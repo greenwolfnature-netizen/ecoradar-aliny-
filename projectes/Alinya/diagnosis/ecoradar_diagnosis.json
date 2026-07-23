@@ -1,0 +1,372 @@
+{
+  "project": "Alinya",
+  "generated_at": "2026-07-08T14:37:56+00:00",
+  "scope": "diagnosi ecològica basada en indicadors; sense recomanacions, fitxa ni informe final",
+  "inputs": {
+    "indicators": "indicators/ecoradar_core_indicators.json",
+    "indicator_engine_report": "metadata/indicator_engine_report.json",
+    "data_availability_report": "metadata/data_availability_report.json"
+  },
+  "summary": {
+    "overall_state": "diagnosi parcial defensable",
+    "confidence": "mitjana",
+    "robust_conclusions": 3,
+    "provisional_conclusions": 8
+  },
+  "required_sections": {
+    "estat_ecologic_general": [
+      "Diagnosi ecològica parcial amb valors naturals alts"
+    ],
+    "valors_ecologics_principals": [
+      "Hàbitats, biodiversitat coneguda i connectivitat són els principals valors detectats"
+    ],
+    "funcionament_ecologic": [
+      "El funcionament ecològic depèn d'una matriu natural connectada amb funcions hídriques parcials"
+    ],
+    "pressions": [
+      "Valor ecològic alt amb pressió humana potencial mitjana"
+    ],
+    "fortaleses": [
+      "Els espais oberts poden tenir una funció ecològica desproporcionada dins la matriu forestal"
+    ],
+    "vulnerabilitats": [
+      "La lectura climàtica és la principal incertesa ecològica",
+      "La resiliència davant del foc queda condicionada per combustible i humitat no disponibles"
+    ],
+    "debilitats": [
+      "L'aigua està cartografiada parcialment però no funcionalment caracteritzada"
+    ],
+    "oportunitats": [
+      "Hi ha potencial de restauració, però encara no priorització espacial"
+    ],
+    "dades_critiques_absents": [
+      "Les dades que més condicionen la diagnosi són teledetecció, clima, camp i combustible"
+    ],
+    "validacio_camp": [
+      "Cal validar al camp hàbitats, pressió humana, punts d'aigua i biodiversitat sensible"
+    ]
+  },
+  "conclusions": [
+    {
+      "section": "estat_ecologic_general",
+      "title": "Diagnosi ecològica parcial amb valors naturals alts",
+      "interpretation": "El sistema disposa de 5 indicadors complets, 6 parcials i 1 no disponible. Els senyals més sòlids provenen d'hàbitats, biodiversitat coneguda, connectivitat, mosaic i pressió humana potencial. La diagnosi encara no pot tancar vegetació, clima i una part del foc perquè falten Copernicus, clima i combustible.",
+      "management_implication": "La lectura és suficient per orientar prudència i validació, però encara no per prioritzar actuacions finals.",
+      "supporting_indicators": [
+        "CORE_01",
+        "CORE_02",
+        "CORE_03",
+        "CORE_04",
+        "CORE_05",
+        "CORE_06",
+        "CORE_07",
+        "CORE_08",
+        "CORE_09",
+        "CORE_10",
+        "CORE_11",
+        "CORE_12"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "fires_burned_areas",
+        "gbif_occurrences",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "icgc_dem_mdt",
+        "inaturalist_observations",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "La vegetació Sentinel i el context climàtic no estan disponibles."
+      ],
+      "robustness": "provisional"
+    },
+    {
+      "section": "valors_ecologics_principals",
+      "title": "Hàbitats, biodiversitat coneguda i connectivitat són els principals valors detectats",
+      "interpretation": "El valor d'hàbitats és molt alt (98.91/100), la biodiversitat coneguda és molt alt (95.11/100) i la connectivitat és alt (79.5/100). Això apunta a un espai amb responsabilitat de conservació elevada, tot i que la biodiversitat prové de fonts públiques oportunistes.",
+      "management_implication": "Les decisions que afectin HIC, hàbitats prioritaris o zones connectores han de tractar-se amb criteri preventiu.",
+      "supporting_indicators": [
+        "CORE_02",
+        "CORE_06",
+        "CORE_08"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "gbif_occurrences",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "inaturalist_observations",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "confidence": "alta",
+      "limitations": [
+        "No hi ha validació de camp d'hàbitats.",
+        "No hi ha encara llista EcoRadar d'hàbitats sensibles/degradats aplicada com a capa independent.",
+        "Falten BDBC, dades pròpies de camp i llistes creuades d'espècies protegides, amenaçades o invasores.",
+        "Les fonts públiques són oportunistes i no equivalen a inventari complet.",
+        "No hi ha model de barreres fines ni permeabilitat específica per espècie.",
+        "La pressió humana s'integra com a proxy d'infraestructura, no d'intensitat d'ús."
+      ],
+      "robustness": "robusta"
+    },
+    {
+      "section": "funcionament_ecologic",
+      "title": "El funcionament ecològic depèn d'una matriu natural connectada amb funcions hídriques parcials",
+      "interpretation": "El mosaic és alt (70.71/100) i la connectivitat és alt (79.5/100). Aquesta combinació suggereix una matriu natural funcional, però el paper de l'aigua queda parcial perquè NDWI, basses i validació de punts d'aigua no estan disponibles.",
+      "management_implication": "La gestió ha de llegir conjuntament hàbitats, mosaic, corredors i aigua; una capa sola no explica el territori.",
+      "supporting_indicators": [
+        "CORE_01",
+        "CORE_02",
+        "CORE_08",
+        "CORE_10"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "icgc_dem_mdt",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "SIGPAC, DUN i MCSC no estan disponibles; l'ús agrari fi no entra al càlcul.",
+        "La continuïtat forestal es tracta com a proxy de composició, no com a mètrica espacial completa.",
+        "No hi ha model de barreres fines ni permeabilitat específica per espècie.",
+        "La pressió humana s'integra com a proxy d'infraestructura, no d'intensitat d'ús.",
+        "Falten NDWI, basses/zones humides amb presència dins l'àrea i punts d'aigua validats al camp.",
+        "No incorpora estat ecològic de masses d'aigua."
+      ],
+      "robustness": "provisional"
+    },
+    {
+      "section": "pressions",
+      "title": "Valor ecològic alt amb pressió humana potencial mitjana",
+      "interpretation": "Hàbitats i biodiversitat mostren valors molt alts, mentre que la pressió humana és mitjà (49.15/100). Això no prova un conflicte, però sí una zona on ús públic i conservació poden solapar-se.",
+      "management_implication": "Cal validar punts d'accés, camins i freqüentació real abans d'interpretar conflictes o regular usos.",
+      "supporting_indicators": [
+        "CORE_02",
+        "CORE_06",
+        "CORE_07"
+      ],
+      "sources_used": [
+        "gbif_occurrences",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "inaturalist_observations",
+        "osm_public_use"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "OSM no mesura intensitat real de visitants.",
+        "Strava queda legalment condicionat i no s'ha usat; falten comptadors, gestors i camp.",
+        "Falten BDBC, dades pròpies de camp i llistes creuades d'espècies protegides, amenaçades o invasores.",
+        "Les fonts públiques són oportunistes i no equivalen a inventari complet."
+      ],
+      "robustness": "provisional"
+    },
+    {
+      "section": "fortaleses",
+      "title": "Els espais oberts poden tenir una funció ecològica desproporcionada dins la matriu forestal",
+      "interpretation": "El mosaic és alt però la resiliència davant del foc és només mitjana i parcial. Aquesta relació indica que prats, conreus residuals i discontinuïtats poden ser importants per biodiversitat, connectivitat i foc.",
+      "management_implication": "No convé simplificar la gestió en 'més bosc és sempre millor'; cal preservar heterogeneïtat funcional.",
+      "supporting_indicators": [
+        "CORE_01",
+        "CORE_09"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "fires_burned_areas",
+        "habitats_terrestres_v3",
+        "icgc_dem_mdt",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "SIGPAC, DUN i MCSC no estan disponibles; l'ús agrari fi no entra al càlcul.",
+        "La continuïtat forestal es tracta com a proxy de composició, no com a mètrica espacial completa.",
+        "Falten NDMI, LST i font oficial de combustible/estructura forestal.",
+        "No calcula risc d'incendi; només resiliència estructural parcial."
+      ],
+      "robustness": "provisional"
+    },
+    {
+      "section": "vulnerabilitats",
+      "title": "La lectura climàtica és la principal incertesa ecològica",
+      "interpretation": "L'estat de la vegetació no està disponible i refugis/vulnerabilitat climàtica són parcials. Sense NDVI, NDMI, NDWI, LST i clima no es pot distingir bé entre estructura favorable i estrès real.",
+      "management_implication": "Qualsevol diagnosi climàtica ha de quedar marcada com provisional fins incorporar Copernicus i clima.",
+      "supporting_indicators": [
+        "CORE_03",
+        "CORE_04",
+        "CORE_05"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "icgc_dem_mdt",
+        "land_cover_icgc_cobertes_sol"
+      ],
+      "confidence": "baixa",
+      "limitations": [
+        "No hi ha NDVI, NDMI, NDWI ni clima validats; Copernicus/Meteocat/AEMET requereixen credencials.",
+        "Falten LST, NDMI i NDVI; no es delimiten refugis tèrmics finals.",
+        "El valor és un proxy topogràfic-hídric i de coberta, no un mapa final de refugi climàtic.",
+        "Falten LST, NDMI, sequera SPEI i clima Meteocat/AEMET.",
+        "El valor representa vulnerabilitat estructural parcial, no vulnerabilitat climàtica completa."
+      ],
+      "robustness": "provisional"
+    },
+    {
+      "section": "vulnerabilitats",
+      "title": "La resiliència davant del foc queda condicionada per combustible i humitat no disponibles",
+      "interpretation": "La resiliència davant del foc és mitjà (44.17/100), però falten NDMI, LST i estructura oficial de combustible. Mosaic i aigua aporten context, però no tanquen el risc.",
+      "management_implication": "No s'han de derivar actuacions forestals finals només amb aquest indicador; cal completar combustible i humitat.",
+      "supporting_indicators": [
+        "CORE_09",
+        "CORE_01",
+        "CORE_10"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "fires_burned_areas",
+        "habitats_terrestres_v3",
+        "icgc_dem_mdt",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "Falten NDMI, LST i font oficial de combustible/estructura forestal.",
+        "No calcula risc d'incendi; només resiliència estructural parcial.",
+        "Falten NDWI, basses/zones humides amb presència dins l'àrea i punts d'aigua validats al camp.",
+        "No incorpora estat ecològic de masses d'aigua."
+      ],
+      "robustness": "provisional"
+    },
+    {
+      "section": "debilitats",
+      "title": "L'aigua està cartografiada parcialment però no funcionalment caracteritzada",
+      "interpretation": "La funcionalitat hídrica és mitjà (47.18/100) i entra també als refugis climàtics. Hi ha base ACA i DEM, però falta NDWI, estat ecològic, basses/zones humides efectives i validació de camp.",
+      "management_implication": "Les decisions sobre refugis, restauració o fauna associada a l'aigua necessiten una campanya de verificació hídrica.",
+      "supporting_indicators": [
+        "CORE_10",
+        "CORE_04"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "icgc_dem_mdt",
+        "land_cover_icgc_cobertes_sol"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "Falten NDWI, basses/zones humides amb presència dins l'àrea i punts d'aigua validats al camp.",
+        "No incorpora estat ecològic de masses d'aigua.",
+        "Falten LST, NDMI i NDVI; no es delimiten refugis tèrmics finals.",
+        "El valor és un proxy topogràfic-hídric i de coberta, no un mapa final de refugi climàtic."
+      ],
+      "robustness": "provisional"
+    },
+    {
+      "section": "oportunitats",
+      "title": "Hi ha potencial de restauració, però encara no priorització espacial",
+      "interpretation": "El potencial de restauració és alt (73.71/100), mentre la prioritat de gestió és parcial. La combinació suggereix oportunitats, però no delimita on actuar.",
+      "management_implication": "El següent pas no és executar actuacions sinó completar dades que permetin espacialitzar prioritats.",
+      "supporting_indicators": [
+        "CORE_11",
+        "CORE_12"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "fires_burned_areas",
+        "gbif_occurrences",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "icgc_dem_mdt",
+        "inaturalist_observations",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "Falten Sentinel, hàbitats degradats validats, hàbitats font, SIGPAC/DUN i treball de camp.",
+        "No delimita zones de restauració; només calcula potencial agregat provisional.",
+        "No genera recomanacions ni zones prioritàries.",
+        "La síntesi queda limitada per absència de Copernicus, clima, combustible oficial i treball de camp."
+      ],
+      "robustness": "provisional"
+    },
+    {
+      "section": "dades_critiques_absents",
+      "title": "Les dades que més condicionen la diagnosi són teledetecció, clima, camp i combustible",
+      "interpretation": "Les fonts absents es repeteixen en indicadors de vegetació, clima, foc, restauració i prioritat de gestió.",
+      "management_implication": "Completar aquestes fonts augmentarà directament la confiança de la diagnosi i evitarà conclusions prematures.",
+      "supporting_indicators": [
+        "CORE_01",
+        "CORE_02",
+        "CORE_03",
+        "CORE_04",
+        "CORE_05",
+        "CORE_06",
+        "CORE_07",
+        "CORE_08",
+        "CORE_09",
+        "CORE_10",
+        "CORE_11",
+        "CORE_12"
+      ],
+      "sources_used": [],
+      "confidence": "alta",
+      "limitations": [
+        "field_biodiversity",
+        "field_validation",
+        "copernicus_sentinel_ndmi",
+        "copernicus_lst",
+        "sigpac_catalunya",
+        "dun_cultius",
+        "meteocat",
+        "aemet",
+        "spei",
+        "land_cover_mcsc",
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndwi"
+      ],
+      "robustness": "robusta"
+    },
+    {
+      "section": "validacio_camp",
+      "title": "Cal validar al camp hàbitats, pressió humana, punts d'aigua i biodiversitat sensible",
+      "interpretation": "Les fonts de camp són absents i diversos indicadors depenen de dades oportunistes o cartografia general. La validació ha de centrar-se en HIC, zones d'ús públic, fonts/basses i grups taxonòmics poc representats.",
+      "management_implication": "La campanya de camp ha de convertir incerteses en criteris de gestió verificats.",
+      "supporting_indicators": [
+        "CORE_02",
+        "CORE_06",
+        "CORE_07",
+        "CORE_10"
+      ],
+      "sources_used": [
+        "habitats_terrestres_v3",
+        "gbif_occurrences",
+        "inaturalist_observations",
+        "osm_public_use",
+        "aca_hydrology"
+      ],
+      "confidence": "alta",
+      "limitations": [
+        "field_biodiversity",
+        "field_validation",
+        "BDBC no integrat"
+      ],
+      "robustness": "robusta"
+    }
+  ]
+}

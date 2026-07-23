@@ -1,0 +1,125 @@
+{
+  "project": "Alinya",
+  "generated_at": "2026-07-22T18:30:18+00:00",
+  "status": "aborted",
+  "modules_executed": [
+    {
+      "number": 1,
+      "name": "Carregar l'àrea d'estudi",
+      "critical": true,
+      "status": "ok",
+      "duration_seconds": 0.007,
+      "started_at": "2026-07-22T18:30:18+00:00",
+      "finished_at": "2026-07-22T18:30:18+00:00",
+      "outputs": [
+        "projectes/Alinya/processed/study_area.gpkg"
+      ],
+      "summary": {
+        "crs": "EPSG:25831",
+        "feature_count": 1,
+        "surface_ha": 5464.031656330243,
+        "perimeter_m": 93285.61321120504,
+        "warnings": []
+      },
+      "error": null
+    },
+    {
+      "number": 2,
+      "name": "Executar el Data Source Manager",
+      "critical": true,
+      "status": "ok",
+      "duration_seconds": 0.005,
+      "started_at": "2026-07-22T18:30:18+00:00",
+      "finished_at": "2026-07-22T18:30:18+00:00",
+      "outputs": [
+        "projectes/Alinya/metadata/data_availability_report.json",
+        "projectes/Alinya/reports/data_availability_report.md",
+        "projectes/Alinya/metadata/connectors_status_report.json",
+        "projectes/Alinya/metadata/indicators_completeness_report.json"
+      ],
+      "summary": {
+        "total_sources": 30,
+        "status_counts": {
+          "consultada_correctament": 14,
+          "manual_pendent": 8,
+          "requereix_credencials": 7,
+          "legalment_condicionada": 1
+        },
+        "sources_ok": 14,
+        "sources_partial": 0,
+        "sources_failed": 0,
+        "sources_not_implemented": 0,
+        "sources_require_credentials": 7,
+        "sources_manual_pending": 8,
+        "sources_legal_conditioned": 1
+      },
+      "error": null
+    },
+    {
+      "number": 3,
+      "name": "Validar totes les fonts",
+      "critical": true,
+      "status": "ok",
+      "duration_seconds": 0.008,
+      "started_at": "2026-07-22T18:30:18+00:00",
+      "finished_at": "2026-07-22T18:30:18+00:00",
+      "outputs": [
+        "projectes/Alinya/metadata/data_availability_report.json",
+        "projectes/Alinya/metadata/connectors_status_report.json",
+        "projectes/Alinya/metadata/indicators_completeness_report.json"
+      ],
+      "summary": {
+        "source_count": 30,
+        "failed_sources": 0,
+        "credential_sources": 0,
+        "connector_count": 21
+      },
+      "error": null
+    },
+    {
+      "number": 4,
+      "name": "Executar els connectors disponibles",
+      "critical": true,
+      "status": "failed",
+      "duration_seconds": 0.022,
+      "started_at": "2026-07-22T18:30:18+00:00",
+      "finished_at": "2026-07-22T18:30:18+00:00",
+      "outputs": [],
+      "summary": {},
+      "error": "RuntimeError: Connectors without usable outputs: connector_copernicus_teledeteccio: EcoRadar cannot continue without mandatory Copernicus Sentinel outputs (NDVI, NDMI, NDWI, NBR and LST/equivalent): missing outputs: processed/teledeteccio/ndwi.tif, processed/teledeteccio/nbr.tif, processed/teledeteccio/lst.tif, maps/teledeteccio/ndvi.png, maps/teledeteccio/ndmi.png, maps/teledeteccio/ndwi.png, maps/teledeteccio/nbr.png, maps/teledeteccio/lst.png, indicators/teledeteccio_resum.csv, metadata/teledeteccio_stats.json, metadata/teledeteccio_percentiles.json, metadata/teledeteccio_classification.json, metadata/teledeteccio_ecological_summary.json; missing summary rows: ndvi, ndmi, ndwi, nbr, lst; validation status: blocked_requires_credentials."
+    }
+  ],
+  "total_duration_seconds": 0.042,
+  "sources_used": [
+    "study_area_file",
+    "icgc_base_maps",
+    "icgc_orthophoto",
+    "land_cover_icgc_cobertes_sol",
+    "habitats_terrestres_v3",
+    "hic_v2",
+    "icgc_dem_mdt",
+    "aca_hydrology",
+    "connectivity_infraestructura_verda",
+    "gbif_occurrences",
+    "inaturalist_observations",
+    "osm_public_use",
+    "fires_burned_areas",
+    "effis"
+  ],
+  "sources_failed": [],
+  "indicators_calculated": [],
+  "recommendations_generated": [],
+  "files_created": [
+    "projectes/Alinya/metadata/connectors_status_report.json",
+    "projectes/Alinya/metadata/data_availability_report.json",
+    "projectes/Alinya/metadata/indicators_completeness_report.json",
+    "projectes/Alinya/reports/data_availability_report.md"
+  ],
+  "errors_detected": [
+    {
+      "step": "Executar els connectors disponibles",
+      "error": "RuntimeError: Connectors without usable outputs: connector_copernicus_teledeteccio: EcoRadar cannot continue without mandatory Copernicus Sentinel outputs (NDVI, NDMI, NDWI, NBR and LST/equivalent): missing outputs: processed/teledeteccio/ndwi.tif, processed/teledeteccio/nbr.tif, processed/teledeteccio/lst.tif, maps/teledeteccio/ndvi.png, maps/teledeteccio/ndmi.png, maps/teledeteccio/ndwi.png, maps/teledeteccio/nbr.png, maps/teledeteccio/lst.png, indicators/teledeteccio_resum.csv, metadata/teledeteccio_stats.json, metadata/teledeteccio_percentiles.json, metadata/teledeteccio_classification.json, metadata/teledeteccio_ecological_summary.json; missing summary rows: ndvi, ndmi, ndwi, nbr, lst; validation status: blocked_requires_credentials.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/usuario/Documents/Ecoradar/ecoradar/core/orchestrator.py\", line 224, in _run_step\n    result = action()\n  File \"/Users/usuario/Documents/Ecoradar/ecoradar/core/orchestrator.py\", line 326, in _run_connectors\n    raise RuntimeError(f\"Connectors without usable outputs: {', '.join(hard_failures)}\")\nRuntimeError: Connectors without usable outputs: connector_copernicus_teledeteccio: EcoRadar cannot continue without mandatory Copernicus Sentinel outputs (NDVI, NDMI, NDWI, NBR and LST/equivalent): missing outputs: processed/teledeteccio/ndwi.tif, processed/teledeteccio/nbr.tif, processed/teledeteccio/lst.tif, maps/teledeteccio/ndvi.png, maps/teledeteccio/ndmi.png, maps/teledeteccio/ndwi.png, maps/teledeteccio/nbr.png, maps/teledeteccio/lst.png, indicators/teledeteccio_resum.csv, metadata/teledeteccio_stats.json, metadata/teledeteccio_percentiles.json, metadata/teledeteccio_classification.json, metadata/teledeteccio_ecological_summary.json; missing summary rows: ndvi, ndmi, ndwi, nbr, lst; validation status: blocked_requires_credentials.\n"
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "project": "Alinya",
+  "generated_at": "2026-07-08T14:38:06+00:00",
+  "level": "ecological",
+  "summary": {
+    "checks": 6,
+    "passed": 5,
+    "warnings": 1,
+    "major_errors": 0,
+    "critical_errors": 0,
+    "status": "VALIDATED_WITH_LIMITATIONS"
+  },
+  "checks": [
+    {
+      "code": "ECO_01",
+      "level": "ecological",
+      "title": "Hàbitats alts impliquen prudència de gestió",
+      "status": "PASS",
+      "severity": "major",
+      "message": "El valor d'hàbitats molt alt ha d'anar lligat a prudència, HIC o validació abans d'actuar.",
+      "evidence": {
+        "CORE_02": {
+          "code": "CORE_02",
+          "name": "Valor d'hàbitats",
+          "value_0_100": 98.91,
+          "category": "molt alt",
+          "status": "COMPLET",
+          "confidence": "alta",
+          "sources_used": [
+            "habitats_terrestres_v3",
+            "hic_v2"
+          ],
+          "sources_absent": [
+            "field_biodiversity",
+            "field_validation"
+          ],
+          "calculation_explanation": "Combina nombre d'hàbitats, superfície d'HIC i superfície d'HIC prioritaris dins l'àrea.",
+          "limitations": [
+            "No hi ha validació de camp d'hàbitats.",
+            "No hi ha encara llista EcoRadar d'hàbitats sensibles/degradats aplicada com a capa independent."
+          ],
+          "diagnosis_impact": "La lectura d'hàbitats és sòlida a escala cartogràfica, però les actuacions sobre hàbitats concrets necessiten validació de camp."
+        },
+        "matched_text": true
+      }
+    },
+    {
+      "code": "ECO_02",
+      "level": "ecological",
+      "title": "Prats, ecotons i discontinuïtats no queden invisibles",
+      "status": "PASS",
+      "severity": "major",
+      "message": "La diagnosi ha de destacar espais oberts funcionals encara que no siguin dominants.",
+      "evidence": {
+        "matched": true
+      }
+    },
+    {
+      "code": "ECO_03",
+      "level": "ecological",
+      "title": "Pressió humana no es confon amb freqüentació real",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "OSM/camins només poden interpretar-se com accessibilitat o pressió potencial.",
+      "evidence": {
+        "CORE_07": {
+          "code": "CORE_07",
+          "name": "Pressió humana i ús públic",
+          "value_0_100": 49.15,
+          "category": "mitjà",
+          "status": "COMPLET",
+          "confidence": "alta",
+          "sources_used": [
+            "osm_public_use"
+          ],
+          "sources_absent": [
+            "field_biodiversity",
+            "strava_heatmap",
+            "field_validation"
+          ],
+          "calculation_explanation": "Combina densitat de camins/pistes OSM i concentració de punts d'ús públic cartografiats.",
+          "limitations": [
+            "OSM no mesura intensitat real de visitants.",
+            "Strava queda legalment condicionat i no s'ha usat; falten comptadors, gestors i camp."
+          ],
+          "diagnosis_impact": "Indica pressió potencial per accessibilitat, però no afluència real."
+        }
+      }
+    },
+    {
+      "code": "ECO_04",
+      "level": "ecological",
+      "title": "Biodiversitat pública no es confon amb inventari complet",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "GBIF/iNaturalist han de quedar descrits com a coneixement públic oportunista.",
+      "evidence": {
+        "CORE_06": {
+          "code": "CORE_06",
+          "name": "Biodiversitat coneguda",
+          "value_0_100": 95.11,
+          "category": "molt alt",
+          "status": "COMPLET",
+          "confidence": "alta",
+          "sources_used": [
+            "gbif_occurrences",
+            "inaturalist_observations"
+          ],
+          "sources_absent": [
+            "bdbc",
+            "field_biodiversity",
+            "field_validation"
+          ],
+          "calculation_explanation": "Combina riquesa d'espècies citades, proporció de registres recents i cobertura de grups taxonòmics.",
+          "limitations": [
+            "Falten BDBC, dades pròpies de camp i llistes creuades d'espècies protegides, amenaçades o invasores.",
+            "Les fonts públiques són oportunistes i no equivalen a inventari complet."
+          ],
+          "diagnosis_impact": "Serveix per valorar coneixement disponible, però les decisions sobre espècies sensibles necessiten camp i llistes normatives."
+        }
+      }
+    },
+    {
+      "code": "ECO_05",
+      "level": "ecological",
+      "title": "Foc, clima, aigua i restauració no es tanquen si falten dades crítiques",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "Els blocs condicionats per Copernicus, clima, combustible, aigua funcional o camp han de quedar provisionals.",
+      "evidence": {
+        "CORE_03": {
+          "status": "NO DISPONIBLE",
+          "confidence": "baixa"
+        },
+        "CORE_04": {
+          "status": "PARCIAL",
+          "confidence": "mitjana"
+        },
+        "CORE_05": {
+          "status": "PARCIAL",
+          "confidence": "mitjana"
+        },
+        "CORE_09": {
+          "status": "PARCIAL",
+          "confidence": "mitjana"
+        },
+        "CORE_10": {
+          "status": "PARCIAL",
+          "confidence": "mitjana"
+        },
+        "CORE_11": {
+          "status": "PARCIAL",
+          "confidence": "mitjana"
+        },
+        "CORE_12": {
+          "status": "PARCIAL",
+          "confidence": "mitjana"
+        }
+      }
+    },
+    {
+      "code": "ECO_06",
+      "level": "ecological",
+      "title": "Diagnosi validada amb limitacions de dades",
+      "status": "WARN",
+      "severity": "minor",
+      "message": "Hi ha indicadors parcials o no disponibles; la validació permet fitxa/informe només perquè aquestes limitacions estan explícites.",
+      "evidence": {
+        "limited_indicators": [
+          "CORE_03",
+          "CORE_04",
+          "CORE_05",
+          "CORE_09",
+          "CORE_10",
+          "CORE_11",
+          "CORE_12"
+        ]
+      }
+    }
+  ]
+}

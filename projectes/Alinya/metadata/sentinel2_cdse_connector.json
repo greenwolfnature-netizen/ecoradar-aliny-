@@ -1,0 +1,41 @@
+{
+  "generated_at_utc": "2026-07-20T17:49:53.447098+00:00",
+  "source": "Copernicus Sentinel-2 MSI Level-2A",
+  "organization": "European Union Copernicus programme / ESA",
+  "scene_id": "S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508",
+  "acquired_at_utc": "2026-07-07T10:37:01.024000Z",
+  "source_file": "projectes/Alinya/raw/sentinel2_cdse/S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508_analytical_uint8.tif",
+  "source_sha256": "a2ba776617842c161ab73e0c7ed8647d92bc9a906955f7566433288cdac008c8",
+  "official_urls": {
+    "stac": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a",
+    "browser": "https://browser.dataspace.copernicus.eu/",
+    "process_api": "https://sh.dataspace.copernicus.eu/api/v1/process"
+  },
+  "service_type": "authenticated CDSE Browser analytical GeoTIFF export",
+  "credentials": "free CDSE user session required; no credential stored",
+  "license": "Copernicus Sentinel data policy",
+  "connector_status": "verified",
+  "study_bbox_epsg4326": [
+    1.363998,
+    42.144427,
+    1.5199389999999993,
+    42.22512200000001
+  ],
+  "crs": "EPSG:4326",
+  "export_bounds": [
+    1.2390518188476565,
+    42.108411365705855,
+    1.603660583496094,
+    42.291532494305976
+  ],
+  "export_grid_resolution": [
+    0.000145843505859375,
+    0.00010809983978755645
+  ],
+  "transport_encoding": {
+    "band_1": "NDVI encoded as round(255*((NDVI+1)/2))",
+    "band_2": "NDMI encoded as round(255*((NDMI+1)/2))",
+    "band_3": "albedo encoded as round(255*albedo)",
+    "validity": "evalscript returns RGB 0/0/0 outside dataMask=1 and SCL {4,5,6}; Browser export used Clip extra bands"
+  }
+}

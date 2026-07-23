@@ -1,0 +1,38 @@
+{
+  "project": "Alinya",
+  "status": "blocked_requires_credentials",
+  "source": "Copernicus Data Space Ecosystem / Sentinel Hub",
+  "url": "https://dataspace.copernicus.eu/analyse/apis",
+  "public_stac_url": "https://stac.dataspace.copernicus.eu/v1/search",
+  "products_planned": [
+    "Sentinel-2 L2A NDVI",
+    "Sentinel-2 L2A NDMI",
+    "Sentinel-2 L2A NDWI",
+    "Sentinel-2 L2A NBR",
+    "LST/equivalent"
+  ],
+  "lst_status": "not_available_until_operational_collection_mapping_is_configured",
+  "query_date": "2026-07-22T18:30:18.969266+00:00",
+  "capture_date": null,
+  "scene_id": null,
+  "spatial_resolution_m": 20,
+  "crs": "EPSG:25831",
+  "cloud_cover_percent": null,
+  "date_window": {
+    "start": "2026-06-01",
+    "end": "2026-07-22"
+  },
+  "study_area_surface_ha": 5464.031656330243,
+  "required_credentials": [
+    "COPERNICUS_CLIENT_ID",
+    "COPERNICUS_CLIENT_SECRET"
+  ],
+  "blocker": "set COPERNICUS_CLIENT_ID and COPERNICUS_CLIENT_SECRET from a Copernicus Data Space Sentinel Hub OAuth client",
+  "catalog_status": "Copernicus public STAC catalogue could not be queried without credentials (URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>).",
+  "limitations": [
+    "The official public STAC catalogue can identify candidate Sentinel-2 L2A scenes without creating NDVI, NDMI, NDWI or NBR.",
+    "No raster was downloaded because Copernicus Data Space Sentinel Hub OAuth credentials or authorized product download credentials are not configured.",
+    "The connector must not create placeholder GeoTIFFs, maps or summary statistics without real validated inputs.",
+    "LST/equivalent requires a real validated thermal raster before EcoRadar Core can run."
+  ]
+}

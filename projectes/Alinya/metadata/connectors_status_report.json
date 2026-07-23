@@ -1,0 +1,332 @@
+{
+  "generated_at": "2026-07-22T18:30:18+00:00",
+  "connectors": [
+    {
+      "connector": "blocked_strava_heatmap_connector",
+      "status": "requereix intervenció manual",
+      "sources": [
+        "strava_heatmap"
+      ],
+      "downloaded_data": [],
+      "missing_outputs": [],
+      "requires_manual_intervention": true
+    },
+    {
+      "connector": "connector_aca_hidrologia",
+      "status": "implementat",
+      "sources": [
+        "aca_hydrology"
+      ],
+      "downloaded_data": [
+        "processed/hidrologia.gpkg",
+        "indicators/hidrologia_resum.csv",
+        "metadata/hidrologia_metadata.json"
+      ],
+      "missing_outputs": [],
+      "requires_manual_intervention": false
+    },
+    {
+      "connector": "connector_biodiversitat",
+      "status": "implementat",
+      "sources": [
+        "gbif_occurrences",
+        "inaturalist_observations"
+      ],
+      "downloaded_data": [
+        "raw/biodiversitat/gbif_raw.json",
+        "processed/biodiversitat.gpkg",
+        "indicators/biodiversitat_resum.csv",
+        "metadata/biodiversitat_metadata.json",
+        "raw/biodiversitat/inaturalist_raw.json",
+        "processed/biodiversitat.gpkg",
+        "indicators/biodiversitat_resum.csv",
+        "metadata/biodiversitat_metadata.json"
+      ],
+      "missing_outputs": [],
+      "requires_manual_intervention": false
+    },
+    {
+      "connector": "connector_connectivitat_ecologica",
+      "status": "implementat",
+      "sources": [
+        "connectivity_infraestructura_verda"
+      ],
+      "downloaded_data": [
+        "processed/connectivitat.gpkg",
+        "indicators/connectivitat_resum.csv",
+        "metadata/connectivitat_metadata.json"
+      ],
+      "missing_outputs": [],
+      "requires_manual_intervention": false
+    },
+    {
+      "connector": "connector_copernicus_teledeteccio",
+      "status": "requereix intervenció manual",
+      "sources": [
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst"
+      ],
+      "downloaded_data": [
+        "processed/teledeteccio/ndvi.tif",
+        "metadata/teledeteccio_metadata.json",
+        "processed/teledeteccio/ndmi.tif",
+        "metadata/teledeteccio_metadata.json",
+        "metadata/teledeteccio_metadata.json",
+        "metadata/teledeteccio_metadata.json",
+        "metadata/teledeteccio_metadata.json"
+      ],
+      "missing_outputs": [
+        "maps/teledeteccio/ndvi.png",
+        "indicators/teledeteccio_resum.csv",
+        "metadata/teledeteccio_stats.json",
+        "metadata/teledeteccio_percentiles.json",
+        "metadata/teledeteccio_classification.json",
+        "metadata/teledeteccio_ecological_summary.json",
+        "maps/teledeteccio/ndmi.png",
+        "indicators/teledeteccio_resum.csv",
+        "metadata/teledeteccio_stats.json",
+        "metadata/teledeteccio_percentiles.json",
+        "metadata/teledeteccio_classification.json",
+        "metadata/teledeteccio_ecological_summary.json",
+        "processed/teledeteccio/ndwi.tif",
+        "maps/teledeteccio/ndwi.png",
+        "indicators/teledeteccio_resum.csv",
+        "metadata/teledeteccio_stats.json",
+        "metadata/teledeteccio_percentiles.json",
+        "metadata/teledeteccio_classification.json",
+        "metadata/teledeteccio_ecological_summary.json",
+        "processed/teledeteccio/nbr.tif",
+        "maps/teledeteccio/nbr.png",
+        "indicators/teledeteccio_resum.csv",
+        "metadata/teledeteccio_stats.json",
+        "metadata/teledeteccio_percentiles.json",
+        "metadata/teledeteccio_classification.json",
+        "metadata/teledeteccio_ecological_summary.json",
+        "processed/teledeteccio/lst.tif",
+        "maps/teledeteccio/lst.png",
+        "indicators/teledeteccio_resum.csv",
+        "metadata/teledeteccio_stats.json",
+        "metadata/teledeteccio_percentiles.json",
+        "metadata/teledeteccio_classification.json",
+        "metadata/teledeteccio_ecological_summary.json"
+      ],
+      "requires_manual_intervention": true
+    },
+    {
+      "connector": "connector_habitats",
+      "status": "implementat",
+      "sources": [
+        "habitats_terrestres_v3",
+        "hic_v2"
+      ],
+      "downloaded_data": [
+        "processed/habitats.gpkg",
+        "indicators/habitats_resum.csv",
+        "metadata/habitats_metadata.json",
+        "indicators/habitats_resum.csv"
+      ],
+      "missing_outputs": [],
+      "requires_manual_intervention": false
+    },
+    {
+      "connector": "connector_icgc_cobertes_sol",
+      "status": "implementat",
+      "sources": [
+        "land_cover_icgc_cobertes_sol"
+      ],
+      "downloaded_data": [
+        "processed/cobertes_sol.gpkg",
+        "indicators/cobertes_sol_resum.csv",
+        "metadata/cobertes_sol_metadata.json"
+      ],
+      "missing_outputs": [],
+      "requires_manual_intervention": false
+    },
+    {
+      "connector": "connector_icgc_dem_mdt",
+      "status": "implementat",
+      "sources": [
+        "icgc_dem_mdt"
+      ],
+      "downloaded_data": [
+        "processed/terrain/dem.tif",
+        "processed/terrain/slope.tif",
+        "processed/terrain/aspect.tif",
+        "processed/terrain/northness.tif",
+        "processed/terrain/solana_obaga.tif",
+        "metadata/terrain_metadata.json"
+      ],
+      "missing_outputs": [],
+      "requires_manual_intervention": false
+    },
+    {
+      "connector": "connector_incendis_historial",
+      "status": "implementat",
+      "sources": [
+        "fires_burned_areas",
+        "effis"
+      ],
+      "downloaded_data": [
+        "processed/incendis.gpkg",
+        "indicators/incendis_resum.csv",
+        "metadata/incendis_metadata.json",
+        "raw/incendis/effis_drf_datasets.json",
+        "metadata/incendis_metadata.json"
+      ],
+      "missing_outputs": [],
+      "requires_manual_intervention": false
+    },
+    {
+      "connector": "connector_recreational_pressure_osm",
+      "status": "implementat",
+      "sources": [
+        "osm_public_use"
+      ],
+      "downloaded_data": [
+        "raw/recreational_pressure/overpass_osm_raw.json",
+        "processed/recreational_pressure.gpkg",
+        "indicators/recreational_pressure_resum.csv",
+        "metadata/recreational_pressure_metadata.json"
+      ],
+      "missing_outputs": [],
+      "requires_manual_intervention": false
+    },
+    {
+      "connector": "ecoradar.core.study_area",
+      "status": "implementat",
+      "sources": [
+        "study_area_file"
+      ],
+      "downloaded_data": [
+        "processed/study_area.gpkg",
+        "metadata/study_area_metadata.json"
+      ],
+      "missing_outputs": [],
+      "requires_manual_intervention": false
+    },
+    {
+      "connector": "pending_aemet_connector",
+      "status": "requereix intervenció manual",
+      "sources": [
+        "aemet"
+      ],
+      "downloaded_data": [],
+      "missing_outputs": [
+        "processed/clima/aemet.csv"
+      ],
+      "requires_manual_intervention": true
+    },
+    {
+      "connector": "pending_base_cartography_icgc",
+      "status": "pendent",
+      "sources": [
+        "icgc_base_maps",
+        "icgc_orthophoto"
+      ],
+      "downloaded_data": [
+        "maps/producte/mapa_base_alinya.png",
+        "maps/producte/mapa_espai_alinya.png",
+        "maps/producte/mapa_base_alinya.png"
+      ],
+      "missing_outputs": [],
+      "requires_manual_intervention": false
+    },
+    {
+      "connector": "pending_bdbc_connector",
+      "status": "requereix intervenció manual",
+      "sources": [
+        "bdbc"
+      ],
+      "downloaded_data": [],
+      "missing_outputs": [],
+      "requires_manual_intervention": true
+    },
+    {
+      "connector": "pending_dun_cultius_connector",
+      "status": "requereix intervenció manual",
+      "sources": [
+        "dun_cultius"
+      ],
+      "downloaded_data": [],
+      "missing_outputs": [],
+      "requires_manual_intervention": true
+    },
+    {
+      "connector": "pending_fieldwork_importer",
+      "status": "requereix intervenció manual",
+      "sources": [
+        "field_biodiversity",
+        "field_validation"
+      ],
+      "downloaded_data": [],
+      "missing_outputs": [
+        "data/fieldwork",
+        "data/fieldwork"
+      ],
+      "requires_manual_intervention": true
+    },
+    {
+      "connector": "pending_fuel_structure_connector",
+      "status": "requereix intervenció manual",
+      "sources": [
+        "fuel_continuity"
+      ],
+      "downloaded_data": [],
+      "missing_outputs": [
+        "processed/fire/fuel_continuity.gpkg"
+      ],
+      "requires_manual_intervention": true
+    },
+    {
+      "connector": "pending_mcsc_connector",
+      "status": "requereix intervenció manual",
+      "sources": [
+        "land_cover_mcsc"
+      ],
+      "downloaded_data": [],
+      "missing_outputs": [],
+      "requires_manual_intervention": true
+    },
+    {
+      "connector": "pending_meteocat_connector",
+      "status": "requereix intervenció manual",
+      "sources": [
+        "meteocat"
+      ],
+      "downloaded_data": [],
+      "missing_outputs": [
+        "processed/clima/meteocat.csv",
+        "metadata/clima_metadata.json"
+      ],
+      "requires_manual_intervention": true
+    },
+    {
+      "connector": "pending_sigpac_connector",
+      "status": "requereix intervenció manual",
+      "sources": [
+        "sigpac_catalunya"
+      ],
+      "downloaded_data": [],
+      "missing_outputs": [],
+      "requires_manual_intervention": true
+    },
+    {
+      "connector": "pending_spei_connector",
+      "status": "requereix intervenció manual",
+      "sources": [
+        "spei"
+      ],
+      "downloaded_data": [],
+      "missing_outputs": [],
+      "requires_manual_intervention": true
+    }
+  ],
+  "summary": {
+    "requereix intervenció manual": 11,
+    "implementat": 9,
+    "pendent": 1
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "project": "Alinya",
+  "generated_at": "2026-07-07T18:15:32+00:00",
+  "scope": "motor d'indicadors desacoblat de diagnosi, recomanacions i informes",
+  "inputs": {
+    "data_availability_report": "metadata/data_availability_report.json",
+    "indicators_completeness_report": "metadata/indicators_completeness_report.json",
+    "land_cover": "indicators/cobertes_sol_resum.csv",
+    "habitats": "indicators/habitats_resum.csv",
+    "biodiversity": "indicators/biodiversitat_resum.csv",
+    "human_pressure": "indicators/recreational_pressure_resum.csv",
+    "hydrology": "indicators/hidrologia_resum.csv",
+    "connectivity": "indicators/connectivitat_resum.csv",
+    "fires": "indicators/incendis_resum.csv",
+    "terrain": "metadata/terrain_metadata.json"
+  },
+  "outputs": {
+    "summary_csv": "indicators/ecoradar_indicators_summary.csv",
+    "detail_json": "indicators/ecoradar_indicators.json"
+  },
+  "status_counts": {
+    "PARCIAL": 11,
+    "NO DISPONIBLE": 1
+  },
+  "confidence_counts": {
+    "mitjana": 8,
+    "baixa": 4
+  },
+  "rules": [
+    "No s'han inventat valors substitutius.",
+    "Els indicadors amb fonts clau absents queden PARCIAL o NO DISPONIBLE.",
+    "El motor no genera diagnosi, recomanacions, fitxes ni PDF."
+  ]
+}

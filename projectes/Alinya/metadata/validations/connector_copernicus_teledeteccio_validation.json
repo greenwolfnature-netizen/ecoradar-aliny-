@@ -1,0 +1,67 @@
+{
+  "connector": "connector_copernicus_teledeteccio",
+  "project": "Alinya",
+  "validated_at": "2026-07-22T18:30:18+00:00",
+  "status": "blocked_requires_credentials",
+  "can_advance_to_next_connector": false,
+  "source": "Copernicus Data Space Ecosystem / Sentinel Hub",
+  "official_documentation": {
+    "authentication": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Overview/Authentication.html",
+    "catalog_api": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Catalog.html",
+    "processing_api": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Process.html"
+  },
+  "products_requested": [
+    "Sentinel-2 L2A NDVI",
+    "Sentinel-2 L2A NDMI",
+    "Sentinel-2 L2A NDWI",
+    "Sentinel-2 L2A NBR",
+    "LST/equivalent"
+  ],
+  "date_window": {
+    "start": "2026-06-01",
+    "end": "2026-07-22"
+  },
+  "required_credentials": [
+    "COPERNICUS_CLIENT_ID",
+    "COPERNICUS_CLIENT_SECRET"
+  ],
+  "message": "Copernicus public STAC catalogue could not be queried without credentials (URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>). set COPERNICUS_CLIENT_ID and COPERNICUS_CLIENT_SECRET from a Copernicus Data Space Sentinel Hub OAuth client",
+  "lst_status": "not_available_until_operational_collection_mapping_is_configured",
+  "scene": null,
+  "expected_outputs": {
+    "processed/teledeteccio/ndvi.tif": "projectes/Alinya/processed/teledeteccio/ndvi.tif",
+    "processed/teledeteccio/ndmi.tif": "projectes/Alinya/processed/teledeteccio/ndmi.tif",
+    "processed/teledeteccio/ndwi.tif": "projectes/Alinya/processed/teledeteccio/ndwi.tif",
+    "processed/teledeteccio/nbr.tif": "projectes/Alinya/processed/teledeteccio/nbr.tif",
+    "processed/teledeteccio/lst.tif": "projectes/Alinya/processed/teledeteccio/lst.tif",
+    "maps/teledeteccio/ndvi.png": "projectes/Alinya/maps/teledeteccio/ndvi.png",
+    "maps/teledeteccio/ndmi.png": "projectes/Alinya/maps/teledeteccio/ndmi.png",
+    "maps/teledeteccio/ndwi.png": "projectes/Alinya/maps/teledeteccio/ndwi.png",
+    "maps/teledeteccio/nbr.png": "projectes/Alinya/maps/teledeteccio/nbr.png",
+    "maps/teledeteccio/lst.png": "projectes/Alinya/maps/teledeteccio/lst.png",
+    "indicators/teledeteccio_resum.csv": "projectes/Alinya/indicators/teledeteccio_resum.csv",
+    "metadata/teledeteccio_metadata.json": "projectes/Alinya/metadata/teledeteccio_metadata.json",
+    "metadata/teledeteccio_stats.json": "projectes/Alinya/metadata/teledeteccio_stats.json",
+    "metadata/teledeteccio_percentiles.json": "projectes/Alinya/metadata/teledeteccio_percentiles.json",
+    "metadata/teledeteccio_classification.json": "projectes/Alinya/metadata/teledeteccio_classification.json",
+    "metadata/teledeteccio_ecological_summary.json": "projectes/Alinya/metadata/teledeteccio_ecological_summary.json",
+    "metadata/validations/connector_copernicus_teledeteccio_validation.json": "projectes/Alinya/metadata/validations/connector_copernicus_teledeteccio_validation.json"
+  },
+  "created_outputs": {},
+  "missing_outputs": [
+    "projectes/Alinya/processed/teledeteccio/ndwi.tif",
+    "projectes/Alinya/processed/teledeteccio/nbr.tif",
+    "projectes/Alinya/processed/teledeteccio/lst.tif",
+    "projectes/Alinya/maps/teledeteccio/ndvi.png",
+    "projectes/Alinya/maps/teledeteccio/ndmi.png",
+    "projectes/Alinya/maps/teledeteccio/ndwi.png",
+    "projectes/Alinya/maps/teledeteccio/nbr.png",
+    "projectes/Alinya/maps/teledeteccio/lst.png",
+    "projectes/Alinya/indicators/teledeteccio_resum.csv",
+    "projectes/Alinya/metadata/teledeteccio_stats.json",
+    "projectes/Alinya/metadata/teledeteccio_percentiles.json",
+    "projectes/Alinya/metadata/teledeteccio_classification.json",
+    "projectes/Alinya/metadata/teledeteccio_ecological_summary.json"
+  ],
+  "validation_rule": "Do not generate NDVI, NDMI, NDWI, NBR, LST/equivalent, maps or summary statistics without real validated inputs."
+}

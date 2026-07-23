@@ -1,0 +1,37 @@
+{
+  "font": "ICGC - Cobertes del Sol de Catalunya",
+  "url": "https://geoserveis.icgc.cat/servei/catalunya/cobertes-sol/wms",
+  "service_type": "WCS/WMS",
+  "coverage_id": "cobertes_2024",
+  "data_consulta": "2026-07-06T19:08:56+00:00",
+  "crs": "EPSG:25831",
+  "escala_resolucio": "1 m raster classified coverage, according to WCS DescribeCoverage offset vectors",
+  "limitacions": [
+    "Connector uses ICGC WCS classified raster values and WMS GetFeatureInfo labels.",
+    "The WCS GeoTIFF is RGB-rendered; classes are resolved from sampled RGB pixels through official WMS GetFeatureInfo responses.",
+    "Areas are calculated from 1 m pixels after masking with the study area.",
+    "Pixel-based clipping may differ slightly from vector-source areas along boundaries.",
+    "No EcoRadar ecological interpretation or index is calculated."
+  ],
+  "study_area_path": "projectes/Alinya/processed/study_area.gpkg",
+  "processed_path": "projectes/Alinya/processed/cobertes_sol.gpkg",
+  "summary_path": "projectes/Alinya/indicators/cobertes_sol_resum.csv",
+  "raw_tiles": [
+    "projectes/Alinya/raw/cobertes_sol/cobertes_2024_364868_4666982_368868_4670982.tif",
+    "projectes/Alinya/raw/cobertes_sol/cobertes_2024_364868_4670982_368868_4674982.tif",
+    "projectes/Alinya/raw/cobertes_sol/cobertes_2024_364868_4674982_368868_4676013.tif",
+    "projectes/Alinya/raw/cobertes_sol/cobertes_2024_368868_4666982_372868_4670982.tif",
+    "projectes/Alinya/raw/cobertes_sol/cobertes_2024_368868_4670982_372868_4674982.tif",
+    "projectes/Alinya/raw/cobertes_sol/cobertes_2024_368868_4674982_372868_4676013.tif",
+    "projectes/Alinya/raw/cobertes_sol/cobertes_2024_372868_4666982_376868_4670982.tif",
+    "projectes/Alinya/raw/cobertes_sol/cobertes_2024_372868_4670982_376868_4674982.tif",
+    "projectes/Alinya/raw/cobertes_sol/cobertes_2024_372868_4674982_376868_4676013.tif",
+    "projectes/Alinya/raw/cobertes_sol/cobertes_2024_376868_4666982_377779_4670982.tif",
+    "projectes/Alinya/raw/cobertes_sol/cobertes_2024_376868_4670982_377779_4674982.tif",
+    "projectes/Alinya/raw/cobertes_sol/cobertes_2024_376868_4674982_377779_4676013.tif"
+  ],
+  "tile_count": 12,
+  "class_count": 24,
+  "surface_ha_from_classified_pixels": 5464.0226,
+  "study_area_surface_ha": 5464.031656330243
+}

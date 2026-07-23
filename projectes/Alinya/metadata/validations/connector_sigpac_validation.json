@@ -1,0 +1,15 @@
+{
+  "connector": "pending_sigpac_connector",
+  "source": "SIGPAC Catalunya",
+  "status": "blocked_pending_official_service_verification",
+  "reason": "No hi ha cap endpoint vectorial oficial verificat i documentat dins el projecte per descarregar recintes SIGPAC per polígon. No es fa scraping del visor.",
+  "required_action": "Verificar servei oficial FEGA/Generalitat, esquema de camps, llicència i via de descàrrega abans d'implementar el connector.",
+  "outputs": {},
+  "missing_outputs": [
+    "processed/sigpac.gpkg",
+    "metadata/sigpac_metadata.json"
+  ],
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:42:13+00:00",
+  "can_advance_to_next_connector": true
+}

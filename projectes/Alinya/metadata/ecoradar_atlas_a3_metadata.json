@@ -1,0 +1,156 @@
+{
+  "generated_at": "2026-07-07T15:08:54+00:00",
+  "project": "Alinyà",
+  "format": "A3 landscape",
+  "outputs": {
+    "atlas_pdf": "projectes/Alinya/reports/atlas_diagnosi_ecoradar_alinya_a3.pdf",
+    "modules_pdf": "projectes/Alinya/reports/modules/moduls_diagnosi_ecoradar_alinya_a3.pdf",
+    "output_copy": "output/pdf/atlas_diagnosi_ecoradar_alinya_a3.pdf"
+  },
+  "module_count": 12,
+  "modules": [
+    {
+      "number": 1,
+      "title": "Biodiversitat",
+      "status": "Parcial",
+      "confidence": "Mitjà",
+      "updated_at": "2026-07-06",
+      "sources": [
+        "GBIF",
+        "iNaturalist"
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Hàbitats",
+      "status": "Parcial",
+      "confidence": "Mitjà",
+      "updated_at": "2026-07-06",
+      "sources": [
+        "Cartografia dels hàbitats terrestres v3",
+        "HIC v2"
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Paisatge i connectivitat",
+      "status": "Parcial",
+      "confidence": "Mitjà",
+      "updated_at": "2026-07-06",
+      "sources": [
+        "ICGC Cobertes del sòl",
+        "EcoRadar Core"
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Pressió humana",
+      "status": "Parcial",
+      "confidence": "Baix",
+      "updated_at": "2026-07-06",
+      "sources": [
+        "OpenStreetMap",
+        "Overpass API"
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Recursos hídrics",
+      "status": "No disponible",
+      "confidence": "Baix",
+      "updated_at": "2026-07-07",
+      "sources": [
+        "Font hidrològica oficial pendent d'incorporació"
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Boscos i estructura forestal",
+      "status": "Parcial",
+      "confidence": "Baix",
+      "updated_at": "2026-07-06",
+      "sources": [
+        "ICGC Cobertes del sòl",
+        "EcoRadar Core"
+      ]
+    },
+    {
+      "number": 7,
+      "title": "Història ecològica",
+      "status": "No disponible",
+      "confidence": "Baix",
+      "updated_at": "2026-07-07",
+      "sources": [
+        "Font oficial d'incendis pendent d'incorporació",
+        "Copernicus/Sentinel pendent"
+      ]
+    },
+    {
+      "number": 8,
+      "title": "Tranquil·litat ecològica",
+      "status": "Parcial",
+      "confidence": "Baix",
+      "updated_at": "2026-07-06",
+      "sources": [
+        "OpenStreetMap",
+        "Dades de biodiversitat públiques"
+      ]
+    },
+    {
+      "number": 9,
+      "title": "Vulnerabilitat i canvi climàtic",
+      "status": "Parcial",
+      "confidence": "Baix",
+      "updated_at": "2026-07-06",
+      "sources": [
+        "ICGC Cobertes del sòl",
+        "Copernicus pendent de credencials"
+      ]
+    },
+    {
+      "number": 10,
+      "title": "Prioritats de gestió",
+      "status": "Parcial",
+      "confidence": "Baix",
+      "updated_at": "2026-07-07",
+      "sources": [
+        "EcoRadar Core",
+        "Cobertes",
+        "Hàbitats",
+        "Biodiversitat",
+        "OSM"
+      ]
+    },
+    {
+      "number": 11,
+      "title": "Coneixement disponible i buits",
+      "status": "Parcial",
+      "confidence": "Mitjà",
+      "updated_at": "2026-07-07",
+      "sources": [
+        "EcoRadar 0.1",
+        "EcoRadar Core"
+      ]
+    },
+    {
+      "number": 12,
+      "title": "Recomanacions de gestió",
+      "status": "Parcial",
+      "confidence": "Mitjà",
+      "updated_at": "2026-07-07",
+      "sources": [
+        "EcoRadar Core",
+        "Fonts públiques processades"
+      ]
+    }
+  ],
+  "map_outputs": {
+    "espai": "projectes/Alinya/maps/producte/mapa_espai_alinya.png",
+    "paisatge": "projectes/Alinya/maps/producte/mapa_paisatge_alinya.png",
+    "habitats": "projectes/Alinya/maps/producte/mapa_habitats_alinya.png",
+    "biodiversitat": "projectes/Alinya/maps/producte/mapa_biodiversitat_alinya.png",
+    "pressio": "projectes/Alinya/maps/producte/mapa_pressio_humana_alinya.png",
+    "base": "projectes/Alinya/maps/producte/mapa_base_alinya.png"
+  },
+  "data_policy": "No synthetic values. Missing source data are displayed as 'No disponible'."
+}

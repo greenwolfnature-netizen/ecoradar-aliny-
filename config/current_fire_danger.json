@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "weights": {
+    "structural": 0.25,
+    "ndmi_dryness": 0.2,
+    "surface_temperature": 0.15,
+    "vegetation_continuity": 0.15,
+    "wind": 0.1,
+    "relative_humidity_inverse": 0.1,
+    "slope": 0.03,
+    "aspect": 0.02
+  },
+  "stations": {
+    "alinya": {
+      "code": "Y4",
+      "name": "Alinyà",
+      "project": "Alinya"
+    }
+  },
+  "xema": {
+    "dataset_id": "nzvn-apee",
+    "history_days": 35,
+    "variables": {
+      "air_temperature_c": "32",
+      "wind_speed_ms": "30",
+      "wind_direction_deg": "31",
+      "relative_humidity_pct": "33",
+      "precipitation_mm": "35",
+      "wind_gust_ms": "50",
+      "wind_gust_direction_deg": "51"
+    }
+  },
+  "normalization": {
+    "robust_percentiles": [
+      5,
+      95
+    ],
+    "vegetation_cell_fraction": 0.5,
+    "vegetation_neighbourhood_fraction": 0.5,
+    "continuity_window_cells": 3
+  },
+  "freshness_days": {
+    "structural": {
+      "full": 730,
+      "zero": 2190
+    },
+    "ndmi_dryness": {
+      "full": 10,
+      "zero": 60
+    },
+    "surface_temperature": {
+      "full": 16,
+      "zero": 64
+    },
+    "vegetation_continuity": {
+      "full": 730,
+      "zero": 2190
+    },
+    "wind": {
+      "full": 1,
+      "zero": 3
+    },
+    "relative_humidity_inverse": {
+      "full": 1,
+      "zero": 3
+    },
+    "slope": {
+      "full": 1825,
+      "zero": 5475
+    },
+    "aspect": {
+      "full": 1825,
+      "zero": 5475
+    }
+  },
+  "spatial_representativeness": {
+    "structural": 1.0,
+    "ndmi_dryness": 0.9,
+    "surface_temperature": 0.8,
+    "vegetation_continuity": 0.9,
+    "wind": 0.45,
+    "relative_humidity_inverse": 0.45,
+    "slope": 0.95,
+    "aspect": 0.95
+  },
+  "categories": [
+    {
+      "min": 0,
+      "max": 20,
+      "label": "molt baix",
+      "color": "#2f8f4e"
+    },
+    {
+      "min": 20,
+      "max": 40,
+      "label": "baix",
+      "color": "#a8c94a"
+    },
+    {
+      "min": 40,
+      "max": 60,
+      "label": "moderat",
+      "color": "#f0d84b"
+    },
+    {
+      "min": 60,
+      "max": 80,
+      "label": "alt",
+      "color": "#ef8b2c"
+    },
+    {
+      "min": 80,
+      "max": 90,
+      "label": "molt alt",
+      "color": "#d43d2f"
+    },
+    {
+      "min": 90,
+      "max": 100,
+      "label": "extrem",
+      "color": "#711d2d"
+    }
+  ]
+}

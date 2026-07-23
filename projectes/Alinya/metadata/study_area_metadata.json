@@ -1,0 +1,22 @@
+{
+  "project_name": "Alinya",
+  "created_at": "2026-07-06T18:50:09+00:00",
+  "source_path": "/Users/usuario/Downloads/InstamapsExport.gpkg",
+  "source_layer": "limits_zip",
+  "processed_path": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/processed/study_area.gpkg",
+  "original_crs": "EPSG:3857",
+  "final_crs": "EPSG:25831",
+  "feature_count": 1,
+  "surface_ha": 5464.031656330243,
+  "perimeter_m": 93285.61321120504,
+  "bounds": [
+    364868.4605003563,
+    4666982.6601438355,
+    377778.94435022376,
+    4676012.395402906
+  ],
+  "detected_errors": [],
+  "external_data_downloaded": false,
+  "indicators_calculated": false,
+  "reports_created": false
+}

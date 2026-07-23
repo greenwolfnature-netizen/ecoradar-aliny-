@@ -1,0 +1,258 @@
+{
+  "project_name": "Alinya",
+  "generated_at": "2026-07-07T19:06:49+00:00",
+  "overall_state": "diagnosi parcial",
+  "confidence": "mitjana-baixa",
+  "executive_summary": "Alinya mostra senyals robustos de valor d'hàbitats i biodiversitat coneguda, però la diagnosi encara és parcial. Les decisions de conservació prudent estan justificades; les prioritats espacials finals han d'esperar teledetecció, hidrologia, topografia, foc i camp.",
+  "strengths": [
+    {
+      "theme": "hàbitats",
+      "title": "Valor d'hàbitats molt rellevant",
+      "interpretation": "El Core d'hàbitats és molt alt i combina riquesa d'hàbitats, HIC i HIC prioritaris.",
+      "management_implication": "Qualsevol actuació ha de començar comprovant afectació a HIC i hàbitats prioritaris.",
+      "evidence": [
+        "CORE_02",
+        "habitats=47; HIC=3170.95 ha; prioritaris=1229.39 ha"
+      ],
+      "confidence": "mitjana"
+    },
+    {
+      "theme": "biodiversitat",
+      "title": "Base pública de biodiversitat útil",
+      "interpretation": "Les cites públiques aporten un primer mapa de coneixement, però no equivalen a inventari exhaustiu.",
+      "management_implication": "Serveix per orientar treball de camp, detectar grups febles i prioritzar validacions.",
+      "evidence": [
+        "CORE_06",
+        "registres=731; especies=516; recents=726"
+      ],
+      "confidence": "mitjana"
+    },
+    {
+      "theme": "paisatge",
+      "title": "Matriu natural dominant amb espais oberts rellevants",
+      "interpretation": "La coberta forestal (88.4246%) domina, però els prats i herbassars (9.3344%) poden tenir una funció ecològica desproporcionada.",
+      "management_implication": "Cal conservar el mosaic existent i evitar actuacions uniformes sobre tota la matriu forestal.",
+      "evidence": [
+        "CORE_01",
+        "ecoradar_01_resum.csv"
+      ],
+      "confidence": "mitjana"
+    }
+  ],
+  "weaknesses": [
+    {
+      "theme": "foc",
+      "title": "Resiliència al foc encara feble i incompleta",
+      "interpretation": "La lectura actual només combina cobertes i mosaic obert; falten pendent, orientació, humitat vegetal, accessos i punts d'aigua.",
+      "management_implication": "No és prudent definir actuacions forestals espacials finals sense completar aquesta base.",
+      "evidence": [
+        "CORE_09",
+        "forestal=88.4246%; prats=9.3344%; agricola=0.0047%"
+      ],
+      "confidence": "baixa"
+    },
+    {
+      "theme": "aigua",
+      "title": "Funcionalitat hídrica no caracteritzada",
+      "interpretation": "Sense cursos, basses, fonts, zones humides i NDWI no es poden delimitar corredors hídrics ni refugis associats a l'aigua.",
+      "management_implication": "La hidrologia ha de ser una prioritat de dades abans de restauració o adaptació climàtica.",
+      "evidence": [
+        "CORE_10"
+      ],
+      "confidence": "baixa"
+    }
+  ],
+  "pressures": [
+    {
+      "theme": "ús públic",
+      "title": "Pressió humana només estimada com accessibilitat potencial",
+      "interpretation": "Pressio humana estimada parcialment amb xarxa OSM i punts d'us public; no representa nombre de visitants.",
+      "management_implication": "Cal validar accessos i punts d'ús abans de regular, tancar o redirigir fluxos.",
+      "evidence": [
+        "CORE_07",
+        "densitat camins/pistes=2.2846 km/km2; punts us public=18"
+      ],
+      "confidence": "baixa"
+    }
+  ],
+  "opportunities": [
+    {
+      "theme": "gestió",
+      "title": "Conservació prudent ja accionable",
+      "interpretation": "La combinació de valor d'hàbitats, biodiversitat coneguda i mosaic dona criteris inicials per evitar impactes i dirigir el camp.",
+      "management_implication": "Es poden establir zones de prudència i protocols de revisió abans d'actuacions.",
+      "evidence": [
+        "CORE_01",
+        "CORE_02",
+        "CORE_06"
+      ],
+      "confidence": "mitjana"
+    },
+    {
+      "theme": "coneixement",
+      "title": "Els buits de dades ja defineixen un full de ruta",
+      "interpretation": "Les mancances no són soroll: indiquen quines dades poden canviar decisions de gestió.",
+      "management_implication": "Prioritzar teledetecció, hidrologia, topografia i camp aportarà salt qualitatiu immediat.",
+      "evidence": [
+        "CORE_03",
+        "CORE_10",
+        "CORE_11",
+        "CORE_12"
+      ],
+      "confidence": "alta"
+    }
+  ],
+  "risks": [
+    {
+      "theme": "governança",
+      "title": "Risc de falsa precisió si es força una prioritat final",
+      "interpretation": "Diversos indicadors clau són parcials o no disponibles; una mitjana global amagaria incertesa.",
+      "management_implication": "EcoRadar ha de mantenir indicadors separats i recomanar validació quan la confiança és baixa.",
+      "evidence": [
+        "CORE_03",
+        "CORE_10",
+        "CORE_12"
+      ],
+      "confidence": "alta"
+    }
+  ],
+  "uncertainties": [
+    {
+      "theme": "Estat de la vegetacio",
+      "title": "Estat de la vegetacio",
+      "interpretation": "No es pot calcular sense teledeteccio real.",
+      "management_implication": "Configurar credencials Copernicus i generar rasters abans de valorar aquest indicador.",
+      "evidence": [
+        "CORE_03",
+        "NDVI; NDMI; NDWI; anomalia temporal"
+      ],
+      "confidence": "baixa"
+    },
+    {
+      "theme": "Refugis climatics",
+      "title": "Refugis climatics",
+      "interpretation": "Només es pot usar la cobertura forestal com a senyal parcial; el mapa de refugis queda pendent.",
+      "management_implication": "No prioritzar refugis climatics sense teledeteccio, topografia i hidrologia.",
+      "evidence": [
+        "CORE_04",
+        "LST; NDMI; orientacio nord/obaga; proximitat a cursos o punts d'aigua"
+      ],
+      "confidence": "baixa"
+    },
+    {
+      "theme": "Vulnerabilitat climatica",
+      "title": "Vulnerabilitat climatica",
+      "interpretation": "Vulnerabilitat només aproximada amb cobertura; no hi ha mapa de zones vulnerables.",
+      "management_implication": "Esperar teledeteccio, DEM i hidrologia abans de prioritzar restauracio climatica.",
+      "evidence": [
+        "CORE_05",
+        "LST alta; NDMI baix; orientacio sud; pendent; manca d'aigua"
+      ],
+      "confidence": "baixa"
+    },
+    {
+      "theme": "Connectivitat ecologica",
+      "title": "Connectivitat ecologica",
+      "interpretation": "Connectivitat aproximada només amb cobertes; corredors i barreres principals pendents.",
+      "management_implication": "No definir corredors fins incorporar barreres i xarxa hidrica.",
+      "evidence": [
+        "CORE_08",
+        "barreres; xarxa de riberes; infraestructures; corredors potencials"
+      ],
+      "confidence": "baixa"
+    },
+    {
+      "theme": "Aigua i funcionalitat hidrica",
+      "title": "Aigua i funcionalitat hidrica",
+      "interpretation": "No es pot valorar funcionalitat hidrica amb les dades actuals.",
+      "management_implication": "Implementar connector hidrologic oficial i executar NDWI quan Copernicus estigui disponible.",
+      "evidence": [
+        "CORE_10",
+        "cursos fluvials; basses; fonts; zones humides; NDWI; punts d'aigua de camp"
+      ],
+      "confidence": "baixa"
+    },
+    {
+      "theme": "Potencial de restauracio",
+      "title": "Potencial de restauracio",
+      "interpretation": "No es pot calcular potencial de restauracio sense els indicadors base complets.",
+      "management_implication": "Esperar les capes de vegetacio, pressio humana, hidrologia i camp abans de proposar zones.",
+      "evidence": [
+        "CORE_11",
+        "baixa qualitat de vegetacio; habitats degradats; baixa connectivitat; pressio gestionable; habitats font"
+      ],
+      "confidence": "baixa"
+    },
+    {
+      "theme": "Prioritat de gestio",
+      "title": "Prioritat de gestio",
+      "interpretation": "No es calcula cap prioritat global per evitar una mitjana simplista.",
+      "management_implication": "No generar top 10 zones prioritaries fins disposar de pressio humana, clima, foc, aigua i camp.",
+      "evidence": [
+        "CORE_12",
+        "refugis climatics; vulnerabilitat; pressio humana; resiliencia al foc; potencial de restauracio"
+      ],
+      "confidence": "baixa"
+    }
+  ],
+  "fieldwork_needs": [
+    {
+      "theme": "camp",
+      "title": "Validar hàbitats, accessos i grups infrarepresentats",
+      "interpretation": "Les fonts públiques orienten, però no certifiquen estat local ni absències.",
+      "management_implication": "Programar mostreig dirigit sobre HIC, prats, accessos principals, punts d'aigua i grups taxonòmics febles.",
+      "evidence": [
+        "CORE_02",
+        "CORE_06",
+        "CORE_07"
+      ],
+      "confidence": "mitjana"
+    }
+  ],
+  "data_insufficiencies": [
+    "LST",
+    "LST alta",
+    "NDMI",
+    "NDMI baix",
+    "NDVI",
+    "NDWI",
+    "accessos",
+    "anomalia temporal",
+    "baixa connectivitat",
+    "baixa qualitat de vegetacio",
+    "barreres",
+    "basses",
+    "buit espacial d'informacio",
+    "classificacio d'habitats sensibles",
+    "comptadors",
+    "continuïtat forestal espacial",
+    "corredors potencials",
+    "cursos fluvials",
+    "dades de gestors",
+    "especies indicadores",
+    "especies protegides/interes",
+    "fonts",
+    "habitats degradats",
+    "habitats font",
+    "heatmap autoritzat",
+    "infraestructures",
+    "manca d'aigua",
+    "observacions de camp",
+    "orientacio",
+    "orientacio nord/obaga",
+    "orientacio sud",
+    "pendent",
+    "potencial de restauracio",
+    "pressio gestionable",
+    "pressio humana",
+    "proximitat a cursos o punts d'aigua",
+    "punts d'aigua",
+    "punts d'aigua de camp",
+    "refugis climatics",
+    "resiliencia al foc",
+    "vulnerabilitat",
+    "xarxa de riberes",
+    "zones de mes valor espacialitzades",
+    "zones humides"
+  ]
+}

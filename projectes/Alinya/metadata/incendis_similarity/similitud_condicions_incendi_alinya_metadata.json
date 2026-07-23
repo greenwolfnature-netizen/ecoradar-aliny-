@@ -1,0 +1,118 @@
+{
+  "created_at": "2026-07-07",
+  "status": "environmental_similarity_not_fire_probability",
+  "cell_size_m": 150,
+  "study_area_ha": 5464.031656330243,
+  "official_fire_polygons_used": 2,
+  "fire_sample_summary": [
+    {
+      "year": "2000",
+      "area_ha": 13.634712264870084,
+      "cover_group": "Bosc",
+      "habitat_corine": "32.4811+",
+      "slope_deg": 32.84725570678711,
+      "slope_class": "forta",
+      "aspect_deg": 350.10028076171875,
+      "aspect_class": "N",
+      "elevation_m": 1616.0999755859375,
+      "distance_to_access_m": 0.0
+    },
+    {
+      "year": "2012",
+      "area_ha": 3.814191484934974,
+      "cover_group": "Bosc",
+      "habitat_corine": "32.641+",
+      "slope_deg": 9.900030136108398,
+      "slope_class": "suau",
+      "aspect_deg": 319.6495056152344,
+      "aspect_class": "N",
+      "elevation_m": 1686.030029296875,
+      "distance_to_access_m": 486.1372434678043
+    }
+  ],
+  "similarity_area_by_class_ha": {
+    "alta": 355.1580569299648,
+    "baixa": 417.98358503224915,
+    "mitjana": 2605.0239337668504,
+    "mitjana_alta": 2082.3890705798294
+  },
+  "llinars_bombers_records": [
+    {
+      "act_num_actuacio": "262527362",
+      "codi_ine": "08106",
+      "nom_regio": "Metropolitana Nord",
+      "tal_cod_alarma1": "IV",
+      "tga_nom_grupo": "incendi vegetació",
+      "tal_cod_alarma2": "VU",
+      "tal_nom_alarma": "Incendi vegetació urbana",
+      "municipi": "Llinars del Vallès",
+      "nom_poblacio": "Llinars del Vallès",
+      "codi_comarca": "41",
+      "nom_comarca": "Vallès Oriental",
+      "any": "2026",
+      "mes": "6",
+      "act_dat_actuacio": "2026-06-24T00:00:00.000",
+      "codi_regio": "25",
+      "urgents": "S",
+      "validat": "N"
+    }
+  ],
+  "method": {
+    "description": "Heuristic similarity to official local burned polygons; not a probability model.",
+    "weights": {
+      "land_cover": 0.22,
+      "habitat": 0.18,
+      "slope": 0.18,
+      "aspect": 0.14,
+      "elevation": 0.12,
+      "distance_to_access": 0.16
+    }
+  },
+  "sources": [
+    {
+      "name": "Superficies afectades per incendis forestals v1.1 / VEGETACIO:VEGETACIO_INCENDIS",
+      "organization": "Generalitat de Catalunya",
+      "status": "verified",
+      "path": "projectes/Alinya/processed/incendis/incendis_historics_alinya_clip.gpkg"
+    },
+    {
+      "name": "Actuacions dels Bombers de la Generalitat",
+      "organization": "DGPEIS / Departament d'Interior",
+      "status": "official_tabular_context_no_geometry",
+      "path": "projectes/Alinya/raw/incendis/bombers_llinars_incendis_vegetacio_2026.json"
+    },
+    {
+      "name": "Cobertes del sol",
+      "organization": "ICGC / EcoRadar processed project data",
+      "status": "verified",
+      "path": "projectes/Alinya/processed/cobertes_sol.gpkg"
+    },
+    {
+      "name": "Cartografia dels habitats terrestres v3",
+      "organization": "Generalitat de Catalunya",
+      "status": "verified",
+      "path": "projectes/Alinya/processed/habitats.gpkg"
+    },
+    {
+      "name": "Model d'elevacions del terreny 5m",
+      "organization": "ICGC",
+      "status": "verified",
+      "url": "https://datacloud.icgc.cat/datacloud/model-elevacions-terreny/tif_unzip/model-elevacions-terreny-topografic-catalunya-5m-2009-2018.tif",
+      "path": "projectes/Alinya/raw/terrain/icgc_dem_5m_alinya_window.tif"
+    },
+    {
+      "name": "Accessos OSM processats",
+      "organization": "OpenStreetMap contributors",
+      "status": "verified",
+      "path": "projectes/Alinya/processed/recreational_pressure.gpkg"
+    }
+  ],
+  "not_used": [
+    "IncendisCAT: consulted only as non-official context; not used as EcoRadar data source.",
+    "Pla Alfa: pending verification.",
+    "EFFIS: pending connector-grade endpoint and license verification.",
+    "Meteocat/AEMET: require credentials before implementation.",
+    "Sentinel NDMI/NDVI: requires Copernicus credentials.",
+    "Hydrology/water points: pending exact official layer."
+  ]
+}

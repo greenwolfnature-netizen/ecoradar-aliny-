@@ -1,0 +1,28 @@
+{
+  "connector": "connector_aca_hidrologia",
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:30:57+00:00",
+  "status": "completed",
+  "can_advance_to_next_connector": true,
+  "source": "ACA / Gencat AIGUA WFS",
+  "service_url": "https://sig.gencat.cat/ows/AIGUA/wfs",
+  "total_features": 15,
+  "required_layers_with_data": [
+    "rius_aca_che",
+    "eixos_drenatge",
+    "fonts"
+  ],
+  "outputs": {
+    "processed": "projectes/Alinya/processed/hidrologia.gpkg",
+    "summary": "projectes/Alinya/indicators/hidrologia_resum.csv",
+    "metadata": "projectes/Alinya/metadata/hidrologia_metadata.json"
+  },
+  "checks": {
+    "processed_exists": true,
+    "summary_exists": true,
+    "metadata_exists": true,
+    "has_any_water_features": true,
+    "has_courses_or_drainage": true,
+    "has_springs": true
+  }
+}

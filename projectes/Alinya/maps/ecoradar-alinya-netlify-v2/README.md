@@ -1,0 +1,28 @@
+# EcoRadar Alinyà v2 — paquet Netlify
+
+Aquest directori es pot publicar directament a Netlify. La funció
+`/api/daily-readings` consulta el repositori GitHub canònic a cada càrrega; els
+JSON empaquetats només s'utilitzen com a reserva si falla la consulta remota.
+
+Cal configurar `ECORADAR_GITHUB_REPOSITORY=propietari/repositori` i,
+opcionalment, `ECORADAR_GITHUB_BRANCH` (per defecte `main`) a Netlify.
+
+## Contingut
+
+- `index.html`: experiencia EcoRadar reorganitzada per a la Muntanya d'Alinya, amb lectura executiva i tecnica completa.
+- `vendor/d3.min.js`: D3 servit localment, com al model EcoRadar Urba.
+- `docs/data-sources-matrix.md`: matriu de fonts del projecte Alinya.
+- `docs/fire-source.md`: nota de traçabilitat de la capa d'incendis.
+- `docs/current-fire-danger-source.md`: metodologia i fonts oficials del perill actual.
+- `metadata/current_fire_danger.json`: comprovacio, variables, pesos, resultats i limitacions.
+- `metadata/daily_readings.json` i `metadata/daily_history.json`: reserva coherent.
+- `netlify/functions/daily-readings.mjs`: lectura remota del repositori canònic.
+
+La capa de concurrencia no es probabilitat oficial d'incendi ni perill diari.
+La lectura `Perill d'incendi actual` es un index analitic EcoRadar de 0 a 100,
+no una alerta oficial ni el Pla Alfa. Utilitza meteorologia XEMA Y4 i
+renormalitza els pesos si una variable no esta disponible.
+La geometria historica d'incendis va ser consultada el 17.07.2026.
+La concurrencia mostrada al visor utilitza nomes els perimetres historics
+oficials d'Alinya i les condicions territorials ja processades. No incorpora
+EFFIS, FIRMS ni registres operatius recents sense perimetre consolidat.

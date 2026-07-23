@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EcoRadar Project Manifest",
+  "type": "object",
+  "required": [
+    "project_id",
+    "site_name",
+    "created_at",
+    "study_area",
+    "space_type",
+    "diagnostic_objective",
+    "paths",
+    "source_gates"
+  ],
+  "properties": {
+    "project_id": { "type": "string" },
+    "site_name": { "type": "string" },
+    "municipality": { "type": "string" },
+    "comarca": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "space_type": {
+      "type": "string",
+      "enum": [
+        "natural_protected",
+        "forest",
+        "agricultural",
+        "periurban",
+        "urban_green",
+        "riparian",
+        "dryland",
+        "mixed"
+      ]
+    },
+    "diagnostic_objective": {
+      "type": "string",
+      "enum": [
+        "biodiversity",
+        "fires",
+        "restoration",
+        "public_use",
+        "annual_monitoring",
+        "general_planning"
+      ]
+    },
+    "study_area": {
+      "type": "object",
+      "required": ["input_format", "crs", "path"],
+      "properties": {
+        "input_format": {
+          "type": "string",
+          "enum": ["geojson", "shp", "gpkg", "drawn_polygon"]
+        },
+        "crs": { "type": "string" },
+        "path": { "type": "string" },
+        "area_ha": { "type": "number" }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "source_gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_id", "status", "can_run_connector"],
+        "properties": {
+          "source_id": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": [
+              "verified",
+              "requires_credentials",
+              "service_unavailable",
+              "pending_verification",
+              "blocked"
+            ]
+          },
+          "can_run_connector": { "type": "boolean" },
+          "reason": { "type": "string" }
+        }
+      }
+    }
+  }
+}
+

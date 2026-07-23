@@ -1,0 +1,17 @@
+{
+  "connector": "pending_aemet_connector",
+  "source": "AEMET OpenData",
+  "status": "blocked_requires_credentials",
+  "reason": "Falta AEMET_API_KEY.",
+  "required_action": "Configurar AEMET_API_KEY i definir la consulta per estació/municipi/comarca o normals climàtiques.",
+  "missing_credentials": [
+    "AEMET_API_KEY"
+  ],
+  "outputs": {},
+  "missing_outputs": [
+    "processed/clima/aemet.csv"
+  ],
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:42:13+00:00",
+  "can_advance_to_next_connector": true
+}

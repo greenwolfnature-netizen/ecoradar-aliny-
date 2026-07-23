@@ -1,0 +1,90 @@
+{
+  "project": "Alinya",
+  "source": "Infraestructura Verda / Connectivitat ecològica",
+  "responsible_organization": "Generalitat de Catalunya",
+  "url": "https://mediambient.gencat.cat/",
+  "service_url": "https://sig.gencat.cat/ows/INFRAESTRUCTURA_VERDA/wfs",
+  "service_type": "WFS 2.0.0",
+  "query_date": "2026-07-07T17:36:47.553555+00:00",
+  "crs": "EPSG:25831",
+  "study_area_surface_ha": 5464.031656330243,
+  "processed_path": "projectes/Alinya/processed/connectivitat.gpkg",
+  "summary_path": "projectes/Alinya/indicators/connectivitat_resum.csv",
+  "layers": [
+    {
+      "layer_id": "connectivitat_terrestre_index",
+      "type_name": "INFRAESTRUCTURA_VERDA:CONECO_INDX_CONNEC_TERR_GRAL",
+      "theme": "terrestrial_connectivity_index",
+      "raw_path": "projectes/Alinya/raw/connectivitat/connectivitat_terrestre_index.geojson",
+      "feature_count": 49,
+      "geometry_types": [
+        "MultiPolygon",
+        "Polygon"
+      ],
+      "area_ha": 5464.0317,
+      "length_km": 283.3514
+    },
+    {
+      "layer_id": "connectors_fluvials_complementaris",
+      "type_name": "INFRAESTRUCTURA_VERDA:CONECO_CONNECTORS_FLUV_COMPL",
+      "theme": "fluvial_connectors_complementary",
+      "raw_path": "projectes/Alinya/raw/connectivitat/connectors_fluvials_complementaris.geojson",
+      "feature_count": 1,
+      "geometry_types": [
+        "LineString"
+      ],
+      "area_ha": 0.0,
+      "length_km": 0.0208
+    },
+    {
+      "layer_id": "connectors_fluvials_principals",
+      "type_name": "INFRAESTRUCTURA_VERDA:CONECO_CONNECTORS_FLUV_PPAL",
+      "theme": "fluvial_connectors_main",
+      "raw_path": "projectes/Alinya/raw/connectivitat/connectors_fluvials_principals.geojson",
+      "feature_count": 0,
+      "geometry_types": [],
+      "area_ha": 0.0,
+      "length_km": 0.0
+    },
+    {
+      "layer_id": "connectors_terrestres_complementaris",
+      "type_name": "INFRAESTRUCTURA_VERDA:CONECO_CONNECTORS_TERR_COMPL",
+      "theme": "terrestrial_connectors_complementary",
+      "raw_path": "projectes/Alinya/raw/connectivitat/connectors_terrestres_complementaris.geojson",
+      "feature_count": 0,
+      "geometry_types": [],
+      "area_ha": 0.0,
+      "length_km": 0.0
+    },
+    {
+      "layer_id": "connectors_terrestres_principals",
+      "type_name": "INFRAESTRUCTURA_VERDA:CONECO_CONNECTORS_TERR_PPAL",
+      "theme": "terrestrial_connectors_main",
+      "raw_path": "projectes/Alinya/raw/connectivitat/connectors_terrestres_principals.geojson",
+      "feature_count": 4,
+      "geometry_types": [
+        "MultiPolygon",
+        "Polygon"
+      ],
+      "area_ha": 1198.6046,
+      "length_km": 49.9162
+    },
+    {
+      "layer_id": "zones_connectors_infraestructura_verda",
+      "type_name": "INFRAESTRUCTURA_VERDA:INFRAVERD_ZONES_CONNECTORS",
+      "theme": "green_infrastructure_connector_zones",
+      "raw_path": "projectes/Alinya/raw/connectivitat/zones_connectors_infraestructura_verda.geojson",
+      "feature_count": 1,
+      "geometry_types": [
+        "MultiPolygon"
+      ],
+      "area_ha": 6.3477,
+      "length_km": 2.3636
+    }
+  ],
+  "limitations": [
+    "The connector stores official connectivity layers clipped to the study area.",
+    "It does not calculate EcoRadar connectivity scores or corridor prioritization.",
+    "Large polygon layers may include features selected by BBOX and then clipped locally."
+  ]
+}

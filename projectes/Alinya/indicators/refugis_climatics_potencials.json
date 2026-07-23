@@ -1,0 +1,48 @@
+{
+  "generated_at_utc": "2026-07-20T19:17:36.148218+00:00",
+  "scope": "Muntanya d'Alinya",
+  "status": "verified_analysis",
+  "name": "Potencial relatiu de refugi climatic",
+  "sources": {
+    "temperature": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
+    "temperature_period": "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z",
+    "ndmi_ndvi": "Copernicus Sentinel-2 L2A S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508",
+    "hydrology_context": "ACA and project-normalized official hydrology layers"
+  },
+  "method": {
+    "formula": "0.50*frescor_LST + 0.30*humitat_NDMI + 0.20*vigor_NDVI",
+    "normalization": "Each component clipped to its documented P10-P90 interval within Alinya",
+    "vegetation_filter": "NDVI >= 0.30",
+    "weights": {
+      "frescor_lst": 0.5,
+      "humitat_ndmi": 0.3,
+      "vigor_ndvi": 0.2
+    },
+    "thresholds": {
+      "suport": 0.5,
+      "alt": 0.65,
+      "molt_alt": 0.8
+    }
+  },
+  "distribution": {
+    "suport": {
+      "pixels": 59752,
+      "share_of_vegetated_valid_pct": 17.0
+    },
+    "alt": {
+      "pixels": 63138,
+      "share_of_vegetated_valid_pct": 18.0
+    },
+    "molt_alt": {
+      "pixels": 82798,
+      "share_of_vegetated_valid_pct": 23.5
+    }
+  },
+  "high_or_very_high_share_of_vegetated_valid_pct": 41.5,
+  "outputs": {
+    "geotiff": "processed/teledeteccio/refugis_climatics_potencials.tif",
+    "webp": "maps/teledeteccio/refugis_climatics_potencials.webp",
+    "product_map": "maps/producte/mapa_refugis_climatics_alinya.png"
+  },
+  "limitations": "Relative screening layer based on a two-summer daytime LST composite and one Sentinel-2 date. It is not air temperature, a climatic normal, microclimate monitoring or a field-validated refuge inventory. Weights and thresholds are explicit EcoRadar analysis assumptions."
+}

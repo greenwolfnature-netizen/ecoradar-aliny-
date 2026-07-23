@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-07-06T21:45:35+00:00",
+  "project": "Alinyà",
+  "product_outputs": {
+    "executive_markdown": "projectes/Alinya/reports/informe_executiu_ecoradar_alinya.md",
+    "executive_pdf": "projectes/Alinya/reports/informe_executiu_ecoradar_alinya.pdf",
+    "modules_pdf": "projectes/Alinya/reports/modules/moduls_diagnosi_ecoradar_alinya.pdf",
+    "combined_product_pdf": "projectes/Alinya/reports/informe_professional_ecoradar_alinya.pdf"
+  },
+  "map_outputs": {
+    "espai": "projectes/Alinya/maps/producte/mapa_espai_alinya.png",
+    "paisatge": "projectes/Alinya/maps/producte/mapa_paisatge_alinya.png",
+    "habitats": "projectes/Alinya/maps/producte/mapa_habitats_alinya.png",
+    "biodiversitat": "projectes/Alinya/maps/producte/mapa_biodiversitat_alinya.png",
+    "pressio": "projectes/Alinya/maps/producte/mapa_pressio_humana_alinya.png",
+    "base": "projectes/Alinya/maps/producte/mapa_base_alinya.png"
+  },
+  "principles": [
+    "Executive output hides internal technical implementation details.",
+    "Modules keep indicators separated and do not invent unavailable data.",
+    "Maps are interpretative products generated from already prepared local outputs."
+  ],
+  "input_counts": {
+    "basic_rows": 18,
+    "core_rows": 12,
+    "habitat_rows": 47,
+    "biodiversity_rows": 13,
+    "pressure_rows": 4
+  }
+}

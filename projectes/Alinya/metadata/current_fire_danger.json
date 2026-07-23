@@ -1,0 +1,500 @@
+{
+  "source_gate": "verified",
+  "checked_at_utc": "2026-07-23T19:54:51Z",
+  "config": "config/alinya_current_fire_danger.json",
+  "inputs": {
+    "official_structural": "projectes/LaSeu_Urba/raw/incendis/perill_basic_2024/PERILLBASICINCENDI.tif",
+    "surface_temperature": "projectes/Alinya/processed/landsat/landsat_lst.tif",
+    "ndmi": "projectes/Alinya/processed/teledeteccio/ndmi.tif",
+    "landcover": "projectes/Alinya/maps/incendis/condicions_cobertes_alinya.geojson",
+    "concurrence": "projectes/Alinya/maps/incendis_similarity/similitud_condicions_incendi_alinya.geojson",
+    "meteorology": "projectes/Alinya/raw/meteocat_xema/Y4_observations.csv"
+  },
+  "result": {
+    "schema_version": "1.0",
+    "generated_at_utc": "2026-07-23T19:54:51Z",
+    "checked_at_utc": "2026-07-23T19:54:51Z",
+    "reading": "Perill d'incendi actual",
+    "scope": "Muntanya d'Alinyà",
+    "status": "incompleta en algunes cel·les",
+    "official_alert": false,
+    "grid": {
+      "crs": "EPSG:25831",
+      "resolution_m": 100.0,
+      "cells": 5998,
+      "bbox_epsg4326": [
+        1.3617252918882514,
+        42.142558863812205,
+        1.5211302013780743,
+        42.227525158639374
+      ],
+      "geojson": "projectes/Alinya/maps/incendis/current_fire_danger_cells.geojson",
+      "raster": "projectes/Alinya/processed/incendis/current_fire_danger/current_fire_danger_0_100.tif",
+      "webp": "projectes/Alinya/maps/incendis/current_fire_danger.webp"
+    },
+    "summary": {
+      "mean_index_0_100": 53.3,
+      "predominant_category": "moderat",
+      "maximum_index_0_100": 88.2,
+      "maximum_category": "molt alt",
+      "area_by_category_ha": {
+        "molt baix": 0.0,
+        "baix": 714.43,
+        "moderat": 3025.13,
+        "alt": 1704.23,
+        "molt alt": 20.24,
+        "extrem": 0.0
+      },
+      "very_high_or_extreme_area_pct": 0.4,
+      "dominant_variables": [
+        "vegetation_type_fuel_potential",
+        "official_structural_2024",
+        "vegetation_dryness_ndmi"
+      ],
+      "dominant_labels": [
+        "Coberta amb més potencial de combustible",
+        "Perill estructural elevat",
+        "Vegetació seca"
+      ],
+      "latest_update_utc": "2026-07-23T19:00:00Z",
+      "confidence_pct": 63.8,
+      "confidence": "mitjana"
+    },
+    "weather": {
+      "air_temperature_c": {
+        "value": 28.1,
+        "timestamp_utc": "2026-07-23T19:00:00Z",
+        "validation_code": "",
+        "history_p05": 18.6,
+        "history_p95": 32.0
+      },
+      "relative_humidity_pct": {
+        "value": 34.0,
+        "timestamp_utc": "2026-07-23T19:00:00Z",
+        "validation_code": "",
+        "history_p05": 20.0,
+        "history_p95": 59.0
+      },
+      "precipitation_mm": {
+        "value": 0.0,
+        "timestamp_utc": "2026-07-23T19:00:00Z",
+        "validation_code": ""
+      },
+      "daily_min_relative_humidity_pct": 25.0
+    },
+    "variables_today": {
+      "official_structural_2024": {
+        "value": "mediana 4.0/10",
+        "source": "Generalitat · perill bàsic 2024",
+        "date_utc": "2024-01-01T00:00:00Z",
+        "weight_pct": 24,
+        "quality": "verificada",
+        "update_status": "última dada vàlida"
+      },
+      "surface_temperature": {
+        "value": "mediana 27.3 °C",
+        "source": "USGS Landsat 8/9 C2 L2 · composició estival",
+        "date_utc": "2026-07-08T10:36:09.180240Z",
+        "weight_pct": 16,
+        "quality": "verificada",
+        "update_status": "última dada vàlida"
+      },
+      "vegetation_dryness_ndmi": {
+        "value": "mediana 0.103",
+        "source": "Copernicus Sentinel-2 L2A",
+        "date_utc": "2026-07-07T10:37:01.024000Z",
+        "weight_pct": 16,
+        "quality": "verificada",
+        "update_status": "última dada vàlida"
+      },
+      "vegetation_type_fuel_potential": {
+        "value": "potencial mitjà 0.95/1",
+        "source": "ICGC · cobertes del sòl 2024",
+        "date_utc": "2024-12-31T00:00:00Z",
+        "weight_pct": 16,
+        "quality": "verificada",
+        "update_status": "última dada vàlida"
+      },
+      "territorial_concurrence": {
+        "value": "mediana 0.509/1",
+        "source": "EcoRadar · fonts territorials oficials documentades",
+        "date_utc": "2026-07-20T18:27:24.763407+00:00",
+        "weight_pct": 8,
+        "quality": "verificada",
+        "update_status": "última dada vàlida"
+      },
+      "wind": {
+        "value": "dada no disponible",
+        "source": "Meteocat XEMA · Y4 Alinyà",
+        "date_utc": null,
+        "weight_pct": 10,
+        "quality": "no disponible",
+        "update_status": "dada no disponible"
+      },
+      "relative_humidity_inverse": {
+        "value": "34 %",
+        "source": "Meteocat XEMA · Y4 Alinyà",
+        "date_utc": "2026-07-23T19:00:00Z",
+        "weight_pct": 10,
+        "quality": "provisional",
+        "update_status": "actualitzada avui"
+      }
+    },
+    "normalization": {
+      "method": "P10-P90 within Alinyà for static rasters and P5-P95 over the 35-day XEMA history; missing variables are reweighted, never set to zero.",
+      "ndmi_p10_p90": [
+        -0.0395,
+        0.2503
+      ],
+      "lst_c_p10_p90": [
+        22.86,
+        32.4
+      ]
+    },
+    "weights": {
+      "official_structural_2024": 0.24,
+      "surface_temperature": 0.16,
+      "vegetation_dryness_ndmi": 0.16,
+      "vegetation_type_fuel_potential": 0.16,
+      "territorial_concurrence": 0.08,
+      "wind": 0.1,
+      "relative_humidity_inverse": 0.1
+    },
+    "methodology": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
+    "sources": {
+      "meteocat": {
+        "generated_at_utc": "2026-07-23T19:55:17.007157+00:00",
+        "connector": "meteocat_xema_socrata",
+        "responsibility": "download_and_normalize_only",
+        "source": "Dades meteorològiques de la XEMA",
+        "organization": "Servei Meteorològic de Catalunya / Generalitat de Catalunya",
+        "official_dataset": "https://analisi.transparenciacatalunya.cat/d/nzvn-apee",
+        "station_code": "Y4",
+        "station_name": "Alinyà",
+        "records": 5037,
+        "first_observation_utc": "2026-06-18T20:00:00Z",
+        "last_observation_utc": "2026-07-23T19:00:00Z",
+        "variables": {
+          "air_temperature_c": "32",
+          "wind_speed_ms": "30",
+          "wind_direction_deg": "31",
+          "relative_humidity_pct": "33",
+          "precipitation_mm": "35",
+          "wind_gust_ms": "50",
+          "wind_gust_direction_deg": "51"
+        },
+        "validation_note": "Blank codi_estat means validation has not started; T means pending; V means validated.",
+        "connector_status": "verified",
+        "output_csv": "projectes/Alinya/raw/meteocat_xema/Y4_observations.csv"
+      },
+      "sentinel2": {
+        "generated_at_utc": "2026-07-20T17:49:53.447098+00:00",
+        "scope": "Muntanya d'Alinyà",
+        "source_scene": "S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508",
+        "acquired_at_utc": "2026-07-07T10:37:01.024000Z",
+        "study_bbox_epsg4326": [
+          1.363998,
+          42.144427,
+          1.5199389999999993,
+          42.22512200000001
+        ],
+        "valid_pixels": 377656,
+        "valid_area_ha": 5467.2,
+        "metrics": {
+          "ndvi": {
+            "mean": 0.579,
+            "median": 0.616,
+            "p10": 0.341,
+            "p90": 0.757
+          },
+          "ndmi": {
+            "mean": 0.104,
+            "median": 0.106,
+            "p10": -0.075,
+            "p90": 0.278
+          },
+          "albedo": {
+            "mean": 0.182,
+            "median": 0.173,
+            "p10": 0.129,
+            "p90": 0.243
+          }
+        },
+        "methods": {
+          "ndvi": "(B08-B04)/(B08+B04), Sentinel-2 L2A bottom-of-atmosphere reflectance",
+          "ndmi": "(B08-B11)/(B08+B11)",
+          "albedo": "0.356*B02 + 0.130*B04 + 0.373*B08 + 0.085*B11 + 0.072*B12 - 0.0018",
+          "quality_mask": "dataMask=1 and SCL classes 4, 5 or 6; cloud, cirrus, shadow, snow and invalid classes excluded"
+        },
+        "limitations": {
+          "scene": "Single acquisition; not a seasonal climatology",
+          "ndvi": "not biodiversity or individual plant health",
+          "ndmi": "relative proxy, not field fuel moisture",
+          "albedo": "broadband estimate, not in-situ radiometry"
+        },
+        "outputs": {
+          "ndvi": "maps/teledeteccio/ndvi.webp",
+          "ndmi": "maps/teledeteccio/ndmi.webp",
+          "albedo": "maps/teledeteccio/albedo.webp"
+        }
+      },
+      "landsat": {
+        "generated_at_utc": "2026-07-20T18:25:00.708623+00:00",
+        "connector": "landsat_usgs_c2_l2_summer_composite",
+        "responsibility": "download_and_normalize_only",
+        "scope": "Muntanya d'Alinyà",
+        "study_bbox_epsg4326": [
+          1.3639980000000003,
+          42.14442700000001,
+          1.5199389999999995,
+          42.22512200000001
+        ],
+        "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
+        "organization": "United States Geological Survey",
+        "official_catalog_url": "https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l2-sr",
+        "access_mirror_search_url": "https://planetarycomputer.microsoft.com/api/stac/v1/search",
+        "service_type": "STAC plus signed Cloud Optimized GeoTIFF range reads",
+        "license": "USGS Landsat data are in the public domain",
+        "date_range": "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z",
+        "scene_count": 20,
+        "scenes": [
+          {
+            "item_id": "LC08_L2SP_198031_20250830_02_T1",
+            "acquired_at_utc": "2025-08-30T10:36:43.258150Z",
+            "scene_cloud_cover_pct": 0.76,
+            "valid_study_pixels": 59555,
+            "valid_study_pct": 98.1
+          },
+          {
+            "item_id": "LC08_L2SP_198031_20250627_02_T1",
+            "acquired_at_utc": "2025-06-27T10:36:23.048888Z",
+            "scene_cloud_cover_pct": 0.88,
+            "valid_study_pixels": 60648,
+            "valid_study_pct": 99.9
+          },
+          {
+            "item_id": "LC09_L2SP_198031_20260622_02_T1",
+            "acquired_at_utc": "2026-06-22T10:36:04.112465Z",
+            "scene_cloud_cover_pct": 1.61,
+            "valid_study_pixels": 59306,
+            "valid_study_pct": 97.69
+          },
+          {
+            "item_id": "LC08_L2SP_198031_20250915_02_T1",
+            "acquired_at_utc": "2025-09-15T10:36:49.286864Z",
+            "scene_cloud_cover_pct": 1.94,
+            "valid_study_pixels": 60619,
+            "valid_study_pct": 99.85
+          },
+          {
+            "item_id": "LC08_L2SP_198031_20250729_02_T1",
+            "acquired_at_utc": "2025-07-29T10:36:31.577467Z",
+            "scene_cloud_cover_pct": 2.83,
+            "valid_study_pixels": 60329,
+            "valid_study_pct": 99.37
+          },
+          {
+            "item_id": "LC08_L2SP_198031_20250814_02_T1",
+            "acquired_at_utc": "2025-08-14T10:36:40.794171Z",
+            "scene_cloud_cover_pct": 3.19,
+            "valid_study_pixels": 59720,
+            "valid_study_pct": 98.37
+          },
+          {
+            "item_id": "LC09_L2SP_198031_20260708_02_T1",
+            "acquired_at_utc": "2026-07-08T10:36:09.180240Z",
+            "scene_cloud_cover_pct": 5.63,
+            "valid_study_pixels": 22555,
+            "valid_study_pct": 37.15
+          },
+          {
+            "item_id": "LC09_L2SP_198031_20250619_02_T1",
+            "acquired_at_utc": "2025-06-19T10:36:16.127205Z",
+            "scene_cloud_cover_pct": 5.78,
+            "valid_study_pixels": 60514,
+            "valid_study_pct": 99.68
+          },
+          {
+            "item_id": "LC08_L2SP_198031_20260630_02_T1",
+            "acquired_at_utc": "2026-06-30T10:36:00.611167Z",
+            "scene_cloud_cover_pct": 7.47,
+            "valid_study_pixels": 51154,
+            "valid_study_pct": 84.26
+          },
+          {
+            "item_id": "LC08_L2SP_198031_20250713_02_T1",
+            "acquired_at_utc": "2025-07-13T10:36:26.693516Z",
+            "scene_cloud_cover_pct": 7.99,
+            "valid_study_pixels": 56476,
+            "valid_study_pct": 93.02
+          },
+          {
+            "item_id": "LC09_L2SP_198031_20250923_02_T1",
+            "acquired_at_utc": "2025-09-23T10:36:54.399413Z",
+            "scene_cloud_cover_pct": 8.5,
+            "valid_study_pixels": 57877,
+            "valid_study_pct": 95.33
+          },
+          {
+            "item_id": "LC09_L2SP_198031_20250822_02_T1",
+            "acquired_at_utc": "2025-08-22T10:36:45.415514Z",
+            "scene_cloud_cover_pct": 9.79,
+            "valid_study_pixels": 47150,
+            "valid_study_pct": 77.66
+          },
+          {
+            "item_id": "LC08_L2SP_198031_20260614_02_T1",
+            "acquired_at_utc": "2026-06-14T10:35:47.609599Z",
+            "scene_cloud_cover_pct": 12.37,
+            "valid_study_pixels": 59434,
+            "valid_study_pct": 97.9
+          },
+          {
+            "item_id": "LC08_L2SP_198031_20250611_02_T1",
+            "acquired_at_utc": "2025-06-11T10:36:13.236887Z",
+            "scene_cloud_cover_pct": 13.78,
+            "valid_study_pixels": 60692,
+            "valid_study_pct": 99.97
+          },
+          {
+            "item_id": "LC09_L2SP_198031_20250806_02_T1",
+            "acquired_at_utc": "2025-08-06T10:36:36.976511Z",
+            "scene_cloud_cover_pct": 16.09,
+            "valid_study_pixels": 60701,
+            "valid_study_pct": 99.98
+          },
+          {
+            "item_id": "LC09_L2SP_198031_20250721_02_T1",
+            "acquired_at_utc": "2025-07-21T10:36:29.059307Z",
+            "scene_cloud_cover_pct": 16.23,
+            "valid_study_pixels": 52839,
+            "valid_study_pct": 87.03
+          },
+          {
+            "item_id": "LC09_L2SP_198031_20250603_02_T1",
+            "acquired_at_utc": "2025-06-03T10:36:04.004415Z",
+            "scene_cloud_cover_pct": 25.06,
+            "valid_study_pixels": 40354,
+            "valid_study_pct": 66.47
+          },
+          {
+            "item_id": "LC09_L2SP_198031_20250907_02_T1",
+            "acquired_at_utc": "2025-09-07T10:36:51.063658Z",
+            "scene_cloud_cover_pct": 35.61,
+            "valid_study_pixels": 7015,
+            "valid_study_pct": 11.55
+          },
+          {
+            "item_id": "LC09_L2SP_198031_20260606_02_T1",
+            "acquired_at_utc": "2026-06-06T10:35:53.038167Z",
+            "scene_cloud_cover_pct": 64.01,
+            "valid_study_pixels": 0,
+            "valid_study_pct": 0.0
+          },
+          {
+            "item_id": "LC09_L2SP_198031_20250705_02_T1",
+            "acquired_at_utc": "2025-07-05T10:36:21.879307Z",
+            "scene_cloud_cover_pct": 68.19,
+            "valid_study_pixels": 0,
+            "valid_study_pct": 0.0
+          }
+        ],
+        "crs": "EPSG:32631",
+        "resolution_m": 30.0,
+        "variables": [
+          "ST_B10",
+          "QA_PIXEL"
+        ],
+        "normalization": "LST_C = ST_B10 * scale + offset - 273.15; QA bits 0-5 excluded",
+        "composite_method": "Per-pixel median of every valid QA-screened summer observation",
+        "study_pixels": 60711,
+        "valid_pixels": 60711,
+        "study_coverage_pct": 100.0,
+        "normalized_tif": "projectes/Alinya/processed/landsat/landsat_lst.tif",
+        "sha256": "03982eb31fbcf702ab9de96550fdfea78a3c82cf09a8c9883b084af72316eaa6",
+        "connector_status": "verified"
+      },
+      "territorial": {
+        "generated_at_utc": "2026-07-20T18:27:24.763407+00:00",
+        "indicator": "integrated_structural_wildfire_danger_ecoradar",
+        "status": "verified_analysis",
+        "scope": "Muntanya d'Alinyà",
+        "crs": "EPSG:25831",
+        "resolution_m": 100.0,
+        "coverage_pct": 100.0,
+        "formula": "weighted mean of available normalized components; weights renormalized where the official forest-only raster has NoData",
+        "weights": {
+          "official_structural_2024": 0.3,
+          "surface_temperature": 0.2,
+          "vegetation_dryness_ndmi": 0.2,
+          "vegetation_type_fuel_potential": 0.2,
+          "territorial_concurrence": 0.1
+        },
+        "components": {
+          "official_structural_2024": "Generalitat Mapa bàsic de perill d'incendi forestal 2024, values 1-10 normalized to 0-1",
+          "surface_temperature": "Landsat warm-season composite robust-scaled between study P10=22.82 C and P90=32.38 C",
+          "vegetation_dryness_ndmi": "inverse Sentinel-2 NDMI robust-scaled between study P10=-0.039 and P90=0.251",
+          "vegetation_type_fuel_potential": {
+            "Aigua": 0.0,
+            "Roquissars / sol nu": 0.1,
+            "Vies i nuclis": 0.15,
+            "Conreus": 0.4,
+            "Prats i herbassars": 0.55,
+            "Matollar": 0.9,
+            "Bosc": 1.0
+          },
+          "territorial_concurrence": "existing 0-1 score combining cover, habitat, slope, aspect, elevation and access similarity to historical fires"
+        },
+        "thresholds": {
+          "baix": "<0.25",
+          "moderat": "0.25-<0.50",
+          "alt": "0.50-<0.70",
+          "molt_alt": ">=0.70"
+        },
+        "statistics": {
+          "minimum": 0.115,
+          "median": 0.527,
+          "maximum": 0.926,
+          "distribution": {
+            "baix": {
+              "cells": 35,
+              "area_ha": 35.0,
+              "share_pct": 0.6
+            },
+            "moderat": {
+              "cells": 2281,
+              "area_ha": 2281.0,
+              "share_pct": 41.8
+            },
+            "alt": {
+              "cells": 2503,
+              "area_ha": 2503.0,
+              "share_pct": 45.8
+            },
+            "molt_alt": {
+              "cells": 643,
+              "area_ha": 643.0,
+              "share_pct": 11.8
+            }
+          }
+        },
+        "outputs": {
+          "tif": "processed/incendis/perill_integrat_ecoradar.tif",
+          "webp": "maps/incendis/perill_integrat_ecoradar.webp"
+        },
+        "limitations": [
+          "EcoRadar integrated structural reading; not the official daily danger, Pla Alfa, ignition probability or emergency alert.",
+          "Fuel-potential scores are explicit analytical assumptions by land-cover class and require field validation of fuel load and vertical structure.",
+          "Landsat temperature is a warm-season surface composite and NDMI is a relative spectral moisture proxy, not fine-fuel moisture."
+        ]
+      }
+    },
+    "limitations": [
+      "Índex EcoRadar derivat; no és una alerta oficial ni substitueix el Pla Alfa o el mapa diari oficial.",
+      "La meteorologia XEMA Y4 és una observació puntual i no representa cada vessant d'un àmbit de 5.464 ha.",
+      "Una variable XEMA absent es marca com a no disponible i el pes es renormalitza; no es converteix en zero.",
+      "La temperatura Landsat és una composició estival i l'NDMI és un proxy relatiu, no humitat fina del combustible.",
+      "La coberta és un proxy de combustible que requereix validació de càrrega i estructura vertical al camp."
+    ]
+  }
+}

@@ -1,0 +1,546 @@
+{
+  "generated_at": "2026-07-22T18:30:18+00:00",
+  "indicators": [
+    {
+      "indicator": "CORE_01",
+      "required_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "connectivity_infraestructura_verda"
+      ],
+      "all_sources": [
+        "study_area_file",
+        "icgc_base_maps",
+        "icgc_orthophoto",
+        "land_cover_icgc_cobertes_sol",
+        "land_cover_mcsc",
+        "sigpac_catalunya",
+        "dun_cultius",
+        "connectivity_infraestructura_verda"
+      ],
+      "available_sources": [
+        "study_area_file",
+        "icgc_base_maps",
+        "icgc_orthophoto",
+        "land_cover_icgc_cobertes_sol",
+        "connectivity_infraestructura_verda"
+      ],
+      "partial_sources": [],
+      "missing_sources": [
+        "land_cover_mcsc",
+        "sigpac_catalunya",
+        "dun_cultius"
+      ],
+      "data_available_percent": 100.0,
+      "status": "DISPONIBLE",
+      "confidence": "alta"
+    },
+    {
+      "indicator": "CORE_02",
+      "required_sources": [
+        "study_area_file",
+        "habitats_terrestres_v3",
+        "hic_v2"
+      ],
+      "all_sources": [
+        "study_area_file",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "field_biodiversity",
+        "field_validation"
+      ],
+      "available_sources": [
+        "study_area_file",
+        "habitats_terrestres_v3",
+        "hic_v2"
+      ],
+      "partial_sources": [],
+      "missing_sources": [
+        "field_biodiversity",
+        "field_validation"
+      ],
+      "data_available_percent": 100.0,
+      "status": "DISPONIBLE",
+      "confidence": "alta"
+    },
+    {
+      "indicator": "CORE_03",
+      "required_sources": [
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst",
+        "meteocat"
+      ],
+      "all_sources": [
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst",
+        "meteocat",
+        "aemet"
+      ],
+      "available_sources": [],
+      "partial_sources": [],
+      "missing_sources": [
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst",
+        "meteocat",
+        "aemet"
+      ],
+      "data_available_percent": 0.0,
+      "status": "NO DISPONIBLE",
+      "confidence": "baixa"
+    },
+    {
+      "indicator": "CORE_04",
+      "required_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_lst",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "meteocat"
+      ],
+      "all_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_lst",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "meteocat",
+        "aemet",
+        "spei"
+      ],
+      "available_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "icgc_dem_mdt",
+        "aca_hydrology"
+      ],
+      "partial_sources": [],
+      "missing_sources": [
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_lst",
+        "meteocat",
+        "aemet",
+        "spei"
+      ],
+      "data_available_percent": 50.0,
+      "status": "PARCIAL",
+      "confidence": "mitjana"
+    },
+    {
+      "indicator": "CORE_05",
+      "required_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "copernicus_sentinel_ndmi",
+        "copernicus_lst",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "meteocat"
+      ],
+      "all_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "copernicus_sentinel_ndmi",
+        "copernicus_lst",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "meteocat",
+        "aemet",
+        "spei"
+      ],
+      "available_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "icgc_dem_mdt",
+        "aca_hydrology"
+      ],
+      "partial_sources": [],
+      "missing_sources": [
+        "copernicus_sentinel_ndmi",
+        "copernicus_lst",
+        "meteocat",
+        "aemet",
+        "spei"
+      ],
+      "data_available_percent": 57.1,
+      "status": "PARCIAL",
+      "confidence": "mitjana"
+    },
+    {
+      "indicator": "CORE_06",
+      "required_sources": [
+        "habitats_terrestres_v3",
+        "gbif_occurrences",
+        "inaturalist_observations"
+      ],
+      "all_sources": [
+        "habitats_terrestres_v3",
+        "gbif_occurrences",
+        "inaturalist_observations",
+        "bdbc",
+        "field_biodiversity",
+        "field_validation"
+      ],
+      "available_sources": [
+        "habitats_terrestres_v3",
+        "gbif_occurrences",
+        "inaturalist_observations"
+      ],
+      "partial_sources": [],
+      "missing_sources": [
+        "bdbc",
+        "field_biodiversity",
+        "field_validation"
+      ],
+      "data_available_percent": 100.0,
+      "status": "DISPONIBLE",
+      "confidence": "alta"
+    },
+    {
+      "indicator": "CORE_07",
+      "required_sources": [
+        "osm_public_use"
+      ],
+      "all_sources": [
+        "field_biodiversity",
+        "osm_public_use",
+        "strava_heatmap",
+        "field_validation"
+      ],
+      "available_sources": [
+        "osm_public_use"
+      ],
+      "partial_sources": [],
+      "missing_sources": [
+        "field_biodiversity",
+        "strava_heatmap",
+        "field_validation"
+      ],
+      "data_available_percent": 100.0,
+      "status": "DISPONIBLE",
+      "confidence": "alta"
+    },
+    {
+      "indicator": "CORE_08",
+      "required_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "habitats_terrestres_v3",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "osm_public_use"
+      ],
+      "all_sources": [
+        "study_area_file",
+        "icgc_base_maps",
+        "icgc_orthophoto",
+        "land_cover_icgc_cobertes_sol",
+        "land_cover_mcsc",
+        "habitats_terrestres_v3",
+        "sigpac_catalunya",
+        "dun_cultius",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "osm_public_use",
+        "strava_heatmap"
+      ],
+      "available_sources": [
+        "study_area_file",
+        "icgc_base_maps",
+        "icgc_orthophoto",
+        "land_cover_icgc_cobertes_sol",
+        "habitats_terrestres_v3",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "osm_public_use"
+      ],
+      "partial_sources": [],
+      "missing_sources": [
+        "land_cover_mcsc",
+        "sigpac_catalunya",
+        "dun_cultius",
+        "strava_heatmap"
+      ],
+      "data_available_percent": 100.0,
+      "status": "DISPONIBLE",
+      "confidence": "alta"
+    },
+    {
+      "indicator": "CORE_09",
+      "required_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst",
+        "icgc_dem_mdt",
+        "osm_public_use",
+        "fires_burned_areas",
+        "fuel_continuity"
+      ],
+      "all_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "land_cover_mcsc",
+        "sigpac_catalunya",
+        "dun_cultius",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst",
+        "icgc_dem_mdt",
+        "osm_public_use",
+        "fires_burned_areas",
+        "effis",
+        "fuel_continuity"
+      ],
+      "available_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "icgc_dem_mdt",
+        "osm_public_use",
+        "fires_burned_areas",
+        "effis"
+      ],
+      "partial_sources": [],
+      "missing_sources": [
+        "land_cover_mcsc",
+        "sigpac_catalunya",
+        "dun_cultius",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst",
+        "fuel_continuity"
+      ],
+      "data_available_percent": 55.6,
+      "status": "PARCIAL",
+      "confidence": "mitjana"
+    },
+    {
+      "indicator": "CORE_10",
+      "required_sources": [
+        "study_area_file",
+        "copernicus_sentinel_ndwi",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda"
+      ],
+      "all_sources": [
+        "study_area_file",
+        "copernicus_sentinel_ndwi",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "field_biodiversity",
+        "spei",
+        "field_validation"
+      ],
+      "available_sources": [
+        "study_area_file",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda"
+      ],
+      "partial_sources": [],
+      "missing_sources": [
+        "copernicus_sentinel_ndwi",
+        "field_biodiversity",
+        "spei",
+        "field_validation"
+      ],
+      "data_available_percent": 80.0,
+      "status": "PARCIAL",
+      "confidence": "alta"
+    },
+    {
+      "indicator": "CORE_11",
+      "required_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "habitats_terrestres_v3",
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "gbif_occurrences",
+        "inaturalist_observations",
+        "osm_public_use",
+        "fires_burned_areas",
+        "fuel_continuity",
+        "meteocat"
+      ],
+      "all_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "habitats_terrestres_v3",
+        "sigpac_catalunya",
+        "dun_cultius",
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "gbif_occurrences",
+        "inaturalist_observations",
+        "field_biodiversity",
+        "osm_public_use",
+        "fires_burned_areas",
+        "fuel_continuity",
+        "meteocat",
+        "aemet",
+        "spei",
+        "field_validation"
+      ],
+      "available_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "habitats_terrestres_v3",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "gbif_occurrences",
+        "inaturalist_observations",
+        "osm_public_use",
+        "fires_burned_areas"
+      ],
+      "partial_sources": [],
+      "missing_sources": [
+        "sigpac_catalunya",
+        "dun_cultius",
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst",
+        "field_biodiversity",
+        "fuel_continuity",
+        "meteocat",
+        "aemet",
+        "spei",
+        "field_validation"
+      ],
+      "data_available_percent": 58.8,
+      "status": "PARCIAL",
+      "confidence": "mitjana"
+    },
+    {
+      "indicator": "CORE_12",
+      "required_sources": [
+        "study_area_file",
+        "land_cover_icgc_cobertes_sol",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "gbif_occurrences",
+        "inaturalist_observations",
+        "osm_public_use",
+        "fires_burned_areas",
+        "fuel_continuity",
+        "meteocat"
+      ],
+      "all_sources": [
+        "study_area_file",
+        "icgc_base_maps",
+        "icgc_orthophoto",
+        "land_cover_icgc_cobertes_sol",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "sigpac_catalunya",
+        "dun_cultius",
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "gbif_occurrences",
+        "inaturalist_observations",
+        "bdbc",
+        "field_biodiversity",
+        "osm_public_use",
+        "strava_heatmap",
+        "fires_burned_areas",
+        "effis",
+        "fuel_continuity",
+        "meteocat",
+        "aemet",
+        "spei",
+        "field_validation"
+      ],
+      "available_sources": [
+        "study_area_file",
+        "icgc_base_maps",
+        "icgc_orthophoto",
+        "land_cover_icgc_cobertes_sol",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "gbif_occurrences",
+        "inaturalist_observations",
+        "osm_public_use",
+        "fires_burned_areas",
+        "effis"
+      ],
+      "partial_sources": [],
+      "missing_sources": [
+        "sigpac_catalunya",
+        "dun_cultius",
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr",
+        "copernicus_lst",
+        "bdbc",
+        "field_biodiversity",
+        "strava_heatmap",
+        "fuel_continuity",
+        "meteocat",
+        "aemet",
+        "spei",
+        "field_validation"
+      ],
+      "data_available_percent": 61.1,
+      "status": "PARCIAL",
+      "confidence": "mitjana"
+    }
+  ],
+  "summary": {
+    "complete": 5,
+    "partial": 6,
+    "not_available": 1
+  }
+}

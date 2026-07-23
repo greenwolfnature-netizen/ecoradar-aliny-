@@ -1,0 +1,41 @@
+{
+  "generated_at_utc": "2026-07-20T18:27:23.231962+00:00",
+  "scope": "Muntanya d'Alinyà",
+  "study_bbox_epsg4326": [
+    1.363998,
+    42.144427,
+    1.5199389999999993,
+    42.22512200000001
+  ],
+  "vegetation_cover": {
+    "source": "CLMS HRL Tree Cover Density 2023 + Herbaceous Cover 2023",
+    "method": "TCD 2023 > 0 or Herbaceous Cover 2023 = 1",
+    "covered_area_ha": 3770.5,
+    "covered_pct": 69.0,
+    "valid_pixels": 546608
+  },
+  "surface_temperature": {
+    "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
+    "date_range": "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z",
+    "scene_count": 20,
+    "composite_method": "Per-pixel median of every valid QA-screened summer observation",
+    "coverage_pct": 100.0,
+    "metrics_c": {
+      "mean": 27.5,
+      "median": 27.3,
+      "p10": 22.7,
+      "p90": 32.5,
+      "minimum": 16.8,
+      "maximum": 39.7
+    },
+    "valid_pixels": 60711
+  },
+  "outputs": {
+    "vegetation": "maps/teledeteccio/vegetation_cover_2023.webp",
+    "temperature": "maps/teledeteccio/landsat_lst.webp"
+  },
+  "limitations": {
+    "vegetation": "coverage presence, not biodiversity, habitat quality or fuel load",
+    "temperature": "warm-season multi-date surface-temperature composite, not air temperature, a single-day observation or a climatic normal"
+  }
+}

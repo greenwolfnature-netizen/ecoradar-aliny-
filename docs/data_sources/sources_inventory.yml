@@ -1,0 +1,847 @@
+verification_date: "2026-07-07"
+policy:
+  connectors_allowed_for_status:
+    - verified
+  blocked_statuses:
+    - requires_credentials
+    - service_unavailable
+    - pending_verification
+    - blocked
+sources:
+  - id: climate_xema_socrata_observations
+    domain: climate
+    source_name: Dades meteorologiques de la XEMA
+    responsible_organization: Servei Meteorologic de Catalunya / Generalitat de Catalunya
+    official_url: https://analisi.transparenciacatalunya.cat/d/nzvn-apee
+    service_type: Socrata open data API
+    data_format:
+      - JSON
+      - CSV
+    crs: station metadata in WGS84 (EPSG:4326); observations are tabular
+    available_variables:
+      - half-hourly relative humidity
+      - half-hourly wind speed
+      - wind direction
+      - maximum wind gust
+      - observation timestamp in UTC
+      - validation state
+    update_frequency: every 30 minutes
+    usage_license: METEOCAT intellectual-property terms and Generalitat open-data attribution
+    example_connection: https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json
+    connector_status: verified
+    verification_notes: Verified on 2026-07-22. Public Socrata access requires no API key. Station CD (la Seu d'Urgell - Bellestar) and station Y4 (Alinya) are operational. Variable 33 is relative humidity and variable 30 is wind speed at 10 m. Unvalidated blank-state observations remain real provisional measurements and must be labelled as such.
+
+  - id: climate_meteocat_api
+    domain: climate
+    source_name: Meteocat API
+    responsible_organization: Servei Meteorologic de Catalunya
+    official_url: https://api.meteo.cat/
+    service_type: API
+    data_format:
+      - JSON
+    crs: station coordinates; endpoint schema pending
+    available_variables:
+      - temperature
+      - precipitation
+      - humidity
+      - wind
+      - forecasts
+      - climate summaries
+      - extreme heat days
+      - frost days
+      - climate anomalies
+    update_frequency: endpoint dependent
+    usage_license: pending endpoint terms; API credentials required
+    example_connection: https://api.meteo.cat/
+    connector_status: requires_credentials
+    verification_notes: Official API returns Forbidden without credentials; selected endpoints and schema must be documented before implementation.
+
+  - id: climate_aemet_opendata
+    domain: climate
+    source_name: AEMET OpenData
+    responsible_organization: Agencia Estatal de Meteorologia
+    official_url: https://opendata.aemet.es/centrodedescargas/inicio
+    service_type: API
+    data_format:
+      - JSON
+    crs: station coordinates; product schema dependent
+    available_variables:
+      - observations
+      - historical climate values
+      - climatological normals
+      - forecasts
+      - warnings
+      - extreme episodes
+    update_frequency: product dependent
+    usage_license: cite AEMET as author; API key required
+    example_connection: https://opendata.aemet.es/opendata/api/valores/climatologicos/inventarioestaciones/todasestaciones/
+    connector_status: requires_credentials
+    verification_notes: Official portal exposes API-key request and developer access; implementation waits for credentials and endpoint selection.
+
+  - id: fires_active_bombers_actions
+    domain: fires
+    source_name: Actuacions dels Bombers de la Generalitat
+    responsible_organization: Departament d'Interior / Direccio General de Prevencio, Extincio d'Incendis i Salvaments
+    official_url: https://analisi.transparenciacatalunya.cat/d/g2ay-3vnj
+    service_type: API
+    data_format:
+      - JSON
+      - CSV
+    crs: no geometry; administrative codes only
+    available_variables:
+      - action identifier
+      - INE municipality code
+      - emergency region
+      - action group code and description
+      - action type code and description
+      - municipality
+      - population/place name
+      - comarca code and name
+      - year
+      - month
+      - action date
+      - urgent/non-urgent flag
+      - validation flag
+    update_frequency: weekly
+    usage_license: SEE_TERMS_OF_USE; Generalitat open data license
+    example_connection: https://analisi.transparenciacatalunya.cat/resource/g2ay-3vnj.json?$limit=10
+    connector_status: blocked
+    verification_notes: Official candidate found in the Generalitat Socrata catalogue, but it is not proven to be the exact upstream used by IncendisCAT. IncendisCAT exposes coordinates, operational status, deployed units, first-seen/last-update timestamps, and minute-scale refresh through its own backend; those fields/update behaviour are not documented in this weekly tabular official dataset.
+
+  - id: fires_bombers_arcgis_operational_viewer
+    domain: fires
+    source_name: Bombers - Visor d'actuacions incendis PRO / ACTUACIONS_URGENTS_online_PRO_AMB_FASE_VIEW
+    responsible_organization: Departament d'Interior / Bombers de la Generalitat
+    official_url: https://experience.arcgis.com/experience/f6172fd2d6974bc0a8c51e3a6bc2a735
+    service_type:
+      - ArcGIS Experience
+      - ArcGIS FeatureServer
+    data_format:
+      - ArcGIS JSON
+    crs: EPSG:25831
+    available_variables:
+      - action identifier
+      - action dates
+      - IV alarm group and type
+      - situation
+      - start date
+      - end date
+      - update date
+      - urgent flag
+      - municipality
+      - vehicle/resource count
+      - fire phase
+      - point geometry
+    update_frequency: layer metadata reports cacheMaxAge 30 seconds; operational refresh and retention policy not formally documented
+    usage_license: not declared in inspected public ArcGIS item/layer metadata
+    example_connection: https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/ACTUACIONS_URGENTS_online_PRO_AMB_FASE_VIEW/FeatureServer/0/query?f=json&where=1%3D1&returnGeometry=true&outFields=*&outSR=25831
+    connector_status: pending_verification
+    verification_notes: Public ArcGIS item and layer inspected on 2026-07-07. Item owner AdminInterior and title identify a Bombers operational IV viewer. The layer returned one IV point in the Cadí context query. Use as public operational context only; licence, retention and exact IncendisCAT upstream relation remain pending.
+
+  - id: fires_burned_areas_v1r1
+    domain: fires
+    source_name: Superficies afectades per incendis forestals v1.1
+    responsible_organization: Departament d'Accio Climatica, Alimentacio i Agenda Rural / ICGC / Cos d'Agents Rurals
+    official_url: http://agricultura.gencat.cat/ca/serveis/cartografia-sig/bases-cartografiques/boscos/incendis-forestals
+    service_type:
+      - WFS
+      - WMS
+      - file_download
+    data_format:
+      - CSV
+      - GML
+      - KML
+      - MMZX
+      - SHP
+    crs: EPSG:25831
+    available_variables:
+      - burned area geometry
+      - semantic fire attributes
+    update_frequency: annual/versioned
+    usage_license: no public access limitations; gencat legal notice
+    example_connection: https://sig.gencat.cat/ows/VEGETACIO/wfs?service=wfs&version=2.0.0&request=GetCapabilities
+    connector_status: verified
+    verification_notes: Verified through IDEC metadata and official Gencat geodata service links.
+
+  - id: fires_pla_alfa
+    domain: fires
+    source_name: Pla Alfa daily fire danger by municipality
+    responsible_organization: Cos d'Agents Rurals / Generalitat de Catalunya
+    official_url: null
+    service_type: null
+    data_format: null
+    crs: null
+    available_variables:
+      - municipality
+      - fire danger level 0-3
+    update_frequency: daily
+    usage_license: null
+    example_connection: null
+    connector_status: pending_verification
+    verification_notes: Official technical endpoint and metadata still need confirmation.
+
+  - id: fires_effis
+    domain: fires
+    source_name: European Forest Fire Information System
+    responsible_organization: Copernicus Emergency Management Service / Joint Research Centre
+    official_url: https://forest-fire.emergency.copernicus.eu
+    service_type: portal/data_services
+    data_format: null
+    crs: null
+    available_variables:
+      - active fires
+      - burned areas
+      - severity
+      - recurrence
+      - fire danger
+      - fire risk
+    update_frequency: product dependent
+    usage_license: null
+    example_connection: null
+    connector_status: pending_verification
+    verification_notes: Official EFFIS portal and data request service identified; connector-grade API/service endpoint and license must be verified.
+
+  - id: fires_effis_drf_catalog
+    domain: fires
+    source_name: EFFIS / Copernicus Emergency Management Service Data Request Form dataset catalogue
+    responsible_organization: Copernicus Emergency Management Service / Joint Research Centre
+    official_url: https://forest-fire.emergency.copernicus.eu/apps/data.request.form/
+    service_type:
+      - API
+      - data_request_catalogue
+    data_format:
+      - JSON
+    crs: product dependent; catalogue endpoint has no geometry
+    available_variables:
+      - requestable dataset code
+      - requestable dataset name
+      - requestable dataset description
+      - available output file types by dataset
+      - hs_viirs thermal anomalies
+      - hs_modis thermal anomalies
+      - fire MODIS/Sentinel-2 burned areas
+    update_frequency: service dependent; product update frequency must be verified per requested dataset
+    usage_license: pending product/request terms; official legal notice and data request conditions apply
+    example_connection: https://api.effis.emergency.copernicus.eu/rest/drf/datasets/
+    connector_status: verified
+    verification_notes: Verified on 2026-07-07 through the official EFFIS data-request form and public REST catalogue. This source is verified for catalogue/context metadata only; product downloads remain out of scope until per-product schema, CRS, licence and request workflow are documented.
+
+  - id: forest_structure_cartography
+    domain: forest_structure
+    source_name: Forest structure and fuel-related cartography
+    responsible_organization: pending; likely Generalitat de Catalunya, ICGC, CREAF or forest management bodies depending on selected product
+    official_url: null
+    service_type: null
+    data_format: null
+    crs: null
+    available_variables:
+      - forest types
+      - canopy or forest structure attributes if available
+      - fuel model or combustible structure if available
+    update_frequency: null
+    usage_license: null
+    example_connection: null
+    connector_status: pending_verification
+    verification_notes: User-requested "Cartografia forestal ICGC" still needs exact official dataset, technical endpoint, variables, CRS and license before connector implementation.
+
+  - id: land_cover_icgc_cobertes_sol
+    domain: land_cover
+    source_name: ICGC - Cobertes del Sol de Catalunya
+    responsible_organization: Institut Cartografic i Geologic de Catalunya
+    official_url: https://geoserveis.icgc.cat/servei/catalunya/cobertes-sol/wms
+    service_type:
+      - WMS
+      - WCS
+    data_format:
+      - GeoTIFF
+      - WMS query responses
+    crs:
+      - EPSG:25831
+      - EPSG:4326
+      - EPSG:4258
+      - EPSG:3857
+    available_variables:
+      - classified land-cover raster values
+      - land-cover class labels through GetFeatureInfo
+    update_frequency: annual/versioned
+    usage_license: ICGC legal notice; WMS/WCS AccessConstraints copyright
+    example_connection: https://geoserveis.icgc.cat/servei/catalunya/cobertes-sol/wms?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&COVERAGEID=cobertes_2024&FORMAT=image/tiff
+    connector_status: verified
+    verification_notes: Verified through official ICGC WMS/WCS capabilities. WCS exposes coverages cobertes_2009, cobertes_2018, cobertes_2019_2022, cobertes_2023 and cobertes_2024. DescribeCoverage for cobertes_2024 reports EPSG:25831 and 1 m offset vectors.
+
+  - id: emergency_copernicus_ems_mapping
+    domain: fires
+    source_name: Copernicus EMS Mapping
+    responsible_organization: Copernicus Emergency Management Service
+    official_url: https://emergency.copernicus.eu
+    service_type: activation_catalogue
+    data_format:
+      - vector
+      - raster
+    crs: product dependent
+    available_variables:
+      - post-fire mapping
+      - flood extent
+      - damage grading
+      - emergency mapping products
+    update_frequency: activation based
+    usage_license: null
+    example_connection: null
+    connector_status: pending_verification
+    verification_notes: Official service identified; exact machine-readable download/API path and license still need confirmation.
+
+  - id: biodiversity_habitats_hic_v2
+    domain: biodiversity
+    source_name: Cartografia dels habitats d'interes comunitari a Catalunya 1:50.000, versio 2
+    responsible_organization: Generalitat de Catalunya
+    official_url: http://agricultura.gencat.cat/ca/serveis/cartografia-sig/bases-cartografiques/habitats/habitats-catalunya/
+    service_type:
+      - WMS
+      - file_download
+    data_format:
+      - vector
+    crs: EPSG:25831
+    available_variables:
+      - CORINE habitats
+      - HIC
+      - EUNIS correspondences
+      - LPEHT correspondences
+      - natural interest attributes
+      - threat attributes
+    update_frequency: versioned
+    usage_license: no public access limitations; gencat terms may apply
+    example_connection: https://sig.gencat.cat/ows/wmts/service/wms?service=wms&version=1.3.0&request=GetCapabilities
+    connector_status: verified
+    verification_notes: Verified through IDEC metadata.
+
+  - id: biodiversity_habitats_terrestres_v3
+    domain: biodiversity
+    source_name: Cartografia dels habitats terrestres, versio 3 (2019/2024)
+    responsible_organization: Generalitat de Catalunya, Departament de Territori, Habitatge i Transicio Ecologica
+    official_url: https://mediambient.gencat.cat/ca/05_ambits_dactuacio/patrimoni_natural/sistemes_dinformacio/habitats/habitats_terrestres/mapa-dels-habitats-terrestres/cartografia-dels-habitats-versio-3-2025/
+    service_type:
+      - WFS
+      - WMS
+      - Hipermapa
+    data_format:
+      - vector
+      - GeoJSON via WFS
+    crs: EPSG:25831
+    available_variables:
+      - CORINE habitat code and description
+      - Habitat of Community Interest code and description
+      - HIC priority flag
+      - EUNIS correspondence
+      - LPEHT correspondence
+      - habitat threat and value attributes
+      - geometry
+    update_frequency: versioned; page updated 2025-06-11
+    usage_license: gencat legal terms apply; public Hipermapa/WFS access verified
+    example_connection: https://sig.gencat.cat/ows/wfs?service=WFS&version=2.0.0&request=DescribeFeatureType&typeNames=HABITATS_TERRESTPOL
+    connector_status: verified
+    verification_notes: Verified through the official Medi Ambient page and the official Hipermapa WFS schema. The WFS layer HABITATS_TERRESTPOL exposes COD_CORINE, CORINE_CA, COD_HIC, HIC_CA and HIC_PRIOR.
+
+  - id: biodiversity_gbif_occurrence
+    domain: biodiversity
+    source_name: GBIF Occurrence API
+    responsible_organization: Global Biodiversity Information Facility
+    official_url: https://api.gbif.org/v1/
+    service_type: REST API
+    data_format:
+      - JSON
+    crs: WGS84 coordinates in occurrence records
+    available_variables:
+      - scientific name
+      - vernacular name when available
+      - taxonomic classification
+      - event date
+      - coordinates
+      - basis of record
+      - data license
+      - occurrence issues
+      - record key
+    update_frequency: continuously updated from publishing datasets
+    usage_license: record-level licenses; GBIF citation and dataset attribution requirements apply
+    example_connection: https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&limit=1
+    connector_status: verified
+    verification_notes: Verified through official GBIF API documentation. The API is RESTful, JSON-based, stable, and most use does not require authentication; GBIF recommends a User-Agent and warns search APIs may be rate limited.
+
+  - id: biodiversity_inaturalist_observations
+    domain: biodiversity
+    source_name: iNaturalist Observations API
+    responsible_organization: iNaturalist Network
+    official_url: https://api.inaturalist.org/v1/observations
+    service_type: REST API
+    data_format:
+      - JSON
+    crs: WGS84 coordinates in observation records
+    available_variables:
+      - scientific name
+      - preferred common name
+      - iconic taxon group
+      - observed date
+      - coordinates
+      - quality grade
+      - license code
+      - observation URL
+      - captive/cultivated flag
+    update_frequency: continuously updated from user observations
+    usage_license: record-level licenses and iNaturalist API terms apply
+    example_connection: https://api.inaturalist.org/v1/observations?per_page=1
+    connector_status: verified
+    verification_notes: Verified through official iNaturalist API reference and live v1 observations endpoint. Public observation queries can be made without scraping; authenticated flows are available but not required for public observations.
+
+  - id: biodiversity_protected_areas
+    domain: biodiversity
+    source_name: Espais Naturals de Proteccio Especial, Natura 2000, PEIN
+    responsible_organization: Direccio General de Politiques Ambientals i Medi Natural
+    official_url: http://agricultura.gencat.cat/ca/serveis/cartografia-sig/bases-cartografiques/espais-naturals/
+    service_type:
+      - WFS
+      - WMS
+      - OGC_API_Features
+      - ATOM
+      - file_download
+    data_format:
+      - CSV
+      - GML
+      - KML
+      - MMZX
+      - SHP
+    crs:
+      - EPSG:25831
+      - EPSG:4326
+      - EPSG:4258
+    available_variables:
+      - ENPE
+      - Natura 2000
+      - PEIN
+      - wetlands
+      - public forests
+      - geoparks
+      - geological-interest spaces
+    update_frequency: as_needed/versioned
+    usage_license: CC BY 4.0 for native ENPE metadata; gencat legal notice
+    example_connection: https://sig.gencat.cat/ows/ESPAIS_NATURALS/wfs?service=wfs&version=2.0.0&request=GetCapabilities
+    connector_status: verified
+    verification_notes: Verified through IDEC metadata.
+
+  - id: connectivity_terrestrial_general_index
+    domain: connectivity
+    source_name: Index de connectivitat terrestre general
+    responsible_organization: Minuartia / Departament d'Accio Climatica, Alimentacio i Agenda Rural / IDEC
+    official_url: https://catalegs.ide.cat/geonetwork/srv/search?uuid=coneco-indx-connec-terr-gral
+    service_type:
+      - WFS
+      - WMS
+    data_format: digital vector data
+    crs: EPSG:25831
+    available_variables:
+      - terrestrial ecological connectivity index
+    update_frequency: versioned
+    usage_license: consult responsible organization; no public access limitations
+    example_connection: http://sig.gencat.cat/ows/INFRAESTRUCTURA_VERDA/wfs
+    connector_status: verified
+    verification_notes: Verified through IDEC metadata.
+
+  - id: connectivity_ecosystem_service
+    domain: connectivity
+    source_name: Connectivitat ecologica
+    responsible_organization: CREAF / IDEC
+    official_url: https://catalegs.ide.cat/geonetwork/srv/search?uuid=servecosis-conectecologica
+    service_type:
+      - WFS
+      - WMS
+    data_format: digital raster/grid data
+    crs: EPSG:25831
+    available_variables:
+      - ecological connectivity service index
+    update_frequency: versioned
+    usage_license: consult responsible organization; no public access limitations
+    example_connection: http://sig.gencat.cat/ows/INFRAESTRUCTURA_VERDA/wms
+    connector_status: verified
+    verification_notes: Verified through IDEC metadata.
+
+  - id: drought_exploitation_units
+    domain: drought
+    source_name: Unitats d'explotacio, Pla de Sequera
+    responsible_organization: Agencia Catalana de l'Aigua
+    official_url: https://aplicacions.aca.gencat.cat/visseq/
+    service_type:
+      - WFS
+      - WMS
+    data_format: digital vector data
+    crs: EPSG:25831
+    available_variables:
+      - exploitation unit boundaries
+    update_frequency: monthly state review; boundary layer versioned
+    usage_license: consult ACA; no public access limitations
+    example_connection: http://sig.gencat.cat/ows/AIGUA/wfs
+    connector_status: verified
+    verification_notes: Verified through IDEC metadata.
+
+  - id: drought_current_state_aca
+    domain: drought
+    source_name: Visor de la sequera
+    responsible_organization: Agencia Catalana de l'Aigua
+    official_url: https://aplicacions.aca.gencat.cat/visseq/
+    service_type: web_application
+    data_format: null
+    crs: null
+    available_variables:
+      - drought state by exploitation unit
+    update_frequency: monthly
+    usage_license: null
+    example_connection: null
+    connector_status: pending_verification
+    verification_notes: Official machine-readable endpoint for current state still needs confirmation.
+
+  - id: hydrology_network
+    domain: water
+    source_name: Hydrographic network and water access features
+    responsible_organization: pending; likely Agencia Catalana de l'Aigua, ICGC or IDEC catalogued hydrology datasets depending on selected product
+    official_url: null
+    service_type: null
+    data_format: null
+    crs: null
+    available_variables:
+      - river and stream network
+      - water bodies
+      - water points or hydrants if available
+      - distance/proximity inputs for later analysis
+    update_frequency: null
+    usage_license: null
+    example_connection: null
+    connector_status: pending_verification
+    verification_notes: A connector-grade official hydrology layer for the fire-resilience module has not yet been selected and documented.
+
+  - id: drought_spei_base
+    domain: drought
+    source_name: Global SPEI database, SPEIbase
+    responsible_organization: CSIC / SPEI Global Drought Monitor team
+    official_url: https://spei.csic.es/database.html
+    service_type: file_download
+    data_format:
+      - NetCDF
+    crs: geographic longitude/latitude grid
+    available_variables:
+      - spei
+      - longitude
+      - latitude
+      - time
+    update_frequency: updated as new source data become available
+    usage_license: Open Database License (ODbL)
+    example_connection: https://spei.csic.es/spei_database_2_11
+    connector_status: verified
+    verification_notes: Official documentation provides resolution, temporal coverage, variables, NetCDF format and license.
+
+  - id: drought_spi_indicator
+    domain: drought
+    source_name: Standardized Precipitation Index
+    responsible_organization: not applicable; derived indicator
+    official_url: null
+    service_type: derived_indicator
+    data_format: null
+    crs: inherited from precipitation source
+    available_variables:
+      - spi
+    update_frequency: inherited from precipitation source
+    usage_license: inherited from precipitation source
+    example_connection: null
+    connector_status: blocked
+    verification_notes: SPI is not a data source connector. It must be calculated in the Analysis Engine from verified precipitation data.
+
+  - id: copernicus_sentinel2_indices_source
+    domain: copernicus_indices
+    source_name: Sentinel-2 via Copernicus Data Space Ecosystem
+    responsible_organization: Copernicus Data Space Ecosystem / ESA / European Union
+    official_url: https://dataspace.copernicus.eu/analyse/apis
+    service_type:
+      - STAC
+      - OData
+      - openEO
+      - Sentinel Hub API
+      - OGC API
+    data_format:
+      - Sentinel products
+      - raster outputs
+      - API responses
+    crs: product/API dependent
+    available_variables:
+      - Sentinel-2 spectral bands
+      - cloud masks
+      - product metadata
+    update_frequency: Sentinel acquisition cadence/product availability
+    usage_license: Copernicus terms; service credentials may be required
+    example_connection: https://sh.dataspace.copernicus.eu/api/v1/process
+    connector_status: requires_credentials
+    verification_notes: Official API catalogue and Sentinel Hub documentation verified. Sentinel Hub Processing API and Catalogue API require OAuth2 access tokens from the CDSE token endpoint. NDVI, NDMI and NDWI are derived from Sentinel-2 L2A bands; connector execution requires COPERNICUS_CLIENT_ID and COPERNICUS_CLIENT_SECRET.
+
+  - id: copernicus_lst_source
+    domain: copernicus_indices
+    source_name: Land Surface Temperature via Copernicus Data Space Ecosystem
+    responsible_organization: Copernicus Data Space Ecosystem / ESA / European Union
+    official_url: https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/S3SLSTR.html
+    service_type:
+      - Sentinel Hub API
+      - CLMS/Sentinel-3 product access
+    data_format:
+      - raster outputs
+      - API responses
+    crs: product/API dependent
+    available_variables:
+      - land surface temperature
+      - thermal bands/product metadata depending on selected collection
+    update_frequency: product dependent
+    usage_license: Copernicus terms; service credentials required
+    example_connection: https://sh.dataspace.copernicus.eu/api/v1/process
+    connector_status: requires_credentials
+    verification_notes: LST is available in Copernicus/Sentinel Hub product families such as Sentinel-3 SLSTR and CLMS LST. Exact operational collection and band mapping must be selected and tested with credentials before producing lst.tif.
+
+  - id: terrain_icgc_dem
+    domain: terrain
+    source_name: Model d'elevacions del terreny
+    responsible_organization: Institut Cartografic i Geologic de Catalunya
+    official_url: https://www.icgc.cat/ca/Geoinformacio-i-mapes/Dades-i-productes/Elevacions-territorial
+    service_type:
+      - file_download
+      - COG
+    data_format:
+      - COG
+      - GeoTIFF
+    crs:
+      - EPSG:25831
+      - EGM08D595 orthometric heights
+    available_variables:
+      - terrain elevation
+    update_frequency: versioned survey/publication products
+    usage_license: CC BY 4.0 for current IDEC elevation records
+    example_connection: https://datacloud.icgc.cat/datacloud/model-elevacions-terreny/tif_unzip/
+    connector_status: verified
+    verification_notes: Slope, aspect, insolation, water accumulation and hydrological connectivity are derived analysis products, not connector responsibilities.
+
+  - id: public_use_protected_areas
+    domain: public_use
+    source_name: Protected-area public-use and visitor-pressure data
+    responsible_organization: null
+    official_url: null
+    service_type: null
+    data_format: null
+    crs: null
+    available_variables:
+      - visitor counts
+      - access counters
+      - trail use
+      - facility use
+    update_frequency: null
+    usage_license: null
+    example_connection: null
+    connector_status: pending_verification
+    verification_notes: Protected-area geometries are verified, but a Catalunya-wide official public-use dataset has not yet been identified.
+
+  - id: recreational_osm_overpass
+    domain: public_use
+    source_name: OpenStreetMap via Overpass API
+    responsible_organization: OpenStreetMap contributors; Overpass API maintained by the OSM/Overpass community
+    official_url: https://wiki.openstreetmap.org/wiki/Overpass_API
+    service_type: REST API
+    data_format:
+      - JSON
+      - XML
+      - GeoJSON through client conversion
+    crs: WGS84 coordinates in OSM elements
+    available_variables:
+      - paths and tracks
+      - cycleways and roads
+      - access tags
+      - parking and access points
+      - viewpoints and recreation facilities
+      - route relations when mapped
+    update_frequency: continuously updated by OSM contributors
+    usage_license: ODbL for OpenStreetMap data; Overpass public instance usage policy applies
+    example_connection: https://overpass-api.de/api/interpreter
+    connector_status: verified
+    verification_notes: Verified through OpenStreetMap/Overpass documentation. Overpass is a read-only API for selected OSM map data and public instances require respectful use and identifying User-Agent/Referer headers.
+
+  - id: recreational_strava_global_heatmap
+    domain: public_use
+    source_name: Strava Global Heatmap
+    responsible_organization: Strava, Inc.
+    official_url: https://www.strava.com/maps/global-heatmap
+    service_type: web_map_visualization
+    data_format: null
+    crs: web map tiles; exact connector-grade access not documented
+    available_variables:
+      - relative activity heat visualization
+      - activity-type visualization depending on Strava UI options
+    update_frequency: not documented for connector use
+    usage_license: proprietary; connector-grade reuse terms not verified
+    example_connection: null
+    connector_status: blocked
+    verification_notes: Official public page exposes a heatmap visualization but no documented public API or download endpoint for automated EcoRadar ingestion. Do not scrape tiles or bypass access controls. Strava-derived intensity can only be integrated after an authorized/licensed data access path is documented.
+
+  - id: recreational_wikiloc_future
+    domain: public_use
+    source_name: Wikiloc recreational route data
+    responsible_organization: Wikiloc Outdoor Navigation, S.L.
+    official_url: null
+    service_type: null
+    data_format: null
+    crs: null
+    available_variables:
+      - routes
+      - activity type
+    update_frequency: null
+    usage_license: null
+    example_connection: null
+    connector_status: pending_verification
+    verification_notes: Future candidate only. No authorized connector-grade API has been verified for EcoRadar.
+
+  - id: electricity_network_fire_context
+    domain: infrastructure
+    source_name: Electricity network relevant to wildfire context
+    responsible_organization: pending; may depend on operator, Generalitat/IDEC catalogue, CNMC or Red Electrica datasets
+    official_url: null
+    service_type: null
+    data_format: null
+    crs: null
+    available_variables:
+      - power lines
+      - substations or infrastructure points if available
+      - voltage/category if available
+    update_frequency: null
+    usage_license: null
+    example_connection: null
+    connector_status: pending_verification
+    verification_notes: User-requested electricity network source is not yet verified for automated EcoRadar ingestion. Do not implement until official source, access path, license and safety/privacy constraints are documented.
+
+  - id: urban_lst_landsat_c2l2_st
+    domain: urban_climate
+    source_name: Landsat Collection 2 Level-2 UTM Surface Temperature Product
+    responsible_organization: U.S. Geological Survey Earth Resources Observation and Science Center
+    official_url: https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l2-st
+    service_type:
+      - STAC API
+      - Cloud Optimized GeoTIFF
+    data_format:
+      - JSON
+      - GeoTIFF
+    crs: per-scene UTM CRS; La Seu calculation reads scene-native CRS
+    available_variables:
+      - ST_B10 surface temperature
+      - ST_QA
+      - QA_PIXEL
+      - cloud distance
+      - emissivity
+      - thermal radiance
+    update_frequency: Landsat acquisition and processing dependent
+    usage_license: Landsat data policy
+    example_connection: https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l2-st/items?bbox=1.435,42.335,1.490,42.375&datetime=2026-06-01T00:00:00Z/2026-07-09T23:59:59Z&limit=20
+    connector_status: verified
+    verification_notes: Verified for the La Seu urban climate poster on 2026-07-09. The value is a satellite acquisition-time LST, not a 15:00 local measurement.
+
+  - id: urban_lidar_icgc_lidar_territorial_v3r1
+    domain: urban_climate
+    source_name: LiDAR Territorial v3.1 2021-2023
+    responsible_organization: Institut Cartografic i Geologic de Catalunya
+    official_url: https://www.icgc.cat/ca/Geoinformacio-i-mapes/Dades-i-productes/Elevacions/Elevacions-territorial/LiDAR-Territorial
+    service_type:
+      - file_download
+      - datacloud
+    data_format:
+      - LAZ
+      - LAS 1.4
+    crs: EPSG:25831; orthometric altitudes referenced to EGM08D595 according to IDEC metadata
+    available_variables:
+      - point coordinates
+      - classification
+      - ground
+      - vegetation classes
+      - buildings
+      - water
+      - GPS time
+    update_frequency: versioned coverage 2021-2023
+    usage_license: CC BY 4.0
+    example_connection: https://datacloud.icgc.cat/datacloud/lidar-territorial/laz_unzip/
+    connector_status: verified
+    verification_notes: Verified official source for LiDAR-derived canopy/shade metrics. True time-specific shade requires LAZ processing and solar-shadow modelling.
+
+  - id: urban_roads_icgc_rtt_v1
+    domain: urban_climate
+    source_name: Referencial Topografic Territorial v1
+    responsible_organization: Institut Cartografic i Geologic de Catalunya
+    official_url: https://www.icgc.cat/ca/Geoinformacio-i-mapes/Dades-i-productes/Geoinformacio-cartografica/Referencial-Topografic-Territorial
+    service_type:
+      - WMS
+      - vector_download
+    data_format:
+      - GeoPackage
+      - Geodatabase
+      - DWG
+      - DGN
+      - GeoTIFF
+      - IFC
+    crs: EPSG:25831 in ICGC territorial products
+    available_variables:
+      - transports
+      - road-network categorization
+      - hydrography
+      - constructions
+      - land cover
+      - relief
+    update_frequency: versioned; 2024 data source date
+    usage_license: CC BY 4.0
+    example_connection: https://datacloud.icgc.cat/datacloud/topografia-territorial/gpkg/
+    connector_status: verified
+    verification_notes: Official road source verified. The Catalunya-wide 2024 GeoPackage is about 5.3 GB; the tested small-area vector extract returned an email request form, so automated street-aligned tree-cover processing is blocked until a direct official extract or municipal street-tree inventory is available.
+
+  - id: urban_trees_laseu_green_management
+    domain: urban_climate
+    source_name: On som? La gestio actual del verd urba
+    responsible_organization: Ajuntament de la Seu d'Urgell
+    official_url: https://www.laseu.cat/viure-a-la-seu/mediambient/ecoturisme-la-seu-naturalment/per-que-es-important-el-verd-urba/on-som-la-gestio-actual-del-verd-urba
+    service_type: official_web_page
+    data_format:
+      - HTML
+    crs: not spatial
+    available_variables:
+      - urban green space area
+      - planted trees in streets and parks
+      - number of species
+    update_frequency: not declared
+    usage_license: municipal public web content; no machine-readable data license declared
+    example_connection: https://www.laseu.cat/@@search?SearchableText=verd%20urb%C3%A0
+    connector_status: verified
+    verification_notes: Supports the municipal tree count, but not a georeferenced tree inventory.
+
+  - id: urban_tree_inventory_laseu_open
+    domain: urban_climate
+    source_name: Open municipal tree inventory for La Seu d'Urgell
+    responsible_organization: Ajuntament de la Seu d'Urgell
+    official_url: null
+    service_type: null
+    data_format: null
+    crs: null
+    available_variables: []
+    update_frequency: null
+    usage_license: null
+    example_connection: null
+    connector_status: blocked
+    verification_notes: No open geospatial municipal tree inventory was found in official municipal search results for arbrat, arbres or verd urba. Do not invent point/tree inventory data.
+
+  - id: urban_linear_tree_cover_laseu_official
+    domain: urban_climate
+    source_name: Official street-aligned tree-cover dataset for La Seu d'Urgell
+    responsible_organization:
+      - Ajuntament de la Seu d'Urgell
+      - Institut Cartografic i Geologic de Catalunya
+    official_url: null
+    service_type: null
+    data_format: null
+    crs: null
+    available_variables: []
+    update_frequency: null
+    usage_license: null
+    example_connection: null
+    connector_status: blocked
+    verification_notes: A defensible street-aligned tree-cover percentage requires official road vectors and either georeferenced municipal tree/crown data or an accepted LiDAR-over-road method. No open municipal tree inventory was found, and the tested ICGC RTT small-area vector extraction required an email form.

@@ -1,0 +1,122 @@
+name: Update EcoRadar urban daily readings
+
+on:
+  schedule:
+    - cron: "35 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-current-fire-danger
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      COPERNICUS_CLIENT_ID: ${{ secrets.COPERNICUS_CLIENT_ID }}
+      COPERNICUS_CLIENT_SECRET: ${{ secrets.COPERNICUS_CLIENT_SECRET }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install EcoRadar
+        run: pip install -e .
+      - name: Fix one audit timestamp for the complete daily run
+        run: echo "ECORADAR_CHECKED_AT_UTC=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_ENV"
+      - name: Update XEMA observations for la Seu d'Urgell
+        id: xema_la_seu
+        continue-on-error: true
+        run: python -m ecoradar.connectors.connector_meteocat_xema --location la_seu_urba
+      - name: Verify XEMA fallback
+        if: steps.xema_la_seu.outcome == 'failure'
+        run: test -s projectes/LaSeu_Urba/raw/meteocat_xema/CD_observations.csv
+      - name: Update current CAMS air-quality context
+        id: cams
+        continue-on-error: true
+        run: python tools/fetch_la_seu_cams_context.py
+      - name: Verify CAMS fallback
+        if: steps.cams.outcome == 'failure'
+        run: test -s projectes/LaSeu_Urba/indicators/contextual_environment.json
+      - name: Check latest QA-valid Landsat surface temperature
+        id: landsat
+        continue-on-error: true
+        run: python tools/fetch_la_seu_landsat_expanded.py
+      - name: Recalculate only Landsat-dependent outputs when the source changed
+        if: steps.landsat.outcome == 'success'
+        run: |
+          if ! git diff --quiet -- projectes/LaSeu_Urba/processed/landsat_expanded projectes/LaSeu_Urba/metadata/landsat_expanded_connector.json; then
+            python tools/calculate_la_seu_landsat_dynamic.py
+          fi
+      - name: Update latest cloud-free Sentinel-2 scene
+        id: sentinel
+        if: env.COPERNICUS_CLIENT_ID != '' && env.COPERNICUS_CLIENT_SECRET != ''
+        continue-on-error: true
+        run: python tools/fetch_la_seu_cdse_sentinel2.py --scope expanded --max-cloud 10
+      - name: Recalculate Sentinel-2 readings only when the source changed
+        if: steps.sentinel.outcome == 'success'
+        run: |
+          if ! git diff --quiet -- projectes/LaSeu_Urba/processed/sentinel2_cdse_expanded projectes/LaSeu_Urba/metadata/sentinel2_cdse_expanded_connector.json; then
+            python tools/calculate_la_seu_sentinel2_expanded.py
+          fi
+      - name: Update coarse Copernicus context when credentials are available
+        id: cdse_context
+        if: env.COPERNICUS_CLIENT_ID != '' && env.COPERNICUS_CLIENT_SECRET != ''
+        continue-on-error: true
+        run: |
+          python tools/fetch_la_seu_cdse_context.py
+          python tools/calculate_la_seu_contextual_indicators.py
+      - name: Recalculate date-dependent shade only
+        run: python tools/recalculate_la_seu_daily_shade.py --local-time 15:00
+      - name: Recalculate current danger, daily registry and web
+        run: |
+          python tools/calculate_la_seu_current_fire_danger.py
+          python tools/calculate_la_seu_daily_readings.py
+          python tools/update_la_seu_daily_history.py
+          python tools/render_la_seu_urban_map.py
+          python tools/sync_la_seu_netlify.py
+          python tools/sync_la_seu_repository_root.py --repository-root .
+      - name: Validate generated outputs
+        run: |
+          python -m py_compile ecoradar/connectors/connector_meteocat_xema.py tools/fetch_la_seu_landsat_expanded.py tools/recalculate_la_seu_daily_shade.py tools/calculate_la_seu_landsat_dynamic.py tools/calculate_la_seu_daily_readings.py tools/calculate_la_seu_current_fire_danger.py tools/update_la_seu_daily_history.py tools/render_la_seu_urban_map.py tools/sync_la_seu_netlify.py tools/sync_la_seu_repository_root.py tools/validate_la_seu_daily_timestamps.py
+          python tools/validate_la_seu_daily_timestamps.py --max-age-minutes 30
+          node --check netlify/functions/daily-readings.mjs
+          node --test tests/js/test-daily-readings-api.mjs
+          test -s index.html
+          test -s netlify.toml
+          test -s metadata/daily_readings.json
+          test -s history/daily_readings_checks.jsonl
+          test -s projectes/LaSeu_Urba/maps/current_fire_danger_cells.geojson
+          test -s projectes/LaSeu_Urba/maps/current_fire_danger.png
+          test -s projectes/LaSeu_Urba/indicators/daily_readings.json
+          test -s projectes/LaSeu_Urba/indicators/daily_history.json
+          grep -q "Perill d’incendi actual" index.html
+          grep -q "Actualització diària" index.html
+      - name: Commit refreshed data
+        id: commit
+        run: |
+          git config user.name "EcoRadar data updater"
+          git config user.email "ecoradar-bot@users.noreply.github.com"
+          git add index.html netlify.toml THIRD_PARTY_NOTICES.md metadata history netlify vendor docs/current-fire-danger-source.md docs/data-sources-matrix.md docs/fire-danger-source.md docs/urban-daily-readings-source.md projectes/LaSeu_Urba/raw/meteocat_xema projectes/LaSeu_Urba/raw/cams projectes/LaSeu_Urba/raw/sentinel2_cdse_expanded projectes/LaSeu_Urba/processed/sentinel2_indicators_expanded projectes/LaSeu_Urba/processed/landsat_expanded projectes/LaSeu_Urba/processed/current_fire_danger projectes/LaSeu_Urba/maps projectes/LaSeu_Urba/indicators projectes/LaSeu_Urba/metadata projectes/LaSeu_Urba/history ':(exclude)projectes/LaSeu_Urba/maps/*.zip'
+          if [ -e projectes/LaSeu_Urba/processed/sentinel2_cdse_expanded ]; then
+            git add projectes/LaSeu_Urba/processed/sentinel2_cdse_expanded
+          fi
+          if ! git diff --cached --quiet; then
+            git commit -m "data: update EcoRadar urban daily readings"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          else
+            echo "The timestamp should change on every run; refusing to deploy an uncommitted snapshot." >&2
+            exit 1
+          fi
+      - name: Publish the refreshed interactive fitxa to Netlify
+        if: env.NETLIFY_AUTH_TOKEN != '' && env.NETLIFY_SITE_ID != ''
+        run: npx --yes netlify-cli deploy --prod --dir . --functions netlify/functions --site "$NETLIFY_SITE_ID" --auth "$NETLIFY_AUTH_TOKEN" --message "EcoRadar ${{ steps.commit.outputs.sha }}"

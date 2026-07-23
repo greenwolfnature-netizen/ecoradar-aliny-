@@ -1,0 +1,117 @@
+name: Update EcoRadar Alinyà daily readings
+
+on:
+  schedule:
+    - cron: "35 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-current-fire-danger
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      COPERNICUS_CLIENT_ID: ${{ secrets.COPERNICUS_CLIENT_ID }}
+      COPERNICUS_CLIENT_SECRET: ${{ secrets.COPERNICUS_CLIENT_SECRET }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install EcoRadar
+        run: pip install -e .
+      - name: Fix one audit timestamp for the complete daily run
+        run: echo "ECORADAR_CHECKED_AT_UTC=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_ENV"
+      - name: Update XEMA observations for Alinyà
+        id: xema_alinya
+        continue-on-error: true
+        run: python -m ecoradar.connectors.connector_meteocat_xema --location alinya
+      - name: Verify XEMA fallback
+        if: steps.xema_alinya.outcome == 'failure'
+        run: test -s projectes/Alinya/raw/meteocat_xema/Y4_observations.csv
+      - name: Update current CAMS air-quality context
+        id: cams
+        continue-on-error: true
+        run: python tools/fetch_alinya_cams_context.py
+      - name: Verify CAMS fallback
+        if: steps.cams.outcome == 'failure'
+        run: test -s projectes/Alinya/indicators/contextual_environment.json
+      - name: Check latest QA-valid Landsat surface temperature
+        id: landsat
+        continue-on-error: true
+        run: python tools/fetch_alinya_landsat_composite.py
+      - name: Recalculate only Landsat-dependent outputs when the source changed
+        if: steps.landsat.outcome == 'success'
+        run: |
+          if ! git diff --quiet -- projectes/Alinya/processed/landsat projectes/Alinya/metadata/landsat_connector.json; then
+            python tools/calculate_alinya_satellite_layers.py
+            python tools/calculate_alinya_climatic_refuges.py
+          fi
+      - name: Update latest cloud-free Sentinel-2 scene
+        id: sentinel
+        if: env.COPERNICUS_CLIENT_ID != '' && env.COPERNICUS_CLIENT_SECRET != ''
+        continue-on-error: true
+        run: python tools/fetch_alinya_cdse_sentinel2.py --max-cloud 10
+      - name: Recalculate Sentinel-2 readings only when the source changed
+        if: steps.sentinel.outcome == 'success'
+        run: |
+          if ! git diff --quiet -- projectes/Alinya/processed/sentinel2_cdse projectes/Alinya/metadata/sentinel2_cdse_automated_connector.json; then
+            python tools/calculate_alinya_sentinel2_indicators.py
+            python tools/calculate_alinya_climatic_refuges.py
+          fi
+      - name: Recalculate current danger, daily registry and web
+        run: |
+          python tools/calculate_alinya_current_fire_danger.py
+          python tools/calculate_alinya_daily_readings.py
+          python tools/update_alinya_daily_history.py
+          python tools/sync_alinya_netlify.py
+          python tools/sync_alinya_repository_root.py --repository-root .
+      - name: Validate generated outputs
+        run: |
+          python -m py_compile ecoradar/connectors/connector_meteocat_xema.py tools/fetch_alinya_cams_context.py tools/fetch_alinya_landsat_composite.py tools/fetch_alinya_cdse_sentinel2.py tools/calculate_alinya_sentinel2_indicators.py tools/calculate_alinya_satellite_layers.py tools/calculate_alinya_climatic_refuges.py tools/calculate_alinya_current_fire_danger.py tools/calculate_alinya_daily_readings.py tools/update_alinya_daily_history.py tools/export_ecoradar_alinya_netlify.py tools/sync_alinya_netlify.py tools/sync_alinya_repository_root.py tools/validate_alinya_daily_timestamps.py
+          python tools/validate_alinya_daily_timestamps.py --max-age-minutes 30
+          node --check netlify/functions/daily-readings.mjs
+          node --test tests/js/test-daily-readings-api.mjs
+          test -s index.html
+          test -s netlify.toml
+          test -s metadata/daily_readings.json
+          test -s history/daily_readings_checks.jsonl
+          test -s projectes/Alinya/maps/incendis/current_fire_danger_cells.geojson
+          test -s projectes/Alinya/maps/incendis/current_fire_danger.webp
+          test -s projectes/Alinya/indicators/daily_readings.json
+          test -s projectes/Alinya/indicators/daily_history.json
+          grep -q "Perill d'incendi actual" index.html
+          grep -q "Lectura remota actualitzada" index.html
+      - name: Commit refreshed data
+        id: commit
+        run: |
+          git config user.name "EcoRadar data updater"
+          git config user.email "ecoradar-bot@users.noreply.github.com"
+          git add index.html netlify.toml THIRD_PARTY_NOTICES.md metadata history netlify vendor docs/current-fire-danger-source.md docs/data-sources-matrix.md docs/fire-source.md docs/alinya-daily-readings-source.md projectes/Alinya/raw/meteocat_xema projectes/Alinya/raw/cams projectes/Alinya/processed/landsat projectes/Alinya/processed/incendis/current_fire_danger projectes/Alinya/processed/teledeteccio projectes/Alinya/maps projectes/Alinya/indicators projectes/Alinya/metadata projectes/Alinya/history ':(exclude)projectes/Alinya/maps/*.zip'
+          if [ -e projectes/Alinya/processed/sentinel2_cdse ]; then
+            git add projectes/Alinya/processed/sentinel2_cdse
+          fi
+          if [ -e projectes/Alinya/raw/sentinel2_cdse_official ]; then
+            git add projectes/Alinya/raw/sentinel2_cdse_official
+          fi
+          if ! git diff --cached --quiet; then
+            git commit -m "data: update EcoRadar Alinyà daily readings"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          else
+            echo "The timestamp should change on every run; refusing to deploy an uncommitted snapshot." >&2
+            exit 1
+          fi
+      - name: Publish the refreshed interactive fitxa to Netlify
+        if: env.NETLIFY_AUTH_TOKEN != '' && env.NETLIFY_SITE_ID != ''
+        run: npx --yes netlify-cli deploy --prod --dir . --functions netlify/functions --site "$NETLIFY_SITE_ID" --auth "$NETLIFY_AUTH_TOKEN" --message "EcoRadar ${{ steps.commit.outputs.sha }}"

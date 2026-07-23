@@ -1,0 +1,23 @@
+{
+  "connector": "connector_icgc_dem_mdt",
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:25:46+00:00",
+  "status": "completed",
+  "can_advance_to_next_connector": true,
+  "source": "ICGC Model d'elevacions del terreny 5 m",
+  "outputs": {
+    "dem": "projectes/Alinya/processed/terrain/dem.tif",
+    "slope": "projectes/Alinya/processed/terrain/slope.tif",
+    "aspect": "projectes/Alinya/processed/terrain/aspect.tif",
+    "northness": "projectes/Alinya/processed/terrain/northness.tif",
+    "solana_obaga": "projectes/Alinya/processed/terrain/solana_obaga.tif"
+  },
+  "missing_outputs": [],
+  "checks": {
+    "crs_is_epsg_25831": true,
+    "resolution_is_5m": true,
+    "has_altitude_stats": true,
+    "has_slope_stats": true,
+    "has_aspect_stats": true
+  }
+}

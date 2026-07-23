@@ -1,0 +1,16 @@
+{
+  "connector": "pending_fuel_structure_connector",
+  "source": "Continuïtat forestal i combustible potencial",
+  "status": "partial_proxy_only",
+  "reason": "Existeix proxy local de condicions d'incendi, però no una font oficial de combustible/estructura forestal documentada i normalitzada com a connector.",
+  "required_action": "Identificar font oficial forestal/combustible, separar descàrrega de l'anàlisi i generar capa normalitzada.",
+  "outputs": {
+    "proxy": "projectes/Alinya/processed/incendis_similarity/similitud_condicions_incendi_alinya.gpkg"
+  },
+  "missing_outputs": [
+    "processed/fire/fuel_continuity.gpkg"
+  ],
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:42:13+00:00",
+  "can_advance_to_next_connector": true
+}

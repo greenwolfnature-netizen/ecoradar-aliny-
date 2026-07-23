@@ -1,0 +1,292 @@
+{
+  "generated_at": "2026-07-07T15:08:50+00:00",
+  "indicators": [
+    {
+      "code": "CORE_01",
+      "name": "Mosaic del paisatge",
+      "status": "parcial",
+      "raw_value": "cobertes=13; forestal=88.4246%; prats=9.3344%; agricola=0.0047%; artificial=0.0801%",
+      "normalized_value": 60.01,
+      "category": "alt",
+      "confidence": "mitjana",
+      "sources_used": [
+        "cobertes_sol_resum.csv"
+      ],
+      "limitations": [
+        "No hi ha encara calcul espacial de continuitat forestal."
+      ],
+      "preliminary_recommendation": "Validar discontinuïtats reals i conservar espais oberts existents.",
+      "brief_interpretation": "Mosaic estimat amb classes de coberta i percentatges basics; la continuitat espacial queda pendent.",
+      "missing_data": [
+        "continuïtat forestal espacial"
+      ],
+      "map_output": "projectes/Alinya/maps/ecoradar_core/core_01.md"
+    },
+    {
+      "code": "CORE_02",
+      "name": "Valor d'habitats",
+      "status": "parcial",
+      "raw_value": "habitats=47; HIC=3170.95 ha; prioritaris=1229.39 ha",
+      "normalized_value": 98.91,
+      "category": "molt alt",
+      "confidence": "mitjana",
+      "sources_used": [
+        "habitats_resum.csv"
+      ],
+      "limitations": [
+        "Habitats sensibles encara no estan classificats en una llista EcoRadar validada."
+      ],
+      "preliminary_recommendation": "Revisar els habitats HIC i prioritaris abans de qualsevol actuacio.",
+      "brief_interpretation": "Valor calculat amb riquesa d'habitats, HIC i HIC prioritaris. Habitats principals: 42.561; 32.641+; 42.425.",
+      "missing_data": [
+        "classificacio d'habitats sensibles",
+        "zones de mes valor espacialitzades"
+      ],
+      "map_output": "projectes/Alinya/maps/ecoradar_core/core_02.md"
+    },
+    {
+      "code": "CORE_03",
+      "name": "Estat de la vegetacio",
+      "status": "no disponible",
+      "raw_value": "no disponible",
+      "normalized_value": null,
+      "category": "no disponible",
+      "confidence": "baixa",
+      "sources_used": [
+        "teledeteccio_metadata.json"
+      ],
+      "limitations": [
+        "Copernicus esta bloquejat per manca de credencials i no hi ha rasters NDVI/NDMI/NDWI/LST."
+      ],
+      "preliminary_recommendation": "Configurar credencials Copernicus i generar rasters abans de valorar aquest indicador.",
+      "brief_interpretation": "No es pot calcular sense teledeteccio real.",
+      "missing_data": [
+        "NDVI",
+        "NDMI",
+        "NDWI",
+        "anomalia temporal"
+      ],
+      "map_output": "projectes/Alinya/maps/ecoradar_core/core_03.md"
+    },
+    {
+      "code": "CORE_04",
+      "name": "Refugis climatics",
+      "status": "parcial",
+      "raw_value": "cobertura forestal=88.4246%",
+      "normalized_value": 88.42,
+      "category": "molt alt",
+      "confidence": "baixa",
+      "sources_used": [
+        "cobertes_sol_resum.csv"
+      ],
+      "limitations": [
+        "Falten LST, NDMI, orientacio i proximitat a aigua; no es poden delimitar refugis."
+      ],
+      "preliminary_recommendation": "No prioritzar refugis climatics sense teledeteccio, topografia i hidrologia.",
+      "brief_interpretation": "Només es pot usar la cobertura forestal com a senyal parcial; el mapa de refugis queda pendent.",
+      "missing_data": [
+        "LST",
+        "NDMI",
+        "orientacio nord/obaga",
+        "proximitat a cursos o punts d'aigua"
+      ],
+      "map_output": "projectes/Alinya/maps/ecoradar_core/core_04.md"
+    },
+    {
+      "code": "CORE_05",
+      "name": "Vulnerabilitat climatica",
+      "status": "parcial",
+      "raw_value": "proxy disponible: forestal=88.4246%; artificial=0.0801%",
+      "normalized_value": 22.99,
+      "category": "baix",
+      "confidence": "baixa",
+      "sources_used": [
+        "cobertes_sol_resum.csv"
+      ],
+      "limitations": [
+        "Falten LST, NDMI, orientacio, pendent i manca d'aigua; el valor es un proxy incomplet."
+      ],
+      "preliminary_recommendation": "Esperar teledeteccio, DEM i hidrologia abans de prioritzar restauracio climatica.",
+      "brief_interpretation": "Vulnerabilitat només aproximada amb cobertura; no hi ha mapa de zones vulnerables.",
+      "missing_data": [
+        "LST alta",
+        "NDMI baix",
+        "orientacio sud",
+        "pendent",
+        "manca d'aigua"
+      ],
+      "map_output": "projectes/Alinya/maps/ecoradar_core/core_05.md"
+    },
+    {
+      "code": "CORE_06",
+      "name": "Biodiversitat coneguda",
+      "status": "parcial",
+      "raw_value": "registres=731; especies=516; recents=726",
+      "normalized_value": 99.66,
+      "category": "molt alt",
+      "confidence": "mitjana",
+      "sources_used": [
+        "biodiversitat.gpkg",
+        "biodiversitat_resum.csv"
+      ],
+      "limitations": [
+        "No hi ha encara llistes d'especies indicadores, protegides o invasores creuades."
+      ],
+      "preliminary_recommendation": "Validar grups infrarepresentats amb treball de camp i llistes de referencia.",
+      "brief_interpretation": "Biodiversitat coneguda basada en cites publiques; grups infrarepresentats o febles: Reptilia, Amphibia, Sense grup, Animalia, Mollusca, Protozoa.",
+      "missing_data": [
+        "especies indicadores",
+        "especies protegides/interes",
+        "buit espacial d'informacio"
+      ],
+      "map_output": "projectes/Alinya/maps/ecoradar_core/core_06.md"
+    },
+    {
+      "code": "CORE_07",
+      "name": "Pressio humana i us public",
+      "status": "parcial",
+      "raw_value": "densitat camins/pistes=2.2846 km/km2; punts us public=18",
+      "normalized_value": 39.32,
+      "category": "baix",
+      "confidence": "baixa",
+      "sources_used": [
+        "recreational_pressure.gpkg",
+        "recreational_pressure_resum.csv"
+      ],
+      "limitations": [
+        "OSM descriu infraestructura cartografiada, no intensitat real de visitants.",
+        "Strava, comptadors, dades de gestors i observacions de camp encara no estan incorporats."
+      ],
+      "preliminary_recommendation": "Validar sobre el terreny els accessos, aparcaments i camins principals abans d'interpretar pressio real.",
+      "brief_interpretation": "Pressio humana estimada parcialment amb xarxa OSM i punts d'us public; no representa nombre de visitants.",
+      "missing_data": [
+        "heatmap autoritzat",
+        "comptadors",
+        "dades de gestors",
+        "observacions de camp"
+      ],
+      "map_output": "projectes/Alinya/maps/ecoradar_core/core_07.md"
+    },
+    {
+      "code": "CORE_08",
+      "name": "Connectivitat ecologica",
+      "status": "parcial",
+      "raw_value": "forestal=88.4246%; prats=9.3344%",
+      "normalized_value": 60.05,
+      "category": "alt",
+      "confidence": "baixa",
+      "sources_used": [
+        "cobertes_sol_resum.csv",
+        "habitats_resum.csv"
+      ],
+      "limitations": [
+        "Falten barreres, riberes i model espacial de corredors."
+      ],
+      "preliminary_recommendation": "No definir corredors fins incorporar barreres i xarxa hidrica.",
+      "brief_interpretation": "Connectivitat aproximada només amb cobertes; corredors i barreres principals pendents.",
+      "missing_data": [
+        "barreres",
+        "xarxa de riberes",
+        "infraestructures",
+        "corredors potencials"
+      ],
+      "map_output": "projectes/Alinya/maps/ecoradar_core/core_08.md"
+    },
+    {
+      "code": "CORE_09",
+      "name": "Resiliencia al foc",
+      "status": "parcial",
+      "raw_value": "forestal=88.4246%; prats=9.3344%; agricola=0.0047%",
+      "normalized_value": 32.65,
+      "category": "baix",
+      "confidence": "baixa",
+      "sources_used": [
+        "cobertes_sol_resum.csv"
+      ],
+      "limitations": [
+        "Falten pendent, orientacio, NDMI, LST, accessos i punts d'aigua."
+      ],
+      "preliminary_recommendation": "Analitzar mosaic i discontinuïtats abans de proposar actuacions forestals.",
+      "brief_interpretation": "Estimacio parcial basada en continuitat forestal aparent i mosaic obert; no es risc final.",
+      "missing_data": [
+        "pendent",
+        "orientacio",
+        "NDMI",
+        "LST",
+        "accessos",
+        "punts d'aigua"
+      ],
+      "map_output": "projectes/Alinya/maps/ecoradar_core/core_09.md"
+    },
+    {
+      "code": "CORE_10",
+      "name": "Aigua i funcionalitat hidrica",
+      "status": "no disponible",
+      "raw_value": "no disponible",
+      "normalized_value": null,
+      "category": "no disponible",
+      "confidence": "baixa",
+      "sources_used": [],
+      "limitations": [
+        "No hi ha connector hidrologic executat i NDWI no esta disponible."
+      ],
+      "preliminary_recommendation": "Implementar connector hidrologic oficial i executar NDWI quan Copernicus estigui disponible.",
+      "brief_interpretation": "No es pot valorar funcionalitat hidrica amb les dades actuals.",
+      "missing_data": [
+        "cursos fluvials",
+        "basses",
+        "fonts",
+        "zones humides",
+        "NDWI",
+        "punts d'aigua de camp"
+      ],
+      "map_output": "projectes/Alinya/maps/ecoradar_core/core_10.md"
+    },
+    {
+      "code": "CORE_11",
+      "name": "Potencial de restauracio",
+      "status": "no disponible",
+      "raw_value": "no disponible",
+      "normalized_value": null,
+      "category": "no disponible",
+      "confidence": "baixa",
+      "sources_used": [],
+      "limitations": [
+        "Depen d'indicadors encara no disponibles: vegetacio, vulnerabilitat climatica, connectivitat robusta i pressio humana."
+      ],
+      "preliminary_recommendation": "Esperar les capes de vegetacio, pressio humana, hidrologia i camp abans de proposar zones.",
+      "brief_interpretation": "No es pot calcular potencial de restauracio sense els indicadors base complets.",
+      "missing_data": [
+        "baixa qualitat de vegetacio",
+        "habitats degradats",
+        "baixa connectivitat",
+        "pressio gestionable",
+        "habitats font"
+      ],
+      "map_output": "projectes/Alinya/maps/ecoradar_core/core_11.md"
+    },
+    {
+      "code": "CORE_12",
+      "name": "Prioritat de gestio",
+      "status": "no disponible",
+      "raw_value": "no disponible",
+      "normalized_value": null,
+      "category": "no disponible",
+      "confidence": "baixa",
+      "sources_used": [],
+      "limitations": [
+        "Indicador final de sintesi bloquejat fins tenir els Core previs amb prou confiança."
+      ],
+      "preliminary_recommendation": "No generar top 10 zones prioritaries fins disposar de pressio humana, clima, foc, aigua i camp.",
+      "brief_interpretation": "No es calcula cap prioritat global per evitar una mitjana simplista.",
+      "missing_data": [
+        "refugis climatics",
+        "vulnerabilitat",
+        "pressio humana",
+        "resiliencia al foc",
+        "potencial de restauracio"
+      ],
+      "map_output": "projectes/Alinya/maps/ecoradar_core/core_12.md"
+    }
+  ]
+}

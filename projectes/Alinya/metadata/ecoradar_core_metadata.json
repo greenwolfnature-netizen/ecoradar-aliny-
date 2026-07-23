@@ -1,0 +1,172 @@
+{
+  "project": "Alinya",
+  "run_name": "EcoRadar Core",
+  "generated_at": "2026-07-07T15:08:52+00:00",
+  "input_files": {
+    "study_area": "projectes/Alinya/processed/study_area.gpkg",
+    "land_cover_summary": "projectes/Alinya/indicators/cobertes_sol_resum.csv",
+    "habitats_summary": "projectes/Alinya/indicators/habitats_resum.csv",
+    "biodiversity_summary": "projectes/Alinya/indicators/biodiversitat_resum.csv",
+    "teledetection_metadata": "projectes/Alinya/metadata/teledeteccio_metadata.json"
+  },
+  "outputs": {
+    "csv": "projectes/Alinya/indicators/ecoradar_core.csv",
+    "json": "projectes/Alinya/indicators/ecoradar_core.json",
+    "report": "projectes/Alinya/reports/ecoradar_core_resum.md",
+    "metadata": "projectes/Alinya/metadata/ecoradar_core_metadata.json"
+  },
+  "maps_dir": "projectes/Alinya/maps/ecoradar_core",
+  "basic_maps": [
+    "projectes/Alinya/maps/ecoradar_core/study_area.geojson",
+    "projectes/Alinya/maps/ecoradar_core/cobertes_sol.geojson",
+    "projectes/Alinya/maps/ecoradar_core/habitats_hic.geojson",
+    "projectes/Alinya/maps/ecoradar_core/biodiversitat_registres.geojson",
+    "projectes/Alinya/maps/ecoradar_core/pressio_humana_osm_camins.geojson",
+    "projectes/Alinya/maps/ecoradar_core/pressio_humana_osm_punts.geojson"
+  ],
+  "status_counts": {
+    "parcial": 8,
+    "no disponible": 4
+  },
+  "indicators": [
+    {
+      "code": "CORE_01",
+      "status": "parcial",
+      "confidence": "mitjana",
+      "missing_data": [
+        "continuïtat forestal espacial"
+      ]
+    },
+    {
+      "code": "CORE_02",
+      "status": "parcial",
+      "confidence": "mitjana",
+      "missing_data": [
+        "classificacio d'habitats sensibles",
+        "zones de mes valor espacialitzades"
+      ]
+    },
+    {
+      "code": "CORE_03",
+      "status": "no disponible",
+      "confidence": "baixa",
+      "missing_data": [
+        "NDVI",
+        "NDMI",
+        "NDWI",
+        "anomalia temporal"
+      ]
+    },
+    {
+      "code": "CORE_04",
+      "status": "parcial",
+      "confidence": "baixa",
+      "missing_data": [
+        "LST",
+        "NDMI",
+        "orientacio nord/obaga",
+        "proximitat a cursos o punts d'aigua"
+      ]
+    },
+    {
+      "code": "CORE_05",
+      "status": "parcial",
+      "confidence": "baixa",
+      "missing_data": [
+        "LST alta",
+        "NDMI baix",
+        "orientacio sud",
+        "pendent",
+        "manca d'aigua"
+      ]
+    },
+    {
+      "code": "CORE_06",
+      "status": "parcial",
+      "confidence": "mitjana",
+      "missing_data": [
+        "especies indicadores",
+        "especies protegides/interes",
+        "buit espacial d'informacio"
+      ]
+    },
+    {
+      "code": "CORE_07",
+      "status": "parcial",
+      "confidence": "baixa",
+      "missing_data": [
+        "heatmap autoritzat",
+        "comptadors",
+        "dades de gestors",
+        "observacions de camp"
+      ]
+    },
+    {
+      "code": "CORE_08",
+      "status": "parcial",
+      "confidence": "baixa",
+      "missing_data": [
+        "barreres",
+        "xarxa de riberes",
+        "infraestructures",
+        "corredors potencials"
+      ]
+    },
+    {
+      "code": "CORE_09",
+      "status": "parcial",
+      "confidence": "baixa",
+      "missing_data": [
+        "pendent",
+        "orientacio",
+        "NDMI",
+        "LST",
+        "accessos",
+        "punts d'aigua"
+      ]
+    },
+    {
+      "code": "CORE_10",
+      "status": "no disponible",
+      "confidence": "baixa",
+      "missing_data": [
+        "cursos fluvials",
+        "basses",
+        "fonts",
+        "zones humides",
+        "NDWI",
+        "punts d'aigua de camp"
+      ]
+    },
+    {
+      "code": "CORE_11",
+      "status": "no disponible",
+      "confidence": "baixa",
+      "missing_data": [
+        "baixa qualitat de vegetacio",
+        "habitats degradats",
+        "baixa connectivitat",
+        "pressio gestionable",
+        "habitats font"
+      ]
+    },
+    {
+      "code": "CORE_12",
+      "status": "no disponible",
+      "confidence": "baixa",
+      "missing_data": [
+        "refugis climatics",
+        "vulnerabilitat",
+        "pressio humana",
+        "resiliencia al foc",
+        "potencial de restauracio"
+      ]
+    }
+  ],
+  "limitations": [
+    "No es genera cap puntuacio global.",
+    "Els indicadors parcials no substitueixen validacio de camp.",
+    "Els mapes derivats Core son placeholders documentals fins que les dades espacials requerides estiguin disponibles.",
+    "Teledeteccio, pressio humana, hidrologia i topografia derivada limiten diversos indicadors."
+  ]
+}

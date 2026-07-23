@@ -1,0 +1,23 @@
+{
+  "connector": "connector_incendis_historial",
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:33:05+00:00",
+  "status": "completed",
+  "can_advance_to_next_connector": true,
+  "source": "Superfícies afectades per incendis forestals v1.1",
+  "outputs": {
+    "processed": "projectes/Alinya/processed/incendis.gpkg",
+    "summary": "projectes/Alinya/indicators/incendis_resum.csv",
+    "metadata": "projectes/Alinya/metadata/incendis_metadata.json",
+    "effis_catalog": "projectes/Alinya/raw/incendis/effis_drf_datasets.json"
+  },
+  "checks": {
+    "processed_exists": true,
+    "summary_exists": true,
+    "metadata_exists": true,
+    "has_gencat_fire_polygons": true,
+    "has_effis_catalogue": true,
+    "effis_local_geometry_downloaded": false,
+    "incendiscat_not_used": true
+  }
+}

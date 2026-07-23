@@ -1,0 +1,122 @@
+{
+  "project": "Alinya",
+  "generated_at": "2026-07-22T18:30:18+00:00",
+  "principle": "Prioritzar funcionalitats que reforcin la Fitxa EcoRadar i la capacitat de l'Informe de Diagnosi Ecològica Integrada per justificar-ne les conclusions.",
+  "items": [
+    {
+      "priority": 1,
+      "title": "Figura de protecció i context administratiu",
+      "fitxa_section": "Capítol territorial, protecció, mapa resum i fonts",
+      "decision_unlocked": "Saber quin marc normatiu condiciona qualsevol actuació de gestió.",
+      "required_evidence": [
+        "Espais protegits oficials",
+        "Natura 2000/PEIN/ENPE si escau",
+        "límits administratius"
+      ],
+      "supporting_indicators": [
+        "study_area"
+      ],
+      "value_level": "molt alt",
+      "implementation_note": "No crear un connector nou fins confirmar integració amb fonts ja verificades; és la dada que reforça la lectura territorial de la Fitxa i després la seva justificació a l'informe."
+    },
+    {
+      "priority": 2,
+      "title": "Teledetecció de vegetació i humitat",
+      "fitxa_section": "Capítols de vegetació, clima, vulnerabilitat i resum executiu",
+      "decision_unlocked": "Distingir zones amb vigor, estrès hídric i possibles refugis o vulnerabilitats.",
+      "required_evidence": [
+        "NDVI",
+        "NDMI",
+        "NDWI",
+        "anomalia temporal"
+      ],
+      "supporting_indicators": [
+        "CORE_03",
+        "CORE_04",
+        "CORE_05"
+      ],
+      "value_level": "molt alt",
+      "implementation_note": "Només executar quan hi hagi credencials Copernicus i productes reals; no generar ràsters substitutius."
+    },
+    {
+      "priority": 3,
+      "title": "Hidrologia funcional",
+      "fitxa_section": "Capítol d'hidrologia, oportunitats, mapa de prioritats i actuacions",
+      "decision_unlocked": "Identificar corredors hídrics, punts d'aigua, refugis i restauració vinculada a l'aigua.",
+      "required_evidence": [
+        "cursos fluvials",
+        "basses",
+        "fonts",
+        "zones humides",
+        "NDWI",
+        "punts d'aigua de camp"
+      ],
+      "supporting_indicators": [
+        "CORE_10",
+        "CORE_04",
+        "CORE_11"
+      ],
+      "value_level": "molt alt",
+      "implementation_note": "Prioritzar fonts oficials ACA/ICGC ja documentades abans de qualsevol model derivat."
+    },
+    {
+      "priority": 4,
+      "title": "Relleu, pendent i orientació",
+      "fitxa_section": "Capítols de clima, foc, refugis climàtics i vulnerabilitat",
+      "decision_unlocked": "Separar solanes, obagues, pendents crítics i zones amb potencial microclimàtic.",
+      "required_evidence": [
+        "DEM",
+        "pendent",
+        "orientació",
+        "insolació potencial"
+      ],
+      "supporting_indicators": [
+        "CORE_04",
+        "CORE_05",
+        "CORE_09"
+      ],
+      "value_level": "alt",
+      "implementation_note": "Derivar només de DEM oficial verificat; aporta valor visual i de gestió a l'informe i a la síntesi executiva posterior."
+    },
+    {
+      "priority": 5,
+      "title": "Històric d'incendis i continuïtat del combustible",
+      "fitxa_section": "Capítol de foc, amenaces, mapa de prioritats i actuacions prioritàries",
+      "decision_unlocked": "Diferenciar on cal mantenir mosaic, reduir continuïtat o evitar actuacions que perjudiquin hàbitats.",
+      "required_evidence": [
+        "pendent",
+        "orientacio",
+        "NDMI",
+        "LST",
+        "accessos",
+        "punts d'aigua"
+      ],
+      "supporting_indicators": [
+        "CORE_09",
+        "CORE_01",
+        "CORE_02"
+      ],
+      "value_level": "alt",
+      "implementation_note": "Respectar la Fire Data Rule: no usar IncendisCat com a font i verificar l'upstream oficial abans de connector."
+    },
+    {
+      "priority": 6,
+      "title": "Validació de camp dirigida",
+      "fitxa_section": "Validació, confiança, fortaleses, pressions i actuacions",
+      "decision_unlocked": "Convertir una diagnosi preliminar en una diagnosi defensable davant gestors i propietat.",
+      "required_evidence": [
+        "validació d'HIC",
+        "accessos principals",
+        "punts d'aigua",
+        "grups infrarepresentats"
+      ],
+      "supporting_indicators": [
+        "CORE_02",
+        "CORE_06",
+        "CORE_07"
+      ],
+      "value_level": "alt",
+      "implementation_note": "Ha d'entrar com a dades traçables, no com a text lliure dins l'informe."
+    }
+  ]
+}

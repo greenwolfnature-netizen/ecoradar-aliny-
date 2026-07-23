@@ -1,0 +1,217 @@
+{
+  "schema_version": "1.0",
+  "checked_at_utc": "2026-07-23T19:54:51Z",
+  "station": {
+    "code": "Y4",
+    "name": "Alinyà"
+  },
+  "status_counts": {
+    "updated_today": 5,
+    "last_available": 4,
+    "unavailable": 2
+  },
+  "source_checks": {
+    "meteocat_xema": {
+      "label": "Meteocat XEMA · estació Y4",
+      "organization": "Servei Meteorològic de Catalunya / Generalitat de Catalunya",
+      "status": "verified",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "data_at_utc": "2026-07-23T19:00:00Z",
+      "service": "Socrata API · nzvn-apee",
+      "note": "Consulta oficial; les variables absents es declaren i no es converteixen en zero."
+    },
+    "cams_pm25": {
+      "label": "CAMS · PM2,5 europeu",
+      "organization": "Copernicus Atmosphere Monitoring Service / ECMWF",
+      "status": "verified",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "data_at_utc": "2026-07-23T00:00:00Z",
+      "service": "WMS 1.3.0 GetFeatureInfo",
+      "note": "Context modelitzat a aproximadament 10 km; no és una estació local."
+    },
+    "landsat_surface_temperature": {
+      "label": "Landsat 8/9 Collection 2 Level-2 ST",
+      "organization": "United States Geological Survey",
+      "status": "service_unavailable",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "data_at_utc": "2026-07-08T10:36:09.180240Z",
+      "service": "STAC plus signed Cloud Optimized GeoTIFF range reads",
+      "note": "La consulta és diària; la composició només canvia amb una escena QA-vàlida nova."
+    },
+    "sentinel2_indices": {
+      "label": "Sentinel-2 L2A · NDVI, NDMI i albedo",
+      "organization": "Copernicus / ESA",
+      "status": "requires_credentials",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "data_at_utc": "2026-07-07T10:37:01.024000Z",
+      "service": "CDSE STAC + Process API",
+      "note": "Requereix credencials CDSE per actualitzar l'escena analítica."
+    },
+    "current_fire_danger": {
+      "label": "Perill actual d'incendi · índex EcoRadar",
+      "organization": "EcoRadar sobre fonts oficials documentades",
+      "status": "verified",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "data_at_utc": "2026-07-23T19:00:00Z",
+      "service": "Analysis Engine EcoRadar",
+      "note": "Indicador derivat; no és una alerta oficial ni substitueix el Pla Alfa."
+    }
+  },
+  "readings": {
+    "air_temperature": {
+      "label": "Temperatura de l'aire",
+      "value": "28,1 °C",
+      "value_numeric": 28.1,
+      "unit": "°C",
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "data_at_utc": "2026-07-23T19:00:00Z",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "status_code": "updated_today",
+      "status": "actualitzada avui",
+      "quality": "provisional XEMA",
+      "note": "Observació puntual de l'estació Y4; no representa cada vessant de la Muntanya d'Alinyà."
+    },
+    "relative_humidity": {
+      "label": "Humitat relativa",
+      "value": "34 %",
+      "value_numeric": 34.0,
+      "unit": "%",
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "data_at_utc": "2026-07-23T19:00:00Z",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "status_code": "updated_today",
+      "status": "actualitzada avui",
+      "quality": "provisional XEMA",
+      "note": "Observació puntual; no és una malla territorial d'humitat."
+    },
+    "wind": {
+      "label": "Vent",
+      "value": "dada no disponible",
+      "value_numeric": null,
+      "unit": null,
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "data_at_utc": null,
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "status_code": "unavailable",
+      "status": "dada no disponible",
+      "quality": "no disponible amb les fonts verificades",
+      "note": "L'extracte públic actual de l'estació Y4 no conté la variable 30; no s'interpreta com vent nul."
+    },
+    "precipitation": {
+      "label": "Precipitació",
+      "value": "0,0 mm",
+      "value_numeric": 0.0,
+      "unit": "mm",
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "data_at_utc": "2026-07-23T19:00:00Z",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "status_code": "updated_today",
+      "status": "actualitzada avui",
+      "quality": "provisional XEMA",
+      "note": "Acumulació dels períodes XEMA disponibles del 2026-07-23."
+    },
+    "surface_temperature": {
+      "label": "Temperatura superficial",
+      "value": "27,3 °C",
+      "value_numeric": 27.3,
+      "unit": "°C",
+      "source": "USGS Landsat 8/9 Collection 2 Level-2 ST",
+      "data_at_utc": "2026-07-08T10:36:09.180240Z",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "status_code": "last_available",
+      "status": "última dada disponible",
+      "quality": "QA_PIXEL aplicada",
+      "note": "Mediana de la composició estival QA-vàlida; no és temperatura de l'aire ni una lectura instantània."
+    },
+    "ndmi": {
+      "label": "NDMI",
+      "value": "0,106",
+      "value_numeric": 0.106,
+      "unit": "índex",
+      "source": "Copernicus Sentinel-2 MSI L2A",
+      "data_at_utc": "2026-07-07T10:37:01.024000Z",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "status_code": "last_available",
+      "status": "última dada disponible",
+      "quality": "màscara SCL aplicada",
+      "note": "Mediana de l'àmbit de l'última escena local vàlida."
+    },
+    "ndvi": {
+      "label": "NDVI",
+      "value": "0,616",
+      "value_numeric": 0.616,
+      "unit": "índex",
+      "source": "Copernicus Sentinel-2 MSI L2A",
+      "data_at_utc": "2026-07-07T10:37:01.024000Z",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "status_code": "last_available",
+      "status": "última dada disponible",
+      "quality": "màscara SCL aplicada",
+      "note": "Mediana de l'àmbit de l'última escena local vàlida."
+    },
+    "albedo": {
+      "label": "Albedo",
+      "value": "0,173",
+      "value_numeric": 0.173,
+      "unit": "índex",
+      "source": "Copernicus Sentinel-2 MSI L2A",
+      "data_at_utc": "2026-07-07T10:37:01.024000Z",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "status_code": "last_available",
+      "status": "última dada disponible",
+      "quality": "màscara SCL aplicada",
+      "note": "Mediana de l'àmbit de l'última escena local vàlida."
+    },
+    "air_quality": {
+      "label": "Qualitat de l'aire",
+      "value": "PM2,5 · 13,60 µg/m³",
+      "value_numeric": 13.6,
+      "unit": "µg/m³ PM2,5",
+      "source": "Copernicus CAMS European air-quality forecast",
+      "data_at_utc": "2026-07-23T00:00:00Z",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "status_code": "updated_today",
+      "status": "actualitzada avui",
+      "quality": "model 0,1° (~10 km)",
+      "note": "Context modelitzat supramunicipal; no és una estació local ni una concentració de sender o nucli."
+    },
+    "thermal_comfort": {
+      "label": "Confort tèrmic contextual",
+      "value": "dada no disponible",
+      "value_numeric": null,
+      "unit": null,
+      "source": "Derivat de temperatura, humitat i vent XEMA",
+      "data_at_utc": null,
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "status_code": "unavailable",
+      "status": "dada no disponible",
+      "quality": "no disponible amb les fonts verificades",
+      "note": "Falta almenys una de les tres entrades; no es calcula un valor parcial."
+    },
+    "current_fire_danger": {
+      "label": "Perill actual d'incendi",
+      "value": "53,3/100 · moderat",
+      "value_numeric": 53.3,
+      "unit": "índex 0–100",
+      "source": "Índex EcoRadar derivat · fonts detallades a la lectura",
+      "data_at_utc": "2026-07-23T19:00:00Z",
+      "checked_at_utc": "2026-07-23T19:54:51Z",
+      "status_code": "updated_today",
+      "status": "actualitzada avui",
+      "quality": "confiança mitjana · 63.8 %",
+      "note": "No és una alerta oficial ni substitueix el Pla Alfa."
+    }
+  },
+  "structural_layers_not_recalculated_daily": [
+    "relleu",
+    "pendent",
+    "orientació",
+    "cobertes del sòl",
+    "hàbitats HIC",
+    "xarxa hidrogràfica",
+    "connectivitat ecològica",
+    "incendis històrics",
+    "perill estructural d'incendi"
+  ],
+  "methodology": "docs/data_sources/alinya_daily_readings.md"
+}

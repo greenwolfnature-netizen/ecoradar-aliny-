@@ -1,0 +1,108 @@
+{
+  "project": "Alinya",
+  "source": "ACA / Gencat AIGUA WFS",
+  "responsible_organization": "Agència Catalana de l'Aigua / Generalitat de Catalunya",
+  "url": "https://aca.gencat.cat/",
+  "service_url": "https://sig.gencat.cat/ows/AIGUA/wfs",
+  "service_type": "WFS 2.0.0",
+  "query_date": "2026-07-07T17:30:57.648563+00:00",
+  "crs": "EPSG:25831",
+  "study_area_surface_ha": 5464.031656330243,
+  "layers": [
+    {
+      "layer_id": "rius_aca_che",
+      "type_name": "AIGUA:AIGUA_RIUS_ACA_CHE",
+      "theme": "courses",
+      "description": "Rius ACA/CHE",
+      "raw_path": "projectes/Alinya/raw/hidrologia/rius_aca_che.geojson",
+      "feature_count": 2,
+      "geometry_types": [
+        "MultiLineString"
+      ],
+      "length_km": 11.6975,
+      "area_ha": 0.0
+    },
+    {
+      "layer_id": "eixos_drenatge",
+      "type_name": "AIGUA:AIGUA_EIXOS_DRENATGE_ASDT",
+      "theme": "drainage_axes",
+      "description": "Eixos de drenatge ASDT",
+      "raw_path": "projectes/Alinya/raw/hidrologia/eixos_drenatge.geojson",
+      "feature_count": 1,
+      "geometry_types": [
+        "LineString"
+      ],
+      "length_km": 0.0744,
+      "area_ha": 0.0
+    },
+    {
+      "layer_id": "fonts",
+      "type_name": "AIGUA:AIGUA_FONTS",
+      "theme": "springs",
+      "description": "Fonts",
+      "raw_path": "projectes/Alinya/raw/hidrologia/fonts.geojson",
+      "feature_count": 12,
+      "geometry_types": [
+        "Point"
+      ],
+      "length_km": 0.0,
+      "area_ha": 0.0
+    },
+    {
+      "layer_id": "masses_rius",
+      "type_name": "AIGUA:AIGUA_CONQUES_MASSES_RIUS",
+      "theme": "river_water_bodies",
+      "description": "Conques i masses de rius",
+      "raw_path": "projectes/Alinya/raw/hidrologia/masses_rius.geojson",
+      "feature_count": 0,
+      "geometry_types": [],
+      "length_km": 0.0,
+      "area_ha": 0.0
+    },
+    {
+      "layer_id": "preses_basses",
+      "type_name": "AIGUA:AIGUA_PRESES_BASSES",
+      "theme": "ponds_reservoirs",
+      "description": "Preses i basses",
+      "raw_path": "projectes/Alinya/raw/hidrologia/preses_basses.geojson",
+      "feature_count": 0,
+      "geometry_types": [],
+      "length_km": 0.0,
+      "area_ha": 0.0
+    },
+    {
+      "layer_id": "estanys",
+      "type_name": "AIGUA:AIGUA_MA_ESTANYS",
+      "theme": "lakes",
+      "description": "Masses d'aigua estanys",
+      "raw_path": "projectes/Alinya/raw/hidrologia/estanys.geojson",
+      "feature_count": 0,
+      "geometry_types": [],
+      "length_km": 0.0,
+      "area_ha": 0.0
+    },
+    {
+      "layer_id": "zones_humides_estanys",
+      "type_name": "AIGUA:AIGUA_PDG_ZH_ESTANYS_CIC_222",
+      "theme": "wetlands_lakes",
+      "description": "Zones humides i estanys del pla de gestió",
+      "raw_path": "projectes/Alinya/raw/hidrologia/zones_humides_estanys.geojson",
+      "feature_count": 0,
+      "geometry_types": [],
+      "length_km": 0.0,
+      "area_ha": 0.0
+    }
+  ],
+  "processed_path": "projectes/Alinya/processed/hidrologia.gpkg",
+  "processed_layers": {
+    "rius_aca_che": "projectes/Alinya/processed/hidrologia.gpkg",
+    "eixos_drenatge": "projectes/Alinya/processed/hidrologia.gpkg",
+    "fonts": "projectes/Alinya/processed/hidrologia.gpkg"
+  },
+  "summary_path": "projectes/Alinya/indicators/hidrologia_resum.csv",
+  "limitations": [
+    "Some official WFS layers can legitimately return zero features inside the study area.",
+    "The connector stores source geometry and simple length/area summaries only; it does not classify ecological water functionality.",
+    "Springs, ponds and wetlands require field validation before management decisions."
+  ]
+}

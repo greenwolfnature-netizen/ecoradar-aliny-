@@ -1,0 +1,6 @@
+metric,value,unit
+gencat_fire_polygons,2,features
+gencat_burned_area_ha,17.4489,ha
+gencat_fire_years,,years
+effis_catalog_datasets,3,datasets
+effis_local_geometry_downloaded,0,boolean

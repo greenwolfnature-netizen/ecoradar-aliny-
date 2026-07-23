@@ -1,0 +1,88 @@
+version: "1.0"
+status: frozen
+frozen_at: "2026-07-08"
+reference_project: "Alinya"
+page:
+  format: A4
+  orientation: portrait
+  pages: 1
+  role: "executive ecological decision sheet"
+editorial_flow:
+  first: "fitxa_ecoradar"
+  second: "integrated_ecological_diagnosis_report"
+  principle: "La fitxa es la sintesi executiva; l'informe es la demostracio tecnica de la fitxa."
+  report_rule: "Cada capitol de l'informe ha de justificar una afirmacio important de la fitxa."
+  chapter_quality_test: "Si elimino aquest capitol, la fitxa continua sent igual de creible?"
+decision_questions:
+  - "Quin es l'estat ecologic global de l'espai?"
+  - "Quin proces ecologic es el mes important?"
+  - "Quin es el principal risc?"
+  - "Quina es la principal oportunitat?"
+  - "Quina actuacio faria primer?"
+  - "On hauria d'actuar?"
+blocks:
+  ecological_status:
+    required: true
+    allowed_categories:
+      - "Molt favorable"
+      - "Favorable"
+      - "Favorable pero vulnerable"
+      - "Desfavorable"
+      - "Critic"
+  landscape_mosaic:
+    required: true
+  decision_radar:
+    required: true
+  covers_and_habitats:
+    required: true
+  known_biodiversity:
+    required: true
+  expert_reading:
+    required: true
+    questions:
+      - "Que passa?"
+      - "Quina es la causa principal?"
+      - "Quin es el principal risc?"
+      - "Quina es la millor oportunitat?"
+  access_and_pressure:
+    required: true
+  ecological_processes:
+    required: true
+    fields:
+      - process
+      - trend
+      - ecological_impact
+      - confidence
+  priority_actions:
+    required: true
+    fields:
+      - priority
+      - where_to_act
+      - expected_ecological_benefit
+      - difficulty
+      - time_horizon
+forbidden_main_body_terms:
+  - "Copernicus"
+  - "Sentinel"
+  - "API"
+  - "Connectors"
+  - "Connector"
+  - "Data Source Manager"
+  - "Desenvolupament"
+  - "Fonts pendents"
+  - "Desbloquejar"
+validation:
+  visual:
+    - "No text outside panels"
+    - "No numbers overlapping labels"
+    - "Radar labels inside panel"
+    - "Metric boxes inside panel"
+    - "A4 portrait one page"
+  decision:
+    - "Answers all six decision questions"
+    - "At least three executable priority actions"
+    - "Includes where to act"
+commands:
+  prepare_area: "/Users/usuario/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -m ecoradar.cli prepare-study-area /ruta/a/area_estudi.gpkg --project-name NOM_ESPAI --projects-root projectes --metric-crs EPSG:25831 --repair-geometry --overwrite"
+  run_pipeline: "/Users/usuario/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 tools/run_ecoradar_pipeline.py --project projectes/NOM_ESPAI"
+  render_documents: "/Users/usuario/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 ecoradar/reporting/client_report_a4.py --project projectes/NOM_ESPAI"
