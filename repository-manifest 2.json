@@ -1,0 +1,2292 @@
+{
+  "schema_version": "1.0",
+  "package": "EcoRadar — Muntanya d'Alinyà",
+  "built_at_utc": "2026-07-23T20:41:59Z",
+  "canonical_checked_at_utc": "2026-07-23T20:41:16Z",
+  "archive_layout": "repository files are stored directly at ZIP root",
+  "excluded_as_regenerable_or_non_operational": [
+    "virtual environments, caches and secret files",
+    "previous releases, backup PDFs, old interactive viewers and ZIP archives",
+    "the six 46 MiB ICGC source-cover tiles; their normalized and mapped derivatives remain included",
+    "all other EcoRadar study areas"
+  ],
+  "file_count_excluding_this_manifest": 455,
+  "uncompressed_bytes_excluding_this_manifest": 420882551,
+  "files": [
+    {
+      "path": ".ecoradar-alinya-repository",
+      "bytes": 83,
+      "sha256": "ae517e33051d0864f123c11f7423fd343a40607ed3ac6b9c98656d12b99d421e"
+    },
+    {
+      "path": ".env.example",
+      "bytes": 989,
+      "sha256": "de79297c1df078e52d339085fd6fd68b4818b86267e71213576785d39fc56335"
+    },
+    {
+      "path": ".github/workflows/update-current-fire-danger.yml",
+      "bytes": 6421,
+      "sha256": "86cec8e6e98c805a0a1e83bf610c53ed4710f438418310150e194d73065d6d79"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 130,
+      "sha256": "34fe406701306ba0019bb8a16644fc3c79091f3c9ee6f4eb9cd76adffe039ea6"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 2354,
+      "sha256": "9388c68cb48eaf27ab8a157bcce51a377b9448817142009e9f8a7bfab775a78a"
+    },
+    {
+      "path": "ECORADAR_EXECUTION_REPORT.md",
+      "bytes": 4740,
+      "sha256": "03a7ae9a0f036e9b12326beaaff821235518556a655e075be02c3a5f329ccc9e"
+    },
+    {
+      "path": "ECORADAR_FITXA_V1.md",
+      "bytes": 4709,
+      "sha256": "fed230769e7f17cd668111a8e28742b5586c9c5978a462b2f15d68149cae73c9"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1922,
+      "sha256": "5ad02673a1ad45dbbb2d776c29345ddb34b5ec40137c225ea4c8dd42e23b9a2f"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 302,
+      "sha256": "619a6e72f1edffacad829f1f9524c2b8bdce676cdeac287b43ba8bbd199a1554"
+    },
+    {
+      "path": "config/alinya_current_fire_danger.json",
+      "bytes": 2329,
+      "sha256": "27bdce50368875843c35fe7450f84592d48532632bd3ede3018425441460f4ce"
+    },
+    {
+      "path": "config/alinya_daily_readings.json",
+      "bytes": 4197,
+      "sha256": "69e37121beb008281994fa0f70291679f17316ad83fe4a37e5af9ab994471093"
+    },
+    {
+      "path": "config/current_fire_danger.json",
+      "bytes": 2304,
+      "sha256": "b00d2fe41f40528d5e4e9e0b0b3622d65408b2e03ed798b2b241ab66488f542c"
+    },
+    {
+      "path": "config/data_sources.yaml",
+      "bytes": 29932,
+      "sha256": "9289ef4b73a5f8e7669db7851b73ea4ebd0992c9ab1eb027ad90f24957340803"
+    },
+    {
+      "path": "config/urban_daily_readings.json",
+      "bytes": 4709,
+      "sha256": "3dce82954f097b3a4e10a6159ec38a418f475b8cef019170c7e0d84853420e84"
+    },
+    {
+      "path": "docs/alinya-daily-readings-source.md",
+      "bytes": 2621,
+      "sha256": "86f81d4ff13c64544a1f100e423b45d3391f551d8747136be5a78eb5485db5b2"
+    },
+    {
+      "path": "docs/architecture_review.md",
+      "bytes": 6472,
+      "sha256": "1e1745d16b3f4f1ac8ea5e023007f88a5eee9ca467ccb7b322ee6679e0a86027"
+    },
+    {
+      "path": "docs/central_engine/README.md",
+      "bytes": 3754,
+      "sha256": "277eb83f7d73d44a74a1c840475e7ffbe4a765175accabafa0eac86a2b2da092"
+    },
+    {
+      "path": "docs/central_engine/database_schema.sql",
+      "bytes": 4477,
+      "sha256": "2f25742d46fa94dfd661c0ec8254904e1ef04b9b5f269071b03d5e6810e8062f"
+    },
+    {
+      "path": "docs/central_engine/ecoradar_0_1_scope.md",
+      "bytes": 2380,
+      "sha256": "54e937bfdb898171ccf7834d54765ae3fce2cd1c29d7e0a6eb146d40538b6db7"
+    },
+    {
+      "path": "docs/central_engine/indicator_library.md",
+      "bytes": 1142,
+      "sha256": "eab6bb305b8b376398682db0687546149f552a7ad0c8366672ee4aff4301b8c5"
+    },
+    {
+      "path": "docs/central_engine/indicator_profiles.md",
+      "bytes": 2169,
+      "sha256": "76cf95018cd00752fb819573d62e2e31bf64b2fbbb2427805ae3c105fcbe440b"
+    },
+    {
+      "path": "docs/central_engine/project_manifest.schema.json",
+      "bytes": 2151,
+      "sha256": "e6ae5d4cb3492c7583f8b93b67e099193acfb098759414d9cfd3a10bab0f74f0"
+    },
+    {
+      "path": "docs/connectors/README.md",
+      "bytes": 2651,
+      "sha256": "689180a8941a066a24fd9a595feee64b06b98b993f9e937ff6b6cf2127fc53e3"
+    },
+    {
+      "path": "docs/connectors/connector_incendis_combustible_resiliencia.md",
+      "bytes": 4867,
+      "sha256": "62d3496c62aa90cbc24bdae940178a0b0e4a1fababc56d6cdf4ff9a3f2029f5c"
+    },
+    {
+      "path": "docs/connectors/connector_recreational_pressure.md",
+      "bytes": 2939,
+      "sha256": "d9422b083b9ad4f5dfa726469172a16947305d698c50a332beb7bb61b2685edc"
+    },
+    {
+      "path": "docs/current-fire-danger-source.md",
+      "bytes": 3909,
+      "sha256": "fa02e8064544bb78cf99fb67013bb8aad31adcb126276c94b2abb777004138de"
+    },
+    {
+      "path": "docs/data-sources-matrix.md",
+      "bytes": 11428,
+      "sha256": "3f05b81b425fdf0f040e8ffc02817fe6e0b3275565dc3e65700c9d4353757e2f"
+    },
+    {
+      "path": "docs/data_sources/README.md",
+      "bytes": 1402,
+      "sha256": "5ec0ae84ad8cf1378c9d2f989ae8bbc1763071ac370f3239fca84d35d9757c4e"
+    },
+    {
+      "path": "docs/data_sources/alinya_daily_readings.md",
+      "bytes": 2621,
+      "sha256": "86f81d4ff13c64544a1f100e423b45d3391f551d8747136be5a78eb5485db5b2"
+    },
+    {
+      "path": "docs/data_sources/fire/basic-wildfire-danger-2024.md",
+      "bytes": 3410,
+      "sha256": "e3a23771d144ee687489d1115d09ce9e40cac614278b6c523a442517f56f1d33"
+    },
+    {
+      "path": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
+      "bytes": 3909,
+      "sha256": "fa02e8064544bb78cf99fb67013bb8aad31adcb126276c94b2abb777004138de"
+    },
+    {
+      "path": "docs/data_sources/fire/current-wildfire-danger-urban.md",
+      "bytes": 3101,
+      "sha256": "1946e31ab374813136a97d10b6cc591c0bad10b20926bc70a24a8a6114ef386b"
+    },
+    {
+      "path": "docs/data_sources/fire/incendiscat-official-source.md",
+      "bytes": 9592,
+      "sha256": "8444c50c77bc9513c90206ca190ce2a35f612d051c7dffa7085d10a3404e6985"
+    },
+    {
+      "path": "docs/data_sources/official_sources.md",
+      "bytes": 33005,
+      "sha256": "feab67e1d2796cf17f2791231929170846bed77cddcb42a4097a27cdc9e0b37c"
+    },
+    {
+      "path": "docs/data_sources/sources_inventory.yml",
+      "bytes": 36106,
+      "sha256": "ed424a9651a0003d7a4421bff35ba2fdedafc7918cd5de1a2d1ed816472c8ddb"
+    },
+    {
+      "path": "docs/data_sources/urban_climate_la_seu.md",
+      "bytes": 8956,
+      "sha256": "97a175ca9dfbd0f88f20b6ee700bb9fc0ea62e30c8078de9b8ec4153b9c8156e"
+    },
+    {
+      "path": "docs/data_sources/urban_daily_readings.md",
+      "bytes": 9240,
+      "sha256": "f2cd3f0957e272d22ab124b7e0c2000513e2f4041bc5f893b351e8a9587d72b8"
+    },
+    {
+      "path": "docs/deployment/alinya_github_repository_readme.md",
+      "bytes": 1922,
+      "sha256": "5ad02673a1ad45dbbb2d776c29345ddb34b5ec40137c225ea4c8dd42e23b9a2f"
+    },
+    {
+      "path": "docs/deployment/la_seu_github_repository_readme.md",
+      "bytes": 3240,
+      "sha256": "9d8feb76368bbc2788c4d8d54fbb2a717ce2fa1ab3c5ec9adbc68a08ed947f4c"
+    },
+    {
+      "path": "docs/deployment/update-alinya-current-fire-danger.yml",
+      "bytes": 6421,
+      "sha256": "86cec8e6e98c805a0a1e83bf610c53ed4710f438418310150e194d73065d6d79"
+    },
+    {
+      "path": "docs/deployment/update-current-fire-danger.yml",
+      "bytes": 6752,
+      "sha256": "d304367eb0919f5431219d6a466e0d6a25227a9cd2fbeb362d914ff7214fb20c"
+    },
+    {
+      "path": "docs/fire-source.md",
+      "bytes": 1169,
+      "sha256": "e982d1c9cf868636286d46c16efa45d6addd9ee83580e8a85325f601f70d2088"
+    },
+    {
+      "path": "docs/internal/project_state_report.md",
+      "bytes": 23079,
+      "sha256": "9f006841e1764a36d31ffc8350084e7ecd6b97f2fd403cc0bc816f2b6ee2a21e"
+    },
+    {
+      "path": "docs/legacy_archive/core_wrappers/__init__.py",
+      "bytes": 57,
+      "sha256": "aeaada4ebaa57a0a4857f1e857410f6b49263879885050d2e26034704464aa5f"
+    },
+    {
+      "path": "docs/legacy_archive/core_wrappers/data_source_manager.py",
+      "bytes": 268,
+      "sha256": "6c9dddccda8435bdeec5edc1ccd4b268e31e88e71bcfd5701adac276cc964dc3"
+    },
+    {
+      "path": "docs/legacy_archive/core_wrappers/diagnosis_engine.py",
+      "bytes": 219,
+      "sha256": "67e6d0908a31059d6e9ca7130fb0e47639f7c8729da64fa254898f5e98551bea"
+    },
+    {
+      "path": "docs/legacy_archive/core_wrappers/indicator_engine.py",
+      "bytes": 201,
+      "sha256": "3df76cb3ffe970526611dc278ea44a784b1805f3c6d2124d286945c65f0e6eb3"
+    },
+    {
+      "path": "docs/legacy_archive/core_wrappers/orchestrator.py",
+      "bytes": 205,
+      "sha256": "ad3358085af2df582ccce8ee35ab11d3043faa99be5c8075071be14d29623cab"
+    },
+    {
+      "path": "docs/legacy_archive/core_wrappers/recommendation_engine.py",
+      "bytes": 218,
+      "sha256": "9394af983faf1db4cf05d840aea70c912bf8ca523cccafa17291cf2950479c15"
+    },
+    {
+      "path": "docs/legacy_archive/core_wrappers/validation_engine.py",
+      "bytes": 223,
+      "sha256": "01a904b438796de613fe8aca4fc7f383cd21237ef08344ffd99bd6e8cf4db736"
+    },
+    {
+      "path": "docs/legacy_archive/diagnosis_engine_compat_legacy.py",
+      "bytes": 12398,
+      "sha256": "720cb7e1a8b8704fdbb0f2c9426c832a019171b18185e35901747d706b5296be"
+    },
+    {
+      "path": "docs/legacy_archive/diagnosis_engine_wrapper_legacy.py",
+      "bytes": 785,
+      "sha256": "d16dd0348c7e8120788bef88b0035ddddb24c26a32a2abe31e6784e13db188b6"
+    },
+    {
+      "path": "docs/legacy_archive/indicators_engine_wrapper_legacy.py",
+      "bytes": 201,
+      "sha256": "3df76cb3ffe970526611dc278ea44a784b1805f3c6d2124d286945c65f0e6eb3"
+    },
+    {
+      "path": "docs/legacy_archive/recommendations_engine_old_legacy.py",
+      "bytes": 6203,
+      "sha256": "d429399e8836a73b946bd85478ade5ddbe04a7e4842b8ea07babb9bb1dc2a7e2"
+    },
+    {
+      "path": "docs/legacy_archive/recommendations_engine_wrapper_legacy.py",
+      "bytes": 879,
+      "sha256": "efd6a22a90f2b47ec1fc3564cf72fd03e79d0c7d3820e04e8728843f9d990f36"
+    },
+    {
+      "path": "docs/metodologia_oficial_ecoradar.md",
+      "bytes": 31255,
+      "sha256": "c0e8925e123cee2b1dc48cd4933fe6ce37a2709b341b38c8ccd4838974f3bc5a"
+    },
+    {
+      "path": "docs/modules/fire/functional-brief.md",
+      "bytes": 3890,
+      "sha256": "df297f354e853800c052ac36fc4e1cd4ce73a48fe65a9e04bc23a0b904bb7613"
+    },
+    {
+      "path": "docs/modules/fire/memoria-del-foc-editorial-spec.md",
+      "bytes": 8071,
+      "sha256": "b7ab57e7988f6828ae5ec248d9fd524480916b01937744172540abea27fae37c"
+    },
+    {
+      "path": "docs/product/ecoradar_product_standard.md",
+      "bytes": 11472,
+      "sha256": "2ba1adde4acae7c0e2f308e795d29e407c4cdee9f1c503f0306d81d4de4cb60f"
+    },
+    {
+      "path": "docs/product/releases/fitxa_ecoradar_v1/SPEC.md",
+      "bytes": 2941,
+      "sha256": "6d9e32ad7ce07edc05beadaaac1f523f81b071a2402142928c8b97290cc66edf"
+    },
+    {
+      "path": "docs/product/releases/fitxa_ecoradar_v1/client_report_a4_v1.py",
+      "bytes": 239645,
+      "sha256": "b620d4072ae8aff4d21481027974c88512980db410f268dd6002c59ea02106eb"
+    },
+    {
+      "path": "docs/product/releases/fitxa_ecoradar_v1/fitxa_ecoradar_v1.yaml",
+      "bytes": 2847,
+      "sha256": "68837674e33a47add95bebf29e17639f668d2e8826a4d997d5bc6ae77e8760ad"
+    },
+    {
+      "path": "ecoradar/__init__.py",
+      "bytes": 79,
+      "sha256": "e54b043c50325706dc382a6071f512c09a579e13b0285e465d8b3ce4099d0f1a"
+    },
+    {
+      "path": "ecoradar/analysis/__init__.py",
+      "bytes": 33,
+      "sha256": "c7e36e7c2554a9ed741a5600d8f63860eeea73c81bd79450039887c45271b8e5"
+    },
+    {
+      "path": "ecoradar/analysis/core.py",
+      "bytes": 32908,
+      "sha256": "e721bf314c6eb1007f95240e431b003634faaeb3783a435a199c2ae9e1ecf701"
+    },
+    {
+      "path": "ecoradar/cli.py",
+      "bytes": 5438,
+      "sha256": "d7a612385755e98672fe400506435df40ce239b424c6ceac8df0d33157b1eea8"
+    },
+    {
+      "path": "ecoradar/connectors/__init__.py",
+      "bytes": 40,
+      "sha256": "638af6d304d4c6eed4251efa036a8e1e1b4d4033f19c0c6f5755e634fbadeace"
+    },
+    {
+      "path": "ecoradar/connectors/base.py",
+      "bytes": 859,
+      "sha256": "f1a6576a1169ee78276e72b791bda80446d6fc7a76a2a65a0480a7a6b3514c67"
+    },
+    {
+      "path": "ecoradar/connectors/cobertes_sol.py",
+      "bytes": 1057,
+      "sha256": "1527d06a48cddfaadb5fd2cfe816740c3aee4f7254edefe967ad1dc715ec016d"
+    },
+    {
+      "path": "ecoradar/connectors/connector_aca_hidrologia.py",
+      "bytes": 11495,
+      "sha256": "fefe9217c1cb78a6e3b70f0b115c64e1ed4b0472d5ff813b7cddaeabb4781310"
+    },
+    {
+      "path": "ecoradar/connectors/connector_biodiversitat.py",
+      "bytes": 18719,
+      "sha256": "51a02d38ddbca60ff52942625a1afc675a733948e80042f1916d1d5d687d5755"
+    },
+    {
+      "path": "ecoradar/connectors/connector_connectivitat_ecologica.py",
+      "bytes": 10367,
+      "sha256": "9c2878237221fdd7619a25d47fba73a18ea1782bcf501ae12ef4f8a92c62c9d7"
+    },
+    {
+      "path": "ecoradar/connectors/connector_copernicus_teledeteccio.py",
+      "bytes": 33751,
+      "sha256": "95ffbe2632a8df4f725cae052b220d9a1a48a855215b2d18e3e118893c4518cc"
+    },
+    {
+      "path": "ecoradar/connectors/connector_habitats.py",
+      "bytes": 9697,
+      "sha256": "2c41026e26ebf2e68ba8b78ca9bc7bfdb9f7a9f86d889ecebe1c1b869105be97"
+    },
+    {
+      "path": "ecoradar/connectors/connector_icgc_cobertes_sol.py",
+      "bytes": 12310,
+      "sha256": "f0424bed15c1700d6257c78724012a5194c25d122bc8df598f4e3bcef54cf11f"
+    },
+    {
+      "path": "ecoradar/connectors/connector_icgc_dem_mdt.py",
+      "bytes": 9395,
+      "sha256": "ed2a141f4611d86d1cce84fcbb24ad1f2a3da7c227dd06c8226d5c9acd21d47f"
+    },
+    {
+      "path": "ecoradar/connectors/connector_incendis_historial.py",
+      "bytes": 11477,
+      "sha256": "8ebc46bb9f900010c11ad9374c124d6f7fd8a94b64d2a955a2da99c1327f5a3a"
+    },
+    {
+      "path": "ecoradar/connectors/connector_meteocat_xema.py",
+      "bytes": 4581,
+      "sha256": "5a07ed2a9df03b127739dba6d47a139a65592cf6cb537a01dcf4b41505dc456d"
+    },
+    {
+      "path": "ecoradar/connectors/connector_recreational_pressure_osm.py",
+      "bytes": 12124,
+      "sha256": "36f6d10ddfbcaf2fd30398fb62ff7ed681c5a26f5bc3ee08ba65216646d80533"
+    },
+    {
+      "path": "ecoradar/connectors/registry.py",
+      "bytes": 625,
+      "sha256": "60610f76bb679a2397dd863efe5603ed4d49bd62c5828ac30f8867b48d1c953e"
+    },
+    {
+      "path": "ecoradar/core/__init__.py",
+      "bytes": 55,
+      "sha256": "8ea9761445d0807c808ee67d0137acb6632e6e131388e0b9ec30d23b7c0a1a8d"
+    },
+    {
+      "path": "ecoradar/core/context.py",
+      "bytes": 3194,
+      "sha256": "47c1dbf4ecd555564d78dbd023895145319fa5a39abcf394d6437f04e6364da7"
+    },
+    {
+      "path": "ecoradar/core/orchestrator.py",
+      "bytes": 29839,
+      "sha256": "38e89a0d05cbb25286a67315581cc7ff18290c606915d43c207457aef28b9bb3"
+    },
+    {
+      "path": "ecoradar/core/project.py",
+      "bytes": 3044,
+      "sha256": "c5dadc4072f188470ec012575ecb9f9d001b8704ba916ff706b8ac5d1c21c16e"
+    },
+    {
+      "path": "ecoradar/core/study_area.py",
+      "bytes": 6892,
+      "sha256": "e5f81b3affa59f06a5d3a7da7e9d661cd8e49e26c0033dcfa71e74a285410cab"
+    },
+    {
+      "path": "ecoradar/datastore/__init__.py",
+      "bytes": 194,
+      "sha256": "9933fde222ab17c37fde02881a670dade69d228ff55261231b6913178463823a"
+    },
+    {
+      "path": "ecoradar/datastore/project_store.py",
+      "bytes": 5862,
+      "sha256": "9bc9fc86d4534f8240028558d231432f6488fbfcbb22baefb69c5384d696d2c7"
+    },
+    {
+      "path": "ecoradar/diagnosis/__init__.py",
+      "bytes": 169,
+      "sha256": "f2ee60b6b350684757f801c9a91b857efdd3b932410e77694445b3cb453e7212"
+    },
+    {
+      "path": "ecoradar/diagnosis/engine.py",
+      "bytes": 20303,
+      "sha256": "1609e2df09a626db8f7e8f4a4cfee82d75b19fbee0f040658927b6eda5664da9"
+    },
+    {
+      "path": "ecoradar/indicators/__init__.py",
+      "bytes": 332,
+      "sha256": "7d370421b0c5a7dfbc22ae437b78b1a56b83e426da58787ce554d3b0e2c99657"
+    },
+    {
+      "path": "ecoradar/indicators/engine.py",
+      "bytes": 32051,
+      "sha256": "c054179a51d368970905b70c7cefaab7af4b6959e8fee497b1c99bdf793b840e"
+    },
+    {
+      "path": "ecoradar/indicators/library.py",
+      "bytes": 28077,
+      "sha256": "65f8af084a7a77d35c5abdb7ae130789cf1e1b16ee9fde53686e0de2883263be"
+    },
+    {
+      "path": "ecoradar/pipeline.py",
+      "bytes": 885,
+      "sha256": "7bfde9bafab74dc044f400ff2afd98e487392c04675d75b2d6ac9cf8a40a51f8"
+    },
+    {
+      "path": "ecoradar/product/__init__.py",
+      "bytes": 171,
+      "sha256": "3e6bd398a6cc26bb7991e064933c2bd938f790d249466d25f77cb7c8974be8f9"
+    },
+    {
+      "path": "ecoradar/product/fitxa_value.py",
+      "bytes": 7983,
+      "sha256": "be4f4b4a088ae4e3f7912aad05ecea5cdb6fdf18593fa985d9aa3f6af9020954"
+    },
+    {
+      "path": "ecoradar/recommendations/__init__.py",
+      "bytes": 194,
+      "sha256": "3e9a8a57db2f856e9b5930c2e2e7ecdd2a465a630efb4be535864010c15e2a8f"
+    },
+    {
+      "path": "ecoradar/recommendations/engine.py",
+      "bytes": 22762,
+      "sha256": "14b87a3c4fa4ac8b4923124ab984943565e8e83684644e418d81632c4e1e0e57"
+    },
+    {
+      "path": "ecoradar/reporting/__init__.py",
+      "bytes": 42,
+      "sha256": "d8c0acadfa2d3f7757cbf66c582b893229cedf3f3d8a9cba331761210944e285"
+    },
+    {
+      "path": "ecoradar/reporting/client_report_a4-backup-20260721-box3-box8.py",
+      "bytes": 297749,
+      "sha256": "95ff178050a7e01aa746ddb6e91934dc0dae0eb37995f91a05a7cf4f15bd6618"
+    },
+    {
+      "path": "ecoradar/reporting/client_report_a4-backup-20260721-layout.py",
+      "bytes": 297250,
+      "sha256": "a8dfa23f1f03078ea4b2677725c7732b97afbdd67a5d46d0f1ee372ec9d19b2b"
+    },
+    {
+      "path": "ecoradar/reporting/client_report_a4-backup-20260721-management-radar.py",
+      "bytes": 298541,
+      "sha256": "fa03e9db1b53782f651c0181f58341cb22df02a930d38860893b7fd65e135771"
+    },
+    {
+      "path": "ecoradar/reporting/client_report_a4-backup-20260721-marked-review.py",
+      "bytes": 297585,
+      "sha256": "2630045f13585cc52af36531a4f04387b692ac9181be1608bd3f6fd1ad7b942a"
+    },
+    {
+      "path": "ecoradar/reporting/client_report_a4-backup-20260721-panel6-map.py",
+      "bytes": 297761,
+      "sha256": "3e2588ea6fbc25a129042fb89e123d66f12b67a5fc7d85c89d5bed5252a923d8"
+    },
+    {
+      "path": "ecoradar/reporting/client_report_a4-backup-20260721-punctual.py",
+      "bytes": 296061,
+      "sha256": "cf9506b288c1351201c74af8017b3fffe2252adfd228939f33cb254df0045d6b"
+    },
+    {
+      "path": "ecoradar/reporting/client_report_a4-backup-20260721-radar-priority.py",
+      "bytes": 297785,
+      "sha256": "e45c5d39e71e4442255a5cfc7c81af8cb66866448104c8911b14a3861ab512ec"
+    },
+    {
+      "path": "ecoradar/reporting/client_report_a4-backup-20260721-six-axis-radar.py",
+      "bytes": 298770,
+      "sha256": "2a85390b0884a8c814a8cc43cd2ceed441ffd06f01cecd1c3a6f22be5391dc82"
+    },
+    {
+      "path": "ecoradar/reporting/client_report_a4-backup-20260721-urgency-radar.py",
+      "bytes": 298541,
+      "sha256": "fa03e9db1b53782f651c0181f58341cb22df02a930d38860893b7fd65e135771"
+    },
+    {
+      "path": "ecoradar/reporting/client_report_a4.py",
+      "bytes": 299240,
+      "sha256": "ae6df61d0a7518575621076432d489da456caeebd3adae83af28ad217acbe35f"
+    },
+    {
+      "path": "ecoradar/sources/__init__.py",
+      "bytes": 369,
+      "sha256": "503f70da919efc03fb42c8892346bc322d3bb316cb66cc1e9eafb9b3df52bc98"
+    },
+    {
+      "path": "ecoradar/sources/availability.py",
+      "bytes": 17196,
+      "sha256": "c555e46c102552ec4853381b2f86d16204343755e0cb6b6af320dce9814af972"
+    },
+    {
+      "path": "ecoradar/sources/data_source_manager.py",
+      "bytes": 3669,
+      "sha256": "67eadb69398ee6d8f7aa42438cc9b50c2c8922d4481a19115a5bf731c52a956b"
+    },
+    {
+      "path": "ecoradar/sources/mandatory_copernicus.py",
+      "bytes": 4308,
+      "sha256": "7d6ff5dedc30494ca3ebfb354b10e4a4b62708c37c830418e2895f802e253e7e"
+    },
+    {
+      "path": "ecoradar/sources/source_gate.py",
+      "bytes": 3367,
+      "sha256": "e5a19d754fe0ad8f8709dbd3d989eca1c21ef9c4f37cac51694a2c76d3ea8509"
+    },
+    {
+      "path": "ecoradar/validation/__init__.py",
+      "bytes": 186,
+      "sha256": "c70d64278dcd485a36b53dbbe6a84b6bd47844c9006c135e2898ab6cb2ea3580"
+    },
+    {
+      "path": "ecoradar/validation/engine.py",
+      "bytes": 32242,
+      "sha256": "84fb758ab01d0c5e2fa855b4950c8d82b164bb8b3f041e965dc6b675133f5e8b"
+    },
+    {
+      "path": "history/daily_readings_checks.jsonl",
+      "bytes": 281,
+      "sha256": "d2e90e793adea3fd37098023e73c3faa920ba4914c00258be6d3ee6c2b6b9ffa"
+    },
+    {
+      "path": "history/daily_readings_observations.jsonl",
+      "bytes": 1015813,
+      "sha256": "d026d0cb3ef98bc791729761e1429228144f3794740deef10df6add60c9fc9ee"
+    },
+    {
+      "path": "index.html",
+      "bytes": 23216145,
+      "sha256": "e1db198e75ff2644ca9889995950c06b25ce1cec70b612bb087f8c0c94e792d0"
+    },
+    {
+      "path": "metadata/current_fire_danger.json",
+      "bytes": 17509,
+      "sha256": "1b30c357452ab385d39679d57f72f2f920fd2aad50e9f7afdd7ee2dffd390881"
+    },
+    {
+      "path": "metadata/daily_history.json",
+      "bytes": 1411389,
+      "sha256": "a89fd02fb6a3792a0c059f113eed2564f6c9a34d051e6ea34bf8a531f20bd123"
+    },
+    {
+      "path": "metadata/daily_readings.json",
+      "bytes": 8264,
+      "sha256": "f57ab6cabe6c594ecc032ad85913d0434fde01cabcf0cd9ad98c61552829add9"
+    },
+    {
+      "path": "netlify/functions/daily-readings.mjs",
+      "bytes": 4778,
+      "sha256": "f2a9813640d8afcf38dde5427f102d090d15d789e7ea4005dee28d2bda45131c"
+    },
+    {
+      "path": "netlify.toml",
+      "bytes": 539,
+      "sha256": "a3a25bd5304189f033d881659d174673d47643050129f18357cf551b0efe2d69"
+    },
+    {
+      "path": "projectes/Alinya/assets/branding/ecoradar_logo.png",
+      "bytes": 1426971,
+      "sha256": "5ff8ad9696930118f4f5cd3778cd264f3d9f5ec4030f3f855549ebb788fc3c27"
+    },
+    {
+      "path": "projectes/Alinya/assets/branding/green_wolf_nature_logo.png",
+      "bytes": 353162,
+      "sha256": "1483d765ea62cefbd51d2f60fd2239cc94add861b725c53f79b6470dd09ec9ec"
+    },
+    {
+      "path": "projectes/Alinya/assets/branding/green_wolf_nature_logo.svg",
+      "bytes": 369883,
+      "sha256": "b7ac279e928782e502b8cfd616f7363000b2fd2a04dff1b163bfd8442beb3eff"
+    },
+    {
+      "path": "projectes/Alinya/datastore/ecoradar_project.sqlite",
+      "bytes": 12288,
+      "sha256": "cb170d5bb8918e591eec7dbbbb71cf250b85d5a7c7a4326deb4807df79483a08"
+    },
+    {
+      "path": "projectes/Alinya/datastore/project_datastore.json",
+      "bytes": 2820,
+      "sha256": "142bb215cca1cdea102dec8444a06f7bf72aa1648d54185d1322d7603bfdb104"
+    },
+    {
+      "path": "projectes/Alinya/diagnosis/ecoradar_diagnosis.json",
+      "bytes": 16269,
+      "sha256": "8cd78942efdf2b851c52e927c72cfd80f9dc1039feca72daf9fadaff5c6ec46f"
+    },
+    {
+      "path": "projectes/Alinya/history/daily_readings_checks.jsonl",
+      "bytes": 281,
+      "sha256": "d2e90e793adea3fd37098023e73c3faa920ba4914c00258be6d3ee6c2b6b9ffa"
+    },
+    {
+      "path": "projectes/Alinya/history/daily_readings_observations.jsonl",
+      "bytes": 1015813,
+      "sha256": "d026d0cb3ef98bc791729761e1429228144f3794740deef10df6add60c9fc9ee"
+    },
+    {
+      "path": "projectes/Alinya/indicators/biodiversitat_resum.csv",
+      "bytes": 904,
+      "sha256": "febb90deaba45394f555d412e21d862f8688bc0e57d1edba217652662ffa86f6"
+    },
+    {
+      "path": "projectes/Alinya/indicators/cobertes_sol_resum.csv",
+      "bytes": 984,
+      "sha256": "42e11bcb0235600a4b011e8d59851244d29e75d432ad1b4d2f5adc20e2ed722e"
+    },
+    {
+      "path": "projectes/Alinya/indicators/connectivitat_resum.csv",
+      "bytes": 1407,
+      "sha256": "5da89e6d89222d2cfa6ef2e3ff27c954d554f6e059a31ac098196f9def785d17"
+    },
+    {
+      "path": "projectes/Alinya/indicators/contextual_environment.json",
+      "bytes": 1846,
+      "sha256": "77dfedf8cee6542f421793fad4cb1261a5e374e1ba3837c982d7b239f0f80535"
+    },
+    {
+      "path": "projectes/Alinya/indicators/current_fire_danger.json",
+      "bytes": 17509,
+      "sha256": "1b30c357452ab385d39679d57f72f2f920fd2aad50e9f7afdd7ee2dffd390881"
+    },
+    {
+      "path": "projectes/Alinya/indicators/daily_history.json",
+      "bytes": 1411389,
+      "sha256": "a89fd02fb6a3792a0c059f113eed2564f6c9a34d051e6ea34bf8a531f20bd123"
+    },
+    {
+      "path": "projectes/Alinya/indicators/daily_readings.json",
+      "bytes": 8264,
+      "sha256": "f57ab6cabe6c594ecc032ad85913d0434fde01cabcf0cd9ad98c61552829add9"
+    },
+    {
+      "path": "projectes/Alinya/indicators/ecoradar_01_resum.csv",
+      "bytes": 1998,
+      "sha256": "a68afeb2d259229bf75d794de27481d3d0989d966b99d00f3bd93c71ade584fb"
+    },
+    {
+      "path": "projectes/Alinya/indicators/ecoradar_core.csv",
+      "bytes": 6144,
+      "sha256": "efa000a7469e6e5e98c26e1de611e5c7806339e80754cfa42905519d5321e0df"
+    },
+    {
+      "path": "projectes/Alinya/indicators/ecoradar_core.json",
+      "bytes": 10958,
+      "sha256": "d2133c8bc2ac2ae084718e3c0c351aa0ac59f58a10b4d389fee26185bd8c2177"
+    },
+    {
+      "path": "projectes/Alinya/indicators/ecoradar_core_indicators.csv",
+      "bytes": 7352,
+      "sha256": "11ff8a83229364d4ae35f238a1105f4660600d7b510795b57b6f2568ac309d48"
+    },
+    {
+      "path": "projectes/Alinya/indicators/ecoradar_core_indicators.json",
+      "bytes": 12403,
+      "sha256": "edc2f4d85b9fc016b38895dfbc85101581f1c9f5f24f2391c9852409225ab8ff"
+    },
+    {
+      "path": "projectes/Alinya/indicators/ecoradar_fitxa_value_gate.csv",
+      "bytes": 2507,
+      "sha256": "0319ec622020daf4c074fd1884989b4380542868d608d38c3435f42332eb1dfe"
+    },
+    {
+      "path": "projectes/Alinya/indicators/ecoradar_indicators.json",
+      "bytes": 6904,
+      "sha256": "fbb3aab52f35582011cb72cbc24e73fd05deba333564c626b409ec1797b9c09b"
+    },
+    {
+      "path": "projectes/Alinya/indicators/ecoradar_indicators_summary.csv",
+      "bytes": 1276,
+      "sha256": "810c10456ac6bce0ff51b2486234962336cfe5b02c33ca347f6247616295da33"
+    },
+    {
+      "path": "projectes/Alinya/indicators/ecoradar_recommendations.csv",
+      "bytes": 2123,
+      "sha256": "8991d9a5c6cdf33ac7372ff62527db63d6347172ea4e00673b33bb8a70cf8f2c"
+    },
+    {
+      "path": "projectes/Alinya/indicators/habitats_resum.csv",
+      "bytes": 6520,
+      "sha256": "e8c2b23ca7d41835f1b1e4df8860348e878a2dcbae14f2d48a11a63d73a20610"
+    },
+    {
+      "path": "projectes/Alinya/indicators/hidrologia_resum.csv",
+      "bytes": 1103,
+      "sha256": "edb1481b6e7d66eb07bf3426a31cc980650548366863cf355824db11c1f49218"
+    },
+    {
+      "path": "projectes/Alinya/indicators/incendis_resum.csv",
+      "bytes": 190,
+      "sha256": "a804c18079856578a0b08c0cbc826892e26962b9c803e54ef1ce48af03881346"
+    },
+    {
+      "path": "projectes/Alinya/indicators/incendis_similarity/similitud_condicions_resum.csv",
+      "bytes": 152,
+      "sha256": "0f9cb720bb854db628e978d3aa1794078b0cbc7fdaf3d8bc280099d84c01be94"
+    },
+    {
+      "path": "projectes/Alinya/indicators/perill_integrat_ecoradar.json",
+      "bytes": 2568,
+      "sha256": "d4ca2813a0d53a02817ab73117e97f121cc0e4d15e8a41d81c75227ee197b8ae"
+    },
+    {
+      "path": "projectes/Alinya/indicators/recreational_pressure_resum.csv",
+      "bytes": 178,
+      "sha256": "c2e35e7af779d48757a2ccbc823c3c0aa8a57672b3de87893376eb121dd29302"
+    },
+    {
+      "path": "projectes/Alinya/indicators/refugis_climatics_potencials.json",
+      "bytes": 1820,
+      "sha256": "8e1e0193f72af29234fefc6ecd25e4f20b2c842e41a8168f17bf078716273c32"
+    },
+    {
+      "path": "projectes/Alinya/indicators/teledeteccio_satellite_layers.json",
+      "bytes": 1328,
+      "sha256": "b4a53bcd9fbfbfe8fc27c104842da7cc3fdf9e4ed1e630c079ba3fb2ec7f7f3b"
+    },
+    {
+      "path": "projectes/Alinya/indicators/teledeteccio_sentinel2.json",
+      "bytes": 1474,
+      "sha256": "b2aed72d3b7bd3ec662f342c3eb9fa1b47431cd0c91825fd3e8df46167722d14"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/atlas_diagnosi_ecoradar_alinya_a3.pdf",
+      "bytes": 605544,
+      "sha256": "128e5ac9e4b053d46fdf53dec28027fe77ccdfac28dd1a08d0f911b62953449d"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/atlas_diagnosi_ecoradar_alinya_v2_a3.pdf",
+      "bytes": 590500,
+      "sha256": "0df6df5eb2c96cfa967826e4a1b4dc466104115cd32c310aa9e4084b3790e6ff"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/atlas_diagnosi_ecoradar_alinya_v3_a3.pdf",
+      "bytes": 599154,
+      "sha256": "a0477d8dbdbc5c8f1bb213d5e7c8f6ae1f2fcf9d7a6df93b65ba4f6bac285a17"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/diagnosi_ecoradar_alinya.md",
+      "bytes": 9349,
+      "sha256": "055e9a812b546e9e98491fd56e25bfaffd31a32184d78dba724e295678d9462e"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/diagnosi_ecoradar_alinya.pdf",
+      "bytes": 14035,
+      "sha256": "c7edd1bd7b5dc23ca0ae3e2055013b643917b3d4307956de74b616fa612cc030"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/ecoradar_01_resum.md",
+      "bytes": 2652,
+      "sha256": "3e674f5286af9a7fbdf6b3f6d2f25cb460f54f2a588eb8c7ee3e191800fc6439"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/ecoradar_core_resum.md",
+      "bytes": 5194,
+      "sha256": "f59047c3c2b6dff5dbe457a0846ccf67de49144a0b4e330bc049c462cf4dabc8"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/ecoradar_fitxa_value_gate.md",
+      "bytes": 1379,
+      "sha256": "3854e7314a73fbb63a062a586eca7ed66abc2dc9ace11baef6e72226eae31fad"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/ecoradar_recommendations.md",
+      "bytes": 2526,
+      "sha256": "a84a8b1b59a3a7b34f38bd013e7ddcf06c47b7e2298369f83c301d884a933169"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/fitxa_diagnosi_ecoradar_alinya.pdf",
+      "bytes": 121428,
+      "sha256": "08d5e6c4bee2d65abac0f91a83e997a9d0be900080a4d2880ac21f9125be5297"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/informe_diagnosi_ecoradar_alinya.pdf",
+      "bytes": 21196,
+      "sha256": "4e30d53e1eb939b9cea5c03cfc7bf0715f9bbfb74156d259428d64853c8cebcd"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/informe_executiu_ecoradar_alinya.md",
+      "bytes": 1854,
+      "sha256": "f578c933296ccf0cceb3f16a1fe04df9d282c5358764953644c75feae72c86c4"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/informe_executiu_ecoradar_alinya.pdf",
+      "bytes": 121602,
+      "sha256": "3ae096d1a7ef2a7cf42c9d68cbe31c9929169ffdad5143a85eff68b4fedfc4b8"
+    },
+    {
+      "path": "projectes/Alinya/legacy_outputs/reports/informe_professional_ecoradar_alinya.pdf",
+      "bytes": 698839,
+      "sha256": "adfbc112fe2d0991ad6e300c39a6572c2749f7989e71c88a7d4b984c699840fc"
+    },
+    {
+      "path": "projectes/Alinya/maps/README.md",
+      "bytes": 392,
+      "sha256": "197e8f85e83ebe25b64c14d18b85c7667bf483dcce28ff92be1227d6879a92a3"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/README.md",
+      "bytes": 1712,
+      "sha256": "c787ea3d25ddf987a6e152c25ed8d5f39285acdd7f76212618ca0d2ddd591bae"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/THIRD_PARTY_NOTICES.md",
+      "bytes": 302,
+      "sha256": "619a6e72f1edffacad829f1f9524c2b8bdce676cdeac287b43ba8bbd199a1554"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/docs/alinya-daily-readings-source.md",
+      "bytes": 2621,
+      "sha256": "86f81d4ff13c64544a1f100e423b45d3391f551d8747136be5a78eb5485db5b2"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/docs/current-fire-danger-source.md",
+      "bytes": 3909,
+      "sha256": "fa02e8064544bb78cf99fb67013bb8aad31adcb126276c94b2abb777004138de"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/docs/data-sources-matrix.md",
+      "bytes": 11428,
+      "sha256": "3f05b81b425fdf0f040e8ffc02817fe6e0b3275565dc3e65700c9d4353757e2f"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/docs/fire-source.md",
+      "bytes": 1169,
+      "sha256": "e982d1c9cf868636286d46c16efa45d6addd9ee83580e8a85325f601f70d2088"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/history/daily_readings_checks.jsonl",
+      "bytes": 281,
+      "sha256": "d2e90e793adea3fd37098023e73c3faa920ba4914c00258be6d3ee6c2b6b9ffa"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/history/daily_readings_observations.jsonl",
+      "bytes": 1015813,
+      "sha256": "d026d0cb3ef98bc791729761e1429228144f3794740deef10df6add60c9fc9ee"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/index.html",
+      "bytes": 23216145,
+      "sha256": "e1db198e75ff2644ca9889995950c06b25ce1cec70b612bb087f8c0c94e792d0"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/metadata/current_fire_danger.json",
+      "bytes": 17509,
+      "sha256": "1b30c357452ab385d39679d57f72f2f920fd2aad50e9f7afdd7ee2dffd390881"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/metadata/daily_history.json",
+      "bytes": 1411389,
+      "sha256": "a89fd02fb6a3792a0c059f113eed2564f6c9a34d051e6ea34bf8a531f20bd123"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/metadata/daily_readings.json",
+      "bytes": 8264,
+      "sha256": "f57ab6cabe6c594ecc032ad85913d0434fde01cabcf0cd9ad98c61552829add9"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/netlify/functions/daily-readings.mjs",
+      "bytes": 4778,
+      "sha256": "f2a9813640d8afcf38dde5427f102d090d15d789e7ea4005dee28d2bda45131c"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/netlify.toml",
+      "bytes": 539,
+      "sha256": "a3a25bd5304189f033d881659d174673d47643050129f18357cf551b0efe2d69"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/vendor/d3.min.js",
+      "bytes": 279706,
+      "sha256": "f2094bbf6141b359722c4fe454eb6c4b0f0e42cc10cc7af921fc158fceb86539"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_alinya_interactiu-v2.html",
+      "bytes": 23216172,
+      "sha256": "09b5d71f2aaf13e8d45b8b0a24d8e676cd328202cec2233eea57caab761a4add"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/README.md",
+      "bytes": 1304,
+      "sha256": "735b4c41ce8c7104a8bdfc1d5bb48745ded673fa1fd5b482664b6623fc8b19ab"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/biodiversitat_registres.geojson",
+      "bytes": 231452,
+      "sha256": "af666a0e9a29582109378bf6c35cac6a7e47a3ef349d241c50ca2b0b73857477"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/cobertes_sol.geojson",
+      "bytes": 55135208,
+      "sha256": "5d63a4fafa1571639177d9df4f14764220034c0f642145e611aa2b0fb639bd17"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/core_01.md",
+      "bytes": 210,
+      "sha256": "36ef109745b058167198629d44be18b3e3f2cc7a8c358093de6ec0027e045979"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/core_02.md",
+      "bytes": 207,
+      "sha256": "87298d813a6aa4725e1e3d90238762f1081e7ed84893eee0e032aa98c5935b86"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/core_03.md",
+      "bytes": 226,
+      "sha256": "0253c6abdcf5e6d2abd351fb499922e0299050ca1adcce16b4df130adcc6decf"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/core_04.md",
+      "bytes": 208,
+      "sha256": "310f8521df2c49de0420fd07d11495e10903973a43550279fda539a0407cf36e"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/core_05.md",
+      "bytes": 215,
+      "sha256": "d0d2d5c83ec6cba1cae39869c4b78b931d69bd5f193c5c4d85035e18680b70ba"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/core_06.md",
+      "bytes": 213,
+      "sha256": "6e536c7fcc13379ccc51ac629dcb4410671f6ea9cb95a92eca9fb4ebfeaefc4d"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/core_07.md",
+      "bytes": 217,
+      "sha256": "e7583cf7781501bb40724200a10109057fd3b98568e791c441c12fe4022e84a7"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/core_08.md",
+      "bytes": 214,
+      "sha256": "fe687352cebf47f002921d124b3b0d9dbe0346e23ad0519d5026430ade9ce2f1"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/core_09.md",
+      "bytes": 209,
+      "sha256": "a4d88a1879dc0fde445b6a4bed0ae8ce2e4a14c2002ef8772384cf5718d6fd91"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/core_10.md",
+      "bytes": 234,
+      "sha256": "9e2be7dfe32e10bd6431790e04e1aba7feeabbf424a6a24fde8ad02100285b8c"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/core_11.md",
+      "bytes": 229,
+      "sha256": "a60382c5cb01d9f916a7e880d8d917e4fc36aa4f90b5599ce2dc47e66e789afc"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/core_12.md",
+      "bytes": 224,
+      "sha256": "67112bab40392e2a668eeb87bbf62898c87cf99deeb1921a4c79e74f7db7714f"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/habitats_hic.geojson",
+      "bytes": 3924394,
+      "sha256": "3b17257bfda46ac6f485fc25a02f527ea083ab114e0eb48053be727e84485037"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/pressio_humana_osm_camins.geojson",
+      "bytes": 620307,
+      "sha256": "126033c15be673ace0e5a396f49d9b40d02b7002a0bdad017ed8183b34c3ee04"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/pressio_humana_osm_punts.geojson",
+      "bytes": 4336,
+      "sha256": "062ee289ebb365e51f0dc6dcf9a1bd5d56e4d838372977eb91990c9d58a6ac22"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_core/study_area.geojson",
+      "bytes": 250299,
+      "sha256": "46d2298fe6a5967ff0cfc3cbcd81af788e0f3b5f9f4a9288c3a89795b201e36d"
+    },
+    {
+      "path": "projectes/Alinya/maps/ecoradar_memoria_foc_alinya_interactiu.html",
+      "bytes": 1157853,
+      "sha256": "a651d27a164f77138d638546a59981df011f8b0b36fa1a098e37be444d3095ab"
+    },
+    {
+      "path": "projectes/Alinya/maps/incendis/README.md",
+      "bytes": 1642,
+      "sha256": "4563956247e01deeff3bba2a132859409fcdab4638ab1d122c0a2961442f9ff8"
+    },
+    {
+      "path": "projectes/Alinya/maps/incendis/condicions_cobertes_alinya.geojson",
+      "bytes": 17620610,
+      "sha256": "db680f56dbaac9c33854cb5e0bbbe934f471c0f46730584fb741045ede191748"
+    },
+    {
+      "path": "projectes/Alinya/maps/incendis/current_fire_danger.webp",
+      "bytes": 3516,
+      "sha256": "b6dec96b0268efdf84a055cd41bbfe9722fd638c15daeb15a3a9b54a528796a5"
+    },
+    {
+      "path": "projectes/Alinya/maps/incendis/current_fire_danger_cells.geojson",
+      "bytes": 11014910,
+      "sha256": "22a9d6dd3dc8ad0b7f51d589646280897fbe247f760e53000bdb3a3a8e0d1c07"
+    },
+    {
+      "path": "projectes/Alinya/maps/incendis/incendis_historics_alinya_clip.geojson",
+      "bytes": 7435,
+      "sha256": "9baaa37331bd0d50f20b0948a2723f2c37f639e1dd7685905a4c2fd6a228593a"
+    },
+    {
+      "path": "projectes/Alinya/maps/incendis/mapa_incendis_context_alinya.svg",
+      "bytes": 2173310,
+      "sha256": "0c22f7fc69a9044287eaac8de9a6fd1bb1933fb6e9ce7af420616eeee14d22f0"
+    },
+    {
+      "path": "projectes/Alinya/maps/incendis/mapa_incendis_context_alinya.svg.png",
+      "bytes": 524451,
+      "sha256": "5c9605020941dfbacec22fd3abe954a01e743b8fb84cbda2840f72d9bd28d23e"
+    },
+    {
+      "path": "projectes/Alinya/maps/incendis/perill_integrat_ecoradar.webp",
+      "bytes": 4224,
+      "sha256": "2763ea68cb8f7ec20ddbf91698233279c431fd53661829e44bf4dc67425d3f88"
+    },
+    {
+      "path": "projectes/Alinya/maps/incendis_similarity/README.md",
+      "bytes": 1536,
+      "sha256": "185b2557a82ce881c86c0e957c38c10344035feea6943e4a72f890b3203eb23b"
+    },
+    {
+      "path": "projectes/Alinya/maps/incendis_similarity/mapa_similitud_condicions_incendi_alinya.svg",
+      "bytes": 868264,
+      "sha256": "60b2b5dfc52c8ffe846a3001add7ab9fc10c503deab30f9700f8160406dbb732"
+    },
+    {
+      "path": "projectes/Alinya/maps/incendis_similarity/mapa_similitud_condicions_incendi_alinya.svg.png",
+      "bytes": 512138,
+      "sha256": "617887f8eafe2fdf282ae6b25782ad2244f2dc02f59e5262ebd7ba9a73bc2a80"
+    },
+    {
+      "path": "projectes/Alinya/maps/incendis_similarity/similitud_condicions_incendi_alinya.geojson",
+      "bytes": 2582223,
+      "sha256": "2b3314ebe28f61a07c7deb03baeaa1fba98a910551cbe13e2069fb0efb5e087c"
+    },
+    {
+      "path": "projectes/Alinya/maps/producte/mapa_base_alinya.png",
+      "bytes": 24147,
+      "sha256": "2335a8b2333bfec3191e42092f25b1a8dd4ce1204739c1cf7ffebf9137b1db7f"
+    },
+    {
+      "path": "projectes/Alinya/maps/producte/mapa_biodiversitat_alinya.png",
+      "bytes": 35027,
+      "sha256": "66a5dfb7ba7a1c0acf45bcd4cedd4d17fc6ee119a9fb8d1295c2350da64e3b70"
+    },
+    {
+      "path": "projectes/Alinya/maps/producte/mapa_espai_alinya.png",
+      "bytes": 90014,
+      "sha256": "7a4352d0bf6e382c648a2cab57a8a6d19a4ab17d4aa5a75919783d81353a8ddc"
+    },
+    {
+      "path": "projectes/Alinya/maps/producte/mapa_habitats_alinya.png",
+      "bytes": 113839,
+      "sha256": "b63f70b2ed00b5b4ea8edbc908d22a9cb4dcdd8f541df4d90e52281c85c557b0"
+    },
+    {
+      "path": "projectes/Alinya/maps/producte/mapa_paisatge_alinya.png",
+      "bytes": 65702,
+      "sha256": "c1f42ecc2b0a268737bca47d294d67654e86f4e12b07b0d454cce7994bf765fe"
+    },
+    {
+      "path": "projectes/Alinya/maps/producte/mapa_pressio_humana_alinya.png",
+      "bytes": 53881,
+      "sha256": "d9102d9845ec602a1b190710a52a710fafc708bc0a2e17a160c2de7a12a4cdae"
+    },
+    {
+      "path": "projectes/Alinya/maps/producte/mapa_refugis_climatics_alinya.png",
+      "bytes": 188322,
+      "sha256": "3988865ab4ceee633093103c1e12be74b98ce9b51cf1b6f89ab0819549a79483"
+    },
+    {
+      "path": "projectes/Alinya/maps/teledeteccio/albedo.webp",
+      "bytes": 66324,
+      "sha256": "ad5c31e2454f428d35d8cc90c366ae9cad445536ad8fc2af2a28e3ddae136052"
+    },
+    {
+      "path": "projectes/Alinya/maps/teledeteccio/landsat_lst.webp",
+      "bytes": 13796,
+      "sha256": "a42290d42627cbb56702236f62be4f30290d4f3df8eca56cd14c9681e0e7bc13"
+    },
+    {
+      "path": "projectes/Alinya/maps/teledeteccio/ndmi.webp",
+      "bytes": 93272,
+      "sha256": "e0b662931c03b2de012cb0126f641e0feb36412112db9ceab5cdfb5d008fefe3"
+    },
+    {
+      "path": "projectes/Alinya/maps/teledeteccio/ndvi.webp",
+      "bytes": 108838,
+      "sha256": "d66e146c71851def0708e3be5eca7b07d61838cfb3a02afdc5887cd59c8f05ef"
+    },
+    {
+      "path": "projectes/Alinya/maps/teledeteccio/refugis_climatics_potencials.webp",
+      "bytes": 172182,
+      "sha256": "d3d48b396fcbaa4e69bc5adc22baf3db267366fad2ea8bfc0ecfe1a0d5d62631"
+    },
+    {
+      "path": "projectes/Alinya/maps/teledeteccio/vegetation_cover_2023.webp",
+      "bytes": 134970,
+      "sha256": "87ce67b435f68b4e82da7f78c6fbe9952c68ea0355b5cff5caf0b7192c916b96"
+    },
+    {
+      "path": "projectes/Alinya/maps/topografia/relleu_icgc.webp",
+      "bytes": 20654,
+      "sha256": "d982edf4541cea7d215e6c5a004e815468895786dc4dcc4711b2d1a5cf574f79"
+    },
+    {
+      "path": "projectes/Alinya/metadata/biodiversitat_metadata.json",
+      "bytes": 1935,
+      "sha256": "71499a3e34f36cf8d44df6d9562e748f4d720743e25c32937bad699e11a66f37"
+    },
+    {
+      "path": "projectes/Alinya/metadata/cobertes_sol_metadata.json",
+      "bytes": 2281,
+      "sha256": "b998fb580873baf5f781cec83dbb63d8066f76318fe24a3b36a34a624178def2"
+    },
+    {
+      "path": "projectes/Alinya/metadata/connectivitat_metadata.json",
+      "bytes": 3373,
+      "sha256": "d399c3e0e3cbc8ad9295ed52aebedf2a24550b6a1ba395a440c6d28681492dba"
+    },
+    {
+      "path": "projectes/Alinya/metadata/connectors_status_report.json",
+      "bytes": 9855,
+      "sha256": "1feef5048ae4b6e49a0408dd262d17976838fd3c0b18fc45db194e99e43ed0b1"
+    },
+    {
+      "path": "projectes/Alinya/metadata/copernicus_hrl_connector.json",
+      "bytes": 2815,
+      "sha256": "2b1a1c23b51c0c3c6d2ac7f87bafd2488ad920ced6525b1b7c946a9365d5cf67"
+    },
+    {
+      "path": "projectes/Alinya/metadata/current_fire_danger.json",
+      "bytes": 19163,
+      "sha256": "1d4c594730f86c29d36eb9849622d1466f508fe970c92e112867c6b3643c5fbd"
+    },
+    {
+      "path": "projectes/Alinya/metadata/daily_history.json",
+      "bytes": 1411389,
+      "sha256": "a89fd02fb6a3792a0c059f113eed2564f6c9a34d051e6ea34bf8a531f20bd123"
+    },
+    {
+      "path": "projectes/Alinya/metadata/daily_readings.json",
+      "bytes": 8264,
+      "sha256": "f57ab6cabe6c594ecc032ad85913d0434fde01cabcf0cd9ad98c61552829add9"
+    },
+    {
+      "path": "projectes/Alinya/metadata/data_availability_report.json",
+      "bytes": 49841,
+      "sha256": "f645ec82bd3fca7c91bfaae3dc144a7164982eb5d94dce6c99c5e6d164c77264"
+    },
+    {
+      "path": "projectes/Alinya/metadata/data_sources_matrix.csv",
+      "bytes": 11260,
+      "sha256": "c512a8fc56a88cd76f14c5f7558c2b8341bb27923af267af589933a31fd45841"
+    },
+    {
+      "path": "projectes/Alinya/metadata/data_sources_matrix.json",
+      "bytes": 18128,
+      "sha256": "9b6173365220c9e4cfff21ebd96af277064f8a2276827cff63f8925e523b2986"
+    },
+    {
+      "path": "projectes/Alinya/metadata/data_sources_matrix.md",
+      "bytes": 11428,
+      "sha256": "3f05b81b425fdf0f040e8ffc02817fe6e0b3275565dc3e65700c9d4353757e2f"
+    },
+    {
+      "path": "projectes/Alinya/metadata/diagnosis_engine_report.json",
+      "bytes": 919,
+      "sha256": "49ec3882aee197caf240567b64974f459aa51e64acb0b6d48cc0e1dccbb5bf94"
+    },
+    {
+      "path": "projectes/Alinya/metadata/ecoradar_01_metadata.json",
+      "bytes": 2262,
+      "sha256": "0beb49c0ef5639a39cdef3ea7abbe571ccfaea249c2f0aff2cc72745869fafb4"
+    },
+    {
+      "path": "projectes/Alinya/metadata/ecoradar_atlas_a3_metadata.json",
+      "bytes": 4059,
+      "sha256": "9ff25b8afc165f22ebe2e4a8649808414dcf03708215753945e488e0c1e3bfd2"
+    },
+    {
+      "path": "projectes/Alinya/metadata/ecoradar_atlas_v2_metadata.json",
+      "bytes": 1233,
+      "sha256": "50a37df6c66574793b22ac6466c845899f274ee6c35a901f7b2aec770bff8be7"
+    },
+    {
+      "path": "projectes/Alinya/metadata/ecoradar_atlas_v3_metadata.json",
+      "bytes": 1343,
+      "sha256": "aa0211051afb2fe18346458fa4d8747f62c69c9c9c5777c89a3a24ca797d9ebf"
+    },
+    {
+      "path": "projectes/Alinya/metadata/ecoradar_core_metadata.json",
+      "bytes": 4576,
+      "sha256": "bcd04211da8d1e58151f90461fde6105f7f6fc3c8e74e75b9a58d08f018900ea"
+    },
+    {
+      "path": "projectes/Alinya/metadata/ecoradar_diagnosis.json",
+      "bytes": 9888,
+      "sha256": "2b6b097635474ff1b7b1d6fced069195fd6c63ca9e2f3f9bce1dfb0ad07e9df2"
+    },
+    {
+      "path": "projectes/Alinya/metadata/ecoradar_diagnosis_run_metadata.json",
+      "bytes": 2740,
+      "sha256": "94ba2af276d8de0a7585a6da65fbfc2673cc00b0272371ade8d3d54ef96afac8"
+    },
+    {
+      "path": "projectes/Alinya/metadata/ecoradar_execution_report.json",
+      "bytes": 6224,
+      "sha256": "3415f70b3a69e2e7f42328fa1acb43073c76398de33c7b97e2a0064caba645bc"
+    },
+    {
+      "path": "projectes/Alinya/metadata/ecoradar_fitxa_value_gate.json",
+      "bytes": 4494,
+      "sha256": "bd1e8eb5754aa7544dd12a6a14bab37d07521ce16661dcfa3cd193376d624921"
+    },
+    {
+      "path": "projectes/Alinya/metadata/ecoradar_indicators_metadata.json",
+      "bytes": 1247,
+      "sha256": "d0f17810bf320ba6d4613cf5ac61a4a4ecda13016440f9e1ad4bf053b218fe34"
+    },
+    {
+      "path": "projectes/Alinya/metadata/ecoradar_product_metadata.json",
+      "bytes": 1342,
+      "sha256": "b4c0162d37aa23c44c8749286b5d28216c3a78706749461f1468825ef32436f1"
+    },
+    {
+      "path": "projectes/Alinya/metadata/ecoradar_recommendations.json",
+      "bytes": 3341,
+      "sha256": "629bb1c2fa522facff7589f10ad23c8bac315cc7b68d53fe6c0f63e454057dfd"
+    },
+    {
+      "path": "projectes/Alinya/metadata/habitats_metadata.json",
+      "bytes": 1605,
+      "sha256": "fd3f0273c681140722a9c5990bca8f67bbd7060e200580ad79cfa8dd8b269132"
+    },
+    {
+      "path": "projectes/Alinya/metadata/hidrologia_metadata.json",
+      "bytes": 3619,
+      "sha256": "b8063a1f43e527c2cb14238cfe864bd8283902840e6ae5fee63ccf2f8f89db44"
+    },
+    {
+      "path": "projectes/Alinya/metadata/incendis/mapa_incendis_context_alinya_metadata.json",
+      "bytes": 1935,
+      "sha256": "e851a2638298744681b3d83e3b54ad81edb0d80a736235fd637216ccff23ceb4"
+    },
+    {
+      "path": "projectes/Alinya/metadata/incendis_metadata.json",
+      "bytes": 1985,
+      "sha256": "230350f7fefd478590b6a92aa3b487c70b3da178e6b8e252203d2209c03d2aa0"
+    },
+    {
+      "path": "projectes/Alinya/metadata/incendis_similarity/similitud_condicions_incendi_alinya_metadata.json",
+      "bytes": 3969,
+      "sha256": "cfc16983b2f272799e8cd632e4d5decd40f58c6d7142e1ee487018d11b713924"
+    },
+    {
+      "path": "projectes/Alinya/metadata/indicator_engine_report.json",
+      "bytes": 1022,
+      "sha256": "407e8dfd9e3ccb12f40f34c8ba86a5233a94c3e2885973a3bdbff8dfc3196fe0"
+    },
+    {
+      "path": "projectes/Alinya/metadata/indicators_completeness_report.json",
+      "bytes": 14137,
+      "sha256": "c5254d27e4e523cf95b18f6902483885a1da8da38f716ebaaa4e40eb38811bd6"
+    },
+    {
+      "path": "projectes/Alinya/metadata/landsat_connector.json",
+      "bytes": 5884,
+      "sha256": "1b80b8a8cab9b92dbef017aa2394d37a4e1240f8d6124cab27ea97b77eb6a2ab"
+    },
+    {
+      "path": "projectes/Alinya/metadata/perill_integrat_ecoradar.json",
+      "bytes": 2568,
+      "sha256": "d4ca2813a0d53a02817ab73117e97f121cc0e4d15e8a41d81c75227ee197b8ae"
+    },
+    {
+      "path": "projectes/Alinya/metadata/recreational_pressure_metadata.json",
+      "bytes": 1325,
+      "sha256": "d67e36a84e6619739e4c3ab8dcead79c9bad6ee608b6720acd1cbc928acaa124"
+    },
+    {
+      "path": "projectes/Alinya/metadata/relleu_base_icgc_osm.json",
+      "bytes": 808,
+      "sha256": "2088d37166aed292f000998d29f6b4cf10cdb984bf701ed4ae70a9241cf09b7d"
+    },
+    {
+      "path": "projectes/Alinya/metadata/sentinel2_cdse_connector.json",
+      "bytes": 1652,
+      "sha256": "047acf26ee9f5a16b7cee86d301341739f8e60a0f5e0d53bfd7769170306d0ac"
+    },
+    {
+      "path": "projectes/Alinya/metadata/study_area_metadata.json",
+      "bytes": 663,
+      "sha256": "5140c3925c433c2faff0646fe800742ff7934c9804ea07bc7235e218e472c3e2"
+    },
+    {
+      "path": "projectes/Alinya/metadata/teledeteccio_metadata.json",
+      "bytes": 1717,
+      "sha256": "2113f8779dbb3acb8b36d6edc669728048b4e95c2a876faf7b4a0ec91bfe4f37"
+    },
+    {
+      "path": "projectes/Alinya/metadata/terrain_metadata.json",
+      "bytes": 1824,
+      "sha256": "69acad15dd55a5d6efbf1d9c16a1756ec2b5b82bf01a1f40c26ccd9f269b9dde"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_aca_hidrologia_validation.json",
+      "bytes": 815,
+      "sha256": "99dda652f1a4c79da4a459f0460039f412c6a92d571b4fde7c9880d80f795908"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_aemet_validation.json",
+      "bytes": 520,
+      "sha256": "6b0bf481c8a40feac56cf3579bffac97412c5eb4996417becba69793ce91d45d"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_bdbc_validation.json",
+      "bytes": 538,
+      "sha256": "691e13eef42ee9c4b26dd2579d156593064552538d58e68fd301aebaec7a4a98"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_connectivitat_ecologica_validation.json",
+      "bytes": 678,
+      "sha256": "f44e20bbf361b113b113f971132cf0711554d4a19a424edea659d084f7b8236f"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_copernicus_credentials_gate_validation.json",
+      "bytes": 733,
+      "sha256": "c9a2abf7af7248a64cc365efb64fb2549c26907cedd49cb805261d0ee03a102c"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_copernicus_teledeteccio_validation.json",
+      "bytes": 3926,
+      "sha256": "15b97904c4825bc8866a52e24accbec33721b2b4d00e7cacc2cce770ca2e3167"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_fieldwork_importer_validation.json",
+      "bytes": 486,
+      "sha256": "7e64fb230bb57469964288246ccb094b7e5aaa05387b734d1817e471704a3504"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_fuel_structure_validation.json",
+      "bytes": 753,
+      "sha256": "7576d5a9427aa3fa74f090006452df9a4d308e195c1772f28f881a3ef68ac34a"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_icgc_base_cartography_validation.json",
+      "bytes": 728,
+      "sha256": "d6d03141fdee820ee00ddd2f761e34d9a99b48184a8a080316a03fd93b156ec9"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_icgc_dem_mdt_validation.json",
+      "bytes": 774,
+      "sha256": "a26dff5b4d1ebf9b6393d3e9c0007e807b73b589cfe3695d139e4e7b74c43f4b"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_incendis_historial_validation.json",
+      "bytes": 799,
+      "sha256": "9c7ddec2e4acec19c3824c25d600692d6a249970af845e5684da9cb14fc0e39c"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_mcsc_validation.json",
+      "bytes": 580,
+      "sha256": "f2efb4601929477da45e21e0c7f7c04413e04d9db9a0834fc3159d94fb3cfb18"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_meteocat_validation.json",
+      "bytes": 553,
+      "sha256": "34232df15ff0637dd8159f0859d942c835c5da2b0137535cd0d61b7218abda74"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_sigpac_validation.json",
+      "bytes": 681,
+      "sha256": "06a7989ad56767c7556da6cd4add85e8cd432f246931fccae68c618e7afe1b83"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_spei_validation.json",
+      "bytes": 587,
+      "sha256": "3a5e40a2393a11479780e5f3f91f3bb9990c7aedf882a72f75ffc5d254b04951"
+    },
+    {
+      "path": "projectes/Alinya/metadata/validations/connector_strava_heatmap_validation.json",
+      "bytes": 571,
+      "sha256": "ea2f3fa23c045d4c153d5a74e1e2b621cb24d1d2399596c9e00e9c26d3faef8e"
+    },
+    {
+      "path": "projectes/Alinya/processed/biodiversitat.gpkg",
+      "bytes": 348160,
+      "sha256": "98a49b744540b90ec74d067c922a6fd714e2033bb6741cdee79e77e39f8fd138"
+    },
+    {
+      "path": "projectes/Alinya/processed/cobertes_sol.gpkg",
+      "bytes": 39473152,
+      "sha256": "ce0a21edc335c4c6475d1e2ebeb39969902081f25ef834ad597feb9e0e3c9bf5"
+    },
+    {
+      "path": "projectes/Alinya/processed/connectivitat.gpkg",
+      "bytes": 372736,
+      "sha256": "b7cf8502f4899adae14c3cd8fc897acf30782b65a32cbe4923313b61e61aad97"
+    },
+    {
+      "path": "projectes/Alinya/processed/copernicus_hrl/herbaceous_cover_2023.tif",
+      "bytes": 48287,
+      "sha256": "6601c16e1657957c2b91c3a33a446ef1f1a275bc72071388400a313bf5b46a60"
+    },
+    {
+      "path": "projectes/Alinya/processed/copernicus_hrl/tree_cover_density_2023.tif",
+      "bytes": 586875,
+      "sha256": "6a9611cdfbdbfd0ec705e67d2cb1e44de1fe13d40bbbd7080d58d4cdc46c4c16"
+    },
+    {
+      "path": "projectes/Alinya/processed/habitats.gpkg",
+      "bytes": 1970176,
+      "sha256": "8eed157e86ffc6785d097e9b785ced8469e9c43ad4dd381f7b1d9fa2189a5a98"
+    },
+    {
+      "path": "projectes/Alinya/processed/hidrologia.gpkg",
+      "bytes": 143360,
+      "sha256": "16e42cc2947b9a10fc7084aea4eb88902b757fd2645be87c7f0f414ce2ffd8af"
+    },
+    {
+      "path": "projectes/Alinya/processed/incendis/accessos_osm_alinya.gpkg",
+      "bytes": 339968,
+      "sha256": "85a55ccc454d2a699513a60ea1be202f8d12c463520e5ef02dad60df10545bfd"
+    },
+    {
+      "path": "projectes/Alinya/processed/incendis/condicions_cobertes_alinya.gpkg",
+      "bytes": 10719232,
+      "sha256": "8b0973fb2bf1fd95cc006dab2da62a3b24402cfae0681d472edeffbb04ce73d3"
+    },
+    {
+      "path": "projectes/Alinya/processed/incendis/current_fire_danger/current_fire_danger_0_100.tif",
+      "bytes": 20959,
+      "sha256": "c93070e72b03132f6c2df585c06eff0d22eb9609b4e0b5a774fb1372f743c1d6"
+    },
+    {
+      "path": "projectes/Alinya/processed/incendis/incendis_historics_alinya_clip.gpkg",
+      "bytes": 98304,
+      "sha256": "bdb9eda566741dec99704b7e6955f0bc54705ce456c4b2e8f84696e58be8074b"
+    },
+    {
+      "path": "projectes/Alinya/processed/incendis/perill_integrat_ecoradar.tif",
+      "bytes": 20697,
+      "sha256": "6f48da7fcac64fd42788685d57d09cc6cad9b19bfd6be0988fe7880b7b3b1266"
+    },
+    {
+      "path": "projectes/Alinya/processed/incendis.gpkg",
+      "bytes": 98304,
+      "sha256": "6fc9691448dff3ef43bee40f199269355558938fdc3a02a9caff52c29201cb04"
+    },
+    {
+      "path": "projectes/Alinya/processed/incendis_similarity/incendis_historics_amb_condicions.gpkg",
+      "bytes": 98304,
+      "sha256": "11383025140705b613d800e843f9664a7dc544f65aac418d07b28127c68eac81"
+    },
+    {
+      "path": "projectes/Alinya/processed/incendis_similarity/orientacio_icgc_derived_alinya.tif",
+      "bytes": 16756657,
+      "sha256": "e3f830ffd7e53e17c2068ac3fb1de35acd2f03a3c5d36b24b2e3a4d63b5f402c"
+    },
+    {
+      "path": "projectes/Alinya/processed/incendis_similarity/pendent_icgc_derived_alinya.tif",
+      "bytes": 17357565,
+      "sha256": "cf03d6a3f056fa2331ae22be41b4a0f2bf66afb5b344bfee581ee84a9bcadf29"
+    },
+    {
+      "path": "projectes/Alinya/processed/incendis_similarity/similitud_condicions_incendi_alinya.gpkg",
+      "bytes": 1048576,
+      "sha256": "4a1efe8e1f16f273d1055e0fb0caeb585bd2f20b4e111e13dc1d92cc6ff30416"
+    },
+    {
+      "path": "projectes/Alinya/processed/landsat/landsat_lst.tif",
+      "bytes": 207409,
+      "sha256": "03982eb31fbcf702ab9de96550fdfea78a3c82cf09a8c9883b084af72316eaa6"
+    },
+    {
+      "path": "projectes/Alinya/processed/recreational_pressure.gpkg",
+      "bytes": 356352,
+      "sha256": "41c4efa93eb06b1219e3398e6e025774cc97a155bb3c05d4decc7e436212992f"
+    },
+    {
+      "path": "projectes/Alinya/processed/study_area.gpkg",
+      "bytes": 172032,
+      "sha256": "1f2ed57810461a8446ab40b19893dcfcc1316ea118ee63dd49e2ff520cd9aacd"
+    },
+    {
+      "path": "projectes/Alinya/processed/teledeteccio/albedo.tif",
+      "bytes": 384620,
+      "sha256": "f9bbaa70ed4775c3c9765e3ae594cedd28fe1284ed8f35824f25f1884f0b3318"
+    },
+    {
+      "path": "projectes/Alinya/processed/teledeteccio/ndmi.tif",
+      "bytes": 450532,
+      "sha256": "1782fecdddd7ab2a5b48485189407202dd15c545a97129a0c610b1b648654e32"
+    },
+    {
+      "path": "projectes/Alinya/processed/teledeteccio/ndvi.tif",
+      "bytes": 480762,
+      "sha256": "555cf277b6644129c326c66165a43b47230b69e78118d94dc02afe369e7882cb"
+    },
+    {
+      "path": "projectes/Alinya/processed/teledeteccio/refugis_climatics_potencials.tif",
+      "bytes": 1231665,
+      "sha256": "2c15d960a86067646b18e6affdb45f5569a29f66bb43909cfa24793bbb621978"
+    },
+    {
+      "path": "projectes/Alinya/processed/teledeteccio/vegetation_cover_2023.tif",
+      "bytes": 64298,
+      "sha256": "4a0100b8acfb82c6366152b59b90b4f555d992888dc2680f35eebdc71cb597f4"
+    },
+    {
+      "path": "projectes/Alinya/processed/terrain/aspect.tif",
+      "bytes": 7219826,
+      "sha256": "c6204e23a54fc4461505d6a865e3575524908c6144d38a49e8239a3afe7f20a1"
+    },
+    {
+      "path": "projectes/Alinya/processed/terrain/dem.tif",
+      "bytes": 4016880,
+      "sha256": "4857dcd7a18a02cfc43d554f4ba73548737e93e99a026251830942e3faac0185"
+    },
+    {
+      "path": "projectes/Alinya/processed/terrain/northness.tif",
+      "bytes": 7506034,
+      "sha256": "f5f23e38d1683a00bbfdcca929aa4000884a567e80af551ce52452a46b78993c"
+    },
+    {
+      "path": "projectes/Alinya/processed/terrain/slope.tif",
+      "bytes": 7480519,
+      "sha256": "4a31f633947f6ec9b918c8258abf0b327fdf856f645547ac2f590b3f28d163f8"
+    },
+    {
+      "path": "projectes/Alinya/processed/terrain/solana_obaga.tif",
+      "bytes": 245675,
+      "sha256": "ba030465b28f225c70def7ce2c3b24abffd5078186c9179e9e217cf40d54a946"
+    },
+    {
+      "path": "projectes/Alinya/raw/biodiversitat/gbif_raw.json",
+      "bytes": 6273146,
+      "sha256": "04f125d1848953b08eb180ae44a10a8930b76ad788025ba72c7b2dbda859de95"
+    },
+    {
+      "path": "projectes/Alinya/raw/biodiversitat/inaturalist_raw.json",
+      "bytes": 53195421,
+      "sha256": "52cf6f6a4519c6ca0873f4fbf0b9e6f5822ec45eb8b447ceb8e4bbf673a48375"
+    },
+    {
+      "path": "projectes/Alinya/raw/cams/pm25_context_2026-07-23.txt",
+      "bytes": 271,
+      "sha256": "8616b0bbe462cae89863cf4c47d7e5cc539bf17b0b138239f323cb2be6678f62"
+    },
+    {
+      "path": "projectes/Alinya/raw/connectivitat/connectivitat_terrestre_index.geojson",
+      "bytes": 8515665,
+      "sha256": "1790efff16f146805650822fac36403c51d1795bad596ce774cda2caa3a8d91a"
+    },
+    {
+      "path": "projectes/Alinya/raw/connectivitat/connectors_fluvials_complementaris.geojson",
+      "bytes": 4312,
+      "sha256": "abaf1b8980c1cbc60661219d87c3c727d06a21bd67dd0a11656058975195c87d"
+    },
+    {
+      "path": "projectes/Alinya/raw/connectivitat/connectors_fluvials_principals.geojson",
+      "bytes": 60386,
+      "sha256": "3cde163c3ee3b02305928dc45c6b261769bef26576563ff517004439ab5b6a8e"
+    },
+    {
+      "path": "projectes/Alinya/raw/connectivitat/connectors_terrestres_complementaris.geojson",
+      "bytes": 1041,
+      "sha256": "ad9d680e82f1e82f7f998ccdff6eb9e77338471318255d7ba99fef8cc7aceee2"
+    },
+    {
+      "path": "projectes/Alinya/raw/connectivitat/connectors_terrestres_principals.geojson",
+      "bytes": 4664,
+      "sha256": "42125d97d55d211d9ca0b387eb1bf8b55c15ed7924f3e1ff0bf72d382d80a69b"
+    },
+    {
+      "path": "projectes/Alinya/raw/connectivitat/zones_connectors_infraestructura_verda.geojson",
+      "bytes": 146198,
+      "sha256": "d0b16c36273668193c0330b26d9bdb1a3dc7ccb9ae6d114b0858f15ce2020c6a"
+    },
+    {
+      "path": "projectes/Alinya/raw/copernicus_hrl/herbaceous_cover_2023.tif",
+      "bytes": 1430048,
+      "sha256": "0f535dfd68c7f91a2570177a6379b0ee4c533c980eb6f5b177c5ab189ff803a9"
+    },
+    {
+      "path": "projectes/Alinya/raw/copernicus_hrl/tree_cover_density_2023.tif",
+      "bytes": 1430048,
+      "sha256": "9331abfb18c83d134e01113124b0ba817e612d6a04f93a244d931a29689a5ec1"
+    },
+    {
+      "path": "projectes/Alinya/raw/habitats/habitats_terrestres_v3_alinya_bbox.geojson",
+      "bytes": 8600842,
+      "sha256": "749d00fc412e1e67415c7a74d8af4c5ff4fb7bbaea74179d7398ddd24d04d390"
+    },
+    {
+      "path": "projectes/Alinya/raw/hidrologia/eixos_drenatge.geojson",
+      "bytes": 26523,
+      "sha256": "5b2a5e65c41a12571ffdb14dc99ad9b2627edbcf4c37552a66e98f4f0c60cbc8"
+    },
+    {
+      "path": "projectes/Alinya/raw/hidrologia/estanys.geojson",
+      "bytes": 147,
+      "sha256": "96aeba4dab45c79bda5b012246f836925bee4248fa44a35f69eb96d3316b0081"
+    },
+    {
+      "path": "projectes/Alinya/raw/hidrologia/fonts.geojson",
+      "bytes": 11720,
+      "sha256": "c09c812a8198d60730d5e002a41f3d4ecceb8ceafdb866d85795a502bad33838"
+    },
+    {
+      "path": "projectes/Alinya/raw/hidrologia/masses_rius.geojson",
+      "bytes": 48403,
+      "sha256": "ea1ca7962dee78f93fa4aa867f6697a672d0a9016d8764331846f5c355799451"
+    },
+    {
+      "path": "projectes/Alinya/raw/hidrologia/preses_basses.geojson",
+      "bytes": 147,
+      "sha256": "173ce33130d6da6a3f37f92732c4e64ed2f6270937da56a6e0a415c60eafc3a9"
+    },
+    {
+      "path": "projectes/Alinya/raw/hidrologia/rius_aca_che.geojson",
+      "bytes": 253385,
+      "sha256": "e7f63fde692240e08b3c87e1e8405c5c42ca36e0404af7fd8e293b1b35530223"
+    },
+    {
+      "path": "projectes/Alinya/raw/hidrologia/zones_humides_estanys.geojson",
+      "bytes": 147,
+      "sha256": "3afad7a8d75bf85350feba53ee81e1f1ffae5a267ff83fe68a11aeabfaa2050d"
+    },
+    {
+      "path": "projectes/Alinya/raw/incendis/bombers_figols_alinya_incendis_2026.json",
+      "bytes": 435,
+      "sha256": "0141ab3ed7d50fe6ac7963fa89e591a994a8f0b9d32793858435ec4b917854a4"
+    },
+    {
+      "path": "projectes/Alinya/raw/incendis/bombers_llinars_incendis_vegetacio_2026.json",
+      "bytes": 452,
+      "sha256": "d2d9a83eafe5dead3b372087e4eb0d7af45d7a36b9b857397a3a75faac2073df"
+    },
+    {
+      "path": "projectes/Alinya/raw/incendis/bombers_oden_incendis_2026.json",
+      "bytes": 2054,
+      "sha256": "ec14c00cf12e9f7c76a20cb3c97e9c3af991c873d05810c2c9c9ca030cd88337"
+    },
+    {
+      "path": "projectes/Alinya/raw/incendis/effis_drf_datasets.json",
+      "bytes": 14095,
+      "sha256": "85c56d8e470f40b20039c088be259ec2fb1c59b92f9a9f8bd9c7c3f52ebcd7a1"
+    },
+    {
+      "path": "projectes/Alinya/raw/incendis/mapasdeincendios_effis_cataluna_2026_20260717.json",
+      "bytes": 66174,
+      "sha256": "dffccc4be4c93fbce8a7e6bf99a4545f217167e96f52a09fb83ed5d49bac353d"
+    },
+    {
+      "path": "projectes/Alinya/raw/incendis/mapasdeincendios_fires_cataluna_20260717.json",
+      "bytes": 2277,
+      "sha256": "1f2908cc7f99ae8a5cb129c8df11bd05e36f130a105d5bcc60bafdeddd1460a5"
+    },
+    {
+      "path": "projectes/Alinya/raw/incendis/mapasdeincendios_hotspots_cataluna_20260717.json",
+      "bytes": 30335,
+      "sha256": "c593d9e7a6cc252d0069c6985b1afea4074da1c944546a597f7ade55e3198a27"
+    },
+    {
+      "path": "projectes/Alinya/raw/incendis/perill_basic_2024/PERILLBASICINCENDI.tif",
+      "bytes": 3621020,
+      "sha256": "7f4636ba502a7d3abe075aacbc66748a8fd93a2e72600bef7e9ccde13f746474"
+    },
+    {
+      "path": "projectes/Alinya/raw/incendis/vegetacio_incendis_alinya_bbox.geojson",
+      "bytes": 8461,
+      "sha256": "cdb3cc486999e7a6f91283aed2ecd047896fb6ed626ccb00bcdf8625def33e68"
+    },
+    {
+      "path": "projectes/Alinya/raw/meteocat_xema/Y4_metadata.json",
+      "bytes": 994,
+      "sha256": "fd6237ee33a0fc1e7280138f3f7e3d6fe83282f19db04a56eeaa7d2e0b6dcccf"
+    },
+    {
+      "path": "projectes/Alinya/raw/meteocat_xema/Y4_observations.csv",
+      "bytes": 183672,
+      "sha256": "54d2b5ccd274a8075c71e59e49135246764ee0b80e82d594680816c7ff217aec"
+    },
+    {
+      "path": "projectes/Alinya/raw/recreational_pressure/overpass_osm_raw.json",
+      "bytes": 1764208,
+      "sha256": "dcca381f3e03bdc2a951995dfe02762d1632b18389f9de3d1507a5ddecfce22c"
+    },
+    {
+      "path": "projectes/Alinya/raw/sentinel2_cdse/S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508_analytical_uint8.tif",
+      "bytes": 11369453,
+      "sha256": "a2ba776617842c161ab73e0c7ed8647d92bc9a906955f7566433288cdac008c8"
+    },
+    {
+      "path": "projectes/Alinya/raw/terrain/icgc_dem_5m_alinya_window.tif",
+      "bytes": 8987014,
+      "sha256": "d0da4a411d78d732c5fecafaf1dca884055a03a3e76e3a5bfd267880172d7dda"
+    },
+    {
+      "path": "projectes/Alinya/recommendations/priority_matrix.csv",
+      "bytes": 7812,
+      "sha256": "da545880339e30c0a36167f401dc1e90a0e9d0f870918ff766892296dcbe9318"
+    },
+    {
+      "path": "projectes/Alinya/recommendations/priority_matrix.json",
+      "bytes": 12903,
+      "sha256": "7b8804b290a308a6fa30986a99cb0e4eb97ade92c3a3232800def7263ee88053"
+    },
+    {
+      "path": "projectes/Alinya/recommendations/recommendations.json",
+      "bytes": 13159,
+      "sha256": "2e7cbb8877c1ffcc8d32b6b1abf3dfe4befce82351b9a359d8b8ed797857352b"
+    },
+    {
+      "path": "projectes/Alinya/recommendations/recommendations.md",
+      "bytes": 8850,
+      "sha256": "3d16b3984d7c4eda0f39938d2a55919353857f34598133bc2e3a535717e49396"
+    },
+    {
+      "path": "projectes/Alinya/reports/fitxa_ecoradar_alinya_v1.pdf",
+      "bytes": 2176447,
+      "sha256": "5d141a3968dffb732e24b05607a86d30f887bc82c29b903958a4b46a7a8b02ad"
+    },
+    {
+      "path": "projectes/Alinya/reports/informe_complet_muntanya_alinya.pdf",
+      "bytes": 5657546,
+      "sha256": "b81b57e3bfd52e0577940eb8d952d0ab859b4ffff1e5e0934e43a0d0dc2925ab"
+    },
+    {
+      "path": "projectes/Alinya/validation/ecological_validation.json",
+      "bytes": 6071,
+      "sha256": "263f113e2799057f11acb968e2585a09e014b17f149b9accd2594c77fd960470"
+    },
+    {
+      "path": "projectes/Alinya/validation/field_validation_checklist.csv",
+      "bytes": 2291,
+      "sha256": "a724efb0d925eecdae126506239851619362ebd67eaff39302630abe050685ef"
+    },
+    {
+      "path": "projectes/Alinya/validation/recommendations_validation.json",
+      "bytes": 1848,
+      "sha256": "bc7d09245e6013af04c79d8c7c703f6b447bdb06f725145e1ee589fa28e578ce"
+    },
+    {
+      "path": "projectes/Alinya/validation/technical_validation.json",
+      "bytes": 5161,
+      "sha256": "331f3253863548ba9dcdcf73919a31d6a6445ec1ad431c5ac3520b682ff59733"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 797,
+      "sha256": "93c2b8242f1cd96c4391ba4d5825a3255cafab742db31c945055202c11ca8e89"
+    },
+    {
+      "path": "tests/js/test-daily-readings-api.mjs",
+      "bytes": 2131,
+      "sha256": "9b02ac61d2763f92ebbb14ee1f5d1c15c4fa766c686b065023967b1f2bc5d68f"
+    },
+    {
+      "path": "tests/test_connectors.py",
+      "bytes": 719,
+      "sha256": "1fe834e9dc43e2f4595ce317836b35f958d07bf478515bd6a5010b159a799abe"
+    },
+    {
+      "path": "tests/test_core_analysis.py",
+      "bytes": 960,
+      "sha256": "5ac2191e84b2630985c8a75693bb83acce5c120fd68afc397dd726fff726dd13"
+    },
+    {
+      "path": "tests/test_data_source_manager.py",
+      "bytes": 1254,
+      "sha256": "723490436be20f8b54dafedd176b7db5a539c8f9de3cebed3afb0e66f1e4e2fb"
+    },
+    {
+      "path": "tests/test_diagnosis_engine.py",
+      "bytes": 432,
+      "sha256": "1e81c28e0af2d23b2bad7d2d48501d469b74a217097fd3796373edc7e72ee66d"
+    },
+    {
+      "path": "tests/test_indicator_engine.py",
+      "bytes": 433,
+      "sha256": "df0c45453588f31a43d62ba833601a97eb60f070d1a983cdef634a5e9092e95f"
+    },
+    {
+      "path": "tests/test_indicator_library.py",
+      "bytes": 1753,
+      "sha256": "217346b8b9abb61e3c23554cb295c9fa26be896b0e455c6e01213b48b03bb43e"
+    },
+    {
+      "path": "tests/test_orchestrator.py",
+      "bytes": 894,
+      "sha256": "02f880a4ac2956f66059cfaf15c7de829df78cd204a1689d5433a5afd9180e2b"
+    },
+    {
+      "path": "tests/test_platform_integration.py",
+      "bytes": 3091,
+      "sha256": "bd85f8bffe9b4b0e5b488bb900fea2bf2623c0256e148b0d52262d1eb216e8e8"
+    },
+    {
+      "path": "tests/test_prepare_contract.py",
+      "bytes": 294,
+      "sha256": "4cf303f194e7e5abfb763f8b1e0e40e6244ce16c626d7faf2d760fcc4e395d03"
+    },
+    {
+      "path": "tests/test_project.py",
+      "bytes": 1311,
+      "sha256": "cf807f373dadbd1895adecbcbd7d5c3caa63a5998e331249c97469b51c7e47c1"
+    },
+    {
+      "path": "tests/test_recommendation_engine.py",
+      "bytes": 449,
+      "sha256": "f2d82683742c09fdea1d01e0acd33d41cde6ff58214b72fb2c5f7d99b94f22b1"
+    },
+    {
+      "path": "tests/test_study_area.py",
+      "bytes": 377,
+      "sha256": "0bf1884ab8caade02ea9b07bb8082c569aaef9bb4bbb1eac049695a3c77adaa6"
+    },
+    {
+      "path": "tests/test_validation_engine.py",
+      "bytes": 561,
+      "sha256": "e8b45eeb8e80c8e0ae30f913eb83562dc79de7784b689eb9a36bee4d73f23f68"
+    },
+    {
+      "path": "tools/build_la_seu_lidar_report_arrays.py",
+      "bytes": 3852,
+      "sha256": "11ab1e369ff0a991e2c1a5bdce8df50661ecf1e8b95ed0f80366f3ecb44c2d2d"
+    },
+    {
+      "path": "tools/build_la_seu_urban_project.py",
+      "bytes": 31567,
+      "sha256": "ce58deb703c2c347e9b7d382f16d3f72a72bae39c84326d3bd5723f0de8fdece"
+    },
+    {
+      "path": "tools/calculate_alinya_climatic_refuges.py",
+      "bytes": 12496,
+      "sha256": "10f288f9d4e734326651e254d63ae1e44bacfa1f582a82c0d183c13c8c0039ab"
+    },
+    {
+      "path": "tools/calculate_alinya_current_fire_danger.py",
+      "bytes": 24001,
+      "sha256": "125fe4d8b19fd11308b1e5c978e5acde13c64aba922a96391923e2daf8d3d38e"
+    },
+    {
+      "path": "tools/calculate_alinya_daily_readings.py",
+      "bytes": 18911,
+      "sha256": "de9ef987219f3b62ad4ca02801da4bc0dd60d13ca3fbe400f368230abe7ccd04"
+    },
+    {
+      "path": "tools/calculate_alinya_integrated_fire_danger.py",
+      "bytes": 10037,
+      "sha256": "c17e942d15134d1cc6e3769847cd9dd11ea71aee3c28f1363a5fd60f2d87c6c4"
+    },
+    {
+      "path": "tools/calculate_alinya_relief_base.py",
+      "bytes": 4371,
+      "sha256": "9d31eefc94e3fa2b472e5516c16ab1c7910f53932df5e6bb6bf090e5d0c62266"
+    },
+    {
+      "path": "tools/calculate_alinya_satellite_layers.py",
+      "bytes": 4557,
+      "sha256": "31b59ffee1932d07eee1f57760b7f8577001cb9b9c9045333d075018229ce807"
+    },
+    {
+      "path": "tools/calculate_alinya_sentinel2_indicators.py",
+      "bytes": 6003,
+      "sha256": "e4673a069ee03a69e362fb764e9dea08df4317edff289edb5b3a327c1d8462f2"
+    },
+    {
+      "path": "tools/calculate_la_seu_contextual_indicators.py",
+      "bytes": 4425,
+      "sha256": "fd84544c88abb06892d535029cbfbcf4ff3a94a10cc1b36468a3d602bef6279f"
+    },
+    {
+      "path": "tools/calculate_la_seu_current_fire_danger.py",
+      "bytes": 25072,
+      "sha256": "60d8e5537dd6528654456834519cbe8c5cbf0470fabbeb9b2437d486031ba7d0"
+    },
+    {
+      "path": "tools/calculate_la_seu_daily_readings.py",
+      "bytes": 21233,
+      "sha256": "7297f072eec1e8017bd4fd1762414112f8d8b1b528504efdbc39a4719fdab4a8"
+    },
+    {
+      "path": "tools/calculate_la_seu_expanded_indicators.py",
+      "bytes": 25854,
+      "sha256": "fc7ca3f8de3b2a61830dab38b647e0dd242f28ba1b7acdac4e1aeec1721faaef"
+    },
+    {
+      "path": "tools/calculate_la_seu_extended_urban_indicators.py",
+      "bytes": 11818,
+      "sha256": "2a925e0202f1508c73513572569441ad3f1f2a8031389d771ec2e7febea02595"
+    },
+    {
+      "path": "tools/calculate_la_seu_landsat_dynamic.py",
+      "bytes": 5861,
+      "sha256": "09561960ae95fc5cac4316deaafc7753ac484bbac4d25ea62ad6c25e9213e7aa"
+    },
+    {
+      "path": "tools/calculate_la_seu_lidar_expanded.py",
+      "bytes": 9406,
+      "sha256": "a48bf6d0a8d4d5925fda923e2663d20a97787fef9d8d7f7ee60fb9ffe46fc9e8"
+    },
+    {
+      "path": "tools/calculate_la_seu_sentinel2_expanded.py",
+      "bytes": 7644,
+      "sha256": "58810b86c4dbcb83041c0af774a35757fb101eeda9852c4bba019ddc3092cc52"
+    },
+    {
+      "path": "tools/calculate_la_seu_sentinel2_indicators.py",
+      "bytes": 9312,
+      "sha256": "906186046887923dd2a5f4c8bc0637025c898160ed28579988ae93f715e78866"
+    },
+    {
+      "path": "tools/calculate_la_seu_urban_biodiversity.py",
+      "bytes": 24795,
+      "sha256": "945fd02271fa53d35d571a20bb7555be91f61d84f0a24fe251daa435a5491c82"
+    },
+    {
+      "path": "tools/calculate_la_seu_urban_metrics.py",
+      "bytes": 14419,
+      "sha256": "5caece9cc6db0ecd796d4ac1c0cbd51168abd2c4db88751d0b2149672ddd2a0e"
+    },
+    {
+      "path": "tools/completar_indicadors_la_seu.command",
+      "bytes": 567,
+      "sha256": "6457f58ab4e139d76caf82ada82b4548cf1f4631761c98ff61c2e6496666e538"
+    },
+    {
+      "path": "tools/complete_la_seu_remaining_indicators.py",
+      "bytes": 1213,
+      "sha256": "c65f0a9458d45b61b0265beb4167768d2dff802612ddb6107a1eb00a9b711ccc"
+    },
+    {
+      "path": "tools/create_ecoradar_urban_project.py",
+      "bytes": 5311,
+      "sha256": "fcd4222c4eabcdb869efd2ebe96a2c20f18bab01769674499b70e63fa0d5fdc6"
+    },
+    {
+      "path": "tools/crop_la_seu_flood_expanded.py",
+      "bytes": 2425,
+      "sha256": "9c08300874ace49e2d8f47617f1fdd4746b39583214bb08c0d1a616e257a34fd"
+    },
+    {
+      "path": "tools/export_alinya_integrated_report_urban_template.py",
+      "bytes": 63830,
+      "sha256": "6c1f036305b9ad34aff404f683bb5cba159d974021ea702c57a0243f792e8b24"
+    },
+    {
+      "path": "tools/export_ecoradar_alinya_netlify-backup-20260721-punctual.py",
+      "bytes": 117938,
+      "sha256": "e109cd4c0179a2844312c66eb432039139fcbe539a890775dd6c6269af000fda"
+    },
+    {
+      "path": "tools/export_ecoradar_alinya_netlify.py",
+      "bytes": 140525,
+      "sha256": "a0bb8511052bf8c73a72d4c2ec383c28c63d2fce851cff49bfbe5fe118c72fc7"
+    },
+    {
+      "path": "tools/export_la_seu_urban_diagnosis_v3.py",
+      "bytes": 82217,
+      "sha256": "338e5525eec82fb7c8760addf331c951627a5ba704092900a4d27ecdc2b1d443"
+    },
+    {
+      "path": "tools/export_la_seu_urban_diagnosis_v4_expanded.py",
+      "bytes": 86130,
+      "sha256": "c6c4620be57a619c914b9ca75621da121599b8262259b782c477a1155445e757"
+    },
+    {
+      "path": "tools/export_la_seu_urban_report_v2.py",
+      "bytes": 55948,
+      "sha256": "dd042ada0dae9ae19abc86d5bdc367a69e81f29fa0c820442e1a3841e0555b5a"
+    },
+    {
+      "path": "tools/export_postfoc_ecoradar_alinya_a4.py",
+      "bytes": 31789,
+      "sha256": "62d8c789eba15b446959cb7c45308551127340452ec327d7c89a5dc215cfdaa1"
+    },
+    {
+      "path": "tools/export_postfoc_ecoradar_alinya_interactive.py",
+      "bytes": 35909,
+      "sha256": "12e8eefc9856a804d6371580c6b22ab2fdc6c91bc4ce9abf4ac018b39f8afa63"
+    },
+    {
+      "path": "tools/fetch_alinya_cams_context.py",
+      "bytes": 4934,
+      "sha256": "4cc4afcbdd774af495d98514d833cbddb028f5b77a9522b8bfeec150708efc9c"
+    },
+    {
+      "path": "tools/fetch_alinya_cdse_sentinel2.py",
+      "bytes": 2294,
+      "sha256": "1c865dadb44671213678b4da872886a5836c1492740ea93df675194c80a899b1"
+    },
+    {
+      "path": "tools/fetch_alinya_clms_hrl.py",
+      "bytes": 4680,
+      "sha256": "06db08f001fb6d5f4718738bb54ae263c8647e29bf535380c146bb64c572ed4b"
+    },
+    {
+      "path": "tools/fetch_alinya_landsat.py",
+      "bytes": 4379,
+      "sha256": "93b3547529fbe362fbeed6697b17f7d0a2c754e6c2558d008a6f80848b736121"
+    },
+    {
+      "path": "tools/fetch_alinya_landsat_composite.py",
+      "bytes": 8583,
+      "sha256": "7c6855fd229dcbd7eebd61528a09bbdc5889b59ab788ea8514e37c263c64fb6e"
+    },
+    {
+      "path": "tools/fetch_la_seu_cams_context.py",
+      "bytes": 5172,
+      "sha256": "07cfc1f551983e33fdd24ab9ce6658ee529c838366ca1404d65d1a9ad1ef9188"
+    },
+    {
+      "path": "tools/fetch_la_seu_cdse_context.py",
+      "bytes": 9178,
+      "sha256": "504202912354f06b8df45d990d29524e4ce9a7e3acecc3b8309992c60f36282a"
+    },
+    {
+      "path": "tools/fetch_la_seu_cdse_sentinel2.py",
+      "bytes": 15980,
+      "sha256": "0590c5dbf0363262bdddc6e9cd5572031c84d8ba7dbc06e1640ff4cde125a28a"
+    },
+    {
+      "path": "tools/fetch_la_seu_clms_hrl.py",
+      "bytes": 7867,
+      "sha256": "e10c80a2099f220fb4a65b5efaef836766581ffbbebb890ccaf631463e23f592"
+    },
+    {
+      "path": "tools/fetch_la_seu_landsat_expanded.py",
+      "bytes": 7999,
+      "sha256": "f7e6a8474f9028a4ec29f119bba072818b12ad2d600fc5a6e964eef511693945"
+    },
+    {
+      "path": "tools/import_alinya_sentinel2_analytical.py",
+      "bytes": 8358,
+      "sha256": "10141c306e4eba23079892ccd453ac8e5332491e462fb5df0999ef7d915e52ef"
+    },
+    {
+      "path": "tools/import_la_seu_sentinel2_analytical_expanded.py",
+      "bytes": 12041,
+      "sha256": "8565c43327415e3ff3181651f27d7f8f0a82680a85017a870ac2ff8a81a84f45"
+    },
+    {
+      "path": "tools/legacy/build_alinya_fire_similarity_map.py",
+      "bytes": 28846,
+      "sha256": "a7da653b3c46e7e69337930511de3f2983142f4b5412148dd6e560cbd05cfced"
+    },
+    {
+      "path": "tools/legacy/build_cadi_fire_similarity_map.py",
+      "bytes": 68768,
+      "sha256": "996db3892e2ef1f2e1416ce334bc89173706509775ab279a081a97e4b76d7e58"
+    },
+    {
+      "path": "tools/legacy/build_data_sources_matrix.py",
+      "bytes": 19860,
+      "sha256": "59fa3d60ed87b743cdbdb79a0399edfebc80479004d5b35046594cfc5eff752c"
+    },
+    {
+      "path": "tools/legacy/export_diagnosi_pdf.py",
+      "bytes": 8965,
+      "sha256": "5f1b956820b6118c14a72e66646382ed88ab9cef511410644de019a5548c0b22"
+    },
+    {
+      "path": "tools/legacy/export_ecoradar_atlas_a3.py",
+      "bytes": 36941,
+      "sha256": "4bc77f50a8166e4db94f8955dac3af093904846c2a741939317cded11e55ff14"
+    },
+    {
+      "path": "tools/legacy/export_ecoradar_atlas_v2.py",
+      "bytes": 38503,
+      "sha256": "dc6a98441a349ddde55aa17b4f1ff734d0dac4b0741703203fd66f616fe16079"
+    },
+    {
+      "path": "tools/legacy/export_ecoradar_atlas_v3.py",
+      "bytes": 18729,
+      "sha256": "b7a36f362892d8ea1a30dc98f699e9595c0bf04df3fbcc98588aa00cbc60afa0"
+    },
+    {
+      "path": "tools/legacy/export_ecoradar_product.py",
+      "bytes": 49349,
+      "sha256": "81a05dc08f8be566f002f5acce3b14e221d3d312c085e1c48a093f076a794da5"
+    },
+    {
+      "path": "tools/legacy/export_informe_diagnosi_fitxa_pdf.py",
+      "bytes": 14349,
+      "sha256": "e3c45e6717c8b68d0ebb0a40c677743ab6441dac585976513517faf7c2ac23cc"
+    },
+    {
+      "path": "tools/legacy/run_ecoradar_diagnosis.py",
+      "bytes": 6900,
+      "sha256": "807fe6e0c1d7aa88fdef97d3f3ce173a52312606b074940d9c51744e960e0e21"
+    },
+    {
+      "path": "tools/legacy/write_step2_blocked_validations.py",
+      "bytes": 8978,
+      "sha256": "206e6e57b5915e616e1f13740c85f2c2629d69f4d84b08bafc75a210a5bc200b"
+    },
+    {
+      "path": "tools/normalize_la_seu_sentinel2_safe_expanded.py",
+      "bytes": 9891,
+      "sha256": "46d434e00bdd40665a7b7836c0035885f6549ab1ec7f18062637388740fe9420"
+    },
+    {
+      "path": "tools/package_alinya_github_repository.py",
+      "bytes": 14108,
+      "sha256": "4000dc4f517762033e1cc80bae009ece236e70cab24a128e2d74c849acb8ea18"
+    },
+    {
+      "path": "tools/package_la_seu_github_repository.py",
+      "bytes": 11234,
+      "sha256": "a7ea77ff102e4515661b2c3a7642726ac6ded9d697af8f61c81ab566603b00a6"
+    },
+    {
+      "path": "tools/process_la_seu_fire_danger.py",
+      "bytes": 12371,
+      "sha256": "34b231bc95cb7a38cb24fe09e33c849e68b2ac675174795da70615c475d0eeda"
+    },
+    {
+      "path": "tools/recalculate_la_seu_daily_shade.py",
+      "bytes": 5268,
+      "sha256": "d269be395300cc2fa188fdf4e56def22124b97377f04059fa69eb9674773f30b"
+    },
+    {
+      "path": "tools/render_la_seu_poster_v2.py",
+      "bytes": 14541,
+      "sha256": "6a87eb68af3c470d601e0107836190f4d96b9d9a888d6e6cdeb28ddd1bd2a20d"
+    },
+    {
+      "path": "tools/render_la_seu_urban_map.py",
+      "bytes": 106201,
+      "sha256": "0839ef916104fd908c8536586cad938315b35968a260a54a5d357a8067f71b0c"
+    },
+    {
+      "path": "tools/run_data_availability_check.py",
+      "bytes": 839,
+      "sha256": "d1da2b45586edcc79719e296471e86debd147de0194ed9c75b8aeb12a82ca39a"
+    },
+    {
+      "path": "tools/run_diagnosis_engine.py",
+      "bytes": 646,
+      "sha256": "a31c4273ed825e7b189908d030b9faa1d5373778f2502967b2e166ab4a4290b7"
+    },
+    {
+      "path": "tools/run_ecoradar_pipeline.py",
+      "bytes": 1015,
+      "sha256": "2c417e5ebf80cd36568e825d12b07f382ac1f0cb3ad42e633d19fca3f9292d92"
+    },
+    {
+      "path": "tools/run_indicator_engine.py",
+      "bytes": 652,
+      "sha256": "55b9e26285d0745aa285adcfed3746a2980137789c197dc14f4221d0b57c3d09"
+    },
+    {
+      "path": "tools/run_recommendation_engine.py",
+      "bytes": 662,
+      "sha256": "e61fa79c0d7b398769c56904e082e7166825a6543821414b71fe133492b82854"
+    },
+    {
+      "path": "tools/run_validation_engine.py",
+      "bytes": 530,
+      "sha256": "971cf508d2a1f6c60b2bec11e0a7c554e4878c7c8400dc46dc499b1985c8eb1a"
+    },
+    {
+      "path": "tools/sync_alinya_netlify.py",
+      "bytes": 209,
+      "sha256": "e92866bf78255abc524938175ded6a9ad3a166c724a278b394392e29d7bcef5c"
+    },
+    {
+      "path": "tools/sync_alinya_repository_root.py",
+      "bytes": 2445,
+      "sha256": "b876b674e64cfa57b94193424d47655d8c90e40c63e8e17fb1972726c9a87b59"
+    },
+    {
+      "path": "tools/sync_la_seu_netlify.py",
+      "bytes": 2246,
+      "sha256": "5516bb3c2b7c9255b88307f056378da58286f0d65363f0bcda639aec13683657"
+    },
+    {
+      "path": "tools/sync_la_seu_repository_root.py",
+      "bytes": 2778,
+      "sha256": "0574c522550bf1572a569fca1f8f0912d05c6b61ca744819c7b8ef740e5a2a81"
+    },
+    {
+      "path": "tools/update_alinya_daily_history.py",
+      "bytes": 11836,
+      "sha256": "5899abb6b2390c3eea929cd7bdd31faeb2294fbab955ecaf7f40496eaf50a1ee"
+    },
+    {
+      "path": "tools/update_la_seu_daily_history.py",
+      "bytes": 11735,
+      "sha256": "a92e005bc73448d87ac8f24cf323fbcc668dc9d44c4a2975886d1b765288f65e"
+    },
+    {
+      "path": "tools/validate_alinya_daily_timestamps.py",
+      "bytes": 2512,
+      "sha256": "73fe027720072e96e8aa8b4c351aa4e52025b0de834b9e95fa9b8d979a74ea71"
+    },
+    {
+      "path": "tools/validate_ecoradar_alinya_reorganization.py",
+      "bytes": 5587,
+      "sha256": "acd33ccbb6b8155fc838f13f81127edc8e5fe60fde90b8a16a2acd2f612caf94"
+    },
+    {
+      "path": "tools/validate_la_seu_daily_timestamps.py",
+      "bytes": 2516,
+      "sha256": "99094a5577f5f253331e0f30cab7371ba6af939fc243b2e9cb8caf286adbe55a"
+    },
+    {
+      "path": "vendor/d3.min.js",
+      "bytes": 279706,
+      "sha256": "f2094bbf6141b359722c4fe454eb6c4b0f0e42cc10cc7af921fc158fceb86539"
+    }
+  ]
+}
