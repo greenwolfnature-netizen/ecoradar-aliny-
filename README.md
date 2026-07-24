@@ -13,8 +13,11 @@ els indicadors, els mapes i els informes per les dades verificades d’Alinyà.
 3. A GitHub, configura si escau:
    `COPERNICUS_CLIENT_ID`, `COPERNICUS_CLIENT_SECRET`,
    `NETLIFY_AUTH_TOKEN` i `NETLIFY_SITE_ID`.
-4. A Netlify, configura `ECORADAR_GITHUB_REPOSITORY=propietari/repositori` i,
-   si la branca no és `main`, `ECORADAR_GITHUB_BRANCH`.
+4. A Netlify, si el repositori és privat, configura
+   `ECORADAR_DATA_BASE_URL=https://main--NOM_DEL_LLOC.netlify.app/projectes/Alinya`
+   amb l'àlies de branca del projecte. Si el repositori és públic, també pots
+   usar `ECORADAR_GITHUB_REPOSITORY=propietari/repositori` i, si la branca no
+   és `main`, `ECORADAR_GITHUB_BRANCH`.
 5. Cada `push` a `main` executa `Update EcoRadar Alinyà daily readings`,
    recalcula les lectures, desplega la versió nova i comprova el visor públic i
    `/api/daily-readings`. També es pot executar manualment i s’executa cada dia

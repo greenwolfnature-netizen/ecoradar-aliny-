@@ -54,6 +54,28 @@ For wildfire data, identify and document the exact official source used by Incen
 
 Do not use IncendisCat itself as a data source.
 
+## Daily Interactive Readings
+
+Every interactive EcoRadar must run one automated daily check of every
+updateable reading, including current fire danger, meteorology, daily shade,
+air-quality context, Landsat surface temperature, and Sentinel-2 NDVI, NDMI,
+and albedo.
+
+- Set one `ECORADAR_CHECKED_AT_UTC` value per complete daily run and propagate
+  it to `daily_readings`, `daily_history`, and `current_fire_danger`.
+- Update `checked_at_utc` and the source-check status on every run, even when a
+  source has not published a new observation.
+- Preserve each source's real observation or acquisition timestamp. Never
+  present the daily check time as the data timestamp.
+- Query every configured official source daily, but only recalculate
+  source-dependent products when a new valid source observation exists.
+- Publish the refreshed records and viewer after the checks, then verify the
+  public API and deployed interface.
+- Treat packaged JSON as fallback only. The interactive viewer must prefer a
+  remote, current snapshot and visibly identify fallback use.
+- Apply this contract to Alinyà, la Seu d'Urgell, and every future EcoRadar
+  generated from the project template.
+
 ## Frozen Product References
 
 The frozen EcoRadar Fitxa v1 reference is documented at:

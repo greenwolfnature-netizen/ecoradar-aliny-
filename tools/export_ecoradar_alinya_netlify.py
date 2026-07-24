@@ -1641,6 +1641,11 @@ def write_package() -> None:
   for = "/vendor/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/projectes/Alinya/maps/incendis/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
 """,
         encoding="utf-8",
     )
@@ -1651,8 +1656,11 @@ Aquest directori es pot publicar directament a Netlify. La funció
 `/api/daily-readings` consulta el repositori GitHub canònic a cada càrrega; els
 JSON empaquetats només s'utilitzen com a reserva si falla la consulta remota.
 
-Cal configurar `ECORADAR_GITHUB_REPOSITORY=propietari/repositori` i,
-opcionalment, `ECORADAR_GITHUB_BRANCH` (per defecte `main`) a Netlify.
+Si el repositori GitHub és privat, configura
+`ECORADAR_DATA_BASE_URL=https://main--NOM_DEL_LLOC.netlify.app/projectes/Alinya`
+amb l'àlies de branca del mateix projecte. Si és públic, també es pot
+configurar `ECORADAR_GITHUB_REPOSITORY=propietari/repositori` i,
+opcionalment, `ECORADAR_GITHUB_BRANCH` (per defecte `main`).
 
 ## Contingut
 
