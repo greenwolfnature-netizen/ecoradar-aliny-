@@ -115,21 +115,18 @@ jobs:
             echo "The timestamp should change on every run; refusing to deploy an uncommitted snapshot." >&2
             exit 1
           fi
-      - name: Verify Netlify deployment credentials
-        run: |
-          test -n "$NETLIFY_AUTH_TOKEN" || { echo "::error::Missing GitHub secret NETLIFY_AUTH_TOKEN"; exit 1; }
-          test -n "$NETLIFY_SITE_ID" || { echo "::error::Missing GitHub secret NETLIFY_SITE_ID"; exit 1; }
       - name: Publish the refreshed interactive fitxa to Netlify
+        if: env.NETLIFY_AUTH_TOKEN != '' && env.NETLIFY_SITE_ID != ''
         run: npx --yes netlify-cli deploy --prod --dir . --functions netlify/functions --site "$NETLIFY_SITE_ID" --auth "$NETLIFY_AUTH_TOKEN" --message "EcoRadar ${{ steps.commit.outputs.sha }}"
       - name: Verify the public Netlify deployment
         env:
           ECORADAR_PUBLIC_URL: https://ecoradar-alinya.netlify.app
         run: |
-          for attempt in 1 2 3 4 5 6 7 8 9 10 11 12; do
+          for attempt in $(seq 1 36); do
             if curl -fsS "${ECORADAR_PUBLIC_URL}/?commit=${{ steps.commit.outputs.sha }}" -o "$RUNNER_TEMP/ecoradar-index.html" &&
                curl -fsS "${ECORADAR_PUBLIC_URL}/api/daily-readings?commit=${{ steps.commit.outputs.sha }}" -o "$RUNNER_TEMP/ecoradar-daily-readings.json" &&
                grep -q 'data-mode="fireCurrent"' "$RUNNER_TEMP/ecoradar-index.html" &&
-               grep -q '"checked_at_utc"' "$RUNNER_TEMP/ecoradar-daily-readings.json"; then
+               python -c 'import json,sys; data=json.load(open(sys.argv[1])); raise SystemExit(0 if data.get("checked_at_utc") == sys.argv[2] else 1)' "$RUNNER_TEMP/ecoradar-daily-readings.json" "$ECORADAR_CHECKED_AT_UTC"; then
               echo "Verified current EcoRadar viewer and daily-readings API in production."
               exit 0
             fi

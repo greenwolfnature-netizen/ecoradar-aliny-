@@ -10,9 +10,9 @@ els indicadors, els mapes i els informes per les dades verificades d’Alinyà.
 1. Descomprimeix el ZIP i crea un repositori nou amb GitHub Desktop a partir
    d’aquesta carpeta.
 2. Publica’l a GitHub.
-3. A GitHub, configura si escau:
+3. A GitHub, configura:
    `COPERNICUS_CLIENT_ID`, `COPERNICUS_CLIENT_SECRET`,
-   `NETLIFY_AUTH_TOKEN` i `NETLIFY_SITE_ID`.
+   i, opcionalment, `NETLIFY_AUTH_TOKEN` i `NETLIFY_SITE_ID`.
 4. A Netlify, si el repositori és privat, configura
    `ECORADAR_DATA_BASE_URL=https://main--NOM_DEL_LLOC.netlify.app/projectes/Alinya`
    amb l'àlies de branca del projecte. Si el repositori és públic, també pots
@@ -23,9 +23,12 @@ els indicadors, els mapes i els informes per les dades verificades d’Alinyà.
    `/api/daily-readings`. També es pot executar manualment i s’executa cada dia
    a les 14:35 UTC.
 
-Els secrets `NETLIFY_AUTH_TOKEN` i `NETLIFY_SITE_ID` són obligatoris. El
-workflow falla amb un missatge explícit si no estan configurats, en lloc de
-finalitzar correctament sense haver publicat res.
+Si Netlify està connectat al repositori GitHub, el `push` del workflow ja
+activa el desplegament continu i no calen `NETLIFY_AUTH_TOKEN` ni
+`NETLIFY_SITE_ID`. Si tots dos secrets existeixen, el workflow també fa un
+desplegament explícit amb Netlify CLI. En tots dos casos, no finalitza fins que
+el visor públic i `/api/daily-readings` exposen exactament el
+`checked_at_utc` de l’execució en curs.
 
 ## Lectura remota
 
