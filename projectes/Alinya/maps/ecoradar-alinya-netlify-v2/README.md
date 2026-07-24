@@ -19,7 +19,8 @@ opcionalment, `ECORADAR_GITHUB_BRANCH` (per defecte `main`) a Netlify.
 - `netlify/functions/daily-readings.mjs`: lectura remota del repositori canònic.
 
 La capa de concurrencia no es probabilitat oficial d'incendi ni perill diari.
-La lectura `Perill d'incendi actual` es un index analitic EcoRadar de 0 a 100,
+La lectura `Perill d'incendi avui` es un index analitic EcoRadar de 0 a 100
+calculat en cel·les de 100 m,
 no una alerta oficial ni el Pla Alfa. Utilitza meteorologia XEMA Y4 i
 renormalitza els pesos si una variable no esta disponible.
 La geometria historica d'incendis va ser consultada el 17.07.2026.

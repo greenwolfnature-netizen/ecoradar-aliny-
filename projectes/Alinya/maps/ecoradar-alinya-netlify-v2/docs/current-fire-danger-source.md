@@ -60,4 +60,7 @@ python tools/export_ecoradar_alinya_netlify.py
 - L’NDMI és un proxy espectral relatiu, no humitat fina del combustible.
 - La coberta és un proxy explícit de combustible i requereix validació de
   càrrega, estructura vertical i continuïtat real al camp.
+- La quadrícula oficial diària té una resolució massa grossa per interpretar
+  diferències internes de la Muntanya d’Alinyà. Es conserva com a context
+  oficial, però no s’interpola ni es representa com una superfície detallada.
 - Cal consultar sempre Pla Alfa, avisos oficials i instruccions d’emergència.

@@ -880,7 +880,7 @@ def render_index(data: dict) -> str:
           <button class="eu-mode" data-mode="management" aria-pressed="false">Gestió<small>capes de decisió</small></button>
           <button class="eu-mode" data-mode="similarity" aria-pressed="false">Concurrència<small>condicions semblants</small></button>
           <button class="eu-mode" data-mode="fireDanger" aria-pressed="false">Perill d'incendi<small>Generalitat + LST + NDMI + cobertes</small></button>
-          <button class="eu-mode" data-mode="fireCurrent" aria-pressed="false">Perill d'incendi actual<small id="eu-fire-current-date">darrera comprovació</small></button>
+          <button class="eu-mode" data-mode="fireCurrent" aria-pressed="false">Perill d'incendi avui<small id="eu-fire-current-date">darrera comprovació · índex EcoRadar 100 m</small></button>
           <button class="eu-mode" data-mode="fires" aria-pressed="false">Històric d'incendis<small>perímetres oficials</small></button>
         </div>
       </section>
@@ -933,7 +933,7 @@ def render_index(data: dict) -> str:
         <p><a href="#mosaic">Continuar amb el diagnòstic tècnic complet</a></p>
       </section>
       <section class="eu-panel" data-current-fire hidden>
-        <h3>Perill actual · resum</h3>
+        <h3>Perill d’avui · resum</h3>
         <div class="eu-live-status" id="eu-live-status" role="status" aria-live="polite">Consultant l’última comprovació remota…</div>
         <div class="eu-fire-summary" id="eu-fire-current-summary"></div>
         <div class="eu-fire-areas" id="eu-fire-current-areas"></div>
@@ -1240,11 +1240,11 @@ def render_index(data: dict) -> str:
       legend:[['#2c7bb6','Baix · <0,25'],['#f0e65b','Moderat · 0,25–0,50'],['#f39a38','Alt · 0,50–0,70'],['#8b1e2d','Molt alt · ≥0,70'],['#c23c32','Perímetres històrics']]
     }},
     fireCurrent: {{
-      label:`Perill d’incendi actual · ${{Number(D.currentFire.summary.mean_index_0_100).toFixed(1).replace('.',',')}}/100 · ${{D.currentFire.summary.predominant_category}}`,
-      title:'Perill d’incendi actual EcoRadar',
-      copy:'Combina per cel·les de 100 m el perill estructural oficial 2024, la temperatura superficial Landsat, la sequedat relativa NDMI, el potencial de combustible per coberta ICGC, la concurrència territorial i la meteorologia més recent de l’estació XEMA Y4 d’Alinyà. Els pesos disponibles es renormalitzen quan una variable manca.',
+      label:`Perill d’incendi avui · índex EcoRadar 100 m · ${{Number(D.currentFire.summary.mean_index_0_100).toFixed(1).replace('.',',')}}/100 · ${{D.currentFire.summary.predominant_category}}`,
+      title:'Perill d’incendi avui · índex EcoRadar a 100 m',
+      copy:'Combina per cel·les de 100 m el perill estructural oficial 2024, la temperatura superficial Landsat, la sequedat relativa NDMI, el potencial de combustible per coberta ICGC, la concurrència territorial i la meteorologia més recent de l’estació XEMA Y4 d’Alinyà. Els pesos disponibles es renormalitzen quan una variable manca. La quadrícula oficial diària, d’escala molt més grossa, no es representa com si aportés detall dins la finca.',
       reading:'Verd: molt baix (0–20). Verd groguenc: baix (21–40). Groc: moderat (41–60). Taronja: alt (61–80). Vermell: molt alt (81–90). Granat: extrem (91–100). Clica qualsevol cel·la per consultar els valors i les contribucions.',
-      limit:`Límit: és una lectura analítica EcoRadar, no una alerta oficial, el Pla Alfa ni una predicció d’ignició. La XEMA Y4 és una observació puntual i no una superfície meteorològica. ${{D.currentFire.variables.wind.quality === 'no disponible' ? 'A la comprovació actual no hi ha vent disponible a l’extracte públic de Y4; el seu pes s’ha exclòs i els components disponibles s’han renormalitzat.' : 'El vent disponible correspon a l’estació Y4 i pot no representar tot el relleu de l’àmbit.'}}`,
+      limit:`Límit: és una lectura analítica EcoRadar, no una alerta oficial, el Pla Alfa ni una predicció d’ignició. No interpola la quadrícula oficial diària per crear un detall que la font no té. La XEMA Y4 és una observació puntual i no una superfície meteorològica. ${{D.currentFire.variables.wind.quality === 'no disponible' ? 'A la comprovació actual no hi ha vent disponible a l’extracte públic de Y4; el seu pes s’ha exclòs i els components disponibles s’han renormalitzat.' : 'El vent disponible correspon a l’estació Y4 i pot no representar tot el relleu de l’àmbit.'}}`,
       layers:['fireCurrent','fires','access'],
       raster:'fireCurrent',
       legend:[['#2f8f4e','0–20 · molt baix'],['#a8c94a','21–40 · baix'],['#f0d84b','41–60 · moderat'],['#ef8b2c','61–80 · alt'],['#d43d2f','81–90 · molt alt'],['#711d2d','91–100 · extrem'],['#c23c32','Perímetres històrics']]
@@ -1666,7 +1666,8 @@ opcionalment, `ECORADAR_GITHUB_BRANCH` (per defecte `main`) a Netlify.
 - `netlify/functions/daily-readings.mjs`: lectura remota del repositori canònic.
 
 La capa de concurrencia no es probabilitat oficial d'incendi ni perill diari.
-La lectura `Perill d'incendi actual` es un index analitic EcoRadar de 0 a 100,
+La lectura `Perill d'incendi avui` es un index analitic EcoRadar de 0 a 100
+calculat en cel·les de 100 m,
 no una alerta oficial ni el Pla Alfa. Utilitza meteorologia XEMA Y4 i
 renormalitza els pesos si una variable no esta disponible.
 La geometria historica d'incendis va ser consultada el 17.07.2026.

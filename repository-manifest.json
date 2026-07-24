@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "package": "EcoRadar — Muntanya d'Alinyà",
-  "built_at_utc": "2026-07-23T20:03:39Z",
-  "canonical_checked_at_utc": "2026-07-23T19:54:51Z",
+  "built_at_utc": "2026-07-23T20:41:59Z",
+  "canonical_checked_at_utc": "2026-07-23T20:41:16Z",
   "archive_layout": "repository files are stored directly at ZIP root",
   "excluded_as_regenerable_or_non_operational": [
     "virtual environments, caches and secret files",
@@ -11,7 +11,7 @@
     "all other EcoRadar study areas"
   ],
   "file_count_excluding_this_manifest": 455,
-  "uncompressed_bytes_excluding_this_manifest": 420840501,
+  "uncompressed_bytes_excluding_this_manifest": 420882551,
   "files": [
     {
       "path": ".ecoradar-alinya-repository",
@@ -25,8 +25,8 @@
     },
     {
       "path": ".github/workflows/update-current-fire-danger.yml",
-      "bytes": 6423,
-      "sha256": "63fc3145121a1b16f72ed5d617b8f9a2e10bd75dd1a26d1a7dce1e0011c0e8b9"
+      "bytes": 6421,
+      "sha256": "86cec8e6e98c805a0a1e83bf610c53ed4710f438418310150e194d73065d6d79"
     },
     {
       "path": ".gitignore",
@@ -140,8 +140,8 @@
     },
     {
       "path": "docs/current-fire-danger-source.md",
-      "bytes": 3668,
-      "sha256": "939b557364022392df568f0db8b8785334e6d2bd331cbeb2c0999c5cfbeaea94"
+      "bytes": 3909,
+      "sha256": "fa02e8064544bb78cf99fb67013bb8aad31adcb126276c94b2abb777004138de"
     },
     {
       "path": "docs/data-sources-matrix.md",
@@ -165,8 +165,8 @@
     },
     {
       "path": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
-      "bytes": 3668,
-      "sha256": "939b557364022392df568f0db8b8785334e6d2bd331cbeb2c0999c5cfbeaea94"
+      "bytes": 3909,
+      "sha256": "fa02e8064544bb78cf99fb67013bb8aad31adcb126276c94b2abb777004138de"
     },
     {
       "path": "docs/data_sources/fire/current-wildfire-danger-urban.md",
@@ -210,8 +210,8 @@
     },
     {
       "path": "docs/deployment/update-alinya-current-fire-danger.yml",
-      "bytes": 6423,
-      "sha256": "63fc3145121a1b16f72ed5d617b8f9a2e10bd75dd1a26d1a7dce1e0011c0e8b9"
+      "bytes": 6421,
+      "sha256": "86cec8e6e98c805a0a1e83bf610c53ed4710f438418310150e194d73065d6d79"
     },
     {
       "path": "docs/deployment/update-current-fire-danger.yml",
@@ -590,33 +590,33 @@
     },
     {
       "path": "history/daily_readings_checks.jsonl",
-      "bytes": 142,
-      "sha256": "aaa6c21234f0d68c1d01634ebbc7a3d9370308734b03ced2131519f513c7beb1"
+      "bytes": 281,
+      "sha256": "d2e90e793adea3fd37098023e73c3faa920ba4914c00258be6d3ee6c2b6b9ffa"
     },
     {
       "path": "history/daily_readings_observations.jsonl",
-      "bytes": 1014521,
-      "sha256": "ae2c6d38ebce8e8e4b92a2346dcacca3111eaf3f833e28946dd9a14acf3f5d6b"
+      "bytes": 1015813,
+      "sha256": "d026d0cb3ef98bc791729761e1429228144f3794740deef10df6add60c9fc9ee"
     },
     {
       "path": "index.html",
-      "bytes": 23208383,
-      "sha256": "a4fb353a9c6b583f27f0c91ad6a748873cc583f6340bf274f3e7f010313289ba"
+      "bytes": 23216145,
+      "sha256": "e1db198e75ff2644ca9889995950c06b25ce1cec70b612bb087f8c0c94e792d0"
     },
     {
       "path": "metadata/current_fire_danger.json",
-      "bytes": 17508,
-      "sha256": "dc09e893a2b435f9e4555390c051e4b58a2d9d883ca11dcc3f4bf8c986e8d624"
+      "bytes": 17509,
+      "sha256": "1b30c357452ab385d39679d57f72f2f920fd2aad50e9f7afdd7ee2dffd390881"
     },
     {
       "path": "metadata/daily_history.json",
-      "bytes": 1409551,
-      "sha256": "0f3e8e80c7d979e8cf6fbba18751fb9ed1b678d83f1b3848b2c6fce3c80d3419"
+      "bytes": 1411389,
+      "sha256": "a89fd02fb6a3792a0c059f113eed2564f6c9a34d051e6ea34bf8a531f20bd123"
     },
     {
       "path": "metadata/daily_readings.json",
       "bytes": 8264,
-      "sha256": "1c9e8216bbe3e09c35b1d11433fa2734a22ec1841b2bdf976cd42bc4857e93ee"
+      "sha256": "f57ab6cabe6c594ecc032ad85913d0434fde01cabcf0cd9ad98c61552829add9"
     },
     {
       "path": "netlify/functions/daily-readings.mjs",
@@ -660,13 +660,13 @@
     },
     {
       "path": "projectes/Alinya/history/daily_readings_checks.jsonl",
-      "bytes": 142,
-      "sha256": "aaa6c21234f0d68c1d01634ebbc7a3d9370308734b03ced2131519f513c7beb1"
+      "bytes": 281,
+      "sha256": "d2e90e793adea3fd37098023e73c3faa920ba4914c00258be6d3ee6c2b6b9ffa"
     },
     {
       "path": "projectes/Alinya/history/daily_readings_observations.jsonl",
-      "bytes": 1014521,
-      "sha256": "ae2c6d38ebce8e8e4b92a2346dcacca3111eaf3f833e28946dd9a14acf3f5d6b"
+      "bytes": 1015813,
+      "sha256": "d026d0cb3ef98bc791729761e1429228144f3794740deef10df6add60c9fc9ee"
     },
     {
       "path": "projectes/Alinya/indicators/biodiversitat_resum.csv",
@@ -690,18 +690,18 @@
     },
     {
       "path": "projectes/Alinya/indicators/current_fire_danger.json",
-      "bytes": 17508,
-      "sha256": "dc09e893a2b435f9e4555390c051e4b58a2d9d883ca11dcc3f4bf8c986e8d624"
+      "bytes": 17509,
+      "sha256": "1b30c357452ab385d39679d57f72f2f920fd2aad50e9f7afdd7ee2dffd390881"
     },
     {
       "path": "projectes/Alinya/indicators/daily_history.json",
-      "bytes": 1409551,
-      "sha256": "0f3e8e80c7d979e8cf6fbba18751fb9ed1b678d83f1b3848b2c6fce3c80d3419"
+      "bytes": 1411389,
+      "sha256": "a89fd02fb6a3792a0c059f113eed2564f6c9a34d051e6ea34bf8a531f20bd123"
     },
     {
       "path": "projectes/Alinya/indicators/daily_readings.json",
       "bytes": 8264,
-      "sha256": "1c9e8216bbe3e09c35b1d11433fa2734a22ec1841b2bdf976cd42bc4857e93ee"
+      "sha256": "f57ab6cabe6c594ecc032ad85913d0434fde01cabcf0cd9ad98c61552829add9"
     },
     {
       "path": "projectes/Alinya/indicators/ecoradar_01_resum.csv",
@@ -870,8 +870,8 @@
     },
     {
       "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/README.md",
-      "bytes": 1684,
-      "sha256": "5030b1cced07ab9f24bbedb6489a1b8b0a6d4f71ea1587f6decca4fe49119bac"
+      "bytes": 1712,
+      "sha256": "c787ea3d25ddf987a6e152c25ed8d5f39285acdd7f76212618ca0d2ddd591bae"
     },
     {
       "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/THIRD_PARTY_NOTICES.md",
@@ -885,8 +885,8 @@
     },
     {
       "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/docs/current-fire-danger-source.md",
-      "bytes": 3668,
-      "sha256": "939b557364022392df568f0db8b8785334e6d2bd331cbeb2c0999c5cfbeaea94"
+      "bytes": 3909,
+      "sha256": "fa02e8064544bb78cf99fb67013bb8aad31adcb126276c94b2abb777004138de"
     },
     {
       "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/docs/data-sources-matrix.md",
@@ -900,33 +900,33 @@
     },
     {
       "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/history/daily_readings_checks.jsonl",
-      "bytes": 142,
-      "sha256": "aaa6c21234f0d68c1d01634ebbc7a3d9370308734b03ced2131519f513c7beb1"
+      "bytes": 281,
+      "sha256": "d2e90e793adea3fd37098023e73c3faa920ba4914c00258be6d3ee6c2b6b9ffa"
     },
     {
       "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/history/daily_readings_observations.jsonl",
-      "bytes": 1014521,
-      "sha256": "ae2c6d38ebce8e8e4b92a2346dcacca3111eaf3f833e28946dd9a14acf3f5d6b"
+      "bytes": 1015813,
+      "sha256": "d026d0cb3ef98bc791729761e1429228144f3794740deef10df6add60c9fc9ee"
     },
     {
       "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/index.html",
-      "bytes": 23208383,
-      "sha256": "a4fb353a9c6b583f27f0c91ad6a748873cc583f6340bf274f3e7f010313289ba"
+      "bytes": 23216145,
+      "sha256": "e1db198e75ff2644ca9889995950c06b25ce1cec70b612bb087f8c0c94e792d0"
     },
     {
       "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/metadata/current_fire_danger.json",
-      "bytes": 17508,
-      "sha256": "dc09e893a2b435f9e4555390c051e4b58a2d9d883ca11dcc3f4bf8c986e8d624"
+      "bytes": 17509,
+      "sha256": "1b30c357452ab385d39679d57f72f2f920fd2aad50e9f7afdd7ee2dffd390881"
     },
     {
       "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/metadata/daily_history.json",
-      "bytes": 1409551,
-      "sha256": "0f3e8e80c7d979e8cf6fbba18751fb9ed1b678d83f1b3848b2c6fce3c80d3419"
+      "bytes": 1411389,
+      "sha256": "a89fd02fb6a3792a0c059f113eed2564f6c9a34d051e6ea34bf8a531f20bd123"
     },
     {
       "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/metadata/daily_readings.json",
       "bytes": 8264,
-      "sha256": "1c9e8216bbe3e09c35b1d11433fa2734a22ec1841b2bdf976cd42bc4857e93ee"
+      "sha256": "f57ab6cabe6c594ecc032ad85913d0434fde01cabcf0cd9ad98c61552829add9"
     },
     {
       "path": "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/netlify/functions/daily-readings.mjs",
@@ -945,8 +945,8 @@
     },
     {
       "path": "projectes/Alinya/maps/ecoradar_alinya_interactiu-v2.html",
-      "bytes": 23208410,
-      "sha256": "023c9377ce9bf1e29fd9ae2d2ef0f2646c4fa0a7910139dd8b355476f46300ac"
+      "bytes": 23216172,
+      "sha256": "09b5d71f2aaf13e8d45b8b0a24d8e676cd328202cec2233eea57caab761a4add"
     },
     {
       "path": "projectes/Alinya/maps/ecoradar_core/README.md",
@@ -1060,13 +1060,13 @@
     },
     {
       "path": "projectes/Alinya/maps/incendis/current_fire_danger.webp",
-      "bytes": 3550,
-      "sha256": "5128172865458e23f56ea399ecdf01e13a380daa6a4dbbc8144c6c23421f2402"
+      "bytes": 3516,
+      "sha256": "b6dec96b0268efdf84a055cd41bbfe9722fd638c15daeb15a3a9b54a528796a5"
     },
     {
       "path": "projectes/Alinya/maps/incendis/current_fire_danger_cells.geojson",
-      "bytes": 11008727,
-      "sha256": "92c0d729506e0df912e40d56a8197b90e6ed0b5f80094389b63f75395d44f790"
+      "bytes": 11014910,
+      "sha256": "22a9d6dd3dc8ad0b7f51d589646280897fbe247f760e53000bdb3a3a8e0d1c07"
     },
     {
       "path": "projectes/Alinya/maps/incendis/incendis_historics_alinya_clip.geojson",
@@ -1205,18 +1205,18 @@
     },
     {
       "path": "projectes/Alinya/metadata/current_fire_danger.json",
-      "bytes": 19162,
-      "sha256": "13feb1a2144e3f6a30ef29ecffe9d7e67228c58dbf519b32fe92ef76aa60cde5"
+      "bytes": 19163,
+      "sha256": "1d4c594730f86c29d36eb9849622d1466f508fe970c92e112867c6b3643c5fbd"
     },
     {
       "path": "projectes/Alinya/metadata/daily_history.json",
-      "bytes": 1409551,
-      "sha256": "0f3e8e80c7d979e8cf6fbba18751fb9ed1b678d83f1b3848b2c6fce3c80d3419"
+      "bytes": 1411389,
+      "sha256": "a89fd02fb6a3792a0c059f113eed2564f6c9a34d051e6ea34bf8a531f20bd123"
     },
     {
       "path": "projectes/Alinya/metadata/daily_readings.json",
       "bytes": 8264,
-      "sha256": "1c9e8216bbe3e09c35b1d11433fa2734a22ec1841b2bdf976cd42bc4857e93ee"
+      "sha256": "f57ab6cabe6c594ecc032ad85913d0434fde01cabcf0cd9ad98c61552829add9"
     },
     {
       "path": "projectes/Alinya/metadata/data_availability_report.json",
@@ -1505,8 +1505,8 @@
     },
     {
       "path": "projectes/Alinya/processed/incendis/current_fire_danger/current_fire_danger_0_100.tif",
-      "bytes": 20919,
-      "sha256": "e7d48949794ac648c4dbf7dc297eab7b778c79088cd790eca850bf3ccbb4f828"
+      "bytes": 20959,
+      "sha256": "c93070e72b03132f6c2df585c06eff0d22eb9609b4e0b5a774fb1372f743c1d6"
     },
     {
       "path": "projectes/Alinya/processed/incendis/incendis_historics_alinya_clip.gpkg",
@@ -1751,12 +1751,12 @@
     {
       "path": "projectes/Alinya/raw/meteocat_xema/Y4_metadata.json",
       "bytes": 994,
-      "sha256": "f200aaf87d39e8800c8858ce3b83498c266a231233a416ce8b2a2946c3b95c5f"
+      "sha256": "fd6237ee33a0fc1e7280138f3f7e3d6fe83282f19db04a56eeaa7d2e0b6dcccf"
     },
     {
       "path": "projectes/Alinya/raw/meteocat_xema/Y4_observations.csv",
-      "bytes": 183785,
-      "sha256": "912d54a21636f325345b74e869cc66e9e79c743a6c608f68da4bdbdecf283896"
+      "bytes": 183672,
+      "sha256": "54d2b5ccd274a8075c71e59e49135246764ee0b80e82d594680816c7ff217aec"
     },
     {
       "path": "projectes/Alinya/raw/recreational_pressure/overpass_osm_raw.json",
@@ -2030,8 +2030,8 @@
     },
     {
       "path": "tools/export_ecoradar_alinya_netlify.py",
-      "bytes": 140233,
-      "sha256": "19d242aedaf12cfb9ad9cbc201ca4919aed29e25a4cd208d556f07ceb11164e2"
+      "bytes": 140525,
+      "sha256": "a0bb8511052bf8c73a72d4c2ec383c28c63d2fce851cff49bfbe5fe118c72fc7"
     },
     {
       "path": "tools/export_la_seu_urban_diagnosis_v3.py",

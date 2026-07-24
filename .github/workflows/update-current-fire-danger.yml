@@ -90,7 +90,7 @@ jobs:
           test -s projectes/Alinya/maps/incendis/current_fire_danger.webp
           test -s projectes/Alinya/indicators/daily_readings.json
           test -s projectes/Alinya/indicators/daily_history.json
-          grep -q "Perill d'incendi actual" index.html
+          grep -q "Perill d'incendi avui" index.html
           grep -q "Lectura remota actualitzada" index.html
       - name: Commit refreshed data
         id: commit
