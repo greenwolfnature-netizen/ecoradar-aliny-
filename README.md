@@ -15,8 +15,14 @@ els indicadors, els mapes i els informes per les dades verificades d’Alinyà.
    `NETLIFY_AUTH_TOKEN` i `NETLIFY_SITE_ID`.
 4. A Netlify, configura `ECORADAR_GITHUB_REPOSITORY=propietari/repositori` i,
    si la branca no és `main`, `ECORADAR_GITHUB_BRANCH`.
-5. Executa manualment `Update EcoRadar Alinyà daily readings` una primera
-   vegada. Després s’executa cada dia a les 14:35 UTC.
+5. Cada `push` a `main` executa `Update EcoRadar Alinyà daily readings`,
+   recalcula les lectures, desplega la versió nova i comprova el visor públic i
+   `/api/daily-readings`. També es pot executar manualment i s’executa cada dia
+   a les 14:35 UTC.
+
+Els secrets `NETLIFY_AUTH_TOKEN` i `NETLIFY_SITE_ID` són obligatoris. El
+workflow falla amb un missatge explícit si no estan configurats, en lloc de
+finalitzar correctament sense haver publicat res.
 
 ## Lectura remota
 

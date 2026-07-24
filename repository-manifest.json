@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "package": "EcoRadar — Muntanya d'Alinyà",
-  "built_at_utc": "2026-07-23T20:41:59Z",
+  "built_at_utc": "2026-07-24T06:03:08Z",
   "canonical_checked_at_utc": "2026-07-23T20:41:16Z",
   "archive_layout": "repository files are stored directly at ZIP root",
   "excluded_as_regenerable_or_non_operational": [
@@ -11,7 +11,7 @@
     "all other EcoRadar study areas"
   ],
   "file_count_excluding_this_manifest": 455,
-  "uncompressed_bytes_excluding_this_manifest": 420882551,
+  "uncompressed_bytes_excluding_this_manifest": 420885617,
   "files": [
     {
       "path": ".ecoradar-alinya-repository",
@@ -25,8 +25,8 @@
     },
     {
       "path": ".github/workflows/update-current-fire-danger.yml",
-      "bytes": 6421,
-      "sha256": "86cec8e6e98c805a0a1e83bf610c53ed4710f438418310150e194d73065d6d79"
+      "bytes": 7626,
+      "sha256": "bb4202ad772165e015849373d303f495f171830d1af976b0f57093638bce6ff3"
     },
     {
       "path": ".gitignore",
@@ -50,8 +50,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 1922,
-      "sha256": "5ad02673a1ad45dbbb2d776c29345ddb34b5ec40137c225ea4c8dd42e23b9a2f"
+      "bytes": 2250,
+      "sha256": "a289de119fa02053a5298bc20b94aa8c595b15a9adcfb166a790de200e0f9c17"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -200,8 +200,8 @@
     },
     {
       "path": "docs/deployment/alinya_github_repository_readme.md",
-      "bytes": 1922,
-      "sha256": "5ad02673a1ad45dbbb2d776c29345ddb34b5ec40137c225ea4c8dd42e23b9a2f"
+      "bytes": 2250,
+      "sha256": "a289de119fa02053a5298bc20b94aa8c595b15a9adcfb166a790de200e0f9c17"
     },
     {
       "path": "docs/deployment/la_seu_github_repository_readme.md",
@@ -210,8 +210,8 @@
     },
     {
       "path": "docs/deployment/update-alinya-current-fire-danger.yml",
-      "bytes": 6421,
-      "sha256": "86cec8e6e98c805a0a1e83bf610c53ed4710f438418310150e194d73065d6d79"
+      "bytes": 7626,
+      "sha256": "bb4202ad772165e015849373d303f495f171830d1af976b0f57093638bce6ff3"
     },
     {
       "path": "docs/deployment/update-current-fire-danger.yml",
