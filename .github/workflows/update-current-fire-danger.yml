@@ -126,7 +126,7 @@ jobs:
             if curl -fsS "${ECORADAR_PUBLIC_URL}/?commit=${{ steps.commit.outputs.sha }}" -o "$RUNNER_TEMP/ecoradar-index.html" &&
                curl -fsS "${ECORADAR_PUBLIC_URL}/api/daily-readings?commit=${{ steps.commit.outputs.sha }}" -o "$RUNNER_TEMP/ecoradar-daily-readings.json" &&
                grep -q 'data-mode="fireCurrent"' "$RUNNER_TEMP/ecoradar-index.html" &&
-               python -c 'import json,sys; data=json.load(open(sys.argv[1])); raise SystemExit(0 if data.get("checked_at_utc") == sys.argv[2] else 1)' "$RUNNER_TEMP/ecoradar-daily-readings.json" "$ECORADAR_CHECKED_AT_UTC"; then
+               python -c 'import datetime,json,sys; parse=lambda value: datetime.datetime.fromisoformat(value.replace("Z","+00:00")); data=json.load(open(sys.argv[1])); raise SystemExit(0 if parse(data["checked_at_utc"]) == parse(sys.argv[2]) else 1)' "$RUNNER_TEMP/ecoradar-daily-readings.json" "$ECORADAR_CHECKED_AT_UTC"; then
               echo "Verified current EcoRadar viewer and daily-readings API in production."
               exit 0
             fi
