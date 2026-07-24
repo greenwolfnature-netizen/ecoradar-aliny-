@@ -1,6 +1,6 @@
 {
   "source_gate": "verified",
-  "checked_at_utc": "2026-07-24T06:33:33Z",
+  "checked_at_utc": "2026-07-24T06:41:16Z",
   "config": "config/alinya_current_fire_danger.json",
   "inputs": {
     "official_structural": "projectes/Alinya/raw/incendis/perill_basic_2024/PERILLBASICINCENDI.tif",
@@ -12,8 +12,8 @@
   },
   "result": {
     "schema_version": "1.0",
-    "generated_at_utc": "2026-07-24T06:33:33Z",
-    "checked_at_utc": "2026-07-24T06:33:33Z",
+    "generated_at_utc": "2026-07-24T06:41:16Z",
+    "checked_at_utc": "2026-07-24T06:41:16Z",
     "reading": "Perill d'incendi actual",
     "scope": "Muntanya d'Alinyà",
     "status": "incompleta en algunes cel·les",
@@ -163,7 +163,7 @@
     "methodology": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
     "sources": {
       "meteocat": {
-        "generated_at_utc": "2026-07-24T06:33:41.143018+00:00",
+        "generated_at_utc": "2026-07-24T06:41:23.645864+00:00",
         "connector": "meteocat_xema_socrata",
         "responsibility": "download_and_normalize_only",
         "source": "Dades meteorològiques de la XEMA",
@@ -239,7 +239,7 @@
         }
       },
       "landsat": {
-        "generated_at_utc": "2026-07-24T06:34:44.542752+00:00",
+        "generated_at_utc": "2026-07-24T06:42:26.938762+00:00",
         "connector": "landsat_usgs_c2_l2_summer_composite",
         "responsibility": "download_and_normalize_only",
         "scope": "Muntanya d'Alinyà",
