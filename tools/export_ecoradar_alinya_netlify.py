@@ -645,7 +645,10 @@ def render_index(data: dict) -> str:
       min-height:760px; border:1px solid #d8d1c4; box-sizing:border-box; overflow:hidden;
     }}
     #ecoradar-alinya * {{ box-sizing:border-box; }}
-    #ecoradar-alinya .eu-head {{ display:grid; grid-template-columns:minmax(280px,.9fr) minmax(430px,1.5fr) auto; gap:20px; align-items:end; padding:18px 20px 14px; border-bottom:1px solid var(--line); background:linear-gradient(90deg,#fbfaf6 0%,#f6f2e8 70%,#f9f7f1 100%); }}
+    #ecoradar-alinya .eu-head {{ position:relative; isolation:isolate; display:grid; grid-template-columns:minmax(280px,.9fr) minmax(430px,1.5fr) auto; gap:20px; align-items:end; overflow:hidden; padding:18px 20px 14px; border-bottom:1px solid #b8c8b9; background:linear-gradient(90deg,rgba(251,250,246,.98) 0%,rgba(239,245,235,.96) 55%,rgba(247,246,239,.98) 100%); }}
+    #ecoradar-alinya .eu-head::before {{ content:""; position:absolute; z-index:-2; inset:-45px -20px -55px 43%; background:radial-gradient(circle at 57% 50%,transparent 0 35px,rgba(86,128,67,.16) 36px 37px,transparent 38px 63px,rgba(86,128,67,.13) 64px 65px,transparent 66px 92px,rgba(23,51,45,.10) 93px 95px,transparent 96px),conic-gradient(from 315deg at 57% 50%,transparent 0deg 305deg,rgba(132,164,72,.18) 306deg 338deg,transparent 339deg 360deg); }}
+    #ecoradar-alinya .eu-head::after {{ content:""; position:absolute; z-index:-1; top:50%; right:186px; width:16px; height:16px; border:5px solid rgba(64,111,52,.16); border-radius:50%; background:rgba(47,116,63,.18); box-shadow:0 0 0 1px rgba(23,51,45,.08); transform:translateY(-50%); }}
+    #ecoradar-alinya .eu-head > * {{ position:relative; z-index:1; }}
     #ecoradar-alinya h1 {{ margin:0; font-size:28px; line-height:.94; letter-spacing:.02em; color:var(--blue); }}
     #ecoradar-alinya h1 span {{ display:block; margin-top:7px; color:var(--green); font-size:31px; }}
     #ecoradar-alinya h1 small {{ display:block; margin-top:7px; color:#49645a; font-size:12px; line-height:1.15; letter-spacing:.08em; }}
@@ -790,12 +793,16 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya details.eu-detail summary {{ cursor:pointer; padding:12px 14px; color:var(--blue); font-size:11px; font-weight:750; }}
     #ecoradar-alinya details.eu-detail > div {{ padding:0 14px 14px; color:#405563; font-size:10px; line-height:1.55; }}
     #ecoradar-alinya .eu-callout {{ margin-top:16px; padding:14px 16px; border-left:4px solid var(--orange); background:#fff8ed; color:#5c5145; font-size:11px; line-height:1.55; }}
-    #ecoradar-alinya .eu-executive {{ padding-top:52px; background:linear-gradient(180deg,#f1f5ed 0%,#f7f4ec 100%); }}
-    #ecoradar-alinya .eu-executive-head {{ display:grid; grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr); gap:24px; align-items:end; }}
-    #ecoradar-alinya .eu-reading-path {{ padding:18px; border:1px solid #bdcdbd; border-radius:10px; background:rgba(255,255,255,.8); }}
+    #ecoradar-alinya .eu-executive {{ padding-top:52px; border-top:5px solid var(--green); border-bottom:1px solid #b9c8b8; background:linear-gradient(180deg,#edf4ea 0%,#f7f4ec 100%); text-align:center; }}
+    #ecoradar-alinya .eu-executive-intro {{ position:relative; max-width:960px; margin:0 auto 30px; padding:0 36px 30px; }}
+    #ecoradar-alinya .eu-executive-intro::after {{ content:""; position:absolute; left:50%; bottom:0; width:min(420px,70%); height:1px; background:#9fb39f; transform:translateX(-50%); }}
+    #ecoradar-alinya .eu-executive-head {{ display:flex; flex-direction:column; align-items:center; gap:14px; }}
+    #ecoradar-alinya .eu-executive .eu-section-kicker {{ margin-bottom:0; font-size:11px; letter-spacing:.14em; }}
+    #ecoradar-alinya .eu-executive .eu-lead {{ max-width:900px; margin:18px auto 22px; color:#294a3c; font-size:clamp(15px,1.5vw,19px); line-height:1.58; }}
+    #ecoradar-alinya .eu-reading-path {{ width:min(720px,100%); padding:14px 20px; border:1px solid #bdcdbd; border-radius:10px; background:rgba(255,255,255,.8); }}
     #ecoradar-alinya .eu-reading-path strong {{ display:block; margin-bottom:6px; color:var(--blue); font-size:12px; }}
     #ecoradar-alinya .eu-reading-path p {{ margin:0; color:#405563; font-size:10px; line-height:1.5; }}
-    #ecoradar-alinya .eu-actions {{ display:flex; flex-wrap:wrap; gap:9px; margin:20px 0 26px; }}
+    #ecoradar-alinya .eu-actions {{ display:flex; flex-wrap:wrap; justify-content:center; gap:9px; margin:20px 0 0; }}
     #ecoradar-alinya .eu-action {{ display:inline-flex; align-items:center; min-height:40px; padding:9px 14px; border:1px solid var(--blue); border-radius:6px; color:#fff; background:var(--blue); font-size:10px; font-weight:750; text-decoration:none; }}
     #ecoradar-alinya .eu-action.secondary {{ color:var(--blue); background:#fff; }}
     #ecoradar-alinya .eu-exec-grid {{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }}
@@ -808,7 +815,7 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-fire-chapter {{ background:#f5f2eb; }}
     @media (max-width:1050px) {{ #ecoradar-alinya .eu-grid {{ grid-template-columns:230px minmax(450px,1fr); }} #ecoradar-alinya .eu-column.eu-right {{ grid-column:1/-1; display:grid; grid-template-columns:repeat(3,1fr); }} #ecoradar-alinya .eu-foot {{ grid-column:1/-1; }} }}
     @media (max-width:900px) {{ #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} }}
-    @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ display:flex; }} #ecoradar-alinya .eu-map-panel, #ecoradar-alinya svg {{ min-height:520px; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} }}
+    @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ display:flex; }} #ecoradar-alinya .eu-map-panel, #ecoradar-alinya svg {{ min-height:520px; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} }}
     @media print {{
       @page {{ size:A4 landscape; margin:10mm; }}
       body {{ background:#fff!important; }}
@@ -842,12 +849,14 @@ def render_index(data: dict) -> str:
   </nav>
 
   <section class="eu-report-section eu-executive" id="resum">
-    <div class="eu-executive-head">
-      <div><p class="eu-section-kicker">01 · Resum territorial</p></div>
-      <aside class="eu-reading-path"><strong>Dues profunditats, una mateixa diagnosi</strong><p>Aquesta primera pantalla permet una lectura directiva en dos minuts. El mapa i els set capítols següents conserven íntegrament la lectura tècnica, les fitxes, les fonts, les capes i les limitacions.</p></aside>
+    <div class="eu-executive-intro">
+      <div class="eu-executive-head">
+        <div><p class="eu-section-kicker">01 · Resum territorial</p></div>
+        <aside class="eu-reading-path"><strong>Dues profunditats, una mateixa diagnosi</strong><p>Aquesta primera pantalla permet una lectura directiva en dos minuts. El mapa i els set capítols següents conserven íntegrament la lectura tècnica, les fitxes, les fonts, les capes i les limitacions.</p></aside>
+      </div>
+      <p class="eu-lead">La Muntanya d’Alinyà conserva una matriu forestal extensa, una elevada responsabilitat sobre hàbitats d’interès comunitari i una biodiversitat pública ben documentada. El procés territorial central és el tancament progressiu del paisatge: prats, herbassars, vores i ecotons tenen una funció desproporcionada com a hàbitat, espai de campeig i discontinuïtat del combustible.</p>
+      <div class="eu-actions"><a class="eu-action" href="#cartografia">Explorar el mapa interactiu</a><a class="eu-action secondary" href="#gestio">Anar a les prioritats de gestió</a><a class="eu-action secondary" href="#mosaic">Començar la lectura tècnica</a></div>
     </div>
-    <p class="eu-lead">La Muntanya d’Alinyà conserva una matriu forestal extensa, una elevada responsabilitat sobre hàbitats d’interès comunitari i una biodiversitat pública ben documentada. El procés territorial central és el tancament progressiu del paisatge: prats, herbassars, vores i ecotons tenen una funció desproporcionada com a hàbitat, espai de campeig i discontinuïtat del combustible.</p>
-    <div class="eu-actions"><a class="eu-action" href="#cartografia">Explorar el mapa interactiu</a><a class="eu-action secondary" href="#gestio">Anar a les prioritats de gestió</a><a class="eu-action secondary" href="#mosaic">Començar la lectura tècnica</a></div>
     <div class="eu-card-grid eu-four">
       <article class="eu-report-card"><span class="eu-big" id="report-area"></span><h3>Àmbit validat</h3><p>Base espacial comuna per a totes les capes, en ETRS89 / UTM 31N (EPSG:25831).</p></article>
       <article class="eu-report-card green"><span class="eu-big" id="report-forest"></span><h3>Coberta forestal</h3><p>Matriu dominant. La dada de coberta no descriu per si sola estructura, vigor ni combustible.</p></article>
