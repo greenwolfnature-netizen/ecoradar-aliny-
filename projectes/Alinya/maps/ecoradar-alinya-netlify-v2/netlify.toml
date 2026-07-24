@@ -19,3 +19,8 @@
   for = "/vendor/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/projectes/Alinya/maps/incendis/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"

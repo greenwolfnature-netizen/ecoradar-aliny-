@@ -1,6 +1,6 @@
 {
   "source_gate": "verified",
-  "checked_at_utc": "2026-07-24T06:06:10Z",
+  "checked_at_utc": "2026-07-24T06:26:52Z",
   "config": "config/alinya_current_fire_danger.json",
   "inputs": {
     "official_structural": "projectes/Alinya/raw/incendis/perill_basic_2024/PERILLBASICINCENDI.tif",
@@ -12,8 +12,8 @@
   },
   "result": {
     "schema_version": "1.0",
-    "generated_at_utc": "2026-07-24T06:06:10Z",
-    "checked_at_utc": "2026-07-24T06:06:10Z",
+    "generated_at_utc": "2026-07-24T06:26:52Z",
+    "checked_at_utc": "2026-07-24T06:26:52Z",
     "reading": "Perill d'incendi actual",
     "scope": "Muntanya d'Alinyà",
     "status": "incompleta en algunes cel·les",
@@ -33,15 +33,15 @@
       "webp": "projectes/Alinya/maps/incendis/current_fire_danger.webp"
     },
     "summary": {
-      "mean_index_0_100": 46.6,
+      "mean_index_0_100": 47.2,
       "predominant_category": "moderat",
-      "maximum_index_0_100": 80.5,
+      "maximum_index_0_100": 81.2,
       "maximum_category": "molt alt",
       "area_by_category_ha": {
-        "molt baix": 52.39,
-        "baix": 1428.74,
-        "moderat": 2991.7,
-        "alt": 990.2,
+        "molt baix": 20.49,
+        "baix": 1378.62,
+        "moderat": 3018.45,
+        "alt": 1045.48,
         "molt alt": 1.0,
         "extrem": 0.0
       },
@@ -56,28 +56,28 @@
         "Perill estructural elevat",
         "Vegetació seca"
       ],
-      "latest_update_utc": "2026-07-24T05:00:00Z",
+      "latest_update_utc": "2026-07-24T05:30:00Z",
       "confidence_pct": 63.7,
       "confidence": "mitjana"
     },
     "weather": {
       "air_temperature_c": {
-        "value": 19.5,
-        "timestamp_utc": "2026-07-24T05:00:00Z",
+        "value": 19.6,
+        "timestamp_utc": "2026-07-24T05:30:00Z",
         "validation_code": "",
         "history_p05": 18.8,
         "history_p95": 32.0
       },
       "relative_humidity_pct": {
-        "value": 54.0,
-        "timestamp_utc": "2026-07-24T05:00:00Z",
+        "value": 52.0,
+        "timestamp_utc": "2026-07-24T05:30:00Z",
         "validation_code": "",
         "history_p05": 20.0,
         "history_p95": 59.0
       },
       "precipitation_mm": {
         "value": 0.0,
-        "timestamp_utc": "2026-07-24T05:00:00Z",
+        "timestamp_utc": "2026-07-24T05:30:00Z",
         "validation_code": ""
       },
       "daily_min_relative_humidity_pct": 47.0
@@ -132,9 +132,9 @@
         "update_status": "dada no disponible"
       },
       "relative_humidity_inverse": {
-        "value": "54 %",
+        "value": "52 %",
         "source": "Meteocat XEMA · Y4 Alinyà",
-        "date_utc": "2026-07-24T05:00:00Z",
+        "date_utc": "2026-07-24T05:30:00Z",
         "weight_pct": 10,
         "quality": "provisional",
         "update_status": "actualitzada avui"
@@ -163,7 +163,7 @@
     "methodology": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
     "sources": {
       "meteocat": {
-        "generated_at_utc": "2026-07-24T06:07:11.819709+00:00",
+        "generated_at_utc": "2026-07-24T06:27:00.378028+00:00",
         "connector": "meteocat_xema_socrata",
         "responsibility": "download_and_normalize_only",
         "source": "Dades meteorològiques de la XEMA",
@@ -171,9 +171,9 @@
         "official_dataset": "https://analisi.transparenciacatalunya.cat/d/nzvn-apee",
         "station_code": "Y4",
         "station_name": "Alinyà",
-        "records": 5034,
+        "records": 5037,
         "first_observation_utc": "2026-06-19T06:30:00Z",
-        "last_observation_utc": "2026-07-24T05:00:00Z",
+        "last_observation_utc": "2026-07-24T05:30:00Z",
         "variables": {
           "air_temperature_c": "32",
           "wind_speed_ms": "30",
@@ -239,7 +239,7 @@
         }
       },
       "landsat": {
-        "generated_at_utc": "2026-07-24T06:08:17.172585+00:00",
+        "generated_at_utc": "2026-07-24T06:27:52.298127+00:00",
         "connector": "landsat_usgs_c2_l2_summer_composite",
         "responsibility": "download_and_normalize_only",
         "scope": "Muntanya d'Alinyà",
