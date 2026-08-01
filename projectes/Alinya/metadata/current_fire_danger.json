@@ -1,6 +1,6 @@
 {
   "source_gate": "verified",
-  "checked_at_utc": "2026-07-31T18:59:09Z",
+  "checked_at_utc": "2026-08-01T17:46:38Z",
   "config": "config/alinya_current_fire_danger.json",
   "inputs": {
     "official_structural": "projectes/Alinya/raw/incendis/perill_basic_2024/PERILLBASICINCENDI.tif",
@@ -12,8 +12,8 @@
   },
   "result": {
     "schema_version": "1.0",
-    "generated_at_utc": "2026-07-31T18:59:09Z",
-    "checked_at_utc": "2026-07-31T18:59:09Z",
+    "generated_at_utc": "2026-08-01T17:46:38Z",
+    "checked_at_utc": "2026-08-01T17:46:38Z",
     "reading": "Perill d'incendi actual",
     "scope": "Muntanya d'Alinyà",
     "status": "incompleta en algunes cel·les",
@@ -33,19 +33,19 @@
       "webp": "projectes/Alinya/maps/incendis/current_fire_danger.webp"
     },
     "summary": {
-      "mean_index_0_100": 48.8,
+      "mean_index_0_100": 52.7,
       "predominant_category": "moderat",
-      "maximum_index_0_100": 83.1,
+      "maximum_index_0_100": 87.6,
       "maximum_category": "molt alt",
       "area_by_category_ha": {
-        "molt baix": 14.27,
-        "baix": 1194.54,
-        "moderat": 3059.72,
-        "alt": 1193.5,
-        "molt alt": 2.0,
+        "molt baix": 0.96,
+        "baix": 747.47,
+        "moderat": 3056.18,
+        "alt": 1642.81,
+        "molt alt": 16.62,
         "extrem": 0.0
       },
-      "very_high_or_extreme_area_pct": 0.0,
+      "very_high_or_extreme_area_pct": 0.3,
       "dominant_variables": [
         "vegetation_type_fuel_potential",
         "official_structural_2024",
@@ -56,31 +56,31 @@
         "Perill estructural elevat",
         "Vegetació seca"
       ],
-      "latest_update_utc": "2026-07-31T18:00:00Z",
-      "confidence_pct": 59.8,
+      "latest_update_utc": "2026-08-01T17:00:00Z",
+      "confidence_pct": 59.3,
       "confidence": "mitjana"
     },
     "weather": {
       "air_temperature_c": {
-        "value": 27.3,
-        "timestamp_utc": "2026-07-31T18:00:00Z",
+        "value": 28.0,
+        "timestamp_utc": "2026-08-01T17:00:00Z",
         "validation_code": "",
         "history_p05": 17.9,
         "history_p95": 32.209999999999994
       },
       "relative_humidity_pct": {
-        "value": 48.0,
-        "timestamp_utc": "2026-07-31T18:00:00Z",
+        "value": 36.0,
+        "timestamp_utc": "2026-08-01T17:00:00Z",
         "validation_code": "",
         "history_p05": 20.0,
         "history_p95": 60.0
       },
       "precipitation_mm": {
         "value": 0.0,
-        "timestamp_utc": "2026-07-31T18:00:00Z",
+        "timestamp_utc": "2026-08-01T17:00:00Z",
         "validation_code": ""
       },
-      "daily_min_relative_humidity_pct": 22.0
+      "daily_min_relative_humidity_pct": 31.0
     },
     "variables_today": {
       "official_structural_2024": {
@@ -132,9 +132,9 @@
         "update_status": "dada no disponible"
       },
       "relative_humidity_inverse": {
-        "value": "48 %",
+        "value": "36 %",
         "source": "Meteocat XEMA · Y4 Alinyà",
-        "date_utc": "2026-07-31T18:00:00Z",
+        "date_utc": "2026-08-01T17:00:00Z",
         "weight_pct": 10,
         "quality": "provisional",
         "update_status": "actualitzada avui"
@@ -163,7 +163,7 @@
     "methodology": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
     "sources": {
       "meteocat": {
-        "generated_at_utc": "2026-07-31T18:59:18.424204+00:00",
+        "generated_at_utc": "2026-08-01T17:46:53.552022+00:00",
         "connector": "meteocat_xema_socrata",
         "responsibility": "download_and_normalize_only",
         "source": "Dades meteorològiques de la XEMA",
@@ -172,8 +172,8 @@
         "station_code": "Y4",
         "station_name": "Alinyà",
         "records": 5037,
-        "first_observation_utc": "2026-06-26T19:00:00Z",
-        "last_observation_utc": "2026-07-31T18:00:00Z",
+        "first_observation_utc": "2026-06-27T18:00:00Z",
+        "last_observation_utc": "2026-08-01T17:00:00Z",
         "variables": {
           "air_temperature_c": "32",
           "wind_speed_ms": "30",
