@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-08-02T18:10:52.374703+00:00",
+  "generated_at_utc": "2026-08-03T20:20:18.880694+00:00",
   "scope": "Muntanya d'Alinyà",
   "study_bbox_epsg4326": [
     1.3639979999999998,
@@ -17,7 +17,7 @@
   "surface_temperature": {
     "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
     "date_range": "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z",
-    "scene_count": 21,
+    "scene_count": 22,
     "composite_method": "Per-pixel median of every valid QA-screened summer observation",
     "coverage_pct": 100.0,
     "metrics_c": {

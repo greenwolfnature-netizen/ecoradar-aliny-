@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-08-02T18:10:51.305431+00:00",
+  "generated_at_utc": "2026-08-03T20:20:17.462524+00:00",
   "connector": "landsat_usgs_c2_l2_summer_composite",
   "responsibility": "download_and_normalize_only",
   "scope": "Muntanya d'Alinyà",
@@ -16,7 +16,7 @@
   "service_type": "STAC plus signed Cloud Optimized GeoTIFF range reads",
   "license": "USGS Landsat data are in the public domain",
   "date_range": "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z",
-  "scene_count": 21,
+  "scene_count": 22,
   "scenes": [
     {
       "item_id": "LC08_L2SP_198031_20250830_02_T1",
@@ -162,6 +162,13 @@
       "item_id": "LC09_L2SP_198031_20250705_02_T1",
       "acquired_at_utc": "2025-07-05T10:36:21.879307Z",
       "scene_cloud_cover_pct": 68.19,
+      "valid_study_pixels": 0,
+      "valid_study_pct": 0.0
+    },
+    {
+      "item_id": "LC08_L2SP_198031_20260716_02_T1",
+      "acquired_at_utc": "2026-07-16T10:36:04.150287Z",
+      "scene_cloud_cover_pct": 79.15,
       "valid_study_pixels": 0,
       "valid_study_pct": 0.0
     }
