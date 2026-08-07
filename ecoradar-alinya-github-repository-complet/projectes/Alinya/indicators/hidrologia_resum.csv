@@ -1,0 +1,8 @@
+layer_id,type_name,theme,description,feature_count,geometry_types,length_km,area_ha,raw_path
+rius_aca_che,AIGUA:AIGUA_RIUS_ACA_CHE,courses,Rius ACA/CHE,2,MultiLineString,11.6975,0.0,projectes/Alinya/raw/hidrologia/rius_aca_che.geojson
+eixos_drenatge,AIGUA:AIGUA_EIXOS_DRENATGE_ASDT,drainage_axes,Eixos de drenatge ASDT,1,LineString,0.0744,0.0,projectes/Alinya/raw/hidrologia/eixos_drenatge.geojson
+fonts,AIGUA:AIGUA_FONTS,springs,Fonts,12,Point,0.0,0.0,projectes/Alinya/raw/hidrologia/fonts.geojson
+masses_rius,AIGUA:AIGUA_CONQUES_MASSES_RIUS,river_water_bodies,Conques i masses de rius,0,,0.0,0.0,projectes/Alinya/raw/hidrologia/masses_rius.geojson
+preses_basses,AIGUA:AIGUA_PRESES_BASSES,ponds_reservoirs,Preses i basses,0,,0.0,0.0,projectes/Alinya/raw/hidrologia/preses_basses.geojson
+estanys,AIGUA:AIGUA_MA_ESTANYS,lakes,Masses d'aigua estanys,0,,0.0,0.0,projectes/Alinya/raw/hidrologia/estanys.geojson
+zones_humides_estanys,AIGUA:AIGUA_PDG_ZH_ESTANYS_CIC_222,wetlands_lakes,Zones humides i estanys del pla de gestió,0,,0.0,0.0,projectes/Alinya/raw/hidrologia/zones_humides_estanys.geojson

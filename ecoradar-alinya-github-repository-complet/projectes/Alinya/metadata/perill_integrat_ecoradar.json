@@ -1,0 +1,74 @@
+{
+  "generated_at_utc": "2026-07-20T18:27:24.763407+00:00",
+  "indicator": "integrated_structural_wildfire_danger_ecoradar",
+  "status": "verified_analysis",
+  "scope": "Muntanya d'Alinyà",
+  "crs": "EPSG:25831",
+  "resolution_m": 100.0,
+  "coverage_pct": 100.0,
+  "formula": "weighted mean of available normalized components; weights renormalized where the official forest-only raster has NoData",
+  "weights": {
+    "official_structural_2024": 0.3,
+    "surface_temperature": 0.2,
+    "vegetation_dryness_ndmi": 0.2,
+    "vegetation_type_fuel_potential": 0.2,
+    "territorial_concurrence": 0.1
+  },
+  "components": {
+    "official_structural_2024": "Generalitat Mapa bàsic de perill d'incendi forestal 2024, values 1-10 normalized to 0-1",
+    "surface_temperature": "Landsat warm-season composite robust-scaled between study P10=22.82 C and P90=32.38 C",
+    "vegetation_dryness_ndmi": "inverse Sentinel-2 NDMI robust-scaled between study P10=-0.039 and P90=0.251",
+    "vegetation_type_fuel_potential": {
+      "Aigua": 0.0,
+      "Roquissars / sol nu": 0.1,
+      "Vies i nuclis": 0.15,
+      "Conreus": 0.4,
+      "Prats i herbassars": 0.55,
+      "Matollar": 0.9,
+      "Bosc": 1.0
+    },
+    "territorial_concurrence": "existing 0-1 score combining cover, habitat, slope, aspect, elevation and access similarity to historical fires"
+  },
+  "thresholds": {
+    "baix": "<0.25",
+    "moderat": "0.25-<0.50",
+    "alt": "0.50-<0.70",
+    "molt_alt": ">=0.70"
+  },
+  "statistics": {
+    "minimum": 0.115,
+    "median": 0.527,
+    "maximum": 0.926,
+    "distribution": {
+      "baix": {
+        "cells": 35,
+        "area_ha": 35.0,
+        "share_pct": 0.6
+      },
+      "moderat": {
+        "cells": 2281,
+        "area_ha": 2281.0,
+        "share_pct": 41.8
+      },
+      "alt": {
+        "cells": 2503,
+        "area_ha": 2503.0,
+        "share_pct": 45.8
+      },
+      "molt_alt": {
+        "cells": 643,
+        "area_ha": 643.0,
+        "share_pct": 11.8
+      }
+    }
+  },
+  "outputs": {
+    "tif": "processed/incendis/perill_integrat_ecoradar.tif",
+    "webp": "maps/incendis/perill_integrat_ecoradar.webp"
+  },
+  "limitations": [
+    "EcoRadar integrated structural reading; not the official daily danger, Pla Alfa, ignition probability or emergency alert.",
+    "Fuel-potential scores are explicit analytical assumptions by land-cover class and require field validation of fuel load and vertical structure.",
+    "Landsat temperature is a warm-season surface composite and NDMI is a relative spectral moisture proxy, not fine-fuel moisture."
+  ]
+}

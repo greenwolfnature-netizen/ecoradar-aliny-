@@ -1,0 +1,25 @@
+{
+"type": "FeatureCollection",
+"name": "pressio_humana_osm_punts",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::25831" } },
+"features": [
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 370119.798101165099069, 4670068.833294630981982 ] } },
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 370638.025750430300832, 4670283.192787344567478 ] } },
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 370172.418028335087001, 4670752.458042748272419 ] } },
+{ "type": "Feature", "properties": { "name": "Mirador del camí de l'Aiguaneix", "amenity": "", "tourism": "viewpoint", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 370169.227381802978925, 4670755.060435755178332 ] } },
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 368698.84671087260358, 4670962.661613763310015 ] } },
+{ "type": "Feature", "properties": { "name": "Mirador dels Voltors", "amenity": "", "tourism": "viewpoint", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 368662.694796531577595, 4671156.362012868747115 ] } },
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 369537.810013285954483, 4672885.631494562141597 ] } },
+{ "type": "Feature", "properties": { "name": "Clot de patates", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 368004.722109710215591, 4673111.742953715845942 ] } },
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 367888.038917254074477, 4673132.525663748383522 ] } },
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 367918.628737476770766, 4673187.012144807726145 ] } },
+{ "type": "Feature", "properties": { "name": "Operation CO2 – La Muntanya d’Alinyà", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 369670.495259070303291, 4673199.282405740581453 ] } },
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 367888.109731231234036, 4673310.14619714487344 ] } },
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 370058.933554654242471, 4672480.413592260330915 ] } },
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 370048.569042821181938, 4672489.890691476874053 ] } },
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 370302.812123719369993, 4672529.866426588967443 ] } },
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 371831.393879696086515, 4672626.258330339565873 ] } },
+{ "type": "Feature", "properties": { "name": "Mirador de Colldeu", "amenity": "", "tourism": "viewpoint", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 371898.356905375781935, 4673192.536531798541546 ] } },
+{ "type": "Feature", "properties": { "name": "", "amenity": "", "tourism": "information", "leisure": "", "highway": "" }, "geometry": { "type": "Point", "coordinates": [ 374786.616498195624445, 4672548.352059932425618 ] } }
+]
+}

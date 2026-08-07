@@ -1,0 +1,5 @@
+indicator,value,unit
+osm_line_features,200,features
+osm_path_track_road_km,124.8291,km
+osm_path_track_road_density,2.2846,km/km2
+osm_recreational_point_features,18,features

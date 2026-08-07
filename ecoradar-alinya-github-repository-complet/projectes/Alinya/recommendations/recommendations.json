@@ -1,0 +1,326 @@
+{
+  "project": "Alinya",
+  "generated_at": "2026-07-08T14:37:57+00:00",
+  "scope": "recomanacions derivades exclusivament de la diagnosi ecològica; sense fitxa ni PDF",
+  "recommendations": [
+    {
+      "id": "DADES-001",
+      "title": "Desbloquejar Copernicus i clima abans de tancar vegetació, refugis climàtics i vulnerabilitat",
+      "type": "investigar",
+      "group": "Dades pendents",
+      "ecological_justification": "La diagnosi identifica teledetecció i clima com les dades que més condicionen vegetació, clima, foc, restauració i prioritat de gestió.",
+      "supporting_indicators": [
+        "CORE_03",
+        "CORE_04",
+        "CORE_05",
+        "CORE_09",
+        "CORE_11",
+        "CORE_12"
+      ],
+      "sources_used": [],
+      "location": "Tot l'àmbit d'Alinyà; lectura raster i climàtica homogènia.",
+      "affected_surface": "5.464,03 ha",
+      "expected_ecological_benefit": "Augmentar de forma directa la confiança dels indicadors climàtics, de vegetació, foc i restauració.",
+      "urgency": "molt alta",
+      "difficulty": "baixa",
+      "confidence": "alta",
+      "dependencies": [
+        "Credencials Copernicus, Meteocat/AEMET i definició de producte LST."
+      ],
+      "diagnosis_conclusions": [
+        "Les dades que més condicionen la diagnosi són teledetecció, clima, camp i combustible"
+      ],
+      "ecological_priority_score": 97.18
+    },
+    {
+      "id": "CAMP-001",
+      "title": "Executar una campanya de validació de camp sobre hàbitats, aigua, ús públic i biodiversitat sensible",
+      "type": "validar al camp",
+      "group": "Treball de camp",
+      "ecological_justification": "La diagnosi marca com a robusta la necessitat de camp perquè falten field_biodiversity i field_validation en diversos indicadors.",
+      "supporting_indicators": [
+        "CORE_02",
+        "CORE_06",
+        "CORE_07",
+        "CORE_10"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "gbif_occurrences",
+        "habitats_terrestres_v3",
+        "inaturalist_observations",
+        "osm_public_use"
+      ],
+      "location": "HIC i HIC prioritaris, punts d'aigua, accessos principals i grups taxonòmics poc representats.",
+      "affected_surface": "5.464,03 ha d'àmbit de mostreig; punts finals a definir en pla de camp",
+      "expected_ecological_benefit": "Convertir incerteses en criteris verificats i evitar actuacions incompatibles amb hàbitats o espècies sensibles.",
+      "urgency": "molt alta",
+      "difficulty": "mitjana",
+      "confidence": "alta",
+      "dependencies": [
+        "Disseny de protocols de camp i importador de dades pròpies EcoRadar."
+      ],
+      "diagnosis_conclusions": [
+        "Cal validar al camp hàbitats, pressió humana, punts d'aigua i biodiversitat sensible"
+      ],
+      "ecological_priority_score": 91.55
+    },
+    {
+      "id": "CONS-001",
+      "title": "Conservar preventivament HIC i hàbitats prioritaris abans de qualsevol actuació",
+      "type": "conservar",
+      "group": "Conservació",
+      "ecological_justification": "La diagnosi identifica els hàbitats com un dels valors ecològics principals: CORE_02 és molt alt i combina riquesa d'hàbitats, HIC i HIC prioritaris.",
+      "supporting_indicators": [
+        "CORE_02",
+        "CORE_06",
+        "CORE_08"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "gbif_occurrences",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "inaturalist_observations",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "location": "Polígons cartografiats com HIC o HIC prioritari dins l'àrea d'Alinyà.",
+      "affected_surface": "3.170,95 ha HIC; 1.229,39 ha HIC prioritaris",
+      "expected_ecological_benefit": "Evitar impactes sobre hàbitats de responsabilitat de conservació i mantenir els valors que sustenten la diagnosi.",
+      "urgency": "alta",
+      "difficulty": "mitjana",
+      "confidence": "alta",
+      "dependencies": [
+        "Validació de camp d'hàbitats abans d'actuacions locals."
+      ],
+      "diagnosis_conclusions": [
+        "Hàbitats, biodiversitat coneguda i connectivitat són els principals valors detectats"
+      ],
+      "ecological_priority_score": 78.87
+    },
+    {
+      "id": "CONS-002",
+      "title": "Mantenir la matriu natural connectada i evitar noves barreres",
+      "type": "millorar connectivitat",
+      "group": "Conservació",
+      "ecological_justification": "La diagnosi relaciona mosaic alt, connectivitat alta i hàbitats de valor; cap capa aïllada explica el funcionament del territori.",
+      "supporting_indicators": [
+        "CORE_01",
+        "CORE_02",
+        "CORE_08",
+        "CORE_10"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "icgc_dem_mdt",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "location": "Connectors oficials i zones de matriu natural identificades per Infraestructura Verda i cobertes del sòl.",
+      "affected_surface": "1.198,60 ha en connectors terrestres principals retallats",
+      "expected_ecological_benefit": "Mantenir permeabilitat ecològica i reduir fragmentació futura.",
+      "urgency": "alta",
+      "difficulty": "mitjana",
+      "confidence": "mitjana",
+      "dependencies": [
+        "Model de barreres fines i validació de passos/corredors locals."
+      ],
+      "diagnosis_conclusions": [
+        "El funcionament ecològic depèn d'una matriu natural connectada amb funcions hídriques parcials"
+      ],
+      "ecological_priority_score": 69.01
+    },
+    {
+      "id": "HIDRO-001",
+      "title": "Validar funcionalitat hídrica, fonts i punts d'aigua abans de definir refugis o restauració",
+      "type": "hidrologia",
+      "group": "Seguiment",
+      "ecological_justification": "La diagnosi indica que l'aigua està cartografiada parcialment però no funcionalment caracteritzada.",
+      "supporting_indicators": [
+        "CORE_10",
+        "CORE_04"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "icgc_dem_mdt",
+        "land_cover_icgc_cobertes_sol"
+      ],
+      "location": "Cursos/drenatge ACA i fonts oficials dins l'àrea d'estudi.",
+      "affected_surface": "11,77 km de xarxa hidrogràfica/drenatge; 12 fonts oficials",
+      "expected_ecological_benefit": "Millorar la lectura de refugis climàtics, fauna associada a aigua i oportunitats de restauració.",
+      "urgency": "alta",
+      "difficulty": "mitjana",
+      "confidence": "mitjana",
+      "dependencies": [
+        "NDWI, verificació de camp de fonts/basses i estat ecològic dels punts d'aigua."
+      ],
+      "diagnosis_conclusions": [
+        "L'aigua està cartografiada parcialment però no funcionalment caracteritzada"
+      ],
+      "ecological_priority_score": 69.01
+    },
+    {
+      "id": "FOC-001",
+      "title": "Validar combustible, humitat vegetal i discontinuïtats abans de proposar gestió forestal",
+      "type": "validar al camp",
+      "group": "Treball de camp",
+      "ecological_justification": "La diagnosi no tanca resiliència al foc perquè falten NDMI, LST i estructura oficial de combustible.",
+      "supporting_indicators": [
+        "CORE_09",
+        "CORE_01",
+        "CORE_10"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "fires_burned_areas",
+        "habitats_terrestres_v3",
+        "icgc_dem_mdt",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "location": "Masses forestals, matollars, prats i discontinuïtats detectades per cobertes del sòl i DEM.",
+      "affected_surface": "5.464,03 ha d'àmbit potencial; actuacions forestals no delimitades encara",
+      "expected_ecological_benefit": "Evitar actuacions forestals prematures i separar zones on el mosaic ajuda de zones on pot faltar discontinuïtat.",
+      "urgency": "alta",
+      "difficulty": "mitjana",
+      "confidence": "mitjana",
+      "dependencies": [
+        "NDMI, LST, font oficial de combustible/estructura forestal i validació de camp."
+      ],
+      "diagnosis_conclusions": [
+        "La resiliència davant del foc queda condicionada per combustible i humitat no disponibles"
+      ],
+      "ecological_priority_score": 69.01
+    },
+    {
+      "id": "AGR-001",
+      "title": "Verificar prats, conreus residuals i espais oberts amb SIGPAC/DUN abans de gestió agrària",
+      "type": "gestió agrària",
+      "group": "Dades pendents",
+      "ecological_justification": "La diagnosi apunta que els espais oberts poden tenir funció ecològica desproporcionada, però SIGPAC/DUN no està disponible.",
+      "supporting_indicators": [
+        "CORE_01",
+        "CORE_09"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "fires_burned_areas",
+        "habitats_terrestres_v3",
+        "icgc_dem_mdt",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "location": "Prats, herbassars, conreus residuals i ecotons detectats per cobertes/hàbitats.",
+      "affected_surface": "5.464,03 ha d'àmbit; superfície agrària fina pendent de SIGPAC/DUN",
+      "expected_ecological_benefit": "Distingir espais oberts ecològicament estratègics de zones sense funció prioritària abans de gestionar o restaurar.",
+      "urgency": "mitjana",
+      "difficulty": "baixa",
+      "confidence": "mitjana",
+      "dependencies": [
+        "Accés oficial SIGPAC/DUN i validació de camp dels espais oberts."
+      ],
+      "diagnosis_conclusions": [
+        "Els espais oberts poden tenir una funció ecològica desproporcionada dins la matriu forestal"
+      ],
+      "ecological_priority_score": 61.97
+    },
+    {
+      "id": "REST-001",
+      "title": "Validar zones candidates de restauració abans de convertir el potencial en actuacions",
+      "type": "validar al camp",
+      "group": "Restauració",
+      "ecological_justification": "La diagnosi detecta potencial de restauració alt, però encara no priorització espacial ni hàbitats degradats validats.",
+      "supporting_indicators": [
+        "CORE_11",
+        "CORE_12"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "fires_burned_areas",
+        "gbif_occurrences",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "icgc_dem_mdt",
+        "inaturalist_observations",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "location": "Àmbit complet; priorització pendent de Sentinel, camp, combustible i SIGPAC/DUN.",
+      "affected_surface": "5.464,03 ha d'anàlisi; superfície d'actuació no delimitada",
+      "expected_ecological_benefit": "Evitar restauracions mal localitzades i preparar una cartera de zones candidates amb criteri ecològic.",
+      "urgency": "mitjana",
+      "difficulty": "mitjana",
+      "confidence": "mitjana",
+      "dependencies": [
+        "Sentinel, hàbitats degradats, hàbitats font, SIGPAC/DUN i treball de camp."
+      ],
+      "diagnosis_conclusions": [
+        "Hi ha potencial de restauració, però encara no priorització espacial"
+      ],
+      "ecological_priority_score": 56.34
+    },
+    {
+      "id": "GEST-001",
+      "title": "Validar i ordenar l'ús públic on es pot solapar amb hàbitats d'alt valor",
+      "type": "ordenar ús públic",
+      "group": "Gestió",
+      "ecological_justification": "La diagnosi detecta valor ecològic molt alt i pressió humana potencial mitjana; això no prova conflicte, però obliga a validar accessos i freqüentació.",
+      "supporting_indicators": [
+        "CORE_02",
+        "CORE_06",
+        "CORE_07"
+      ],
+      "sources_used": [
+        "gbif_occurrences",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "inaturalist_observations",
+        "osm_public_use"
+      ],
+      "location": "Camins, pistes i punts d'ús públic cartografiats per OSM, especialment propers a HIC i zones connectores.",
+      "affected_surface": "124,83 km de camins/pistes OSM; 18 punts d'ús públic",
+      "expected_ecological_benefit": "Reduir possibles conflictes entre conservació i ús públic abans que esdevinguin pressions reals.",
+      "urgency": "mitjana",
+      "difficulty": "mitjana",
+      "confidence": "mitjana",
+      "dependencies": [
+        "Comptadors, observació de camp o dades de gestors; Strava només si és legalment compatible."
+      ],
+      "diagnosis_conclusions": [
+        "Valor ecològic alt amb pressió humana potencial mitjana"
+      ],
+      "ecological_priority_score": 56.34
+    }
+  ],
+  "groups": {
+    "Conservació": [
+      "CONS-001",
+      "CONS-002"
+    ],
+    "Restauració": [
+      "REST-001"
+    ],
+    "Gestió": [
+      "GEST-001"
+    ],
+    "Seguiment": [
+      "HIDRO-001"
+    ],
+    "Treball de camp": [
+      "CAMP-001",
+      "FOC-001"
+    ],
+    "Dades pendents": [
+      "DADES-001",
+      "AGR-001"
+    ]
+  }
+}

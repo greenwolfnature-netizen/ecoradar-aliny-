@@ -1,0 +1,13 @@
+indicator,value,confidence,sources_used,status
+Mosaic del paisatge,60.63,mitjana,land_cover_icgc_cobertes_sol,PARCIAL
+Estat de la vegetació,NO DISPONIBLE,baixa,,NO DISPONIBLE
+Valor dels hàbitats,98.91,mitjana,habitats_terrestres_v3; hic_v2,PARCIAL
+Refugis climàtics,59.2,mitjana,land_cover_icgc_cobertes_sol; icgc_dem_mdt; aca_hydrology,PARCIAL
+Vulnerabilitat climàtica,37.31,mitjana,land_cover_icgc_cobertes_sol; icgc_dem_mdt; aca_hydrology,PARCIAL
+Funcionalitat hídrica,47.18,mitjana,aca_hydrology,PARCIAL
+Connectivitat ecològica,93.83,mitjana,connectivity_infraestructura_verda; land_cover_icgc_cobertes_sol; aca_hydrology,PARCIAL
+Biodiversitat coneguda,95.11,mitjana,gbif_occurrences; inaturalist_observations,PARCIAL
+Pressió humana,49.15,baixa,osm_public_use,PARCIAL
+Resiliència davant del foc,42.99,mitjana,land_cover_icgc_cobertes_sol; icgc_dem_mdt; fires_burned_areas; osm_public_use,PARCIAL
+Potencial de restauració,72.26,baixa,habitats_terrestres_v3; land_cover_icgc_cobertes_sol; icgc_dem_mdt; aca_hydrology; osm_public_use,PARCIAL
+Prioritat de gestió,64.99,baixa,aca_hydrology; fires_burned_areas; gbif_occurrences; habitats_terrestres_v3; hic_v2; icgc_dem_mdt; inaturalist_observations; land_cover_icgc_cobertes_sol; osm_public_use,PARCIAL

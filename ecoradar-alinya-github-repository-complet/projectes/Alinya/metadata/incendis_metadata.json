@@ -1,0 +1,57 @@
+{
+  "project": "Alinya",
+  "source": "Superfícies afectades per incendis forestals v1.1",
+  "responsible_organization": "Generalitat de Catalunya / Departament competent en medi natural / ICGC / Cos d'Agents Rurals",
+  "service_url": "https://sig.gencat.cat/ows/VEGETACIO/wfs",
+  "layer": "VEGETACIO:VEGETACIO_INCENDIS",
+  "service_type": "WFS 2.0.0",
+  "query_date": "2026-07-07T17:33:05.879936+00:00",
+  "crs": "EPSG:25831",
+  "study_area_surface_ha": 5464.031656330243,
+  "raw_file": "projectes/Alinya/raw/incendis/vegetacio_incendis_alinya_bbox.geojson",
+  "processed_file": "projectes/Alinya/processed/incendis.gpkg",
+  "summary_file": "projectes/Alinya/indicators/incendis_resum.csv",
+  "features_clipped": 2,
+  "burned_area_ha": 17.4489,
+  "fire_years": [],
+  "effis": {
+    "status": "catalogue_only",
+    "url": "https://api.effis.emergency.copernicus.eu/rest/drf/datasets/",
+    "raw_file": "projectes/Alinya/raw/incendis/effis_drf_datasets.json",
+    "dataset_count": 3,
+    "local_geometry_downloaded": false
+  },
+  "summary": [
+    {
+      "metric": "gencat_fire_polygons",
+      "value": 2,
+      "unit": "features"
+    },
+    {
+      "metric": "gencat_burned_area_ha",
+      "value": 17.4489,
+      "unit": "ha"
+    },
+    {
+      "metric": "gencat_fire_years",
+      "value": "",
+      "unit": "years"
+    },
+    {
+      "metric": "effis_catalog_datasets",
+      "value": 3,
+      "unit": "datasets"
+    },
+    {
+      "metric": "effis_local_geometry_downloaded",
+      "value": 0,
+      "unit": "boolean"
+    }
+  ],
+  "limitations": [
+    "Gencat burned-area polygons describe historical perimeters, not current operational fire risk.",
+    "EFFIS is included as a verified public catalogue only; no local EFFIS product geometry is used until product-specific request workflow, CRS, licence and schema are documented.",
+    "IncendisCat is not used as an EcoRadar data source.",
+    "The connector does not calculate fire probability or resilience indicators."
+  ]
+}

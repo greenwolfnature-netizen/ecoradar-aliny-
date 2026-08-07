@@ -1,0 +1,12 @@
+{
+  "connector": "blocked_strava_heatmap_connector",
+  "source": "Strava Global Heatmap",
+  "status": "not_implementable_without_authorization",
+  "reason": "La font està condicionada legalment; EcoRadar no ha de fer scraping ni descarregar heatmaps sense permís o endpoint autoritzat.",
+  "required_action": "Integrar només si existeix accés autoritzat, condicions d'ús compatibles i metadades de llicència.",
+  "outputs": {},
+  "missing_outputs": [],
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:42:13+00:00",
+  "can_advance_to_next_connector": true
+}

@@ -1,0 +1,184 @@
+{
+  "project": "Alinya",
+  "generated_at": "2026-07-08T14:38:06+00:00",
+  "level": "technical",
+  "summary": {
+    "checks": 8,
+    "passed": 8,
+    "warnings": 0,
+    "major_errors": 0,
+    "critical_errors": 0,
+    "status": "VALIDATED"
+  },
+  "checks": [
+    {
+      "code": "TECH_01",
+      "level": "technical",
+      "title": "CRS de l'àrea d'estudi",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "CRS detectat: capa=EPSG:25831, metadades=EPSG:25831.",
+      "evidence": {
+        "study_area": {
+          "path": "projectes/Alinya/processed/study_area.gpkg",
+          "exists": true,
+          "crs": "EPSG:25831",
+          "feature_count": 1,
+          "invalid_count": 0,
+          "valid": true,
+          "area_ha": 5464.031656330243
+        },
+        "metadata_final_crs": "EPSG:25831"
+      }
+    },
+    {
+      "code": "TECH_02",
+      "level": "technical",
+      "title": "Geometria de l'àrea d'estudi",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "Geometries invàlides: 0.",
+      "evidence": {
+        "path": "projectes/Alinya/processed/study_area.gpkg",
+        "exists": true,
+        "crs": "EPSG:25831",
+        "feature_count": 1,
+        "invalid_count": 0,
+        "valid": true,
+        "area_ha": 5464.031656330243
+      }
+    },
+    {
+      "code": "TECH_03",
+      "level": "technical",
+      "title": "Superfície coherent amb metadades",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "Diferència àrea geometria/metadades: 0,000%.",
+      "evidence": {
+        "metadata_area_ha": 5464.031656330243,
+        "geometry_area_ha": 5464.031656330243,
+        "delta_pct": 0.0
+      }
+    },
+    {
+      "code": "TECH_04",
+      "level": "technical",
+      "title": "Capes processades retallades dins l'àrea d'estudi",
+      "status": "PASS",
+      "severity": "major",
+      "message": "Capes revisades: 7; fora de tolerància: 0.",
+      "evidence": {
+        "layers": [
+          {
+            "path": "projectes/Alinya/processed/cobertes_sol.gpkg",
+            "exists": true,
+            "status": "inside",
+            "feature_count": 6994,
+            "crs": "EPSG:25831",
+            "outside_area_m2": 0.0,
+            "outside_pct": 0.0
+          },
+          {
+            "path": "projectes/Alinya/processed/habitats.gpkg",
+            "exists": true,
+            "status": "inside",
+            "feature_count": 452,
+            "crs": "EPSG:25831",
+            "outside_area_m2": 0.0,
+            "outside_pct": 0.0
+          },
+          {
+            "path": "projectes/Alinya/processed/biodiversitat.gpkg",
+            "exists": true,
+            "status": "inside",
+            "feature_count": 731,
+            "crs": "EPSG:25831",
+            "outside_area_m2": 0.0,
+            "outside_pct": 0.0
+          },
+          {
+            "path": "projectes/Alinya/processed/recreational_pressure.gpkg",
+            "exists": true,
+            "status": "inside",
+            "feature_count": 200,
+            "crs": "EPSG:25831",
+            "outside_area_m2": 0.0,
+            "outside_pct": 0.0
+          },
+          {
+            "path": "projectes/Alinya/processed/hidrologia.gpkg",
+            "exists": true,
+            "status": "inside",
+            "feature_count": 2,
+            "crs": "EPSG:25831",
+            "outside_area_m2": 0.0,
+            "outside_pct": 0.0
+          },
+          {
+            "path": "projectes/Alinya/processed/connectivitat.gpkg",
+            "exists": true,
+            "status": "inside",
+            "feature_count": 49,
+            "crs": "EPSG:25831",
+            "outside_area_m2": 0.0,
+            "outside_pct": 0.0
+          },
+          {
+            "path": "projectes/Alinya/processed/incendis.gpkg",
+            "exists": true,
+            "status": "inside",
+            "feature_count": 2,
+            "crs": "EPSG:25831",
+            "outside_area_m2": 0.0,
+            "outside_pct": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "code": "TECH_05",
+      "level": "technical",
+      "title": "Valors sense buits crítics",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "Indicadors complets amb valor/font absent: 0.",
+      "evidence": {
+        "affected_indicators": []
+      }
+    },
+    {
+      "code": "TECH_06",
+      "level": "technical",
+      "title": "Fonts documentades",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "Fonts al catàleg: 29; fonts incompletes: 0.",
+      "evidence": {
+        "undocumented_sources": []
+      }
+    },
+    {
+      "code": "TECH_07",
+      "level": "technical",
+      "title": "Indicadors vinculats a fonts reals",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "Fonts utilitzades no registrades: 0.",
+      "evidence": {
+        "unknown_sources": []
+      }
+    },
+    {
+      "code": "TECH_08",
+      "level": "technical",
+      "title": "Cap valor inventat",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "Valors numèrics sense fonts: 0.",
+      "evidence": {
+        "affected_indicators": []
+      }
+    }
+  ]
+}

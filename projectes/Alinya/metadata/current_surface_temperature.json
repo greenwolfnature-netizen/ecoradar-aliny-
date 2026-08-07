@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "selection_rule": "freshest normalized QA-valid local detailed LST; coarse contextual products are excluded",
+  "selected": {
+    "source_key": "landsat",
+    "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
+    "organization": "United States Geological Survey",
+    "acquired_at_utc": "2026-07-08T10:36:09.180240Z",
+    "resolution_m": 30,
+    "normalized_tif": "projectes/Alinya/processed/landsat/landsat_lst.tif",
+    "quality": "QA_PIXEL applied; median composition of valid summer observations",
+    "source_metadata": "projectes/Alinya/metadata/landsat_connector.json"
+  },
+  "eligible_sources": [
+    {
+      "source_key": "landsat",
+      "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
+      "acquired_at_utc": "2026-07-08T10:36:09.180240Z",
+      "resolution_m": 30
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "connector": "pending_bdbc_connector",
+  "source": "Banc de Dades de Biodiversitat de Catalunya",
+  "status": "blocked_pending_official_access_verification",
+  "reason": "No hi ha API/exportació automàtica verificada per polígon dins el projecte.",
+  "required_action": "Confirmar amb BDBC/UB si hi ha exportació autoritzada per quadrícula o àrea i documentar llicència.",
+  "outputs": {},
+  "missing_outputs": [],
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:42:13+00:00",
+  "can_advance_to_next_connector": true
+}

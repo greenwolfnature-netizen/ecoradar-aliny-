@@ -1,0 +1,21 @@
+{
+  "connector": "connector_connectivitat_ecologica",
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:36:47+00:00",
+  "status": "completed",
+  "can_advance_to_next_connector": true,
+  "source": "Infraestructura Verda / Connectivitat ecològica",
+  "outputs": {
+    "processed": "projectes/Alinya/processed/connectivitat.gpkg",
+    "summary": "projectes/Alinya/indicators/connectivitat_resum.csv",
+    "metadata": "projectes/Alinya/metadata/connectivitat_metadata.json"
+  },
+  "checks": {
+    "processed_exists": true,
+    "summary_exists": true,
+    "metadata_exists": true,
+    "total_features": 55,
+    "has_connectivity_index": true,
+    "has_connectors": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "project": "Alinya",
+  "source_id": "biodiversity_habitats_terrestres_v3",
+  "source": "Cartografia dels habitats terrestres, versio 3 (2019/2024)",
+  "url": "https://mediambient.gencat.cat/ca/05_ambits_dactuacio/patrimoni_natural/sistemes_dinformacio/habitats/habitats_terrestres/mapa-dels-habitats-terrestres/cartografia-dels-habitats-versio-3-2025/",
+  "service_url": "https://sig.gencat.cat/ows/wfs",
+  "layer": "HABITATS_TERRESTPOL",
+  "query_date": "2026-07-06T19:17:53.275017+00:00",
+  "crs": "EPSG:25831",
+  "original_crs": "EPSG:25831",
+  "scale_or_resolution": "Version 3 terrestrial habitat polygons; minimum polygon threshold 15000 m2 according to the official page.",
+  "study_area_surface_ha": 5464.031656330243,
+  "clipped_surface_ha": 5464.031656330236,
+  "features_downloaded": 779,
+  "features_clipped": 452,
+  "raw_file": "projectes/Alinya/raw/habitats/habitats_terrestres_v3_alinya_bbox.geojson",
+  "processed_file": "projectes/Alinya/processed/habitats.gpkg",
+  "summary_file": "projectes/Alinya/indicators/habitats_resum.csv",
+  "limitations": [
+    "The official page states that each polygon habitat is present in at least 75 percent of the polygon.",
+    "Habitats smaller than 15000 m2 may be represented as points; this connector currently processes the polygon layer HABITATS_TERRESTPOL only.",
+    "The WFS BBOX response may return multipart habitat features beyond the study-area envelope; final outputs are clipped locally to the study-area geometry.",
+    "Areas are calculated after clipping in EPSG:25831 and may differ from official AREA_M2 source attributes."
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "project": "Alinya",
+  "sources_consulted": [
+    {
+      "source": "GBIF Occurrence API",
+      "url": "https://api.gbif.org/v1/occurrence/search"
+    },
+    {
+      "source": "iNaturalist Observations API",
+      "url": "https://api.inaturalist.org/v1/observations"
+    }
+  ],
+  "query_date": "2026-07-06T19:38:49.678857+00:00",
+  "filters": {
+    "gbif": {
+      "hasCoordinate": true,
+      "hasGeospatialIssue": false,
+      "bbox": "study area bounding box in WGS84"
+    },
+    "inaturalist": {
+      "geo": true,
+      "bbox": "study area bounding box in WGS84"
+    },
+    "local_clip": "records clipped to study area polygon after download",
+    "recent_year_threshold": 2016,
+    "max_records_per_source": 1000
+  },
+  "buffer_m": 0,
+  "study_area_surface_ha": 5464.031656330243,
+  "query_area_surface_ha": 5464.031656330243,
+  "records_downloaded": {
+    "GBIF": 1000,
+    "iNaturalist": 838
+  },
+  "download_limit_reached": {
+    "GBIF": true,
+    "iNaturalist": false
+  },
+  "records_normalized_after_clip": 731,
+  "crs": "EPSG:25831",
+  "raw_files": {
+    "GBIF": "projectes/Alinya/raw/biodiversitat/gbif_raw.json",
+    "iNaturalist": "projectes/Alinya/raw/biodiversitat/inaturalist_raw.json"
+  },
+  "processed_file": "projectes/Alinya/processed/biodiversitat.gpkg",
+  "summary_file": "projectes/Alinya/indicators/biodiversitat_resum.csv",
+  "limitations": [
+    "GBIF and iNaturalist records are opportunistic/public records and do not prove complete species absence or current presence.",
+    "Old records are marked historic and should not be interpreted as current presence without field or recent supporting evidence.",
+    "iNaturalist is queried by bounding box and then clipped locally to the study-area polygon.",
+    "Coordinate uncertainty, obscured coordinates, taxonomic revisions and observer effort can affect record quality.",
+    "No Ornitho or other non-authorized portal scraping is performed."
+  ]
+}

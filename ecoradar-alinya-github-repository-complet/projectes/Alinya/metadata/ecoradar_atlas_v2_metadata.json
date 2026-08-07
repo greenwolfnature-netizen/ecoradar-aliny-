@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-07-07T15:08:54+00:00",
+  "project": "Alinyà",
+  "version": "2.0",
+  "format": "A3 landscape",
+  "outputs": {
+    "atlas_pdf": "projectes/Alinya/reports/atlas_diagnosi_ecoradar_alinya_v2_a3.pdf",
+    "modules_pdf": "projectes/Alinya/reports/modules/moduls_diagnosi_ecoradar_alinya_v2_a3.pdf",
+    "output_copy": "output/pdf/atlas_diagnosi_ecoradar_alinya_v2_a3.pdf"
+  },
+  "page_count": 14,
+  "new_pages": [
+    "Radiografia ecològica",
+    "Pla de prioritats"
+  ],
+  "design_principles": [
+    "Each page answers one management question.",
+    "Pages use different narrative structures where data allow it.",
+    "No synthetic data are generated.",
+    "Unavailable inputs are labelled and translated into management implications."
+  ],
+  "maps": {
+    "espai": "projectes/Alinya/maps/producte/mapa_espai_alinya.png",
+    "paisatge": "projectes/Alinya/maps/producte/mapa_paisatge_alinya.png",
+    "habitats": "projectes/Alinya/maps/producte/mapa_habitats_alinya.png",
+    "biodiversitat": "projectes/Alinya/maps/producte/mapa_biodiversitat_alinya.png",
+    "pressio": "projectes/Alinya/maps/producte/mapa_pressio_humana_alinya.png",
+    "base": "projectes/Alinya/maps/producte/mapa_base_alinya.png"
+  }
+}

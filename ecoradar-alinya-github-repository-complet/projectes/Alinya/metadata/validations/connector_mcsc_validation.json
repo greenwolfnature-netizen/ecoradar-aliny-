@@ -1,0 +1,12 @@
+{
+  "connector": "pending_mcsc_connector",
+  "source": "MCSC - Mapa de Cobertes del Sòl de Catalunya",
+  "status": "blocked_pending_official_service_verification",
+  "reason": "MCSC està documentat com a complement, però no hi ha endpoint/descàrrega oficial verificat al projecte amb llicència i versió.",
+  "required_action": "Verificar font CREAF/MCSC oficial, format descarregable i llicència abans d'implementar.",
+  "outputs": {},
+  "missing_outputs": [],
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:42:13+00:00",
+  "can_advance_to_next_connector": true
+}

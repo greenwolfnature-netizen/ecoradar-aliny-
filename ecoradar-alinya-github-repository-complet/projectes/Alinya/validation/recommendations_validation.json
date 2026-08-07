@@ -1,0 +1,70 @@
+{
+  "project": "Alinya",
+  "generated_at": "2026-07-08T14:38:06+00:00",
+  "level": "recommendations",
+  "summary": {
+    "checks": 5,
+    "passed": 5,
+    "warnings": 0,
+    "major_errors": 0,
+    "critical_errors": 0,
+    "status": "VALIDATED"
+  },
+  "checks": [
+    {
+      "code": "REC_01",
+      "level": "recommendations",
+      "title": "Recomanacions amb camps obligatoris",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "Recomanacions amb camps obligatoris absents: 0.",
+      "evidence": {
+        "recommendations": []
+      }
+    },
+    {
+      "code": "REC_02",
+      "level": "recommendations",
+      "title": "Recomanacions derivades d'indicadors reals",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "Recomanacions sense indicador/conclusió traçable: 0.",
+      "evidence": {
+        "recommendations": []
+      }
+    },
+    {
+      "code": "REC_03",
+      "level": "recommendations",
+      "title": "Fonts citades quan són actuacions substantives",
+      "status": "PASS",
+      "severity": "major",
+      "message": "Recomanacions sense fonts fora de Dades pendents: 0.",
+      "evidence": {
+        "recommendations": []
+      }
+    },
+    {
+      "code": "REC_04",
+      "level": "recommendations",
+      "title": "Localització indicada",
+      "status": "PASS",
+      "severity": "major",
+      "message": "Recomanacions sense localització útil: 0.",
+      "evidence": {
+        "recommendations": []
+      }
+    },
+    {
+      "code": "REC_05",
+      "level": "recommendations",
+      "title": "No hi ha actuacions finals sense advertir parcialitat",
+      "status": "PASS",
+      "severity": "critical",
+      "message": "Recomanacions finals basades en indicadors parcials sense dependències: 0.",
+      "evidence": {
+        "recommendations": []
+      }
+    }
+  ]
+}

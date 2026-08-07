@@ -1,0 +1,48 @@
+{
+  "created_at": "2026-07-07",
+  "status": "context_map_not_probability_model_no_incendiscat_data_source",
+  "study_area_ha": 5464.031656330243,
+  "official_fire_features_intersecting_area": 2,
+  "official_fire_area_ha_inside_area_sum": 17.44890374980506,
+  "official_fire_area_percent_of_area_sum": 0.3193411906680662,
+  "fire_years": [
+    2000,
+    2012
+  ],
+  "land_cover_context_ha": {
+    "Aigua": 0.6045696210939338,
+    "Bosc": 4830.600748802117,
+    "Conreus": 0.2578,
+    "Matollar": 116.9327394947012,
+    "Prats i herbassars": 509.9165253033926,
+    "Roquissars / sol nu": 0.21847628472093064,
+    "Vies i nuclis": 4.362952761725028
+  },
+  "source_note": "This is a cartographic context output. It does not estimate fire probability or operational risk.",
+  "sources": [
+    {
+      "name": "Superficies afectades per incendis forestals v1.1 / VEGETACIO:VEGETACIO_INCENDIS",
+      "organization": "Generalitat de Catalunya / Departament competent en medi natural; WFS sig.gencat.cat",
+      "url": "https://sig.gencat.cat/ows/VEGETACIO/wfs",
+      "consulted_at": "2026-07-07"
+    },
+    {
+      "name": "Cobertes del sol locals ja processades per EcoRadar Alinya",
+      "organization": "ICGC / EcoRadar processed project data",
+      "path": "projectes/Alinya/processed/cobertes_sol.gpkg",
+      "consulted_at": "2026-07-07"
+    },
+    {
+      "name": "Accessos OSM locals ja processats per EcoRadar Alinya",
+      "organization": "OpenStreetMap contributors / EcoRadar processed project data",
+      "path": "projectes/Alinya/processed/recreational_pressure.gpkg",
+      "consulted_at": "2026-07-07"
+    }
+  ],
+  "incendiscat_consultation": {
+    "url": "https://incendiscat.cat/historial.html",
+    "consulted_at": "2026-07-07",
+    "used_as_data_source": false,
+    "reason_not_used": "IncendisCAT is an independent non-official tool and the exact official upstream remains blocked by the EcoRadar source gate."
+  }
+}

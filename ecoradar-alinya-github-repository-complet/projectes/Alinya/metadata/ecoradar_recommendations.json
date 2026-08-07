@@ -1,0 +1,73 @@
+{
+  "project": "Alinya",
+  "generated_at": "2026-07-07T19:27:55+00:00",
+  "recommendations": [
+    {
+      "priority": 1,
+      "action_type": "conservar",
+      "objective": "Protegir hàbitats d'interès i hàbitats prioritaris abans de qualsevol actuació.",
+      "justification": "Valor calculat amb riquesa d'habitats, HIC i HIC prioritaris. Habitats principals: 42.561; 32.641+; 42.425.",
+      "location": "Zones cartografiades com HIC o HIC prioritari dins l'àrea d'estudi.",
+      "expected_ecological_benefit": "Reduir risc d'impacte sobre hàbitats de responsabilitat de conservació.",
+      "supporting_indicators": [
+        "CORE_02"
+      ],
+      "confidence": "mitjana"
+    },
+    {
+      "priority": 2,
+      "action_type": "validar",
+      "objective": "Validar prats, espais oberts i discontinuïtats que poden sostenir mosaic ecològic.",
+      "justification": "El mosaic és parcialment favorable, però encara falta continuïtat espacial i lectura de camp.",
+      "location": "Espais oberts, ecotons i zones de contacte entre bosc, prats i matollars.",
+      "expected_ecological_benefit": "Mantenir heterogeneïtat útil per biodiversitat, connectivitat i resiliència al foc.",
+      "supporting_indicators": [
+        "CORE_01",
+        "CORE_09"
+      ],
+      "confidence": "mitjana-baixa"
+    },
+    {
+      "priority": 3,
+      "action_type": "monitoritzar",
+      "objective": "Comprovar accessos, punts d'ús públic i possibles concentracions de freqüentació.",
+      "justification": "Pressio humana estimada parcialment amb xarxa OSM i punts d'us public; no representa nombre de visitants.",
+      "location": "Camins, pistes, aparcaments i punts d'ús públic cartografiats.",
+      "expected_ecological_benefit": "Evitar conflictes entre ús públic i conservació abans de proposar regulació.",
+      "supporting_indicators": [
+        "CORE_07"
+      ],
+      "confidence": "baixa"
+    },
+    {
+      "priority": 4,
+      "action_type": "ampliar dades",
+      "objective": "Incorporar teledetecció, hidrologia, DEM i històric de foc abans de prioritzar restauració.",
+      "justification": "Els indicadors de vegetació, aigua, potencial de restauració i prioritat final no són calculables amb rigor.",
+      "location": "Tot l'àmbit; especialment zones forestals contínues, fondalades, riberes i espais oberts.",
+      "expected_ecological_benefit": "Convertir una diagnosi preliminar en una priorització espacial fiable.",
+      "supporting_indicators": [
+        "CORE_03",
+        "CORE_05",
+        "CORE_10",
+        "CORE_11",
+        "CORE_12"
+      ],
+      "confidence": "alta"
+    },
+    {
+      "priority": 5,
+      "action_type": "treball de camp",
+      "objective": "Planificar mostreig dirigit per validar biodiversitat, microhàbitats i punts sensibles.",
+      "justification": "Les fonts públiques orienten, però no certifiquen estat local ni absències.",
+      "location": "Zones amb HIC, accessos principals, punts d'aigua potencials i grups taxonòmics infrarepresentats.",
+      "expected_ecological_benefit": "Millorar confiança de la diagnosi i evitar actuacions incompatibles amb espècies o hàbitats sensibles.",
+      "supporting_indicators": [
+        "CORE_02",
+        "CORE_06",
+        "CORE_07"
+      ],
+      "confidence": "mitjana"
+    }
+  ]
+}

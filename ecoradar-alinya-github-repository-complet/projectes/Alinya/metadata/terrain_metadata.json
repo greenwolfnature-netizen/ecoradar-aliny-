@@ -1,0 +1,60 @@
+{
+  "project": "Alinya",
+  "source": "ICGC Model d'elevacions del terreny 5 m",
+  "responsible_organization": "Institut Cartogràfic i Geològic de Catalunya",
+  "url": "https://datacloud.icgc.cat/datacloud/model-elevacions-terreny/tif_unzip/model-elevacions-terreny-topografic-catalunya-5m-2009-2018.tif",
+  "service_type": "Cloud Optimized GeoTIFF / raster file",
+  "query_date": "2026-07-07T17:25:46.656556+00:00",
+  "crs": "EPSG:25831",
+  "resolution_m": [
+    5.0,
+    5.0
+  ],
+  "width": 2583,
+  "height": 1806,
+  "bounds": [
+    364868.461,
+    4666982.395,
+    377783.461,
+    4676012.395
+  ],
+  "study_area_surface_ha": 5464.031656330243,
+  "outputs": {
+    "dem": "projectes/Alinya/processed/terrain/dem.tif",
+    "slope": "projectes/Alinya/processed/terrain/slope.tif",
+    "aspect": "projectes/Alinya/processed/terrain/aspect.tif",
+    "northness": "projectes/Alinya/processed/terrain/northness.tif",
+    "solana_obaga": "projectes/Alinya/processed/terrain/solana_obaga.tif"
+  },
+  "variables": {
+    "altitude_m": {
+      "min": 607.26,
+      "max": 2378.46,
+      "mean": 1484.5076,
+      "std": 376.0356
+    },
+    "slope_degrees": {
+      "min": 0.0,
+      "max": 85.6557,
+      "mean": 25.6153,
+      "std": 11.7632
+    },
+    "aspect_degrees": {
+      "min": 0.0,
+      "max": 359.9897,
+      "mean": 158.997,
+      "std": 93.9135
+    },
+    "northness": {
+      "min": -1.0,
+      "max": 1.0,
+      "mean": -0.1599,
+      "std": 0.7333
+    }
+  },
+  "limitations": [
+    "Pendent, orientació i obaga/solana són derivats geomorfològics del DEM, no indicadors ecològics finals.",
+    "La classificació obaga/solana és una capa normalitzada simple basada en orientació; la insolació real requeriria model solar amb data, ombres i horizon.",
+    "El connector no calcula cap indicador EcoRadar."
+  ]
+}

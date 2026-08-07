@@ -1,0 +1,23 @@
+{
+  "generated_at_utc": "2026-07-20T18:40:56.948806+00:00",
+  "scope": "Muntanya d'Alinyà",
+  "source": "ICGC Model d'elevacions del terreny 5 m",
+  "source_file": "processed/terrain/dem.tif",
+  "osm_role": "OpenStreetMap supplies access paths and mapped features; it does not supply the elevation raster",
+  "method": "Hypsometric tint plus analytical hillshade; azimuth 315 degrees, altitude 45 degrees",
+  "display_resolution_m": 20,
+  "elevation_m": {
+    "minimum": 607.3,
+    "median": 1483.4,
+    "maximum": 2378.5
+  },
+  "bbox_epsg4326": [
+    1.363998,
+    42.144427,
+    1.5199389999999993,
+    42.22512200000001
+  ],
+  "output": "maps/topografia/relleu_icgc.webp",
+  "status": "verified_analysis",
+  "limitations": "Relief visualization, not a contour map or a substitute for field navigation"
+}

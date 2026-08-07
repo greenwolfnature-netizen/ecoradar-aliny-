@@ -1,0 +1,14 @@
+grup_taxonomic,nombre_registres,nombre_especies,registres_recents,registres_historics,font_principal,possibles_buits_informacio
+Plantae,273,225,273,0,iNaturalist,89 registres dubtosos
+Aves,196,85,195,0,GBIF,180 registres dubtosos; 1 registres sense data
+Insecta,164,136,162,2,iNaturalist,22 registres dubtosos
+Fungi,29,28,29,0,iNaturalist,7 registres dubtosos
+Mammalia,22,11,22,0,GBIF,18 registres dubtosos
+Arachnida,19,13,19,0,iNaturalist,cap buit evident en les fonts consultades
+Reptilia,7,4,7,0,iNaturalist,1 registres dubtosos
+Amphibia,6,5,4,2,iNaturalist,2 registres dubtosos
+Sense grup,5,0,5,0,iNaturalist,4 registres dubtosos
+Animalia,3,3,3,0,iNaturalist,cap buit evident en les fonts consultades
+Mollusca,3,3,3,0,iNaturalist,cap buit evident en les fonts consultades
+Protozoa,3,2,3,0,iNaturalist,cap buit evident en les fonts consultades
+Squamata,1,1,1,0,GBIF,1 registres dubtosos

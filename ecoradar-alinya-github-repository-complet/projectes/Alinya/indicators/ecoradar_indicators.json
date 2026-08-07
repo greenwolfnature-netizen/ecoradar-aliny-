@@ -1,0 +1,207 @@
+{
+  "generated_at": "2026-07-07T18:15:32+00:00",
+  "records": [
+    {
+      "code": "CORE_01",
+      "name": "Mosaic del paisatge",
+      "value": 60.63,
+      "classification": "alt",
+      "confidence": "mitjana",
+      "sources_used": [
+        "land_cover_icgc_cobertes_sol"
+      ],
+      "status": "PARCIAL",
+      "calculation": "Entropia de cobertes, balanç forestal, proporció d'espais oberts/agroforestals i baixa artificialització.",
+      "limitations": [
+        "SIGPAC/MCSC i continuïtat forestal espacial encara no estan incorporats."
+      ]
+    },
+    {
+      "code": "CORE_03",
+      "name": "Estat de la vegetació",
+      "value": null,
+      "classification": "no disponible",
+      "confidence": "baixa",
+      "sources_used": [],
+      "status": "NO DISPONIBLE",
+      "calculation": "Requereix NDVI, NDMI i NDWI reals de Copernicus.",
+      "limitations": [
+        "Copernicus està bloquejat per credencials; no hi ha NDVI, NDMI ni NDWI validats."
+      ]
+    },
+    {
+      "code": "CORE_02",
+      "name": "Valor dels hàbitats",
+      "value": 98.91,
+      "classification": "molt alt",
+      "confidence": "mitjana",
+      "sources_used": [
+        "habitats_terrestres_v3",
+        "hic_v2"
+      ],
+      "status": "PARCIAL",
+      "calculation": "Riquesa d'hàbitats, percentatge d'HIC i percentatge d'hàbitats prioritaris sobre la superfície de l'àrea.",
+      "limitations": [
+        "No hi ha validació de camp ni classificació EcoRadar d'hàbitats sensibles/degradats."
+      ]
+    },
+    {
+      "code": "CORE_04",
+      "name": "Refugis climàtics",
+      "value": 59.2,
+      "classification": "mitjà",
+      "confidence": "mitjana",
+      "sources_used": [
+        "land_cover_icgc_cobertes_sol",
+        "icgc_dem_mdt",
+        "aca_hydrology"
+      ],
+      "status": "PARCIAL",
+      "calculation": "Cobertura forestal, orientació/northness derivada del DEM i presència de cursos/fonts oficials.",
+      "limitations": [
+        "Falten LST i NDMI; per tant el valor no delimita refugis tèrmics finals.",
+        "Capes ACA sense elements dins l'àrea compten com a absència consultada, no com a error."
+      ]
+    },
+    {
+      "code": "CORE_05",
+      "name": "Vulnerabilitat climàtica",
+      "value": 37.31,
+      "classification": "baix",
+      "confidence": "mitjana",
+      "sources_used": [
+        "land_cover_icgc_cobertes_sol",
+        "icgc_dem_mdt",
+        "aca_hydrology"
+      ],
+      "status": "PARCIAL",
+      "calculation": "Baixa cobertura forestal relativa, pendent mitjà, exposició sud estimada, artificialització i menor senyal hídric disponible.",
+      "limitations": [
+        "Falten LST, NDMI, Meteocat/AEMET i SPEI; no és una lectura climàtica completa."
+      ]
+    },
+    {
+      "code": "CORE_10",
+      "name": "Funcionalitat hídrica",
+      "value": 47.18,
+      "classification": "mitjà",
+      "confidence": "mitjana",
+      "sources_used": [
+        "aca_hydrology"
+      ],
+      "status": "PARCIAL",
+      "calculation": "Densitat de cursos/drenatge ACA i nombre de fonts oficials dins l'àrea.",
+      "limitations": [
+        "Falten NDWI, punts d'aigua de camp i validació de l'estat ecològic/funcional."
+      ]
+    },
+    {
+      "code": "CORE_08",
+      "name": "Connectivitat ecològica",
+      "value": 93.83,
+      "classification": "molt alt",
+      "confidence": "mitjana",
+      "sources_used": [
+        "connectivity_infraestructura_verda",
+        "land_cover_icgc_cobertes_sol",
+        "aca_hydrology"
+      ],
+      "status": "PARCIAL",
+      "calculation": "Cobertes naturals i superfície de connectors oficials principals/complementaris retallats a l'àrea.",
+      "limitations": [
+        "No s'han modelitzat barreres fines ni permeabilitat per grup faunístic."
+      ]
+    },
+    {
+      "code": "CORE_06",
+      "name": "Biodiversitat coneguda",
+      "value": 95.11,
+      "classification": "molt alt",
+      "confidence": "mitjana",
+      "sources_used": [
+        "gbif_occurrences",
+        "inaturalist_observations"
+      ],
+      "status": "PARCIAL",
+      "calculation": "Nombre d'espècies, proporció de registres recents i cobertura de grups taxonòmics en fonts públiques.",
+      "limitations": [
+        "Falten BDBC, dades de camp, espècies protegides/amenaçades/invasores i control d'esforç de mostreig."
+      ]
+    },
+    {
+      "code": "CORE_07",
+      "name": "Pressió humana",
+      "value": 49.15,
+      "classification": "mitjà",
+      "confidence": "baixa",
+      "sources_used": [
+        "osm_public_use"
+      ],
+      "status": "PARCIAL",
+      "calculation": "Densitat de camins/pistes OSM i concentració de punts d'ús públic.",
+      "limitations": [
+        "OSM no mesura intensitat real de visitants; falten Strava legalment compatible, comptadors i validació de camp."
+      ]
+    },
+    {
+      "code": "CORE_09",
+      "name": "Resiliència davant del foc",
+      "value": 42.99,
+      "classification": "mitjà",
+      "confidence": "mitjana",
+      "sources_used": [
+        "land_cover_icgc_cobertes_sol",
+        "icgc_dem_mdt",
+        "fires_burned_areas",
+        "osm_public_use"
+      ],
+      "status": "PARCIAL",
+      "calculation": "Continuïtat forestal proxy, presència d'espais oberts/agroforestals, pendent, històric d'incendis i accessibilitat.",
+      "limitations": [
+        "Falten NDMI, LST i una font oficial específica de combustible/estructura forestal."
+      ]
+    },
+    {
+      "code": "CORE_11",
+      "name": "Potencial de restauració",
+      "value": 72.26,
+      "classification": "alt",
+      "confidence": "baixa",
+      "sources_used": [
+        "habitats_terrestres_v3",
+        "land_cover_icgc_cobertes_sol",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "osm_public_use"
+      ],
+      "status": "PARCIAL",
+      "calculation": "Vulnerabilitat climàtica parcial, funcionalitat hídrica parcial, pressió gestionable i valor d'hàbitats.",
+      "limitations": [
+        "Falten vegetació Sentinel, hàbitats degradats validats, camps de restauració i hàbitats font espacialitzats."
+      ]
+    },
+    {
+      "code": "CORE_12",
+      "name": "Prioritat de gestió",
+      "value": 64.99,
+      "classification": "alt",
+      "confidence": "baixa",
+      "sources_used": [
+        "aca_hydrology",
+        "fires_burned_areas",
+        "gbif_occurrences",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "icgc_dem_mdt",
+        "inaturalist_observations",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "status": "PARCIAL",
+      "calculation": "Síntesi numèrica dels indicadors base disponibles, mantenint l'estat parcial per manca de fonts crítiques.",
+      "limitations": [
+        "No genera zones prioritàries ni recomanacions; falten Copernicus, clima, combustible oficial i camp."
+      ]
+    }
+  ]
+}

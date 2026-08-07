@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-07-07T15:08:55+00:00",
+  "project": "Alinyà",
+  "refresh_data": false,
+  "connector_steps": [],
+  "product_outputs": {
+    "core": {
+      "csv": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/indicators/ecoradar_core.csv",
+      "json": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/indicators/ecoradar_core.json",
+      "metadata": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/metadata/ecoradar_core_metadata.json",
+      "maps_dir": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/maps/ecoradar_core"
+    },
+    "diagnosis": {
+      "json": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/metadata/ecoradar_diagnosis.json",
+      "markdown": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/reports/ecoradar_diagnosis.md",
+      "overall_state": "diagnosi parcial",
+      "confidence": "mitjana-baixa"
+    },
+    "recommendations": {
+      "json": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/metadata/ecoradar_recommendations.json",
+      "csv": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/indicators/ecoradar_recommendations.csv",
+      "markdown": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/reports/ecoradar_recommendations.md",
+      "recommendation_count": 5
+    },
+    "fitxa_value_gate": {
+      "json": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/metadata/ecoradar_fitxa_value_gate.json",
+      "csv": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/indicators/ecoradar_fitxa_value_gate.csv",
+      "markdown": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/reports/ecoradar_fitxa_value_gate.md",
+      "top_priority": "Figura de protecció i context administratiu",
+      "item_count": 6
+    },
+    "executive_sheet": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/reports/fitxa_diagnosi_ecoradar_alinya.pdf",
+    "executive_sheet_copy": "/Users/usuario/Documents/Ecoradar/output/pdf/fitxa_ecoradar_alinya_a3.pdf",
+    "atlas_a3": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/reports/atlas_diagnosi_ecoradar_alinya_a3.pdf",
+    "atlas_a3_copy": "/Users/usuario/Documents/Ecoradar/output/pdf/atlas_diagnosi_ecoradar_alinya_a3.pdf",
+    "atlas_v2_a3": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/reports/atlas_diagnosi_ecoradar_alinya_v2_a3.pdf",
+    "atlas_v2_a3_copy": "/Users/usuario/Documents/Ecoradar/output/pdf/atlas_diagnosi_ecoradar_alinya_v2_a3.pdf",
+    "atlas_v3_a3": "/Users/usuario/Documents/Ecoradar/projectes/Alinya/reports/atlas_diagnosi_ecoradar_alinya_v3_a3.pdf",
+    "atlas_v3_a3_copy": "/Users/usuario/Documents/Ecoradar/output/pdf/atlas_diagnosi_ecoradar_alinya_v3_a3.pdf"
+  },
+  "data_policy": "Real prepared data only. Missing connector outputs remain unavailable and are not estimated."
+}

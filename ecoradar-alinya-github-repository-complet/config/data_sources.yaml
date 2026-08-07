@@ -1,0 +1,600 @@
+{
+  "version": "1.0",
+  "policy": {
+    "required_before_core": [
+      "data_availability_report",
+      "connectors_status_report",
+      "indicators_completeness_report"
+    ],
+    "missing_data_rule": "Never replace missing key data with invented estimates. Mark affected indicators as NO DISPONIBLE or PARCIAL and lower confidence.",
+    "connector_scope_rule": "Connectors only connect, download, normalize and return data. Analysis and diagnosis run after this availability gate."
+  },
+  "blocks": [
+    {
+      "id": "study_area",
+      "name": "Àrea d'estudi",
+      "sources": [
+        {
+          "id": "study_area_file",
+          "name": "Límit de l'àrea d'estudi",
+          "url": "projectes/{project}/processed/study_area.gpkg",
+          "access_type": "fitxer manual",
+          "expected_format": "GeoPackage",
+          "responsible_connector": "ecoradar.core.study_area",
+          "minimum_fields": ["geometry", "crs", "surface_ha", "perimeter_m"],
+          "feeds_indicators": ["CORE_01", "CORE_02", "CORE_04", "CORE_05", "CORE_08", "CORE_09", "CORE_10", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "BLOCK_CORE",
+          "error_message": "No es pot executar EcoRadar sense una àrea d'estudi validada.",
+          "confidence_if_missing": "baixa",
+          "expected_outputs": ["processed/study_area.gpkg", "metadata/study_area_metadata.json"]
+        }
+      ]
+    },
+    {
+      "id": "base_cartography",
+      "name": "Cartografia base ICGC",
+      "sources": [
+        {
+          "id": "icgc_base_maps",
+          "name": "Cartografia base i ortofoto ICGC",
+          "url": "https://geoserveis.icgc.cat/",
+          "access_type": "WMS/WMTS",
+          "expected_format": "map tiles / raster context",
+          "responsible_connector": "pending_base_cartography_icgc",
+          "minimum_fields": ["base_map", "orthophoto_or_topographic_context", "scale_reference"],
+          "feeds_indicators": ["CORE_01", "CORE_08", "CORE_12"],
+          "required": false,
+          "on_failure": "USE_EXISTING_PRODUCT_MAP_CONTEXT_AND_MARK_PARTIAL",
+          "error_message": "La cartografia base ICGC encara no està integrada com a connector automàtic.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": ["maps/producte/mapa_base_alinya.png", "maps/producte/mapa_espai_alinya.png"]
+        },
+        {
+          "id": "icgc_orthophoto",
+          "name": "Ortofoto ICGC",
+          "url": "https://geoserveis.icgc.cat/",
+          "access_type": "WMS/WMTS",
+          "expected_format": "map tiles / raster context",
+          "responsible_connector": "pending_base_cartography_icgc",
+          "minimum_fields": ["orthophoto", "capture_year_or_version", "scale_reference"],
+          "feeds_indicators": ["CORE_01", "CORE_08", "CORE_12"],
+          "required": false,
+          "on_failure": "USE_EXISTING_PRODUCT_MAP_CONTEXT_AND_MARK_PARTIAL",
+          "error_message": "L'ortofoto ICGC encara no està integrada com a connector automàtic separat.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": ["maps/producte/mapa_base_alinya.png"]
+        }
+      ]
+    },
+    {
+      "id": "land_cover",
+      "name": "Cobertes del sòl ICGC / MCSC",
+      "sources": [
+        {
+          "id": "land_cover_icgc_cobertes_sol",
+          "name": "ICGC - Cobertes del sòl de Catalunya",
+          "url": "https://geoserveis.icgc.cat/servei/catalunya/cobertes-sol/wms",
+          "access_type": "WMS/WCS",
+          "expected_format": "GeoTIFF, GeoPackage, CSV",
+          "responsible_connector": "connector_icgc_cobertes_sol",
+          "minimum_fields": ["geometry", "tipus_coberta", "superficie_ha", "percentatge_total", "crs", "source_date"],
+          "feeds_indicators": ["CORE_01", "CORE_04", "CORE_05", "CORE_08", "CORE_09", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "MARK_AFFECTED_INDICATORS_PARTIAL_OR_NO_DISPONIBLE",
+          "error_message": "No s'han pogut obtenir o validar les cobertes del sòl oficials.",
+          "confidence_if_missing": "baixa",
+          "expected_outputs": ["processed/cobertes_sol.gpkg", "indicators/cobertes_sol_resum.csv", "metadata/cobertes_sol_metadata.json"]
+        },
+        {
+          "id": "land_cover_mcsc",
+          "name": "MCSC - Mapa de Cobertes del Sòl de Catalunya",
+          "url": "https://www.creaf.cat/",
+          "access_type": "consulta manual / servei pendent",
+          "expected_format": "vector/raster",
+          "responsible_connector": "pending_mcsc_connector",
+          "minimum_fields": ["class", "geometry", "year", "surface"],
+          "feeds_indicators": ["CORE_01", "CORE_08", "CORE_09"],
+          "required": false,
+          "on_failure": "USE_ICGC_COBERTES_AS_PRIMARY_AND_MARK_SOURCE_AS_PENDING",
+          "error_message": "MCSC no està integrat encara com a font automàtica.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": []
+        }
+      ]
+    },
+    {
+      "id": "habitats",
+      "name": "Hàbitats Generalitat / HIC",
+      "sources": [
+        {
+          "id": "habitats_terrestres_v3",
+          "name": "Cartografia dels hàbitats terrestres v3",
+          "url": "https://mediambient.gencat.cat/ca/05_ambits_dactuacio/patrimoni_natural/sistemes_dinformacio/habitats/habitats_terrestres/mapa-dels-habitats-terrestres/cartografia-dels-habitats-versio-3-2025/",
+          "access_type": "WFS/WMS",
+          "expected_format": "GeoJSON, GeoPackage, CSV",
+          "responsible_connector": "connector_habitats",
+          "minimum_fields": ["geometry", "codi_habitat", "nom_habitat", "superficie_ha", "es_hic", "es_prioritari"],
+          "feeds_indicators": ["CORE_02", "CORE_06", "CORE_08", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "MARK_HABITAT_VALUE_NO_DISPONIBLE_AND_BLOCK_FINAL_PRIORITIES",
+          "error_message": "No s'ha pogut obtenir o validar la cartografia oficial d'hàbitats.",
+          "confidence_if_missing": "baixa",
+          "expected_outputs": ["processed/habitats.gpkg", "indicators/habitats_resum.csv", "metadata/habitats_metadata.json"]
+        },
+        {
+          "id": "hic_v2",
+          "name": "Hàbitats d'Interès Comunitari v2",
+          "url": "https://catalegs.ide.cat/geonetwork/srv/api/records/habitats-interes-comunitari-v2-2018",
+          "access_type": "WMS / catàleg IDEC",
+          "expected_format": "vector",
+          "responsible_connector": "connector_habitats",
+          "minimum_fields": ["geometry", "COD_HIC", "HIC_CA", "HIC_PRIOR"],
+          "feeds_indicators": ["CORE_02", "CORE_12"],
+          "required": true,
+          "on_failure": "USE_HIC_FIELDS_FROM_HABITATS_V3_IF_PRESENT",
+          "error_message": "La font HIC complementària no està disponible com a sortida separada.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": ["indicators/habitats_resum.csv"]
+        }
+      ]
+    },
+    {
+      "id": "agriculture",
+      "name": "SIGPAC i mapa de cultius",
+      "sources": [
+        {
+          "id": "sigpac_catalunya",
+          "name": "SIGPAC Catalunya",
+          "url": "https://sigpac.mapa.gob.es/fega/visor/",
+          "access_type": "WMS/WFS/consulta manual",
+          "expected_format": "vector",
+          "responsible_connector": "pending_sigpac_connector",
+          "minimum_fields": ["geometry", "uso_sigpac", "cultivo", "superficie"],
+          "feeds_indicators": ["CORE_01", "CORE_08", "CORE_09", "CORE_11", "CORE_12"],
+          "required": false,
+          "on_failure": "KEEP_AGRICULTURE_ONLY_FROM_LAND_COVER_AND_MARK_PARTIAL",
+          "error_message": "SIGPAC/cultius encara no està integrat automàticament.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": []
+        },
+        {
+          "id": "dun_cultius",
+          "name": "Mapa de cultius / DUN",
+          "url": "pendent de servei oficial verificat",
+          "access_type": "consulta manual / servei pendent",
+          "expected_format": "vector/CSV",
+          "responsible_connector": "pending_dun_cultius_connector",
+          "minimum_fields": ["geometry", "cultiu", "campanya", "superficie", "font"],
+          "feeds_indicators": ["CORE_01", "CORE_08", "CORE_09", "CORE_11", "CORE_12"],
+          "required": false,
+          "on_failure": "KEEP_AGRICULTURE_ONLY_FROM_LAND_COVER_AND_MARK_PARTIAL",
+          "error_message": "El mapa de cultius/DUN no està integrat automàticament o no és accessible amb llicència verificada.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": []
+        }
+      ]
+    },
+    {
+      "id": "copernicus_sentinel",
+      "name": "Copernicus / Sentinel",
+      "sources": [
+        {
+          "id": "copernicus_sentinel_ndvi",
+          "name": "Copernicus Data Space Sentinel-2 NDVI",
+          "url": "https://dataspace.copernicus.eu/",
+          "access_type": "STAC/API",
+          "expected_format": "GeoTIFF, CSV, JSON",
+          "responsible_connector": "connector_copernicus_teledeteccio",
+          "minimum_fields": ["ndvi_mean", "ndvi_min", "ndvi_max", "ndvi_percentiles", "ndvi_classification", "capture_date", "cloud_cover", "resolution"],
+          "feeds_indicators": ["CORE_03", "CORE_04", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "BLOCK_ECORADAR_CORE_AND_DIAGNOSIS",
+          "error_message": "Copernicus/Sentinel no ha generat NDVI validat.",
+          "confidence_if_missing": "baixa",
+          "requires_credentials": ["COPERNICUS_CLIENT_ID", "COPERNICUS_CLIENT_SECRET"],
+          "expected_outputs": [
+            "processed/teledeteccio/ndvi.tif",
+            "maps/teledeteccio/ndvi.png",
+            "indicators/teledeteccio_resum.csv",
+            "metadata/teledeteccio_metadata.json",
+            "metadata/teledeteccio_stats.json",
+            "metadata/teledeteccio_percentiles.json",
+            "metadata/teledeteccio_classification.json",
+            "metadata/teledeteccio_ecological_summary.json"
+          ]
+        },
+        {
+          "id": "copernicus_sentinel_ndmi",
+          "name": "Copernicus Data Space Sentinel-2 NDMI",
+          "url": "https://dataspace.copernicus.eu/",
+          "access_type": "STAC/API",
+          "expected_format": "GeoTIFF, CSV, JSON",
+          "responsible_connector": "connector_copernicus_teledeteccio",
+          "minimum_fields": ["ndmi_mean", "ndmi_min", "ndmi_max", "ndmi_percentiles", "ndmi_classification", "capture_date", "cloud_cover", "resolution"],
+          "feeds_indicators": ["CORE_03", "CORE_04", "CORE_05", "CORE_09", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "BLOCK_ECORADAR_CORE_AND_DIAGNOSIS",
+          "error_message": "Copernicus/Sentinel no ha generat NDMI validat.",
+          "confidence_if_missing": "baixa",
+          "requires_credentials": ["COPERNICUS_CLIENT_ID", "COPERNICUS_CLIENT_SECRET"],
+          "expected_outputs": [
+            "processed/teledeteccio/ndmi.tif",
+            "maps/teledeteccio/ndmi.png",
+            "indicators/teledeteccio_resum.csv",
+            "metadata/teledeteccio_metadata.json",
+            "metadata/teledeteccio_stats.json",
+            "metadata/teledeteccio_percentiles.json",
+            "metadata/teledeteccio_classification.json",
+            "metadata/teledeteccio_ecological_summary.json"
+          ]
+        },
+        {
+          "id": "copernicus_sentinel_ndwi",
+          "name": "Copernicus Data Space Sentinel-2 NDWI",
+          "url": "https://dataspace.copernicus.eu/",
+          "access_type": "STAC/API",
+          "expected_format": "GeoTIFF, CSV, JSON",
+          "responsible_connector": "connector_copernicus_teledeteccio",
+          "minimum_fields": ["ndwi_mean", "ndwi_min", "ndwi_max", "ndwi_percentiles", "ndwi_classification", "capture_date", "cloud_cover", "resolution"],
+          "feeds_indicators": ["CORE_03", "CORE_10", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "BLOCK_ECORADAR_CORE_AND_DIAGNOSIS",
+          "error_message": "Copernicus/Sentinel no ha generat NDWI validat.",
+          "confidence_if_missing": "baixa",
+          "requires_credentials": ["COPERNICUS_CLIENT_ID", "COPERNICUS_CLIENT_SECRET"],
+          "expected_outputs": [
+            "processed/teledeteccio/ndwi.tif",
+            "maps/teledeteccio/ndwi.png",
+            "indicators/teledeteccio_resum.csv",
+            "metadata/teledeteccio_metadata.json",
+            "metadata/teledeteccio_stats.json",
+            "metadata/teledeteccio_percentiles.json",
+            "metadata/teledeteccio_classification.json",
+            "metadata/teledeteccio_ecological_summary.json"
+          ]
+        },
+        {
+          "id": "copernicus_sentinel_nbr",
+          "name": "Copernicus Data Space Sentinel-2 NBR",
+          "url": "https://dataspace.copernicus.eu/",
+          "access_type": "STAC/API",
+          "expected_format": "GeoTIFF, PNG, CSV, JSON",
+          "responsible_connector": "connector_copernicus_teledeteccio",
+          "minimum_fields": ["nbr_mean", "nbr_min", "nbr_max", "nbr_percentiles", "nbr_classification", "capture_date", "cloud_cover", "resolution"],
+          "feeds_indicators": ["CORE_03", "CORE_09", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "BLOCK_ECORADAR_CORE_AND_DIAGNOSIS",
+          "error_message": "Copernicus/Sentinel no ha generat NBR validat.",
+          "confidence_if_missing": "baixa",
+          "requires_credentials": ["COPERNICUS_CLIENT_ID", "COPERNICUS_CLIENT_SECRET"],
+          "expected_outputs": [
+            "processed/teledeteccio/nbr.tif",
+            "maps/teledeteccio/nbr.png",
+            "indicators/teledeteccio_resum.csv",
+            "metadata/teledeteccio_metadata.json",
+            "metadata/teledeteccio_stats.json",
+            "metadata/teledeteccio_percentiles.json",
+            "metadata/teledeteccio_classification.json",
+            "metadata/teledeteccio_ecological_summary.json"
+          ]
+        },
+        {
+          "id": "copernicus_lst",
+          "name": "LST / Land Surface Temperature o equivalent tèrmic validat",
+          "url": "https://dataspace.copernicus.eu/",
+          "access_type": "STAC/API",
+          "expected_format": "GeoTIFF, PNG, CSV, JSON",
+          "responsible_connector": "connector_copernicus_teledeteccio",
+          "minimum_fields": ["lst_mean", "lst_min", "lst_max", "lst_percentiles", "lst_classification", "capture_date", "resolution"],
+          "feeds_indicators": ["CORE_03", "CORE_04", "CORE_05", "CORE_09", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "BLOCK_ECORADAR_CORE_AND_DIAGNOSIS",
+          "error_message": "LST no està disponible com a raster validat per l'àrea.",
+          "confidence_if_missing": "baixa",
+          "requires_credentials": ["COPERNICUS_CLIENT_ID", "COPERNICUS_CLIENT_SECRET"],
+          "expected_outputs": [
+            "processed/teledeteccio/lst.tif",
+            "maps/teledeteccio/lst.png",
+            "indicators/teledeteccio_resum.csv",
+            "metadata/teledeteccio_metadata.json",
+            "metadata/teledeteccio_stats.json",
+            "metadata/teledeteccio_percentiles.json",
+            "metadata/teledeteccio_classification.json",
+            "metadata/teledeteccio_ecological_summary.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "terrain",
+      "name": "DEM / MDT",
+      "sources": [
+        {
+          "id": "icgc_dem_mdt",
+          "name": "ICGC Model d'elevacions del terreny",
+          "url": "https://www.icgc.cat/",
+          "access_type": "WCS/fitxer",
+          "expected_format": "GeoTIFF",
+          "responsible_connector": "connector_icgc_dem_mdt",
+          "minimum_fields": ["altitude", "slope", "aspect", "northness", "solar_exposure"],
+          "feeds_indicators": ["CORE_04", "CORE_05", "CORE_08", "CORE_09", "CORE_10", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "MARK_TOPOGRAPHIC_READINGS_PARTIAL",
+          "error_message": "DEM/MDT i derivats de pendent/orientació no estan disponibles.",
+          "confidence_if_missing": "baixa",
+          "expected_outputs": ["processed/terrain/dem.tif", "processed/terrain/slope.tif", "processed/terrain/aspect.tif", "processed/terrain/northness.tif", "processed/terrain/solana_obaga.tif", "metadata/terrain_metadata.json"]
+        }
+      ]
+    },
+    {
+      "id": "hydrology",
+      "name": "Hidrologia",
+      "sources": [
+        {
+          "id": "aca_hydrology",
+          "name": "ACA / xarxa hidrogràfica, masses d'aigua i punts d'aigua",
+          "url": "https://aca.gencat.cat/",
+          "access_type": "WMS/WFS/API",
+          "expected_format": "GeoPackage, CSV, JSON",
+          "responsible_connector": "connector_aca_hidrologia",
+          "minimum_fields": ["geometry", "water_type", "name", "status", "source_date"],
+          "feeds_indicators": ["CORE_04", "CORE_05", "CORE_08", "CORE_10", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "MARK_WATER_FUNCTIONALITY_NO_DISPONIBLE_AND_REFUGIA_PARTIAL",
+          "error_message": "Cursos d'aigua, fonts, basses o zones humides no estan integrats.",
+          "confidence_if_missing": "baixa",
+          "expected_outputs": ["processed/hidrologia.gpkg", "indicators/hidrologia_resum.csv", "metadata/hidrologia_metadata.json"]
+        }
+      ]
+    },
+    {
+      "id": "connectivity",
+      "name": "Connectivitat ecològica",
+      "sources": [
+        {
+          "id": "connectivity_infraestructura_verda",
+          "name": "Infraestructura Verda / Connectivitat ecològica",
+          "url": "https://sig.gencat.cat/ows/INFRAESTRUCTURA_VERDA/wfs",
+          "access_type": "WFS/WMS",
+          "expected_format": "GeoPackage, CSV, JSON",
+          "responsible_connector": "connector_connectivitat_ecologica",
+          "minimum_fields": ["geometry", "connectivity_index_or_connector_type", "source_layer", "area_or_length"],
+          "feeds_indicators": ["CORE_01", "CORE_08", "CORE_10", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "MARK_CONNECTIVITY_PARTIAL",
+          "error_message": "La connectivitat ecològica oficial no està integrada.",
+          "confidence_if_missing": "baixa",
+          "expected_outputs": ["processed/connectivitat.gpkg", "indicators/connectivitat_resum.csv", "metadata/connectivitat_metadata.json"]
+        }
+      ]
+    },
+    {
+      "id": "biodiversity",
+      "name": "Biodiversitat",
+      "sources": [
+        {
+          "id": "gbif_occurrences",
+          "name": "GBIF Occurrence API",
+          "url": "https://api.gbif.org/v1/",
+          "access_type": "API",
+          "expected_format": "JSON, GeoPackage, CSV",
+          "responsible_connector": "connector_biodiversitat",
+          "minimum_fields": ["scientificName", "taxonGroup", "eventDate", "latitude", "longitude", "source", "license"],
+          "feeds_indicators": ["CORE_06", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "MARK_BIODIVERSITY_PARTIAL_AND_REQUIRE_FIELD_VALIDATION",
+          "error_message": "GBIF no ha retornat o validat registres per l'àrea.",
+          "confidence_if_missing": "baixa",
+          "expected_outputs": ["raw/biodiversitat/gbif_raw.json", "processed/biodiversitat.gpkg", "indicators/biodiversitat_resum.csv", "metadata/biodiversitat_metadata.json"]
+        },
+        {
+          "id": "inaturalist_observations",
+          "name": "iNaturalist Observations API",
+          "url": "https://api.inaturalist.org/v1/observations",
+          "access_type": "API",
+          "expected_format": "JSON, GeoPackage, CSV",
+          "responsible_connector": "connector_biodiversitat",
+          "minimum_fields": ["scientificName", "commonName", "taxonGroup", "eventDate", "latitude", "longitude", "source", "recordUrl"],
+          "feeds_indicators": ["CORE_06", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "MARK_BIODIVERSITY_PARTIAL_AND_REQUIRE_FIELD_VALIDATION",
+          "error_message": "iNaturalist no ha retornat o validat observacions per l'àrea.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": ["raw/biodiversitat/inaturalist_raw.json", "processed/biodiversitat.gpkg", "indicators/biodiversitat_resum.csv", "metadata/biodiversitat_metadata.json"]
+        },
+        {
+          "id": "bdbc",
+          "name": "Banc de Dades de Biodiversitat de Catalunya",
+          "url": "https://biodiver.bio.ub.es/biocat/",
+          "access_type": "consulta manual/API pendent",
+          "expected_format": "CSV/manual",
+          "responsible_connector": "pending_bdbc_connector",
+          "minimum_fields": ["scientificName", "taxonGroup", "date", "location", "source"],
+          "feeds_indicators": ["CORE_06", "CORE_12"],
+          "required": false,
+          "on_failure": "KEEP_PUBLIC_API_BIODIVERSITY_AND_MARK_BDBC_PENDING",
+          "error_message": "BDBC no està integrat o no és accessible automàticament.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": []
+        },
+        {
+          "id": "field_biodiversity",
+          "name": "Dades pròpies de camp",
+          "url": "projectes/{project}/data/fieldwork",
+          "access_type": "fitxer manual",
+          "expected_format": "CSV, GeoPackage, media",
+          "responsible_connector": "pending_fieldwork_importer",
+          "minimum_fields": ["date", "observer", "geometry", "observation_type", "species_or_element", "certainty"],
+          "feeds_indicators": ["CORE_02", "CORE_06", "CORE_07", "CORE_10", "CORE_11", "CORE_12"],
+          "required": false,
+          "on_failure": "KEEP_PUBLIC_DATA_AND_MARK_FIELD_VALIDATION_PENDING",
+          "error_message": "No s'han importat dades pròpies de camp.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": ["data/fieldwork"]
+        }
+      ]
+    },
+    {
+      "id": "human_pressure",
+      "name": "Pressió humana",
+      "sources": [
+        {
+          "id": "osm_public_use",
+          "name": "OpenStreetMap / Overpass",
+          "url": "https://overpass-api.de/api/interpreter",
+          "access_type": "API",
+          "expected_format": "JSON, GeoPackage, CSV",
+          "responsible_connector": "connector_recreational_pressure_osm",
+          "minimum_fields": ["geometry", "feature_type", "osm_id", "source", "length_km_or_count"],
+          "feeds_indicators": ["CORE_07", "CORE_08", "CORE_09", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "MARK_HUMAN_PRESSURE_PARTIAL_AND_REQUIRE_FIELD_VALIDATION",
+          "error_message": "OSM/Overpass no ha generat xarxa de camins, pistes o punts d'ús públic.",
+          "confidence_if_missing": "baixa",
+          "expected_outputs": ["raw/recreational_pressure/overpass_osm_raw.json", "processed/recreational_pressure.gpkg", "indicators/recreational_pressure_resum.csv", "metadata/recreational_pressure_metadata.json"]
+        },
+        {
+          "id": "strava_heatmap",
+          "name": "Strava Global Heatmap",
+          "url": "https://www.strava.com/maps/global-heatmap",
+          "access_type": "consulta manual / ús condicionat legalment",
+          "expected_format": "relative heatmap if authorized",
+          "responsible_connector": "blocked_strava_heatmap_connector",
+          "minimum_fields": ["relative_intensity", "sport", "date_or_version", "license_or_permission"],
+          "feeds_indicators": ["CORE_07", "CORE_08", "CORE_12"],
+          "required": false,
+          "on_failure": "DO_NOT_SCRAPE_USE_OSM_AND_FIELD_VALIDATION",
+          "error_message": "Strava només es pot usar si és compatible amb les seves condicions d'ús.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": []
+        }
+      ]
+    },
+    {
+      "id": "fires",
+      "name": "Incendis",
+      "sources": [
+        {
+          "id": "fires_burned_areas",
+          "name": "Superfícies afectades per incendis forestals",
+          "url": "https://sig.gencat.cat/ows/VEGETACIO/wfs",
+          "access_type": "WFS/WMS/file download",
+          "expected_format": "GeoPackage, CSV",
+          "responsible_connector": "connector_incendis_historial",
+          "minimum_fields": ["geometry", "fire_year", "burned_area_ha", "source"],
+          "feeds_indicators": ["CORE_09", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "MARK_FIRE_RESILIENCE_PARTIAL_AND_BLOCK_FIRE_HISTORY_MODULE",
+          "error_message": "Històric oficial d'incendis no està integrat per l'àrea.",
+          "confidence_if_missing": "baixa",
+          "expected_outputs": ["processed/incendis.gpkg", "indicators/incendis_resum.csv", "metadata/incendis_metadata.json"]
+        },
+        {
+          "id": "effis",
+          "name": "EFFIS",
+          "url": "https://forest-fire.emergency.copernicus.eu",
+          "access_type": "API / data request catalogue",
+          "expected_format": "JSON catalogue; product geometry pending per-product request",
+          "responsible_connector": "connector_incendis_historial",
+          "minimum_fields": ["burned_area", "severity", "recurrence", "fire_danger"],
+          "feeds_indicators": ["CORE_09", "CORE_12"],
+          "required": false,
+          "on_failure": "USE_OFFICIAL_CATALAN_BURNED_AREAS_WHEN_AVAILABLE",
+          "error_message": "EFFIS encara no està verificat com a connector automàtic.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": ["raw/incendis/effis_drf_datasets.json", "metadata/incendis_metadata.json"]
+        },
+        {
+          "id": "fuel_continuity",
+          "name": "Continuïtat forestal i combustible potencial",
+          "url": "pendent de font oficial exacta",
+          "access_type": "consulta manual / derivat analític",
+          "expected_format": "GeoPackage, GeoTIFF",
+          "responsible_connector": "pending_fuel_structure_connector",
+          "minimum_fields": ["forest_continuity", "fuel_proxy", "slope", "aspect", "humidity_proxy"],
+          "feeds_indicators": ["CORE_09", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "MARK_FIRE_RESILIENCE_PARTIAL",
+          "error_message": "Continuïtat de combustible no està calculada.",
+          "confidence_if_missing": "baixa",
+          "expected_outputs": ["processed/fire/fuel_continuity.gpkg"]
+        }
+      ]
+    },
+    {
+      "id": "climate",
+      "name": "Clima",
+      "sources": [
+        {
+          "id": "meteocat",
+          "name": "Meteocat API",
+          "url": "https://api.meteo.cat/",
+          "access_type": "API",
+          "expected_format": "JSON, CSV",
+          "responsible_connector": "pending_meteocat_connector",
+          "minimum_fields": ["temperature", "precipitation", "humidity", "wind", "station_or_grid", "date"],
+          "feeds_indicators": ["CORE_03", "CORE_04", "CORE_05", "CORE_11", "CORE_12"],
+          "required": true,
+          "on_failure": "MARK_CLIMATE_CONTEXT_PARTIAL_AND_REQUIRE_CREDENTIALS",
+          "error_message": "Meteocat requereix credencials o endpoint seleccionat.",
+          "confidence_if_missing": "baixa",
+          "requires_credentials": ["METEOCAT_API_KEY"],
+          "expected_outputs": ["processed/clima/meteocat.csv", "metadata/clima_metadata.json"]
+        },
+        {
+          "id": "aemet",
+          "name": "AEMET OpenData",
+          "url": "https://opendata.aemet.es/",
+          "access_type": "API",
+          "expected_format": "JSON, CSV",
+          "responsible_connector": "pending_aemet_connector",
+          "minimum_fields": ["temperature", "precipitation", "normal_climatologica", "station", "date"],
+          "feeds_indicators": ["CORE_03", "CORE_04", "CORE_05", "CORE_11", "CORE_12"],
+          "required": false,
+          "on_failure": "USE_METEOCAT_WHEN_AVAILABLE_AND_MARK_AEMET_PENDING",
+          "error_message": "AEMET OpenData requereix API key.",
+          "confidence_if_missing": "mitjana",
+          "requires_credentials": ["AEMET_API_KEY"],
+          "expected_outputs": ["processed/clima/aemet.csv"]
+        },
+        {
+          "id": "spei",
+          "name": "SPEI Global Drought Monitor",
+          "url": "https://spei.csic.es/",
+          "access_type": "consulta manual/API pendent",
+          "expected_format": "CSV/raster",
+          "responsible_connector": "pending_spei_connector",
+          "minimum_fields": ["spei", "timescale", "date", "geometry_or_grid"],
+          "feeds_indicators": ["CORE_04", "CORE_05", "CORE_10", "CORE_11", "CORE_12"],
+          "required": false,
+          "on_failure": "KEEP_DROUGHT_CONTEXT_PENDING",
+          "error_message": "SPEI no està integrat automàticament.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": []
+        }
+      ]
+    },
+    {
+      "id": "fieldwork",
+      "name": "Treball de camp",
+      "sources": [
+        {
+          "id": "field_validation",
+          "name": "Microhàbitats, validació d'hàbitats, pressions reals i punts sensibles",
+          "url": "projectes/{project}/data/fieldwork",
+          "access_type": "fitxer manual",
+          "expected_format": "CSV, GeoPackage, fotografies, notes",
+          "responsible_connector": "pending_fieldwork_importer",
+          "minimum_fields": ["date", "observer", "coordinates", "observation_type", "certainty", "technical_comment"],
+          "feeds_indicators": ["CORE_02", "CORE_06", "CORE_07", "CORE_10", "CORE_11", "CORE_12"],
+          "required": false,
+          "on_failure": "MARK_FIELD_VALIDATION_PENDING_AND_LOWER_CONFIDENCE_WHERE_RELEVANT",
+          "error_message": "Treball de camp pendent o no importat.",
+          "confidence_if_missing": "mitjana",
+          "expected_outputs": ["data/fieldwork"]
+        }
+      ]
+    }
+  ]
+}

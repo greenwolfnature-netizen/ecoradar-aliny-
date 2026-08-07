@@ -1,0 +1,44 @@
+{
+  "project": "Alinya",
+  "run_name": "EcoRadar 0.1 functional summary",
+  "generated_at": "2026-07-06T20:37:00+00:00",
+  "inputs": {
+    "study_area": "projectes/Alinya/processed/study_area.gpkg",
+    "land_cover": "projectes/Alinya/indicators/cobertes_sol_resum.csv",
+    "habitats": "projectes/Alinya/indicators/habitats_resum.csv",
+    "teledetection": "projectes/Alinya/metadata/teledeteccio_metadata.json",
+    "biodiversity": "projectes/Alinya/processed/biodiversitat.gpkg",
+    "human_pressure": "projectes/Alinya/processed/recreational_pressure.gpkg"
+  },
+  "outputs": {
+    "summary_csv": "projectes/Alinya/indicators/ecoradar_01_resum.csv",
+    "summary_report": "projectes/Alinya/reports/ecoradar_01_resum.md",
+    "maps_dir": "projectes/Alinya/maps",
+    "metadata": "projectes/Alinya/metadata/ecoradar_01_metadata.json"
+  },
+  "available_indicator_count": 14,
+  "unavailable_indicator_count": 4,
+  "unavailable_reasons": {
+    "ndvi_mitja": "Copernicus bloquejat: falten COPERNICUS_CLIENT_ID i COPERNICUS_CLIENT_SECRET.",
+    "ndmi_mitja": "Copernicus bloquejat: falten COPERNICUS_CLIENT_ID i COPERNICUS_CLIENT_SECRET.",
+    "ndwi_mitja": "Copernicus bloquejat: falten COPERNICUS_CLIENT_ID i COPERNICUS_CLIENT_SECRET.",
+    "lst_mitjana": "LST no habilitada: cal configurar col·leccio Sentinel-3/CLMS i credencials.",
+    "densitat_camins_i_pistes": "Disponible amb OSM/Overpass; no representa intensitat real de visitants.",
+    "nombre_accessos_punts_us_public": "Disponible amb punts OSM d'us public; cal validacio de camp."
+  },
+  "connector_status": {
+    "study_area": "available",
+    "cobertes_sol": "available",
+    "habitats": "available",
+    "teledeteccio_copernicus": "blocked_requires_credentials",
+    "biodiversitat": "available",
+    "pressio_humana": "available_osm_partial"
+  },
+  "limitations": [
+    "No es calculen indexs compostos.",
+    "No es fan interpretacions ecologiques complexes.",
+    "Els valors de teledeteccio no estan disponibles per manca de credencials Copernicus i configuracio LST.",
+    "La pressio humana esta disponible nomes com a infraestructura OSM parcial; no estima visitants ni intensitat real.",
+    "Els percentatges de cobertes es basen en la taula resum del connector ICGC ja generada."
+  ]
+}

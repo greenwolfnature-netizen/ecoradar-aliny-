@@ -1,0 +1,32 @@
+{
+  "generated_at_utc": "2026-08-07T17:20:00Z",
+  "latest_catalog_check_utc": "2026-08-07T17:20:00Z",
+  "connector": "meteocat_xema_socrata_nearest_wind",
+  "responsibility": "download_and_normalize_only",
+  "source": "Dades meteorològiques de la XEMA",
+  "organization": "Servei Meteorològic de Catalunya / Generalitat de Catalunya",
+  "official_dataset": "https://analisi.transparenciacatalunya.cat/d/nzvn-apee",
+  "station_code": "CJ",
+  "station_name": "Organyà",
+  "station_coordinates_epsg4326": [
+    1.33133,
+    42.21622
+  ],
+  "reference_station": {
+    "code": "Y4",
+    "name": "Alinyà",
+    "distance_km": 9.2
+  },
+  "variables": {
+    "wind_speed_ms": "30",
+    "wind_direction_deg": "31",
+    "wind_gust_ms": "50",
+    "wind_gust_direction_deg": "51"
+  },
+  "records": 6716,
+  "first_observation_utc": "2026-07-03T17:30:00Z",
+  "last_observation_utc": "2026-08-07T16:30:00Z",
+  "connector_status": "verified",
+  "limitation": "Observació puntual a Organyà, 9,2 km de Y4; no és vent mesurat dins la Muntanya d'Alinyà ni una superfície de vent.",
+  "output_csv": "projectes/Alinya/raw/meteocat_xema/CJ_wind_observations.csv"
+}

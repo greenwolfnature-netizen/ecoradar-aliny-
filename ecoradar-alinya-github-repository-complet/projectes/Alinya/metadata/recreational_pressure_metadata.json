@@ -1,0 +1,29 @@
+{
+  "source": "OpenStreetMap via Overpass API",
+  "responsible_organization": "OpenStreetMap contributors; Overpass community",
+  "url": "https://wiki.openstreetmap.org/wiki/Overpass_API",
+  "data_url": "https://overpass-api.de/api/interpreter",
+  "date_consulted": "2026-07-06T21:26:04+00:00",
+  "crs": "EPSG:25831",
+  "service_type": "REST API",
+  "data_format": [
+    "JSON",
+    "GeoPackage"
+  ],
+  "license": "ODbL for OpenStreetMap data; Overpass public instance usage policy applies",
+  "raw_cache_used": false,
+  "raw_elements": 670,
+  "line_features": 200,
+  "point_features": 18,
+  "outputs": {
+    "raw": "projectes/Alinya/raw/recreational_pressure/overpass_osm_raw.json",
+    "processed": "projectes/Alinya/processed/recreational_pressure.gpkg",
+    "summary": "projectes/Alinya/indicators/recreational_pressure_resum.csv"
+  },
+  "limitations": [
+    "OpenStreetMap is volunteered geographic information and may be incomplete or unevenly mapped.",
+    "The connector normalizes infrastructure and access features only; it does not estimate visitor numbers.",
+    "Strava Global Heatmap, Wikiloc, counters and manager datasets remain excluded until authorized connector-grade access is documented.",
+    "Later EcoRadar analysis should combine OSM with fieldwork before diagnosing real public-use pressure."
+  ]
+}

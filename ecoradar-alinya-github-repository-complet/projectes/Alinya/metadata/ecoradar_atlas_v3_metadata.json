@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-07-07T15:08:55+00:00",
+  "project": "Alinyà",
+  "version": "3.0",
+  "format": "A3 landscape",
+  "outputs": {
+    "atlas_pdf": "projectes/Alinya/reports/atlas_diagnosi_ecoradar_alinya_v3_a3.pdf",
+    "modules_pdf": "projectes/Alinya/reports/modules/moduls_diagnosi_ecoradar_alinya_v3_a3.pdf",
+    "output_copy": "output/pdf/atlas_diagnosi_ecoradar_alinya_v3_a3.pdf"
+  },
+  "page_count": 16,
+  "required_sections": [
+    "Radiografia ecològica global",
+    "Mòduls de diagnosi",
+    "Comparació i valors de referència",
+    "Prioritats de gestió",
+    "Pla d'acció",
+    "Full de ruta"
+  ],
+  "quality_gate": [
+    "Every page answers one management question.",
+    "No synthetic values are generated.",
+    "Unavailable inputs state why decisions are blocked.",
+    "Recommendations are tied to available evidence or explicit data gaps."
+  ],
+  "maps": {
+    "espai": "projectes/Alinya/maps/producte/mapa_espai_alinya.png",
+    "paisatge": "projectes/Alinya/maps/producte/mapa_paisatge_alinya.png",
+    "habitats": "projectes/Alinya/maps/producte/mapa_habitats_alinya.png",
+    "biodiversitat": "projectes/Alinya/maps/producte/mapa_biodiversitat_alinya.png",
+    "pressio": "projectes/Alinya/maps/producte/mapa_pressio_humana_alinya.png",
+    "base": "projectes/Alinya/maps/producte/mapa_base_alinya.png"
+  }
+}

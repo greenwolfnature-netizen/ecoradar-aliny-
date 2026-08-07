@@ -17,19 +17,36 @@ Netlify consulta els tres registres canònics del repositori GitHub:
 
 | Lectura | Font responsable | Servei | Resolució | Actualització | Estat |
 | --- | --- | --- | --- | --- | --- |
-| Temperatura, humitat, vent i precipitació | Meteocat / Generalitat de Catalunya | XEMA Socrata `nzvn-apee`, estació Y4 | observació puntual | habitualment 30 minuts; comprovació diària | `verified` |
-| Temperatura superficial | USGS | Landsat 8/9 Collection 2 Level-2 ST, STAC + COG | 30 m | amb nova escena QA-vàlida | `verified` |
+| Temperatura, humitat i precipitació | Meteocat / Generalitat de Catalunya | XEMA Socrata `nzvn-apee`, estació Y4 Alinyà | observació puntual | habitualment 30 minuts; comprovació diària | `verified` |
+| Vent contextual | Meteocat / Generalitat de Catalunya | XEMA Socrata `nzvn-apee`, estació CJ Organyà, 9,2 km de Y4 | observació puntual propera | habitualment 30 minuts; comprovació diària | `verified` |
+| Temperatura superficial detallada · principal | USGS | Landsat 8/9 Collection 2 Level-2 ST, STAC + COG | 30 m | amb nova escena QA-vàlida | `verified` |
+| Temperatura superficial detallada · alternativa | NASA/JPL ECOSTRESS; NASA LP DAAC | CMR Search + COG protegit, `ECO_L2T_LSTE.003` | 70 m | adquisició irregular; consulta diària | `requires_credentials` per descarregar |
 | NDVI, NDMI i albedo | Copernicus / ESA | CDSE Catalog + OAuth2 + Process API | 10–20 m, sortida a 10 m | amb nova escena L2A vàlida | `requires_credentials` per actualitzar |
 | PM2,5 contextual | CAMS / ECMWF | WMS públic | 0,1°, aproximadament 10 km | horària | `verified` com a context supramunicipal |
+| Ombra topogràfica a les 15 h | ICGC MDT 5 m + posició solar calculada | GeoTIFF estructural + càlcul diari | 5 m | diària perquè canvien data i posició solar | `verified` com a derivat |
+| Sequera forestal i potencial de foc | CREAF / EMF | repositori HTTPS GeoPackage `daily_modelled_forests` | punts forestals amb empremta nativa de 500 × 500 m | execució model diària; la publicació pot tenir retard | `verified` |
 | Perill actual d’incendi | EcoRadar sobre fonts oficials documentades | Analysis Engine | cel·les de 100 m | comprovació diària | indicador derivat |
+
+La temperatura superficial activa és sempre la capa local detallada QA-vàlida
+més recent entre Landsat i ECOSTRESS. Els productes contextuals de 3–9 km no
+poden substituir-la. Si el catàleg no aporta una observació nova, es conserva
+la darrera capa vàlida amb la seva data real.
+
+ForestDrought es consulta diàriament, però es conserva la data del model
+publicat. Cada punt només s'aplica a la seva empremta forestal nativa de
+500 × 500 m: no s'interpola sobre zones sense cel·la ni es presenta com una
+observació, una ignició o una alerta oficial.
 
 ## Perill actual d’incendi
 
-La fórmula 0–100 és:
+La fórmula 0–100 és la mateixa que a l’EcoRadar Urbà:
 
-`24% perill estructural oficial + 16% temperatura superficial + 16% sequedat
-relativa NDMI + 16% potencial de combustible per coberta + 8% concurrència
-territorial + 10% vent + 10% humitat relativa baixa`.
+`20% potencial de foc ForestDrought + 20% perill estructural + 15% sequedat
+NDMI + 10% temperatura superficial detallada + 10% continuïtat vegetal + 10%
+vent + 10% humitat relativa baixa + 3% pendent + 2% orientació de solana`.
+
+La concurrència territorial no intervé en aquesta fórmula; continua disponible
+com a lectura temàtica separada.
 
 Els components disponibles es renormalitzen si manca una variable. Una absència
 no es converteix en zero. L’índex no és una alerta oficial, una probabilitat
@@ -38,11 +55,12 @@ d’ignició ni el Pla Alfa.
 ## Limitacions
 
 - L’estació XEMA Y4 és puntual i no representa totes les valls, carenes i
-  orientacions de l’àmbit.
-- En l’extracte públic comprovat el 23 de juliol de 2026 no constaven registres
-  de vent; això es publica com a dada no disponible.
+  orientacions de l’àmbit. Y4 no publica vent; el component de vent usa CJ
+  Organyà, a 9,2 km, com a context oficial proper i no com una mesura feta dins
+  la Muntanya d’Alinyà.
 - La temperatura Landsat és superficial i la capa vigent és una composició
   estival, no temperatura de l’aire.
 - CAMS només s’incorpora com a context supramunicipal.
+- L’ombra diària d’Alinyà és estrictament topogràfica: considera pendent i orientació del MDT, però no arbres, edificis ni horitzó llunyà.
 - Les escenes Sentinel-2 requereixen credencials gratuïtes CDSE per a
   l’actualització automàtica; cap secret queda dins del repositori.

@@ -1,0 +1,14 @@
+{
+  "connector": "pending_fieldwork_importer",
+  "source": "Dades pròpies de camp",
+  "status": "not_available_no_project_dataset",
+  "reason": "No s'ha proporcionat cap dataset de camp per Alinyà.",
+  "required_action": "Crear plantilla CSV/GPKG/media i importar observacions validades quan existeixin.",
+  "outputs": {},
+  "missing_outputs": [
+    "data/fieldwork"
+  ],
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:42:13+00:00",
+  "can_advance_to_next_connector": true
+}

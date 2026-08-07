@@ -1,0 +1,12 @@
+{
+  "connector": "pending_spei_connector",
+  "source": "SPEI Global Drought Monitor",
+  "status": "blocked_pending_endpoint_schema_verification",
+  "reason": "La font està identificada, però falta endpoint o descàrrega automatitzable, esquema de grid i llicència d'ús dins EcoRadar.",
+  "required_action": "Documentar descàrrega oficial CSIC per coordenada/grid i implementar només després de verificar camps i resolució.",
+  "outputs": {},
+  "missing_outputs": [],
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:42:13+00:00",
+  "can_advance_to_next_connector": true
+}

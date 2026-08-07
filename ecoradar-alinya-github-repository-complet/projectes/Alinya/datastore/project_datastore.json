@@ -1,0 +1,112 @@
+{
+  "project": "Alinya",
+  "generated_at": "2026-07-08T14:37:47+00:00",
+  "policy": "Official EcoRadar project datastore manifest. Modules should read registered assets instead of discovering arbitrary CSV/JSON files.",
+  "assets": [
+    {
+      "id": "study_area",
+      "relative_path": "processed/study_area.gpkg",
+      "type": "vector",
+      "exists": true,
+      "size_bytes": 172032
+    },
+    {
+      "id": "land_cover",
+      "relative_path": "processed/cobertes_sol.gpkg",
+      "type": "vector",
+      "exists": true,
+      "size_bytes": 39473152
+    },
+    {
+      "id": "habitats",
+      "relative_path": "processed/habitats.gpkg",
+      "type": "vector",
+      "exists": true,
+      "size_bytes": 1970176
+    },
+    {
+      "id": "biodiversity",
+      "relative_path": "processed/biodiversitat.gpkg",
+      "type": "vector",
+      "exists": true,
+      "size_bytes": 348160
+    },
+    {
+      "id": "human_pressure",
+      "relative_path": "processed/recreational_pressure.gpkg",
+      "type": "vector",
+      "exists": true,
+      "size_bytes": 356352
+    },
+    {
+      "id": "hydrology",
+      "relative_path": "processed/hidrologia.gpkg",
+      "type": "vector",
+      "exists": true,
+      "size_bytes": 143360
+    },
+    {
+      "id": "connectivity",
+      "relative_path": "processed/connectivitat.gpkg",
+      "type": "vector",
+      "exists": true,
+      "size_bytes": 372736
+    },
+    {
+      "id": "fires",
+      "relative_path": "processed/incendis.gpkg",
+      "type": "vector",
+      "exists": true,
+      "size_bytes": 98304
+    },
+    {
+      "id": "terrain_dem",
+      "relative_path": "processed/terrain/dem.tif",
+      "type": "raster",
+      "exists": true,
+      "size_bytes": 4016880
+    },
+    {
+      "id": "terrain_slope",
+      "relative_path": "processed/terrain/slope.tif",
+      "type": "raster",
+      "exists": true,
+      "size_bytes": 7480519
+    },
+    {
+      "id": "terrain_aspect",
+      "relative_path": "processed/terrain/aspect.tif",
+      "type": "raster",
+      "exists": true,
+      "size_bytes": 7219826
+    },
+    {
+      "id": "core_indicators",
+      "relative_path": "indicators/ecoradar_core_indicators.json",
+      "type": "indicator_json",
+      "exists": true,
+      "size_bytes": 12403
+    },
+    {
+      "id": "diagnosis",
+      "relative_path": "diagnosis/ecoradar_diagnosis.json",
+      "type": "diagnosis_json",
+      "exists": true,
+      "size_bytes": 16269
+    },
+    {
+      "id": "recommendations",
+      "relative_path": "recommendations/recommendations.json",
+      "type": "recommendations_json",
+      "exists": true,
+      "size_bytes": 13159
+    },
+    {
+      "id": "validation",
+      "relative_path": "validation/technical_validation.json",
+      "type": "validation_json",
+      "exists": true,
+      "size_bytes": 5161
+    }
+  ]
+}

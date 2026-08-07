@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at_utc": "2026-08-07T17:33:24Z",
-  "checked_at_utc": "2026-08-07T17:33:24Z",
+  "generated_at_utc": "2026-08-07T17:20:00Z",
+  "checked_at_utc": "2026-08-07T17:20:00Z",
   "reading": "Perill d'incendi actual",
   "scope": "Muntanya d'Alinyà",
   "status": "incompleta en algunes cel·les",
@@ -9,43 +9,43 @@
   "grid": {
     "crs": "EPSG:25831",
     "resolution_m": 100.0,
-    "cells": 5998,
+    "cells": 5462,
     "bbox_epsg4326": [
       1.3617252918882514,
       42.142558863812205,
-      1.5211302013780739,
-      42.22752515863937
+      1.5211302013780743,
+      42.227525158639374
     ],
     "geojson": "projectes/Alinya/maps/incendis/current_fire_danger_cells.geojson",
     "raster": "projectes/Alinya/processed/incendis/current_fire_danger/current_fire_danger_0_100.tif",
     "webp": "projectes/Alinya/maps/incendis/current_fire_danger.webp"
   },
   "summary": {
-    "mean_index_0_100": 54.3,
+    "mean_index_0_100": 53.5,
     "predominant_category": "moderat",
-    "maximum_index_0_100": 89.4,
+    "maximum_index_0_100": 84.7,
     "maximum_category": "molt alt",
     "area_by_category_ha": {
       "molt baix": 0.0,
-      "baix": 626.68,
-      "moderat": 2952.8,
-      "alt": 1857.32,
-      "molt alt": 27.24,
+      "baix": 249.6,
+      "moderat": 3883.96,
+      "alt": 1210.7,
+      "molt alt": 9.4,
       "extrem": 0.0
     },
-    "very_high_or_extreme_area_pct": 0.5,
+    "very_high_or_extreme_area_pct": 0.2,
     "dominant_variables": [
-      "vegetation_type_fuel_potential",
-      "relative_humidity_inverse",
-      "official_structural_2024"
+      "creaf_fire_potential",
+      "ndmi_dryness",
+      "relative_humidity_inverse"
     ],
     "dominant_labels": [
-      "Coberta amb més potencial de combustible",
-      "Humitat relativa baixa",
-      "Perill estructural elevat"
+      "Potencial de foc ForestDrought elevat",
+      "Vegetació seca",
+      "Humitat relativa baixa"
     ],
     "latest_update_utc": "2026-08-07T16:30:00Z",
-    "confidence_pct": 59.7,
+    "confidence_pct": 61.7,
     "confidence": "mitjana"
   },
   "weather": {
@@ -53,8 +53,22 @@
       "value": 30.3,
       "timestamp_utc": "2026-08-07T16:30:00Z",
       "validation_code": "",
-      "history_p05": 17.884999999999998,
+      "history_p05": 17.89,
       "history_p95": 32.3
+    },
+    "wind_speed_ms": {
+      "value": 4.3,
+      "timestamp_utc": "2026-08-07T16:30:00Z",
+      "validation_code": "",
+      "history_p05": 0.7,
+      "history_p95": 6.1
+    },
+    "wind_direction_deg": {
+      "value": 191.0,
+      "timestamp_utc": "2026-08-07T16:30:00Z",
+      "validation_code": "",
+      "history_p05": 16.0,
+      "history_p95": 337.0
     },
     "relative_humidity_pct": {
       "value": 35.0,
@@ -68,56 +82,71 @@
       "timestamp_utc": "2026-08-07T16:30:00Z",
       "validation_code": ""
     },
-    "daily_min_relative_humidity_pct": 34.0
+    "wind_gust_ms": {
+      "value": 7.8,
+      "timestamp_utc": "2026-08-07T16:30:00Z",
+      "validation_code": "",
+      "history_p05": 1.8,
+      "history_p95": 10.9
+    },
+    "wind_gust_direction_deg": {
+      "value": 203.0,
+      "timestamp_utc": "2026-08-07T16:30:00Z",
+      "validation_code": "",
+      "history_p05": 16.900000000000006,
+      "history_p95": 320.0
+    },
+    "daily_min_relative_humidity_pct": 34.0,
+    "daily_max_wind_gust_ms": 13.8
   },
   "variables_today": {
-    "official_structural_2024": {
+    "creaf_fire_potential": {
+      "value": "mediana 79.2/100",
+      "source": "CREAF/EMF · ForestDrought daily modelled forests",
+      "date_utc": "2026-08-02T00:00:00Z",
+      "weight_pct": 20,
+      "quality": "verificada",
+      "update_status": "última dada vàlida"
+    },
+    "structural": {
       "value": "mediana 4.0/10",
       "source": "Generalitat · perill bàsic 2024",
       "date_utc": "2024-01-01T00:00:00Z",
-      "weight_pct": 24,
+      "weight_pct": 20,
+      "quality": "verificada",
+      "update_status": "última dada vàlida"
+    },
+    "ndmi_dryness": {
+      "value": "mediana 0.104",
+      "source": "Copernicus Sentinel-2 L2A",
+      "date_utc": "2026-07-07T10:37:01.024000Z",
+      "weight_pct": 15,
       "quality": "verificada",
       "update_status": "última dada vàlida"
     },
     "surface_temperature": {
-      "value": "mediana 28.3 °C",
-      "source": "USGS Landsat 8/9 C2 L2 · composició estival",
-      "date_utc": "2026-07-24T10:36:22.020782Z",
-      "weight_pct": 16,
+      "value": "mediana 27.2 °C",
+      "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
+      "date_utc": "2026-07-08T10:36:09.180240Z",
+      "weight_pct": 10,
       "quality": "verificada",
       "update_status": "última dada vàlida"
     },
-    "vegetation_dryness_ndmi": {
-      "value": "mediana 0.103",
-      "source": "Copernicus Sentinel-2 L2A",
-      "date_utc": "2026-07-07T10:37:01.024000Z",
-      "weight_pct": 16,
-      "quality": "verificada",
-      "update_status": "última dada vàlida"
-    },
-    "vegetation_type_fuel_potential": {
-      "value": "potencial mitjà 0.95/1",
-      "source": "ICGC · cobertes del sòl 2024",
-      "date_utc": "2024-12-31T00:00:00Z",
-      "weight_pct": 16,
-      "quality": "verificada",
-      "update_status": "última dada vàlida"
-    },
-    "territorial_concurrence": {
-      "value": "mediana 0.509/1",
-      "source": "EcoRadar · fonts territorials oficials documentades",
-      "date_utc": "2026-07-20T18:27:24.763407+00:00",
-      "weight_pct": 8,
+    "vegetation_continuity": {
+      "value": "mitjana 49.7/100",
+      "source": "Copernicus CLMS HRL 2023",
+      "date_utc": "2023-12-31T00:00:00Z",
+      "weight_pct": 10,
       "quality": "verificada",
       "update_status": "última dada vàlida"
     },
     "wind": {
-      "value": "dada no disponible",
-      "source": "Meteocat XEMA · Y4 Alinyà",
-      "date_utc": null,
+      "value": "15.5 km/h",
+      "source": "Meteocat XEMA · CJ Organyà · 9,2 km de Y4",
+      "date_utc": "2026-08-07T16:30:00Z",
       "weight_pct": 10,
-      "quality": "no disponible",
-      "update_status": "dada no disponible"
+      "quality": "provisional",
+      "update_status": "actualitzada avui"
     },
     "relative_humidity_inverse": {
       "value": "35 %",
@@ -126,32 +155,54 @@
       "weight_pct": 10,
       "quality": "provisional",
       "update_status": "actualitzada avui"
+    },
+    "slope": {
+      "value": "mediana 25.3°",
+      "source": "ICGC · model d'elevacions del terreny 5 m",
+      "date_utc": "2023-12-31T00:00:00Z",
+      "weight_pct": 3,
+      "quality": "verificada",
+      "update_status": "última dada vàlida"
+    },
+    "aspect": {
+      "value": "exposició de solana derivada 0–100",
+      "source": "ICGC · model d'elevacions del terreny 5 m",
+      "date_utc": "2023-12-31T00:00:00Z",
+      "weight_pct": 2,
+      "quality": "verificada",
+      "update_status": "última dada vàlida"
     }
   },
   "normalization": {
-    "method": "P10-P90 within Alinyà for static rasters and P5-P95 over the 35-day XEMA history; missing variables are reweighted, never set to zero.",
+    "method": "P5-P95 dins Alinyà per LST, NDMI i pendent; P5-P95 sobre 35 dies XEMA; variables absents renormalitzades, mai convertides en zero.",
     "ndmi_p10_p90": [
-      -0.0395,
-      0.2503
+      -0.0812,
+      0.2836
     ],
     "lst_c_p10_p90": [
-      23.82,
-      33.03
+      21.57,
+      33.71
+    ],
+    "slope_deg_p05_p95": [
+      7.73,
+      44.58
     ]
   },
   "weights": {
-    "official_structural_2024": 0.24,
-    "surface_temperature": 0.16,
-    "vegetation_dryness_ndmi": 0.16,
-    "vegetation_type_fuel_potential": 0.16,
-    "territorial_concurrence": 0.08,
+    "creaf_fire_potential": 0.2,
+    "structural": 0.2,
+    "ndmi_dryness": 0.15,
+    "surface_temperature": 0.1,
+    "vegetation_continuity": 0.1,
     "wind": 0.1,
-    "relative_humidity_inverse": 0.1
+    "relative_humidity_inverse": 0.1,
+    "slope": 0.03,
+    "aspect": 0.02
   },
   "methodology": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
   "sources": {
     "meteocat": {
-      "generated_at_utc": "2026-08-07T17:33:34.088254+00:00",
+      "generated_at_utc": "2026-08-07T17:17:15.051229+00:00",
       "connector": "meteocat_xema_socrata",
       "responsibility": "download_and_normalize_only",
       "source": "Dades meteorològiques de la XEMA",
@@ -159,8 +210,8 @@
       "official_dataset": "https://analisi.transparenciacatalunya.cat/d/nzvn-apee",
       "station_code": "Y4",
       "station_name": "Alinyà",
-      "records": 5034,
-      "first_observation_utc": "2026-07-03T18:00:00Z",
+      "records": 5037,
+      "first_observation_utc": "2026-07-03T17:30:00Z",
       "last_observation_utc": "2026-08-07T16:30:00Z",
       "variables": {
         "air_temperature_c": "32",
@@ -174,6 +225,38 @@
       "validation_note": "Blank codi_estat means validation has not started; T means pending; V means validated.",
       "connector_status": "verified",
       "output_csv": "projectes/Alinya/raw/meteocat_xema/Y4_observations.csv"
+    },
+    "meteocat_wind": {
+      "generated_at_utc": "2026-08-07T17:20:00Z",
+      "latest_catalog_check_utc": "2026-08-07T17:20:00Z",
+      "connector": "meteocat_xema_socrata_nearest_wind",
+      "responsibility": "download_and_normalize_only",
+      "source": "Dades meteorològiques de la XEMA",
+      "organization": "Servei Meteorològic de Catalunya / Generalitat de Catalunya",
+      "official_dataset": "https://analisi.transparenciacatalunya.cat/d/nzvn-apee",
+      "station_code": "CJ",
+      "station_name": "Organyà",
+      "station_coordinates_epsg4326": [
+        1.33133,
+        42.21622
+      ],
+      "reference_station": {
+        "code": "Y4",
+        "name": "Alinyà",
+        "distance_km": 9.2
+      },
+      "variables": {
+        "wind_speed_ms": "30",
+        "wind_direction_deg": "31",
+        "wind_gust_ms": "50",
+        "wind_gust_direction_deg": "51"
+      },
+      "records": 6716,
+      "first_observation_utc": "2026-07-03T17:30:00Z",
+      "last_observation_utc": "2026-08-07T16:30:00Z",
+      "connector_status": "verified",
+      "limitation": "Observació puntual a Organyà, 9,2 km de Y4; no és vent mesurat dins la Muntanya d'Alinyà ni una superfície de vent.",
+      "output_csv": "projectes/Alinya/raw/meteocat_xema/CJ_wind_observations.csv"
     },
     "sentinel2": {
       "generated_at_utc": "2026-07-20T17:49:53.447098+00:00",
@@ -227,15 +310,15 @@
       }
     },
     "landsat": {
-      "generated_at_utc": "2026-08-07T17:34:21.434555+00:00",
+      "generated_at_utc": "2026-07-20T18:25:00.708623+00:00",
       "connector": "landsat_usgs_c2_l2_summer_composite",
       "responsibility": "download_and_normalize_only",
       "scope": "Muntanya d'Alinyà",
       "study_bbox_epsg4326": [
         1.3639980000000003,
-        42.14442699999999,
-        1.519939,
-        42.225122000000006
+        42.14442700000001,
+        1.5199389999999995,
+        42.22512200000001
       ],
       "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
       "organization": "United States Geological Survey",
@@ -244,7 +327,7 @@
       "service_type": "STAC plus signed Cloud Optimized GeoTIFF range reads",
       "license": "USGS Landsat data are in the public domain",
       "date_range": "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z",
-      "scene_count": 22,
+      "scene_count": 20,
       "scenes": [
         {
           "item_id": "LC08_L2SP_198031_20250830_02_T1",
@@ -345,13 +428,6 @@
           "valid_study_pct": 99.97
         },
         {
-          "item_id": "LC09_L2SP_198031_20260724_02_T1",
-          "acquired_at_utc": "2026-07-24T10:36:22.020782Z",
-          "scene_cloud_cover_pct": 15.13,
-          "valid_study_pixels": 60698,
-          "valid_study_pct": 99.98
-        },
-        {
           "item_id": "LC09_L2SP_198031_20250806_02_T1",
           "acquired_at_utc": "2025-08-06T10:36:36.976511Z",
           "scene_cloud_cover_pct": 16.09,
@@ -392,13 +468,6 @@
           "scene_cloud_cover_pct": 68.19,
           "valid_study_pixels": 0,
           "valid_study_pct": 0.0
-        },
-        {
-          "item_id": "LC08_L2SP_198031_20260716_02_T1",
-          "acquired_at_utc": "2026-07-16T10:36:04.150287Z",
-          "scene_cloud_cover_pct": 79.15,
-          "valid_study_pixels": 0,
-          "valid_study_pct": 0.0
         }
       ],
       "crs": "EPSG:32631",
@@ -413,89 +482,121 @@
       "valid_pixels": 60711,
       "study_coverage_pct": 100.0,
       "normalized_tif": "projectes/Alinya/processed/landsat/landsat_lst.tif",
-      "sha256": "7e8b5d31f9a1ea54639f609661201c6d0ca86ad665e0c3e80f476b92dc6911b2",
+      "sha256": "03982eb31fbcf702ab9de96550fdfea78a3c82cf09a8c9883b084af72316eaa6",
       "connector_status": "verified"
     },
-    "territorial": {
-      "generated_at_utc": "2026-07-20T18:27:24.763407+00:00",
-      "indicator": "integrated_structural_wildfire_danger_ecoradar",
-      "status": "verified_analysis",
+    "surface_temperature_selection": {
+      "source_key": "landsat",
+      "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
+      "organization": "United States Geological Survey",
+      "acquired_at_utc": "2026-07-08T10:36:09.180240Z",
+      "resolution_m": 30,
+      "normalized_tif": "projectes/Alinya/processed/landsat/landsat_lst.tif",
+      "quality": "QA_PIXEL applied; median composition of valid summer observations",
+      "source_metadata": "projectes/Alinya/metadata/landsat_connector.json"
+    },
+    "forestdrought": {
+      "generated_at_utc": "2026-08-07T10:00:00Z",
+      "latest_catalog_check_utc": "2026-08-07T10:00:00Z",
+      "connector": "creaf_forestdrought_daily_modelled_forests",
+      "responsibility": "discover_download_subset_and_normalize_only",
       "scope": "Muntanya d'Alinyà",
+      "source": "ForestDrought daily modelled forests",
+      "organization": "CREAF, Ecosystem Modelling Facility (EMF)",
+      "provider_role": "modelled forest drought and fire-potential data provider",
+      "application_url": "https://laboratoriforestal.creaf.cat/forestdrought_app/",
+      "repository_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/",
+      "source_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/20260802.gpkg",
+      "service_type": "public HTTPS GeoPackage repository",
+      "model_date": "2026-08-02",
+      "data_at_utc": "2026-08-02T00:00:00Z",
+      "crs": "EPSG:25830",
+      "cell_size_m": 500,
+      "geometry_type": "forest grid cell centre points",
+      "variables": [
+        "date",
+        "DDS",
+        "LFMC",
+        "DFMC",
+        "SFP",
+        "CFP",
+        "REW"
+      ],
+      "features": 397,
+      "normalized_geojson": "projectes/Alinya/raw/creaf_forestdrought/forestdrought_latest.geojson",
+      "normalized_csv": "projectes/Alinya/raw/creaf_forestdrought/forestdrought_latest.csv",
+      "usage_license": "Public download and reuse stated by CREAF; formal license identifier pending verification.",
+      "connector_status": "verified",
+      "status_note": "Latest published model file found by descending date search. The model date is preserved separately from the daily check.",
+      "updated": true
+    },
+    "terrain": {
+      "project": "Alinya",
+      "source": "ICGC Model d'elevacions del terreny 5 m",
+      "responsible_organization": "Institut Cartogràfic i Geològic de Catalunya",
+      "url": "https://datacloud.icgc.cat/datacloud/model-elevacions-terreny/tif_unzip/model-elevacions-terreny-topografic-catalunya-5m-2009-2018.tif",
+      "service_type": "Cloud Optimized GeoTIFF / raster file",
+      "query_date": "2026-07-07T17:25:46.656556+00:00",
       "crs": "EPSG:25831",
-      "resolution_m": 100.0,
-      "coverage_pct": 100.0,
-      "formula": "weighted mean of available normalized components; weights renormalized where the official forest-only raster has NoData",
-      "weights": {
-        "official_structural_2024": 0.3,
-        "surface_temperature": 0.2,
-        "vegetation_dryness_ndmi": 0.2,
-        "vegetation_type_fuel_potential": 0.2,
-        "territorial_concurrence": 0.1
+      "resolution_m": [
+        5.0,
+        5.0
+      ],
+      "width": 2583,
+      "height": 1806,
+      "bounds": [
+        364868.461,
+        4666982.395,
+        377783.461,
+        4676012.395
+      ],
+      "study_area_surface_ha": 5464.031656330243,
+      "outputs": {
+        "dem": "projectes/Alinya/processed/terrain/dem.tif",
+        "slope": "projectes/Alinya/processed/terrain/slope.tif",
+        "aspect": "projectes/Alinya/processed/terrain/aspect.tif",
+        "northness": "projectes/Alinya/processed/terrain/northness.tif",
+        "solana_obaga": "projectes/Alinya/processed/terrain/solana_obaga.tif"
       },
-      "components": {
-        "official_structural_2024": "Generalitat Mapa bàsic de perill d'incendi forestal 2024, values 1-10 normalized to 0-1",
-        "surface_temperature": "Landsat warm-season composite robust-scaled between study P10=22.82 C and P90=32.38 C",
-        "vegetation_dryness_ndmi": "inverse Sentinel-2 NDMI robust-scaled between study P10=-0.039 and P90=0.251",
-        "vegetation_type_fuel_potential": {
-          "Aigua": 0.0,
-          "Roquissars / sol nu": 0.1,
-          "Vies i nuclis": 0.15,
-          "Conreus": 0.4,
-          "Prats i herbassars": 0.55,
-          "Matollar": 0.9,
-          "Bosc": 1.0
+      "variables": {
+        "altitude_m": {
+          "min": 607.26,
+          "max": 2378.46,
+          "mean": 1484.5076,
+          "std": 376.0356
         },
-        "territorial_concurrence": "existing 0-1 score combining cover, habitat, slope, aspect, elevation and access similarity to historical fires"
-      },
-      "thresholds": {
-        "baix": "<0.25",
-        "moderat": "0.25-<0.50",
-        "alt": "0.50-<0.70",
-        "molt_alt": ">=0.70"
-      },
-      "statistics": {
-        "minimum": 0.115,
-        "median": 0.527,
-        "maximum": 0.926,
-        "distribution": {
-          "baix": {
-            "cells": 35,
-            "area_ha": 35.0,
-            "share_pct": 0.6
-          },
-          "moderat": {
-            "cells": 2281,
-            "area_ha": 2281.0,
-            "share_pct": 41.8
-          },
-          "alt": {
-            "cells": 2503,
-            "area_ha": 2503.0,
-            "share_pct": 45.8
-          },
-          "molt_alt": {
-            "cells": 643,
-            "area_ha": 643.0,
-            "share_pct": 11.8
-          }
+        "slope_degrees": {
+          "min": 0.0,
+          "max": 85.6557,
+          "mean": 25.6153,
+          "std": 11.7632
+        },
+        "aspect_degrees": {
+          "min": 0.0,
+          "max": 359.9897,
+          "mean": 158.997,
+          "std": 93.9135
+        },
+        "northness": {
+          "min": -1.0,
+          "max": 1.0,
+          "mean": -0.1599,
+          "std": 0.7333
         }
       },
-      "outputs": {
-        "tif": "processed/incendis/perill_integrat_ecoradar.tif",
-        "webp": "maps/incendis/perill_integrat_ecoradar.webp"
-      },
       "limitations": [
-        "EcoRadar integrated structural reading; not the official daily danger, Pla Alfa, ignition probability or emergency alert.",
-        "Fuel-potential scores are explicit analytical assumptions by land-cover class and require field validation of fuel load and vertical structure.",
-        "Landsat temperature is a warm-season surface composite and NDMI is a relative spectral moisture proxy, not fine-fuel moisture."
+        "Pendent, orientació i obaga/solana són derivats geomorfològics del DEM, no indicadors ecològics finals.",
+        "La classificació obaga/solana és una capa normalitzada simple basada en orientació; la insolació real requeriria model solar amb data, ombres i horizon.",
+        "El connector no calcula cap indicador EcoRadar."
       ]
     }
   },
   "limitations": [
     "Índex EcoRadar derivat; no és una alerta oficial ni substitueix el Pla Alfa o el mapa diari oficial.",
-    "La meteorologia XEMA Y4 és una observació puntual i no representa cada vessant d'un àmbit de 5.464 ha.",
+    "La humitat XEMA Y4 i el vent XEMA CJ Organyà són observacions puntuals; CJ és a 9,2 km de Y4 i cap estació representa cada vessant d'un àmbit de 5.464 ha.",
     "Una variable XEMA absent es marca com a no disponible i el pes es renormalitza; no es converteix en zero.",
-    "La temperatura Landsat és una composició estival i l'NDMI és un proxy relatiu, no humitat fina del combustible.",
-    "La coberta és un proxy de combustible que requereix validació de càrrega i estructura vertical al camp."
+    "La temperatura superficial no és temperatura de l'aire i l'NDMI és un proxy relatiu, no humitat fina del combustible.",
+    "ForestDrought és un model forestal de 500 m; no és una observació, una ignició ni una alerta oficial.",
+    "La continuïtat vegetal HRL és horitzontal i no quantifica càrrega, espècie ni estructura vertical del combustible."
   ]
 }

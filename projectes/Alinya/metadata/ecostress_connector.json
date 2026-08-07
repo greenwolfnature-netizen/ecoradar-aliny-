@@ -1,0 +1,18 @@
+{
+  "latest_catalog_check_utc": "2026-08-07T10:00:00Z",
+  "official_catalog_search_url": "https://cmr.earthdata.nasa.gov/search/granules.json?short_name=ECO_L2T_LSTE&version=003&bounding_box=1.363998%2C42.144427%2C1.5199389999999993%2C42.22512200000001&temporal=2026-04-09T10%3A00%3A00Z%2C2026-08-07T10%3A00%3A00Z&page_size=100&sort_key=-start_date",
+  "latest_catalog_candidate": {
+    "granule_id": "ECOv003_L2T_LSTE_45830_002_31TCG_20260805T100426_02",
+    "concept_id": "G4271920955-LPCLOUD",
+    "acquired_at_utc": "2026-08-05T10:04:26.376Z",
+    "day_night_flag": "DAY",
+    "updated_at_utc": "2026-08-06T07:31:48.069Z",
+    "bounds_epsg4326": [
+      "41.4391963 0.5688037 42.4474384 1.919488"
+    ]
+  },
+  "connector_status": "requires_credentials",
+  "status_note": "A newer official catalog granule exists, but protected LP DAAC COG download requires EARTHDATA_TOKEN.",
+  "updated": false,
+  "scope": "Muntanya d'Alinyà"
+}

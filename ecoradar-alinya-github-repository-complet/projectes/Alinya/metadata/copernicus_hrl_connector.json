@@ -1,0 +1,62 @@
+{
+  "generated_at_utc": "2026-07-20T17:48:16.264989+00:00",
+  "connector": "clms_hrl_wms",
+  "responsibility": "download_and_normalize_only",
+  "scope": "Muntanya d'Alinyà",
+  "study_bbox_epsg4326": [
+    1.363998,
+    42.144427,
+    1.5199389999999993,
+    42.22512200000001
+  ],
+  "target_bounds_epsg3035": [
+    3606380,
+    2155090,
+    3620160,
+    2165450
+  ],
+  "width": 1378,
+  "height": 1036,
+  "datasets": [
+    {
+      "dataset": "tree_cover_density_2023",
+      "source": "CLMS HRL Tree Cover Density 2023",
+      "organization": "Copernicus Land Monitoring Service / European Environment Agency",
+      "official_url": "https://land.copernicus.eu/en/products/high-resolution-layer-forests-and-tree-cover",
+      "service_type": "WMS GetMap",
+      "format": "GeoTIFF uint8",
+      "crs": "EPSG:3035",
+      "resolution_m": 10,
+      "variables": "0-100 percent tree-cover density",
+      "update_frequency": "three-yearly according to product",
+      "license": "Copernicus data policy",
+      "connector_status": "verified",
+      "query_url": "https://geoserver.vlcc.geoville.com/geoserver/ows?service=WMS&version=1.1.1&request=GetMap&layers=HRL_TCF%3ATCD_S2023&styles=&srs=EPSG%3A3035&bbox=3606380%2C2155090%2C3620160%2C2165450&width=1378&height=1036&format=image%2Fgeotiff&transparent=false",
+      "raw_path": "projectes/Alinya/raw/copernicus_hrl/tree_cover_density_2023.tif",
+      "normalized_path": "projectes/Alinya/processed/copernicus_hrl/tree_cover_density_2023.tif",
+      "sha256": "9331abfb18c83d134e01113124b0ba817e612d6a04f93a244d931a29689a5ec1",
+      "minimum": 0,
+      "maximum": 94
+    },
+    {
+      "dataset": "herbaceous_cover_2023",
+      "source": "CLMS HRL Herbaceous Cover 2023",
+      "organization": "Copernicus Land Monitoring Service / European Environment Agency",
+      "official_url": "https://land.copernicus.eu/en/products/high-resolution-layer-grasslands",
+      "service_type": "WMS GetMap",
+      "format": "GeoTIFF uint8",
+      "crs": "EPSG:3035",
+      "resolution_m": 10,
+      "variables": "binary herbaceous-cover presence",
+      "update_frequency": "three-yearly according to product",
+      "license": "Copernicus data policy",
+      "connector_status": "verified",
+      "query_url": "https://geoserver.vlcc.geoville.com/geoserver/ows?service=WMS&version=1.1.1&request=GetMap&layers=HRL_GRA%3AHER_S2023&styles=&srs=EPSG%3A3035&bbox=3606380%2C2155090%2C3620160%2C2165450&width=1378&height=1036&format=image%2Fgeotiff&transparent=false",
+      "raw_path": "projectes/Alinya/raw/copernicus_hrl/herbaceous_cover_2023.tif",
+      "normalized_path": "projectes/Alinya/processed/copernicus_hrl/herbaceous_cover_2023.tif",
+      "sha256": "0f535dfd68c7f91a2570177a6379b0ee4c533c980eb6f5b177c5ab189ff803a9",
+      "minimum": 0,
+      "maximum": 1
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "connector": "pending_meteocat_connector",
+  "source": "Meteocat API",
+  "status": "blocked_requires_credentials",
+  "reason": "Falta METEOCAT_API_KEY.",
+  "required_action": "Configurar METEOCAT_API_KEY i seleccionar endpoint/estació o producte de grid oficial.",
+  "missing_credentials": [
+    "METEOCAT_API_KEY"
+  ],
+  "outputs": {},
+  "missing_outputs": [
+    "processed/clima/meteocat.csv",
+    "metadata/clima_metadata.json"
+  ],
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:42:13+00:00",
+  "can_advance_to_next_connector": true
+}

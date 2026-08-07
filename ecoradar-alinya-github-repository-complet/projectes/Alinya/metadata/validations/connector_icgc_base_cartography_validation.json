@@ -1,0 +1,15 @@
+{
+  "connector": "pending_base_cartography_icgc",
+  "source": "Cartografia base i ortofoto ICGC",
+  "status": "partial_product_maps_only",
+  "reason": "Existeixen mapes PNG de context, però no un connector formal WMTS/WMS que descarregui i documenti ortofoto/topogràfic.",
+  "required_action": "Crear connector de context cartogràfic si cal per a productes visuals; no és crític per al motor de dades vector/raster.",
+  "outputs": {
+    "base_map": "projectes/Alinya/maps/producte/mapa_base_alinya.png",
+    "study_area_map": "projectes/Alinya/maps/producte/mapa_espai_alinya.png"
+  },
+  "missing_outputs": [],
+  "project": "Alinya",
+  "validated_at": "2026-07-07T17:42:13+00:00",
+  "can_advance_to_next_connector": true
+}
