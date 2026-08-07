@@ -1,8 +1,8 @@
 {
-  "generated_at_utc": "2026-08-05T19:07:32.242745+00:00",
+  "generated_at_utc": "2026-08-07T10:58:11.328732+00:00",
   "pm25": {
-    "value_ug_m3": 9.15,
-    "reference_time_utc": "2026-08-05T00:00:00Z",
+    "value_ug_m3": 5.24,
+    "reference_time_utc": "2026-08-07T00:00:00Z",
     "input_point_epsg4326": [
       1.4417227722772277,
       42.18540594059406
@@ -18,7 +18,7 @@
       "dataset": "https://ads.atmosphere.copernicus.eu/datasets/cams-europe-air-quality-forecasts",
       "wms_documentation": "https://confluence.ecmwf.int/spaces/CKB/pages/208502268/WMS+for+CAMS+Global+and+European+air+quality+products",
       "capabilities": "https://eccharts.ecmwf.int/wms/?token=public&service=WMS&request=GetCapabilities&version=1.3.0",
-      "query": "https://eccharts.ecmwf.int/wms/?token=public&service=WMS&version=1.3.0&request=GetFeatureInfo&crs=EPSG%3A4326&bbox=42.144%2C1.364%2C42.226%2C1.521&width=101&height=101&i=50&j=50&layers=composition_europe_pm2p5_forecast_surface&query_layers=composition_europe_pm2p5_forecast_surface&time=2026-08-05T00%3A00%3A00Z&info_format=text%2Fplain"
+      "query": "https://eccharts.ecmwf.int/wms/?token=public&service=WMS&version=1.3.0&request=GetFeatureInfo&crs=EPSG%3A4326&bbox=42.144%2C1.364%2C42.226%2C1.521&width=101&height=101&i=50&j=50&layers=composition_europe_pm2p5_forecast_surface&query_layers=composition_europe_pm2p5_forecast_surface&time=2026-08-07T00%3A00%3A00Z&info_format=text%2Fplain"
     },
     "service_type": "WMS 1.3.0 GetFeatureInfo",
     "spatial_resolution": "0.1 degree, approximately 10 km",
@@ -27,6 +27,6 @@
     "connector_status": "verified",
     "credentials": "none; official public WMS token",
     "interpretation": "Supramunicipal model context only. It is not an observation within the Muntanya d'Alinyà and must not be mapped or interpreted at path, valley or settlement level.",
-    "raw_response": "projectes/Alinya/raw/cams/pm25_context_2026-08-05.txt"
+    "raw_response": "projectes/Alinya/raw/cams/pm25_context_2026-08-07.txt"
   }
 }
