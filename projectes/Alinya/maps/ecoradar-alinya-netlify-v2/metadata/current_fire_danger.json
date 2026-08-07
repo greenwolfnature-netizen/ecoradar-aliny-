@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at_utc": "2026-08-07T10:57:54Z",
-  "checked_at_utc": "2026-08-07T10:57:54Z",
+  "generated_at_utc": "2026-08-07T17:14:27Z",
+  "checked_at_utc": "2026-08-07T17:14:27Z",
   "reading": "Perill d'incendi actual",
   "scope": "Muntanya d'Alinyà",
   "status": "incompleta en algunes cel·les",
@@ -21,19 +21,19 @@
     "webp": "projectes/Alinya/maps/incendis/current_fire_danger.webp"
   },
   "summary": {
-    "mean_index_0_100": 51.2,
+    "mean_index_0_100": 54.1,
     "predominant_category": "moderat",
-    "maximum_index_0_100": 85.6,
+    "maximum_index_0_100": 89.0,
     "maximum_category": "molt alt",
     "area_by_category_ha": {
-      "molt baix": 1.45,
-      "baix": 932.0,
-      "moderat": 3082.08,
-      "alt": 1439.56,
-      "molt alt": 8.94,
+      "molt baix": 0.0,
+      "baix": 645.94,
+      "moderat": 2975.88,
+      "alt": 1818.96,
+      "molt alt": 23.24,
       "extrem": 0.0
     },
-    "very_high_or_extreme_area_pct": 0.2,
+    "very_high_or_extreme_area_pct": 0.4,
     "dominant_variables": [
       "vegetation_type_fuel_potential",
       "official_structural_2024",
@@ -44,31 +44,31 @@
       "Perill estructural elevat",
       "Vegetació seca"
     ],
-    "latest_update_utc": "2026-08-07T10:00:00Z",
+    "latest_update_utc": "2026-08-07T16:00:00Z",
     "confidence_pct": 59.7,
     "confidence": "mitjana"
   },
   "weather": {
     "air_temperature_c": {
-      "value": 26.6,
-      "timestamp_utc": "2026-08-07T10:00:00Z",
+      "value": 30.3,
+      "timestamp_utc": "2026-08-07T16:00:00Z",
       "validation_code": "",
-      "history_p05": 17.89,
+      "history_p05": 17.884999999999998,
       "history_p95": 32.3
     },
     "relative_humidity_pct": {
-      "value": 47.0,
-      "timestamp_utc": "2026-08-07T10:00:00Z",
+      "value": 36.0,
+      "timestamp_utc": "2026-08-07T16:00:00Z",
       "validation_code": "",
       "history_p05": 21.0,
       "history_p95": 70.0
     },
     "precipitation_mm": {
       "value": 0.0,
-      "timestamp_utc": "2026-08-07T10:00:00Z",
+      "timestamp_utc": "2026-08-07T16:00:00Z",
       "validation_code": ""
     },
-    "daily_min_relative_humidity_pct": 47.0
+    "daily_min_relative_humidity_pct": 34.0
   },
   "variables_today": {
     "official_structural_2024": {
@@ -120,9 +120,9 @@
       "update_status": "dada no disponible"
     },
     "relative_humidity_inverse": {
-      "value": "47 %",
+      "value": "36 %",
       "source": "Meteocat XEMA · Y4 Alinyà",
-      "date_utc": "2026-08-07T10:00:00Z",
+      "date_utc": "2026-08-07T16:00:00Z",
       "weight_pct": 10,
       "quality": "provisional",
       "update_status": "actualitzada avui"
@@ -151,7 +151,7 @@
   "methodology": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
   "sources": {
     "meteocat": {
-      "generated_at_utc": "2026-08-07T10:58:05.411381+00:00",
+      "generated_at_utc": "2026-08-07T17:14:41.269810+00:00",
       "connector": "meteocat_xema_socrata",
       "responsibility": "download_and_normalize_only",
       "source": "Dades meteorològiques de la XEMA",
@@ -159,9 +159,9 @@
       "official_dataset": "https://analisi.transparenciacatalunya.cat/d/nzvn-apee",
       "station_code": "Y4",
       "station_name": "Alinyà",
-      "records": 5037,
-      "first_observation_utc": "2026-07-03T11:00:00Z",
-      "last_observation_utc": "2026-08-07T10:00:00Z",
+      "records": 5034,
+      "first_observation_utc": "2026-07-03T17:30:00Z",
+      "last_observation_utc": "2026-08-07T16:00:00Z",
       "variables": {
         "air_temperature_c": "32",
         "wind_speed_ms": "30",
@@ -227,7 +227,7 @@
       }
     },
     "landsat": {
-      "generated_at_utc": "2026-08-07T10:59:12.515201+00:00",
+      "generated_at_utc": "2026-08-07T17:15:32.089817+00:00",
       "connector": "landsat_usgs_c2_l2_summer_composite",
       "responsibility": "download_and_normalize_only",
       "scope": "Muntanya d'Alinyà",
