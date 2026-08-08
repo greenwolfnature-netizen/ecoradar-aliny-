@@ -1,0 +1,21 @@
+# Create a personal OAuth client in the Copernicus Data Space Sentinel Hub dashboard.
+# Never commit the real values. Load them into the shell before running the workflow.
+COPERNICUS_CLIENT_ID=
+COPERNICUS_CLIENT_SECRET=
+
+# Optional contextual CAMS PM2.5 access. Use the personal access token shown by ADS.
+ADS_API_URL=https://ads.atmosphere.copernicus.eu/api
+ADS_API_KEY=
+
+# Optional direct publication from GitHub Actions to the existing Netlify site.
+# Store the real values as GitHub Actions secrets, never in this file.
+NETLIFY_AUTH_TOKEN=
+NETLIFY_SITE_ID=
+
+# Runtime source for the Netlify function. Configure this in the Netlify site,
+# not only in GitHub Actions. Use one option; the explicit base URL takes precedence.
+ECORADAR_DATA_BASE_URL=https://raw.githubusercontent.com/OWNER/REPOSITORY/main/projectes/Alinya
+ECORADAR_GITHUB_REPOSITORY=OWNER/REPOSITORY
+ECORADAR_GITHUB_BRANCH=main
+# Only for a private remote source; store it as a Netlify secret.
+ECORADAR_DATA_BEARER_TOKEN=

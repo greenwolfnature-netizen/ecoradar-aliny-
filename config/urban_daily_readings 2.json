@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "stable_variation_pct": 0.5,
+  "confidence": {
+    "weights": {"availability": 40, "freshness": 35, "quality": 25},
+    "labels": {"high_min": 80, "medium_min": 55},
+    "quality_factors": {
+      "validated": 1.0,
+      "qa_validated": 0.95,
+      "derived_verified": 0.85,
+      "provisional": 0.75,
+      "coarse_model": 0.65,
+      "unavailable": 0.0
+    }
+  },
+  "readings": {
+    "air_temperature": {"frequency_code":"30_minutes","frequency_label":"font cada 30 minuts · comprovació automatitzada diària","trigger":"nova observació XEMA","max_age_hours":2,"trend_direction":"neutral"},
+    "relative_humidity": {"frequency_code":"30_minutes","frequency_label":"font cada 30 minuts · comprovació automatitzada diària","trigger":"nova observació XEMA","max_age_hours":2,"trend_direction":"neutral"},
+    "wind": {"frequency_code":"30_minutes","frequency_label":"font cada 30 minuts · comprovació automatitzada diària","trigger":"nova observació XEMA","max_age_hours":2,"trend_direction":"neutral"},
+    "precipitation": {"frequency_code":"30_minutes","frequency_label":"font cada 30 minuts · comprovació automatitzada diària","trigger":"nou període XEMA; acumulació del dia local","max_age_hours":2,"trend_direction":"neutral"},
+    "surface_temperature": {"frequency_code":"new_satellite_observation","frequency_label":"quan hi ha una nova escena Landsat vàlida","trigger":"escena posterior amb QA local vàlida","max_age_hours":768,"trend_direction":"lower_is_better_heat","alerts":[{"level":"warning","min":52,"label":"superfície molt calenta","basis":"llindar cromàtic EcoRadar de la capa LST; no és un llindar sanitari"}]},
+    "ndmi": {"frequency_code":"new_satellite_observation","frequency_label":"quan hi ha una nova escena Sentinel-2 vàlida","trigger":"escena posterior sense núvols després de SCL","max_age_hours":360,"trend_direction":"higher_is_better"},
+    "ndvi": {"frequency_code":"new_satellite_observation","frequency_label":"quan hi ha una nova escena Sentinel-2 vàlida","trigger":"escena posterior sense núvols després de SCL","max_age_hours":360,"trend_direction":"higher_is_better"},
+    "albedo": {"frequency_code":"new_satellite_observation","frequency_label":"quan hi ha una nova escena Sentinel-2 vàlida","trigger":"escena posterior sense núvols després de SCL","max_age_hours":360,"trend_direction":"neutral"},
+    "air_quality": {"frequency_code":"hourly","frequency_label":"font horària · comprovació automatitzada diària","trigger":"nou temps de referència CAMS","max_age_hours":6,"trend_direction":"lower_is_better","alerts":[{"level":"warning","min":15,"label":"PM2,5 per sobre de la guia OMS de 24 h","basis":"OMS 2021, 15 µg/m³ en mitjana de 24 h; el camp CAMS puntual només activa un cribratge, no una declaració de superació normativa"}]},
+    "thermal_comfort": {"frequency_code":"30_minutes","frequency_label":"font XEMA cada 30 minuts · comprovació automatitzada diària","trigger":"nova combinació de temperatura, humitat i vent","max_age_hours":2,"trend_direction":"lower_is_better_heat","alerts":[{"level":"warning","min":32,"label":"calor aparent elevada","basis":"llindar operatiu EcoRadar de cribratge; no és UTCI, WBGT ni avís oficial"}]},
+    "shade": {"frequency_code":"daily","frequency_label":"diària a les 15.00 h locals","trigger":"canvi de data o hora solar","max_age_hours":30,"trend_direction":"higher_is_better"},
+    "cool_streets": {"frequency_code":"official_source_update","frequency_label":"només quan s’actualitzi una font municipal verificable","trigger":"nova font oficial","max_age_hours":null,"trend_direction":"neutral"},
+    "climate_refuge_utility": {"frequency_code":"official_source_update","frequency_label":"només quan s’actualitzi una font municipal verificable","trigger":"nova font oficial amb horaris, capacitat i condicions","max_age_hours":null,"trend_direction":"neutral"},
+    "current_fire_danger": {"frequency_code":"daily","frequency_label":"diària després de comprovar totes les entrades","trigger":"nova meteorologia o nova entrada satel·litària; comprovació diària","max_age_hours":30,"trend_direction":"lower_is_better","alerts":[{"level":"warning","min":60,"label":"perill actual alt","basis":"categoria operativa EcoRadar 60–80"},{"level":"critical","min":80,"label":"perill actual molt alt o extrem","basis":"categoria operativa EcoRadar ≥80"}]},
+    "current_runoff_or_flood": {"frequency_code":"official_source_update","frequency_label":"quan existeixi una observació o model hidrològic operatiu verificat","trigger":"nova dada oficial representativa","max_age_hours":null,"trend_direction":"lower_is_better"}
+  }
+}
