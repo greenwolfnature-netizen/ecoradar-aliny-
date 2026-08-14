@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-07-20T19:17:36.148218+00:00",
+  "generated_at_utc": "2026-08-14T18:36:21.974184+00:00",
   "scope": "Muntanya d'Alinya",
   "status": "verified_analysis",
   "name": "Potencial relatiu de refugi climatic",
@@ -26,19 +26,19 @@
   },
   "distribution": {
     "suport": {
-      "pixels": 59752,
-      "share_of_vegetated_valid_pct": 17.0
+      "pixels": 58711,
+      "share_of_vegetated_valid_pct": 16.7
     },
     "alt": {
-      "pixels": 63138,
-      "share_of_vegetated_valid_pct": 18.0
+      "pixels": 65170,
+      "share_of_vegetated_valid_pct": 18.5
     },
     "molt_alt": {
-      "pixels": 82798,
-      "share_of_vegetated_valid_pct": 23.5
+      "pixels": 82320,
+      "share_of_vegetated_valid_pct": 23.4
     }
   },
-  "high_or_very_high_share_of_vegetated_valid_pct": 41.5,
+  "high_or_very_high_share_of_vegetated_valid_pct": 41.9,
   "outputs": {
     "geotiff": "processed/teledeteccio/refugis_climatics_potencials.tif",
     "webp": "maps/teledeteccio/refugis_climatics_potencials.webp",

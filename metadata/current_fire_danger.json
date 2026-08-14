@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at_utc": "2026-08-07T17:20:00Z",
-  "checked_at_utc": "2026-08-07T17:20:00Z",
+  "generated_at_utc": "2026-08-14T18:34:49Z",
+  "checked_at_utc": "2026-08-14T18:34:49Z",
   "reading": "Perill d'incendi actual",
   "scope": "Muntanya d'Alinyà",
   "status": "incompleta en algunes cel·les",
@@ -13,24 +13,24 @@
     "bbox_epsg4326": [
       1.3617252918882514,
       42.142558863812205,
-      1.5211302013780743,
-      42.227525158639374
+      1.5211302013780739,
+      42.22752515863937
     ],
     "geojson": "projectes/Alinya/maps/incendis/current_fire_danger_cells.geojson",
     "raster": "projectes/Alinya/processed/incendis/current_fire_danger/current_fire_danger_0_100.tif",
     "webp": "projectes/Alinya/maps/incendis/current_fire_danger.webp"
   },
   "summary": {
-    "mean_index_0_100": 53.5,
+    "mean_index_0_100": 52.8,
     "predominant_category": "moderat",
-    "maximum_index_0_100": 84.7,
+    "maximum_index_0_100": 84.1,
     "maximum_category": "molt alt",
     "area_by_category_ha": {
       "molt baix": 0.0,
-      "baix": 249.6,
-      "moderat": 3883.96,
-      "alt": 1210.7,
-      "molt alt": 9.4,
+      "baix": 321.44,
+      "moderat": 3960.08,
+      "alt": 1063.67,
+      "molt alt": 8.47,
       "extrem": 0.0
     },
     "very_high_or_extreme_area_pct": 0.2,
@@ -44,8 +44,8 @@
       "Vegetació seca",
       "Humitat relativa baixa"
     ],
-    "latest_update_utc": "2026-08-07T16:30:00Z",
-    "confidence_pct": 61.7,
+    "latest_update_utc": "2026-08-09T10:36:27.291477Z",
+    "confidence_pct": 54.8,
     "confidence": "mitjana"
   },
   "weather": {
@@ -101,9 +101,9 @@
   },
   "variables_today": {
     "creaf_fire_potential": {
-      "value": "mediana 79.2/100",
+      "value": "mediana 73.8/100",
       "source": "CREAF/EMF · ForestDrought daily modelled forests",
-      "date_utc": "2026-08-02T00:00:00Z",
+      "date_utc": "2026-08-09T00:00:00Z",
       "weight_pct": 20,
       "quality": "verificada",
       "update_status": "última dada vàlida"
@@ -125,9 +125,9 @@
       "update_status": "última dada vàlida"
     },
     "surface_temperature": {
-      "value": "mediana 27.2 °C",
+      "value": "mediana 28.7 °C",
       "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
-      "date_utc": "2026-07-08T10:36:09.180240Z",
+      "date_utc": "2026-08-09T10:36:27.291477Z",
       "weight_pct": 10,
       "quality": "verificada",
       "update_status": "última dada vàlida"
@@ -146,7 +146,7 @@
       "date_utc": "2026-08-07T16:30:00Z",
       "weight_pct": 10,
       "quality": "provisional",
-      "update_status": "actualitzada avui"
+      "update_status": "última dada vàlida"
     },
     "relative_humidity_inverse": {
       "value": "35 %",
@@ -154,7 +154,7 @@
       "date_utc": "2026-08-07T16:30:00Z",
       "weight_pct": 10,
       "quality": "provisional",
-      "update_status": "actualitzada avui"
+      "update_status": "última dada vàlida"
     },
     "slope": {
       "value": "mediana 25.3°",
@@ -180,8 +180,8 @@
       0.2836
     ],
     "lst_c_p10_p90": [
-      21.57,
-      33.71
+      23.19,
+      34.75
     ],
     "slope_deg_p05_p95": [
       7.73,
@@ -310,15 +310,15 @@
       }
     },
     "landsat": {
-      "generated_at_utc": "2026-07-20T18:25:00.708623+00:00",
+      "generated_at_utc": "2026-08-14T18:36:18.279661+00:00",
       "connector": "landsat_usgs_c2_l2_summer_composite",
       "responsibility": "download_and_normalize_only",
       "scope": "Muntanya d'Alinyà",
       "study_bbox_epsg4326": [
         1.3639980000000003,
-        42.14442700000001,
-        1.5199389999999995,
-        42.22512200000001
+        42.14442699999999,
+        1.519939,
+        42.225122000000006
       ],
       "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
       "organization": "United States Geological Survey",
@@ -327,7 +327,7 @@
       "service_type": "STAC plus signed Cloud Optimized GeoTIFF range reads",
       "license": "USGS Landsat data are in the public domain",
       "date_range": "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z",
-      "scene_count": 20,
+      "scene_count": 24,
       "scenes": [
         {
           "item_id": "LC08_L2SP_198031_20250830_02_T1",
@@ -414,6 +414,13 @@
           "valid_study_pct": 77.66
         },
         {
+          "item_id": "LC09_L2SP_198031_20260809_02_T1",
+          "acquired_at_utc": "2026-08-09T10:36:27.291477Z",
+          "scene_cloud_cover_pct": 10.7,
+          "valid_study_pixels": 60671,
+          "valid_study_pct": 99.93
+        },
+        {
           "item_id": "LC08_L2SP_198031_20260614_02_T1",
           "acquired_at_utc": "2026-06-14T10:35:47.609599Z",
           "scene_cloud_cover_pct": 12.37,
@@ -428,6 +435,13 @@
           "valid_study_pct": 99.97
         },
         {
+          "item_id": "LC09_L2SP_198031_20260724_02_T1",
+          "acquired_at_utc": "2026-07-24T10:36:22.020782Z",
+          "scene_cloud_cover_pct": 15.13,
+          "valid_study_pixels": 60698,
+          "valid_study_pct": 99.98
+        },
+        {
           "item_id": "LC09_L2SP_198031_20250806_02_T1",
           "acquired_at_utc": "2025-08-06T10:36:36.976511Z",
           "scene_cloud_cover_pct": 16.09,
@@ -440,6 +454,13 @@
           "scene_cloud_cover_pct": 16.23,
           "valid_study_pixels": 52839,
           "valid_study_pct": 87.03
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20260801_02_T1",
+          "acquired_at_utc": "2026-08-01T10:36:15.780468Z",
+          "scene_cloud_cover_pct": 17.11,
+          "valid_study_pixels": 60710,
+          "valid_study_pct": 100.0
         },
         {
           "item_id": "LC09_L2SP_198031_20250603_02_T1",
@@ -468,6 +489,13 @@
           "scene_cloud_cover_pct": 68.19,
           "valid_study_pixels": 0,
           "valid_study_pct": 0.0
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20260716_02_T1",
+          "acquired_at_utc": "2026-07-16T10:36:04.150287Z",
+          "scene_cloud_cover_pct": 79.15,
+          "valid_study_pixels": 0,
+          "valid_study_pct": 0.0
         }
       ],
       "crs": "EPSG:32631",
@@ -482,22 +510,22 @@
       "valid_pixels": 60711,
       "study_coverage_pct": 100.0,
       "normalized_tif": "projectes/Alinya/processed/landsat/landsat_lst.tif",
-      "sha256": "03982eb31fbcf702ab9de96550fdfea78a3c82cf09a8c9883b084af72316eaa6",
+      "sha256": "00cc7e92c6b2bcdfd63d83dbbec428ef48918ef80266297e65671f7f48c31ad4",
       "connector_status": "verified"
     },
     "surface_temperature_selection": {
       "source_key": "landsat",
       "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
       "organization": "United States Geological Survey",
-      "acquired_at_utc": "2026-07-08T10:36:09.180240Z",
+      "acquired_at_utc": "2026-08-09T10:36:27.291477Z",
       "resolution_m": 30,
       "normalized_tif": "projectes/Alinya/processed/landsat/landsat_lst.tif",
       "quality": "QA_PIXEL applied; median composition of valid summer observations",
       "source_metadata": "projectes/Alinya/metadata/landsat_connector.json"
     },
     "forestdrought": {
-      "generated_at_utc": "2026-08-07T10:00:00Z",
-      "latest_catalog_check_utc": "2026-08-07T10:00:00Z",
+      "generated_at_utc": "2026-08-14T18:34:49Z",
+      "latest_catalog_check_utc": "2026-08-14T18:34:49Z",
       "connector": "creaf_forestdrought_daily_modelled_forests",
       "responsibility": "discover_download_subset_and_normalize_only",
       "scope": "Muntanya d'Alinyà",
@@ -506,10 +534,10 @@
       "provider_role": "modelled forest drought and fire-potential data provider",
       "application_url": "https://laboratoriforestal.creaf.cat/forestdrought_app/",
       "repository_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/",
-      "source_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/20260802.gpkg",
+      "source_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/20260809.gpkg",
       "service_type": "public HTTPS GeoPackage repository",
-      "model_date": "2026-08-02",
-      "data_at_utc": "2026-08-02T00:00:00Z",
+      "model_date": "2026-08-09",
+      "data_at_utc": "2026-08-09T00:00:00Z",
       "crs": "EPSG:25830",
       "cell_size_m": 500,
       "geometry_type": "forest grid cell centre points",

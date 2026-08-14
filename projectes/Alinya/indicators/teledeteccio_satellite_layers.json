@@ -1,10 +1,10 @@
 {
-  "generated_at_utc": "2026-08-07T16:50:17.934767+00:00",
+  "generated_at_utc": "2026-08-14T18:36:20.900528+00:00",
   "scope": "Muntanya d'Alinyà",
   "study_bbox_epsg4326": [
-    1.363998,
-    42.144427,
-    1.5199389999999993,
+    1.3639979999999998,
+    42.14442699999999,
+    1.5199389999999997,
     42.22512200000001
   ],
   "vegetation_cover": {
@@ -17,20 +17,20 @@
   "surface_temperature": {
     "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
     "source_key": "landsat",
-    "acquired_at_utc": "2026-07-08T10:36:09.180240Z",
+    "acquired_at_utc": "2026-08-09T10:36:27.291477Z",
     "resolution_m": 30,
     "quality": "QA_PIXEL applied; median composition of valid summer observations",
     "date_range": "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z",
-    "scene_count": 20,
+    "scene_count": 24,
     "composite_method": "Per-pixel median of every valid QA-screened summer observation",
     "coverage_pct": 100.0,
     "metrics_c": {
-      "mean": 27.5,
-      "median": 27.3,
-      "p10": 22.7,
-      "p90": 32.5,
-      "minimum": 16.8,
-      "maximum": 39.7
+      "mean": 28.8,
+      "median": 28.7,
+      "p10": 24.3,
+      "p90": 33.7,
+      "minimum": 20.6,
+      "maximum": 40.4
     },
     "valid_pixels": 60711
   },
