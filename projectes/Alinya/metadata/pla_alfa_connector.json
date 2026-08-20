@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "source_type": "official_operational_level",
+  "official": true,
+  "organization": "Cos d'Agents Rurals / Generalitat de Catalunya",
+  "municipality_code": "259084",
+  "municipality": "Fígols i Alinyà",
+  "county": "Alt Urgell",
+  "level": 0,
+  "label": "baix",
+  "data_at_utc": "2026-08-18T13:57:13.598000Z",
+  "checked_at_utc": "2026-08-20T19:20:00Z",
+  "status": "verified",
+  "source_url": "https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/Pla_Alfa_Municipal_Avui_FL_2_view/FeatureServer/0",
+  "official_page": "https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/index.html",
+  "service_item_id": "de0d15089dc141a69dc1d674ba9f9959",
+  "note": "Nivell operatiu oficial municipal; no és un càlcul EcoRadar ni s'incorpora numèricament a l'índex 0-100.",
+  "connector": "pla_alfa_official_arcgis",
+  "responsibility": "download_and_normalize_only",
+  "service_last_edit_epoch_ms": 1787061433598,
+  "output": "projectes/Alinya/raw/pla_alfa/figols_alinya_current.json"
+}

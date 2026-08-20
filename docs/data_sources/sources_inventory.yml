@@ -231,18 +231,21 @@ sources:
     domain: fires
     source_name: Pla Alfa daily fire danger by municipality
     responsible_organization: Cos d'Agents Rurals / Generalitat de Catalunya
-    official_url: null
-    service_type: null
-    data_format: null
-    crs: null
+    official_url: https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/index.html
+    technical_endpoint: https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/Pla_Alfa_Municipal_Avui_FL_2_view/FeatureServer/0
+    service_type: ArcGIS FeatureServer public read-only view
+    data_format: Esri JSON / GeoJSON
+    crs: EPSG:25831
     available_variables:
       - municipality
-      - fire danger level 0-3
-    update_frequency: daily
-    usage_license: null
-    example_connection: null
-    connector_status: pending_verification
-    verification_notes: Official technical endpoint and metadata still need confirmation.
+      - official operational level 0-4
+      - county
+      - municipality code
+    update_frequency: 00:00 and 09:30, or exceptionally when required
+    usage_license: no explicit layer-level license; factual attributed reuse from public official service
+    example_connection: https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/Pla_Alfa_Municipal_Avui_FL_2_view/FeatureServer/0/query?where=CODIMUNI%3D%27259084%27&outFields=CODIMUNI%2CNOMMUNI%2CNOMCOMAR%2CPERIL_M&returnGeometry=false&f=json
+    connector_status: verified
+    verification_notes: Verified 2026-08-20 against the official Interior page, official AdminInterior ArcGIS web map and municipal-today layer. Pla Alfa remains an official context, not an EcoRadar calculation.
 
   - id: fires_effis
     domain: fires
@@ -815,21 +818,28 @@ sources:
 
   - id: electricity_network_fire_context
     domain: infrastructure
-    source_name: Electricity network relevant to wildfire context
-    responsible_organization: pending; may depend on operator, Generalitat/IDEC catalogue, CNMC or Red Electrica datasets
-    official_url: null
-    service_type: null
-    data_format: null
-    crs: null
+    source_name: Referencial Topografic Territorial v1 - electric lines and electric towers, 2024
+    responsible_organization: Institut Cartografic i Geologic de Catalunya
+    official_url: https://www.icgc.cat/ca/Geoinformacio-i-mapes/Dades-i-productes/Geoinformacio-cartografica/Referencial-Topografic-Territorial
+    service_type:
+      - official download
+      - GeoPackage
+      - ArcGIS REST support service
+    data_format:
+      - GeoPackage
+      - GeoJSON for support queries only
+    crs: EPSG:25831
     available_variables:
-      - power lines
-      - substations or infrastructure points if available
-      - voltage/category if available
-    update_frequency: null
-    usage_license: null
-    example_connection: null
-    connector_status: pending_verification
-    verification_notes: User-requested electricity network source is not yet verified for automated EcoRadar ingestion. Do not implement until official source, access path, license and safety/privacy constraints are documented.
+      - con_linia-electrica_l vector line geometry; tipus lel
+      - con_torre-electrica_n point geometry; tipus ele
+      - unique source object id
+      - feature state
+      - optional feature name when assigned by the source
+    update_frequency: versioned product; record the retained edition and source date on every ingestion
+    usage_license: Creative Commons Attribution 4.0 International, CC BY 4.0
+    example_connection: Download the official 2024 GeoPackage or request an area extract in the ICGC download viewer; read con_linia-electrica_l in EPSG:25831. ArcGIS MapServer layers 28 and 29 are visualization or quick-query support only.
+    connector_status: verified
+    verification_notes: The official product page identifies source data date 2024, optimal working scale 1:5000, GeoPackage distribution and CC BY 4.0. Technical specifications dated 2026-06-29 define con_linia-electrica_l with tipus=lel and con_torre-electrica_n with tipus=ele. The source does not document operator, voltage or circuit name, so these attributes remain unknown until independently verified. The downloadable 2024 GeoPackage is the analytical authority; the ArcGIS REST service advertises older 2021 metadata and must not be used as the production analytical source.
 
   - id: urban_lst_landsat_c2l2_st
     domain: urban_climate

@@ -55,7 +55,10 @@ export function validateRemoteSnapshot(daily, history, fire) {
       "daily_readings, daily_history i current_fire_danger no corresponen a la mateixa comprovació.",
     );
   }
-  if (!daily?.readings || !daily?.source_checks || !history?.analytics || !fire?.summary) {
+  if (
+    !daily?.readings || !daily?.source_checks || !history?.analytics || !fire?.summary ||
+    !fire?.meteorology_context || !fire?.pla_alfa
+  ) {
     throw new Error("La resposta remota és incompleta.");
   }
   return { checkedAt, fireCheckedAt };

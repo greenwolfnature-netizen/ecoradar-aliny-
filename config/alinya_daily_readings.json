@@ -42,12 +42,51 @@
       "max_age_hours": 2,
       "trend_direction": "neutral"
     },
+    "wind_gust": {
+      "frequency_code": "30_minutes",
+      "frequency_label": "font cada 30 minuts · comprovació automatitzada diària",
+      "trigger": "nova observació XEMA CJ",
+      "max_age_hours": 2,
+      "trend_direction": "neutral"
+    },
     "precipitation": {
       "frequency_code": "30_minutes",
       "frequency_label": "font cada 30 minuts · comprovació automatitzada diària",
       "trigger": "nou període XEMA Y4; acumulació del dia local",
       "max_age_hours": 2,
       "trend_direction": "neutral"
+    },
+    "precipitation_7d": {
+      "frequency_code": "30_minutes",
+      "frequency_label": "recalculada amb cada nou període XEMA Y4",
+      "trigger": "nova observació de precipitació amb cobertura temporal suficient",
+      "max_age_hours": 2,
+      "trend_direction": "neutral"
+    },
+    "precipitation_30d": {
+      "frequency_code": "30_minutes",
+      "frequency_label": "recalculada amb cada nou període XEMA Y4",
+      "trigger": "nova observació de precipitació amb cobertura temporal suficient",
+      "max_age_hours": 2,
+      "trend_direction": "neutral"
+    },
+    "days_without_significant_rain": {
+      "frequency_code": "30_minutes",
+      "frequency_label": "recalculada amb cada nou període XEMA Y4",
+      "trigger": "nova observació de precipitació amb cobertura diària suficient",
+      "max_age_hours": 2,
+      "trend_direction": "lower_is_better"
+    },
+    "pla_alfa": {
+      "frequency_code": "official_source_update",
+      "frequency_label": "font oficial a les 00.00 i 09.30 h, o quan calgui",
+      "trigger": "canvi a la vista municipal oficial Pla Alfa Avui",
+      "max_age_hours": 48,
+      "trend_direction": "lower_is_better",
+      "alerts": [
+        {"level": "warning", "min": 3, "label": "Pla Alfa oficial nivell 3", "basis": "Cos d'Agents Rurals"},
+        {"level": "critical", "min": 4, "label": "Pla Alfa oficial nivell 4", "basis": "Cos d'Agents Rurals"}
+      ]
     },
     "surface_temperature": {
       "frequency_code": "new_satellite_observation",

@@ -14,7 +14,12 @@ const daily = {
   source_checks: { meteocat_xema: { status: "verified", checked_at_utc: checkedAt } },
 };
 const history = { checked_at_utc: checkedAt, analytics: {} };
-const fire = { checked_at_utc: checkedAt, summary: { mean_index_0_100: 42 } };
+const fire = {
+  checked_at_utc: checkedAt,
+  summary: { mean_index_0_100: 42 },
+  meteorology_context: { precipitation_accumulated: { last_7_days_mm: 10 } },
+  pla_alfa: { official: true, municipality_code: "259084", level: 0 },
+};
 
 test("resolves a GitHub raw base URL when the explicit base is absent", () => {
   assert.equal(
@@ -35,6 +40,13 @@ test("rejects snapshots whose daily history belongs to another check", () => {
         fire,
       ),
     /mateixa comprovació/,
+  );
+});
+
+test("rejects a current-fire snapshot without official Pla Alfa context", () => {
+  assert.throws(
+    () => validateRemoteSnapshot(daily, history, { ...fire, pla_alfa: null }),
+    /incompleta/,
   );
 });
 

@@ -7,7 +7,7 @@ alert and does not replace Pla Alfa or official daily danger products.
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import json
 import math
 import os
@@ -23,6 +23,7 @@ from rasterio.transform import array_bounds
 from rasterio.warp import Resampling, transform_bounds
 from shapely.geometry import box, mapping
 from shapely.ops import transform as transform_geometry
+from zoneinfo import ZoneInfo
 
 from calculate_alinya_integrated_fire_danger import CRS, OFFICIAL, RES, _grid, _reproject
 from calculate_la_seu_current_fire_danger import _latest_weather, _moving_mean, _robust_scale
@@ -44,6 +45,7 @@ METEO = PROJECT / "raw" / "meteocat_xema" / "Y4_observations.csv"
 METEO_METADATA = PROJECT / "raw" / "meteocat_xema" / "Y4_metadata.json"
 WIND_METEO = PROJECT / "raw" / "meteocat_xema" / "CJ_wind_observations.csv"
 WIND_METEO_METADATA = PROJECT / "raw" / "meteocat_xema" / "CJ_wind_metadata.json"
+PLA_ALFA = PROJECT / "raw" / "pla_alfa" / "figols_alinya_current.json"
 SENTINEL_METADATA = PROJECT / "indicators" / "teledeteccio_sentinel2.json"
 LANDSAT_METADATA = PROJECT / "metadata" / "landsat_connector.json"
 TERRAIN_METADATA = PROJECT / "metadata" / "terrain_metadata.json"
@@ -65,6 +67,7 @@ LABELS = {
     "slope": "Pendent pronunciat",
     "aspect": "Exposició de solana",
 }
+LOCAL_TZ = ZoneInfo("Europe/Madrid")
 
 
 def _read_json(path: Path) -> dict:
@@ -213,6 +216,65 @@ def _fill_local_gaps(values: np.ndarray, mask: np.ndarray, passes: int = 3) -> n
     return np.where(mask, result, np.nan)
 
 
+def _precipitation_context(frame: pd.DataFrame, precipitation_code: str) -> dict:
+    """Summarize observed rain without treating missing periods as zero rain."""
+    rows = frame[
+        (frame["codi_estacio"].astype(str) == "Y4")
+        & (frame["codi_variable"].astype(str) == str(precipitation_code))
+    ].copy()
+    if rows.empty:
+        return {
+            "status": "unavailable",
+            "data_at_utc": None,
+            "recent_24h_mm": None,
+            "last_7_days_mm": None,
+            "last_30_days_mm": None,
+            "days_without_significant_rain": None,
+        }
+    rows["data_lectura"] = pd.to_datetime(rows["data_lectura"], utc=True)
+    rows["valor_lectura"] = pd.to_numeric(rows["valor_lectura"], errors="coerce")
+    rows = rows.dropna(subset=["data_lectura", "valor_lectura"]).sort_values("data_lectura")
+    anchor = rows["data_lectura"].max()
+
+    def observed_sum(days: int, minimum_coverage: float) -> float | None:
+        selected = rows[(rows["data_lectura"] > anchor - pd.Timedelta(days=days)) & (rows["data_lectura"] <= anchor)]
+        # XEMA Y4 publishes 30-minute precipitation periods. Refuse an
+        # accumulation when the record is too incomplete for the requested span.
+        if len(selected) < int(days * 48 * minimum_coverage):
+            return None
+        return round(float(selected["valor_lectura"].sum()), 1)
+
+    local = rows.set_index("data_lectura").tz_convert(LOCAL_TZ)
+    daily = local["valor_lectura"].resample("D").agg(["sum", "count"])
+    dry_days = 0
+    significant_threshold = 1.0
+    daily_rows = list(daily.itertuples())
+    if daily_rows and int(daily_rows[-1].count) < 40:
+        if float(daily_rows[-1].sum) >= significant_threshold:
+            daily_rows = []
+        else:
+            daily_rows = daily_rows[:-1]
+    for day in reversed(daily_rows):
+        if int(day.count) < 40:
+            break
+        if float(day.sum) >= significant_threshold:
+            break
+        dry_days += 1
+    return {
+        "status": "available",
+        "data_at_utc": anchor.to_pydatetime().isoformat().replace("+00:00", "Z"),
+        "recent_24h_mm": observed_sum(1, 0.80),
+        "last_7_days_mm": observed_sum(7, 0.80),
+        "last_30_days_mm": observed_sum(30, 0.80),
+        "days_without_significant_rain": dry_days,
+        "significant_rain_threshold_mm_day": significant_threshold,
+        "station": "Meteocat XEMA · Y4 Alinyà",
+        "method": "Suma de períodes XEMA de 30 minuts fins a l'última observació; s'oculta si la cobertura és inferior al 80%.",
+        "climatology_comparison": None,
+        "climatology_note": "No es mostra anomalia climàtica: no hi ha una normal oficial homogènia de Y4 verificada i integrada.",
+    }
+
+
 def calculate() -> dict:
     now = _checked_at()
     config = _read_json(CONFIG_PATH)
@@ -284,11 +346,27 @@ def calculate() -> dict:
     wind_value = weather.get("wind_speed_ms", {}).get("value")
     humidity_value = weather.get("relative_humidity_pct", {}).get("value")
     wind_score = weather_scales.get("wind_speed_ms")
+    gust_score = weather_scales.get("wind_gust_ms")
+    if gust_score is not None:
+        wind_score = gust_score if wind_score is None else max(wind_score, gust_score)
     humidity_score = weather_scales.get("relative_humidity_pct")
     if humidity_score is not None:
         humidity_score = 100 - humidity_score
     wind = np.full(shape, wind_score if wind_score is not None else np.nan, dtype="float32")
     humidity = np.full(shape, humidity_score if humidity_score is not None else np.nan, dtype="float32")
+    precipitation_context = _precipitation_context(
+        weather_frame, weather_config["xema"]["variables"]["precipitation_mm"]
+    )
+    pla_alfa = _read_json(PLA_ALFA) if PLA_ALFA.is_file() else {
+        "official": True,
+        "municipality": "Fígols i Alinyà",
+        "level": None,
+        "label": "dada no disponible",
+        "data_at_utc": None,
+        "checked_at_utc": now.isoformat().replace("+00:00", "Z"),
+        "status": "service_unavailable",
+        "note": "No hi ha cap última dada oficial Pla Alfa disponible localment.",
+    }
 
     components = {
         "creaf_fire_potential": creaf_fire_potential,
@@ -327,13 +405,18 @@ def calculate() -> dict:
     sentinel_metadata = _read_json(SENTINEL_METADATA)
     landsat_metadata = _read_json(LANDSAT_METADATA)
     creaf_metadata = _read_json(CREAF_META)
+    wind_timestamps = [
+        item.get("timestamp_utc")
+        for item in (weather.get("wind_speed_ms", {}), weather.get("wind_gust_ms", {}))
+        if item.get("timestamp_utc")
+    ]
     references = {
         "creaf_fire_potential": creaf_metadata.get("data_at_utc"),
         "structural": "2024-01-01T00:00:00Z",
         "ndmi_dryness": sentinel_metadata["acquired_at_utc"],
         "surface_temperature": surface_selection["acquired_at_utc"],
         "vegetation_continuity": "2023-12-31T00:00:00Z",
-        "wind": weather.get("wind_speed_ms", {}).get("timestamp_utc"),
+        "wind": max(wind_timestamps) if wind_timestamps else None,
         "relative_humidity_inverse": weather.get("relative_humidity_pct", {}).get("timestamp_utc"),
         "slope": "2023-12-31T00:00:00Z",
         "aspect": "2023-12-31T00:00:00Z",
@@ -418,6 +501,7 @@ def calculate() -> dict:
                 "aspect_cardinal": cardinal,
                 "aspect_exposure": exposure,
                 "wind_speed_kmh": round(float(wind_value) * 3.6, 1) if wind_value is not None else None,
+                "wind_gust_kmh": round(float(weather.get("wind_gust_ms", {}).get("value")) * 3.6, 1) if weather.get("wind_gust_ms", {}).get("value") is not None else None,
                 "relative_humidity_pct": round(float(humidity_value), 1) if humidity_value is not None else None,
             },
             "normalized": {
@@ -491,8 +575,14 @@ def calculate() -> dict:
             "source": "Copernicus CLMS HRL 2023",
         },
         "wind": {
-            "value": f"{float(wind_value) * 3.6:.1f} km/h" if wind_value is not None else "dada no disponible",
-            "source": "Meteocat XEMA · CJ Organyà · 9,2 km de Y4",
+            "value": (
+                f"vent {float(wind_value) * 3.6:.1f} km/h · ratxa {float(weather['wind_gust_ms']['value']) * 3.6:.1f} km/h"
+                if wind_value is not None and weather.get("wind_gust_ms", {}).get("value") is not None
+                else f"vent {float(wind_value) * 3.6:.1f} km/h" if wind_value is not None
+                else f"ratxa {float(weather['wind_gust_ms']['value']) * 3.6:.1f} km/h" if weather.get("wind_gust_ms", {}).get("value") is not None
+                else "dada no disponible"
+            ),
+            "source": "Meteocat XEMA · CJ Organyà · 9,2 km de Y4 · el component usa el màxim normalitzat entre vent i ratxa",
         },
         "relative_humidity_inverse": {
             "value": f"{float(humidity_value):.0f} %" if humidity_value is not None else "dada no disponible",
@@ -573,6 +663,16 @@ def calculate() -> dict:
             "confidence": _confidence_label(global_confidence),
         },
         "weather": weather,
+        "meteorology_context": {
+            "air_temperature": weather.get("air_temperature_c"),
+            "relative_humidity": weather.get("relative_humidity_pct"),
+            "wind": weather.get("wind_speed_ms"),
+            "wind_gust": weather.get("wind_gust_ms"),
+            "precipitation_latest_period": weather.get("precipitation_mm"),
+            "precipitation_accumulated": precipitation_context,
+            "spatial_scope_note": "Y4 aporta temperatura, humitat i pluja; el vent i les ratxes provenen de CJ Organyà, a 9,2 km. Són contextos puntuals aplicats a l'àmbit i no una malla de 100 m.",
+        },
+        "pla_alfa": pla_alfa,
         "variables_today": variable_status,
         "normalization": {
             "method": "P5-P95 dins Alinyà per LST, NDMI i pendent; P5-P95 sobre 35 dies XEMA; variables absents renormalitzades, mai convertides en zero.",
@@ -589,10 +689,12 @@ def calculate() -> dict:
             "landsat": landsat_metadata,
             "surface_temperature_selection": surface_selection,
             "forestdrought": creaf_metadata,
+            "pla_alfa": pla_alfa,
             "terrain": _read_json(TERRAIN_METADATA),
         },
         "limitations": [
             "Índex EcoRadar derivat; no és una alerta oficial ni substitueix el Pla Alfa o el mapa diari oficial.",
+            "El Pla Alfa es mostra en paral·lel com a nivell operatiu municipal oficial i no s'afegeix numèricament a l'índex EcoRadar, per evitar doble recompte i falsa precisió.",
             "La humitat XEMA Y4 i el vent XEMA CJ Organyà són observacions puntuals; CJ és a 9,2 km de Y4 i cap estació representa cada vessant d'un àmbit de 5.464 ha.",
             "Una variable XEMA absent es marca com a no disponible i el pes es renormalitza; no es converteix en zero.",
             "La temperatura superficial no és temperatura de l'aire i l'NDMI és un proxy relatiu, no humitat fina del combustible.",

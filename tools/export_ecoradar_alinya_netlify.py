@@ -523,6 +523,8 @@ def build_data() -> dict:
             "status": current_fire["status"],
             "summary": current_fire["summary"],
             "weather": current_fire["weather"],
+            "meteorology": current_fire.get("meteorology_context", {}),
+            "plaAlfa": current_fire.get("pla_alfa", {}),
             "variables": current_fire["variables_today"],
             "weights": current_fire["weights"],
             "normalization": current_fire["normalization"],
@@ -584,7 +586,7 @@ def build_data() -> dict:
                 "llinarsNote": "Llinars del Vallès 24.06.2026: incendi de vegetació urbana",
                 "validation": "La fitxa interactiva mostra només perímetres històrics oficials consolidats dins l'àmbit.",
                 "source": "Generalitat WFS VEGETACIO:VEGETACIO_INCENDIS, capa local processada",
-                "plaAlfa": "Pla Alfa s'actualitza a les 00:00 i 09:30; cal consultar el visor oficial per perill diari.",
+                "plaAlfa": "Pla Alfa oficial municipal incorporat des de la vista pública 'Avui' del Cos d'Agents Rurals; conserva separades la data de la dada i la comprovació.",
                 "satelliteSource": "Mapasdeincendios.es com a visor informatiu; fonts declarades: NASA FIRMS, Copernicus EFFIS, AEMET i MITECO/EGIF.",
                 "satelliteUpdated": "La pàgina consultada el 17.07.2026 indica actualització 18.07.2026 00:00.",
                 "activeNow": 13,
@@ -852,6 +854,18 @@ def render_index(data: dict) -> str:
       <article class="eu-report-card orange"><span class="eu-big" id="report-open"></span><h3>Prats i herbassars</h3><p>Peces escasses que poden mantenir ecotons, recursos florals i discontinuïtat funcional.</p></article>
       <article class="eu-report-card blue"><span class="eu-big" id="report-hic"></span><h3>Hàbitats HIC</h3><p>Responsabilitat de conservació que ha de filtrar qualsevol actuació transformadora.</p></article>
     </div>
+    <article class="eu-report-card orange" style="margin-top:12px" aria-label="Situació actual del perill d'incendi">
+      <h3>Situació d’incendi avui</h3>
+      <div class="eu-facts">
+        <div class="eu-fact"><span>Perill EcoRadar avui</span><strong id="report-fire-today"></strong></div>
+        <div class="eu-fact"><span>Pla Alfa</span><strong id="report-pla-alfa"></strong></div>
+        <div class="eu-fact"><span>Meteorologia</span><strong id="report-fire-weather"></strong></div>
+        <div class="eu-fact"><span>Sequera acumulada</span><strong id="report-fire-drought"></strong></div>
+        <div class="eu-fact"><span>Tendència</span><strong id="report-fire-trend"></strong></div>
+        <div class="eu-fact"><span>Última actualització</span><strong id="report-fire-update"></strong></div>
+      </div>
+      <p class="eu-source">Pla Alfa és el nivell operatiu oficial municipal dels Agents Rurals. L’índex 0–100 és una lectura EcoRadar separada; no converteix el Pla Alfa en una puntuació ni n’inventa una resolució de 100 m.</p>
+    </article>
     <div class="eu-exec-grid">
       <article class="eu-report-card green"><h3>Conclusions clau</h3><ul class="eu-exec-list"><li>Una base ecològica forta que demana governar el canvi, no transformar de manera general.</li><li>No es justifica una restauració generalitzada. Cal validar, actuar només si el camp confirma un problema funcional i fer seguiment de la resposta.</li><li>Fonts, drenatges, fondals i corredors poden concentrar funcions ecològiques durant la sequera, la calor o la recuperació postpertorbació.</li></ul></article>
       <article class="eu-report-card blue"><h3>Prioritats de gestió</h3><ul class="eu-exec-list"><li>P1 · Delimitar sectors candidats de referència i no-intervenció.</li><li>P2 · Restaurar processos de mosaic i connectivitat, prioritzant la retirada de pressions.</li><li>P3 · Inventariar i protegir processos hídrics, refugis i continuïtat de ribera.</li><li>P4 · Reduir pressions d’accés i ús públic abans d’augmentar infraestructura o capacitat de visita.</li></ul></article>
@@ -1071,11 +1085,11 @@ def render_index(data: dict) -> str:
       <p class="eu-section-kicker">08 · Fonts, metodologia i limitacions</p>
       <h2>La força de la diagnosi depèn tant de les dades incorporades com dels límits explícits</h2>
       <div class="eu-card-grid eu-two" style="margin-top:20px">
-        <article class="eu-report-card"><h3>Fonts incorporades</h3><ul><li>Copernicus Sentinel-2 L2A: NDVI, NDMI i albedo del 07.07.2026.</li><li>Copernicus CLMS HRL 2023: densitat arbòria i coberta herbàcia.</li><li>USGS Landsat 8/9 C2 L2: composició de 20 escenes de temperatura superficial dels estius 2025–2026.</li><li>Generalitat: Mapa bàsic de perill d’incendi forestal 2024, hàbitats, HIC, infraestructura verda i incendis.</li><li>Meteocat XEMA, estació Y4 Alinyà: temperatura de l’aire, humitat relativa i precipitació de la darrera comprovació disponible.</li><li>ICGC: cobertes del sòl i model d’elevacions.</li><li>ACA, GBIF, iNaturalist i OpenStreetMap: aigua, registres biològics i accessibilitat.</li><li>EcoRadar: potencial relatiu de refugi climàtic derivat de LST, NDMI i NDVI, amb pesos i llindars documentats.</li></ul></article>
+        <article class="eu-report-card"><h3>Fonts incorporades</h3><ul><li>Copernicus Sentinel-2 L2A: NDVI, NDMI i albedo del 07.07.2026.</li><li>Copernicus CLMS HRL 2023: densitat arbòria i coberta herbàcia.</li><li>USGS Landsat 8/9 C2 L2: composició de 20 escenes de temperatura superficial dels estius 2025–2026.</li><li>Generalitat: Mapa bàsic de perill d’incendi forestal 2024, hàbitats, HIC, infraestructura verda i incendis.</li><li>Meteocat XEMA, estació Y4 Alinyà: temperatura de l’aire, humitat relativa i precipitació; estació CJ Organyà: vent i ratxes com a context puntual a 9,2 km.</li><li>Cos d’Agents Rurals: Pla Alfa oficial municipal de Fígols i Alinyà, vista pública «Avui».</li><li>ICGC: cobertes del sòl i model d’elevacions.</li><li>ACA, GBIF, iNaturalist i OpenStreetMap: aigua, registres biològics i accessibilitat.</li><li>EcoRadar: potencial relatiu de refugi climàtic derivat de LST, NDMI i NDVI, amb pesos i llindars documentats.</li></ul></article>
         <article class="eu-report-card orange"><h3>Limitacions que afecten decisions</h3><ul><li>Hàbitats i punts d’aigua necessiten validació de camp.</li><li>GBIF/iNaturalist no permeten afirmar absències ni equivalen a cens.</li><li>OSM no mesura intensitat real de visitants.</li><li>NDVI i NDMI són instantànies; la LST és una composició estival i no una normal climàtica.</li><li>El perill integrat és una lectura analítica estructural; els pesos i el potencial de combustible per coberta requereixen contrast de camp.</li><li>La lectura de perill actual és un índex EcoRadar, no una alerta oficial ni el Pla Alfa; la humitat és puntual a Y4 i el vent és context puntual de CJ Organyà, a 9,2 km.</li><li>Qualsevol obra o tractament requereix projecte, permisos i validació específica.</li></ul></article>
       </div>
       <details class="eu-detail"><summary>Estat de publicació i validació</summary><div>Producte apte a escala de diagnosi. Els controls tècnics i de recomanacions del projecte estan superats; la validació ecològica manté limitacions explícites. Les entrades de l’informe complet es van validar el 08.07.2026 i la capa històrica d’incendis es va consultar el 17.07.2026.</div></details>
-      <details class="eu-detail"><summary>Fórmula del perill d’incendi actual</summary><div><strong>Índex 0–100 = 20% potencial de foc ForestDrought CREAF + 20% perill estructural oficial + 15% sequedat relativa NDMI + 10% temperatura superficial detallada + 10% continuïtat vegetal + 10% vent + 10% humitat relativa baixa + 3% pendent + 2% orientació de solana.</strong> És la mateixa fórmula que a l’EcoRadar Urbà. ForestDrought aplica 100 × max(SFP, CFP) / 9 només dins l’empremta forestal nativa de 500 × 500 m. Si una variable no està disponible, el seu pes s’exclou i els pesos disponibles es renormalitzen proporcionalment; mai no s’hi assigna un valor zero inventat. És una lectura analítica EcoRadar i no una alerta oficial ni el Pla Alfa.</div></details>
+      <details class="eu-detail"><summary>Fórmula del perill d’incendi actual</summary><div><strong>Índex 0–100 = 20% potencial de foc ForestDrought CREAF + 20% perill estructural oficial + 15% sequedat relativa NDMI + 10% temperatura superficial detallada + 10% continuïtat vegetal + 10% vent/ratxa + 10% humitat relativa baixa + 3% pendent + 2% orientació de solana.</strong> El component de vent usa el màxim normalitzat entre vent sostingut i ratxa disponibles, sense canviar-ne el pes. ForestDrought aplica 100 × max(SFP, CFP) / 9 només dins l’empremta forestal nativa de 500 × 500 m. Si una variable no està disponible, el seu pes s’exclou i els pesos disponibles es renormalitzen proporcionalment; mai no s’hi assigna un valor zero inventat. Temperatura de l’aire, pluja recent, acumulacions de 7/30 dies i Pla Alfa s’expliquen com a contextos traçables amb escala i data pròpies; el Pla Alfa oficial municipal no es converteix en una puntuació EcoRadar.</div></details>
       <details class="eu-detail"><summary>Bibliografia de planificació, conservació i rewilding</summary><div><p><strong>EUROPARC-España (2018).</strong> <em>Las áreas protegidas en el contexto del cambio global: incorporación de la adaptación al cambio climático en la planificación y gestión</em>, 2a ed. Criteris utilitzats: territori com a sistema, incertesa, successió, connectivitat, seguiment i gestió adaptativa (pàgines PDF 29–32).</p><p><strong>EUROPARC-España (2008).</strong> <em>Planificar para gestionar los espacios naturales protegidos</em>. Cicle objectiu–diagnòstic–mesura–resultat–avaluació i gradient no-intervenció/maneig actiu (pàgines PDF 75–77 i 98).</p><p><strong>IUCN Commission on Ecosystem Management (2025).</strong> <a href="https://portals.iucn.org/library/node/52582"><em>Guidelines for rewilding</em></a>. <strong>Carver et al. (2021).</strong> <a href="https://doi.org/10.1111/cobi.13730"><em>Guiding principles for rewilding</em></a>, Conservation Biology 35:1882–1893.</p></div></details>
     </section>
   </article>
@@ -1227,9 +1241,9 @@ def render_index(data: dict) -> str:
     fireCurrent: {{
       label:`Perill d’incendi avui · índex EcoRadar 100 m · ${{Number(D.currentFire.summary.mean_index_0_100).toFixed(1).replace('.',',')}}/100 · ${{D.currentFire.summary.predominant_category}}`,
       title:'Perill d’incendi avui · índex EcoRadar a 100 m',
-      copy:'Combina per cel·les de 100 m el potencial de foc ForestDrought CREAF, el perill estructural oficial 2024, la sequedat relativa NDMI, la temperatura superficial detallada més recent, la continuïtat vegetal CLMS, el pendent, l’orientació, la humitat XEMA Y4 i el vent de l’estació XEMA més propera que el publica, CJ Organyà, a 9,2 km. És la mateixa fórmula que a l’EcoRadar Urbà. La concurrència territorial no intervé en aquest índex i es conserva com a lectura separada.',
+      copy:'Combina per cel·les de 100 m el potencial de foc ForestDrought CREAF, el perill estructural oficial 2024, la sequedat relativa NDMI, la temperatura superficial detallada més recent, la continuïtat vegetal CLMS, el pendent, l’orientació, la humitat XEMA Y4 i el màxim normalitzat entre vent i ratxa de l’estació XEMA CJ Organyà, a 9,2 km. Temperatura de l’aire, pluja recent i acumulacions de 7 i 30 dies expliquen el context meteorològic observat; el Pla Alfa es mostra com a nivell oficial municipal separat. La concurrència territorial no intervé en aquest índex.',
       reading:'Verd: molt baix (0–20). Verd groguenc: baix (21–40). Groc: moderat (41–60). Taronja: alt (61–80). Vermell: molt alt (81–90). Granat: extrem (91–100). Clica qualsevol cel·la per consultar els valors i les contribucions. ForestDrought no s’interpola fora de les cel·les forestals natives.',
-      limit:'Límit: és una lectura analítica EcoRadar, no una alerta oficial, el Pla Alfa ni una predicció d’ignició. ForestDrought és un model i només existeix a la seva graella forestal nativa. Y4 no publica vent; CJ Organyà aporta un context puntual proper, no una superfície meteorològica ni vent mesurat dins Alinyà.',
+      limit:'Límit: és una lectura analítica EcoRadar, no una alerta oficial, el Pla Alfa ni una predicció d’ignició. ForestDrought és un model i només existeix a la seva graella forestal nativa. Y4 no publica vent; CJ Organyà aporta un context puntual proper. Les observacions XEMA i el Pla Alfa són uniformes per a tot l’àmbit: no se’ls atribueix una falsa resolució de 100 m.',
       layers:['fireCurrent','fires','access'],
       raster:'fireCurrent',
       legend:[['#2f8f4e','0–20 · molt baix'],['#a8c94a','21–40 · baix'],['#f0d84b','41–60 · moderat'],['#ef8b2c','61–80 · alt'],['#d43d2f','81–90 · molt alt'],['#711d2d','91–100 · extrem'],['#c23c32','Perímetres històrics']]
@@ -1346,6 +1360,11 @@ def render_index(data: dict) -> str:
     if (Number.isNaN(parsed.getTime())) return String(value);
     return parsed.toLocaleString('ca-ES', {{timeZone:'Europe/Madrid', day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'}});
   }};
+  const metricValue = (item, factor=1, digits=1) => item?.value == null ? null : Number(item.value) * factor;
+  const metricText = (item, unit, factor=1, digits=1) => {{
+    const value = metricValue(item, factor, digits);
+    return value == null ? 'dada no disponible' : `${{Number(value).toFixed(digits).replace('.',',')}} ${{unit}}`;
+  }};
   const fireVariableLabels = {{
     creaf_fire_potential:'Potencial de foc ForestDrought',
     structural:'Perill estructural oficial 2024',
@@ -1363,8 +1382,23 @@ def render_index(data: dict) -> str:
   }};
   function updateCurrentFireSummary(fire) {{
     D.currentFire = fire;
+    const meteo = fire.meteorology || {{}};
+    const accumulated = meteo.precipitation_accumulated || {{}};
+    const pla = fire.plaAlfa || {{}};
+    const trend = D.dailyHistory?.analytics?.current_fire_danger?.trend || {{}};
+    const trendPct = trend.variation_pct == null ? '' : ` · ${{Math.abs(Number(trend.variation_pct)).toFixed(1).replace('.',',')}} %`;
+    const weatherText = `${{metricText(meteo.air_temperature,'°C')}} · HR ${{metricText(meteo.relative_humidity,'%',1,0)}} · vent ${{metricText(meteo.wind,'km/h',3.6)}} · ratxa ${{metricText(meteo.wind_gust,'km/h',3.6)}}`;
+    const droughtText = accumulated.last_7_days_mm == null
+      ? 'dada no disponible'
+      : `${{ca1(accumulated.last_7_days_mm)}} mm / 7 d · ${{accumulated.last_30_days_mm == null ? '—' : ca1(accumulated.last_30_days_mm)}} mm / 30 d · ${{accumulated.days_without_significant_rain == null ? '—' : ca1(accumulated.days_without_significant_rain)}} dies secs`;
+    const plaText = pla.level == null ? 'dada no disponible' : `nivell ${{pla.level}} · ${{pla.label}}`;
+    const trendText = `${{trend.symbol || '→'}} ${{trend.label || 'sense comparació'}}${{trendPct}}`;
     root.querySelector('#eu-fire-current-date').textContent = `comprovat ${{humanDate(fire.checkedAtUtc)}}`;
     root.querySelector('#eu-fire-current-summary').innerHTML = [
+      ['Pla Alfa oficial',plaText],
+      ['Meteorologia',weatherText],
+      ['Sequera acumulada',droughtText],
+      ['Tendència',trendText],
       ['Índex mitjà',`${{ca1(fire.summary.mean_index_0_100)}}/100`],
       ['Categoria predominant',fire.summary.predominant_category],
       ['Màxim territorial',`${{ca1(fire.summary.maximum_index_0_100)}}/100 · ${{fire.summary.maximum_category}}`],
@@ -1377,6 +1411,12 @@ def render_index(data: dict) -> str:
     root.querySelector('#eu-fire-current-check').textContent = `Darrera comprovació del procés: ${{humanDate(fire.checkedAtUtc)}}. Darrera observació meteorològica utilitzada: ${{humanDate(fire.summary.latest_update_utc)}}. Estat: ${{fire.status}}.`;
     root.querySelector('#eu-fire-current-variables').innerHTML = Object.entries(fire.variables || {{}}).map(([key,item]) => `<tr><td>${{esc(fireVariableLabels[key] || key)}}</td><td>${{esc(item.value)}}</td><td>${{esc(item.source)}}</td><td>${{esc(humanDate(item.date_utc))}}</td><td>${{ca1(item.weight_pct)}} %</td><td>${{esc(item.quality)}} · ${{esc(item.update_status)}}</td></tr>`).join('');
     root.querySelector('#eu-fire-current-weights').innerHTML = Object.entries(fire.weights || {{}}).map(([key,weight]) => `<li>${{esc(fireVariableLabels[key] || key)}}: <strong>${{ca1(weight * 100)}} %</strong></li>`).join('');
+    root.querySelector('#report-fire-today').textContent = `${{ca1(fire.summary.mean_index_0_100)}}/100 · ${{fire.summary.predominant_category}}`;
+    root.querySelector('#report-pla-alfa').textContent = plaText;
+    root.querySelector('#report-fire-weather').textContent = weatherText;
+    root.querySelector('#report-fire-drought').textContent = droughtText;
+    root.querySelector('#report-fire-trend').textContent = trendText;
+    root.querySelector('#report-fire-update').textContent = humanDate(fire.checkedAtUtc);
   }}
   updateCurrentFireSummary(D.currentFire);
   root.querySelector('#eu-area-value').textContent = `${{caInt(D.metrics.studyAreaHa)}} ha`;
@@ -1524,11 +1564,19 @@ def render_index(data: dict) -> str:
     const creafNotModelled = p.raw.creaf_fire_potential_0_9 == null;
     const windValue = p.raw.wind_speed_kmh == null ? 'no disponible a la font' : `${{ca1(p.raw.wind_speed_kmh)}} km/h`;
     const windDate = humanDate(p.source_dates.wind);
+    const meteo = D.currentFire.meteorology || {{}};
+    const accumulated = meteo.precipitation_accumulated || {{}};
+    const pla = D.currentFire.plaAlfa || {{}};
+    const plaText = pla.level == null ? 'dada no disponible' : `nivell ${{pla.level}} · ${{pla.label}}`;
+    const rainText = accumulated.last_7_days_mm == null ? 'dada no disponible' : `${{ca1(accumulated.last_7_days_mm)}} mm en 7 dies · ${{accumulated.last_30_days_mm == null ? '—' : ca1(accumulated.last_30_days_mm)}} mm en 30 dies · ${{accumulated.days_without_significant_rain == null ? '—' : ca1(accumulated.days_without_significant_rain)}} dies sense ≥1 mm/dia`;
     firePopup.innerHTML = `<button class="eu-fire-popup-close" type="button" aria-label="Tancar detall">×</button>
       <h3>${{esc(p.cell_id)}} · perill actual</h3>
       <div class="eu-fire-popup-main">${{ca1(p.index_0_100)}}/100 · ${{esc(p.category)}}</div>
       <p><strong>Confiança:</strong> ${{ca1(p.confidence_pct)}} % · ${{esc(p.confidence)}}. <strong>Pes disponible:</strong> ${{ca1(p.available_weight_pct)}} %.</p>
       <p><strong>Vent contextual XEMA · CJ Organyà:</strong> ${{esc(windValue)}} · observació ${{esc(windDate)}}. <span class="eu-muted">Estació oficial de referència situada a 9,2 km de l’estació Y4 d’Alinyà.</span></p>
+      <p><strong>Meteorologia actual:</strong> temperatura ${{esc(metricText(meteo.air_temperature,'°C'))}} · humitat ${{esc(metricText(meteo.relative_humidity,'%',1,0))}} · vent ${{esc(metricText(meteo.wind,'km/h',3.6))}} · ratxa ${{esc(metricText(meteo.wind_gust,'km/h',3.6))}} · pluja 24 h ${{accumulated.recent_24h_mm == null ? '—' : ca1(accumulated.recent_24h_mm) + ' mm'}}.</p>
+      <p><strong>Sequera meteorològica acumulada:</strong> ${{esc(rainText)}}. <span class="eu-muted">Acumulacions XEMA fins a ${{esc(humanDate(accumulated.data_at_utc))}}; si la cobertura és insuficient es mostra “dada no disponible”.</span></p>
+      <p><strong>Pla Alfa oficial · Fígols i Alinyà:</strong> ${{esc(plaText)}} · dada ${{esc(humanDate(pla.data_at_utc))}} · comprovació ${{esc(humanDate(pla.checked_at_utc))}}. <span class="eu-muted">Context operatiu municipal oficial; no entra numèricament a l’índex EcoRadar.</span></p>
       <p><strong>Factors dominants:</strong> ${{esc((p.dominant_labels || []).join(' · ') || 'no determinats')}}.</p>
       ${{p.complete ? '' : creafNotModelled ? '<p class="eu-warning"><strong>Sense cel·la modelitzada ForestDrought.</strong> CREAF no publica potencial de foc per a aquest punt; el component no és aplicable i els pesos disponibles s’han renormalitzat sense inventar cap valor.</p>' : '<p class="eu-warning"><strong>Càlcul incomplet.</strong> Manquen una o més variables en aquesta cel·la; els pesos disponibles s’han renormalitzat i cap absència s’ha convertit en zero.</p>'}}
       <table><thead><tr><th>Component</th><th>Valor</th><th>0–100</th><th>Aportació</th><th>Data font</th></tr></thead><tbody>${{detailRows}}</tbody></table>
@@ -1557,6 +1605,8 @@ def render_index(data: dict) -> str:
         status: remote.status,
         summary: remote.summary,
         weather: remote.weather,
+        meteorology: remote.meteorology_context,
+        plaAlfa: remote.pla_alfa,
         variables: remote.variables_today,
         weights: remote.weights,
         normalization: remote.normalization,

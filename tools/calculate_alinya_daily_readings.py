@@ -154,12 +154,14 @@ def calculate() -> dict:
     checked_at = _run_checked_at()
     fire_config = _read_json(FIRE_CONFIG)
     frame, latest = _xema_inputs(fire_config)
+    current_fire = _read_json(PROJECT / "indicators" / "current_fire_danger.json")
     station_source = "Meteocat XEMA · estació Y4 Alinyà"
     readings: dict[str, dict] = {}
 
     temperature = latest.get("air_temperature_c")
     humidity = latest.get("relative_humidity_pct")
     wind = latest.get("wind_speed_ms")
+    wind_gust = latest.get("wind_gust_ms")
     if temperature:
         readings["air_temperature"] = _entry(
             label="Temperatura de l'aire",
@@ -175,6 +177,24 @@ def calculate() -> dict:
     else:
         readings["air_temperature"] = _missing(
             "Temperatura de l'aire", station_source, checked_at, "L'estació Y4 no ha retornat la variable 32."
+        )
+    if wind_gust:
+        gust_kmh = wind_gust["value"] * 3.6
+        readings["wind_gust"] = _entry(
+            label="Ratxa de vent",
+            value=f"{gust_kmh:.1f} km/h".replace(".", ","),
+            value_numeric=round(gust_kmh, 1),
+            unit="km/h",
+            source="Meteocat XEMA · estació CJ Organyà · 9,2 km de Y4",
+            data_at=wind_gust["data_at"],
+            checked_at=checked_at,
+            quality=_quality(wind_gust),
+            note="Ratxa puntual de l'estació oficial de context; no representa el vent de cada vall o carena d'Alinyà.",
+        )
+    else:
+        readings["wind_gust"] = _missing(
+            "Ratxa de vent", "Meteocat XEMA · estació CJ Organyà", checked_at,
+            "La font no ha retornat una ratxa vàlida; no s'interpreta com absència de ratxes.",
         )
     if humidity:
         readings["relative_humidity"] = _entry(
@@ -236,6 +256,49 @@ def calculate() -> dict:
         readings["precipitation"] = _missing(
             "Precipitació", station_source, checked_at, "L'estació Y4 no ha retornat la variable 35."
         )
+
+    accumulated = current_fire.get("meteorology_context", {}).get("precipitation_accumulated", {})
+    accumulated_at = _as_utc(accumulated.get("data_at_utc"))
+    accumulated_specs = (
+        ("precipitation_7d", "Precipitació últims 7 dies", "last_7_days_mm", "mm"),
+        ("precipitation_30d", "Precipitació últims 30 dies", "last_30_days_mm", "mm"),
+        ("days_without_significant_rain", "Dies sense pluja significativa", "days_without_significant_rain", "dies"),
+    )
+    for key, label, field, unit in accumulated_specs:
+        value = accumulated.get(field)
+        if value is None or accumulated_at is None:
+            readings[key] = _missing(label, station_source, checked_at, "Cobertura temporal insuficient a la sèrie XEMA; no s'emplena amb zeros.")
+            continue
+        readings[key] = _entry(
+            label=label,
+            value=f"{float(value):.1f} {unit}".replace(".0 dies", " dies").replace(".", ","),
+            value_numeric=round(float(value), 1),
+            unit=unit,
+            source=station_source,
+            data_at=accumulated_at,
+            checked_at=checked_at,
+            quality="derivada de períodes XEMA amb cobertura ≥80 %",
+            note=accumulated.get("method", "Acumulació observada XEMA.") + (" Llindar de pluja significativa: 1,0 mm/dia." if field == "days_without_significant_rain" else ""),
+        )
+
+    pla_alfa = current_fire.get("pla_alfa", {})
+    pla_level = pla_alfa.get("level")
+    pla_date = _as_utc(pla_alfa.get("data_at_utc"))
+    readings["pla_alfa"] = (
+        _entry(
+            label="Pla Alfa",
+            value=f"Nivell {int(pla_level)} · {pla_alfa.get('label', '—')}",
+            value_numeric=float(pla_level),
+            unit="nivell oficial 0–4",
+            source="Cos d'Agents Rurals / Generalitat de Catalunya",
+            data_at=pla_date,
+            checked_at=checked_at,
+            quality="dada oficial municipal",
+            note="Nivell operatiu oficial de Fígols i Alinyà; no és un càlcul EcoRadar ni entra numèricament a l'índex 0–100.",
+        )
+        if pla_level is not None and pla_date
+        else _missing("Pla Alfa", "Cos d'Agents Rurals / Generalitat de Catalunya", checked_at, "No hi ha una última dada oficial local disponible.")
+    )
 
     landsat = _read_json(PROJECT / "metadata" / "landsat_connector.json")
     surface_selection = _read_json(PROJECT / "metadata" / "current_surface_temperature.json")
@@ -347,7 +410,6 @@ def calculate() -> dict:
         else _missing("Ombra topogràfica diària · 15 h", "ICGC MDT 5 m", checked_at, "No hi ha càlcul diari vàlid.")
     )
 
-    current_fire = _read_json(PROJECT / "indicators" / "current_fire_danger.json")
     fire_summary = current_fire.get("summary", {})
     fire_date = _as_utc(fire_summary.get("latest_update_utc"))
     fire_value = fire_summary.get("mean_index_0_100")
@@ -394,6 +456,7 @@ def calculate() -> dict:
         forestdrought.get("latest_catalog_check_utc") or forestdrought.get("generated_at_utc")
     )
     forestdrought_date = _as_utc(forestdrought.get("data_at_utc"))
+    pla_checked = _as_utc(pla_alfa.get("checked_at_utc"))
     source_checks = {
         "meteocat_xema": _source_check(
             label="Meteocat XEMA · estació Y4",
@@ -489,6 +552,15 @@ def calculate() -> dict:
             data_at=fire_date,
             service="Analysis Engine EcoRadar",
             note="Indicador derivat; no és una alerta oficial ni substitueix el Pla Alfa.",
+        ),
+        "pla_alfa": _source_check(
+            label="Pla Alfa · Fígols i Alinyà",
+            organization="Cos d'Agents Rurals / Generalitat de Catalunya",
+            status="verified" if pla_level is not None and pla_date and _checked_during_run(pla_checked, checked_at) else "service_unavailable",
+            checked_at=checked_at,
+            data_at=pla_date,
+            service="ArcGIS FeatureServer oficial · vista municipal Avui",
+            note="Nivell oficial 0–4; es mostra en paral·lel i no es converteix en puntuació EcoRadar.",
         ),
     }
     payload = {

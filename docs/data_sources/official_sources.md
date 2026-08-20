@@ -193,15 +193,17 @@ This document follows `AGENTS.md`: source inventory and verification come before
 
 - Source name: Pla Alfa daily fire-danger level by municipality.
 - Responsible organization: Cos d'Agents Rurals / Generalitat de Catalunya.
-- Official URL: pending exact technical endpoint.
-- Service type: pending.
-- Data format: pending.
-- Coordinate reference system: expected municipal geometries if spatialized; pending official metadata.
-- Available variables: fire-danger level 0-3 by municipality; must be confirmed from the official source.
-- Update frequency: daily during fire-risk monitoring periods; pending official metadata.
-- Usage license: pending.
-- Example connection: pending.
-- Connector status: `pending_verification`.
+- Official information page: `https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/index.html`.
+- Official technical endpoint: `https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/Pla_Alfa_Municipal_Avui_FL_2_view/FeatureServer/0`.
+- Service type: public ArcGIS FeatureServer query, read-only view used by the official "Pla Alfa Avui" web map (`a696da9dc39f461dadfc0f22e910b4aa`).
+- Data format: Esri JSON / GeoJSON; EcoRadar requests attributes only once per daily run.
+- Coordinate reference system: ETRS89 UTM zone 31N, `EPSG:25831` (geometry is not downloaded by the Alinyà connector).
+- Available variables: municipal code (`CODIMUNI`), municipality (`NOMMUNI`), county (`NOMCOMAR`) and official operational level 0-4 (`PERIL_M`).
+- Update frequency: the official page states 00:00 and 09:30, or exceptionally when required.
+- Usage license: no explicit layer-level license is published in the ArcGIS item; use is limited here to factual attribution and the public official value, with a direct link to the source.
+- Example connection: `.../FeatureServer/0/query?where=CODIMUNI%3D%27259084%27&outFields=CODIMUNI%2CNOMMUNI%2CNOMCOMAR%2CPERIL_M&returnGeometry=false&f=json`.
+- Connector status: `verified`.
+- Verification notes: verified on 20 August 2026 against the official Interior page, the public ArcGIS item owned by `AdminInterior`, its municipal-today view, layer schema and a direct query for code `259084` (Fígols i Alinyà). Pla Alfa is kept as an official operational context and is not converted into an EcoRadar score.
 
 ### EFFIS
 

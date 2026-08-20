@@ -18,7 +18,9 @@ Netlify consulta els tres registres canònics del repositori GitHub:
 | Lectura | Font responsable | Servei | Resolució | Actualització | Estat |
 | --- | --- | --- | --- | --- | --- |
 | Temperatura, humitat i precipitació | Meteocat / Generalitat de Catalunya | XEMA Socrata `nzvn-apee`, estació Y4 Alinyà | observació puntual | habitualment 30 minuts; comprovació diària | `verified` |
-| Vent contextual | Meteocat / Generalitat de Catalunya | XEMA Socrata `nzvn-apee`, estació CJ Organyà, 9,2 km de Y4 | observació puntual propera | habitualment 30 minuts; comprovació diària | `verified` |
+| Vent i ratxa contextuals | Meteocat / Generalitat de Catalunya | XEMA Socrata `nzvn-apee`, estació CJ Organyà, 9,2 km de Y4 | observació puntual propera | habitualment 30 minuts; comprovació diària | `verified` |
+| Precipitació acumulada 7/30 dies i dies secs | EcoRadar sobre Meteocat XEMA Y4 | suma de períodes de 30 minuts amb cobertura mínima del 80 % | observació puntual acumulada | amb nova observació XEMA; comprovació diària | derivat de font `verified` |
+| Pla Alfa | Cos d'Agents Rurals / Generalitat de Catalunya | ArcGIS FeatureServer públic, vista municipal "Avui" | nivell oficial municipal 0–4 | 00:00 i 09:30, o quan calgui | `verified` |
 | Temperatura superficial detallada · principal | USGS | Landsat 8/9 Collection 2 Level-2 ST, STAC + COG | 30 m | amb nova escena QA-vàlida | `verified` |
 | Temperatura superficial detallada · alternativa | NASA/JPL ECOSTRESS; NASA LP DAAC | CMR Search + COG protegit, `ECO_L2T_LSTE.003` | 70 m | adquisició irregular; consulta diària | `requires_credentials` per descarregar |
 | NDVI, NDMI i albedo | Copernicus / ESA | CDSE Catalog + OAuth2 + Process API | 10–20 m, sortida a 10 m | amb nova escena L2A vàlida | `requires_credentials` per actualitzar |
@@ -43,7 +45,14 @@ La fórmula 0–100 és la mateixa que a l’EcoRadar Urbà:
 
 `20% potencial de foc ForestDrought + 20% perill estructural + 15% sequedat
 NDMI + 10% temperatura superficial detallada + 10% continuïtat vegetal + 10%
-vent + 10% humitat relativa baixa + 3% pendent + 2% orientació de solana`.
+vent/ratxa + 10% humitat relativa baixa + 3% pendent + 2% orientació de solana`.
+
+El component de vent conserva el 10 % i usa el màxim normalitzat entre vent
+sostingut i ratxa disponibles. Temperatura de l'aire, precipitació recent,
+acumulats de 7/30 dies i dies secs es mostren com a factors causals observats
+amb la seva data. El Pla Alfa es mostra en paral·lel com a dada oficial
+municipal. No s'afegeix a la puntuació 0–100 ni es representa com si tingués
+resolució de 100 m.
 
 La concurrència territorial no intervé en aquesta fórmula; continua disponible
 com a lectura temàtica separada.

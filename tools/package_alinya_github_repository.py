@@ -61,6 +61,7 @@ REQUIRED_PATHS = (
     "projectes/Alinya/raw/meteocat_xema/Y4_observations.csv",
     "projectes/Alinya/raw/meteocat_xema/CJ_wind_observations.csv",
     "projectes/Alinya/raw/meteocat_xema/CJ_wind_metadata.json",
+    "projectes/Alinya/raw/pla_alfa/figols_alinya_current.json",
     "projectes/Alinya/raw/incendis/perill_basic_2024/PERILLBASICINCENDI.tif",
     "projectes/Alinya/maps/ecoradar_alinya_interactiu-v2.html",
     "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/index.html",
@@ -274,6 +275,12 @@ def _validate() -> dict:
             raise RuntimeError(f"Incomplete GitHub workflow: missing {fragment}")
     if "projectes/LaSeu_Urba" in workflow:
         raise RuntimeError("Standalone Alinyà workflow depends on La Seu project data.")
+    if "if [ -e projectes/Alinya/processed/ecostress ]; then" not in workflow:
+        raise RuntimeError("Alinyà workflow must guard the optional ECOSTRESS output directory.")
+    commit_block = workflow.split("- name: Commit refreshed data", 1)[1]
+    first_git_add = commit_block.split("if [ -e projectes/Alinya/processed/ecostress ]", 1)[0]
+    if "projectes/Alinya/processed/ecostress" in first_git_add:
+        raise RuntimeError("Optional ECOSTRESS output must not be part of the unconditional git add.")
 
     files = _files()
     return {

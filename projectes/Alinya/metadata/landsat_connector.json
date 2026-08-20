@@ -1,13 +1,13 @@
 {
-  "generated_at_utc": "2026-08-20T16:04:46.618764+00:00",
+  "generated_at_utc": "2026-07-20T18:25:00.708623+00:00",
   "connector": "landsat_usgs_c2_l2_summer_composite",
   "responsibility": "download_and_normalize_only",
   "scope": "Muntanya d'Alinyà",
   "study_bbox_epsg4326": [
     1.3639980000000003,
-    42.14442699999999,
-    1.519939,
-    42.225122000000006
+    42.14442700000001,
+    1.5199389999999995,
+    42.22512200000001
   ],
   "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
   "organization": "United States Geological Survey",
@@ -16,7 +16,7 @@
   "service_type": "STAC plus signed Cloud Optimized GeoTIFF range reads",
   "license": "USGS Landsat data are in the public domain",
   "date_range": "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z",
-  "scene_count": 24,
+  "scene_count": 20,
   "scenes": [
     {
       "item_id": "LC08_L2SP_198031_20250830_02_T1",
@@ -103,13 +103,6 @@
       "valid_study_pct": 77.66
     },
     {
-      "item_id": "LC09_L2SP_198031_20260809_02_T1",
-      "acquired_at_utc": "2026-08-09T10:36:27.291477Z",
-      "scene_cloud_cover_pct": 10.7,
-      "valid_study_pixels": 60671,
-      "valid_study_pct": 99.93
-    },
-    {
       "item_id": "LC08_L2SP_198031_20260614_02_T1",
       "acquired_at_utc": "2026-06-14T10:35:47.609599Z",
       "scene_cloud_cover_pct": 12.37,
@@ -124,13 +117,6 @@
       "valid_study_pct": 99.97
     },
     {
-      "item_id": "LC09_L2SP_198031_20260724_02_T1",
-      "acquired_at_utc": "2026-07-24T10:36:22.020782Z",
-      "scene_cloud_cover_pct": 15.13,
-      "valid_study_pixels": 60698,
-      "valid_study_pct": 99.98
-    },
-    {
       "item_id": "LC09_L2SP_198031_20250806_02_T1",
       "acquired_at_utc": "2025-08-06T10:36:36.976511Z",
       "scene_cloud_cover_pct": 16.09,
@@ -143,13 +129,6 @@
       "scene_cloud_cover_pct": 16.23,
       "valid_study_pixels": 52839,
       "valid_study_pct": 87.03
-    },
-    {
-      "item_id": "LC08_L2SP_198031_20260801_02_T1",
-      "acquired_at_utc": "2026-08-01T10:36:15.780468Z",
-      "scene_cloud_cover_pct": 17.11,
-      "valid_study_pixels": 60710,
-      "valid_study_pct": 100.0
     },
     {
       "item_id": "LC09_L2SP_198031_20250603_02_T1",
@@ -178,13 +157,6 @@
       "scene_cloud_cover_pct": 68.19,
       "valid_study_pixels": 0,
       "valid_study_pct": 0.0
-    },
-    {
-      "item_id": "LC08_L2SP_198031_20260716_02_T1",
-      "acquired_at_utc": "2026-07-16T10:36:04.150287Z",
-      "scene_cloud_cover_pct": 79.15,
-      "valid_study_pixels": 0,
-      "valid_study_pct": 0.0
     }
   ],
   "crs": "EPSG:32631",
@@ -199,6 +171,6 @@
   "valid_pixels": 60711,
   "study_coverage_pct": 100.0,
   "normalized_tif": "projectes/Alinya/processed/landsat/landsat_lst.tif",
-  "sha256": "00cc7e92c6b2bcdfd63d83dbbec428ef48918ef80266297e65671f7f48c31ad4",
+  "sha256": "03982eb31fbcf702ab9de96550fdfea78a3c82cf09a8c9883b084af72316eaa6",
   "connector_status": "verified"
 }

@@ -16,7 +16,8 @@ oficial de perill.
 | NDMI | Sentinel-2 MSI L2A, Copernicus Data Space Ecosystem | OAuth/API de procés; GeoTIFF normalitzat | 10–20 m efectius, reprojecció a 100 m | Segons escena vàlida | Copernicus Data Policy | `verified` |
 | Continuïtat vegetal | CLMS HRL Tree Cover Density i Herbaceous Cover 2023 | WMS/GeoTIFF normalitzat | 10 m, reprojecció a 100 m | versió 2023 | Copernicus Data Policy | `verified` |
 | Pendent i orientació | Model d'elevacions del terreny 5 m, ICGC | GeoTIFF normalitzat | EPSG:25831, 5 m | edició de la font | CC BY 4.0 ICGC | `verified` |
-| Meteorologia | XEMA Y4 Alinyà per humitat i XEMA CJ Organyà per vent, Meteocat | API Socrata `nzvn-apee`; CSV normalitzat | dues observacions puntuals; CJ és a 9,2 km de Y4 | habitualment cada 30 minuts; comprovació automatitzable | Dades obertes Generalitat | `verified` |
+| Meteorologia | XEMA Y4 Alinyà per temperatura, humitat i precipitació; XEMA CJ Organyà per vent i ratxes, Meteocat | API Socrata `nzvn-apee`; CSV normalitzat | dues observacions puntuals; CJ és a 9,2 km de Y4 | habitualment cada 30 minuts; comprovació diària | Dades obertes Generalitat | `verified` |
+| Pla Alfa | Cos d'Agents Rurals / Generalitat de Catalunya | vista pública ArcGIS FeatureServer municipal "Avui" | nivell oficial municipal 0–4 | 00:00 i 09:30, o quan calgui | servei públic oficial; llicència específica no publicada | `verified` |
 
 ## Fórmula
 
@@ -38,7 +39,7 @@ Pesos:
 - sequedat relativa NDMI: 15 %;
 - temperatura superficial detallada: 10 %;
 - continuïtat vegetal: 10 %;
-- vent XEMA: 10 %;
+- vent i ratxa XEMA: 10 %; s'usa el màxim dels dos valors normalitzats disponibles;
 - humitat relativa XEMA invertida: 10 %;
 - pendent: 3 %;
 - orientació de solana: 2 %.
@@ -49,10 +50,24 @@ manté només com a lectura territorial separada. Si una variable no està
 disponible, el seu pes no es converteix en zero: es renormalitzen els pesos
 realment disponibles i la cel·la queda marcada com a incompleta.
 
+La lectura operativa que acompanya el mapa incorpora també, sense alterar els
+pesos, la temperatura de l'aire, la pluja de les darreres 24 hores, els
+acumulats observats de 7 i 30 dies i els dies consecutius sense almenys 1,0 mm
+diari. Els acumulats només es publiquen amb un mínim del 80 % dels períodes
+XEMA de 30 minuts; un buit no es tracta com pluja zero. No es mostra una
+anomalia climàtica perquè encara no hi ha una normal oficial homogènia de Y4
+verificada i integrada.
+
+El Pla Alfa es mostra com a context operatiu oficial municipal, amb la seva
+data de dada i de comprovació. No s'incorpora numèricament a l'índex EcoRadar:
+fer-ho duplicaria part del senyal meteorològic i atribuiria falsa precisió de
+100 m a una decisió oficial municipal.
+
 ## Exemple d’execució
 
 ```bash
 python -m ecoradar.connectors.connector_meteocat_xema --location alinya
+python -m ecoradar.connectors.connector_pla_alfa
 python tools/fetch_alinya_creaf_forestdrought.py
 python tools/fetch_alinya_ecostress.py
 python tools/select_alinya_surface_temperature.py
