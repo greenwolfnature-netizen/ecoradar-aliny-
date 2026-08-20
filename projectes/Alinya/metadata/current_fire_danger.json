@@ -1,6 +1,6 @@
 {
   "source_gate": "verified",
-  "checked_at_utc": "2026-08-19T16:00:05Z",
+  "checked_at_utc": "2026-08-20T16:02:55Z",
   "config": "config/current_fire_danger.json",
   "inputs": {
     "official_structural": "projectes/Alinya/raw/incendis/perill_basic_2024/PERILLBASICINCENDI.tif",
@@ -16,8 +16,8 @@
   },
   "result": {
     "schema_version": "1.0",
-    "generated_at_utc": "2026-08-19T16:00:05Z",
-    "checked_at_utc": "2026-08-19T16:00:05Z",
+    "generated_at_utc": "2026-08-20T16:02:55Z",
+    "checked_at_utc": "2026-08-20T16:02:55Z",
     "reading": "Perill d'incendi actual",
     "scope": "Muntanya d'Alinyà",
     "status": "incompleta en algunes cel·les",
@@ -37,19 +37,19 @@
       "webp": "projectes/Alinya/maps/incendis/current_fire_danger.webp"
     },
     "summary": {
-      "mean_index_0_100": 52.6,
+      "mean_index_0_100": 54.6,
       "predominant_category": "moderat",
-      "maximum_index_0_100": 82.8,
+      "maximum_index_0_100": 85.8,
       "maximum_category": "molt alt",
       "area_by_category_ha": {
         "molt baix": 0.0,
-        "baix": 294.44,
-        "moderat": 4097.12,
-        "alt": 955.63,
-        "molt alt": 6.47,
+        "baix": 174.88,
+        "moderat": 3762.31,
+        "alt": 1402.01,
+        "molt alt": 14.46,
         "extrem": 0.0
       },
-      "very_high_or_extreme_area_pct": 0.1,
+      "very_high_or_extreme_area_pct": 0.3,
       "dominant_variables": [
         "creaf_fire_potential",
         "relative_humidity_inverse",
@@ -60,66 +60,66 @@
         "Humitat relativa baixa",
         "Vegetació seca"
       ],
-      "latest_update_utc": "2026-08-19T15:00:00Z",
-      "confidence_pct": 60.6,
+      "latest_update_utc": "2026-08-20T15:00:00Z",
+      "confidence_pct": 60.3,
       "confidence": "mitjana"
     },
     "weather": {
       "air_temperature_c": {
-        "value": 33.0,
-        "timestamp_utc": "2026-08-19T15:00:00Z",
+        "value": 27.9,
+        "timestamp_utc": "2026-08-20T15:00:00Z",
         "validation_code": "",
-        "history_p05": 16.3,
+        "history_p05": 16.330000000000002,
         "history_p95": 31.9
       },
       "wind_speed_ms": {
-        "value": 3.3,
-        "timestamp_utc": "2026-08-19T15:00:00Z",
+        "value": 4.6,
+        "timestamp_utc": "2026-08-20T15:00:00Z",
         "validation_code": "",
         "history_p05": 0.7,
-        "history_p95": 7.2
+        "history_p95": 7.169999999999982
       },
       "wind_direction_deg": {
-        "value": 179.0,
-        "timestamp_utc": "2026-08-19T15:00:00Z",
+        "value": 177.0,
+        "timestamp_utc": "2026-08-20T15:00:00Z",
         "validation_code": "",
-        "history_p05": 14.0,
-        "history_p95": 336.0
+        "history_p05": 13.300000000000011,
+        "history_p95": 337.0
       },
       "relative_humidity_pct": {
         "value": 25.0,
-        "timestamp_utc": "2026-08-19T15:00:00Z",
+        "timestamp_utc": "2026-08-20T15:00:00Z",
         "validation_code": "",
         "history_p05": 25.0,
         "history_p95": 77.0
       },
       "precipitation_mm": {
         "value": 0.0,
-        "timestamp_utc": "2026-08-19T15:00:00Z",
+        "timestamp_utc": "2026-08-20T15:00:00Z",
         "validation_code": ""
       },
       "wind_gust_ms": {
-        "value": 6.8,
-        "timestamp_utc": "2026-08-19T15:00:00Z",
+        "value": 8.9,
+        "timestamp_utc": "2026-08-20T15:00:00Z",
         "validation_code": "",
         "history_p05": 1.8,
-        "history_p95": 12.350000000000001
+        "history_p95": 12.3
       },
       "wind_gust_direction_deg": {
-        "value": 184.0,
-        "timestamp_utc": "2026-08-19T15:00:00Z",
+        "value": 173.0,
+        "timestamp_utc": "2026-08-20T15:00:00Z",
         "validation_code": "",
-        "history_p05": 18.0,
-        "history_p95": 316.0
+        "history_p05": 17.0,
+        "history_p95": 317.6999999999998
       },
-      "daily_min_relative_humidity_pct": 23.0,
-      "daily_max_wind_gust_ms": 10.7
+      "daily_min_relative_humidity_pct": 25.0,
+      "daily_max_wind_gust_ms": 11.7
     },
     "variables_today": {
       "creaf_fire_potential": {
-        "value": "mediana 69.5/100",
+        "value": "mediana 71.0/100",
         "source": "CREAF/EMF · ForestDrought daily modelled forests",
-        "date_utc": "2026-08-14T00:00:00Z",
+        "date_utc": "2026-08-15T00:00:00Z",
         "weight_pct": 20,
         "quality": "verificada",
         "update_status": "última dada vàlida"
@@ -157,9 +157,9 @@
         "update_status": "última dada vàlida"
       },
       "wind": {
-        "value": "11.9 km/h",
+        "value": "16.6 km/h",
         "source": "Meteocat XEMA · CJ Organyà · 9,2 km de Y4",
-        "date_utc": "2026-08-19T15:00:00Z",
+        "date_utc": "2026-08-20T15:00:00Z",
         "weight_pct": 10,
         "quality": "provisional",
         "update_status": "actualitzada avui"
@@ -167,7 +167,7 @@
       "relative_humidity_inverse": {
         "value": "25 %",
         "source": "Meteocat XEMA · Y4 Alinyà",
-        "date_utc": "2026-08-19T15:00:00Z",
+        "date_utc": "2026-08-20T15:00:00Z",
         "weight_pct": 10,
         "quality": "provisional",
         "update_status": "actualitzada avui"
@@ -218,7 +218,7 @@
     "methodology": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
     "sources": {
       "meteocat": {
-        "generated_at_utc": "2026-08-19T16:00:21.442185+00:00",
+        "generated_at_utc": "2026-08-20T16:03:12.918686+00:00",
         "connector": "meteocat_xema_socrata",
         "responsibility": "download_and_normalize_only",
         "source": "Dades meteorològiques de la XEMA",
@@ -226,9 +226,9 @@
         "official_dataset": "https://analisi.transparenciacatalunya.cat/d/nzvn-apee",
         "station_code": "Y4",
         "station_name": "Alinyà",
-        "records": 4953,
-        "first_observation_utc": "2026-07-15T16:30:00Z",
-        "last_observation_utc": "2026-08-19T15:00:00Z",
+        "records": 5001,
+        "first_observation_utc": "2026-07-16T16:30:00Z",
+        "last_observation_utc": "2026-08-20T15:00:00Z",
         "variables": {
           "air_temperature_c": "32",
           "wind_speed_ms": "30",
@@ -243,8 +243,8 @@
         "output_csv": "projectes/Alinya/raw/meteocat_xema/Y4_observations.csv"
       },
       "meteocat_wind": {
-        "generated_at_utc": "2026-08-19T16:00:05Z",
-        "latest_catalog_check_utc": "2026-08-19T16:00:05Z",
+        "generated_at_utc": "2026-08-20T16:02:55Z",
+        "latest_catalog_check_utc": "2026-08-20T16:02:55Z",
         "connector": "meteocat_xema_socrata_nearest_wind",
         "responsibility": "download_and_normalize_only",
         "source": "Dades meteorològiques de la XEMA",
@@ -267,9 +267,9 @@
           "wind_gust_ms": "50",
           "wind_gust_direction_deg": "51"
         },
-        "records": 6604,
-        "first_observation_utc": "2026-07-15T16:30:00Z",
-        "last_observation_utc": "2026-08-19T15:00:00Z",
+        "records": 6668,
+        "first_observation_utc": "2026-07-16T16:30:00Z",
+        "last_observation_utc": "2026-08-20T15:00:00Z",
         "connector_status": "verified",
         "limitation": "Observació puntual a Organyà, 9,2 km de Y4; no és vent mesurat dins la Muntanya d'Alinyà ni una superfície de vent.",
         "output_csv": "projectes/Alinya/raw/meteocat_xema/CJ_wind_observations.csv"
@@ -326,7 +326,7 @@
         }
       },
       "landsat": {
-        "generated_at_utc": "2026-08-19T16:02:14.816509+00:00",
+        "generated_at_utc": "2026-08-20T16:04:46.618764+00:00",
         "connector": "landsat_usgs_c2_l2_summer_composite",
         "responsibility": "download_and_normalize_only",
         "scope": "Muntanya d'Alinyà",
@@ -540,8 +540,8 @@
         "source_metadata": "projectes/Alinya/metadata/landsat_connector.json"
       },
       "forestdrought": {
-        "generated_at_utc": "2026-08-19T16:00:05Z",
-        "latest_catalog_check_utc": "2026-08-19T16:00:05Z",
+        "generated_at_utc": "2026-08-20T16:02:55Z",
+        "latest_catalog_check_utc": "2026-08-20T16:02:55Z",
         "connector": "creaf_forestdrought_daily_modelled_forests",
         "responsibility": "discover_download_subset_and_normalize_only",
         "scope": "Muntanya d'Alinyà",
@@ -550,10 +550,10 @@
         "provider_role": "modelled forest drought and fire-potential data provider",
         "application_url": "https://laboratoriforestal.creaf.cat/forestdrought_app/",
         "repository_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/",
-        "source_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/20260814.gpkg",
+        "source_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/20260815.gpkg",
         "service_type": "public HTTPS GeoPackage repository",
-        "model_date": "2026-08-14",
-        "data_at_utc": "2026-08-14T00:00:00Z",
+        "model_date": "2026-08-15",
+        "data_at_utc": "2026-08-15T00:00:00Z",
         "crs": "EPSG:25830",
         "cell_size_m": 500,
         "geometry_type": "forest grid cell centre points",
