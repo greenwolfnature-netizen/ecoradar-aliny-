@@ -44,11 +44,42 @@ Pesos:
 - pendent: 3 %;
 - orientació de solana: 2 %.
 
-És exactament la mateixa fórmula i els mateixos pesos que la lectura actual de
+Són els pesos base de la fórmula compartida amb la lectura actual de
 l’EcoRadar Urbà. La concurrència territorial no forma part d’aquest índex; es
-manté només com a lectura territorial separada. Si una variable no està
-disponible, el seu pes no es converteix en zero: es renormalitzen els pesos
-realment disponibles i la cel·la queda marcada com a incompleta.
+manté només com a lectura territorial separada. En cada execució, el pes base
+d’una variable dinàmica es multiplica pel seu factor de frescor. Després es
+renormalitzen els pesos efectius temporalment elegibles i espacialment
+disponibles a cada cel·la. Una dada absent o descartada mai es converteix en
+zero i, per tant, no pot abaixar artificialment el perill.
+
+## Frescor temporal aplicada al càlcul
+
+| Variable | Tipus | Pes complet | Pes zero / només context | Tractament intermedi |
+| --- | --- | --- | --- | --- |
+| Vent i ratxa XEMA | dinàmica | fins a 3 h | a partir de 24 h | reducció lineal |
+| Humitat relativa XEMA | dinàmica | fins a 3 h | a partir de 24 h | reducció lineal |
+| ForestDrought CREAF | dinàmica | fins a 72 h | a partir de 240 h (10 dies) | reducció lineal |
+| NDMI Sentinel-2 | dinàmica | fins a 240 h (10 dies) | a partir de 720 h (30 dies) | reducció lineal |
+| LST Landsat/ECOSTRESS | dinàmica | fins a 192 h (8 dies) | a partir de 576 h (24 dies) | reducció lineal |
+| Perill estructural oficial | estructural | sempre vigent fins a nova edició | no caduca diàriament | pes complet |
+| Continuïtat vegetal CLMS | estructural | sempre vigent fins a nova edició | no caduca diàriament | pes complet |
+| Pendent i orientació ICGC | estructurals | sempre vigents fins a nova edició | no caduquen diàriament | pes complet |
+
+Els terminis responen a la naturalesa i cadència de cada font: XEMA és
+subdiària; ForestDrought és un model diari amb possible retard; Sentinel-2 té
+revisita freqüent però pot quedar impedit pels núvols; Landsat té una revisita
+combinada aproximada de vuit dies i també depèn de la qualitat de l’escena. El
+factor és 1 dins el termini de pes complet, disminueix linealment fins a 0 i
+queda exclòs en superar el termini màxim. El valor antic continua visible al
+popup, amb data i estat «massa antiga», exclusivament com a context.
+
+La meteorologia que sosté una lectura «d’avui» és obligatòria: si tant el vent
+com la humitat superen el límit màxim o no estan disponibles, el procés no
+publica un índex nou i conserva l’últim producte vàlid amb la seva data. La
+temperatura de l’aire i la precipitació es classifiquen com a context actual
+fins a 3 h, recent entre 3 i 24 h, i massa antic després de 24 h. El Pla Alfa,
+que no puntua, es marca actual fins a 18 h, recent fins a 72 h i massa antic a
+partir d’aquest moment.
 
 La lectura operativa que acompanya el mapa incorpora també, sense alterar els
 pesos, la temperatura de l'aire, la pluja de les darreres 24 hores, els

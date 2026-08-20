@@ -106,18 +106,88 @@ def _confidence_label(value: float) -> str:
     return "baixa"
 
 
-def _freshness(reference: str | None, full_days: float, zero_days: float, now: datetime) -> float:
+def _parse_reference(reference: str | None) -> datetime | None:
     if not reference:
-        return 0.0
+        return None
     instant = datetime.fromisoformat(reference.replace("Z", "+00:00"))
     if instant.tzinfo is None:
         instant = instant.replace(tzinfo=timezone.utc)
-    age_days = max(0.0, (now - instant).total_seconds() / 86400)
-    if age_days <= full_days:
-        return 1.0
-    if age_days >= zero_days:
-        return 0.0
-    return 1 - (age_days - full_days) / (zero_days - full_days)
+    return instant.astimezone(timezone.utc)
+
+
+def _freshness_assessment(reference: str | None, policy: dict, now: datetime) -> dict:
+    """Return the temporal eligibility of one component without altering its value."""
+    kind = policy.get("kind")
+    if kind == "structural":
+        return {
+            "kind": "structural",
+            "status": "estructural",
+            "status_label": "estructural · vigent",
+            "age_hours": None,
+            "factor": 1.0,
+            "full_weight_max_age_hours": None,
+            "exclude_after_hours": None,
+            "rationale": policy.get("rationale"),
+        }
+    if kind != "dynamic":
+        raise RuntimeError(f"Unknown Alinyà freshness kind: {kind!r}")
+    instant = _parse_reference(reference)
+    full_hours = float(policy["full_weight_max_age_hours"])
+    zero_hours = float(policy["exclude_after_hours"])
+    if zero_hours <= full_hours:
+        raise RuntimeError("Freshness exclusion threshold must exceed the full-weight threshold.")
+    if instant is None:
+        age_hours = None
+        factor = 0.0
+        status = "too_old"
+        status_label = "dada no disponible · pes exclòs"
+    else:
+        age_hours = max(0.0, (now - instant).total_seconds() / 3600)
+        if age_hours <= full_hours:
+            factor = 1.0
+            status = "current"
+            status_label = "actual · pes complet"
+        elif age_hours >= zero_hours:
+            factor = 0.0
+            status = "too_old"
+            status_label = "massa antiga · pes exclòs"
+        else:
+            factor = 1 - (age_hours - full_hours) / (zero_hours - full_hours)
+            status = "recent"
+            status_label = f"recent · pes reduït al {factor * 100:.0f} %"
+    return {
+        "kind": "dynamic",
+        "status": status,
+        "status_label": status_label,
+        "age_hours": None if age_hours is None else round(age_hours, 1),
+        "factor": round(float(factor), 6),
+        "full_weight_max_age_hours": full_hours,
+        "exclude_after_hours": zero_hours,
+        "rationale": policy.get("rationale"),
+    }
+
+
+def _context_freshness(reference: str | None, policy: dict, now: datetime) -> dict:
+    """Classify non-scored operational context with explicit timestamps."""
+    instant = _parse_reference(reference)
+    current_hours = float(policy["current_max_age_hours"])
+    too_old_hours = float(policy["too_old_after_hours"])
+    age_hours = None if instant is None else max(0.0, (now - instant).total_seconds() / 3600)
+    if age_hours is None:
+        status, label = "unavailable", "dada no disponible"
+    elif age_hours <= current_hours:
+        status, label = "current", "actual"
+    elif age_hours < too_old_hours:
+        status, label = "recent", "recent"
+    else:
+        status, label = "too_old", "massa antiga"
+    return {
+        "status": status,
+        "status_label": label,
+        "age_hours": None if age_hours is None else round(age_hours, 1),
+        "current_max_age_hours": current_hours,
+        "too_old_after_hours": too_old_hours,
+    }
 
 
 def _orientation(degrees: float) -> tuple[str, str]:
@@ -368,40 +438,6 @@ def calculate() -> dict:
         "note": "No hi ha cap última dada oficial Pla Alfa disponible localment.",
     }
 
-    components = {
-        "creaf_fire_potential": creaf_fire_potential,
-        "structural": structural,
-        "ndmi_dryness": dryness,
-        "surface_temperature": temperature,
-        "vegetation_continuity": vegetation,
-        "wind": wind,
-        "relative_humidity_inverse": humidity,
-        "slope": slope,
-        "aspect": aspect,
-    }
-    denominator = np.zeros(shape, dtype="float32")
-    numerator = np.zeros(shape, dtype="float32")
-    available: dict[str, np.ndarray] = {}
-    for key, values in components.items():
-        present = study_mask & np.isfinite(values)
-        available[key] = present
-        denominator[present] += float(weights[key])
-        numerator[present] += float(weights[key]) * values[present]
-    valid = study_mask & (denominator > 0)
-    final = np.full(shape, np.nan, dtype="float32")
-    np.divide(numerator, denominator, out=final, where=valid)
-
-    contributions: dict[str, np.ndarray] = {}
-    for key, values in components.items():
-        contribution = np.full(shape, np.nan, dtype="float32")
-        np.divide(
-            values * float(weights[key]),
-            denominator,
-            out=contribution,
-            where=available[key] & (denominator > 0),
-        )
-        contributions[key] = contribution
-
     sentinel_metadata = _read_json(SENTINEL_METADATA)
     landsat_metadata = _read_json(LANDSAT_METADATA)
     creaf_metadata = _read_json(CREAF_META)
@@ -421,16 +457,87 @@ def calculate() -> dict:
         "slope": "2023-12-31T00:00:00Z",
         "aspect": "2023-12-31T00:00:00Z",
     }
+    freshness_policy = config.get("alinya_freshness_policy") or {}
+    missing_policies = sorted(set(weights) - set(freshness_policy))
+    if missing_policies:
+        raise RuntimeError(f"Missing Alinyà freshness policies: {', '.join(missing_policies)}")
+    freshness = {
+        key: _freshness_assessment(references[key], freshness_policy[key], now)
+        for key in weights
+    }
+    effective_weights = {
+        key: float(weights[key]) * float(freshness[key]["factor"])
+        for key in weights
+    }
+    if effective_weights["wind"] + effective_weights["relative_humidity_inverse"] <= 0:
+        raise RuntimeError(
+            "No current or recent XEMA wind/humidity is available; keep the last valid current-fire product."
+        )
+    eligible_weight = sum(effective_weights.values())
+    if eligible_weight <= 0:
+        raise RuntimeError("No temporally eligible component remains for current fire danger.")
+
+    context_policy = config["alinya_context_freshness"]
+    meteo_reference = max(
+        (
+            item.get("timestamp_utc")
+            for item in weather.values()
+            if isinstance(item, dict) and item.get("timestamp_utc")
+        ),
+        default=None,
+    )
+    meteorology_freshness = _context_freshness(
+        meteo_reference, context_policy["meteorology"], now
+    )
+    precipitation_context["freshness"] = _context_freshness(
+        precipitation_context.get("data_at_utc"), context_policy["meteorology"], now
+    )
+    pla_alfa = dict(pla_alfa)
+    pla_alfa["freshness"] = _context_freshness(
+        pla_alfa.get("data_at_utc"), context_policy["pla_alfa"], now
+    )
+
+    components = {
+        "creaf_fire_potential": creaf_fire_potential,
+        "structural": structural,
+        "ndmi_dryness": dryness,
+        "surface_temperature": temperature,
+        "vegetation_continuity": vegetation,
+        "wind": wind,
+        "relative_humidity_inverse": humidity,
+        "slope": slope,
+        "aspect": aspect,
+    }
+    denominator = np.zeros(shape, dtype="float32")
+    numerator = np.zeros(shape, dtype="float32")
+    available: dict[str, np.ndarray] = {}
+    for key, values in components.items():
+        present = study_mask & np.isfinite(values) & (effective_weights[key] > 0)
+        available[key] = present
+        denominator[present] += effective_weights[key]
+        numerator[present] += effective_weights[key] * values[present]
+    valid = study_mask & (denominator > 0)
+    final = np.full(shape, np.nan, dtype="float32")
+    np.divide(numerator, denominator, out=final, where=valid)
+
+    contributions: dict[str, np.ndarray] = {}
+    for key, values in components.items():
+        contribution = np.full(shape, np.nan, dtype="float32")
+        np.divide(
+            values * effective_weights[key],
+            denominator,
+            out=contribution,
+            where=available[key] & (denominator > 0),
+        )
+        contributions[key] = contribution
     quality = {key: 1.0 for key in weights}
     for key, weather_key in (("wind", "wind_speed_ms"), ("relative_humidity_inverse", "relative_humidity_pct")):
         code = weather.get(weather_key, {}).get("validation_code")
         quality[key] = 1.0 if code == "V" else 0.8 if code in ("", "T") else 0.0
     confidence_numerator = np.zeros(shape, dtype="float32")
     for key in weights:
-        reference = references[key]
-        limits = config["freshness_days"][key]
-        freshness = _freshness(reference, float(limits["full"]), float(limits["zero"]), now) if reference else 0.0
-        reliability = freshness * float(config["spatial_representativeness"][key]) * quality[key]
+        temporal_factor = float(freshness[key]["factor"])
+        reliability = temporal_factor * float(config["spatial_representativeness"][key]) * quality[key]
         confidence_numerator[available[key]] += float(weights[key]) * reliability
     confidence = np.where(study_mask, confidence_numerator * 100, np.nan)
 
@@ -485,8 +592,15 @@ def calculate() -> dict:
             "updated_at_utc": now.isoformat().replace("+00:00", "Z"),
             "confidence_pct": round(float(confidence[row, col]), 1),
             "confidence": _confidence_label(float(confidence[row, col])),
-            "complete": bool(math.isclose(float(denominator[row, col]), 1.0, abs_tol=1e-6)),
-            "available_weight_pct": round(float(denominator[row, col]) * 100, 1),
+            "complete": bool(
+                math.isclose(
+                    float(denominator[row, col]), eligible_weight, abs_tol=1e-6
+                )
+            ),
+            "available_weight_pct": round(
+                float(denominator[row, col]) / eligible_weight * 100, 1
+            ),
+            "eligible_base_weight_pct": round(eligible_weight * 100, 1),
             "area_ha": round(area_ha, 4),
             "raw": {
                 "official_structural_1_10": round(float(official_raw[row, col]), 2) if official_valid[row, col] else None,
@@ -515,6 +629,10 @@ def calculate() -> dict:
             "dominant_variables": dominant,
             "dominant_labels": [LABELS[key] for key in dominant],
             "source_dates": references,
+            "source_freshness": freshness,
+            "temporally_excluded_variables": [
+                key for key, item in freshness.items() if item["factor"] <= 0
+            ],
         }
         features.append(
             {
@@ -606,7 +724,15 @@ def calculate() -> dict:
             validation_code = weather.get("relative_humidity_pct", {}).get("validation_code", "")
         item.update(
             date_utc=reference,
-            weight_pct=round(float(weights[key]) * 100),
+            weight_pct=round(float(effective_weights[key]) * 100, 1),
+            base_weight_pct=round(float(weights[key]) * 100, 1),
+            freshness_factor_pct=round(float(freshness[key]["factor"]) * 100, 1),
+            temporal_status=freshness[key]["status"],
+            temporal_status_label=freshness[key]["status_label"],
+            age_hours=freshness[key]["age_hours"],
+            freshness_kind=freshness[key]["kind"],
+            full_weight_max_age_hours=freshness[key]["full_weight_max_age_hours"],
+            exclude_after_hours=freshness[key]["exclude_after_hours"],
             quality=(
                 "no disponible"
                 if reference is None
@@ -614,13 +740,7 @@ def calculate() -> dict:
                 if key in ("wind", "relative_humidity_inverse") and validation_code != "V"
                 else "verificada"
             ),
-            update_status=(
-                "dada no disponible"
-                if reference is None
-                else "actualitzada avui"
-                if reference[:10] == now.date().isoformat()
-                else "última dada vàlida"
-            ),
+            update_status=freshness[key]["status_label"],
         )
 
     latest_update = max(reference for reference in references.values() if reference)
@@ -661,6 +781,10 @@ def calculate() -> dict:
             "latest_update_utc": latest_update,
             "confidence_pct": round(global_confidence, 1),
             "confidence": _confidence_label(global_confidence),
+            "eligible_base_weight_pct": round(eligible_weight * 100, 1),
+            "temporally_excluded_variables": [
+                key for key, item in freshness.items() if item["factor"] <= 0
+            ],
         },
         "weather": weather,
         "meteorology_context": {
@@ -670,17 +794,20 @@ def calculate() -> dict:
             "wind_gust": weather.get("wind_gust_ms"),
             "precipitation_latest_period": weather.get("precipitation_mm"),
             "precipitation_accumulated": precipitation_context,
+            "freshness": meteorology_freshness,
             "spatial_scope_note": "Y4 aporta temperatura, humitat i pluja; el vent i les ratxes provenen de CJ Organyà, a 9,2 km. Són contextos puntuals aplicats a l'àmbit i no una malla de 100 m.",
         },
         "pla_alfa": pla_alfa,
         "variables_today": variable_status,
         "normalization": {
-            "method": "P5-P95 dins Alinyà per LST, NDMI i pendent; P5-P95 sobre 35 dies XEMA; variables absents renormalitzades, mai convertides en zero.",
+            "method": "P5-P95 dins Alinyà per LST, NDMI i pendent; P5-P95 sobre 35 dies XEMA. El pes base de cada variable dinàmica es multiplica pel seu factor de frescor i els pesos temporalment elegibles i espacialment disponibles es renormalitzen; una dada absent o massa antiga mai es converteix en zero.",
             "ndmi_p10_p90": [round(ndmi_p10, 4), round(ndmi_p90, 4)],
             "lst_c_p10_p90": [round(temp_p10, 2), round(temp_p90, 2)],
             "slope_deg_p05_p95": [round(slope_low, 2), round(slope_high, 2)],
         },
         "weights": weights,
+        "effective_weights": effective_weights,
+        "freshness_policy": freshness_policy,
         "methodology": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
         "sources": {
             "meteocat": _read_json(METEO_METADATA),
@@ -697,6 +824,7 @@ def calculate() -> dict:
             "El Pla Alfa es mostra en paral·lel com a nivell operatiu municipal oficial i no s'afegeix numèricament a l'índex EcoRadar, per evitar doble recompte i falsa precisió.",
             "La humitat XEMA Y4 i el vent XEMA CJ Organyà són observacions puntuals; CJ és a 9,2 km de Y4 i cap estació representa cada vessant d'un àmbit de 5.464 ha.",
             "Una variable XEMA absent es marca com a no disponible i el pes es renormalitza; no es converteix en zero.",
+            "Les variables dinàmiques massa antigues s'exclouen de l'índex actual i només es conserven com a context; dins la franja recent el seu pes es redueix linealment segons la política documentada.",
             "La temperatura superficial no és temperatura de l'aire i l'NDMI és un proxy relatiu, no humitat fina del combustible.",
             "ForestDrought és un model forestal de 500 m; no és una observació, una ignició ni una alerta oficial.",
             "La continuïtat vegetal HRL és horitzontal i no quantifica càrrega, espècie ni estructura vertical del combustible.",

@@ -78,6 +78,64 @@
       "zero": 5475
     }
   },
+  "alinya_freshness_policy": {
+    "creaf_fire_potential": {
+      "kind": "dynamic",
+      "full_weight_max_age_hours": 72,
+      "exclude_after_hours": 240,
+      "rationale": "ForestDrought és un model de publicació diària; després de 3 dies deixa de tenir pes complet i als 10 dies només es conserva com a context."
+    },
+    "structural": {
+      "kind": "structural",
+      "rationale": "El mapa oficial de perill bàsic caracteritza vulnerabilitat territorial i no representa meteorologia del dia."
+    },
+    "ndmi_dryness": {
+      "kind": "dynamic",
+      "full_weight_max_age_hours": 240,
+      "exclude_after_hours": 720,
+      "rationale": "Sentinel-2 pot oferir revisita aproximada de 5 dies, condicionada per núvols; més de 30 dies no descriu l'estat hídric actual."
+    },
+    "surface_temperature": {
+      "kind": "dynamic",
+      "full_weight_max_age_hours": 192,
+      "exclude_after_hours": 576,
+      "rationale": "Landsat 8/9 aporta una oportunitat combinada aproximada de 8 dies; entre 8 i 24 dies el pes disminueix i després s'exclou."
+    },
+    "vegetation_continuity": {
+      "kind": "structural",
+      "rationale": "La continuïtat horitzontal de coberta és una característica territorial de canvi lent."
+    },
+    "wind": {
+      "kind": "dynamic",
+      "full_weight_max_age_hours": 3,
+      "exclude_after_hours": 24,
+      "rationale": "Vent i ratxes són meteorologia operativa; després de 3 hores el pes disminueix i a les 24 hores s'exclou."
+    },
+    "relative_humidity_inverse": {
+      "kind": "dynamic",
+      "full_weight_max_age_hours": 3,
+      "exclude_after_hours": 24,
+      "rationale": "La humitat relativa és meteorologia operativa; després de 3 hores el pes disminueix i a les 24 hores s'exclou."
+    },
+    "slope": {
+      "kind": "structural",
+      "rationale": "El pendent deriva del relleu i no caduca com una variable meteorològica."
+    },
+    "aspect": {
+      "kind": "structural",
+      "rationale": "L'orientació deriva del relleu i no caduca com una variable meteorològica."
+    }
+  },
+  "alinya_context_freshness": {
+    "meteorology": {
+      "current_max_age_hours": 3,
+      "too_old_after_hours": 24
+    },
+    "pla_alfa": {
+      "current_max_age_hours": 18,
+      "too_old_after_hours": 72
+    }
+  },
   "spatial_representativeness": {
     "creaf_fire_potential": 0.85,
     "structural": 1.0,
