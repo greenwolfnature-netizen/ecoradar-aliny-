@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-08-20T21:18:16Z",
-  "latest_catalog_check_utc": "2026-08-20T21:18:16Z",
+  "generated_at_utc": "2026-08-20T21:25:19Z",
+  "latest_catalog_check_utc": "2026-08-20T21:25:19Z",
   "connector": "meteocat_xema_socrata_nearest_wind",
   "responsibility": "download_and_normalize_only",
   "source": "Dades meteorològiques de la XEMA",
