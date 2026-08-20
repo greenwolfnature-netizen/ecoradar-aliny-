@@ -801,6 +801,15 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-exec-grid {{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }}
     #ecoradar-alinya .eu-exec-list {{ margin:0; padding-left:18px; }}
     #ecoradar-alinya .eu-exec-list li {{ margin:7px 0; }}
+    #ecoradar-alinya .eu-fire-executive {{ text-align:center; }}
+    #ecoradar-alinya .eu-fire-executive .eu-facts {{ max-width:1120px; margin:0 auto; }}
+    #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; padding:10px 12px; }}
+    #ecoradar-alinya .eu-fire-executive .eu-fact span,
+    #ecoradar-alinya .eu-fire-executive .eu-fact strong {{ text-align:center; overflow-wrap:anywhere; }}
+    #ecoradar-alinya .eu-fire-executive .eu-source {{ max-width:1120px; margin:12px auto 0; text-align:center; }}
+    #ecoradar-alinya .eu-evidence-table td:first-child {{ min-width:150px; }}
+    #ecoradar-alinya .eu-evidence-table td:nth-child(2) {{ min-width:130px; }}
+    #ecoradar-alinya .eu-evidence-table .eu-reading-state {{ white-space:normal; }}
     #ecoradar-alinya .eu-technical-intro {{ padding:18px max(20px,calc((100% - 1160px)/2)); border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:#eef1ea; }}
     #ecoradar-alinya .eu-technical-intro strong {{ color:var(--blue); font-size:12px; }}
     #ecoradar-alinya .eu-technical-intro span {{ margin-left:8px; color:#53636d; font-size:10px; }}
@@ -808,7 +817,7 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-fire-chapter {{ background:#f5f2eb; }}
     @media (max-width:1050px) {{ #ecoradar-alinya .eu-grid {{ grid-template-columns:230px minmax(450px,1fr); }} #ecoradar-alinya .eu-column.eu-right {{ grid-column:1/-1; display:grid; grid-template-columns:repeat(3,1fr); }} #ecoradar-alinya .eu-foot {{ grid-column:1/-1; }} }}
     @media (max-width:900px) {{ #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} }}
-    @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ display:flex; }} #ecoradar-alinya .eu-map-panel, #ecoradar-alinya svg {{ min-height:520px; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} }}
+    @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ display:flex; }} #ecoradar-alinya .eu-map-panel, #ecoradar-alinya svg {{ min-height:520px; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:1fr; gap:4px; }} }}
     @media print {{
       @page {{ size:A4 landscape; margin:10mm; }}
       body {{ background:#fff!important; }}
@@ -856,7 +865,7 @@ def render_index(data: dict) -> str:
       <article class="eu-report-card orange"><span class="eu-big" id="report-open"></span><h3>Prats i herbassars</h3><p>Peces escasses que poden mantenir ecotons, recursos florals i discontinuïtat funcional.</p></article>
       <article class="eu-report-card blue"><span class="eu-big" id="report-hic"></span><h3>Hàbitats HIC</h3><p>Responsabilitat de conservació que ha de filtrar qualsevol actuació transformadora.</p></article>
     </div>
-    <article class="eu-report-card orange" style="margin-top:12px" aria-label="Situació actual del perill d'incendi">
+    <article class="eu-report-card orange eu-fire-executive" style="margin-top:12px" aria-label="Situació actual del perill d'incendi">
       <h3>Situació d’incendi avui</h3>
       <div class="eu-facts">
         <div class="eu-fact"><span>Perill EcoRadar avui</span><strong id="report-fire-today"></strong></div>
@@ -1025,11 +1034,16 @@ def render_index(data: dict) -> str:
       <p class="eu-subtle">Document postincendi · fitxes 10–14</p>
       <h2>Del precedent històric a una decisió professional, selectiva i verificable</h2>
       <p class="eu-subtle">MEMÒRIA DEL FOC · DIAGNOSI ECOLÒGICA POSTFOC · MOSAIC, CONCURRÈNCIA I DECISIÓ</p>
-      <p class="eu-lead">Els dos perímetres oficials de 2000 i 2012 sumen 17,4 ha dins l’àmbit. La superfície és reduïda, però aporta casos territorials reals per examinar coberta, relleu, orientació i accessibilitat. No descriu severitat, combustible actual ni resposta postfoc.</p>
+      <p class="eu-lead">Els dos perímetres oficials de 2000 i 2012 sumen 17,4 ha dins l’àmbit i aporten antecedents territorials per examinar coberta, relleu, orientació i accessibilitat. Aquesta memòria històrica es contrasta amb la vulnerabilitat estructural i amb la lectura actualitzada diàriament de meteorologia, sequera i estat de la vegetació. Són tres plans complementaris: cap d’ells, per separat, descriu severitat, probabilitat d’ignició, combustible real o resposta postfoc.</p>
       <div class="eu-card-grid eu-two">
         <article class="eu-report-card"><h3>Indicadors clau</h3><div class="eu-facts"><div class="eu-fact"><span>Àmbit analitzat</span><strong id="eu-area-value"></strong></div><div class="eu-fact"><span>Incendis oficials dins l'àmbit</span><strong id="eu-fires-value"></strong></div><div class="eu-fact"><span>Superfície cremada</span><strong id="eu-burned-value"></strong></div><div class="eu-fact"><span>Índex integrat alt / molt alt</span><strong id="eu-concurrence-value"></strong></div><div class="eu-fact"><span>Bosc + matollar</span><strong id="eu-forest-value"></strong></div><div class="eu-fact"><span>Prats + conreus</span><strong id="eu-open-value"></strong></div></div></article>
-        <article class="eu-report-card orange"><h3>Missatge clau</h3><p><strong>El senyal principal no és la superfície cremada, sinó la coincidència entre continuïtat bosc-matollar, accessibilitat i condicions topogràfiques semblants als focs històrics.</strong></p><h3 style="margin-top:14px">Límit metodològic</h3><p>No és un mapa oficial de probabilitat d'incendi. És una lectura de concurrència territorial amb dades EcoRadar ja processades.</p><p>L’índex integrat combina el perill estructural oficial 2024 amb temperatura Landsat estival, NDMI, tipus de coberta i concurrència territorial. Per convertir-lo en risc operatiu encara calen meteorologia diària, Pla Alfa i combustible i humitat fina validats al camp.</p></article>
+        <article class="eu-report-card orange"><h3>Missatge clau</h3><p><strong>El senyal estructural no és la superfície cremada, sinó la coincidència entre continuïtat bosc-matollar, accessibilitat i condicions topogràfiques semblants als focs històrics.</strong></p><p>La situació operativa del dia es llegeix separadament amb l’índex EcoRadar actual, meteorologia XEMA, acumulació de precipitació, ForestDrought, observacions satel·litàries amb control de frescor i Pla Alfa oficial com a context no numèric.</p><h3 style="margin-top:14px">Límit metodològic</h3><p>Ni el mapa estructural ni l’índex actual són una probabilitat oficial d’incendi. La decisió de tractament continua requerint combustible i humitat fina validats al camp, exposició, valors ecològics afectats i viabilitat de manteniment.</p></article>
       </div>
+      <div class="eu-card-grid eu-two" style="margin-top:12px">
+        <article class="eu-report-card green"><h3>Situació operativa actualitzada</h3><div class="eu-facts"><div class="eu-fact"><span>Perill EcoRadar avui</span><strong id="report-fire-chapter-today"></strong></div><div class="eu-fact"><span>Pla Alfa oficial</span><strong id="report-fire-chapter-pla"></strong></div><div class="eu-fact"><span>Meteorologia</span><strong id="report-fire-chapter-weather"></strong></div><div class="eu-fact"><span>Sequera acumulada</span><strong id="report-fire-chapter-drought"></strong></div><div class="eu-fact"><span>Tendència</span><strong id="report-fire-chapter-trend"></strong></div><div class="eu-fact"><span>Confiança</span><strong id="report-fire-chapter-confidence"></strong></div><div class="eu-fact"><span>Darrera comprovació</span><strong id="report-fire-chapter-update"></strong></div></div></article>
+        <article class="eu-report-card blue"><h3>Què determina la lectura d’avui?</h3><p id="report-fire-chapter-dominants"></p><p id="report-fire-chapter-freshness"></p><p><strong>Interpretació de gestió:</strong> el valor diari serveix per graduar la urgència de comprovació, vigilància i preparació operativa. No converteix automàticament una cel·la en zona d’actuació silvícola: aquesta decisió ha de creuar HIC, biodiversitat, aigua, connectivitat, accessibilitat, combustible real i objectiu ecològic.</p></article>
+      </div>
+      <details class="eu-detail"><summary>Traçabilitat de totes les variables del perill d’incendi avui</summary><div><div class="eu-fire-table-wrap"><table class="eu-fire-table eu-evidence-table"><thead><tr><th>Variable</th><th>Valor</th><th>Data real</th><th>Pes efectiu</th><th>Estat temporal</th><th>Funció en la diagnosi</th></tr></thead><tbody id="report-fire-chapter-variables"></tbody></table></div><p>Temperatura de l’aire, precipitació recent i acumulada i Pla Alfa completen el context operatiu amb data pròpia; el Pla Alfa no entra numèricament a l’índex. Les dades dinàmiques massa antigues es mantenen visibles com a context, però no poden aportar el seu pes complet.</p></div></details>
       <article class="eu-report-card" style="margin-top:12px"><h3>Incendis històrics</h3><p><strong>Històric oficial:</strong> es mostren només els dos perímetres consolidats dins la Muntanya d’Alinyà: 2000 i 2012.</p><p><strong>Lectura territorial:</strong> la concurrència compara les condicions del mosaic, pendent, orientació, altitud i accessibilitat amb aquests perímetres històrics.</p><p><strong>Exclosos del mapa:</strong> registres operatius recents sense perímetre i deteccions satel·litàries puntuals. No s’utilitzen aquí per no barrejar context operatiu amb històric consolidat.</p><p class="eu-source">Font de geometria: Generalitat WFS VEGETACIO:VEGETACIO_INCENDIS, capa local processada al projecte. Consulta 17.07.2026.</p></article>
       <div class="eu-card-grid">
         <article class="eu-report-card green"><span class="eu-big">10</span><h3>Memòria del foc</h3><p>El senyal rellevant no és només la superfície cremada, sinó la coincidència local entre massa forestal, contacte bosc-matollar, relleu, accessos i discontinuïtats.</p></article>
@@ -1081,6 +1095,12 @@ def render_index(data: dict) -> str:
         <article class="eu-report-card blue"><h3>Sèries territorials</h3><p>Cobertes i espais oberts; vigor i humitat estival; perímetres oficials de foc; accessibilitat i actualitzacions cartogràfiques.</p></article>
         <article class="eu-report-card orange"><h3>Governança</h3><p>Responsable per indicador, data i versió de font, llindars acordats, registre d’actuacions i revisió anual o postpertorbació.</p></article>
       </div>
+      <h3 style="margin:22px 0 8px;color:#163f35">Traçabilitat de les lectures variables actualitzades</h3>
+      <p class="eu-lead">Les lectures variables no redefineixen cada dia els valors estructurals del territori. Serveixen per ajustar la situació operativa, detectar canvis i decidir quan cal validar o accelerar una actuació. La taula mostra la dada real disponible, la seva data i la funció concreta que té en la decisió.</p>
+      <div class="eu-fire-table-wrap"><table class="eu-data-table eu-evidence-table"><thead><tr><th>Lectura</th><th>Valor i estat</th><th>Data real</th><th>Com entra en la diagnosi i la gestió</th></tr></thead><tbody id="eu-daily-decision-evidence"></tbody></table></div>
+      <h3 style="margin:22px 0 8px;color:#163f35">Traçabilitat dels indicadors Radar</h3>
+      <p class="eu-lead">Els dotze indicadors Radar sintetitzen dimensions diferents i no són dotze ordres d’actuació. La prioritat s’estableix quan diversos indicadors coincideixen, la font és adequada i el camp confirma una necessitat funcional.</p>
+      <div class="eu-fire-table-wrap"><table class="eu-data-table eu-evidence-table"><thead><tr><th>Indicador</th><th>Valor, estat i confiança</th><th>Ús en la decisió</th></tr></thead><tbody id="eu-core-decision-evidence"></tbody></table></div>
     </section>
 
     <section class="eu-report-section" id="fonts">
@@ -1378,6 +1398,51 @@ def render_index(data: dict) -> str:
     slope:'Pendent',
     aspect:'Exposició de solana'
   }};
+  const fireVariableRoles = {{
+    creaf_fire_potential:'Estima l’estrès i el potencial de foc del bosc modelitzat; modula la situació acumulada amb la frescor real del model.',
+    structural:'Caracteritza el perill territorial de base; orienta on validar combustible i exposició, però no descriu el dia actual.',
+    ndmi_dryness:'Aporta el contrast espacial d’humitat espectral quan l’escena és prou recent; si és antiga queda només com a context.',
+    surface_temperature:'Aporta el patró espacial de superfície calenta quan l’observació detallada és prou recent; no és temperatura de l’aire.',
+    vegetation_continuity:'Representa continuïtat horitzontal de la coberta; no quantifica càrrega ni estructura vertical del combustible.',
+    wind:'Representa el component meteorològic actual de propagació amb vent i ratxa XEMA; és context puntual, no una malla local.',
+    relative_humidity_inverse:'Representa la sequedat atmosfèrica actual observada a XEMA Y4; no equival a humitat fina del combustible.',
+    slope:'Caracteritza la propagació potencial associada al relleu i es manté com a factor estructural.',
+    aspect:'Caracteritza l’exposició relativa de solana i es manté com a factor estructural.'
+  }};
+  const dailyReadingOrder = ['air_temperature','relative_humidity','wind','wind_gust','precipitation','precipitation_7d','precipitation_30d','days_without_significant_rain','surface_temperature','ndmi','ndvi','albedo','terrain_shade','air_quality','thermal_comfort','pla_alfa','current_fire_danger'];
+  const dailyReadingRoles = {{
+    air_temperature:'Context meteorològic actual per interpretar calor i incendi; és una observació puntual i no una malla territorial.',
+    relative_humidity:'Entra en el perill d’incendi actual amb control de frescor i ajuda a graduar vigilància; no mesura humitat del combustible.',
+    wind:'Entra en el perill d’incendi actual juntament amb la ratxa; serveix per graduar la urgència operativa, amb la limitació de l’estació de context.',
+    wind_gust:'Complementa el vent sostingut en el component meteorològic del perill actual; no permet descriure cada vall o carena.',
+    precipitation:'Descriu la pluja recent i contextualitza l’assecament; no entra com un zero de risc ni substitueix la humitat del combustible.',
+    precipitation_7d:'Aporta antecedent humit de curt termini per interpretar sequera i disponibilitat de combustible fi.',
+    precipitation_30d:'Aporta antecedent acumulat mensual; serveix per contrastar tendència seca, no com a diagnòstic ecològic únic.',
+    days_without_significant_rain:'Indica persistència sense pluja significativa i ajuda a prioritzar comprovacions de camp de sequedat i aigua.',
+    surface_temperature:'Localitza patrons tèrmics de superfície i participa en perill actual o refugis només segons la frescor i resolució de l’escena.',
+    ndmi:'Informa d’humitat espectral relativa; participa en incendi o refugis només si la data és adequada i mai equival a humitat fina.',
+    ndvi:'Informa de vigor espectral i ajuda a interpretar vegetació i refugis; no mesura biodiversitat ni estat sanitari per si sol.',
+    albedo:'Descriu reflectància superficial i balanç radiatiu contextual; no justifica una actuació ecològica per si sol.',
+    terrain_shade:'Actualitza la posició de l’ombra topogràfica segons el dia i l’hora; ajuda a llegir exposició, però no incorpora arbres ni edificis.',
+    air_quality:'Aporta context ambiental per a ús públic i episodis atmosfèrics; la resolució modelitzada no permet decisions parcel·làries.',
+    thermal_comfort:'Sintetitza condicions meteorològiques per a persones i ús públic; no és un indicador de conservació d’hàbitats.',
+    pla_alfa:'Context operatiu oficial municipal que pot condicionar accés, vigilància i activitats; no entra numèricament a l’índex EcoRadar.',
+    current_fire_danger:'Síntesi diària per prioritzar comprovació i preparació; no ordena tractaments sense creuar valors ecològics i validació de combustible.'
+  }};
+  const coreDecisionRoles = {{
+    CORE_01:'Sustenta P2: conservar o recuperar mosaic funcional després de validar ús, trajectòria i qualitat dels espais oberts.',
+    CORE_02:'Filtre transversal de no-deteriorament per a P1–P5; la cartografia HIC no substitueix l’estat de conservació de camp.',
+    CORE_03:'Orienta seguiment de vigor i humitat, però la puntuació parcial i la data de l’escena impedeixen decidir una actuació per si sola.',
+    CORE_04:'Sustenta P1 i P3 com a cribratge de sectors potencialment frescos; exigeix permanència hídrica i validació microclimàtica.',
+    CORE_05:'Orienta on combinar calor, sequera, relleu i sensibilitat; no equival a impacte observat ni urgència automàtica.',
+    CORE_06:'Filtre de biodiversitat per a totes les prioritats; els registres públics documenten presències i buits, no abundància ni absència.',
+    CORE_07:'Sustenta P4 com a accessibilitat potencial; cal mesurar freqüentació i conflictes abans de restringir o ampliar l’ús.',
+    CORE_08:'Sustenta P2 i P3 per mantenir permeabilitat terrestre i hídrica, amb comprovació de barreres i funcionalitat real.',
+    CORE_09:'Sustenta P5 i el capítol 06; combina vulnerabilitat estructural amb la lectura diària, sense convertir-la en ordre de tractament.',
+    CORE_10:'Sustenta P3; la xarxa i les fonts orienten inventari, però permanència, qualitat i ús faunístic resten pendents de camp.',
+    CORE_11:'Orienta on verificar necessitat de restauració; un valor alt no justifica restauració generalitzada ni substitueix la trajectòria ecològica.',
+    CORE_12:'Síntesi de prioritat de gestió; només és interpretable amb els indicadors anteriors, les dates de les fonts i els criteris de camp.'
+  }};
   const fireAreaColors = {{
     'molt baix':'#2f8f4e', 'baix':'#a8c94a', 'moderat':'#f0d84b',
     'alt':'#ef8b2c', 'molt alt':'#d43d2f', 'extrem':'#711d2d'
@@ -1422,6 +1487,34 @@ def render_index(data: dict) -> str:
     root.querySelector('#report-fire-drought').textContent = droughtText;
     root.querySelector('#report-fire-trend').textContent = trendText;
     root.querySelector('#report-fire-update').textContent = humanDate(fire.checkedAtUtc);
+    root.querySelector('#report-fire-chapter-today').textContent = `${{ca1(fire.summary.mean_index_0_100)}}/100 · ${{fire.summary.predominant_category}}`;
+    root.querySelector('#report-fire-chapter-pla').textContent = plaText;
+    root.querySelector('#report-fire-chapter-weather').textContent = weatherText;
+    root.querySelector('#report-fire-chapter-drought').textContent = droughtText;
+    root.querySelector('#report-fire-chapter-trend').textContent = trendText;
+    root.querySelector('#report-fire-chapter-confidence').textContent = `${{ca1(fire.summary.confidence_pct)}} % · ${{fire.summary.confidence}}`;
+    root.querySelector('#report-fire-chapter-update').textContent = humanDate(fire.checkedAtUtc);
+    root.querySelector('#report-fire-chapter-dominants').innerHTML = `<strong>Factors dominants:</strong> ${{esc((fire.summary.dominant_labels || []).join(' · ') || 'no determinats')}}.`;
+    const excluded = fire.summary.temporally_excluded_variables || [];
+    root.querySelector('#report-fire-chapter-freshness').innerHTML = excluded.length
+      ? `<strong>Control de frescor:</strong> ${{esc(excluded.map(key => fireVariableLabels[key] || key).join(' · '))}} queda fora del càlcul actual per antiguitat. La resta de variables dinàmiques conserva el pes complet o reduït que indica la seva data.`
+      : '<strong>Control de frescor:</strong> cap variable dinàmica ha estat exclosa; els pesos efectius continuen depenent de la data de cada font.';
+    root.querySelector('#report-fire-chapter-variables').innerHTML = Object.entries(fire.variables || {{}}).map(([key,item]) => `<tr><td>${{esc(fireVariableLabels[key] || key)}}</td><td>${{esc(item.value)}}</td><td>${{esc(humanDate(item.date_utc))}}</td><td>${{ca1(item.weight_pct)}} %${{item.base_weight_pct == null || item.base_weight_pct === item.weight_pct ? '' : ` <span class="eu-muted">(base ${{ca1(item.base_weight_pct)}} %)</span>`}}</td><td>${{esc(item.temporal_status_label || item.update_status || 'no informat')}}</td><td>${{esc(fireVariableRoles[key] || 'Variable documentada sense interpretació addicional.')}}</td></tr>`).join('');
+    renderDecisionEvidence();
+  }}
+  function renderDecisionEvidence() {{
+    const readings = D.dailyReadings?.readings || {{}};
+    root.querySelector('#eu-daily-decision-evidence').innerHTML = dailyReadingOrder.map(key => {{
+      const item = readings[key] || {{label:key, value:'dada no disponible', status:'dada no disponible', data_at_utc:null}};
+      return `<tr><td>${{esc(item.label || key)}}</td><td class="eu-reading-state"><strong>${{esc(item.value || 'dada no disponible')}}</strong><br><span class="eu-subtle">${{esc(item.status || 'estat no informat')}}</span></td><td>${{esc(humanDate(item.data_at_utc))}}</td><td>${{esc(dailyReadingRoles[key])}}</td></tr>`;
+    }}).join('');
+    root.querySelector('#eu-core-decision-evidence').innerHTML = D.metrics.core.map(metric => {{
+      const value = metric.value == null ? null : Math.max(0,Math.min(100,metric.value));
+      const valueText = metric.display || (value == null ? 'N/D' : ca1(value));
+      const publicCode = String(metric.code || '').replace('CORE_','RADAR_');
+      const state = `${{valueText}} · ${{metric.status}} · confiança ${{metric.confidence}}`;
+      return `<tr><td><strong>${{esc(publicCode)}} · ${{esc(metric.name)}}</strong></td><td>${{esc(state)}}</td><td>${{esc(coreDecisionRoles[metric.code] || 'Indicador de context que requereix lectura conjunta amb la resta del diagnòstic.')}}</td></tr>`;
+    }}).join('');
   }}
   updateCurrentFireSummary(D.currentFire);
   root.querySelector('#eu-area-value').textContent = `${{caInt(D.metrics.studyAreaHa)}} ha`;
