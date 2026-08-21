@@ -11,10 +11,10 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 
-import geopandas as gpd
 import numpy as np
 import rasterio
 from rasterio.enums import Resampling
+from rasterio.warp import transform_bounds
 
 from calculate_la_seu_expanded_indicators import _to_web_grid
 from calculate_la_seu_sentinel2_indicators import _write_webp
@@ -23,7 +23,6 @@ from calculate_la_seu_sentinel2_indicators import _write_webp
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT / "projectes" / "Alinya"
 DEM = PROJECT / "raw" / "terrain" / "icgc_dem_5m_alinya_window.tif"
-STUDY = PROJECT / "processed" / "study_area.gpkg"
 OUT = PROJECT / "maps" / "topografia" / "relleu_icgc.webp"
 META = PROJECT / "metadata" / "relleu_base_icgc_osm.json"
 
@@ -47,11 +46,11 @@ def _colorize(elevation: np.ndarray, hillshade: np.ndarray, valid: np.ndarray, l
 
 
 def calculate() -> dict:
-    bbox = tuple(float(v) for v in gpd.read_file(STUDY).to_crs(4326).total_bounds)
     with rasterio.open(DEM) as src:
         dem = src.read(1).astype("float32")
         profile = src.profile.copy()
         nodata = src.nodata
+        bbox = tuple(float(v) for v in transform_bounds(src.crs, "EPSG:4326", *src.bounds, densify_pts=21))
     valid = np.isfinite(dem) if nodata is None else np.isfinite(dem) & (dem != nodata)
     dem_nan = np.where(valid, dem, np.nan)
     fill = float(np.nanmedian(dem_nan))

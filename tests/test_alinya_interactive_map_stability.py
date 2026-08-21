@@ -45,3 +45,8 @@ def test_base_map_contains_roads_and_settlements() -> None:
     assert "key === 'relief' || guide.raster === key" in text
     assert "eu-context-rasters" in text
     assert "eu-analytical-rasters" in text
+    assert "osm_highway_context_from_raw(map_bbox)" in text
+    assert '"access": access_context' in text
+    assert "El contorn identifica el límit de l’àmbit analític, no el límit del mapa base" in text
+    assert '"bbox": map_bbox' in text
+    assert '"relief": map_bbox' in text

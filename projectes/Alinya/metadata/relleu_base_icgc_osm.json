@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-08-21T13:15:02.440558+00:00",
+  "generated_at_utc": "2026-08-21T15:15:13.822762+00:00",
   "scope": "Muntanya d'Alinyà i context topogràfic immediat",
   "source": "ICGC Model d'elevacions del terreny 5 m",
   "source_file": "raw/terrain/icgc_dem_5m_alinya_window.tif",
@@ -7,15 +7,15 @@
   "method": "Hypsometric tint plus analytical hillshade from the unmasked ICGC window; azimuth 315 degrees, altitude 45 degrees",
   "display_resolution_m": 20,
   "elevation_m": {
-    "minimum": 601.5,
-    "median": 1460.0,
-    "maximum": 2382.3
+    "minimum": 589.1,
+    "median": 1435.7,
+    "maximum": 2385.7
   },
   "bbox_epsg4326": [
-    1.363998,
-    42.144427,
-    1.5199389999999993,
-    42.22512200000001
+    1.3594885142427886,
+    42.141018616087074,
+    1.523929210825373,
+    42.22902295643775
   ],
   "output": "maps/topografia/relleu_icgc.webp",
   "status": "verified_analysis",

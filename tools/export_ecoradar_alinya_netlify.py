@@ -243,6 +243,44 @@ def haversine_km(a: tuple[float, float], b: tuple[float, float]) -> float:
     return 2 * radius * math.asin(math.sqrt(h))
 
 
+def osm_highway_context_from_raw(map_bbox: list[float]) -> dict:
+    """Build the unmasked OSM road/path context from the verified raw extract.
+
+    The analytical access layer remains unchanged for EcoRadar metrics. This
+    collection is only the cartographic context visible across the map frame.
+    """
+    raw = read_json(PROJECT / "raw" / "recreational_pressure" / "overpass_osm_raw.json")
+    features = []
+    for element in raw.get("elements", []):
+        tags = element.get("tags") or {}
+        geometry = element.get("geometry") or []
+        if element.get("type") != "way" or not tags.get("highway") or len(geometry) < 2:
+            continue
+        coords = [[float(point["lon"]), float(point["lat"])] for point in geometry]
+        xs = [point[0] for point in coords]
+        ys = [point[1] for point in coords]
+        if max(xs) < map_bbox[0] or min(xs) > map_bbox[2] or max(ys) < map_bbox[1] or min(ys) > map_bbox[3]:
+            continue
+        length_km = sum(haversine_km(tuple(a), tuple(b)) for a, b in zip(coords, coords[1:]))
+        features.append({
+            "type": "Feature",
+            "properties": {
+                "osm_id": element.get("id"),
+                "highway": tags.get("highway"),
+                "name": tags.get("name:ca") or tags.get("name"),
+                "surface": tags.get("surface"),
+                "access": tags.get("access"),
+                "length_km": round(length_km, 4),
+                "scope": "cartographic_context",
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": decimate(coords, 120),
+            },
+        })
+    return {"type": "FeatureCollection", "features": features}
+
+
 def projected_ring_area(coords: list) -> float:
     if len(coords) < 4:
         return 0.0
@@ -450,7 +488,7 @@ def build_data() -> dict:
         max_points=1,
         keep_props=["scientificName", "taxonGroup", "source", "recordStatus"],
     )
-    access = feature_collection(
+    analytical_access = feature_collection(
         PROJECT / "maps" / "ecoradar_core" / "pressio_humana_osm_camins.geojson",
         max_points=120,
         keep_props=["highway", "surface", "access", "length_km"],
@@ -468,7 +506,7 @@ def build_data() -> dict:
     road_highways = {"motorway", "trunk", "primary", "secondary", "tertiary", "unclassified", "residential", "living_street", "service"}
     roads_km = sum(
         float(feature["properties"].get("length_km") or 0)
-        for feature in access["features"]
+        for feature in analytical_access["features"]
         if feature["properties"].get("highway") in road_highways
     )
 
@@ -492,15 +530,18 @@ def build_data() -> dict:
     )
     climate_refuges = read_json(PROJECT / "indicators" / "refugis_climatics_potencials.json")
     relief = read_json(PROJECT / "metadata" / "relleu_base_icgc_osm.json")
+    map_bbox = relief.get("bbox_epsg4326", study_bbox)
+    access_context = osm_highway_context_from_raw(map_bbox)
     raster_bbox = satellite.get("study_bbox_epsg4326", study_bbox)
     study_ha = 5464.13568486
     forest_like = sum(float(r["superficie_ha"]) for r in covers if any(t in r["tipus_coberta"].lower() for t in ["bosc", "boscos", "matollar"]))
     open_like = sum(float(r["superficie_ha"]) for r in covers if any(t in r["tipus_coberta"].lower() for t in ["prats", "conreus"]))
     high_plus = updated_similarity_areas.get("alta", 0) + updated_similarity_areas.get("mitjana_alta", 0)
     return {
-        "bbox": raster_bbox,
+        "bbox": map_bbox,
         "studyBbox": raster_bbox,
         "rasterBboxes": {
+            "relief": map_bbox,
             "fireCurrent": current_fire["grid"]["bbox_epsg4326"],
         },
         "study": study,
@@ -526,7 +567,7 @@ def build_data() -> dict:
             "hic": hic,
             "landcover": landcover,
             "biodiversity": biodiversity,
-            "access": access,
+            "access": access_context,
             "publicUse": public_points,
             "places": settlements,
         },
@@ -1258,8 +1299,8 @@ def render_index(data: dict) -> str:
     base: {{
       label:'Mapa base topogràfic · relleu, carreteres i poblacions',
       title:'Relleu real, xarxa viària i nuclis de referència',
-      copy:`Combina l’ombrejat hipsomètric del model d’elevacions ICGC de 5 m amb la xarxa OSM: ${{Number(D.metrics.roadsKm).toFixed(1).replace('.',',')}} km classificats com a carreteres, la resta de camins i pistes, i ${{D.metrics.settlements}} nuclis o poblacions de context. L’altitud dins l’àmbit va aproximadament de 607 a 2.379 m.`,
-      reading:'Els tons verds i ocres representen cotes relativament més baixes; els grisos i clars, cotes més elevades. El relleu base continua visible als enclavaments i a l’entorn immediat; el contorn verd identifica el límit de l’àmbit analític. Les línies taronges més gruixudes són carreteres; les grises fines, camins i pistes. Els punts foscos i les etiquetes identifiquen nuclis `place=hamlet` publicats a OSM.',
+      copy:`Combina l’ombrejat hipsomètric del model d’elevacions ICGC de 5 m amb la xarxa viària i els nuclis OSM de tot el rectangle cartogràfic. Dins l’àmbit analític s’han quantificat ${{Number(D.metrics.pathsKm).toFixed(1).replace('.',',')}} km de xarxa, dels quals ${{Number(D.metrics.roadsKm).toFixed(1).replace('.',',')}} km corresponen a carreteres classificades. L’altitud dins l’àmbit va aproximadament de 607 a 2.379 m.`,
+      reading:'Els tons verds i ocres representen cotes relativament més baixes; els grisos i clars, cotes més elevades. El relleu, les carreteres, els camins i les poblacions continuen visibles dins i fora del contorn verd. El contorn identifica el límit de l’àmbit analític, no el límit del mapa base. Les línies taronges més gruixudes són carreteres; les grises fines, camins i pistes. Els punts foscos i les etiquetes identifiquen nuclis `place=hamlet` publicats a OSM.',
       limit:'Límit: el relleu, la xarxa viària i els topònims que es veuen fora del contorn són només context cartogràfic; les lectures i superfícies EcoRadar continuen restringides a l’àmbit validat. Els topònims i la classificació viària provenen d’OSM i no substitueixen cartografia oficial de navegació. Els punts de població situen el topònim, però no delimiten l’extensió urbana; les xifres de població només es mostren al detall quan OSM n’indica també la data.',
       layers:['access','places'],
       raster:'relief',
@@ -1394,8 +1435,8 @@ def render_index(data: dict) -> str:
     access:{{
       label:'Capa · accessibilitat',
       title:'Camins i pistes',
-      copy:'Mostra els 124,8 km de camins i pistes cartografiats a OSM utilitzats com a context territorial de la diagnosi.',
-      reading:'Les línies grises indiquen camins i pistes. Permeten interpretar accessibilitat potencial i prioritzar la validació de possibles conflictes amb hàbitats o fauna. En la lectura d’incendis també ajuden a identificar vores accessibles on la gestió del combustible pot tenir més retorn.',
+      copy:'Mostra la xarxa viària OSM de context a tot el rectangle del mapa. Els 124,8 km quantificats per la diagnosi corresponen exclusivament al tram de xarxa dins l’àmbit d’Alinyà.',
+      reading:'Les línies taronges indiquen carreteres i les grises, camins i pistes, també fora del contorn verd. Permeten orientar-se i interpretar accessibilitat potencial; només els trams dins l’àmbit entren en la diagnosi. En la lectura d’incendis també ajuden a identificar vores accessibles on la gestió del combustible pot tenir més retorn.',
       limit:'OSM no dona intensitat d’ús, freqüentació, pressió real, estat de manteniment, propietat ni causa d’ignició. Cal contrast de camp.',
       legend:[['#5d675f','Camins i pistes']]
     }},
