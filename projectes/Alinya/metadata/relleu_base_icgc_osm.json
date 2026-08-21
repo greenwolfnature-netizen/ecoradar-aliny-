@@ -1,15 +1,15 @@
 {
-  "generated_at_utc": "2026-07-20T18:40:56.948806+00:00",
-  "scope": "Muntanya d'Alinyà",
+  "generated_at_utc": "2026-08-21T13:15:02.440558+00:00",
+  "scope": "Muntanya d'Alinyà i context topogràfic immediat",
   "source": "ICGC Model d'elevacions del terreny 5 m",
-  "source_file": "processed/terrain/dem.tif",
+  "source_file": "raw/terrain/icgc_dem_5m_alinya_window.tif",
   "osm_role": "OpenStreetMap supplies access paths and mapped features; it does not supply the elevation raster",
-  "method": "Hypsometric tint plus analytical hillshade; azimuth 315 degrees, altitude 45 degrees",
+  "method": "Hypsometric tint plus analytical hillshade from the unmasked ICGC window; azimuth 315 degrees, altitude 45 degrees",
   "display_resolution_m": 20,
   "elevation_m": {
-    "minimum": 607.3,
-    "median": 1483.4,
-    "maximum": 2378.5
+    "minimum": 601.5,
+    "median": 1460.0,
+    "maximum": 2382.3
   },
   "bbox_epsg4326": [
     1.363998,
@@ -19,5 +19,5 @@
   ],
   "output": "maps/topografia/relleu_icgc.webp",
   "status": "verified_analysis",
-  "limitations": "Relief visualization, not a contour map or a substitute for field navigation"
+  "limitations": "Context relief may be visible outside the study boundary and in enclaves; analytical EcoRadar layers remain clipped to the validated study area. Not a contour map or a substitute for field navigation"
 }

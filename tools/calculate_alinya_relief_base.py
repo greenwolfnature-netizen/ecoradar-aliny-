@@ -22,7 +22,7 @@ from calculate_la_seu_sentinel2_indicators import _write_webp
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT / "projectes" / "Alinya"
-DEM = PROJECT / "processed" / "terrain" / "dem.tif"
+DEM = PROJECT / "raw" / "terrain" / "icgc_dem_5m_alinya_window.tif"
 STUDY = PROJECT / "processed" / "study_area.gpkg"
 OUT = PROJECT / "maps" / "topografia" / "relleu_icgc.webp"
 META = PROJECT / "metadata" / "relleu_base_icgc_osm.json"
@@ -74,27 +74,28 @@ def calculate() -> dict:
         hillshade, valid, profile, bbox, 20, resampling=Resampling.bilinear
     )
     web_valid = elevation_valid & shade_valid & np.isfinite(elevation_web) & np.isfinite(shade_web)
-    low, high = (float(v) for v in np.nanpercentile(dem_nan[valid], [2, 98]))
+    displayed_elevation = elevation_web[web_valid]
+    low, high = (float(v) for v in np.nanpercentile(displayed_elevation, [2, 98]))
     OUT.parent.mkdir(parents=True, exist_ok=True)
     _write_webp(OUT, _colorize(elevation_web, shade_web, web_valid, low, high))
 
     payload = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
-        "scope": "Muntanya d'Alinyà",
+        "scope": "Muntanya d'Alinyà i context topogràfic immediat",
         "source": "ICGC Model d'elevacions del terreny 5 m",
         "source_file": str(DEM.relative_to(PROJECT)),
         "osm_role": "OpenStreetMap supplies access paths and mapped features; it does not supply the elevation raster",
-        "method": "Hypsometric tint plus analytical hillshade; azimuth 315 degrees, altitude 45 degrees",
+        "method": "Hypsometric tint plus analytical hillshade from the unmasked ICGC window; azimuth 315 degrees, altitude 45 degrees",
         "display_resolution_m": 20,
         "elevation_m": {
-            "minimum": round(float(np.nanmin(dem_nan)), 1),
-            "median": round(float(np.nanmedian(dem_nan)), 1),
-            "maximum": round(float(np.nanmax(dem_nan)), 1),
+            "minimum": round(float(np.nanmin(displayed_elevation)), 1),
+            "median": round(float(np.nanmedian(displayed_elevation)), 1),
+            "maximum": round(float(np.nanmax(displayed_elevation)), 1),
         },
         "bbox_epsg4326": bbox,
         "output": str(OUT.relative_to(PROJECT)),
         "status": "verified_analysis",
-        "limitations": "Relief visualization, not a contour map or a substitute for field navigation",
+        "limitations": "Context relief may be visible outside the study boundary and in enclaves; analytical EcoRadar layers remain clipped to the validated study area. Not a contour map or a substitute for field navigation",
     }
     META.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
     return payload

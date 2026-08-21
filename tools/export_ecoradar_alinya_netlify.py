@@ -1194,13 +1194,15 @@ def render_index(data: dict) -> str:
   studyClip.selectAll('path').data(D.study.features).join('path').attr('d',path);
   const scene = svg.append('g');
   scene.append('g').selectAll('path').data(D.study.features).join('path').attr('class','eu-study-fill').attr('d',path);
-  const rasterGroup = scene.append('g').attr('class','eu-rasters').attr('clip-path','url(#eu-study-clip)');
+  const contextRasterGroup = scene.append('g').attr('class','eu-rasters eu-context-rasters');
+  const analyticalRasterGroup = scene.append('g').attr('class','eu-rasters eu-analytical-rasters').attr('clip-path','url(#eu-study-clip)');
   const rasterGroups = {{}};
   Object.entries(D.rasters).forEach(([key,href]) => {{
     const rasterBbox = D.rasterBboxes?.[key] || D.studyBbox;
     const rasterTopLeft = projection([rasterBbox[0],rasterBbox[3]]);
     const rasterBottomRight = projection([rasterBbox[2],rasterBbox[1]]);
-    rasterGroups[key] = rasterGroup.append('image')
+    const targetRasterGroup = key === 'relief' ? contextRasterGroup : analyticalRasterGroup;
+    rasterGroups[key] = targetRasterGroup.append('image')
       .attr('href',href).attr('x',rasterTopLeft[0]).attr('y',rasterTopLeft[1])
       .attr('width',rasterBottomRight[0]-rasterTopLeft[0]).attr('height',rasterBottomRight[1]-rasterTopLeft[1])
       .attr('preserveAspectRatio','none').style('display','none').style('opacity',(key === 'fireDanger' || key === 'fireCurrent') ? 1 : .94);
@@ -1257,8 +1259,8 @@ def render_index(data: dict) -> str:
       label:'Mapa base topogràfic · relleu, carreteres i poblacions',
       title:'Relleu real, xarxa viària i nuclis de referència',
       copy:`Combina l’ombrejat hipsomètric del model d’elevacions ICGC de 5 m amb la xarxa OSM: ${{Number(D.metrics.roadsKm).toFixed(1).replace('.',',')}} km classificats com a carreteres, la resta de camins i pistes, i ${{D.metrics.settlements}} nuclis o poblacions de context. L’altitud dins l’àmbit va aproximadament de 607 a 2.379 m.`,
-      reading:'Els tons verds i ocres representen cotes relativament més baixes; els grisos i clars, cotes més elevades. Les línies taronges més gruixudes són carreteres; les grises fines, camins i pistes. Els punts foscos i les etiquetes identifiquen nuclis `place=hamlet` publicats a OSM.',
-      limit:'Límit: els topònims i la classificació viària provenen d’OSM i no substitueixen cartografia oficial de navegació. Els punts de població situen el topònim, però no delimiten l’extensió urbana; les xifres de població només es mostren al detall quan OSM n’indica també la data.',
+      reading:'Els tons verds i ocres representen cotes relativament més baixes; els grisos i clars, cotes més elevades. El relleu base continua visible als enclavaments i a l’entorn immediat; el contorn verd identifica el límit de l’àmbit analític. Les línies taronges més gruixudes són carreteres; les grises fines, camins i pistes. Els punts foscos i les etiquetes identifiquen nuclis `place=hamlet` publicats a OSM.',
+      limit:'Límit: el relleu, la xarxa viària i els topònims que es veuen fora del contorn són només context cartogràfic; les lectures i superfícies EcoRadar continuen restringides a l’àmbit validat. Els topònims i la classificació viària provenen d’OSM i no substitueixen cartografia oficial de navegació. Els punts de població situen el topònim, però no delimiten l’extensió urbana; les xifres de població només es mostren al detall quan OSM n’indica també la data.',
       layers:['access','places'],
       raster:'relief',
       legend:[['#b7c897','Cotes baixes i mitjanes'],['#e8e5da','Cotes més elevades'],['#a65f28','Carreteres OSM'],['#737b76','Camins i pistes OSM'],['#17332d','Poblacions i nuclis OSM']]
@@ -1671,7 +1673,7 @@ def render_index(data: dict) -> str:
     Object.keys(modeGuides).forEach(key => root.classList.remove(`mode-${{key}}`));
     root.classList.add(`mode-${{mode}}`);
     Object.keys(groups).forEach(k => {{ if (k !== 'boundary') setLayer(k, guide.layers.includes(k)); }});
-    Object.entries(rasterGroups).forEach(([key,image]) => image.style('display', guide.raster === key ? null : 'none'));
+    Object.entries(rasterGroups).forEach(([key,image]) => image.style('display', key === 'relief' || guide.raster === key ? null : 'none'));
     root.querySelectorAll('[data-current-fire]').forEach(panel => panel.hidden = mode !== 'fireCurrent');
     root.querySelectorAll('[data-management]').forEach(panel => panel.hidden = mode !== 'management');
     if (mode !== 'fireCurrent') firePopup.hidden = true;

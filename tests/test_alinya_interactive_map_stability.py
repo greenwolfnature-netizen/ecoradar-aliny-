@@ -41,3 +41,7 @@ def test_base_map_contains_roads_and_settlements() -> None:
     assert "Poblacions OSM" in text
     assert "layers:['access','places']" in text
     assert "poblacions_osm.geojson" in text
+    assert "key === 'relief' ? contextRasterGroup : analyticalRasterGroup" in text
+    assert "key === 'relief' || guide.raster === key" in text
+    assert "eu-context-rasters" in text
+    assert "eu-analytical-rasters" in text
