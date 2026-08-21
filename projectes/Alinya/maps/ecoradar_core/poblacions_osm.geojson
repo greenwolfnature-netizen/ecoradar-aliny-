@@ -1,0 +1,26 @@
+{
+  "type": "FeatureCollection",
+  "name": "poblacions_osm_context_alinya",
+  "crs": {
+    "type": "name",
+    "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}
+  },
+  "source": {
+    "name": "OpenStreetMap via Overpass API",
+    "url": "https://overpass-api.de/api/interpreter",
+    "query": "node[place~^(city|town|village|hamlet|isolated_dwelling)$] dins la finestra cartogràfica; visualització limitada a village i hamlet",
+    "osm_base_timestamp_utc": "2026-08-21T12:03:50Z",
+    "license": "ODbL",
+    "limitation": "Els topònims i la classificació place=* provenen d'OSM; no delimiten el sòl urbà ni l'extensió real de cada nucli."
+  },
+  "features": [
+    {"type":"Feature","properties":{"osm_id":390024433,"name":"Ossera","place":"hamlet","population":32,"population_date":"2025"},"geometry":{"type":"Point","coordinates":[1.471454,42.218296]}},
+    {"type":"Feature","properties":{"osm_id":1904899322,"name":"Llinars","place":"hamlet","population":39,"population_date":"2025"},"geometry":{"type":"Point","coordinates":[1.37921,42.147743]}},
+    {"type":"Feature","properties":{"osm_id":2659030508,"name":"l'Alzina d'Alinyà","place":"hamlet","population":20,"population_date":"2025"},"geometry":{"type":"Point","coordinates":[1.445304,42.189207]}},
+    {"type":"Feature","properties":{"osm_id":2659058966,"name":"Perles","place":"hamlet","population":11,"population_date":"2025"},"geometry":{"type":"Point","coordinates":[1.393899,42.178235]}},
+    {"type":"Feature","properties":{"osm_id":3656681695,"name":"Alinyà","place":"hamlet","population":10,"population_date":"2025"},"geometry":{"type":"Point","coordinates":[1.423562,42.18064]}},
+    {"type":"Feature","properties":{"osm_id":3656865324,"name":"Llobera","place":"hamlet","population":null,"population_date":null},"geometry":{"type":"Point","coordinates":[1.428111,42.181484]}},
+    {"type":"Feature","properties":{"osm_id":3656865325,"name":"les Sorts","place":"hamlet","population":null,"population_date":null},"geometry":{"type":"Point","coordinates":[1.42238,42.176228]}},
+    {"type":"Feature","properties":{"osm_id":7006622145,"name":"la Vall del Mig","place":"hamlet","population":null,"population_date":null},"geometry":{"type":"Point","coordinates":[1.438378,42.189351]}}
+  ]
+}

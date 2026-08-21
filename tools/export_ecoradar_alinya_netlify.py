@@ -460,6 +460,17 @@ def build_data() -> dict:
         max_points=1,
         keep_props=["name", "amenity", "tourism", "leisure", "highway"],
     )
+    settlements = feature_collection(
+        PROJECT / "maps" / "ecoradar_core" / "poblacions_osm.geojson",
+        max_points=1,
+        keep_props=["osm_id", "name", "place", "population", "population_date"],
+    )
+    road_highways = {"motorway", "trunk", "primary", "secondary", "tertiary", "unclassified", "residential", "living_street", "service"}
+    roads_km = sum(
+        float(feature["properties"].get("length_km") or 0)
+        for feature in access["features"]
+        if feature["properties"].get("highway") in road_highways
+    )
 
     core = read_csv(PROJECT / "indicators" / "ecoradar_core_indicators.csv")
     basic = {r["indicador"]: r for r in read_csv(PROJECT / "indicators" / "ecoradar_01_resum.csv")}
@@ -517,6 +528,7 @@ def build_data() -> dict:
             "biodiversity": biodiversity,
             "access": access,
             "publicUse": public_points,
+            "places": settlements,
         },
         "currentFire": {
             "checkedAtUtc": current_fire["checked_at_utc"],
@@ -562,7 +574,9 @@ def build_data() -> dict:
             "connectorHa": sum(float(r["area_ha"]) for r in connectivity if r["layer_id"] in {"connectors_terrestres_principals", "zones_connectors_infraestructura_verda"}),
             "biodiversityGroups": biodiversity_detail,
             "pathsKm": 124.83,
+            "roadsKm": roads_km,
             "publicPoints": 18,
+            "settlements": len(settlements["features"]),
             "satellite": {
                 "temperature": satellite["surface_temperature"]["metrics_c"],
                 "temperatureDateRange": satellite["surface_temperature"]["date_range"],
@@ -661,7 +675,7 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-brand-logos {{ display:flex; align-items:center; gap:6px; }}
     #ecoradar-alinya .eu-brand-logos img {{ width:46px; height:46px; object-fit:contain; border:1px solid #d5dcd5; border-radius:6px; background:#fff; }}
     #ecoradar-alinya .eu-badge {{ border:1px solid #bfc8c1; border-radius:999px; padding:7px 10px; font-size:10px; color:#3e5260; background:#fffefa; white-space:nowrap; }}
-    #ecoradar-alinya .eu-grid {{ display:grid; grid-template-columns:272px minmax(470px,1fr) 292px; gap:10px; padding:10px; min-height:655px; }}
+    #ecoradar-alinya .eu-grid {{ display:grid; grid-template-columns:272px minmax(470px,1fr) 292px; gap:10px; align-items:start; padding:10px; min-height:0; }}
     #ecoradar-alinya .eu-column {{ display:flex; flex-direction:column; gap:9px; min-width:0; }}
     #ecoradar-alinya .eu-panel {{ background:rgba(255,255,255,.76); border:1px solid var(--line); padding:11px; }}
     #ecoradar-alinya .eu-panel h3 {{ margin:0 0 8px; color:var(--blue); font-size:11px; text-transform:uppercase; letter-spacing:.045em; }}
@@ -680,11 +694,11 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-fact:last-child {{ border-bottom:0; padding-bottom:0; }}
     #ecoradar-alinya .eu-fact span {{ font-size:9px; color:#51616e; }}
     #ecoradar-alinya .eu-fact strong {{ color:var(--green); font-size:14px; }}
-    #ecoradar-alinya .eu-map-panel {{ position:relative; border:1px solid #cfc9bb; background:#e9ede5; min-height:635px; overflow:hidden; }}
+    #ecoradar-alinya .eu-map-panel {{ position:relative; align-self:start; width:100%; height:clamp(440px,42vw,520px); min-height:0; border:1px solid #cfc9bb; background:#e9ede5; overflow:hidden; }}
     #ecoradar-alinya .eu-map-head {{ position:absolute; z-index:4; top:10px; left:10px; right:10px; display:flex; justify-content:space-between; pointer-events:none; }}
     #ecoradar-alinya .eu-map-label {{ background:rgba(255,255,255,.9); border:1px solid #d5d0c4; padding:7px 9px; font-size:9px; color:#385064; box-shadow:0 3px 12px rgba(38,51,60,.08); }}
     #ecoradar-alinya .eu-reset {{ pointer-events:auto; border:1px solid #c9c4b8; background:rgba(255,255,255,.94); border-radius:4px; padding:7px 9px; color:var(--blue); cursor:pointer; font-size:9px; }}
-    #ecoradar-alinya svg {{ display:block; width:100%; height:100%; min-height:635px; cursor:grab; }}
+    #ecoradar-alinya svg {{ display:block; width:100%; height:100%; min-height:0; cursor:grab; }}
     #ecoradar-alinya svg:active {{ cursor:grabbing; }}
     #ecoradar-alinya .eu-map-bg {{ fill:#edf0e9; }}
     #ecoradar-alinya .eu-study-fill {{ fill:#f3f1e8; stroke:none; }}
@@ -697,9 +711,15 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-sim.baixa {{ fill:transparent; stroke:transparent; pointer-events:none; }}
     #ecoradar-alinya .eu-fire {{ fill:#c23c32; fill-opacity:.24; stroke:#a42220; stroke-width:2.2; vector-effect:non-scaling-stroke; }}
     #ecoradar-alinya .eu-fire-label {{ fill:#7d1c19; stroke:#fff; stroke-width:3px; paint-order:stroke; font-size:12px; font-weight:750; pointer-events:none; }}
-    #ecoradar-alinya .eu-access {{ fill:none; stroke:#5d675f; stroke-opacity:.85; stroke-width:1.15; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke; }}
+    #ecoradar-alinya .eu-access {{ fill:none; stroke:#737b76; stroke-opacity:.72; stroke-width:.9; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke; }}
+    #ecoradar-alinya .eu-access.eu-road {{ stroke:#a65f28; stroke-opacity:.95; stroke-width:2.3; }}
+    #ecoradar-alinya .eu-place-dot {{ fill:#17332d; stroke:#fff; stroke-width:1.4; vector-effect:non-scaling-stroke; }}
+    #ecoradar-alinya .eu-place-label {{ fill:#14395f; stroke:#fff; stroke-width:3px; paint-order:stroke; font-size:11px; font-weight:750; pointer-events:none; }}
     #ecoradar-alinya .eu-hic {{ fill:transparent; stroke:#1d5e3c; stroke-width:1; vector-effect:non-scaling-stroke; }}
     #ecoradar-alinya .eu-hic.prior {{ fill:transparent; stroke:#102f24; stroke-width:1.35; }}
+    #ecoradar-alinya.mode-management .eu-hic {{ fill:#dfeadb; fill-opacity:.55; stroke:#2f743f; stroke-width:.9; cursor:pointer; }}
+    #ecoradar-alinya.mode-management .eu-hic.prior {{ fill:#f3d7ad; fill-opacity:.7; stroke:#a85d16; stroke-width:1.55; }}
+    #ecoradar-alinya.mode-management .eu-access {{ stroke:#6b716d; stroke-opacity:.72; }}
     #ecoradar-alinya .eu-landcover {{ stroke:rgba(255,255,255,.22); stroke-width:.35; vector-effect:non-scaling-stroke; }}
     #ecoradar-alinya .eu-landcover.bosc {{ fill:#2f743f; fill-opacity:.72; }}
     #ecoradar-alinya .eu-landcover.matollar {{ fill:#8ca34a; fill-opacity:.72; }}
@@ -710,7 +730,6 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-landcover.vies-i-nuclis {{ fill:#785f64; fill-opacity:.82; }}
     #ecoradar-alinya .eu-bio {{ fill:#2d72a0; fill-opacity:.78; stroke:#fff; stroke-width:.8; vector-effect:non-scaling-stroke; }}
     #ecoradar-alinya .eu-public {{ fill:#1f2a27; stroke:#fff; stroke-width:1.2; vector-effect:non-scaling-stroke; }}
-    #ecoradar-alinya .eu-place-label {{ fill:#14395f; stroke:#fff; stroke-width:3px; paint-order:stroke; font-size:11px; font-weight:750; pointer-events:none; }}
     #ecoradar-alinya .eu-map-note {{ position:absolute; left:10px; bottom:10px; z-index:4; max-width:360px; padding:7px 9px; background:rgba(255,255,255,.9); border:1px solid #d5d0c4; font-size:8px; line-height:1.35; color:#455662; }}
     #ecoradar-alinya .eu-legend {{ display:grid; gap:5px; font-size:9px; color:#445663; }}
     #ecoradar-alinya .eu-legend-row {{ display:flex; align-items:center; gap:7px; }}
@@ -729,10 +748,11 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-fire-cell {{ fill:transparent; stroke:rgba(255,255,255,.08); stroke-width:.2; cursor:pointer; vector-effect:non-scaling-stroke; }}
     #ecoradar-alinya .eu-fire-cell:hover, #ecoradar-alinya .eu-fire-cell:focus {{ fill:rgba(255,255,255,.18); stroke:#fff; stroke-width:1.2; outline:none; }}
     #ecoradar-alinya .eu-fire-popup {{ position:absolute; z-index:12; top:54px; right:12px; width:min(390px,calc(100% - 24px)); max-height:calc(100% - 90px); overflow:auto; padding:13px; border:1px solid #c9c4b8; border-radius:6px; background:rgba(255,255,255,.97); color:#354b5a; box-shadow:0 12px 30px rgba(0,0,0,.2); font-size:10px; line-height:1.4; }}
-    #ecoradar-alinya .eu-fire-popup[hidden], #ecoradar-alinya [data-current-fire][hidden] {{ display:none; }}
+    #ecoradar-alinya .eu-fire-popup[hidden], #ecoradar-alinya [data-current-fire][hidden], #ecoradar-alinya [data-management][hidden] {{ display:none; }}
     #ecoradar-alinya .eu-fire-popup-close {{ float:right; border:0; border-radius:4px; padding:3px 7px; color:#fff; background:var(--blue); cursor:pointer; }}
     #ecoradar-alinya .eu-fire-popup h3 {{ margin:0 38px 5px 0; color:var(--blue); font-size:13px; text-transform:none; letter-spacing:0; }}
     #ecoradar-alinya .eu-fire-popup-main {{ margin:5px 0 9px; color:var(--red); font-size:18px; font-weight:800; }}
+    #ecoradar-alinya .eu-fire-popup.is-management .eu-fire-popup-main {{ color:var(--green); font-size:14px; }}
     #ecoradar-alinya .eu-fire-popup table {{ width:100%; border-collapse:collapse; margin:8px 0; }}
     #ecoradar-alinya .eu-fire-popup th, #ecoradar-alinya .eu-fire-popup td {{ padding:5px 4px; border-bottom:1px solid #e5e1d8; text-align:left; vertical-align:top; }}
     #ecoradar-alinya .eu-fire-popup th {{ color:var(--blue); font-size:8px; text-transform:uppercase; }}
@@ -817,7 +837,7 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-fire-chapter {{ background:#f5f2eb; }}
     @media (max-width:1050px) {{ #ecoradar-alinya .eu-grid {{ grid-template-columns:230px minmax(450px,1fr); }} #ecoradar-alinya .eu-column.eu-right {{ grid-column:1/-1; display:grid; grid-template-columns:repeat(3,1fr); }} #ecoradar-alinya .eu-foot {{ grid-column:1/-1; }} }}
     @media (max-width:900px) {{ #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} }}
-    @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ display:flex; }} #ecoradar-alinya .eu-map-panel, #ecoradar-alinya svg {{ min-height:520px; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:1fr; gap:4px; }} }}
+    @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ display:flex; }} #ecoradar-alinya .eu-map-panel {{ height:420px; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:1fr; gap:4px; }} }}
     @media print {{
       @page {{ size:A4 landscape; margin:10mm; }}
       body {{ background:#fff!important; }}
@@ -891,7 +911,7 @@ def render_index(data: dict) -> str:
       <section class="eu-panel">
         <h3>Lectura temàtica</h3>
         <div class="eu-modes" role="group" aria-label="Lectura principal">
-          <button class="eu-mode" data-mode="base" aria-pressed="true">Mapa base<small>relleu ICGC + camins OSM</small></button>
+          <button class="eu-mode" data-mode="base" aria-pressed="true">Mapa base<small>relleu + carreteres + poblacions</small></button>
           <button class="eu-mode" data-mode="habitats" aria-pressed="false">Hàbitats<small>HIC i prioritaris</small></button>
           <button class="eu-mode" data-mode="biodiversity" aria-pressed="false">Biodiversitat<small>registres públics</small></button>
           <button class="eu-mode" data-mode="vegetation" aria-pressed="false">Cobertura vegetal<small>Copernicus HRL · 2023</small></button>
@@ -900,7 +920,7 @@ def render_index(data: dict) -> str:
           <button class="eu-mode" data-mode="climateRefuges" aria-pressed="false">Refugis climàtics<small>LST + NDMI + NDVI + aigua</small></button>
           <button class="eu-mode" data-mode="temperature" aria-pressed="false">Temperatura<small>Landsat 8/9 · estius 2025–2026</small></button>
           <button class="eu-mode" data-mode="albedo" aria-pressed="false">Albedo<small>Sentinel-2 · 07.07.2026</small></button>
-          <button class="eu-mode" data-mode="management" aria-pressed="false">Gestió<small>capes de decisió</small></button>
+          <button class="eu-mode" data-mode="management" aria-pressed="false">Cribratge de gestió<small>restriccions i validació</small></button>
           <button class="eu-mode" data-mode="fireDanger" aria-pressed="false">Perill d'incendi<small>Generalitat + LST + NDMI + cobertes</small></button>
           <button class="eu-mode" data-mode="fireCurrent" aria-pressed="false">Perill d'incendi avui<small id="eu-fire-current-date">darrera comprovació · índex EcoRadar 100 m</small></button>
           <button class="eu-mode" data-mode="fires" aria-pressed="false">Històric d'incendis<small>perímetres oficials</small></button>
@@ -922,6 +942,7 @@ def render_index(data: dict) -> str:
           <button class="eu-layer" data-layer="landcover" aria-pressed="false"><span class="eu-dot" style="--dot:#8ca34a"></span>Tipus de coberta ICGC</button>
           <button class="eu-layer" data-layer="biodiversity" aria-pressed="false"><span class="eu-dot" style="--dot:#2d72a0"></span>Biodiversitat coneguda</button>
           <button class="eu-layer" data-layer="access" aria-pressed="true"><span class="eu-dot" style="--dot:#5d675f"></span>Camins i pistes</button>
+          <button class="eu-layer" data-layer="places" aria-pressed="true"><span class="eu-dot" style="--dot:#17332d"></span>Poblacions OSM</button>
           <button class="eu-layer" data-layer="publicUse" aria-pressed="false"><span class="eu-dot" style="--dot:#1f2a27"></span>Ús públic OSM</button>
           <button class="eu-layer" data-layer="fires" aria-pressed="false"><span class="eu-dot" style="--dot:#c23c32"></span>Incendis oficials</button>
         </div>
@@ -930,7 +951,7 @@ def render_index(data: dict) -> str:
 
     <section class="eu-map-panel" aria-label="Mapa interactiu EcoRadar de la Muntanya d'Alinyà">
       <div class="eu-map-head"><div class="eu-map-label" id="eu-active-label">Mapa base verificat</div><button class="eu-reset" type="button">Restablir vista</button></div>
-      <svg role="img" aria-label="Mapa d'Alinyà amb incendis, hàbitats, biodiversitat i accessibilitat"></svg>
+      <svg role="img" aria-label="Mapa d'Alinyà amb relleu, carreteres, poblacions, incendis, hàbitats, biodiversitat i accessibilitat"></svg>
       <div class="eu-map-note">Arrossega per desplaçar i usa la roda per ampliar. Consulta la font, la data i els límits de cada lectura activa.</div>
       <div class="eu-tooltip"></div>
       <div class="eu-fire-popup" hidden aria-live="polite"></div>
@@ -952,6 +973,22 @@ def render_index(data: dict) -> str:
         <h3>Lectura del mapa</h3>
         <p>Selecciona una lectura temàtica i consulta «Com llegir la capa activa». Les capes vectorials es poden activar o desactivar sense alterar la lectura tècnica.</p>
         <p><a href="#mosaic">Continuar amb el diagnòstic tècnic complet</a></p>
+      </section>
+      <section class="eu-panel" data-management hidden>
+        <h3>Cribratge de gestió · què cal fer?</h3>
+        <p class="eu-warning"><strong>Aquest mapa no delimita actuacions.</strong> Ordena comprovacions prèvies i assenyala on una decisió necessita més cautela o informació.</p>
+        <div class="eu-facts">
+          <div class="eu-fact"><span>HIC prioritaris · precaució reforçada</span><strong id="eu-management-hic-prior"></strong></div>
+          <div class="eu-fact"><span>Camins i pistes · accés potencial</span><strong id="eu-management-access"></strong></div>
+          <div class="eu-fact"><span>Punts d’ús públic · conflictes a validar</span><strong id="eu-management-public"></strong></div>
+          <div class="eu-fact"><span>Perímetres històrics · context de pertorbació</span><strong id="eu-management-fires"></strong></div>
+        </div>
+        <ol class="eu-fire-weights">
+          <li><strong>Primer:</strong> comprovar HIC i HIC prioritaris; clica un polígon per saber què representa i què no permet afirmar.</li>
+          <li><strong>Després:</strong> contrastar accessos i punts d’ús públic al camp; indiquen accessibilitat potencial, no freqüentació ni pressió real.</li>
+          <li><strong>Finalment:</strong> incorporar biodiversitat, estat de conservació, combustible, aigua i objectiu ecològic abans d’assignar qualsevol actuació.</li>
+        </ol>
+        <p class="eu-source">Resultat admissible: sector pendent de validació, no-intervenció preventiva o candidat a una actuació selectiva justificada. La capa no assigna territorialment cap d’aquestes decisions.</p>
       </section>
       <section class="eu-panel" data-current-fire hidden>
         <h3>Perill d’avui · resum</h3>
@@ -1179,14 +1216,26 @@ def render_index(data: dict) -> str:
   groups.fires = vectorGroup.append('g');
   groups.fires.selectAll('path').data(D.vectors.fires.features).join('path').attr('class','eu-fire').attr('d',path).on('mousemove',(event,d)=>showTip(event,`Incendi oficial ${{d.properties.any_foc || d.properties.etiqueta_foc}}<br>${{Number(d.properties.area_ha_dins_alinya).toFixed(1).replace('.',',')}} ha dins l'àmbit<br>${{d.properties.font || ''}}`)).on('mouseleave',hideTip);
   groups.fires.selectAll('text').data(D.vectors.fires.features).join('text').attr('class','eu-fire-label').attr('transform',d=>`translate(${{path.centroid(d)}})`).text(d=>d.properties.any_foc || d.properties.etiqueta_foc);
+  const roadHighways = new Set(['motorway','trunk','primary','secondary','tertiary','unclassified','residential','living_street','service']);
   groups.access = vectorGroup.append('g');
-  groups.access.selectAll('path').data(D.vectors.access.features).join('path').attr('class','eu-access').attr('d',path).on('mousemove',(event,d)=>showTip(event,`${{d.properties.highway || 'camí'}}<br>${{Number(d.properties.length_km || 0).toFixed(2).replace('.',',')}} km`)).on('mouseleave',hideTip);
+  groups.access.selectAll('path').data(D.vectors.access.features).join('path').attr('class',d=>`eu-access ${{roadHighways.has(d.properties.highway) ? 'eu-road' : 'eu-track'}}`).attr('d',path).on('mousemove',(event,d)=>showTip(event,`${{roadHighways.has(d.properties.highway) ? 'Carretera' : 'Camí o pista'}} · ${{d.properties.highway || 'sense classe'}}<br>${{Number(d.properties.length_km || 0).toFixed(2).replace('.',',')}} km`)).on('mouseleave',hideTip);
   groups.hic = vectorGroup.append('g').style('display','none');
-  groups.hic.selectAll('path').data(D.vectors.hic.features).join('path').attr('class',d=>`eu-hic ${{d.properties.HIC_PRIOR ? 'prior' : ''}}`).attr('d',path).on('mousemove',(event,d)=>showTip(event,`HIC ${{d.properties.COD_HIC}}<br>${{(d.properties.CORINE_CA || '').slice(0,120)}}`)).on('mouseleave',hideTip);
+  groups.hic.selectAll('path').data(D.vectors.hic.features).join('path').attr('class',d=>`eu-hic ${{d.properties.HIC_PRIOR ? 'prior' : ''}}`).attr('d',path).attr('tabindex',0).on('mousemove',(event,d)=>showTip(event,`HIC ${{d.properties.COD_HIC}}<br>${{(d.properties.CORINE_CA || '').slice(0,120)}}${{root.classList.contains('mode-management') ? '<br><strong>Clica per interpretar la decisió</strong>' : ''}}`)).on('mouseleave',hideTip).on('click',(event,d)=>{{ if (root.classList.contains('mode-management')) {{ event.stopPropagation(); showManagementHicPopup(d); }} }}).on('keydown',(event,d)=>{{ if (root.classList.contains('mode-management') && (event.key === 'Enter' || event.key === ' ')) {{ event.preventDefault(); showManagementHicPopup(d); }} }});
   groups.biodiversity = vectorGroup.append('g').style('display','none');
   groups.biodiversity.selectAll('circle').data(D.vectors.biodiversity.features).join('circle').attr('class','eu-bio').attr('cx',d=>projection(d.geometry.coordinates)[0]).attr('cy',d=>projection(d.geometry.coordinates)[1]).attr('r',2.6).on('mousemove',(event,d)=>showTip(event,`${{d.properties.scientificName || 'Registre'}}<br>${{d.properties.taxonGroup || ''}} · ${{d.properties.source || ''}}`)).on('mouseleave',hideTip);
   groups.publicUse = vectorGroup.append('g').style('display','none');
   groups.publicUse.selectAll('circle').data(D.vectors.publicUse.features).join('circle').attr('class','eu-public').attr('cx',d=>projection(d.geometry.coordinates)[0]).attr('cy',d=>projection(d.geometry.coordinates)[1]).attr('r',4).on('mousemove',(event,d)=>showTip(event,d.properties.name || d.properties.tourism || d.properties.amenity || 'Punt OSM')).on('mouseleave',hideTip);
+  const placeLabelLayout = {{
+    'Alinyà':{{dx:-8,dy:-9,anchor:'end'}},
+    'Llobera':{{dx:8,dy:13,anchor:'start'}},
+    "l'Alzina d'Alinyà":{{dx:8,dy:-10,anchor:'start'}},
+    'la Vall del Mig':{{dx:-8,dy:-10,anchor:'end'}},
+    'les Sorts':{{dx:8,dy:15,anchor:'start'}}
+  }};
+  const placeLabel = d => placeLabelLayout[d.properties.name] || {{dx:7,dy:-7,anchor:'start'}};
+  groups.places = vectorGroup.append('g');
+  groups.places.selectAll('circle').data(D.vectors.places.features).join('circle').attr('class','eu-place-dot').attr('cx',d=>projection(d.geometry.coordinates)[0]).attr('cy',d=>projection(d.geometry.coordinates)[1]).attr('r',4).on('mousemove',(event,d)=>showTip(event,`${{d.properties.name}}<br>Nucli OSM · ${{d.properties.place}}${{d.properties.population == null ? '' : `<br>Població OSM: ${{d.properties.population}} · ${{d.properties.population_date || 'data no indicada'}}`}}`)).on('mouseleave',hideTip);
+  groups.places.selectAll('text').data(D.vectors.places.features).join('text').attr('class','eu-place-label').attr('x',d=>projection(d.geometry.coordinates)[0]+placeLabel(d).dx).attr('y',d=>projection(d.geometry.coordinates)[1]+placeLabel(d).dy).attr('text-anchor',d=>placeLabel(d).anchor).text(d=>d.properties.name);
   vectorGroup.append('g').selectAll('path').data(D.study.features).join('path').attr('class','eu-boundary-outline').attr('d',path);
 
   const north = svg.append('g').attr('transform','translate(946 70)');
@@ -1195,14 +1244,14 @@ def render_index(data: dict) -> str:
 
   const modeGuides = {{
     base: {{
-      label:'Mapa base topogràfic · ICGC + OSM',
-      title:'Relleu real i xarxa territorial',
-      copy:'Combina un ombrejat hipsomètric calculat amb el model d’elevacions ICGC de 5 m i els camins, pistes i accessos cartografiats a OpenStreetMap. L’altitud dins l’àmbit va aproximadament de 607 a 2.379 m.',
-      reading:'Els tons verds i ocres representen sectors relativament més baixos; els grisos i clars, cotes més elevades. Les ombres ajuden a reconèixer carenes, fondalades i pendents. Les línies grises corresponen a la xarxa OSM.',
-      limit:'Límit: OSM no aporta el relleu ni mesura intensitat d’ús. L’ombrejat prové de l’ICGC i és una visualització territorial, no cartografia per a navegació de camp.',
-      layers:['access'],
+      label:'Mapa base topogràfic · relleu, carreteres i poblacions',
+      title:'Relleu real, xarxa viària i nuclis de referència',
+      copy:`Combina l’ombrejat hipsomètric del model d’elevacions ICGC de 5 m amb la xarxa OSM: ${{Number(D.metrics.roadsKm).toFixed(1).replace('.',',')}} km classificats com a carreteres, la resta de camins i pistes, i ${{D.metrics.settlements}} nuclis o poblacions de context. L’altitud dins l’àmbit va aproximadament de 607 a 2.379 m.`,
+      reading:'Els tons verds i ocres representen cotes relativament més baixes; els grisos i clars, cotes més elevades. Les línies taronges més gruixudes són carreteres; les grises fines, camins i pistes. Els punts foscos i les etiquetes identifiquen nuclis `place=hamlet` publicats a OSM.',
+      limit:'Límit: els topònims i la classificació viària provenen d’OSM i no substitueixen cartografia oficial de navegació. Els punts de població situen el topònim, però no delimiten l’extensió urbana; les xifres de població només es mostren al detall quan OSM n’indica també la data.',
+      layers:['access','places'],
       raster:'relief',
-      legend:[['#b7c897','Cotes baixes i mitjanes'],['#e8e5da','Cotes més elevades'],['#5d675f','Camins i pistes OSM']]
+      legend:[['#b7c897','Cotes baixes i mitjanes'],['#e8e5da','Cotes més elevades'],['#a65f28','Carreteres OSM'],['#737b76','Camins i pistes OSM'],['#17332d','Poblacions i nuclis OSM']]
     }},
     fires: {{
       label:'Històric d’incendis oficial',
@@ -1232,13 +1281,13 @@ def render_index(data: dict) -> str:
       legend:[['#2d72a0','Registres públics'],['transparent','Contorn HIC'],['#c23c32','Incendis']]
     }},
     management: {{
-      label:'Lectura de decisió',
-      title:'Capes per decidir on actuar',
-      copy:'Lectura conjunta dels accessos i les restriccions ecològiques disponibles per orientar la decisió.',
-      reading:'Permet contrastar accessibilitat, hàbitats, biodiversitat, ús públic i antecedents d’incendi abans de prioritzar una actuació.',
-      limit:'Límit: és una priorització ecològica-operativa, no una ordre d’emergència. La decisió final requereix combustible, humitat, Pla Alfa i validació de camp.',
-      layers:['fires','access','hic','biodiversity','publicUse'],
-      legend:[['#c23c32','Històric d’incendis'],['#5d675f','Accessos'],['#2f7b50','HIC'],['#2d72a0','Biodiversitat'],['#1f2a27','Ús públic OSM']]
+      label:'Cribratge de gestió · comprovacions abans d’actuar',
+      title:'On cal validar més abans de decidir',
+      copy:'Superposa només quatre evidències verificades: HIC com a filtre de compatibilitat ecològica, camins i punts d’ús públic com a accessibilitat potencial, i perímetres d’incendi com a context històric. No són polígons de proposta ni zones on EcoRadar ordeni intervenir.',
+      reading:'Verd clar: HIC que exigeix comprovar compatibilitat i estat al camp. Taronja: HIC prioritari, amb precaució reforçada. Gris: camins i pistes, sense informació de freqüentació. Negre: punts d’ús públic OSM on cal validar possibles conflictes. Vermell: antecedent d’incendi, no risc actual. Clica un HIC per consultar la seva funció en la decisió.',
+      limit:'Límit: aquesta lectura no assigna prioritat, actuació, no-intervenció ni escala A–E a cap sector. Abans de decidir cal validar estat de conservació, biodiversitat sensible, ús real, aigua, combustible i objectiu ecològic.',
+      layers:['fires','access','hic','publicUse'],
+      legend:[['#dfeadb','HIC · compatibilitat a validar'],['#f3d7ad','HIC prioritari · precaució reforçada'],['#6b716d','Camins · accés potencial'],['#1f2a27','Ús públic OSM · conflicte a validar'],['#c23c32','Incendi històric · context']]
     }},
     temperature: {{
       label:`Temperatura superficial · mediana ${{Number(D.metrics.satellite.temperature.median).toFixed(1).replace('.',',')}} °C`,
@@ -1369,6 +1418,14 @@ def render_index(data: dict) -> str:
       reading:'Els punts foscos són elements de context. Permeten llegir accessibilitat potencial i prioritzar la validació de possibles conflictes amb hàbitats o fauna, però no mesuren freqüentació ni pressió real.',
       limit:'OSM és cartografia col·laborativa; no quantifica visitants, intensitat d’ús, freqüentació, pressió real ni impacte ecològic.',
       legend:[['#1f2a27','18 punts d’ús públic OSM']]
+    }},
+    places:{{
+      label:'Capa · poblacions OSM',
+      title:'Nuclis i poblacions de referència',
+      copy:`Mostra ${{D.metrics.settlements}} topònims classificats a OSM com a nucli habitat dins la finestra cartogràfica d’Alinyà.`,
+      reading:'Els punts foscos situen el topònim; les etiquetes permeten orientar-se respecte a la xarxa viària i el relleu.',
+      limit:'OSM és cartografia col·laborativa. El punt no delimita l’extensió del nucli i no s’utilitza per estimar població, exposició o pressió.',
+      legend:[['#17332d','Poblacions i nuclis OSM']]
     }}
   }};
 
@@ -1528,6 +1585,10 @@ def render_index(data: dict) -> str:
   root.querySelector('#eu-records-value').textContent = caInt(D.metrics.records);
   root.querySelector('#eu-species-value').textContent = caInt(D.metrics.species);
   root.querySelector('#eu-paths-value').textContent = `${{ca1(D.metrics.pathsKm)}} km`;
+  root.querySelector('#eu-management-hic-prior').textContent = `${{caInt(D.metrics.hicPriorHa)}} ha`;
+  root.querySelector('#eu-management-access').textContent = `${{ca1(D.metrics.pathsKm)}} km`;
+  root.querySelector('#eu-management-public').textContent = caInt(D.metrics.publicPoints);
+  root.querySelector('#eu-management-fires').textContent = caInt(D.metrics.fires);
 
   root.querySelector('#report-area').textContent = `${{caInt(D.metrics.studyAreaHa)}} ha`;
   root.querySelector('#report-forest').textContent = `${{ca1(D.metrics.forestPct)}} %`;
@@ -1569,10 +1630,19 @@ def render_index(data: dict) -> str:
   let activeMode = 'base';
   let activeGuide = {{type:'mode', key:'base'}};
   root.querySelectorAll('.eu-mode').forEach(button => button.addEventListener('click', () => {{
+    const mapPanel = root.querySelector('.eu-map-panel');
+    const mapRectBefore = mapPanel.getBoundingClientRect();
+    const keepMapPosition = mapRectBefore.bottom > 0 && mapRectBefore.top < window.innerHeight;
     activeMode = button.dataset.mode;
     activeGuide = {{type:'mode', key:activeMode}};
     root.querySelectorAll('.eu-mode').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
     applyMode(activeMode);
+    if (keepMapPosition) {{
+      requestAnimationFrame(() => requestAnimationFrame(() => {{
+        const displacement = mapPanel.getBoundingClientRect().top - mapRectBefore.top;
+        if (Math.abs(displacement) > 1) window.scrollBy(0, displacement);
+      }}));
+    }}
   }}));
   root.querySelectorAll('.eu-layer').forEach(button => button.addEventListener('click', () => {{
     const key = button.dataset.layer;
@@ -1593,6 +1663,7 @@ def render_index(data: dict) -> str:
     Object.keys(groups).forEach(k => {{ if (k !== 'boundary') setLayer(k, guide.layers.includes(k)); }});
     Object.entries(rasterGroups).forEach(([key,image]) => image.style('display', guide.raster === key ? null : 'none'));
     root.querySelectorAll('[data-current-fire]').forEach(panel => panel.hidden = mode !== 'fireCurrent');
+    root.querySelectorAll('[data-management]').forEach(panel => panel.hidden = mode !== 'management');
     if (mode !== 'fireCurrent') firePopup.hidden = true;
     root.querySelector('#eu-active-label').textContent = guide.label;
     updateGuide();
@@ -1615,8 +1686,9 @@ def render_index(data: dict) -> str:
     root.querySelectorAll('.eu-layer[aria-pressed="true"]').forEach(button => {{
       const key = button.dataset.layer;
       if (key === 'publicUse' && !rows.some(r => r[1].includes('Ús públic'))) rows.push(['#1f2a27','Ús públic OSM']);
+      if (key === 'places' && !rows.some(r => r[1].includes('Poblacions'))) rows.push(['#17332d','Poblacions i nuclis OSM']);
       if (key === 'biodiversity' && !rows.some(r => r[1].includes('Biodiversitat') || r[1].includes('Registres'))) rows.push(['#2d72a0','Registres biodiversitat']);
-      if (key === 'hic' && !rows.some(r => r[1] === 'HIC')) rows.push(['#2f7b50','HIC']);
+      if (key === 'hic' && !rows.some(r => r[1].includes('HIC'))) rows.push(['#2f7b50','HIC']);
       if (key === 'landcover' && !rows.some(r => r[1] === 'Bosc')) rows.push(['#2f743f','Bosc'],['#8ca34a','Matollar'],['#d8c76f','Prats i herbassars']);
     }});
     root.querySelector('#eu-legend').innerHTML = rows.map(([c,l]) => {{
@@ -1638,7 +1710,23 @@ def render_index(data: dict) -> str:
     if (key === 'relative_humidity_pct') return `${{ca1(value)}} %`;
     return ca1(value);
   }}
+  function showManagementHicPopup(feature) {{
+    const p = feature.properties || {{}};
+    const priority = Boolean(p.HIC_PRIOR);
+    firePopup.classList.add('is-management');
+    firePopup.innerHTML = `<button class="eu-fire-popup-close" type="button" aria-label="Tancar detall">×</button>
+      <h3>HIC ${{esc(p.COD_HIC || 'sense codi')}} · filtre de gestió</h3>
+      <div class="eu-fire-popup-main">${{priority ? 'Precaució reforçada · HIC prioritari' : 'Compatibilitat ecològica a validar'}}</div>
+      <p><strong>Què mostra:</strong> ${{esc(p.CORINE_CA || 'hàbitat d’interès comunitari cartografiat')}}.</p>
+      <p><strong>Què permet interpretar:</strong> qualsevol proposta que coincideixi amb aquest polígon ha de comprovar al camp el límit, l’estat de conservació i la compatibilitat de l’actuació. ${{priority ? 'El caràcter prioritari reforça el criteri de prudència i no-deteriorament.' : 'La coincidència activa un filtre de prudència, però no determina per si sola la decisió.'}}</p>
+      <p><strong>Què cal fer:</strong> descriure l’objectiu ecològic, verificar espècies i processos sensibles, comparar no-intervenció, retirada de pressió i actuació selectiva, i definir seguiment abans d’executar.</p>
+      <p class="eu-warning"><strong>Què no permet afirmar:</strong> el polígon no indica estat de conservació actual, degradació, urgència, necessitat d’actuar ni nivell territorial A–E.</p>
+      <p class="eu-source">Font cartogràfica HIC incorporada al projecte. Interpretació EcoRadar de cribratge; requereix validació de camp.</p>`;
+    firePopup.hidden = false;
+    firePopup.querySelector('.eu-fire-popup-close').addEventListener('click', () => {{ firePopup.hidden = true; }});
+  }}
   function showFirePopup(feature) {{
+    firePopup.classList.remove('is-management');
     const p = feature.properties;
     const rows = [
       ['creaf_fire_potential','creaf_fire_potential_0_9'],
