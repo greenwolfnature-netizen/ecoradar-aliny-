@@ -9,8 +9,11 @@ GENERATED = ROOT / "index.html"
 def _assert_stable_map_layout(text: str) -> None:
     text = text.replace("{{", "{").replace("}}", "}")
     assert "align-items:start; padding:10px; min-height:0" in text
-    assert "height:clamp(440px,42vw,520px); min-height:0" in text
-    assert ".eu-map-panel { height:420px; }" in text
+    assert "grid-template-columns:272px minmax(0,1fr)" in text
+    assert "min-height:520px; max-height:680px; aspect-ratio:16/9" in text
+    assert "height:420px; min-height:420px; max-height:none; aspect-ratio:auto" in text
+    assert 'class="eu-map-stack"' in text
+    assert "grid-template-columns:repeat(2,minmax(0,1fr))" in text
     assert "const keepMapPosition = mapRectBefore.bottom > 0" in text
     assert "window.scrollBy(0, displacement)" in text
 

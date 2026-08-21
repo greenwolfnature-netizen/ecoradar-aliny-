@@ -675,8 +675,15 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-brand-logos {{ display:flex; align-items:center; gap:6px; }}
     #ecoradar-alinya .eu-brand-logos img {{ width:46px; height:46px; object-fit:contain; border:1px solid #d5dcd5; border-radius:6px; background:#fff; }}
     #ecoradar-alinya .eu-badge {{ border:1px solid #bfc8c1; border-radius:999px; padding:7px 10px; font-size:10px; color:#3e5260; background:#fffefa; white-space:nowrap; }}
-    #ecoradar-alinya .eu-grid {{ display:grid; grid-template-columns:272px minmax(470px,1fr) 292px; gap:10px; align-items:start; padding:10px; min-height:0; }}
+    #ecoradar-alinya .eu-grid {{ display:grid; grid-template-columns:272px minmax(0,1fr); gap:10px; align-items:start; padding:10px; min-height:0; }}
     #ecoradar-alinya .eu-column {{ display:flex; flex-direction:column; gap:9px; min-width:0; }}
+    #ecoradar-alinya .eu-map-stack {{ display:flex; flex-direction:column; gap:10px; min-width:0; }}
+    #ecoradar-alinya .eu-column.eu-right {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; align-items:start; }}
+    #ecoradar-alinya .eu-column.eu-right > .eu-panel {{ min-width:0; }}
+    #ecoradar-alinya .eu-column.eu-right .eu-panel-wide {{ grid-column:1/-1; }}
+    #ecoradar-alinya .eu-column.eu-right .eu-fire-summary-panel {{ grid-column:1; grid-row:2; }}
+    #ecoradar-alinya .eu-column.eu-right .eu-fire-variables-panel {{ grid-column:1/-1; grid-row:3; }}
+    #ecoradar-alinya .eu-column.eu-right .eu-fire-formula-panel {{ grid-column:2; grid-row:2; }}
     #ecoradar-alinya .eu-panel {{ background:rgba(255,255,255,.76); border:1px solid var(--line); padding:11px; }}
     #ecoradar-alinya .eu-panel h3 {{ margin:0 0 8px; color:var(--blue); font-size:11px; text-transform:uppercase; letter-spacing:.045em; }}
     #ecoradar-alinya .eu-panel p {{ margin:5px 0; font-size:10px; line-height:1.42; color:#425362; }}
@@ -694,7 +701,7 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-fact:last-child {{ border-bottom:0; padding-bottom:0; }}
     #ecoradar-alinya .eu-fact span {{ font-size:9px; color:#51616e; }}
     #ecoradar-alinya .eu-fact strong {{ color:var(--green); font-size:14px; }}
-    #ecoradar-alinya .eu-map-panel {{ position:relative; align-self:start; width:100%; height:clamp(440px,42vw,520px); min-height:0; border:1px solid #cfc9bb; background:#e9ede5; overflow:hidden; }}
+    #ecoradar-alinya .eu-map-panel {{ position:relative; align-self:start; width:100%; height:auto; min-height:520px; max-height:680px; aspect-ratio:16/9; border:1px solid #cfc9bb; background:#e9ede5; overflow:hidden; }}
     #ecoradar-alinya .eu-map-head {{ position:absolute; z-index:4; top:10px; left:10px; right:10px; display:flex; justify-content:space-between; pointer-events:none; }}
     #ecoradar-alinya .eu-map-label {{ background:rgba(255,255,255,.9); border:1px solid #d5d0c4; padding:7px 9px; font-size:9px; color:#385064; box-shadow:0 3px 12px rgba(38,51,60,.08); }}
     #ecoradar-alinya .eu-reset {{ pointer-events:auto; border:1px solid #c9c4b8; background:rgba(255,255,255,.94); border-radius:4px; padding:7px 9px; color:var(--blue); cursor:pointer; font-size:9px; }}
@@ -835,9 +842,9 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-technical-intro span {{ margin-left:8px; color:#53636d; font-size:10px; }}
     #ecoradar-alinya .eu-map-access-label {{ margin:0; padding:24px max(20px,calc((100% - 1160px)/2)) 0; color:var(--green); font-size:10px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; background:var(--paper); }}
     #ecoradar-alinya .eu-fire-chapter {{ background:#f5f2eb; }}
-    @media (max-width:1050px) {{ #ecoradar-alinya .eu-grid {{ grid-template-columns:230px minmax(450px,1fr); }} #ecoradar-alinya .eu-column.eu-right {{ grid-column:1/-1; display:grid; grid-template-columns:repeat(3,1fr); }} #ecoradar-alinya .eu-foot {{ grid-column:1/-1; }} }}
+    @media (max-width:1050px) {{ #ecoradar-alinya .eu-grid {{ grid-template-columns:230px minmax(0,1fr); }} #ecoradar-alinya .eu-map-panel {{ min-height:480px; }} #ecoradar-alinya .eu-foot {{ grid-column:1/-1; }} }}
     @media (max-width:900px) {{ #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} }}
-    @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ display:flex; }} #ecoradar-alinya .eu-map-panel {{ height:420px; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:1fr; gap:4px; }} }}
+    @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right .eu-fire-summary-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-variables-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-formula-panel {{ grid-column:auto; grid-row:auto; }} #ecoradar-alinya .eu-map-panel {{ height:420px; min-height:420px; max-height:none; aspect-ratio:auto; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:1fr; gap:4px; }} }}
     @media print {{
       @page {{ size:A4 landscape; margin:10mm; }}
       body {{ background:#fff!important; }}
@@ -847,6 +854,7 @@ def render_index(data: dict) -> str:
       #ecoradar-alinya .eu-executive {{ padding:7mm 0; break-before:auto!important; }}
       #ecoradar-alinya .eu-map-access-label {{ break-before:page; break-after:avoid; padding:3mm 0 0; }}
       #ecoradar-alinya .eu-grid {{ width:auto; padding:3mm 0 0; min-height:0; display:flex; flex-direction:column; break-inside:auto; }}
+      #ecoradar-alinya .eu-map-stack {{ display:contents; }}
       #ecoradar-alinya .eu-map-panel {{ order:1; height:170mm; min-height:170mm; break-inside:avoid; }}
       #ecoradar-alinya svg {{ height:170mm; min-height:170mm; }}
       #ecoradar-alinya .eu-column.eu-left {{ order:2; display:grid; grid-template-columns:1fr 1fr; align-items:start; break-before:page; }}
@@ -949,6 +957,7 @@ def render_index(data: dict) -> str:
       </section>
     </aside>
 
+    <div class="eu-map-stack">
     <section class="eu-map-panel" aria-label="Mapa interactiu EcoRadar de la Muntanya d'Alinyà">
       <div class="eu-map-head"><div class="eu-map-label" id="eu-active-label">Mapa base verificat</div><button class="eu-reset" type="button">Restablir vista</button></div>
       <svg role="img" aria-label="Mapa d'Alinyà amb relleu, carreteres, poblacions, incendis, hàbitats, biodiversitat i accessibilitat"></svg>
@@ -974,7 +983,7 @@ def render_index(data: dict) -> str:
         <p>Selecciona una lectura temàtica i consulta «Com llegir la capa activa». Les capes vectorials es poden activar o desactivar sense alterar la lectura tècnica.</p>
         <p><a href="#mosaic">Continuar amb el diagnòstic tècnic complet</a></p>
       </section>
-      <section class="eu-panel" data-management hidden>
+      <section class="eu-panel eu-panel-wide" data-management hidden>
         <h3>Cribratge de gestió · què cal fer?</h3>
         <p class="eu-warning"><strong>Aquest mapa no delimita actuacions.</strong> Ordena comprovacions prèvies i assenyala on una decisió necessita més cautela o informació.</p>
         <div class="eu-facts">
@@ -990,24 +999,25 @@ def render_index(data: dict) -> str:
         </ol>
         <p class="eu-source">Resultat admissible: sector pendent de validació, no-intervenció preventiva o candidat a una actuació selectiva justificada. La capa no assigna territorialment cap d’aquestes decisions.</p>
       </section>
-      <section class="eu-panel" data-current-fire hidden>
+      <section class="eu-panel eu-fire-summary-panel" data-current-fire hidden>
         <h3>Perill d’avui · resum</h3>
         <div class="eu-live-status" id="eu-live-status" role="status" aria-live="polite">Consultant l’última comprovació remota…</div>
         <div class="eu-fire-summary" id="eu-fire-current-summary"></div>
         <div class="eu-fire-areas" id="eu-fire-current-areas"></div>
         <p class="eu-source" id="eu-fire-current-check"></p>
       </section>
-      <section class="eu-panel" data-current-fire hidden>
+      <section class="eu-panel eu-fire-variables-panel" data-current-fire hidden>
         <h3>Variables utilitzades avui</h3>
         <div class="eu-fire-table-wrap"><table class="eu-fire-table"><thead><tr><th>Variable</th><th>Valor</th><th>Font</th><th>Data</th><th>Pes</th><th>Estat</th></tr></thead><tbody id="eu-fire-current-variables"></tbody></table></div>
       </section>
-      <section class="eu-panel" data-current-fire hidden>
+      <section class="eu-panel eu-fire-formula-panel" data-current-fire hidden>
         <h3>Fórmula i interpretació</h3>
         <p>L’índex 0–100 combina components estructurals i condicions actuals. Les dades dinàmiques antigues perden pes gradualment o s’exclouen, i els pesos temporalment elegibles i disponibles es renormalitzen; mai no s’assigna un zero fictici.</p>
         <ul class="eu-fire-weights" id="eu-fire-current-weights"></ul>
         <p class="eu-source">Lectura analítica EcoRadar, no alerta oficial, Pla Alfa ni predicció d’ignició. Consulta cada cel·la per veure valors, contribucions i grau de completesa.</p>
       </section>
     </aside>
+    </div>
 
     <footer class="eu-foot"><span>Fonts: Generalitat perill estructural 2024 i incendis · Meteocat XEMA · USGS Landsat 8/9 · Copernicus Sentinel-2/CLMS · ICGC · Hàbitats/HIC · ACA · GBIF/iNaturalist · OSM</span><span>EcoRadar Alinyà · versió 20.07.2026</span></footer>
   </main>
