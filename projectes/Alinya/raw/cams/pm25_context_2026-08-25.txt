@@ -1,0 +1,11 @@
+
+Name: composition_europe_pm2p5_forecast_surface
+Title: Pm2.5 (provided by CAMS)
+Value: 3.60298 µg/m3
+Input latitude:  42.18540594059406
+Input longitude: 1.4417227722772277
+Grid point: nearest
+Distance: 3.94509 km
+Grid point latitude: 42.15
+Grid point longitude:  1.45
+
