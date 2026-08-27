@@ -31,4 +31,7 @@ for mode in ('base','habitats','biodiversity','vegetation','vigor','moisture','c
 for layer in ('access','publicUse','places','landcover'):
     assert f"{layer}:" in profiles, layer
 
+for useful in ('habitats','biodiversity','vegetation','vigor','moisture','climateRefuges','temperature','albedo','fireDanger','fireCurrent','fires','management'):
+    assert f"{useful}:{{contribution:" in profiles, f"missing specific interpretive chain: {useful}"
+
 print('ALINYA_READING_REPORTS=PASS')
