@@ -14,6 +14,8 @@ opcionalment, `ECORADAR_GITHUB_BRANCH` (per defecte `main`).
 
 - `index.html`: experiencia EcoRadar reorganitzada per a la Muntanya d'Alinya, amb lectura executiva i tecnica completa.
 - `vendor/d3.min.js`: D3 servit localment, com al model EcoRadar Urba.
+- `vendor/ecoradar-reading-report.js`: motor reutilitzable de previsualització i exportació PDF.
+- `vendor/ecoradar-alinya-report-profiles.js`: interpretacions contextuals d’Alinyà basades en les dades reals del visor.
 - `docs/data-sources-matrix.md`: matriu de fonts del projecte Alinya.
 - `docs/fire-source.md`: nota de traçabilitat de la capa d'incendis.
 - `docs/current-fire-danger-source.md`: metodologia i fonts oficials del perill actual.

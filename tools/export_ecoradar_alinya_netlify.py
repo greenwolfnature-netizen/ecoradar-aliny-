@@ -29,6 +29,8 @@ STANDALONE_HTML = PROJECT / "maps" / "ecoradar_alinya_interactiu-v2.html"
 VENDOR_D3 = ROOT / "vendor" / "d3.min.js"
 if not VENDOR_D3.is_file():
     VENDOR_D3 = ROOT / "projectes" / "LaSeu_Urba" / "maps" / "ecoradar-la-seu-netlify" / "vendor" / "d3.min.js"
+REPORT_ENGINE = ROOT / "vendor" / "ecoradar-reading-report.js"
+REPORT_PROFILES = ROOT / "vendor" / "ecoradar-alinya-report-profiles.js"
 BRANDING = PROJECT / "assets" / "branding"
 if not BRANDING.is_dir():
     # Transitional fallback for the multi-project workspace. The standalone
@@ -787,6 +789,37 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-guide-label {{ margin:9px 0 5px; color:var(--blue); font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.035em; }}
     #ecoradar-alinya .eu-guide-reading {{ margin-top:8px!important; padding-top:7px; border-top:1px solid #e5e1d8; }}
     #ecoradar-alinya .eu-guide-limit {{ margin-top:7px!important; color:#6c5a47!important; }}
+    #ecoradar-alinya .eu-generate-report {{ width:100%; min-height:38px; margin-top:12px; padding:8px 12px; border:1px solid var(--green); border-radius:5px; color:#fff; background:var(--green); font:700 10px/1.2 Arial,sans-serif; cursor:pointer; }}
+    #ecoradar-alinya .eu-generate-report:hover, #ecoradar-alinya .eu-generate-report:focus-visible {{ background:var(--blue); border-color:var(--blue); outline:2px solid #91a99d; outline-offset:2px; }}
+    body.err-modal-open {{ overflow:hidden; }}
+    #ecoradar-alinya .err-modal {{ position:fixed; inset:0; z-index:9999; display:grid; place-items:center; padding:18px; background:rgba(18,47,73,.72); }}
+    #ecoradar-alinya .err-modal[hidden] {{ display:none; }}
+    #ecoradar-alinya .err-dialog {{ display:grid; grid-template-rows:auto minmax(0,1fr) auto; width:min(980px,100%); height:min(92vh,900px); overflow:hidden; border:1px solid #c9c4b8; border-radius:9px; background:#f7f4ec; box-shadow:0 22px 70px rgba(0,0,0,.35); }}
+    #ecoradar-alinya .err-toolbar {{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border-bottom:1px solid var(--line); background:#fff; }}
+    #ecoradar-alinya .err-toolbar h2 {{ margin:0; color:var(--blue); font-size:15px; }}
+    #ecoradar-alinya .err-close, #ecoradar-alinya .err-pdf {{ min-height:34px; padding:7px 11px; border:1px solid var(--blue); border-radius:5px; color:var(--blue); background:#fff; font:700 9px Arial,sans-serif; cursor:pointer; }}
+    #ecoradar-alinya .err-pdf {{ color:#fff; background:var(--blue); }}
+    #ecoradar-alinya .err-preview {{ overflow:auto; padding:22px; }}
+    #ecoradar-alinya .err-document {{ max-width:760px; margin:auto; color:#334d5d; background:#fff; box-shadow:0 5px 24px rgba(0,0,0,.08); }}
+    #ecoradar-alinya .err-document > section, #ecoradar-alinya .err-document > footer {{ padding:18px 28px; }}
+    #ecoradar-alinya .err-cover {{ display:flex; justify-content:space-between; gap:20px; min-height:160px; padding:28px; border-top:12px solid var(--green); background:#edf4ea; }}
+    #ecoradar-alinya .err-cover span {{ color:var(--green); font-size:9px; font-weight:800; letter-spacing:.12em; }}
+    #ecoradar-alinya .err-cover h1 {{ margin:24px 0 5px; color:var(--blue); font-size:27px; line-height:1.05; }}
+    #ecoradar-alinya .err-cover p, #ecoradar-alinya .err-date {{ margin:0; color:#53636d; font-size:9px; }}
+    #ecoradar-alinya .err-metadata, #ecoradar-alinya .err-facts {{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }}
+    #ecoradar-alinya .err-metadata > div, #ecoradar-alinya .err-fact {{ min-width:0; padding:10px; border:1px solid var(--line); }}
+    #ecoradar-alinya .err-metadata b, #ecoradar-alinya .err-metadata span, #ecoradar-alinya .err-fact span, #ecoradar-alinya .err-fact strong, #ecoradar-alinya .err-fact small {{ display:block; overflow-wrap:anywhere; }}
+    #ecoradar-alinya .err-metadata b, #ecoradar-alinya .err-fact span {{ color:#64727d; font-size:8px; text-transform:uppercase; }}
+    #ecoradar-alinya .err-metadata span {{ margin-top:4px; font-size:10px; }}
+    #ecoradar-alinya .err-fact strong {{ margin-top:4px; color:var(--green); font-size:16px; }}
+    #ecoradar-alinya .err-document h2 {{ margin:0 0 8px; padding-bottom:5px; border-bottom:1px solid var(--line); color:var(--blue); font-size:14px; text-transform:none; letter-spacing:0; }}
+    #ecoradar-alinya .err-document p, #ecoradar-alinya .err-document li {{ color:#3d5261; font-size:10px; line-height:1.55; }}
+    #ecoradar-alinya .err-map {{ height:340px; overflow:hidden; border:1px solid var(--line); background:#eef1ea; }}
+    #ecoradar-alinya .err-map svg {{ width:100%; height:100%; }}
+    #ecoradar-alinya .err-limits {{ margin:0 28px; padding:16px!important; border-left:4px solid var(--orange); background:#fff6e8; }}
+    #ecoradar-alinya .err-document footer {{ border-top:1px solid var(--line); color:#687682; font-size:8px; }}
+    #ecoradar-alinya .err-actions {{ display:flex; justify-content:flex-end; align-items:center; gap:8px; padding:10px 16px; border-top:1px solid var(--line); background:#fff; }}
+    #ecoradar-alinya .err-status {{ margin-right:auto; color:#8a3f20; font-size:8px; }}
     #ecoradar-alinya #eu-reading-guide {{ min-height:310px; }}
     #ecoradar-alinya #eu-legend {{ min-height:84px; align-content:start; }}
     #ecoradar-alinya .eu-source {{ font-size:8px!important; color:#74808a!important; }}
@@ -886,6 +919,7 @@ def render_index(data: dict) -> str:
     @media (max-width:1050px) {{ #ecoradar-alinya .eu-grid {{ grid-template-columns:230px minmax(0,1fr); }} #ecoradar-alinya .eu-map-panel {{ min-height:480px; }} #ecoradar-alinya .eu-foot {{ grid-column:1/-1; }} }}
     @media (max-width:900px) {{ #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right .eu-fire-summary-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-variables-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-formula-panel {{ grid-column:auto; grid-row:auto; }} #ecoradar-alinya .eu-map-panel {{ height:420px; min-height:420px; max-height:none; aspect-ratio:auto; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:1fr; gap:4px; }} }}
+    @media (max-width:760px) {{ #ecoradar-alinya .err-modal {{ padding:0; }} #ecoradar-alinya .err-dialog {{ width:100%; height:100vh; border-radius:0; }} #ecoradar-alinya .err-preview {{ padding:8px; }} #ecoradar-alinya .err-cover {{ flex-direction:column; min-height:0; padding:20px; }} #ecoradar-alinya .err-cover h1 {{ margin-top:14px; font-size:22px; }} #ecoradar-alinya .err-metadata, #ecoradar-alinya .err-facts {{ grid-template-columns:1fr; }} #ecoradar-alinya .err-document > section, #ecoradar-alinya .err-document > footer {{ padding:15px 18px; }} #ecoradar-alinya .err-limits {{ margin:0 18px; }} #ecoradar-alinya .err-map {{ height:240px; }} }}
     @media print {{
       @page {{ size:A4 landscape; margin:10mm; }}
       body {{ background:#fff!important; }}
@@ -983,6 +1017,7 @@ def render_index(data: dict) -> str:
         <div class="eu-legend" id="eu-legend" role="list"></div>
         <p class="eu-guide-reading" id="eu-guide-reading"></p>
         <p class="eu-guide-limit" id="eu-guide-limit"></p>
+        <button class="eu-generate-report" type="button" data-generate-reading-report>Generar informe</button>
       </section>
       <section class="eu-panel">
         <h3>Capes vectorials</h3>
@@ -1203,8 +1238,17 @@ def render_index(data: dict) -> str:
       <details class="eu-detail"><summary>Bibliografia de planificació, conservació i rewilding</summary><div><p><strong>EUROPARC-España (2018).</strong> <em>Las áreas protegidas en el contexto del cambio global: incorporación de la adaptación al cambio climático en la planificación y gestión</em>, 2a ed. Criteris utilitzats: territori com a sistema, incertesa, successió, connectivitat, seguiment i gestió adaptativa (pàgines PDF 29–32).</p><p><strong>EUROPARC-España (2008).</strong> <em>Planificar para gestionar los espacios naturales protegidos</em>. Cicle objectiu–diagnòstic–mesura–resultat–avaluació i gradient no-intervenció/maneig actiu (pàgines PDF 75–77 i 98).</p><p><strong>IUCN Commission on Ecosystem Management (2025).</strong> <a href="https://portals.iucn.org/library/node/52582"><em>Guidelines for rewilding</em></a>. <strong>Carver et al. (2021).</strong> <a href="https://doi.org/10.1111/cobi.13730"><em>Guiding principles for rewilding</em></a>, Conservation Biology 35:1882–1893.</p></div></details>
     </section>
   </article>
+<div class="err-modal" data-reading-report-modal hidden role="dialog" aria-modal="true" aria-labelledby="err-dialog-title">
+  <div class="err-dialog">
+    <div class="err-toolbar"><div><small>Previsualització de l’informe</small><h2 id="err-dialog-title" data-reading-report-title></h2></div><button class="err-close" type="button" data-reading-report-close aria-label="Tancar l’informe">Tancar</button></div>
+    <div class="err-preview" data-reading-report-preview></div>
+    <div class="err-actions"><span class="err-status" data-reading-report-status aria-live="polite"></span><button class="err-close" type="button" data-reading-report-close>Tornar al mapa</button><button class="err-pdf" type="button" data-reading-report-pdf>Exportar en PDF</button></div>
+  </div>
+</div>
 </div>
 <script src="./vendor/d3.min.js"></script>
+<script src="./vendor/ecoradar-reading-report.js"></script>
+<script src="./vendor/ecoradar-alinya-report-profiles.js"></script>
 <script>
 (() => {{
   const root = document.getElementById('ecoradar-alinya');
@@ -1882,6 +1926,13 @@ def render_index(data: dict) -> str:
       status.textContent = `No s’ha pogut consultar la font remota. Es mostra la reserva empaquetada, comprovada ${{humanDate(D.currentFire.checkedAtUtc)}}.`;
     }}
   }}
+  const reportBuilder = window.EcoRadarAlinyaReportProfiles.buildFactory(D, modeGuides, layerGuides);
+  window.EcoRadarReadingReport.mount({{
+    root,
+    getSelection:() => ({{...activeGuide, mode:activeMode, guide:currentGuide()}}),
+    getMapSvg:() => root.querySelector('.eu-map-panel svg'),
+    buildReport:reportBuilder
+  }});
   applyMode('base');
   refreshRemoteSnapshot();
 }})();
@@ -1901,10 +1952,15 @@ def write_package() -> None:
     (OUT_DIR / "history").mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "netlify" / "functions").mkdir(parents=True, exist_ok=True)
     shutil.copy2(VENDOR_D3, OUT_DIR / "vendor" / "d3.min.js")
+    shutil.copy2(REPORT_ENGINE, OUT_DIR / "vendor" / REPORT_ENGINE.name)
+    shutil.copy2(REPORT_PROFILES, OUT_DIR / "vendor" / REPORT_PROFILES.name)
     html_text = render_index(data)
     (OUT_DIR / "index.html").write_text(html_text, encoding="utf-8")
     STANDALONE_HTML.write_text(
-        html_text.replace('<script src="./vendor/d3.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/d3.min.js"></script>'),
+        html_text
+        .replace('<script src="./vendor/d3.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/d3.min.js"></script>')
+        .replace('<script src="./vendor/ecoradar-reading-report.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js"></script>')
+        .replace('<script src="./vendor/ecoradar-alinya-report-profiles.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js"></script>'),
         encoding="utf-8",
     )
     (OUT_DIR / "netlify.toml").write_text(
@@ -1954,6 +2010,8 @@ opcionalment, `ECORADAR_GITHUB_BRANCH` (per defecte `main`).
 
 - `index.html`: experiencia EcoRadar reorganitzada per a la Muntanya d'Alinya, amb lectura executiva i tecnica completa.
 - `vendor/d3.min.js`: D3 servit localment, com al model EcoRadar Urba.
+- `vendor/ecoradar-reading-report.js`: motor reutilitzable de previsualització i exportació PDF.
+- `vendor/ecoradar-alinya-report-profiles.js`: interpretacions contextuals d’Alinyà basades en les dades reals del visor.
 - `docs/data-sources-matrix.md`: matriu de fonts del projecte Alinya.
 - `docs/fire-source.md`: nota de traçabilitat de la capa d'incendis.
 - `docs/current-fire-danger-source.md`: metodologia i fonts oficials del perill actual.
