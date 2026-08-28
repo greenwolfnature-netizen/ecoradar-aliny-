@@ -1,0 +1,50 @@
+{
+  "generated_at_utc": "2026-08-28T18:51:32.141905+00:00",
+  "scope": "Muntanya d’Alinyà",
+  "status": "pilot_qualitative",
+  "sector_unit": "49 unitats cartogràfiques oficials de l’índex de connectivitat terrestre de la Generalitat, retallades a l’àmbit; no són una quadrícula EcoRadar ni una delimitació de gestió.",
+  "privacy": "Els registres de biodiversitat només s’agreguen per sector. El producte no conté coordenades, noms de taxons ni localitzacions sensibles.",
+  "thresholds": {
+    "records_q25_positive": 2.0,
+    "records_median_positive": 3.5,
+    "ndmi_q25": 0.027,
+    "ndvi_q25": 0.482,
+    "lst_q75": 32.02175,
+    "bare_q75": 0.0,
+    "access_q75": 7.159412281471371
+  },
+  "threshold_method": "Quartils territorials interns per detectar contrastos relatius entre sectors; no són llindars ecològics, legals ni causals.",
+  "classification_rules": {
+    "Prioritat de comprovació": "valor ecològic cartografiat i dues o més coincidències de pressió",
+    "Atenció": "valor ecològic cartografiat i una coincidència de pressió",
+    "Coneixement insuficient": "cap registre o recompte dins el primer quartil positiu, sense una coincidència valor-pressions de rang superior",
+    "Seguiment recomanat": "valor o pressió sense coincidència suficient per a les categories anteriors",
+    "Sense senyals destacables": "cap senyal destacable amb les dades disponibles; no implica absència de valor o impacte"
+  },
+  "sources": [
+    "Generalitat de Catalunya: Hàbitats terrestres v3 i HIC",
+    "Generalitat de Catalunya: Infraestructura Verda / connectivitat ecològica",
+    "Generalitat de Catalunya: perímetres d’incendis històrics",
+    "ICGC: Cobertes del Sol de Catalunya 2024",
+    "Copernicus Sentinel-2 L2A: NDVI i NDMI, 07/07/2026",
+    "USGS Landsat 8/9 Collection 2 L2: temperatura superficial, composició estival 2025–2026",
+    "EcoRadar: perill d’incendi actual, amb data preservada al visor",
+    "GBIF i iNaturalist: registres públics agregats",
+    "OpenStreetMap: xarxa i punts d’ús públic com a accessibilitat potencial"
+  ],
+  "limitations": [
+    "No avalua estat de conservació ni presència d’espècies protegides perquè aquestes dades no estan verificades en el conjunt disponible.",
+    "Pocs registres signifiquen coneixement insuficient, no baixa biodiversitat.",
+    "Les coincidències espacials no demostren causalitat ni impacte.",
+    "La xarxa OSM indica accessibilitat potencial, no freqüentació ni pressió real.",
+    "La fragmentació funcional necessita dades específiques de barreres, espècies i validació de camp.",
+    "NDVI, NDMI i temperatura superficial conserven la data real de les observacions i no es presenten com a mesures de camp."
+  ],
+  "counts": {
+    "sectors": 49,
+    "valuable": 44,
+    "pressured": 29,
+    "knowledge_insufficient": 39,
+    "priority_check": 15
+  }
+}
