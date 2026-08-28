@@ -122,6 +122,7 @@ def build() -> tuple[gpd.GeoDataFrame, dict]:
         "lst_q75": positive_quantile(sectors.lst_c, 0.75),
         "bare_q75": positive_quantile(sectors.bare_pct, 0.75),
         "access_q75": positive_quantile(sectors.access_km_km2, 0.75),
+        "natural_cover_q75": positive_quantile(sectors.natural_cover_pct, 0.75),
     }
 
     def classify_knowledge(records: int) -> str:
@@ -167,6 +168,53 @@ def build() -> tuple[gpd.GeoDataFrame, dict]:
         knowledge = classify_knowledge(row.records)
         valuable = bool(value_reasons)
         pressured = bool(pressure_reasons)
+        connectivity_reasons = []
+        if row.connector_ha >= 0.1:
+            connectivity_reasons.append(f"{row.connector_ha:.1f} ha dins connectors terrestres oficials")
+        if row.natural_cover_pct >= (thresholds["natural_cover_q75"] or float("inf")):
+            connectivity_reasons.append(
+                f"{row.natural_cover_pct:.0f} % de cobertes naturals o seminaturals com a context de continuïtat"
+            )
+        reading_coincidences = list(pressure_reasons)
+        detected = []
+        if value_reasons:
+            detected.append("valor ecològic cartografiat amb les fonts disponibles")
+        if pressure_reasons:
+            detected.append("coincidències espacials amb altres lectures EcoRadar")
+        if connectivity_reasons:
+            detected.append("continuïtat o connector cartografiat")
+        if knowledge in {"Pràcticament sense dades", "Poca informació"}:
+            detected.append("coneixement biològic públic insuficient")
+
+        implications = []
+        if row.connector_ha >= 0.1:
+            implications.append(
+                "Una alteració dins un connector cartografiat podria reduir permeabilitat ecològica; la funcionalitat real s’ha de validar per grups de fauna."
+            )
+        if relative_signal(row.ndmi, thresholds["ndmi_q25"], "low"):
+            implications.append(
+                "La humitat espectral relativament baixa pot ser compatible amb menys disponibilitat hídrica de la vegetació, però no demostra estrès fisiològic sense camp."
+            )
+        if relative_signal(row.ndvi, thresholds["ndvi_q25"], "low"):
+            implications.append(
+                "El vigor espectral relativament baix pot respondre a coberta, fenologia, sòl o estat vegetal; cal contrastar la causa abans d’interpretar degradació."
+            )
+        if relative_signal(row.lst_c, thresholds["lst_q75"], "high"):
+            implications.append(
+                "Una superfície relativament càlida pot reduir la funció de refugi tèrmic i reforçar l’assecament, si coincideix amb baixa humitat i la situació es confirma al camp."
+            )
+        if row.historic_fire_ha > 0.05:
+            implications.append(
+                "La coincidència amb foc històric justifica revisar trajectòria de recuperació i estructura, però no implica per si sola un estat ecològic desfavorable."
+            )
+        if row.fire_today is not None and row.fire_today >= 61:
+            implications.append(
+                "El perill d’incendi actual elevat augmenta la necessitat de vigilància conjuntural; no converteix el sector en candidat automàtic a tractament."
+            )
+        if row.access_km_km2 >= (thresholds["access_q75"] or float("inf")):
+            implications.append(
+                "L’accessibilitat potencial pot facilitar coincidències d’ús amb hàbitats o fauna, però la freqüentació i l’impacte real no estan mesurats."
+            )
         if valuable and len(pressure_reasons) >= 2:
             followup = "Prioritat de comprovació"
             recommendation = "Comprovar al camp l’estat de l’hàbitat i les coincidències abans de decidir actuacions."
@@ -197,6 +245,12 @@ def build() -> tuple[gpd.GeoDataFrame, dict]:
                 "missing": missing,
                 "valuable": valuable,
                 "pressured": pressured,
+                "connectivity_reasons": connectivity_reasons,
+                "connected": bool(connectivity_reasons),
+                "change_detected": False,
+                "reading_coincidences": reading_coincidences,
+                "detected": detected,
+                "possible_implications": implications,
             }
         )
 
@@ -208,7 +262,8 @@ def build() -> tuple[gpd.GeoDataFrame, dict]:
         "bare_pct", "records", "road_km", "access_km_km2", "public_points", "historic_fire_ha",
         "historic_fire_events", "ndvi", "ndmi", "lst_c", "fire_today", "value_reasons",
         "pressure_reasons", "knowledge_class", "followup", "recommendation", "missing", "valuable",
-        "pressured", "geometry",
+        "pressured", "connectivity_reasons", "connected", "change_detected", "reading_coincidences",
+        "detected", "possible_implications", "geometry",
     ]
     result = sectors[keep].to_crs(4326)
     for column in ["area_ha", "hic_ha", "priority_hic_ha", "connector_ha", "natural_cover_pct", "bare_pct", "road_km", "access_km_km2", "historic_fire_ha"]:
@@ -254,6 +309,27 @@ def build() -> tuple[gpd.GeoDataFrame, dict]:
             "pressured": int(result.pressured.sum()),
             "knowledge_insufficient": int(result.knowledge_class.isin(["Pràcticament sense dades", "Poca informació"]).sum()),
             "priority_check": int((result.followup == "Prioritat de comprovació").sum()),
+            "connectivity": int(result.connected.sum()),
+            "changes_detected": 0,
+        },
+        "diagnostic_availability": {
+            "value": {"available": True},
+            "pressure": {"available": True},
+            "changes": {
+                "available": False,
+                "message": "Informació insuficient per generar aquesta diagnosi.",
+                "missing": [
+                    "sèrie espacial multitemporal comparable de NDVI i NDMI",
+                    "dates de coberta del sòl harmonitzades per detectar transicions",
+                    "validació de camp dels canvis observats",
+                ],
+            },
+            "connectivity": {
+                "available": True,
+                "limit": "Mostra connectors oficials i continuïtat de cobertes com a context; no identifica funcionalitat específica per espècie ni barreres no cartografiades.",
+            },
+            "knowledge": {"available": True},
+            "followup": {"available": True},
         },
     }
     return result, metadata

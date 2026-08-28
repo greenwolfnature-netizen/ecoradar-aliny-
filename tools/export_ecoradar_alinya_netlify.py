@@ -964,39 +964,54 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-technical-intro span {{ margin-left:8px; color:#53636d; font-size:10px; }}
     #ecoradar-alinya .eu-map-access-label {{ margin:0; padding:24px max(20px,calc((100% - 1160px)/2)) 0; color:var(--green); font-size:10px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; background:var(--paper); }}
     #ecoradar-alinya .eu-fire-chapter {{ background:#f5f2eb; }}
-    #ecoradar-alinya .eu-bh-pilot {{ margin:22px 0 24px; padding:18px; border:1px solid #bdcbbf; border-radius:10px; background:#eef4ec; }}
-    #ecoradar-alinya .eu-bh-pilot-head {{ display:flex; justify-content:space-between; gap:20px; align-items:end; margin-bottom:14px; }}
-    #ecoradar-alinya .eu-bh-pilot-head h3 {{ margin:0; color:var(--blue); font-size:20px; }}
-    #ecoradar-alinya .eu-bh-pilot-head p {{ max-width:650px; margin:5px 0 0; color:#405563; font-size:11px; line-height:1.5; }}
-    #ecoradar-alinya .eu-bh-summary {{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:9px; margin-bottom:12px; }}
-    #ecoradar-alinya .eu-bh-filter {{ min-height:102px; padding:13px; border:1px solid #cbd3ca; border-radius:7px; background:#fff; color:#29465d; text-align:left; cursor:pointer; }}
-    #ecoradar-alinya .eu-bh-filter strong, #ecoradar-alinya .eu-bh-filter span {{ display:block; }}
-    #ecoradar-alinya .eu-bh-filter strong {{ margin-bottom:7px; color:var(--blue); font-size:12px; }}
-    #ecoradar-alinya .eu-bh-filter span {{ color:#53636d; font-size:9px; line-height:1.4; }}
-    #ecoradar-alinya .eu-bh-filter[aria-pressed="true"] {{ color:#fff; border-color:var(--blue); background:var(--blue); }}
-    #ecoradar-alinya .eu-bh-filter[aria-pressed="true"] strong, #ecoradar-alinya .eu-bh-filter[aria-pressed="true"] span {{ color:#fff; }}
-    #ecoradar-alinya .eu-bh-layout {{ display:grid; grid-template-columns:minmax(0,1.5fr) minmax(270px,.7fr); gap:12px; }}
-    #ecoradar-alinya .eu-bh-map {{ position:relative; min-height:430px; border:1px solid #c8cfc6; background:#e7ece3; overflow:hidden; }}
-    #ecoradar-alinya .eu-bh-map svg {{ width:100%; height:430px; }}
+    #ecoradar-alinya .eu-biodiversity-situation[hidden] {{ display:none; }}
+    #ecoradar-alinya .eu-left[hidden], #ecoradar-alinya .eu-map-stack[hidden], #ecoradar-alinya .eu-foot[hidden] {{ display:none!important; }}
+    #ecoradar-alinya .eu-biodiversity-situation {{ grid-column:1/-1; min-width:0; padding:clamp(16px,2vw,28px); border:1px solid #173d34; border-radius:12px; background:linear-gradient(145deg,#0f3029 0,#183f35 36%,#edf2e9 36.1%,#f7f4ec 100%); box-shadow:0 16px 50px rgba(16,47,38,.14); }}
+    #ecoradar-alinya .eu-bh-pilot-head {{ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:20px; align-items:start; margin-bottom:18px; color:#fff; }}
+    #ecoradar-alinya .eu-bh-eyebrow {{ display:block; margin-bottom:9px; color:#b8d8ad; font-size:9px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; }}
+    #ecoradar-alinya .eu-bh-pilot-head h2 {{ max-width:780px; margin:0; color:#fff; font-size:clamp(25px,3vw,42px); line-height:1.03; }}
+    #ecoradar-alinya .eu-bh-pilot-head p {{ max-width:760px; margin:12px 0 0; color:#dce9df; font-size:12px; line-height:1.55; }}
+    #ecoradar-alinya .eu-bh-head-actions {{ display:flex; flex-wrap:wrap; justify-content:flex-end; gap:7px; }}
+    #ecoradar-alinya .eu-bh-back, #ecoradar-alinya .eu-bh-report {{ min-height:37px; padding:8px 11px; border:1px solid #c9ded0; border-radius:5px; color:#fff; background:rgba(255,255,255,.08); cursor:pointer; font-size:9px; font-weight:750; }}
+    #ecoradar-alinya .eu-bh-report {{ color:#15382f; background:#d7e8cf; }}
+    #ecoradar-alinya .eu-bh-summary {{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-bottom:14px; }}
+    #ecoradar-alinya .eu-bh-filter {{ position:relative; min-height:142px; padding:16px 16px 14px; overflow:hidden; border:1px solid #cbd5ca; border-radius:9px; background:rgba(255,255,255,.96); color:#29465d; text-align:left; cursor:pointer; box-shadow:0 8px 24px rgba(18,47,39,.08); }}
+    #ecoradar-alinya .eu-bh-filter::before {{ content:attr(data-bh-number); position:absolute; right:11px; top:7px; color:#dce5da; font-size:40px; font-weight:800; line-height:1; }}
+    #ecoradar-alinya .eu-bh-filter strong, #ecoradar-alinya .eu-bh-filter span, #ecoradar-alinya .eu-bh-filter small {{ position:relative; display:block; }}
+    #ecoradar-alinya .eu-bh-filter strong {{ max-width:80%; margin-bottom:9px; color:#173d34; font-size:13px; letter-spacing:.035em; text-transform:uppercase; }}
+    #ecoradar-alinya .eu-bh-filter span {{ color:#4a5e68; font-size:9px; line-height:1.45; }}
+    #ecoradar-alinya .eu-bh-filter small {{ margin-top:9px; color:#2f743f; font-size:8px; font-weight:800; text-transform:uppercase; }}
+    #ecoradar-alinya .eu-bh-filter.is-unavailable small {{ color:#8b5b25; }}
+    #ecoradar-alinya .eu-bh-filter[aria-pressed="true"] {{ border-color:#c9e2bc; background:#d9e8d0; box-shadow:inset 0 0 0 2px #2f743f,0 8px 24px rgba(18,47,39,.12); }}
+    #ecoradar-alinya .eu-bh-layout {{ display:grid; grid-template-columns:minmax(0,1.35fr) minmax(330px,.75fr); gap:12px; }}
+    #ecoradar-alinya .eu-bh-map {{ position:relative; min-height:540px; border:1px solid #9dad9f; border-radius:8px; background:#dfe8dc; overflow:hidden; }}
+    #ecoradar-alinya .eu-bh-map svg {{ width:100%; height:540px; }}
     #ecoradar-alinya .eu-bh-sector {{ stroke:#fff; stroke-width:.8; vector-effect:non-scaling-stroke; cursor:pointer; transition:opacity .15s ease,stroke-width .15s ease; }}
-    #ecoradar-alinya .eu-bh-sector.is-muted {{ opacity:.12; }}
+    #ecoradar-alinya .eu-bh-sector.is-muted {{ opacity:.09; pointer-events:none; }}
     #ecoradar-alinya .eu-bh-sector.is-selected {{ stroke:#102f24; stroke-width:3; }}
-    #ecoradar-alinya .eu-bh-map-legend {{ position:absolute; left:10px; bottom:10px; max-width:360px; padding:8px 10px; border:1px solid #d5d0c4; background:rgba(255,255,255,.94); color:#455662; font-size:8px; line-height:1.4; }}
-    #ecoradar-alinya .eu-bh-detail {{ min-height:430px; padding:15px; border:1px solid #c8cfc6; background:#fff; }}
-    #ecoradar-alinya .eu-bh-detail h4 {{ margin:0 0 5px; color:var(--blue); font-size:17px; }}
+    #ecoradar-alinya .eu-bh-map-state {{ position:absolute; inset:0; z-index:3; display:grid; place-items:center; padding:30px; background:rgba(245,244,237,.88); text-align:center; }}
+    #ecoradar-alinya .eu-bh-map-state[hidden] {{ display:none; }}
+    #ecoradar-alinya .eu-bh-map-state strong {{ display:block; color:#8b5421; font-size:18px; }}
+    #ecoradar-alinya .eu-bh-map-state p, #ecoradar-alinya .eu-bh-map-state li {{ color:#53636d; font-size:10px; line-height:1.5; }}
+    #ecoradar-alinya .eu-bh-map-legend {{ position:absolute; left:10px; right:10px; bottom:10px; padding:9px 11px; border:1px solid #d5d0c4; background:rgba(255,255,255,.94); color:#455662; font-size:8px; line-height:1.4; }}
+    #ecoradar-alinya .eu-bh-detail {{ min-height:540px; max-height:540px; overflow:auto; padding:17px; border:1px solid #c8cfc6; border-radius:8px; background:#fff; }}
+    #ecoradar-alinya .eu-bh-detail h4 {{ margin:0 0 5px; color:var(--blue); font-size:18px; }}
     #ecoradar-alinya .eu-bh-category {{ display:inline-block; margin-bottom:10px; padding:5px 8px; border-radius:999px; color:#fff; background:var(--green); font-size:9px; font-weight:800; text-transform:uppercase; }}
-    #ecoradar-alinya .eu-bh-detail h5 {{ margin:12px 0 5px; color:var(--green); font-size:10px; text-transform:uppercase; letter-spacing:.04em; }}
-    #ecoradar-alinya .eu-bh-detail p, #ecoradar-alinya .eu-bh-detail li {{ color:#405563; font-size:10px; line-height:1.48; }}
+    #ecoradar-alinya .eu-bh-detail h5 {{ margin:13px 0 5px; color:var(--green); font-size:9px; text-transform:uppercase; letter-spacing:.055em; }}
+    #ecoradar-alinya .eu-bh-detail p, #ecoradar-alinya .eu-bh-detail li {{ color:#405563; font-size:10px; line-height:1.52; }}
     #ecoradar-alinya .eu-bh-detail ul {{ margin:5px 0; padding-left:17px; }}
+    #ecoradar-alinya .eu-bh-why {{ margin-top:14px; padding:12px; border-left:4px solid #2f743f; background:#edf4ea; }}
+    #ecoradar-alinya .eu-bh-why h5 {{ margin-top:0; color:#173d34; font-size:11px; }}
+    #ecoradar-alinya .eu-bh-result {{ display:block; margin-top:8px; color:#173d34; font-size:11px; font-weight:800; }}
     #ecoradar-alinya .eu-bh-notes {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; margin-top:12px; }}
-    #ecoradar-alinya .eu-bh-note {{ padding:12px; border:1px solid #d7d1c4; background:#fff; color:#52636e; font-size:9px; line-height:1.5; }}
+    #ecoradar-alinya .eu-bh-note {{ padding:12px; border:1px solid #d7d1c4; border-radius:6px; background:#fff; color:#52636e; font-size:9px; line-height:1.5; }}
     @media (max-width:1050px) {{ #ecoradar-alinya .eu-grid {{ grid-template-columns:230px minmax(0,1fr); }} #ecoradar-alinya .eu-map-panel {{ min-height:480px; }} #ecoradar-alinya .eu-foot {{ grid-column:1/-1; }} }}
-    @media (max-width:900px) {{ #ecoradar-alinya .eu-guide-horizontal-grid {{ grid-template-columns:1fr 1fr; }} #ecoradar-alinya .eu-guide-interpretation {{ grid-column:1/-1; }} #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-bh-summary {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} #ecoradar-alinya .eu-bh-layout {{ grid-template-columns:1fr; }} }}
+    @media (max-width:900px) {{ #ecoradar-alinya .eu-guide-horizontal-grid {{ grid-template-columns:1fr 1fr; }} #ecoradar-alinya .eu-guide-interpretation {{ grid-column:1/-1; }} #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-bh-summary {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} #ecoradar-alinya .eu-bh-layout {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-bh-detail {{ min-height:0; max-height:none; }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right .eu-fire-summary-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-variables-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-formula-panel {{ grid-column:auto; grid-row:auto; }} #ecoradar-alinya .eu-map-panel {{ height:420px; min-height:420px; max-height:none; aspect-ratio:auto; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:1fr; gap:4px; }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .eu-guide-horizontal-grid {{ grid-template-columns:1fr; gap:10px; }} #ecoradar-alinya .eu-guide-interpretation {{ grid-column:auto; }} #ecoradar-alinya .eu-guide-horizontal-grid .eu-guide-reading {{ padding-top:8px; border-top:1px solid #e5e1d8; }} #ecoradar-alinya .err-modal {{ padding:0; }} #ecoradar-alinya .err-dialog {{ width:100%; height:100vh; border-radius:0; }} #ecoradar-alinya .err-preview {{ padding:8px; }} #ecoradar-alinya .err-cover {{ flex-direction:column; min-height:0; padding:20px; }} #ecoradar-alinya .err-cover h1 {{ margin-top:14px; font-size:22px; }} #ecoradar-alinya .err-metadata, #ecoradar-alinya .err-facts, #ecoradar-alinya .err-diagnostic-grid, #ecoradar-alinya .err-sector-grid, #ecoradar-alinya .err-management-grid, #ecoradar-alinya .err-evolution, #ecoradar-alinya .err-scenario-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .err-document > section, #ecoradar-alinya .err-document > footer {{ padding:15px 18px; }} #ecoradar-alinya .err-limits, #ecoradar-alinya .err-fire-assessment, #ecoradar-alinya .err-conclusion {{ margin:0 18px; }} #ecoradar-alinya .err-map {{ height:240px; }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .err-synthesis, #ecoradar-alinya .err-unverified {{ margin:0 18px; }} #ecoradar-alinya .err-relation > div {{ align-items:flex-start; flex-direction:column; gap:2px; }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .eu-layer-list {{ grid-template-columns:repeat(3,minmax(0,1fr)); }} }}
-    @media (max-width:560px) {{ #ecoradar-alinya .eu-bh-summary, #ecoradar-alinya .eu-bh-notes {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-bh-pilot {{ padding:11px; }} #ecoradar-alinya .eu-bh-map, #ecoradar-alinya .eu-bh-map svg {{ min-height:330px; height:330px; }} }}
+    @media (max-width:560px) {{ #ecoradar-alinya .eu-bh-summary, #ecoradar-alinya .eu-bh-notes {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-biodiversity-situation {{ padding:11px; background:linear-gradient(160deg,#0f3029 0,#183f35 20%,#f7f4ec 20.1%,#f7f4ec 100%); }} #ecoradar-alinya .eu-bh-pilot-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-bh-head-actions {{ justify-content:flex-start; }} #ecoradar-alinya .eu-bh-filter {{ min-height:118px; }} #ecoradar-alinya .eu-bh-map, #ecoradar-alinya .eu-bh-map svg {{ min-height:360px; height:360px; }} }}
     @media print {{
       @page {{ size:A4 landscape; margin:10mm; }}
       body {{ background:#fff!important; }}
@@ -1069,13 +1084,43 @@ def render_index(data: dict) -> str:
   <p class="eu-map-access-label">Accés cartogràfic · totes les capes i interaccions originals</p>
 
   <main class="eu-grid" id="cartografia">
+    <section class="eu-biodiversity-situation" data-bh-pilot hidden aria-label="Quadre de situació ecològica d’Alinyà">
+      <div class="eu-bh-pilot-head">
+        <div>
+          <span class="eu-bh-eyebrow">Mòdul de diagnosi ecològica i suport a la gestió</span>
+          <h2>Quadre de situació ecològica d’Alinyà</h2>
+          <p>No és una capa de biodiversitat ni un recompte d’espècies. Permet explorar on coincideixen valors, pressions, connectivitat, buits d’informació i necessitats de seguiment. Les coincidències espacials orienten comprovacions: no demostren causalitat, estat de conservació ni absència d’espècies.</p>
+        </div>
+        <div class="eu-bh-head-actions"><button class="eu-bh-back" type="button" data-bh-back>Tornar al visor general</button><button class="eu-bh-report" type="button" data-generate-reading-report>Generar informe</button></div>
+      </div>
+      <div class="eu-bh-summary" role="group" aria-label="Sis entrades del quadre de situació ecològica">
+        <button class="eu-bh-filter" type="button" data-bh-filter="value" data-bh-number="01" aria-pressed="true"><strong>Valor ecològic</strong><span>On es concentren HIC, HIC prioritaris, connectors, continuïtat de cobertes o coneixement públic destacable i per què.</span><small>{data['biodiversityPilot']['metadata']['counts']['valuable']} sectors assenyalats</small></button>
+        <button class="eu-bh-filter" type="button" data-bh-filter="pressure" data-bh-number="02" aria-pressed="false"><strong>Sectors sota pressió</strong><span>Sectors amb valor ecològic on coincideixen estrès hídric, calor, foc o accessibilitat potencial.</span><small>{sum(1 for feature in data['biodiversityPilot']['sectors']['features'] if feature['properties']['valuable'] and feature['properties']['pressured'])} sectors amb coincidències</small></button>
+        <button class="eu-bh-filter is-unavailable" type="button" data-bh-filter="changes" data-bh-number="03" aria-pressed="false"><strong>Canvis detectats</strong><span>Canvis temporals ecològicament rellevants en vegetació, humitat o coberta.</span><small>Informació espacial insuficient</small></button>
+        <button class="eu-bh-filter" type="button" data-bh-filter="connectivity" data-bh-number="04" aria-pressed="false"><strong>Connectivitat</strong><span>Connectors oficials i continuïtat de cobertes com a context territorial, sense simular funcionalitat per espècie.</span><small>{data['biodiversityPilot']['metadata']['counts']['connectivity']} sectors assenyalats</small></button>
+        <button class="eu-bh-filter" type="button" data-bh-filter="knowledge" data-bh-number="05" aria-pressed="false"><strong>Buits de coneixement</strong><span>Zones amb informació biològica pública escassa o nul·la. No equivalen a baixa biodiversitat.</span><small>{data['biodiversityPilot']['metadata']['counts']['knowledge_insufficient']} sectors insuficientment coneguts</small></button>
+        <button class="eu-bh-filter" type="button" data-bh-filter="followup" data-bh-number="06" aria-pressed="false"><strong>Seguiment prioritari</strong><span>Sectors on la coincidència entre valor i pressions justifica atenció o comprovació de camp. Els buits de coneixement es consulten separadament.</span><small>{sum(1 for feature in data['biodiversityPilot']['sectors']['features'] if feature['properties']['followup'] in ['Atenció','Prioritat de comprovació'])} sectors per revisar</small></button>
+      </div>
+      <div class="eu-bh-layout">
+        <div class="eu-bh-map">
+          <svg role="img" aria-label="Sectors de diagnosi ecològica d’Alinyà"></svg>
+          <div class="eu-bh-map-state" data-bh-map-state hidden></div>
+          <div class="eu-bh-map-legend" data-bh-legend></div>
+        </div>
+        <article class="eu-bh-detail" data-bh-detail aria-live="polite"><h4>Valor ecològic</h4><p>Selecciona un sector destacat al mapa. La fitxa identificarà les dades responsables de la diagnosi, les coincidències amb altres lectures i els aspectes que cal comprovar.</p></article>
+      </div>
+      <div class="eu-bh-notes">
+        <div class="eu-bh-note"><strong>Privacitat ecològica.</strong> El mòdul no mostra noms ni coordenades de taxons. Els registres públics s’agreguen per sector només per descriure intensitat de coneixement.</div>
+        <div class="eu-bh-note"><strong>Unitat i límit.</strong> Els 49 sectors són unitats cartogràfiques oficials de connectivitat terrestre retallades a l’àmbit; no són una zonificació de gestió ni una quadrícula EcoRadar.</div>
+      </div>
+    </section>
     <aside class="eu-column eu-left">
       <section class="eu-panel">
         <h3>Lectura temàtica</h3>
         <div class="eu-modes" role="group" aria-label="Lectura principal">
           <button class="eu-mode" data-mode="base" aria-pressed="true">Mapa base<small>relleu + carreteres + poblacions</small></button>
           <button class="eu-mode" data-mode="habitats" aria-pressed="false">Hàbitats<small>HIC i prioritaris</small></button>
-          <button class="eu-mode" data-mode="biodiversity" aria-pressed="false">Biodiversitat<small>registres públics</small></button>
+          <button class="eu-mode" data-mode="biodiversity" aria-pressed="false">Biodiversitat<small>quadre de situació ecològica</small></button>
           <button class="eu-mode" data-mode="vegetation" aria-pressed="false">Cobertura vegetal<small>Copernicus HRL · 2023</small></button>
           <button class="eu-mode" data-mode="vigor" aria-pressed="false">Vigor vegetal<small>NDVI · Sentinel-2</small></button>
           <button class="eu-mode" data-mode="moisture" aria-pressed="false">Humitat vegetal<small>NDMI · Sentinel-2</small></button>
@@ -1205,23 +1250,6 @@ def render_index(data: dict) -> str:
       <p class="eu-section-kicker">03 · Biodiversitat i hàbitats</p>
       <h2>Què tenim, què és especialment valuós, què coincideix amb pressions i on ens falta informació?</h2>
       <p class="eu-lead">Aquest pilot orientat a la gestió creua hàbitats, connectors, registres públics agregats i lectures ambientals sense crear cap índex sintètic. Els sectors són unitats cartogràfiques oficials de connectivitat retallades a l’àmbit: serveixen per explorar i prioritzar comprovacions, no són una zonificació definitiva de gestió.</p>
-      <div class="eu-bh-pilot" data-bh-pilot>
-        <div class="eu-bh-pilot-head"><div><h3>Lectura territorial qualitativa</h3><p>Selecciona una pregunta i clica un sector. Els contrastos de NDMI, NDVI, temperatura i accessibilitat són relatius al mateix territori; les coincidències espacials no demostren causalitat.</p></div></div>
-        <div class="eu-bh-summary" role="group" aria-label="Preguntes de la lectura de biodiversitat i hàbitats">
-          <button class="eu-bh-filter" type="button" data-bh-filter="value" aria-pressed="true"><strong>Valor ecològic destacable</strong><span>{data['biodiversityPilot']['metadata']['counts']['valuable']} sectors amb HIC, HIC prioritari, connector, continuïtat de cobertes o coneixement públic destacable.</span></button>
-          <button class="eu-bh-filter" type="button" data-bh-filter="pressure" aria-pressed="false"><strong>Sectors sota pressió</strong><span>{data['biodiversityPilot']['metadata']['counts']['pressured']} sectors amb coincidències relatives d’estrès, calor, foc o accessibilitat potencial.</span></button>
-          <button class="eu-bh-filter" type="button" data-bh-filter="knowledge" aria-pressed="false"><strong>Buits de coneixement</strong><span>{data['biodiversityPilot']['metadata']['counts']['knowledge_insufficient']} sectors amb informació pública escassa o nul·la; no equival a baixa biodiversitat.</span></button>
-          <button class="eu-bh-filter" type="button" data-bh-filter="followup" aria-pressed="false"><strong>Sectors recomanats per seguiment</strong><span>Priorització qualitativa justificada, sense puntuacions: des d’observació fins a comprovació prioritària.</span></button>
-        </div>
-        <div class="eu-bh-layout">
-          <div class="eu-bh-map"><svg role="img" aria-label="Sectors qualitatius de biodiversitat i hàbitats d’Alinyà"></svg><div class="eu-bh-map-legend" data-bh-legend></div></div>
-          <article class="eu-bh-detail" data-bh-detail aria-live="polite"><h4>Selecciona un sector</h4><p>La fitxa explicarà què hi ha, per què és rellevant, quines pressions coincideixen, què falta saber i què recomana EcoRadar.</p></article>
-        </div>
-        <div class="eu-bh-notes">
-          <div class="eu-bh-note"><strong>Privacitat ecològica.</strong> El pilot no conté noms ni coordenades de taxons. Els 731 registres s’agreguen per sector exclusivament per descriure intensitat de coneixement.</div>
-          <div class="eu-bh-note"><strong>Límit de la prova.</strong> No s’ha verificat una capa d’espècies protegides ni l’estat local de conservació. La fragmentació funcional i la pressió humana real requereixen barreres, mostreig específic i validació de camp.</div>
-        </div>
-      </div>
       <h3>Detall dels registres públics agregats</h3>
       <p class="eu-lead">Els 731 registres normalitzats de GBIF i iNaturalist documenten presències i 516 taxons, però no estimen abundància, densitat de població ni riquesa completa. La distribució dels registres també reflecteix l’esforç desigual d’observació.</p>
       <table class="eu-data-table">
@@ -1355,8 +1383,8 @@ def render_index(data: dict) -> str:
 </div>
 <script src="./vendor/d3.min.js"></script>
 <script src="./vendor/html2pdf.bundle.min.js"></script>
-<script src="./vendor/ecoradar-reading-report.js?v=20260828-4"></script>
-<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260828-4"></script>
+<script src="./vendor/ecoradar-reading-report.js?v=20260828-5"></script>
+<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260828-5"></script>
 <script>
 (() => {{
   const root = document.getElementById('ecoradar-alinya');
@@ -1477,13 +1505,13 @@ def render_index(data: dict) -> str:
       legend:[['transparent','Contorn HIC'],['transparent','Contorn HIC prioritari'],['#c23c32','Incendis'],['#5d675f','Accessos']]
     }},
     biodiversity: {{
-      label:'Biodiversitat coneguda',
-      title:'Registres públics de biodiversitat',
-      copy:'Mostra registres GBIF/iNaturalist disponibles dins l’àmbit.',
-      reading:'Serveix per detectar coneixement disponible i buits, no per delimitar biodiversitat real completa.',
-      limit:'Límit: fonts oportunistes; no substitueixen inventari de camp ni llistes normatives.',
-      layers:['biodiversity','hic','fires'],
-      legend:[['#2d72a0','Registres públics'],['transparent','Contorn HIC'],['#c23c32','Incendis']]
+      label:'Quadre de situació ecològica d’Alinyà',
+      title:'Diagnosi ecològica territorial de biodiversitat i hàbitats',
+      copy:'Creua qualitativament valor ecològic, pressions, connectivitat, coneixement disponible i necessitat de seguiment per sectors oficials de connectivitat.',
+      reading:'Serveix per orientar seguiment i comprovació de camp. No és una capa de punts, un recompte d’espècies ni un índex sintètic de biodiversitat.',
+      limit:'Límit: les coincidències espacials no demostren causalitat; pocs registres indiquen coneixement insuficient i no baixa biodiversitat. No es mostren localitzacions sensibles.',
+      layers:[],
+      legend:[['#1f5b39','Valor ecològic'],['#c64b36','Coincidències de pressió'],['#276f61','Connectivitat'],['#66798a','Coneixement insuficient']]
     }},
     management: {{
       label:'Cribratge de gestió · comprovacions abans d’actuar',
@@ -1837,11 +1865,12 @@ def render_index(data: dict) -> str:
   root.querySelectorAll('.eu-mode').forEach(button => button.addEventListener('click', () => {{
     const mapPanel = root.querySelector('.eu-map-panel');
     const mapRectBefore = mapPanel.getBoundingClientRect();
-    const keepMapPosition = mapRectBefore.bottom > 0 && mapRectBefore.top < window.innerHeight;
+    const keepMapPosition = button.dataset.mode !== 'biodiversity' && mapRectBefore.bottom > 0 && mapRectBefore.top < window.innerHeight;
     activeMode = button.dataset.mode;
     activeGuide = {{type:'mode', key:activeMode}};
     root.querySelectorAll('.eu-mode').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
     applyMode(activeMode);
+    if (activeMode === 'biodiversity') root.querySelector('[data-bh-pilot]').scrollIntoView({{block:'start',behavior:'smooth'}});
     if (keepMapPosition) {{
       requestAnimationFrame(() => requestAnimationFrame(() => {{
         const displacement = mapPanel.getBoundingClientRect().top - mapRectBefore.top;
@@ -1864,6 +1893,20 @@ def render_index(data: dict) -> str:
   }}
   function applyMode(mode) {{
     const guide = modeGuides[mode];
+    const biodiversitySituation = root.querySelector('[data-bh-pilot]');
+    const mapStack = root.querySelector('.eu-map-stack');
+    const leftColumn = root.querySelector('.eu-left');
+    const foot = root.querySelector('.eu-foot');
+    const isBiodiversitySituation = mode === 'biodiversity';
+    biodiversitySituation.hidden = !isBiodiversitySituation;
+    mapStack.hidden = isBiodiversitySituation;
+    leftColumn.hidden = isBiodiversitySituation;
+    foot.hidden = isBiodiversitySituation;
+    if (isBiodiversitySituation) {{
+      activeGuide = {{type:'mode', key:mode}};
+      firePopup.hidden = true;
+      return;
+    }}
     Object.keys(modeGuides).forEach(key => root.classList.remove(`mode-${{key}}`));
     root.classList.add(`mode-${{mode}}`);
     Object.keys(groups).forEach(k => {{ if (k !== 'boundary') setLayer(k, guide.layers.includes(k)); }});
@@ -2045,13 +2088,27 @@ def render_index(data: dict) -> str:
     const pilotRoot = root.querySelector('[data-bh-pilot]');
     if (!pilotRoot || !D.biodiversityPilot?.sectors?.features?.length) return;
     const features = D.biodiversityPilot.sectors.features;
+    const availability = D.biodiversityPilot.metadata?.diagnostic_availability || {{}};
     const pilotSvg = d3.select(pilotRoot).select('.eu-bh-map svg');
-    const pilotWidth = 820, pilotHeight = 430;
+    const pilotWidth = 900, pilotHeight = 540;
     pilotSvg.attr('viewBox',`0 0 ${{pilotWidth}} ${{pilotHeight}}`).attr('preserveAspectRatio','xMidYMid meet');
-    const pilotProjection = d3.geoMercator().fitExtent([[12,12],[pilotWidth-12,pilotHeight-12]], D.study);
+    const pilotProjection = d3.geoMercator().fitExtent([[18,18],[pilotWidth-18,pilotHeight-18]], D.study);
     const pilotPath = d3.geoPath(pilotProjection);
-    pilotSvg.append('rect').attr('width',pilotWidth).attr('height',pilotHeight).attr('fill','#e7ece3');
-    pilotSvg.append('g').selectAll('path').data(D.study.features).join('path').attr('d',pilotPath).attr('fill','#f5f3eb').attr('stroke','#17332d').attr('stroke-width',2);
+    pilotSvg.append('rect').attr('width',pilotWidth).attr('height',pilotHeight).attr('fill','#dfe8dc');
+    const reliefBbox = D.rasterBboxes?.relief || D.bbox;
+    if (D.rasters?.relief && reliefBbox) {{
+      const topLeft = pilotProjection([reliefBbox[0],reliefBbox[3]]);
+      const bottomRight = pilotProjection([reliefBbox[2],reliefBbox[1]]);
+      pilotSvg.append('image').attr('href',D.rasters.relief).attr('x',topLeft[0]).attr('y',topLeft[1])
+        .attr('width',bottomRight[0]-topLeft[0]).attr('height',bottomRight[1]-topLeft[1])
+        .attr('preserveAspectRatio','none').attr('opacity',.66);
+    }}
+    pilotSvg.append('g').selectAll('path').data(D.vectors.access.features).join('path').attr('d',pilotPath)
+      .attr('fill','none').attr('stroke','#77827b').attr('stroke-width',.65).attr('stroke-opacity',.65).attr('vector-effect','non-scaling-stroke');
+    pilotSvg.append('g').selectAll('circle').data(D.vectors.places.features).join('circle')
+      .attr('cx',d=>pilotProjection(d.geometry.coordinates)[0]).attr('cy',d=>pilotProjection(d.geometry.coordinates)[1])
+      .attr('r',2.8).attr('fill','#17332d').attr('stroke','#fff').attr('stroke-width',1);
+    pilotSvg.append('g').selectAll('path').data(D.study.features).join('path').attr('d',pilotPath).attr('fill','rgba(245,243,235,.12)').attr('stroke','#17332d').attr('stroke-width',2.4);
     const sectorLayer = pilotSvg.append('g');
     const followupColors = {{
       'Sense senyals destacables':'#aeb8ad',
@@ -2068,10 +2125,16 @@ def render_index(data: dict) -> str:
     }};
     let activeFilter = 'value';
     let selectedId = null;
-    const isHighlighted = p => activeFilter === 'value' ? p.valuable : activeFilter === 'pressure' ? p.pressured : activeFilter === 'knowledge' ? ['Pràcticament sense dades','Poca informació'].includes(p.knowledge_class) : p.followup !== 'Sense senyals destacables';
+    const isHighlighted = p => activeFilter === 'value' ? p.valuable
+      : activeFilter === 'pressure' ? p.valuable && p.pressured
+      : activeFilter === 'changes' ? p.change_detected
+      : activeFilter === 'connectivity' ? p.connected
+      : activeFilter === 'knowledge' ? ['Pràcticament sense dades','Poca informació'].includes(p.knowledge_class)
+      : ['Atenció','Prioritat de comprovació'].includes(p.followup);
     const sectorColor = p => {{
       if (activeFilter === 'value') return p.priority_hic_ha > .1 ? '#1f5b39' : p.connector_ha > .1 ? '#4b8a55' : '#8bb06c';
       if (activeFilter === 'pressure') return (p.pressure_reasons || []).length >= 2 ? '#c64b36' : '#e4a23c';
+      if (activeFilter === 'connectivity') return p.connector_ha > .1 ? '#276f61' : '#79a886';
       if (activeFilter === 'knowledge') return knowledgeColors[p.knowledge_class] || '#aeb8ad';
       return followupColors[p.followup] || '#aeb8ad';
     }};
@@ -2087,15 +2150,43 @@ def render_index(data: dict) -> str:
       return values.length ? `<ul>${{values.map(item=>`<li>${{esc(item)}}</li>`).join('')}}</ul>` : `<p>${{esc(empty)}}</p>`;
     }}
     function renderDetail(p) {{
-      const what = [`${{ca1(p.hic_ha)}} ha d’HIC`,`${{ca1(p.priority_hic_ha)}} ha d’HIC prioritari`,`${{ca1(p.connector_ha)}} ha de connector oficial`,`${{p.records}} registres públics agregats`];
+      const what = [];
+      if (p.hic_ha > .05) what.push(`${{ca1(p.hic_ha)}} ha d’HIC cartografiat`);
+      if (p.priority_hic_ha > .05) what.push(`${{ca1(p.priority_hic_ha)}} ha d’HIC prioritari cartografiat`);
+      if (p.connector_ha > .05) what.push(`${{ca1(p.connector_ha)}} ha de connector oficial`);
+      what.push(`${{p.records}} registres públics agregats; és coneixement disponible, no abundància`);
+      const whyVariables = activeFilter === 'connectivity' ? p.connectivity_reasons
+        : activeFilter === 'knowledge' ? [`${{p.knowledge_class}} · ${{p.records}} registres públics agregats`]
+        : activeFilter === 'value' ? p.value_reasons
+        : [...(p.value_reasons || []),...(p.pressure_reasons || [])];
       pilotRoot.querySelector('[data-bh-detail]').innerHTML = `
         <h4>Sector ${{esc(p.sector_id)}}</h4><span class="eu-bh-category" style="background:${{followupColors[p.followup] || '#66798a'}}">${{esc(p.followup)}}</span>
-        <h5>Què hi ha?</h5>${{list(what,'No hi ha valors cartografiats destacables amb les fonts actuals.')}}
-        <h5>Per què és rellevant?</h5>${{list(p.value_reasons,'No s’ha identificat un senyal de valor diferencial; això no implica absència de valor ecològic.')}}
-        <h5>Quines pressions coincideixen?</h5>${{list(p.pressure_reasons,'No hi ha coincidències destacables amb els contrastos relatius utilitzats.')}}
-        <h5>Quina informació falta?</h5>${{list(p.missing,'No consta cap buit addicional documentat.')}}
-        <h5>Què recomana EcoRadar?</h5><p>${{esc(p.recommendation)}}</p>
-        <h5>Per què EcoRadar ho assenyala?</h5><p>La categoria combina qualitativament HIC i HIC prioritari, connectors oficials i coneixement biològic agregat amb coincidències de NDMI, NDVI, temperatura superficial, perímetres d’incendi, perill actual i accessibilitat potencial. No suma punts ni afirma causalitat.</p>`;
+        <h5>Què hi ha</h5>${{list(what,'No hi ha elements diferencials cartografiats amb les fonts actuals.')}}
+        <h5>Per què és rellevant</h5>${{list(p.value_reasons,'No s’ha identificat un senyal de valor diferencial; això no implica absència de valor ecològic.')}}
+        <h5>Què està detectant EcoRadar</h5>${{list(p.detected,'Cap senyal diferencial amb les dades disponibles.')}}
+        <h5>Amb quines altres lectures coincideix</h5>${{list(p.reading_coincidences,'No hi ha coincidències destacables amb els contrastos territorials disponibles.')}}
+        <h5>Quina és la possible implicació ecològica</h5>${{list(p.possible_implications,'Les dades actuals no permeten formular una implicació ecològica sectorial específica.')}}
+        <h5>Què no sabem</h5>${{list(p.missing,'No consta cap buit addicional documentat.')}}
+        <h5>Què convindria comprovar o seguir</h5><p>${{esc(p.recommendation)}}</p>
+        <div class="eu-bh-why"><h5>Per què EcoRadar ho assenyala?</h5>${{list(whyVariables,'Informació insuficient per justificar una diagnosi sectorial específica.')}}<span class="eu-bh-result">→ ${{esc(p.followup)}}</span><p>No és una suma de punts. La categoria deriva de regles qualitatives explícites i coincidències espacials; no afirma causalitat ni estat de conservació.</p></div>`;
+    }}
+    function renderUnavailable() {{
+      const info = availability.changes || {{}};
+      const missing = Array.isArray(info.missing) ? info.missing : [];
+      pilotRoot.querySelector('[data-bh-detail]').innerHTML = `<h4>Canvis detectats</h4><span class="eu-bh-category" style="background:#8b5b25">Informació insuficient</span><h5>Estat de la diagnosi</h5><p><strong>${{esc(info.message || 'Informació insuficient per generar aquesta diagnosi.')}}</strong></p><h5>Què falta</h5>${{list(missing,'No s’ha documentat la sèrie temporal necessària.')}}<div class="eu-bh-why"><h5>Per què EcoRadar no assenyala sectors?</h5><p>Les escenes actuals permeten descriure estat espectral en dates concretes, però no una trajectòria espacial homogènia. EcoRadar no converteix dues fonts o dates no comparables en un canvi ecològic.</p></div>`;
+      const state = pilotRoot.querySelector('[data-bh-map-state]');
+      state.hidden = false;
+      state.innerHTML = `<div><strong>Informació insuficient per generar aquesta diagnosi.</strong><p>Cal una sèrie espacial multitemporal comparable abans d’assenyalar canvis.</p>${{list(missing,'')}}</div>`;
+    }}
+    function renderFilterIntro() {{
+      const copy = {{
+        value:['Valor ecològic','Clica un sector verd per veure quins hàbitats, connectors o altres evidències cartografiades expliquen el seu valor.'],
+        pressure:['Sectors sota pressió','Només es mostren sectors amb valor ecològic on coincideix almenys una pressió relativa detectada per EcoRadar.'],
+        connectivity:['Connectivitat','Mostra connectors oficials o sectors amb continuïtat elevada de cobertes naturals. No demostra ús funcional per fauna.'],
+        knowledge:['Buits de coneixement','Mostra informació pública escassa o nul·la. No s’interpreta com a baixa biodiversitat.'],
+        followup:['Seguiment prioritari','Mostra sectors que requereixen observació, seguiment o comprovació de camp segons regles qualitatives explícites.']
+      }}[activeFilter];
+      pilotRoot.querySelector('[data-bh-detail]').innerHTML = `<h4>${{esc(copy[0])}}</h4><p>${{esc(copy[1])}}</p><h5>Com continuar</h5><p>Selecciona un sector destacat al mapa per obrir la fitxa de diagnosi.</p>`;
     }}
     function update() {{
       paths.attr('fill',d=>sectorColor(d.properties)).attr('fill-opacity',d=>isHighlighted(d.properties) ? .82 : .22)
@@ -2103,17 +2194,28 @@ def render_index(data: dict) -> str:
       const legend = activeFilter === 'value'
         ? 'Verd fosc: HIC prioritari · verd mitjà: connector oficial · verd clar: altres senyals de valor. Els sectors apagats no tenen un senyal diferencial amb les dades actuals.'
         : activeFilter === 'pressure'
-          ? 'Taronja: una coincidència de pressió · vermell: dues o més. Són contrastos territorials relatius, no impactes demostrats.'
-          : activeFilter === 'knowledge'
-            ? 'Verd: més informació pública · groc: poca · blau gris: pràcticament sense dades. Pocs registres no equivalen a baixa biodiversitat.'
-            : 'Verd gris: sense senyals · verd: seguiment · taronja: atenció · vermell: comprovació prioritària · blau gris: coneixement insuficient.';
+          ? 'Taronja: una coincidència de pressió · vermell: dues o més, sempre dins un sector amb valor ecològic. No són impactes demostrats.'
+          : activeFilter === 'changes'
+            ? 'Sense sectors: no hi ha una sèrie espacial multitemporal homogènia que permeti diagnosticar canvi ecològic.'
+            : activeFilter === 'connectivity'
+              ? 'Verd blavós fosc: connector terrestre oficial · verd blavós clar: continuïtat elevada de cobertes com a context.'
+              : activeFilter === 'knowledge'
+                ? 'Groc: poca informació · blau gris: pràcticament sense dades. Pocs registres no equivalen a baixa biodiversitat.'
+                : 'Verd gris: sense senyals · verd: seguiment · taronja: atenció · vermell: comprovació prioritària · blau gris: coneixement insuficient.';
       pilotRoot.querySelector('[data-bh-legend]').textContent = legend;
     }}
     pilotRoot.querySelectorAll('[data-bh-filter]').forEach(button=>button.addEventListener('click',()=>{{
       activeFilter=button.dataset.bhFilter;
+      selectedId=null;
       pilotRoot.querySelectorAll('[data-bh-filter]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+      const state = pilotRoot.querySelector('[data-bh-map-state]');
+      state.hidden = true;
+      state.innerHTML = '';
+      if (activeFilter === 'changes') renderUnavailable(); else renderFilterIntro();
       update();
     }}));
+    pilotRoot.querySelector('[data-bh-back]').addEventListener('click',()=>root.querySelector('.eu-mode[data-mode="base"]').click());
+    renderFilterIntro();
     update();
   }}
   setupBiodiversityPilot();
@@ -2121,7 +2223,7 @@ def render_index(data: dict) -> str:
   window.EcoRadarReadingReport.mount({{
     root,
     getSelection:() => ({{...activeGuide, mode:activeMode, guide:currentGuide()}}),
-    getMapSvg:() => root.querySelector('.eu-map-panel svg'),
+    getMapSvg:() => activeMode === 'biodiversity' ? root.querySelector('.eu-bh-map svg') : root.querySelector('.eu-map-panel svg'),
     buildReport:reportBuilder
   }});
   applyMode('base');
@@ -2153,8 +2255,8 @@ def write_package() -> None:
         html_text
         .replace('<script src="./vendor/d3.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/d3.min.js"></script>')
         .replace('<script src="./vendor/html2pdf.bundle.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/html2pdf.bundle.min.js"></script>')
-        .replace('<script src="./vendor/ecoradar-reading-report.js?v=20260828-4"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js?v=20260828-4"></script>')
-        .replace('<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260828-4"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js?v=20260828-4"></script>'),
+        .replace('<script src="./vendor/ecoradar-reading-report.js?v=20260828-5"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js?v=20260828-5"></script>')
+        .replace('<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260828-5"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js?v=20260828-5"></script>'),
         encoding="utf-8",
     )
     (OUT_DIR / "netlify.toml").write_text(

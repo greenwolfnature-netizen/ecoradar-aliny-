@@ -7,6 +7,7 @@ engine = (ROOT / "vendor" / "ecoradar-reading-report.js").read_text(encoding="ut
 profiles = (ROOT / "vendor" / "ecoradar-alinya-report-profiles.js").read_text(encoding="utf-8")
 
 assert 'data-generate-reading-report' in html
+assert "querySelectorAll('[data-generate-reading-report]')" in engine
 assert 'data-reading-report-modal' in html
 assert 'data-reading-report-pdf' in html
 assert 'getSelection:() => ({...activeGuide' in html
