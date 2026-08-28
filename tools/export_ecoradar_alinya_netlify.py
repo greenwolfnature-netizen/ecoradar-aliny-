@@ -738,11 +738,11 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-mode:hover, #ecoradar-alinya .eu-layer:hover {{ border-color:#6d8d7a; }}
     #ecoradar-alinya .eu-mode[aria-pressed="true"], #ecoradar-alinya .eu-layer[aria-pressed="true"] {{ color:#fff; background:var(--blue); border-color:var(--blue); }}
     #ecoradar-alinya .eu-mode small {{ display:block; opacity:.72; margin-top:2px; font-size:8px; }}
-    #ecoradar-alinya .eu-context-panel {{ display:grid; grid-template-columns:minmax(210px,.9fr) minmax(0,2.1fr); gap:12px; align-items:center; padding:12px 14px; background:#eef1ea; }}
+    #ecoradar-alinya .eu-context-panel {{ display:block; padding:11px; background:#eef1ea; }}
     #ecoradar-alinya .eu-context-intro h3 {{ margin-bottom:5px; }}
     #ecoradar-alinya .eu-context-intro p {{ margin:0; font-size:9px; line-height:1.4; }}
     #ecoradar-alinya .eu-context-status {{ display:block; margin-top:7px; color:var(--green); font-size:8px; font-weight:750; }}
-    #ecoradar-alinya .eu-layer-list {{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; }}
+    #ecoradar-alinya .eu-layer-list {{ display:grid; grid-template-columns:1fr; gap:6px; margin-top:10px; }}
     #ecoradar-alinya .eu-layer {{ display:grid; grid-template-columns:9px minmax(0,1fr); gap:2px 8px; align-items:center; min-height:45px; padding:7px 8px; }}
     #ecoradar-alinya .eu-layer strong {{ display:block; font-size:9px; line-height:1.15; }}
     #ecoradar-alinya .eu-layer small {{ display:block; grid-column:2; margin-top:1px; color:#6b7881; font-size:7px; line-height:1.2; }}
@@ -955,11 +955,11 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-map-access-label {{ margin:0; padding:24px max(20px,calc((100% - 1160px)/2)) 0; color:var(--green); font-size:10px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; background:var(--paper); }}
     #ecoradar-alinya .eu-fire-chapter {{ background:#f5f2eb; }}
     @media (max-width:1050px) {{ #ecoradar-alinya .eu-grid {{ grid-template-columns:230px minmax(0,1fr); }} #ecoradar-alinya .eu-map-panel {{ min-height:480px; }} #ecoradar-alinya .eu-foot {{ grid-column:1/-1; }} }}
-    @media (max-width:900px) {{ #ecoradar-alinya .eu-guide-horizontal-grid {{ grid-template-columns:1fr 1fr; }} #ecoradar-alinya .eu-guide-interpretation {{ grid-column:1/-1; }} #ecoradar-alinya .eu-context-panel {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-layer-list {{ grid-template-columns:repeat(3,minmax(0,1fr)); }} #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} }}
+    @media (max-width:900px) {{ #ecoradar-alinya .eu-guide-horizontal-grid {{ grid-template-columns:1fr 1fr; }} #ecoradar-alinya .eu-guide-interpretation {{ grid-column:1/-1; }} #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right .eu-fire-summary-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-variables-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-formula-panel {{ grid-column:auto; grid-row:auto; }} #ecoradar-alinya .eu-map-panel {{ height:420px; min-height:420px; max-height:none; aspect-ratio:auto; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:1fr; gap:4px; }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .eu-guide-horizontal-grid {{ grid-template-columns:1fr; gap:10px; }} #ecoradar-alinya .eu-guide-interpretation {{ grid-column:auto; }} #ecoradar-alinya .eu-guide-horizontal-grid .eu-guide-reading {{ padding-top:8px; border-top:1px solid #e5e1d8; }} #ecoradar-alinya .err-modal {{ padding:0; }} #ecoradar-alinya .err-dialog {{ width:100%; height:100vh; border-radius:0; }} #ecoradar-alinya .err-preview {{ padding:8px; }} #ecoradar-alinya .err-cover {{ flex-direction:column; min-height:0; padding:20px; }} #ecoradar-alinya .err-cover h1 {{ margin-top:14px; font-size:22px; }} #ecoradar-alinya .err-metadata, #ecoradar-alinya .err-facts, #ecoradar-alinya .err-diagnostic-grid, #ecoradar-alinya .err-sector-grid, #ecoradar-alinya .err-management-grid, #ecoradar-alinya .err-evolution {{ grid-template-columns:1fr; }} #ecoradar-alinya .err-document > section, #ecoradar-alinya .err-document > footer {{ padding:15px 18px; }} #ecoradar-alinya .err-limits, #ecoradar-alinya .err-fire-assessment, #ecoradar-alinya .err-conclusion {{ margin:0 18px; }} #ecoradar-alinya .err-map {{ height:240px; }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .err-synthesis, #ecoradar-alinya .err-unverified {{ margin:0 18px; }} #ecoradar-alinya .err-relation > div {{ align-items:flex-start; flex-direction:column; gap:2px; }} }}
-    @media (max-width:760px) {{ #ecoradar-alinya .eu-layer-list {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} }}
+    @media (max-width:760px) {{ #ecoradar-alinya .eu-layer-list {{ grid-template-columns:repeat(3,minmax(0,1fr)); }} }}
     @media print {{
       @page {{ size:A4 landscape; margin:10mm; }}
       body {{ background:#fff!important; }}
@@ -1051,6 +1051,18 @@ def render_index(data: dict) -> str:
           <button class="eu-mode" data-mode="fires" aria-pressed="false">Històric d'incendis<small>perímetres oficials</small></button>
         </div>
       </section>
+      <section class="eu-panel eu-context-panel" aria-label="Context fix del mapa">
+        <div class="eu-context-intro">
+          <h3>Context fix del mapa</h3>
+          <p>Només conserva referències OSM per orientar-se i valorar l’accessibilitat potencial. Els hàbitats, les cobertes, la biodiversitat i els incendis es consulten exclusivament com a lectures temàtiques, per evitar duplicar resultats.</p>
+          <span class="eu-context-status" id="eu-context-status" aria-live="polite"></span>
+        </div>
+        <div class="eu-layer-list" role="group" aria-label="Referències fixes OSM">
+          <button class="eu-layer" data-layer="access" aria-pressed="true"><span class="eu-dot" style="--dot:#5d675f"></span><strong>Camins i pistes</strong><small>accessibilitat potencial</small></button>
+          <button class="eu-layer" data-layer="places" aria-pressed="true"><span class="eu-dot" style="--dot:#17332d"></span><strong>Poblacions OSM</strong><small>orientació territorial</small></button>
+          <button class="eu-layer" data-layer="publicUse" aria-pressed="false"><span class="eu-dot" style="--dot:#1f2a27"></span><strong>Ús públic OSM</strong><small>punts per validar</small></button>
+        </div>
+      </section>
     </aside>
 
     <div class="eu-map-stack">
@@ -1063,7 +1075,7 @@ def render_index(data: dict) -> str:
     </section>
 
     <section class="eu-panel eu-reading-guide-horizontal" id="eu-reading-guide" aria-live="polite">
-      <h3>Com llegir la capa activa</h3>
+      <h3>Com llegir la lectura activa</h3>
       <div class="eu-guide-horizontal-grid">
         <div class="eu-guide-explanation">
           <div class="eu-guide-title" id="eu-guide-title"></div>
@@ -1081,23 +1093,6 @@ def render_index(data: dict) -> str:
       </div>
     </section>
 
-    <section class="eu-panel eu-context-panel" aria-label="Context cartogràfic superposable">
-      <div class="eu-context-intro">
-        <h3>Context cartogràfic superposable</h3>
-        <p>Aquests elements només ajuden a situar i contrastar la lectura principal. Activar-los no crea una diagnosi nova, no modifica els valors de l’indicador i no substitueix «Com llegir la lectura activa».</p>
-        <span class="eu-context-status" id="eu-context-status" aria-live="polite"></span>
-      </div>
-      <div class="eu-layer-list" role="group" aria-label="Superposicions de context">
-        <button class="eu-layer" data-layer="hic" aria-pressed="false"><span class="eu-dot" style="--dot:#2f7b50"></span><strong>Hàbitats HIC</strong><small>restricció ecològica</small></button>
-        <button class="eu-layer" data-layer="landcover" aria-pressed="false"><span class="eu-dot" style="--dot:#8ca34a"></span><strong>Cobertes ICGC</strong><small>mosaic físic</small></button>
-        <button class="eu-layer" data-layer="biodiversity" aria-pressed="false"><span class="eu-dot" style="--dot:#2d72a0"></span><strong>Biodiversitat</strong><small>registres coneguts</small></button>
-        <button class="eu-layer" data-layer="access" aria-pressed="true"><span class="eu-dot" style="--dot:#5d675f"></span><strong>Camins i pistes</strong><small>accessibilitat potencial</small></button>
-        <button class="eu-layer" data-layer="places" aria-pressed="true"><span class="eu-dot" style="--dot:#17332d"></span><strong>Poblacions OSM</strong><small>orientació territorial</small></button>
-        <button class="eu-layer" data-layer="publicUse" aria-pressed="false"><span class="eu-dot" style="--dot:#1f2a27"></span><strong>Ús públic OSM</strong><small>punts per validar</small></button>
-        <button class="eu-layer" data-layer="fires" aria-pressed="false"><span class="eu-dot" style="--dot:#c23c32"></span><strong>Incendis oficials</strong><small>antecedent històric</small></button>
-      </div>
-    </section>
-
     <aside class="eu-column eu-right">
       <section class="eu-panel">
         <h3>Valors ecològics</h3>
@@ -1112,7 +1107,7 @@ def render_index(data: dict) -> str:
       </section>
       <section class="eu-panel">
         <h3>Lectura del mapa</h3>
-        <p>Selecciona una lectura temàtica per obtenir la diagnosi. Les superposicions de context situades sota el mapa es poden activar o desactivar sense canviar la lectura, els valors ni l’informe generat.</p>
+        <p>Selecciona una lectura temàtica per obtenir la diagnosi. Les úniques referències activables separadament són els elements fixos OSM de la columna esquerra; no canvien la lectura, els valors ni l’informe generat.</p>
         <p><a href="#mosaic">Continuar amb el diagnòstic tècnic complet</a></p>
       </section>
       <section class="eu-panel eu-panel-wide" data-management hidden>

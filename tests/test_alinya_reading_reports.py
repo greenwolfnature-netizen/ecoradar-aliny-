@@ -23,11 +23,18 @@ assert 'window.open' not in engine
 assert 'print()' not in engine
 assert (ROOT / 'vendor' / 'html2pdf.bundle.min.js').is_file()
 assert (ROOT / 'vendor' / 'html2pdf.bundle.min.js.LICENSE.txt').is_file()
-assert 'Context cartogràfic superposable' in html
+assert 'Context fix del mapa' in html
 assert 'id="eu-context-status"' in html
-assert html.index('class="eu-map-panel"') < html.index('class="eu-panel eu-context-panel"')
+assert html.index('class="eu-panel eu-context-panel"') < html.index('class="eu-map-panel"')
 assert 'class="eu-panel eu-reading-guide-horizontal"' in html
-assert html.index('class="eu-map-panel"') < html.index('class="eu-panel eu-reading-guide-horizontal"') < html.index('class="eu-panel eu-context-panel"')
+assert html.index('class="eu-map-panel"') < html.index('class="eu-panel eu-reading-guide-horizontal"')
+assert 'Com llegir la lectura activa' in html
+for analytical_layer in ('hic', 'landcover', 'biodiversity', 'fires'):
+    assert f'data-layer="{analytical_layer}"' not in html
+for fixed_layer in ('access', 'places', 'publicUse'):
+    assert f'data-layer="{fixed_layer}"' in html
+for analytical_mode in ('habitats', 'vegetation', 'biodiversity', 'fires'):
+    assert f'data-mode="{analytical_mode}"' in html
 assert "activeGuide = {type:'mode', key:activeMode};" in html
 assert "activeGuide = next ? {type:'layer'" not in html
 
