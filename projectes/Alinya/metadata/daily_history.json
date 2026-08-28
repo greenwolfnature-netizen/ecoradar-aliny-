@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at_utc": "2026-08-28T18:51:16.860142+00:00",
-  "checked_at_utc": "2026-08-28T18:49:15Z",
+  "generated_at_utc": "2026-08-28T19:01:52.688755+00:00",
+  "checked_at_utc": "2026-08-28T19:00:24Z",
   "analytics": {
     "air_temperature": {
       "frequency": {
@@ -17,12 +17,12 @@
         "previous_value_numeric": 21.0
       },
       "confidence": {
-        "score_pct": 79,
+        "score_pct": 76,
         "label": "Mitjana",
-        "age_hours": 0.8208333333333333,
+        "age_hours": 1.0066666666666666,
         "components": {
           "availability_pct": 100,
-          "freshness_pct": 59,
+          "freshness_pct": 50,
           "quality_pct": 75
         },
         "quality_note": "dada provisional"
@@ -44,12 +44,12 @@
         "previous_value_numeric": 27.7
       },
       "confidence": {
-        "score_pct": 79,
+        "score_pct": 76,
         "label": "Mitjana",
-        "age_hours": 0.8208333333333333,
+        "age_hours": 1.0066666666666666,
         "components": {
           "availability_pct": 100,
-          "freshness_pct": 59,
+          "freshness_pct": 50,
           "quality_pct": 75
         },
         "quality_note": "dada provisional"
@@ -71,12 +71,12 @@
         "previous_value_numeric": 29.0
       },
       "confidence": {
-        "score_pct": 79,
+        "score_pct": 76,
         "label": "Mitjana",
-        "age_hours": 0.8208333333333333,
+        "age_hours": 1.0066666666666666,
         "components": {
           "availability_pct": 100,
-          "freshness_pct": 59,
+          "freshness_pct": 50,
           "quality_pct": 75
         },
         "quality_note": "dada provisional"
@@ -98,12 +98,12 @@
         "previous_value_numeric": 13.7
       },
       "confidence": {
-        "score_pct": 79,
+        "score_pct": 76,
         "label": "Mitjana",
-        "age_hours": 0.8208333333333333,
+        "age_hours": 1.0066666666666666,
         "components": {
           "availability_pct": 100,
-          "freshness_pct": 59,
+          "freshness_pct": 50,
           "quality_pct": 75
         },
         "quality_note": "dada provisional"
@@ -125,12 +125,12 @@
         "previous_value_numeric": 0.0
       },
       "confidence": {
-        "score_pct": 79,
+        "score_pct": 76,
         "label": "Mitjana",
-        "age_hours": 0.8208333333333333,
+        "age_hours": 1.0066666666666666,
         "components": {
           "availability_pct": 100,
-          "freshness_pct": 59,
+          "freshness_pct": 50,
           "quality_pct": 75
         },
         "quality_note": "dada provisional"
@@ -152,12 +152,12 @@
         "previous_value_numeric": 18.2
       },
       "confidence": {
-        "score_pct": 82,
-        "label": "Alta",
-        "age_hours": 0.8208333333333333,
+        "score_pct": 79,
+        "label": "Mitjana",
+        "age_hours": 1.0066666666666666,
         "components": {
           "availability_pct": 100,
-          "freshness_pct": 59,
+          "freshness_pct": 50,
           "quality_pct": 85
         },
         "quality_note": "indicador derivat documentat"
@@ -179,12 +179,12 @@
         "previous_value_numeric": 50.4
       },
       "confidence": {
-        "score_pct": 82,
-        "label": "Alta",
-        "age_hours": 0.8208333333333333,
+        "score_pct": 79,
+        "label": "Mitjana",
+        "age_hours": 1.0066666666666666,
         "components": {
           "availability_pct": 100,
-          "freshness_pct": 59,
+          "freshness_pct": 50,
           "quality_pct": 85
         },
         "quality_note": "indicador derivat documentat"
@@ -206,12 +206,12 @@
         "previous_value_numeric": 3.0
       },
       "confidence": {
-        "score_pct": 82,
-        "label": "Alta",
-        "age_hours": 0.8208333333333333,
+        "score_pct": 79,
+        "label": "Mitjana",
+        "age_hours": 1.0066666666666666,
         "components": {
           "availability_pct": 100,
-          "freshness_pct": 59,
+          "freshness_pct": 50,
           "quality_pct": 85
         },
         "quality_note": "indicador derivat documentat"
@@ -234,7 +234,7 @@
       "confidence": {
         "score_pct": 61,
         "label": "Mitjana",
-        "age_hours": 244.8670561111111,
+        "age_hours": 245.05288944444445,
         "components": {
           "availability_pct": 100,
           "freshness_pct": 0,
@@ -261,7 +261,7 @@
       "confidence": {
         "score_pct": 78,
         "label": "Mitjana",
-        "age_hours": 464.2132523675,
+        "age_hours": 464.3990857008333,
         "components": {
           "availability_pct": 100,
           "freshness_pct": 40,
@@ -287,7 +287,7 @@
       "confidence": {
         "score_pct": 64,
         "label": "Mitjana",
-        "age_hours": 1256.203882222222,
+        "age_hours": 1256.3897155555555,
         "components": {
           "availability_pct": 100,
           "freshness_pct": 0,
@@ -313,7 +313,7 @@
       "confidence": {
         "score_pct": 64,
         "label": "Mitjana",
-        "age_hours": 1256.203882222222,
+        "age_hours": 1256.3897155555555,
         "components": {
           "availability_pct": 100,
           "freshness_pct": 0,
@@ -339,7 +339,7 @@
       "confidence": {
         "score_pct": 64,
         "label": "Mitjana",
-        "age_hours": 1256.203882222222,
+        "age_hours": 1256.3897155555555,
         "components": {
           "availability_pct": 100,
           "freshness_pct": 0,
@@ -366,7 +366,7 @@
       "confidence": {
         "score_pct": 56,
         "label": "Mitjana",
-        "age_hours": 18.820833333333333,
+        "age_hours": 19.006666666666668,
         "components": {
           "availability_pct": 100,
           "freshness_pct": 0,
@@ -391,12 +391,12 @@
         "previous_value_numeric": 16.7
       },
       "confidence": {
-        "score_pct": 79,
+        "score_pct": 76,
         "label": "Mitjana",
-        "age_hours": 0.8208333333333333,
+        "age_hours": 1.0066666666666666,
         "components": {
           "availability_pct": 100,
-          "freshness_pct": 59,
+          "freshness_pct": 50,
           "quality_pct": 75
         },
         "quality_note": "dada provisional"
@@ -420,10 +420,10 @@
       "confidence": {
         "score_pct": 89,
         "label": "Alta",
-        "age_hours": 5.820833333333334,
+        "age_hours": 6.006666666666667,
         "components": {
           "availability_pct": 100,
-          "freshness_pct": 81,
+          "freshness_pct": 80,
           "quality_pct": 85
         },
         "quality_note": "indicador derivat documentat"
@@ -447,7 +447,7 @@
       "confidence": {
         "score_pct": 95,
         "label": "Alta",
-        "age_hours": 0.8208333333333333,
+        "age_hours": 1.0066666666666666,
         "components": {
           "availability_pct": 100,
           "freshness_pct": 97,
@@ -464,7 +464,7 @@
       "label": "Meteocat XEMA · estació Y4",
       "organization": "Servei Meteorològic de Catalunya / Generalitat de Catalunya",
       "status": "verified",
-      "checked_at_utc": "2026-08-28T18:49:15Z",
+      "checked_at_utc": "2026-08-28T19:00:24Z",
       "data_at_utc": "2026-08-28T18:00:00Z",
       "service": "Socrata API · nzvn-apee",
       "note": "Consulta oficial; les variables absents es declaren i no es converteixen en zero."
@@ -473,7 +473,7 @@
       "label": "Meteocat XEMA · vent CJ Organyà",
       "organization": "Servei Meteorològic de Catalunya / Generalitat de Catalunya",
       "status": "verified",
-      "checked_at_utc": "2026-08-28T18:49:15Z",
+      "checked_at_utc": "2026-08-28T19:00:24Z",
       "data_at_utc": "2026-08-28T18:00:00Z",
       "service": "Socrata API · nzvn-apee",
       "note": "Estació oficial més propera amb vent, a 9,2 km de Y4; context puntual, no mesura dins Alinyà."
@@ -482,7 +482,7 @@
       "label": "CAMS · PM2,5 europeu",
       "organization": "Copernicus Atmosphere Monitoring Service / ECMWF",
       "status": "verified",
-      "checked_at_utc": "2026-08-28T18:49:15Z",
+      "checked_at_utc": "2026-08-28T19:00:24Z",
       "data_at_utc": "2026-08-28T00:00:00Z",
       "service": "WMS 1.3.0 GetFeatureInfo",
       "note": "Context modelitzat a aproximadament 10 km; no és una estació local."
@@ -491,7 +491,7 @@
       "label": "Landsat 8/9 Collection 2 Level-2 ST",
       "organization": "United States Geological Survey",
       "status": "verified",
-      "checked_at_utc": "2026-08-28T18:49:15Z",
+      "checked_at_utc": "2026-08-28T19:00:24Z",
       "data_at_utc": "2026-08-09T10:36:27.291477Z",
       "service": "STAC plus signed Cloud Optimized GeoTIFF range reads",
       "note": "La consulta és diària; la composició només canvia amb una escena QA-vàlida nova."
@@ -500,7 +500,7 @@
       "label": "ECOSTRESS L2T V3 · temperatura superficial",
       "organization": "NASA/JPL ECOSTRESS / NASA LP DAAC",
       "status": "requires_credentials",
-      "checked_at_utc": "2026-08-28T18:49:15Z",
+      "checked_at_utc": "2026-08-28T19:00:24Z",
       "data_at_utc": null,
       "service": "NASA CMR Search + Earthdata protected COG",
       "note": "La consulta de catàleg és diària; només una escena local nova i QA-vàlida pot substituir Landsat."
@@ -509,7 +509,7 @@
       "label": "ForestDrought · sequera forestal i potencial de foc",
       "organization": "CREAF / Ecosystem Modelling Facility",
       "status": "verified",
-      "checked_at_utc": "2026-08-28T18:49:15Z",
+      "checked_at_utc": "2026-08-28T19:00:24Z",
       "data_at_utc": "2026-08-23T00:00:00Z",
       "service": "repositori HTTPS GeoPackage daily_modelled_forests",
       "note": "Model forestal de 500 × 500 m; la data del model es conserva separada de la comprovació diària."
@@ -518,7 +518,7 @@
       "label": "Ombra topogràfica diària · 15 h",
       "organization": "EcoRadar sobre ICGC MDT 5 m",
       "status": "verified",
-      "checked_at_utc": "2026-08-28T18:49:15Z",
+      "checked_at_utc": "2026-08-28T19:00:24Z",
       "data_at_utc": "2026-08-28T13:00:00Z",
       "service": "Analysis Engine EcoRadar",
       "note": "Derivat diari de relleu i posició solar; no incorpora arbres, edificis ni horitzó llunyà."
@@ -527,7 +527,7 @@
       "label": "Sentinel-2 L2A · NDVI, NDMI i albedo",
       "organization": "Copernicus / ESA",
       "status": "requires_credentials",
-      "checked_at_utc": "2026-08-28T18:49:15Z",
+      "checked_at_utc": "2026-08-28T19:00:24Z",
       "data_at_utc": "2026-07-07T10:37:01.024000Z",
       "service": "CDSE STAC + Process API",
       "note": "Requereix credencials CDSE per actualitzar l'escena analítica."
@@ -536,7 +536,7 @@
       "label": "Perill actual d'incendi · índex EcoRadar",
       "organization": "EcoRadar sobre fonts oficials documentades",
       "status": "verified",
-      "checked_at_utc": "2026-08-28T18:49:15Z",
+      "checked_at_utc": "2026-08-28T19:00:24Z",
       "data_at_utc": "2026-08-28T18:00:00Z",
       "service": "Analysis Engine EcoRadar",
       "note": "Indicador derivat; no és una alerta oficial ni substitueix el Pla Alfa."
@@ -545,7 +545,7 @@
       "label": "Pla Alfa · Fígols i Alinyà",
       "organization": "Cos d'Agents Rurals / Generalitat de Catalunya",
       "status": "verified",
-      "checked_at_utc": "2026-08-28T18:49:15Z",
+      "checked_at_utc": "2026-08-28T19:00:24Z",
       "data_at_utc": "2026-08-18T13:57:13.598000Z",
       "service": "ArcGIS FeatureServer oficial · vista municipal Avui",
       "note": "Nivell oficial 0–4; es mostra en paral·lel i no es converteix en puntuació EcoRadar."
@@ -43634,7 +43634,7 @@
   },
   "history": {
     "observation_count": 3587,
-    "check_count": 25,
+    "check_count": 26,
     "observations_jsonl": "projectes/Alinya/history/daily_readings_observations.jsonl",
     "checks_jsonl": "projectes/Alinya/history/daily_readings_checks.jsonl",
     "public_series_limit_per_reading": null
