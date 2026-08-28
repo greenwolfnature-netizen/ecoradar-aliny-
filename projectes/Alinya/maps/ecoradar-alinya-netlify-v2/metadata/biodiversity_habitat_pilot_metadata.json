@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-08-28T18:46:24.111554+00:00",
+  "generated_at_utc": "2026-08-28T18:51:32.141905+00:00",
   "scope": "Muntanya d’Alinyà",
   "status": "pilot_qualitative",
   "sector_unit": "49 unitats cartogràfiques oficials de l’índex de connectivitat terrestre de la Generalitat, retallades a l’àmbit; no són una quadrícula EcoRadar ni una delimitació de gestió.",
@@ -43,7 +43,7 @@
   "counts": {
     "sectors": 49,
     "valuable": 44,
-    "pressured": 30,
+    "pressured": 29,
     "knowledge_insufficient": 39,
     "priority_check": 15
   }
