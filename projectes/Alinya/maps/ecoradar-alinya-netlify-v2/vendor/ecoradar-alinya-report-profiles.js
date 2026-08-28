@@ -14,6 +14,12 @@
     const readings = D.dailyReadings?.readings || {};
     const analytics = D.dailyHistory?.analytics || {};
     const sentinelDate = sat.sentinelDate || readings.ndvi?.data_at_utc;
+    const readingEvidence = key => {
+      const item = readings[key];
+      if (!item) return 'EcoRadar no disposa d’una lectura equivalent en el registre diari.';
+      return `${item.label}: ${item.value}; dada ${date(item.data_at_utc)}; ${item.status || 'estat no indicat'}.`;
+    };
+    const territoryFrame = `Alinyà presenta un gradient aproximat de 607 a 2.379 m, un mosaic forestal i obert i ${ca(D.metrics.hicHa,2)} ha d’HIC cartografiats. Aquest context obliga a separar el patró territorial de les causes: altitud, orientació, coberta, aigua, pertorbacions i usos poden produir respostes diferents dins el mateix valor mitjà.`;
     const structural = {
       base:{sources:['ICGC · model d’elevacions de 5 m','OpenStreetMap · carreteres, camins i nuclis'],date:'cartografia estructural; consulta indicada a les fonts del visor',facts:[['Altitud','607–2.379 m'],['Xarxa dins l’àmbit',`${ca(D.metrics.pathsKm)} km`],['Carreteres classificades',`${ca(D.metrics.roadsKm)} km`]],what:'El mapa base representa el relleu, l’altitud relativa, la xarxa viària i els nuclis que permeten situar totes les lectures EcoRadar.',context:'A Alinyà, el fort gradient altitudinal i el relleu condicionen insolació, temperatura, circulació de l’aigua, accessibilitat i continuïtat d’hàbitats. Les carreteres i poblacions són context, no una mesura de pressió.',relationships:'El relleu ajuda a interpretar temperatura superficial, humitat, refugis climàtics, pendent, orientació, connectivitat i propagació potencial del foc. La xarxa viària informa accessibilitat potencial, no freqüentació.',changes:'El relleu és estructural i no té una evolució diària interpretable. Canvis a la xarxa viària o als usos podrien modificar accessibilitat, fragmentació i pressions, però aquesta capa no els quantifica.',consequences:'Una interpretació incorrecta del context topogràfic pot ocultar fondals, solanes, divisòries i colls amb funcions ecològiques diferents; no implica per si sola un impacte sobre fauna o vegetació.'},
       habitats:{sources:['Generalitat de Catalunya · cartografia d’hàbitats d’interès comunitari'],date:'cartografia oficial disponible al projecte',facts:[['HIC cartografiats',`${ca(D.metrics.hicHa,2)} ha`],['HIC prioritaris',`${ca(D.metrics.hicPriorHa,2)} ha`]],what:'La lectura delimita hàbitats d’interès comunitari (HIC) i els que la normativa classifica com a prioritaris.',context:'A la Muntanya d’Alinyà aquests hàbitats actuen com a filtre de compatibilitat: concentren valors i requeriments ecològics que cal comprovar abans de modificar vegetació, accessos o règims de pertorbació.',relationships:'S’ha de creuar amb biodiversitat, cobertura, vigor, humitat, aigua, connectivitat, ús públic i foc. La coincidència espacial orienta validació, però no prova l’estat de conservació ni la presència actual d’una espècie.',changes:'Una reducció o fragmentació real de l’hàbitat pot debilitar connectivitat i disponibilitat de recursos. Un augment cartogràfic pot derivar d’una actualització de la font i no d’una recuperació ecològica.',consequences:'La degradació funcional pot afectar estructura vegetal, microclima, recursos tròfics, refugis i moviments de fauna. L’abast depèn del tipus d’hàbitat i s’ha de validar.'},
@@ -60,15 +66,138 @@
       ,places:{contribution:'Aporta referències territorials per comunicar resultats i situar accessos, serveis i operativa respecte dels nuclis, sense convertir-los en una mesura de pressió.',improve:'Mantenir topònims i geometries actualitzats i incorporar dades oficials específiques només quan calgui analitzar població, serveis o exposició.'}
       ,landcover:{contribution:'Aporta el mosaic físic de cobertes que estructura hàbitats, connectivitat, erosió, resposta hídrica i continuïtat de combustible.',improve:'Conservar o recuperar el mosaic segons funció ecològica: protegir sòl i cobertes sensibles, mantenir espais oberts funcionals i evitar tant la pèrdua indiscriminada de vegetació com l’homogeneïtzació.'}
     };
+    const technicalProfiles = {
+      base:{
+        technicalSynthesis:`${territoryFrame}\n\nEl mapa base no diagnostica l’estat ecològic. La seva funció tècnica és impedir interpretacions descontextualitzades: un NDMI baix en una solana rocosa, una obaga forestal o un prat d’alta muntanya no té necessàriament el mateix significat ni la mateixa resposta de gestió.`,
+        crossRelations:[
+          {factor:'Topografia i microclima',reading:'Temperatura · NDMI · refugis',reasoning:'Altitud, orientació i posició topogràfica modulen radiació, temperatura i disponibilitat d’aigua; cal comparar unitats territorials equivalents.',evidence:'Relleu ICGC i lectures satel·litàries disponibles; no s’ha calculat una causalitat topogràfica específica per sector.'},
+          {factor:'Accessibilitat',reading:'Ús públic · gestió del foc',reasoning:'La xarxa pot facilitar seguiment i actuació, però també és un lloc on comprovar fragmentació o molèsties si existeix ús real.',evidence:`${ca(D.metrics.pathsKm)} km dins l’àmbit; no hi ha aforaments homogenis.`}
+        ],
+        unverified:['Intensitat real d’ús de la xarxa i estat de manteniment.','Processos microclimàtics mesurats al camp per orientació i altitud.']
+      },
+      habitats:{
+        technicalSynthesis:`${territoryFrame}\n\nEls ${ca(D.metrics.hicHa,2)} ha d’HIC i ${ca(D.metrics.hicPriorHa,2)} ha d’HIC prioritaris són un filtre de compatibilitat, no una puntuació d’estat. La gestió ha de preguntar quin procés manté cada hàbitat, quina pressió està demostrada i si la no-intervenció, la retirada de pressió o una actuació focalitzada és l’opció mínima suficient.`,
+        crossRelations:[
+          {factor:'Aigua i refugis climàtics',reading:'NDMI · temperatura · refugis',reasoning:'La persistència d’humitat i frescor pot sostenir microhàbitats sensibles, però la coincidència cartogràfica necessita comprovació de permanència i estat.',evidence:`Refugis potencials alts o molt alts: ${ca(D.metrics.climateRefugesHighPct)} %; és un cribratge, no un inventari certificat.`},
+          {factor:'Foc i mosaic',reading:'Perill estructural · històric d’incendis',reasoning:'La prevenció només és compatible si conserva les estructures i processos objecte de protecció i evita tractaments uniformes.',evidence:'Perill i HIC són capes diferents; EcoRadar no assigna actuació automàtica als solapaments.'},
+          {factor:'Herbivoria',reading:'Cobertura · vigor · espais oberts',reasoning:'La pastura pot mantenir mosaic i reduir biomassa o, si és excessiva, degradar sòl i regeneració. La direcció depèn de càrrega, estacionalitat i hàbitat.',evidence:'No hi ha una capa verificada de càrrega ramadera ni intensitat espacial; només es formula com a hipòtesi de gestió.'}
+        ],
+        unverified:['Estat de conservació actual de cada HIC.','Càrrega, distribució i estacionalitat de l’herbivoria.','Resposta d’espècies indicadores i microhàbitats després d’una actuació.']
+      },
+      biodiversity:{
+        technicalSynthesis:`Els ${D.metrics.records} registres i ${D.metrics.species} espècies citades descriuen coneixement públic disponible, no riquesa comparable entre sectors. La concentració de punts pot respondre a accessibilitat i esforç d’observació; per això l’informe no converteix densitat de cites en valor ecològic.\n\nLa utilitat de gestió és identificar presències documentades, grups infrarepresentats i llocs on la coincidència amb HIC, aigua, refugis o ús públic justifica una prospecció dirigida.`,
+        crossRelations:[
+          {factor:'Hàbitats i connectivitat',reading:'HIC · mosaic',reasoning:'Les cites prenen significat quan es vinculen als requeriments d’hàbitat i a la permeabilitat territorial, no només al punt observat.',evidence:'Registres GBIF/iNaturalist i HIC disponibles; manca mostreig estandarditzat d’ocupació.'},
+          {factor:'Aigua i microclima',reading:'Refugis · NDMI · temperatura',reasoning:'Amfibis, odonats i altres grups poden dependre de permanència d’aigua i microclimes; cal validar temporalitat i qualitat del punt.',evidence:'Hi ha cartografia hídrica i registres públics, però no una sèrie biològica comparable per massa d’aigua.'},
+          {factor:'Herbivoria i estructura',reading:'Cobertura · vigor',reasoning:'L’herbivoria pot modificar alçada, heterogeneïtat i recursos per a fauna, amb respostes positives o negatives segons el grup.',evidence:'No hi ha pressió d’herbivoria mesurada; no es pot atribuir el patró de cites al pasturatge.'}
+        ],
+        unverified:['Absència real als sectors sense cites.','Abundància, ocupació, reproducció i tendència poblacional.','Pressió d’herbivoria i resposta específica de fauna o flora.']
+      },
+      vegetation:{
+        technicalSynthesis:`La cobertura vegetal de ${ca(sat.vegetationCoverPct)} % (${ca(sat.vegetationCoverHa)} ha) descriu estructura física, no estat ecològic. En un paisatge de muntanya, augmentar cobertura pot protegir sòl i connectivitat, però també tancar espais oberts o augmentar continuïtat de combustible; disminuir-la pot conservar mosaic o representar degradació.\n\nLa decisió depèn de la coberta que canvia, la seva funció, el tipus d’hàbitat i la causa: successió, foc, tala, pastura o erosió no són processos equivalents.`,
+        crossRelations:[
+          {factor:'Estrès hídric',reading:'NDMI · NDVI · temperatura',reasoning:'Coberta, vigor, humitat i temperatura permeten separar presència vegetal de funcionament estival, sempre respectant dates i resolucions.',evidence:`${readingEvidence('ndmi')} ${readingEvidence('ndvi')}`},
+          {factor:'Perill d’incendi',reading:'Perill estructural i actual',reasoning:'La continuïtat de coberta pot afavorir propagació, però el combustible depèn també d’espècie, estructura vertical, biomassa morta i humitat.',evidence:`${readingEvidence('current_fire_danger')} La cobertura HRL no és càrrega de combustible.`},
+          {factor:'Herbivoria i mosaic',reading:'Espais oberts · hàbitats',reasoning:'Una herbivoria compatible pot mantenir herbassars i discontinuïtats; una pressió excessiva pot reduir regeneració i exposar sòl.',evidence:'EcoRadar no disposa de càrrega ramadera georeferenciada; cal camp i dades de maneig.'}
+        ],
+        unverified:['Biomassa viva i morta, estructura vertical i inflamabilitat.','Causa dels canvis de coberta.','Intensitat d’herbivoria i capacitat de càrrega per hàbitat.']
+      },
+      vigor:{
+        technicalSynthesis:`L’NDVI medià de ${ca(sat.ndvi?.median,3)} correspon a l’escena de ${date(sentinelDate)}. És una resposta espectral relativament alta a escala d’àmbit, però no permet concloure que tota la vegetació estigui sana: el percentil 10 (${ca(sat.ndvi?.p10,3)}) confirma heterogeneïtat i pot incloure roca, sòl, espais oberts o vegetació amb resposta menor.\n\nLa interpretació correcta separa fenologia i tipus de coberta d’un possible deteriorament. Només una sèrie estacional comparable i el camp poden convertir una disminució en diagnosi d’estrès.`,
+        crossRelations:[
+          {factor:'Estrès hídric',reading:'NDMI',reasoning:'Vigor i humitat de la mateixa escena permeten distingir vegetació activa de vegetació relativament seca, però no substitueixen potencial hídric o humitat del sòl.',evidence:`${readingEvidence('ndvi')} ${readingEvidence('ndmi')}`},
+          {factor:'Calor superficial',reading:'Temperatura',reasoning:'Una resposta vigorosa pot contribuir a ombra i evapotranspiració; calor alta i NDVI decreixent serien un senyal a contrastar, no causalitat demostrada.',evidence:`${readingEvidence('surface_temperature')} Les dates no són necessàriament coincidents.`},
+          {factor:'Herbivoria',reading:'Cobertura · mosaic',reasoning:'El consum de biomassa pot reduir NDVI localment i mantenir espais oberts sense implicar degradació; sobrepastura i compactació poden produir una resposta negativa.',evidence:'No hi ha dades verificades de càrrega ni distribució del bestiar.'}
+        ],
+        unverified:['Fenologia comparable en diverses dates.','Pressió d’herbivoria, sega o altres manejos.','Causes fisiològiques d’un NDVI baix.']
+      },
+      moisture:{
+        technicalSynthesis:`L’NDMI medià és ${ca(sat.ndmi?.median,3)} i correspon a ${date(sentinelDate)}. És l’última escena disponible, no la humitat d’avui. A Alinyà cal llegir-lo sobre el gradient altitudinal, les solanes i obagues, el tipus de coberta i la proximitat funcional a l’aigua; un valor baix pot representar sequedat estacional, vegetació esparsa o una coberta diferent, no necessàriament degradació.\n\nLa precipitació observada després de l’escena (${readings.precipitation_7d?.value || 'dada no disponible'} en 7 dies i ${readings.precipitation_30d?.value || 'dada no disponible'} en 30 dies) no actualitza retrospectivament l’NDMI. Serveix per descriure el context actual i reforça la necessitat d’una nova observació satel·litària abans d’afirmar persistència de l’estrès.`,
+        crossRelations:[
+          {factor:'Perill d’incendi',reading:'Perill d’incendi avui',reasoning:'NDMI baix pot ser coherent amb vegetació més seca i major inflamabilitat, però només ha d’aportar pes al perill actual mentre compleix el llindar de frescor. Meteorologia, vent, humitat fina i combustible continuen sent determinants.',evidence:`${readingEvidence('ndmi')} ${readingEvidence('current_fire_danger')}`},
+          {factor:'Vigor vegetal',reading:'NDVI',reasoning:'NDMI i NDVI de la mateixa escena ajuden a distingir activitat fotosintètica i humitat relativa. Vigor alt amb humitat moderada pot ser estacional o propi de la coberta i no equival automàticament a estrès sever.',evidence:`${readingEvidence('ndvi')}`},
+          {factor:'Temperatura i refugis',reading:'LST · refugis climàtics',reasoning:'La coincidència de menor humitat, major temperatura i absència de refugi és una hipòtesi de vulnerabilitat microclimàtica que cal validar espacialment i al camp.',evidence:`${readingEvidence('surface_temperature')} Les capes tenen dates diferents i no proven simultaneïtat.`},
+          {factor:'Herbivoria',reading:'Cobertura · vigor · mosaic',reasoning:'La herbivoria modifica biomassa i estructura i pot reduir competència per l’aigua o, si és excessiva, augmentar exposició i degradació. No es pot deduir la direcció només amb NDMI.',evidence:'No hi ha càrrega ramadera, distribució espacial ni estat de pastura verificats.'}
+        ],
+        unverified:['Humitat del sòl i potencial hídric de la vegetació.','Humitat fina i càrrega real de combustible.','Intensitat, distribució i efectes de l’herbivoria.','Persistència de la sequedat després de les pluges posteriors a l’escena.']
+      },
+      temperature:{
+        technicalSynthesis:`La mediana estival Landsat és ${ca(sat.temperature?.median)} °C i el 80 % central se situa entre ${ca(sat.temperature?.p10)} i ${ca(sat.temperature?.p90)} °C. És temperatura de superfície composta, no aire ni confort. En un àmbit amb més de 1.700 m de desnivell, part del patró és topogràfic i no s’ha d’interpretar automàticament com a degradació.\n\nLa prioritat tècnica són les anomalies persistents dins cobertes i posicions comparables, especialment si coincideixen amb NDMI baix, pèrdua de vigor o discontinuïtat hídrica.`,
+        crossRelations:[
+          {factor:'Estrès hídric',reading:'NDMI · precipitació',reasoning:'Temperatura alta pot intensificar demanda evaporativa; el risc ecològic augmenta si coincideix amb baixa humitat vegetal i manca de recuperació després de pluja.',evidence:`${readingEvidence('ndmi')} ${readingEvidence('precipitation_30d')} Dates i escales diferents.`},
+          {factor:'Albedo i coberta',reading:'Albedo · cobertura',reasoning:'Absorció radiativa, ombra, rugositat i evapotranspiració determinen conjuntament la temperatura; cap d’aquests factors explica tot sol el patró.',evidence:`Albedo medià ${ca(sat.albedo?.median,3)}; cobertura vegetal ${ca(sat.vegetationCoverPct)} %.`},
+          {factor:'Perill d’incendi',reading:'Perill actual',reasoning:'La calor superficial pot aportar context de sequedat, però la meteorologia actual i la humitat del combustible són les variables operatives.',evidence:`${readingEvidence('current_fire_danger')}`}
+        ],
+        unverified:['Temperatura i humitat de l’aire a escala de cada sector.','Resposta fisiològica d’espècies o hàbitats concrets.','Persistència de les anomalies en una sèrie homogènia.']
+      },
+      albedo:{
+        technicalSynthesis:`L’albedo medià és ${ca(sat.albedo?.median,3)} a ${date(sentinelDate)}. El valor és coherent amb un mosaic de vegetació, roca i sòls de muntanya, però no existeix un albedo “òptim” únic per a Alinyà. Una superfície fosca pot ser bosc funcional; una superfície clara pot ser roca natural, sòl exposat o neu.\n\nLa gestió no ha de perseguir canviar l’índex, sinó entendre la causa d’una anomalia i comprovar si coincideix amb escalfament, pèrdua d’humitat, erosió o canvi de coberta.`,
+        crossRelations:[
+          {factor:'Balanç tèrmic',reading:'Temperatura superficial',reasoning:'Menor reflexió pot augmentar energia absorbida si la resta de factors es manté; ombra, humitat i evapotranspiració poden compensar o invertir la resposta tèrmica.',evidence:`Albedo ${ca(sat.albedo?.median,3)} i LST ${ca(sat.temperature?.median)} °C provenen de productes i dates diferents; no s’ha calculat correlació causal.`},
+          {factor:'Estrès hídric',reading:'NDMI · vigor',reasoning:'Canvis simultanis d’albedo, NDMI i NDVI poden indicar transformació de coberta o estat, però la direcció depèn de vegetació, sòl, roca i estacionalitat.',evidence:`${readingEvidence('ndmi')} ${readingEvidence('ndvi')}`},
+          {factor:'Perill d’incendi',reading:'Perill estructural i actual',reasoning:'L’albedo només pot aportar context indirecte mitjançant el balanç energètic; no és combustible, humitat fina ni probabilitat d’ignició.',evidence:`${readingEvidence('current_fire_danger')}`}
+        ],
+        unverified:['Causa material dels valors extrems sense classificació de camp.','Balanç energètic complet i fluxos d’evapotranspiració.','Relació causal local entre albedo i temperatura.']
+      },
+      climateRefuges:{
+        technicalSynthesis:`El ${ca(D.metrics.climateRefugesHighPct)} % classificat com a potencial alt o molt alt és un cribratge basat en frescor, NDMI i NDVI. Identifica coincidència favorable, però els components no són independents i provenen de dates que poden ser diferents.\n\nUn refugi funcional requereix persistència durant episodis extrems, aigua o humitat disponible, estructura adequada, connectivitat i baixa pressió. La gestió ha de validar aquestes condicions abans de protegir o restaurar un sector candidat.`,
+        crossRelations:[
+          {factor:'Aigua',reading:'Xarxa hídrica · NDMI',reasoning:'La proximitat cartogràfica a l’aigua només és ecològicament rellevant si hi ha permanència, qualitat i accés funcional.',evidence:'Cartografia hídrica disponible; manca inventari complet de permanència i cabal.'},
+          {factor:'Biodiversitat',reading:'Registres · HIC',reasoning:'Els refugis poden sostenir espècies sensibles, però la coincidència amb cites no prova dependència ni ús durant episodis extrems.',evidence:`${D.metrics.records} registres públics; mostreig oportunista.`},
+          {factor:'Herbivoria i pressió',reading:'Cobertura · ús públic',reasoning:'Pastura o ús intens poden alterar estructura, regeneració i tranquil·litat; també poden mantenir heterogeneïtat segons intensitat.',evidence:'No hi ha mesures homogènies de càrrega ramadera ni freqüentació.'}
+        ],
+        unverified:['Persistència microclimàtica durant onades de calor.','Permanència i qualitat de l’aigua.','Ús efectiu per espècies sensibles.','Pressió d’herbivoria i ús públic.']
+      },
+      fireDanger:{
+        technicalSynthesis:`El perill estructural mostra on coincideixen predisposició territorial, coberta, temperatura, NDMI, relleu i antecedents. És una priorització per validar combustible i compatibilitat ecològica, no una predicció diària.\n\nA Alinyà, el mosaic i la herbivoria poden influir en continuïtat i biomassa, però la capa no conté càrrega ramadera ni estructura fina del combustible. Qualsevol proposta ha de creuar HIC, sòl, aigua, regeneració i objectius de conservació.`,
+        crossRelations:[
+          {factor:'Estrès hídric',reading:'NDMI · ForestDrought',reasoning:'Vegetació més seca pot augmentar disponibilitat del combustible, però el pes depèn de frescor i cobertura real de la font.',evidence:`${readingEvidence('ndmi')}`},
+          {factor:'Meteorologia',reading:'Perill d’incendi avui',reasoning:'El perill estructural persisteix; la situació operativa canvia amb humitat, vent, ratxes, pluja i Pla Alfa.',evidence:`${readingEvidence('current_fire_danger')}`},
+          {factor:'Herbivoria i mosaic',reading:'Cobertura vegetal',reasoning:'La pastura pot reduir combustible herbaci o degradar sòl i regeneració si és excessiva. No es pot prescriure sense càrrega, calendari i objectiu.',evidence:'Sense dades verificades d’herbivoria ni combustible fi per sector.'}
+        ],
+        unverified:['Combustible fi i mort, estructura vertical i continuïtat real.','Règim i efecte espacial de la pastura.','Viabilitat i impacte ecològic de tractaments preventius.']
+      },
+      fireCurrent:{
+        technicalSynthesis:`${readingEvidence('current_fire_danger')} La lectura d’avui renormalitza només els components temporalment elegibles i disponibles; les dades satel·litàries antigues queden reduïdes o com a context. El Pla Alfa continua separat com a dada oficial.\n\nEl valor mitjà no elimina màxims territorials ni substitueix la lectura de cel·la. La decisió operativa ha de prioritzar meteorologia, Pla Alfa i informació de camp; la gestió estructural s’ha de programar fora de l’emergència i amb compatibilitat ecològica.`,
+        crossRelations:[
+          {factor:'Humitat vegetal i sequera',reading:'NDMI · ForestDrought · precipitació',reasoning:'La sequedat acumulada condiciona disponibilitat del combustible, però cada font conserva la seva data i resolució.',evidence:`${readingEvidence('ndmi')} ${readingEvidence('precipitation_7d')}`},
+          {factor:'Vent i humitat de l’aire',reading:'XEMA',reasoning:'Són factors operatius del dia que poden accelerar propagació i assecat; són observacions d’estació i no una falsa graella de 100 m.',evidence:`${readingEvidence('wind')} ${readingEvidence('relative_humidity')}`},
+          {factor:'Herbivoria i combustible',reading:'Cobertura · mosaic',reasoning:'La gestió ramadera pot modificar biomassa, però no forma part de la meteorologia d’avui ni es pot inferir del valor de perill.',evidence:'No hi ha càrrega ni efecte recent d’herbivoria verificats.'}
+        ],
+        unverified:['Humitat fina de combustible a cada sector.','Ignicions, comportament futur i severitat potencial.','Efecte recent de la pastura sobre biomassa disponible.']
+      },
+      fires:{
+        technicalSynthesis:`Els perímetres de 2000 i 2012 aporten memòria de pertorbació, però no expliquen severitat, causa ni recuperació actual. La gestió postincendi ha de reconstruir la trajectòria amb sòl, regeneració, erosió, hàbitats, aigua i pressions, diferenciant recuperació espontània de bloqueig funcional.`,
+        crossRelations:[
+          {factor:'Recuperació vegetal',reading:'Cobertura · NDVI · NDMI',reasoning:'Les lectures actuals poden descriure cobertura i resposta espectral, però no substitueixen una sèrie postincendi comparable.',evidence:'Hi ha estat recent i perímetres, però no una cronoseqüència completa integrada al visor.'},
+          {factor:'Herbivoria postincendi',reading:'Mosaic · regeneració',reasoning:'Pot controlar rebrots, competència i combustible o impedir regeneració si és excessiva.',evidence:'No hi ha dades espacials de càrrega ni exclusió experimental.'},
+          {factor:'Erosió i aigua',reading:'Pendent · xarxa hídrica',reasoning:'Pendent, severitat i cobertura postfoc condicionen exportació de sòl i sediments.',evidence:'Pendent disponible; severitat i erosió de camp no verificades.'}
+        ],
+        unverified:['Severitat dels focs i erosió posterior.','Trajectòria temporal de regeneració.','Pressió d’herbivoria postincendi.']
+      },
+      management:{
+        technicalSynthesis:`La gestió no deriva d’un únic valor. EcoRadar ha de construir una cadena: valor o procés a conservar → pressió demostrada → mecanisme ecològic → mesura mínima → indicador de resposta → llindar de revisió.\n\nA Alinyà, la prioritat és validar la funcionalitat del mosaic, l’aigua i els refugis, l’estat d’HIC, les pressions reals i l’estructura del combustible. L’herbivoria és una eina potencial de procés, no una recepta: requereix objectiu, càrrega, calendari, sectors de referència i seguiment de sòl, vegetació i fauna.`,
+        crossRelations:[
+          {factor:'Mosaic i herbivoria',reading:'Cobertura · vigor · hàbitats',reasoning:'Pot mantenir espais oberts i discontinuïtats si és compatible amb capacitat de càrrega i objectius d’hàbitat.',evidence:'La necessitat és plausible; l’assignació territorial continua pendent de dades de maneig i camp.'},
+          {factor:'Aigua i resiliència',reading:'NDMI · refugis · xarxa hídrica',reasoning:'Protegir processos hídrics pot reforçar microclima, vegetació i fauna i reduir vulnerabilitat durant sequera.',evidence:'Hi ha cribratge remot; manca inventari complet de permanència i estat.'},
+          {factor:'Foc i conservació',reading:'Perill estructural · perill actual · HIC',reasoning:'La prevenció ha de separar resposta operativa del dia i tractaments estructurals, filtrant sempre compatibilitat ecològica.',evidence:'Índexs disponibles; combustible i resposta dels HIC requereixen camp.'}
+        ],
+        unverified:['Assignació territorial de l’escala d’intervenció A–E.','Càrrega ramadera i capacitat de càrrega ecològica.','Cost, manteniment i resposta mesurada de cada actuació.']
+      }
+    };
     return function build(selection) {
       const key=selection.key, guide=selection.guide || {}, aliases={hic:'habitats',biodiversity:'biodiversity',fires:'fires'};
       const semanticKey=selection.type === 'layer' ? (aliases[key] || key) : key;
       const base=selection.type === 'layer' ? (layerSpecific[key] || structural[aliases[key]]) || {} : (optional[key] ? optional[key]() : structural[key]) || {};
+      const technical=technicalProfiles[semanticKey] || {};
       const profile={
         name:guide.title || guide.label || key,
         generatedAt:new Date().toLocaleString('ca-ES',{timeZone:'Europe/Madrid'}),
         dataDate:base.date || 'segons la font indicada al visor', sources:base.sources || ['Font indicada a la lectura activa del visor'],
         facts:(base.facts || []).map(([label,value,note])=>({label,value,note})),
+        technicalSynthesis:technical.technicalSynthesis,
+        crossRelations:technical.crossRelations || [],
+        unverified:technical.unverified || [],
         what:base.what || guide.copy || 'Lectura cartogràfica disponible a EcoRadar.',
         contribution:base.contribution || interpretiveAdditions[semanticKey]?.contribution || guide.reading || 'Aporta una lectura territorial que s’ha de combinar amb la resta d’evidències disponibles.',
         context:base.context || `${guide.copy || ''} ${guide.reading || ''}`,
