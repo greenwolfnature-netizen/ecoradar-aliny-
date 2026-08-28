@@ -11,7 +11,14 @@ assert 'data-reading-report-modal' in html
 assert 'data-reading-report-pdf' in html
 assert 'getSelection:() => ({...activeGuide' in html
 assert 'EcoRadarAlinyaReportProfiles.buildFactory' in html
-assert 'window.open' in engine and 'print()' in engine
+assert 'html2pdf.bundle.min.js' in html
+assert 'Desar informe en PDF' in html
+assert "global.html2pdf().set(options).from(exportMarkup, 'string').save()" in engine
+assert "replaceAll('#ecoradar-alinya ', '')" in engine
+assert 'window.open' not in engine
+assert 'print()' not in engine
+assert (ROOT / 'vendor' / 'html2pdf.bundle.min.js').is_file()
+assert (ROOT / 'vendor' / 'html2pdf.bundle.min.js.LICENSE.txt').is_file()
 assert 'Context cartogràfic superposable' in html
 assert 'id="eu-context-status"' in html
 assert html.index('class="eu-map-panel"') < html.index('class="eu-panel eu-context-panel"')
@@ -23,19 +30,22 @@ assert "activeGuide = next ? {type:'layer'" not in html
 required_sections = (
     'Què estem mesurant?',
     'Què ens aporta aquesta informació?',
-    'Què significa aquesta lectura en aquest espai?',
-    'Com es relaciona amb la resta de lectures EcoRadar?',
-    'Què pot passar si aquest indicador augmenta o disminueix?',
-    'Quines conseqüències pot tenir sobre vegetació, fauna, hàbitats i processos ecològics?',
-    'Es pot millorar? Com?',
-    'Conclusions i implicacions per a la gestió.',
+    'Què ens diu la lectura d’Alinyà?',
+    'Possibles causes i factors condicionants',
+    'Creuament amb altres lectures EcoRadar',
+    'Efectes en cadena',
+    'Com pot evolucionar aquesta lectura?',
+    'Conseqüències ecològiques',
+    'Relació amb els incendis',
+    'Sectors prioritaris',
+    'Implicacions per a la gestió',
+    'Conclusió integrada',
 )
 for heading in required_sections:
     assert heading in engine, heading
 
 for heading in (
     'Diagnosi tècnica integrada',
-    'Relacions ecològiques que cal contrastar',
     'Factors rellevants no verificats amb aquesta lectura',
 ):
     assert heading in engine, heading
@@ -62,6 +72,30 @@ moisture_end = profiles.index('\n      temperature:{', moisture_start)
 moisture = profiles[moisture_start:moisture_end]
 assert "current_fire_danger" in moisture
 assert "herbivoria" in moisture.lower()
-assert "No es pot deduir la direcció només amb NDMI" in moisture
+assert "No equival a humitat fina del combustible" in profiles
+
+extensions_start = profiles.index('const diagnosticExtensions')
+extensions_end = profiles.index('const genericDiagnostic', extensions_start)
+extensions = profiles[extensions_start:extensions_end]
+for mode in ('base','habitats','biodiversity','vegetation','vigor','moisture','climateRefuges','temperature','albedo','management','fireDanger','fireCurrent','fires'):
+    start = extensions.index(f"{mode}:{{")
+    following = [extensions.find(f"\n      {other}:{{", start + 1) for other in ('base','habitats','biodiversity','vegetation','vigor','moisture','climateRefuges','temperature','albedo','management','fireDanger','fireCurrent','fires')]
+    following = [position for position in following if position != -1]
+    end = min(following) if following else len(extensions)
+    block = extensions[start:end]
+    for field in ('causes:','spatialAssessment:','evolution:','chainEffects:','prioritySectors:','managementImplications:','integratedConclusion:'):
+        assert field in block, f"missing {field} in diagnostic extension {mode}"
+
+albedo_start = extensions.index('albedo:{')
+albedo_end = extensions.index('\n      climateRefuges:{', albedo_start)
+albedo = extensions[albedo_start:albedo_end]
+for phrase in ('creuament GIS cel·la a cel·la', 'Pla Alfa', 'propagació'):
+    assert phrase.lower() in albedo.lower(), phrase
+assert 'perill actual' in profiles.lower()
+
+assert 'const genericDiagnostic' in profiles
+assert "level:'observat'" in profiles
+assert "level:'probable'" in profiles
+assert "level:'potencial'" in profiles
 
 print('ALINYA_READING_REPORTS=PASS')
