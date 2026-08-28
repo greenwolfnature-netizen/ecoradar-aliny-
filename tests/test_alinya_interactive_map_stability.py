@@ -14,6 +14,15 @@ def _assert_stable_map_layout(text: str) -> None:
     assert "height:420px; min-height:420px; max-height:none; aspect-ratio:auto" in text
     assert 'class="eu-map-stack"' in text
     assert "grid-template-columns:repeat(2,minmax(0,1fr))" in text
+    assert text.index('aria-label="Context fix del mapa"') < text.index('class="eu-map-stack"')
+    assert 'data-layer="access"' in text
+    assert 'data-layer="places"' in text
+    assert 'data-layer="publicUse"' in text
+    assert 'data-layer="hic"' not in text
+    assert 'data-layer="landcover"' not in text
+    assert 'data-layer="biodiversity"' not in text
+    assert 'data-layer="fires"' not in text
+    assert "Com llegir la lectura activa" in text
     assert "const keepMapPosition = mapRectBefore.bottom > 0" in text
     assert "window.scrollBy(0, displacement)" in text
 
