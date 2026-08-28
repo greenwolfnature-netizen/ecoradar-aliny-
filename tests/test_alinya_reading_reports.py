@@ -15,6 +15,8 @@ assert 'window.open' in engine and 'print()' in engine
 assert 'Context cartogràfic superposable' in html
 assert 'id="eu-context-status"' in html
 assert html.index('class="eu-map-panel"') < html.index('class="eu-panel eu-context-panel"')
+assert 'class="eu-panel eu-reading-guide-horizontal"' in html
+assert html.index('class="eu-map-panel"') < html.index('class="eu-panel eu-reading-guide-horizontal"') < html.index('class="eu-panel eu-context-panel"')
 assert "activeGuide = {type:'mode', key:activeMode};" in html
 assert "activeGuide = next ? {type:'layer'" not in html
 

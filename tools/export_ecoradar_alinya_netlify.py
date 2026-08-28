@@ -796,6 +796,12 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-guide-label {{ margin:9px 0 5px; color:var(--blue); font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.035em; }}
     #ecoradar-alinya .eu-guide-reading {{ margin-top:8px!important; padding-top:7px; border-top:1px solid #e5e1d8; }}
     #ecoradar-alinya .eu-guide-limit {{ margin-top:7px!important; color:#6c5a47!important; }}
+    #ecoradar-alinya .eu-reading-guide-horizontal {{ padding:13px 14px; }}
+    #ecoradar-alinya .eu-reading-guide-horizontal > h3 {{ margin-bottom:10px; }}
+    #ecoradar-alinya .eu-guide-horizontal-grid {{ display:grid; grid-template-columns:minmax(0,1.15fr) minmax(180px,.72fr) minmax(0,1.25fr); gap:16px; align-items:start; }}
+    #ecoradar-alinya .eu-guide-horizontal-grid > div {{ min-width:0; }}
+    #ecoradar-alinya .eu-guide-horizontal-grid .eu-guide-label {{ margin-top:0; }}
+    #ecoradar-alinya .eu-guide-horizontal-grid .eu-guide-reading {{ margin-top:0!important; padding-top:0; border-top:0; }}
     #ecoradar-alinya .eu-generate-report {{ width:100%; min-height:38px; margin-top:12px; padding:8px 12px; border:1px solid var(--green); border-radius:5px; color:#fff; background:var(--green); font:700 10px/1.2 Arial,sans-serif; cursor:pointer; }}
     #ecoradar-alinya .eu-generate-report:hover, #ecoradar-alinya .eu-generate-report:focus-visible {{ background:var(--blue); border-color:var(--blue); outline:2px solid #91a99d; outline-offset:2px; }}
     body.err-modal-open {{ overflow:hidden; }}
@@ -817,27 +823,27 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .err-metadata > div, #ecoradar-alinya .err-fact {{ min-width:0; padding:10px; border:1px solid var(--line); }}
     #ecoradar-alinya .err-metadata b, #ecoradar-alinya .err-metadata span, #ecoradar-alinya .err-fact span, #ecoradar-alinya .err-fact strong, #ecoradar-alinya .err-fact small {{ display:block; overflow-wrap:anywhere; }}
     #ecoradar-alinya .err-metadata b, #ecoradar-alinya .err-fact span {{ color:#64727d; font-size:8px; text-transform:uppercase; }}
-    #ecoradar-alinya .err-metadata span {{ margin-top:4px; font-size:10px; }}
+    #ecoradar-alinya .err-metadata span {{ margin-top:4px; font-size:11px; }}
     #ecoradar-alinya .err-fact strong {{ margin-top:4px; color:var(--green); font-size:16px; }}
     #ecoradar-alinya .err-synthesis {{ margin:0 28px; padding:18px!important; border-left:4px solid var(--green); background:#edf4ea; }}
     #ecoradar-alinya .err-synthesis h2 {{ border-color:#b8c8b9; }}
     #ecoradar-alinya .err-relations {{ display:grid; gap:8px; }}
     #ecoradar-alinya .err-relation {{ padding:11px 12px; border:1px solid var(--line); background:#fbfaf6; }}
     #ecoradar-alinya .err-relation > div {{ display:flex; justify-content:space-between; gap:12px; align-items:baseline; }}
-    #ecoradar-alinya .err-relation strong {{ color:var(--blue); font-size:10px; }}
-    #ecoradar-alinya .err-relation span, #ecoradar-alinya .err-relation small {{ color:#6b7881; font-size:8px; }}
+    #ecoradar-alinya .err-relation strong {{ color:var(--blue); font-size:11px; }}
+    #ecoradar-alinya .err-relation span, #ecoradar-alinya .err-relation small {{ color:#6b7881; font-size:9px; }}
     #ecoradar-alinya .err-relation p {{ margin:7px 0 5px; }}
     #ecoradar-alinya .err-unverified {{ margin:0 28px; padding:16px!important; border-left:4px solid #7b858c; background:#f3f1ed; }}
     #ecoradar-alinya .err-document h2 {{ margin:0 0 8px; padding-bottom:5px; border-bottom:1px solid var(--line); color:var(--blue); font-size:14px; text-transform:none; letter-spacing:0; }}
-    #ecoradar-alinya .err-document p, #ecoradar-alinya .err-document li {{ color:#3d5261; font-size:10px; line-height:1.55; }}
+    #ecoradar-alinya .err-document p, #ecoradar-alinya .err-document li {{ color:#3d5261; font-size:11px; line-height:1.55; }}
     #ecoradar-alinya .err-map {{ height:340px; overflow:hidden; border:1px solid var(--line); background:#eef1ea; }}
     #ecoradar-alinya .err-map svg {{ width:100%; height:100%; }}
     #ecoradar-alinya .err-limits {{ margin:0 28px; padding:16px!important; border-left:4px solid var(--orange); background:#fff6e8; }}
     #ecoradar-alinya .err-document footer {{ border-top:1px solid var(--line); color:#687682; font-size:8px; }}
     #ecoradar-alinya .err-actions {{ display:flex; justify-content:flex-end; align-items:center; gap:8px; padding:10px 16px; border-top:1px solid var(--line); background:#fff; }}
     #ecoradar-alinya .err-status {{ margin-right:auto; color:#8a3f20; font-size:8px; }}
-    #ecoradar-alinya #eu-reading-guide {{ min-height:310px; }}
-    #ecoradar-alinya #eu-legend {{ min-height:84px; align-content:start; }}
+    #ecoradar-alinya #eu-reading-guide {{ min-height:0; }}
+    #ecoradar-alinya #eu-legend {{ min-height:0; align-content:start; }}
     #ecoradar-alinya .eu-source {{ font-size:8px!important; color:#74808a!important; }}
     #ecoradar-alinya .eu-warning {{ border-left:3px solid var(--orange); padding-left:8px; }}
     #ecoradar-alinya .eu-current {{ border-left:3px solid var(--red); padding-left:8px; }}
@@ -933,9 +939,9 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-map-access-label {{ margin:0; padding:24px max(20px,calc((100% - 1160px)/2)) 0; color:var(--green); font-size:10px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; background:var(--paper); }}
     #ecoradar-alinya .eu-fire-chapter {{ background:#f5f2eb; }}
     @media (max-width:1050px) {{ #ecoradar-alinya .eu-grid {{ grid-template-columns:230px minmax(0,1fr); }} #ecoradar-alinya .eu-map-panel {{ min-height:480px; }} #ecoradar-alinya .eu-foot {{ grid-column:1/-1; }} }}
-    @media (max-width:900px) {{ #ecoradar-alinya .eu-context-panel {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-layer-list {{ grid-template-columns:repeat(3,minmax(0,1fr)); }} #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} }}
+    @media (max-width:900px) {{ #ecoradar-alinya .eu-guide-horizontal-grid {{ grid-template-columns:1fr 1fr; }} #ecoradar-alinya .eu-guide-interpretation {{ grid-column:1/-1; }} #ecoradar-alinya .eu-context-panel {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-layer-list {{ grid-template-columns:repeat(3,minmax(0,1fr)); }} #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right .eu-fire-summary-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-variables-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-formula-panel {{ grid-column:auto; grid-row:auto; }} #ecoradar-alinya .eu-map-panel {{ height:420px; min-height:420px; max-height:none; aspect-ratio:auto; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:1fr; gap:4px; }} }}
-    @media (max-width:760px) {{ #ecoradar-alinya .err-modal {{ padding:0; }} #ecoradar-alinya .err-dialog {{ width:100%; height:100vh; border-radius:0; }} #ecoradar-alinya .err-preview {{ padding:8px; }} #ecoradar-alinya .err-cover {{ flex-direction:column; min-height:0; padding:20px; }} #ecoradar-alinya .err-cover h1 {{ margin-top:14px; font-size:22px; }} #ecoradar-alinya .err-metadata, #ecoradar-alinya .err-facts {{ grid-template-columns:1fr; }} #ecoradar-alinya .err-document > section, #ecoradar-alinya .err-document > footer {{ padding:15px 18px; }} #ecoradar-alinya .err-limits {{ margin:0 18px; }} #ecoradar-alinya .err-map {{ height:240px; }} }}
+    @media (max-width:760px) {{ #ecoradar-alinya .eu-guide-horizontal-grid {{ grid-template-columns:1fr; gap:10px; }} #ecoradar-alinya .eu-guide-interpretation {{ grid-column:auto; }} #ecoradar-alinya .eu-guide-horizontal-grid .eu-guide-reading {{ padding-top:8px; border-top:1px solid #e5e1d8; }} #ecoradar-alinya .err-modal {{ padding:0; }} #ecoradar-alinya .err-dialog {{ width:100%; height:100vh; border-radius:0; }} #ecoradar-alinya .err-preview {{ padding:8px; }} #ecoradar-alinya .err-cover {{ flex-direction:column; min-height:0; padding:20px; }} #ecoradar-alinya .err-cover h1 {{ margin-top:14px; font-size:22px; }} #ecoradar-alinya .err-metadata, #ecoradar-alinya .err-facts {{ grid-template-columns:1fr; }} #ecoradar-alinya .err-document > section, #ecoradar-alinya .err-document > footer {{ padding:15px 18px; }} #ecoradar-alinya .err-limits {{ margin:0 18px; }} #ecoradar-alinya .err-map {{ height:240px; }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .err-synthesis, #ecoradar-alinya .err-unverified {{ margin:0 18px; }} #ecoradar-alinya .err-relation > div {{ align-items:flex-start; flex-direction:column; gap:2px; }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .eu-layer-list {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} }}
     @media print {{
@@ -950,9 +956,10 @@ def render_index(data: dict) -> str:
       #ecoradar-alinya .eu-map-stack {{ display:contents; }}
       #ecoradar-alinya .eu-map-panel {{ order:1; height:170mm; min-height:170mm; break-inside:avoid; }}
       #ecoradar-alinya svg {{ height:170mm; min-height:170mm; }}
-      #ecoradar-alinya .eu-column.eu-left {{ order:2; display:grid; grid-template-columns:1fr 1fr; align-items:start; break-before:page; }}
-      #ecoradar-alinya .eu-column.eu-right {{ order:3; display:grid; grid-template-columns:1fr 1fr; align-items:start; break-before:page; }}
-      #ecoradar-alinya .eu-foot {{ order:4; }}
+      #ecoradar-alinya .eu-reading-guide-horizontal {{ order:2; break-before:page; }}
+      #ecoradar-alinya .eu-column.eu-left {{ order:3; display:block; break-before:page; }}
+      #ecoradar-alinya .eu-column.eu-right {{ order:4; display:grid; grid-template-columns:1fr 1fr; align-items:start; break-before:page; }}
+      #ecoradar-alinya .eu-foot {{ order:5; }}
       #ecoradar-alinya .eu-report-section {{ padding:10mm 0; break-before:page; }}
       #ecoradar-alinya .eu-report-card, #ecoradar-alinya .eu-callout, #ecoradar-alinya tr {{ break-inside:avoid; }}
       #ecoradar-alinya details.eu-detail > div {{ display:block!important; }}
@@ -1028,16 +1035,6 @@ def render_index(data: dict) -> str:
           <button class="eu-mode" data-mode="fires" aria-pressed="false">Històric d'incendis<small>perímetres oficials</small></button>
         </div>
       </section>
-      <section class="eu-panel" id="eu-reading-guide" aria-live="polite">
-        <h3>Com llegir la capa activa</h3>
-        <div class="eu-guide-title" id="eu-guide-title"></div>
-        <p class="eu-guide-copy" id="eu-guide-copy"></p>
-        <div class="eu-guide-label">Clau de colors</div>
-        <div class="eu-legend" id="eu-legend" role="list"></div>
-        <p class="eu-guide-reading" id="eu-guide-reading"></p>
-        <p class="eu-guide-limit" id="eu-guide-limit"></p>
-        <button class="eu-generate-report" type="button" data-generate-reading-report>Generar informe</button>
-      </section>
     </aside>
 
     <div class="eu-map-stack">
@@ -1047,6 +1044,25 @@ def render_index(data: dict) -> str:
       <div class="eu-map-note">Arrossega per desplaçar i usa la roda per ampliar. Consulta la font, la data i els límits de cada lectura activa.</div>
       <div class="eu-tooltip"></div>
       <div class="eu-fire-popup" hidden aria-live="polite"></div>
+    </section>
+
+    <section class="eu-panel eu-reading-guide-horizontal" id="eu-reading-guide" aria-live="polite">
+      <h3>Com llegir la capa activa</h3>
+      <div class="eu-guide-horizontal-grid">
+        <div class="eu-guide-explanation">
+          <div class="eu-guide-title" id="eu-guide-title"></div>
+          <p class="eu-guide-copy" id="eu-guide-copy"></p>
+        </div>
+        <div class="eu-guide-key">
+          <div class="eu-guide-label">Clau de colors</div>
+          <div class="eu-legend" id="eu-legend" role="list"></div>
+        </div>
+        <div class="eu-guide-interpretation">
+          <p class="eu-guide-reading" id="eu-guide-reading"></p>
+          <p class="eu-guide-limit" id="eu-guide-limit"></p>
+          <button class="eu-generate-report" type="button" data-generate-reading-report>Generar informe</button>
+        </div>
+      </div>
     </section>
 
     <section class="eu-panel eu-context-panel" aria-label="Context cartogràfic superposable">
