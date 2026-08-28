@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-08-28T19:00:24Z",
-  "latest_catalog_check_utc": "2026-08-28T19:00:24Z",
+  "generated_at_utc": "2026-08-28T19:29:54Z",
+  "latest_catalog_check_utc": "2026-08-28T19:29:54Z",
   "connector": "creaf_forestdrought_daily_modelled_forests",
   "responsibility": "discover_download_subset_and_normalize_only",
   "scope": "Muntanya d'Alinyà",
