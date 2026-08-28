@@ -64,26 +64,28 @@
 
   function mount(options) {
     const root = options.root;
-    const button = root.querySelector('[data-generate-reading-report]');
+    const buttons = [...root.querySelectorAll('[data-generate-reading-report]')];
     const modal = root.querySelector('[data-reading-report-modal]');
     const preview = modal && modal.querySelector('[data-reading-report-preview]');
-    if (!button || !modal || !preview) return;
+    if (!buttons.length || !modal || !preview) return;
     let lastReport = null;
     let lastBody = '';
+    let activeButton = buttons[0];
 
-    function close() { modal.hidden = true; document.body.classList.remove('err-modal-open'); button.focus(); }
-    button.addEventListener('click', () => {
-      const selection = options.getSelection();
-      lastReport = options.buildReport(selection);
-      const svg = options.getMapSvg && options.getMapSvg();
-      const mapSvg = svg ? svg.cloneNode(true).outerHTML : '';
-      lastBody = reportHtml(lastReport, mapSvg);
-      preview.innerHTML = lastBody;
-      modal.querySelector('[data-reading-report-title]').textContent = lastReport.name;
-      modal.hidden = false;
-      document.body.classList.add('err-modal-open');
-      modal.querySelector('[data-reading-report-close]').focus();
-    });
+    function close() { modal.hidden = true; document.body.classList.remove('err-modal-open'); activeButton.focus(); }
+    buttons.forEach(button => button.addEventListener('click', () => {
+        activeButton = button;
+        const selection = options.getSelection();
+        lastReport = options.buildReport(selection);
+        const svg = options.getMapSvg && options.getMapSvg();
+        const mapSvg = svg ? svg.cloneNode(true).outerHTML : '';
+        lastBody = reportHtml(lastReport, mapSvg);
+        preview.innerHTML = lastBody;
+        modal.querySelector('[data-reading-report-title]').textContent = lastReport.name;
+        modal.hidden = false;
+        document.body.classList.add('err-modal-open');
+        modal.querySelector('[data-reading-report-close]').focus();
+    }));
     modal.querySelectorAll('[data-reading-report-close]').forEach(node => node.addEventListener('click', close));
     modal.addEventListener('click', event => { if (event.target === modal) close(); });
     document.addEventListener('keydown', event => { if (event.key === 'Escape' && !modal.hidden) close(); });

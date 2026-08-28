@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-08-28T18:51:32.141905+00:00",
+  "generated_at_utc": "2026-08-28T19:20:08.169215+00:00",
   "scope": "Muntanya d’Alinyà",
   "status": "pilot_qualitative",
   "sector_unit": "49 unitats cartogràfiques oficials de l’índex de connectivitat terrestre de la Generalitat, retallades a l’àmbit; no són una quadrícula EcoRadar ni una delimitació de gestió.",
@@ -11,7 +11,8 @@
     "ndvi_q25": 0.482,
     "lst_q75": 32.02175,
     "bare_q75": 0.0,
-    "access_q75": 7.159412281471371
+    "access_q75": 7.159412281471371,
+    "natural_cover_q75": 99.98959314552918
   },
   "threshold_method": "Quartils territorials interns per detectar contrastos relatius entre sectors; no són llindars ecològics, legals ni causals.",
   "classification_rules": {
@@ -45,6 +46,35 @@
     "valuable": 44,
     "pressured": 29,
     "knowledge_insufficient": 39,
-    "priority_check": 15
+    "priority_check": 15,
+    "connectivity": 32,
+    "changes_detected": 0
+  },
+  "diagnostic_availability": {
+    "value": {
+      "available": true
+    },
+    "pressure": {
+      "available": true
+    },
+    "changes": {
+      "available": false,
+      "message": "Informació insuficient per generar aquesta diagnosi.",
+      "missing": [
+        "sèrie espacial multitemporal comparable de NDVI i NDMI",
+        "dates de coberta del sòl harmonitzades per detectar transicions",
+        "validació de camp dels canvis observats"
+      ]
+    },
+    "connectivity": {
+      "available": true,
+      "limit": "Mostra connectors oficials i continuïtat de cobertes com a context; no identifica funcionalitat específica per espècie ni barreres no cartografiades."
+    },
+    "knowledge": {
+      "available": true
+    },
+    "followup": {
+      "available": true
+    }
   }
 }
