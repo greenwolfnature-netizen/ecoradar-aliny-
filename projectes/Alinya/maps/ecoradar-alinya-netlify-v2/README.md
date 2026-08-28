@@ -21,6 +21,8 @@ opcionalment, `ECORADAR_GITHUB_BRANCH` (per defecte `main`).
 - `docs/fire-source.md`: nota de traçabilitat de la capa d'incendis.
 - `docs/current-fire-danger-source.md`: metodologia i fonts oficials del perill actual.
 - `metadata/current_fire_danger.json`: comprovacio, variables, pesos, resultats i limitacions.
+- `metadata/biodiversity_habitat_pilot_metadata.json`: regles qualitatives, fonts, llindars relatius i limitacions del pilot.
+- `metadata/biodiversity_habitat_pilot.geojson`: sectors agregats sense noms ni coordenades de taxons.
 - `metadata/daily_readings.json` i `metadata/daily_history.json`: reserva coherent.
 - `netlify/functions/daily-readings.mjs`: lectura remota del repositori canònic.
 
