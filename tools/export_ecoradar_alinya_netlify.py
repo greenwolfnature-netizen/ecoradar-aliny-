@@ -850,6 +850,8 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .err-unverified {{ margin:0 28px; padding:16px!important; border-left:4px solid #7b858c; background:#f3f1ed; }}
     #ecoradar-alinya .err-document h2 {{ margin:0 0 8px; padding-bottom:5px; border-bottom:1px solid var(--line); color:var(--blue); font-size:14px; text-transform:none; letter-spacing:0; }}
     #ecoradar-alinya .err-document p, #ecoradar-alinya .err-document li {{ color:#3d5261; font-size:11px; line-height:1.55; }}
+    #ecoradar-alinya .err-map-frame, #ecoradar-alinya .err-map {{ break-inside:avoid; page-break-inside:avoid; }}
+    #ecoradar-alinya .err-map-frame {{ display:block; }}
     #ecoradar-alinya .err-map {{ height:340px; overflow:hidden; border:1px solid var(--line); background:#eef1ea; }}
     #ecoradar-alinya .err-map svg {{ width:100%; height:100%; }}
     #ecoradar-alinya .err-limits {{ margin:0 28px; padding:16px!important; border-left:4px solid var(--orange); background:#fff6e8; }}

@@ -30,7 +30,7 @@
       ${report.technicalSynthesis ? `<section class="err-synthesis"><h2>Diagnosi tècnica integrada</h2>${paragraph(report.technicalSynthesis)}</section>` : ''}
       <section><h2>Què estem mesurant?</h2>${paragraph(report.what)}</section>
       <section><h2>Què ens aporta aquesta informació?</h2>${paragraph(report.contribution)}</section>
-      ${mapSvg ? `<section><h2>Què ens diu la lectura d’Alinyà?</h2><div class="err-map">${mapSvg}</div>${paragraph(report.context)}${paragraph(report.territorial)}${report.spatialAssessment ? paragraph(report.spatialAssessment) : ''}</section>` : ''}
+      ${mapSvg ? `<section class="err-map-section"><div class="err-map-frame"><h2>Què ens diu la lectura d’Alinyà?</h2><div class="err-map">${mapSvg}</div></div>${paragraph(report.context)}${paragraph(report.territorial)}${report.spatialAssessment ? paragraph(report.spatialAssessment) : ''}</section>` : ''}
       ${report.temporal ? `<section><h2>Comparació temporal</h2>${paragraph(report.temporal)}</section>` : ''}
       ${causes ? `<section><h2>Possibles causes i factors condicionants</h2>${causes}</section>` : ''}
       ${relations ? `<section><h2>Creuament amb altres lectures EcoRadar</h2><p>${esc(report.relationships)}</p><div class="err-relations">${relations}</div></section>` : ''}
@@ -110,7 +110,7 @@
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
         pagebreak: {
           mode: ['css', 'legacy'],
-          avoid: ['.err-fact', '.err-diagnostic-card', '.err-relation', '.err-chain-step', '.err-sector', '.err-management', '.err-evolution article']
+          avoid: ['.err-map-frame', '.err-map', '.err-fact', '.err-diagnostic-card', '.err-relation', '.err-chain-step', '.err-sector', '.err-management', '.err-evolution article']
         }
       };
       global.html2pdf().set(options).from(exportMarkup, 'string').save()

@@ -15,6 +15,10 @@ assert 'html2pdf.bundle.min.js' in html
 assert 'Desar informe en PDF' in html
 assert "global.html2pdf().set(options).from(exportMarkup, 'string').save()" in engine
 assert "replaceAll('#ecoradar-alinya ', '')" in engine
+assert 'class="err-map-section"' in engine
+assert 'class="err-map-frame"' in engine
+assert "avoid: ['.err-map-frame', '.err-map'" in engine
+assert '#ecoradar-alinya .err-map-frame, #ecoradar-alinya .err-map { break-inside:avoid; page-break-inside:avoid; }' in html
 assert 'window.open' not in engine
 assert 'print()' not in engine
 assert (ROOT / 'vendor' / 'html2pdf.bundle.min.js').is_file()
