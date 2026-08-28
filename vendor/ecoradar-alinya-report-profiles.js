@@ -187,6 +187,80 @@
     };
     const fireToday = `${readingEvidence('current_fire_danger')} Pla Alfa: ${D.currentFire?.weather?.pla_alfa_label || D.currentFire?.plaAlfa?.label || 'dada no disponible'}; es mostra com a context oficial separat.`;
     const noSpatialCross = 'EcoRadar mostra les capes en el mateix visor, però aquesta versió no conserva una taula de creuament cel·la a cel·la entre aquestes variables. Per això l’informe descriu patrons i hipòtesis contrastables, però no afirma correlacions espacials ni assigna topònims crítics sense càlcul verificat.';
+    const sharedPolicy = {
+      factors:'El valor observat pot respondre simultàniament a topografia, orientació, altitud, tipus de coberta, disponibilitat d’aigua, fenologia, pertorbacions i usos. La lectura activa permet descriure una resposta territorial, però no separar automàticament el pes de cada factor.',
+      noDeduction:'No permet atribuir causalitat, estat ecològic complet, pressió real, presència o absència d’espècies ni necessitat d’actuació sense evidència complementària.',
+      vegetation:'La via sobre la vegetació només és defensable si la lectura coincideix amb canvis d’humitat, vigor, coberta o temperatura en dates comparables. El mecanisme pot afectar disponibilitat hídrica, activitat fotosintètica, regeneració, estructura i proporció de combustible sec, però no es pot atribuir a una sola capa.',
+      fauna:'La fauna podria respondre indirectament si canvien l’aigua disponible, el microclima, la cobertura de refugi, els recursos tròfics o la permeabilitat del mosaic. Sense dades d’ús, ocupació o seguiment d’espècies, EcoRadar identifica vies ecològiques i punts de comprovació, no impactes demostrats.',
+      habitats:'Els HIC cartografiats actuen com a filtre de compatibilitat. Una coincidència espacial amb un valor extrem pot elevar la necessitat de comprovació, però no prova degradació ni estat desfavorable de conservació.',
+      processes:'Els processos que cal considerar són infiltració i escorrentia, evapotranspiració, erosió, successió, connectivitat i règim de pertorbacions. El signe ecològic depèn de la causa i de la trajectòria, no només de si l’indicador puja o baixa.',
+      structuralFire:'La vulnerabilitat estructural depèn de coberta i continuïtat vegetal, pendent, orientació, combustible i accessibilitat. És persistent i no desapareix perquè la meteorologia d’un dia sigui favorable.',
+      fireExposure:'L’exposició inclou hàbitats, sòls, punts d’aigua, connectors, nuclis i infraestructures que podrien resultar afectats. Aquesta lectura no calcula dany esperat ni severitat.',
+      priority:'Seguiment',
+      priorityRationale:'La lectura mostra heterogeneïtat o sectors candidats, però no hi ha prou coincidències espacials i temporals verificades per elevar automàticament la categoria. La prioritat és completar el creuament i validar els extrems.',
+      indicator:'Repetició de la mateixa lectura amb font, resolució, estació, màscara de qualitat i unitats territorials comparables.'
+    };
+    const diagnosticPolicies = {
+      base:{factors:'El relleu és una condició estructural que modula radiació, temperatura, aigua, accessibilitat i continuïtat ecològica; no és un indicador d’estat ni una pressió.',contradictions:['Una solana no és necessàriament degradada ni una obaga és necessàriament un refugi: cal combinar orientació amb coberta, aigua, temperatura i ús biològic.','La proximitat a una pista indica accessibilitat potencial, no freqüentació, fragmentació efectiva ni pressió real.'],priority:'Sense senyals destacables',priorityRationale:'La capa és context estructural. No conté per si sola un senyal d’empitjorament que permeti prioritzar una intervenció.'},
+      habitats:{factors:'La cartografia representa distribució potencial o coneguda d’HIC, no qualitat local, estructura, composició ni tendència. El tipus d’hàbitat, el règim hídric, la successió i les pertorbacions determinen la seva resposta.',contradictions:['Una superfície extensa d’HIC no implica automàticament bon estat; cal estructura, composició, pressions i trajectòria.','Un buit cartogràfic no prova absència d’hàbitat ni menor valor ecològic; pot reflectir escala o actualització de la font.'],priority:'Seguiment',priorityRationale:'Existeix responsabilitat de conservació, però la categoria només pot pujar a Atenció o Prioritari quan un HIC sensible coincideix amb una pressió o pèrdua funcional demostrada.'},
+      biodiversity:{factors:'Els registres depenen de l’esforç d’observació, l’accessibilitat, l’estacionalitat, la detectabilitat i la decisió de publicar. La densitat de punts descriu coneixement disponible, no abundància.',contradictions:['Més registres poden indicar més mostreig i no més biodiversitat.','Pocs registres, inclosos els ratpenats, poden ser un buit de dades i no una absència ecològica.'],priority:'Seguiment',priorityRationale:'Els registres orienten prospecció i precaució, però no permeten classificar un sector com degradat o prioritari sense inventari comparable i hàbitat validat.'},
+      vegetation:{factors:'La cobertura respon al tipus de coberta, successió, gestió, pastura, tala, foc i recuperació. Més vegetació pot protegir sòl i connectivitat, però també tancar mosaic o augmentar continuïtat de combustible.',contradictions:['Més cobertura no és sempre una millora: pot reduir prats, ecotons i discontinuïtats funcionals.','Menys cobertura no és sempre degradació: pot correspondre a roca natural, prats funcionals o manteniment justificat del mosaic.'],priority:'Seguiment',priorityRationale:'La cobertura és estructural i no diagnostica vigor, humitat ni qualitat. Cal conèixer quina coberta canvia, per què i sobre quin hàbitat.'},
+      vigor:{factors:'L’NDVI respon a activitat fotosintètica, fenologia, densitat i tipus de coberta, disponibilitat d’aigua i pertorbacions. La comparació només és robusta entre escenes equivalents.',contradictions:['NDVI baix amb coberta oberta, roca o vegetació estacional pot ser coherent amb el sistema i no indicar estrès.','NDVI alt amb NDMI baix o calor elevada pot descriure vegetació encara activa però sota una condició hídrica que requereix seguiment.'],priority:'Seguiment',priorityRationale:'El rang confirma heterogeneïtat, però no hi ha una tendència comparable ni un creuament espacial que demostri pèrdua funcional.'},
+      moisture:{factors:'L’NDMI respon al contingut relatiu d’aigua de la coberta, tipus i densitat de vegetació, pluja recent, fenologia, ombra i sòl. No equival a percentatge d’aigua ni a humitat fina del combustible.',contradictions:['NDMI baix amb NDVI estable i temperatura moderada pot correspondre a fenologia o coberta seca natural, no a deteriorament.','NDMI alt en una obaga no garanteix aigua permanent, bon estat de l’hàbitat ni baixa inflamabilitat del combustible fi.'],priority:'Seguiment',priorityRationale:'La humitat vegetal és rellevant per estrès i foc, però la data satel·litària i l’absència de coincidència cel·la a cel·la impedeixen elevar la categoria territorial sense validació.'},
+      temperature:{factors:'La temperatura superficial depèn de radiació, albedo, ombra, humitat, evapotranspiració, rugositat, altitud i substrat. No és temperatura de l’aire ni confort tèrmic directe.',contradictions:['Una superfície forestal fosca pot tenir albedo baix i, alhora, temperatura moderada per ombra i evapotranspiració.','Una superfície clara pot tenir albedo alt però escalfar-se si és roca o sòl sec amb poca capacitat evaporativa.'],priority:'Seguiment',priorityRationale:'Els extrems tèrmics són candidats a contrast, però una composició estival no demostra empitjorament actual ni efecte biològic sense humitat, coberta i sèrie comparable.'},
+      albedo:{factors:'L’albedo sintetitza la fracció de radiació reflectida i varia amb vegetació, humitat, color i rugositat del sòl, roca, orientació, ombres i neu. No existeix un valor òptim únic per a Alinyà.',contradictions:['Albedo baix amb NDMI i NDVI elevats i temperatura moderada és compatible amb vegetació densa i funcional, no amb degradació.','Albedo alt amb NDVI i NDMI baixos pot correspondre a roca natural o a sòl exposat; només la coberta i el camp permeten diferenciar-los.'],priority:'Seguiment',priorityRationale:'Els extrems són ambientalment interpretables, però EcoRadar encara no disposa del creuament cel·la a cel·la i temporalment homogeni necessari per classificar-los com a Atenció.'},
+      climateRefuges:{factors:'El cribratge combina frescor, humitat, vigor i aigua, però la funcionalitat depèn de permanència microclimàtica, connectivitat, estructura, absència de pressions i ús biològic.',contradictions:['Un sector fresc en una sola escena no és necessàriament un refugi persistent.','Un sector menys fresc pot continuar sent funcional per a espècies adaptades o per la disponibilitat d’aigua i estructura.'],priority:'Atenció',priorityRationale:'La coincidència de diverses lectures justifica validar els candidats alts o molt alts, però no permet certificar refugis ni prescriure intervencions.'},
+      fireDanger:{factors:'La lectura integra predisposició de fons: continuïtat vegetal, relleu, sequedat espectral i temperatura composta. No representa la meteorologia ni el Pla Alfa del dia.',contradictions:['Perill estructural alt amb meteorologia favorable no implica urgència operativa avui.','Perill estructural baix no exclou una ignició ni un comportament advers si vent, combustible fi i sequedat conjuntural empitjoren.'],priority:'Atenció',priorityRationale:'Existeixen sectors estructuralment elevats que mereixen validació de combustible i compatibilitat ecològica; la intervenció només és prioritària quan coincideixen vulnerabilitat, condicions adverses i exposició.'},
+      fireCurrent:{factors:'L’índex combina meteorologia recent, acumulacions, variables dinàmiques amb control de frescor i vulnerabilitat estructural. Les dades absents o antigues es renormalitzen o queden com a context; Pla Alfa no entra a la puntuació.',contradictions:['Una mitjana moderada pot contenir màxims territorials rellevants i no descriu totes les cel·les.','Un Pla Alfa baix i un índex EcoRadar moderat no són incompatibles: mesuren funcions diferents i tenen resolucions diferents.'],priority:(D.currentFire?.summary?.predominant_category || '').toLowerCase().includes('alt') ? 'Prioritari' : 'Atenció',priorityRationale:`La categoria deriva de la lectura actual (${D.currentFire?.summary?.predominant_category || 'no disponible'}) i del màxim territorial de ${ca(D.currentFire?.summary?.max_index_0_100)}/100. S’ha d’interpretar amb Pla Alfa i meteorologia vigents, sense convertir-lo en una predicció d’ignició.`},
+      fires:{factors:'Els perímetres històrics indiquen antecedent i extensió, però la trajectòria depèn de severitat, sòl, erosió, regeneració, herbivoria, successió i actuacions postincendi.',contradictions:['Un perímetre antic no és sinònim de degradació actual: pot existir recuperació funcional.','Una coberta recuperada no demostra recuperació de sòl, composició, hàbitats o estructura.'],priority:'Seguiment',priorityRationale:'Els antecedents justifiquen reconstruir la trajectòria, però severitat, erosió, regeneració i herbivoria no estan integrades amb prou detall per prioritzar actuacions.'},
+      management:{factors:'El cribratge ordena restriccions, oportunitats i preguntes de validació. No suma capes per crear una ordre automàtica ni assigna territorialment l’escala d’intervenció ecològica.',contradictions:['Moltes capes superposades no equivalen necessàriament a prioritat si no hi ha pressió ni mecanisme de deteriorament.','Pocs senyals poden amagar manca de dades; absència d’evidència no és evidència d’absència.'],priority:'Seguiment',priorityRationale:'La prioritat només pot elevar-se quan coincideixen valor o vulnerabilitat, pressió demostrada, mecanisme causal i una resposta gestionable amb seguiment.'}
+    };
+    function buildIntegratedFields(semanticKey, base, technical, diagnostic) {
+      const policy = {...sharedPolicy, ...(diagnosticPolicies[semanticKey] || {})};
+      const selectedRelations = (technical.crossRelations || []).slice(0, 3).map(item => ({...item, level:item.level || (/no hi ha|manca|no s’ha|pendent|hipòtesi/i.test(`${item.reasoning} ${item.evidence}`) ? 'potencial' : 'probable')}));
+      const relationText = selectedRelations.length
+        ? selectedRelations.map((item, index) => `${index === 0 ? 'La primera relació útil' : 'A més'} és ${item.factor}${item.reading ? ` (${item.reading})` : ''}: ${item.reasoning} La traçabilitat disponible indica: ${item.evidence}`).join('\n\n')
+        : 'No hi ha tres lectures complementàries amb prou definició per construir una coincidència territorial. L’informe manté la lectura activa com a cribratge i explicita aquest buit.';
+      const factText = (base.facts || []).map(([label, value]) => `${label}: ${value}`).join('; ');
+      const causeText = (diagnostic.causes || []).map(item => `${item.factor}: ${item.reasoning}`).join(' ');
+      const consequenceText = diagnostic.ecologicalConsequences || base.consequences || sharedPolicy.processes;
+      const managementFirst = (diagnostic.managementImplications || [])[0];
+      return {
+        selectedRelations,
+        variableExplanation:[base.what, `Font i data: ${((base.sources || []).join('; ') || 'font indicada al visor')}; ${base.date || 'data indicada al visor'}. ${policy.factors}`, `Per a la gestió serveix per separar patrons i formular comprovacions. ${policy.noDeduction}`],
+        territorialDiagnosis:[`${base.context || ''}${factText ? ` Resultats: ${factText}.` : ''}`, diagnostic.spatialAssessment || noSpatialCross],
+        jointDiagnosis:[technical.technicalSynthesis || `${base.context || ''} ${base.relationships || ''}`, 'Les relacions només es tracten com a coincidències observades quan dates, cobertura i resolució són compatibles. En cas contrari són hipòtesis contrastables, no correlacions demostrades.'],
+        concordances:[],
+        contradictions:(policy.contradictions || []).slice(0, 1).map(text => ({level:'potencial',title:'Matís que evita una falsa conclusió',text,evidence:'Cal comprovar la combinació de lectures i la causa material abans d’assignar signe ecològic.'})),
+        causalFramework:[
+          {level:'potencial',title:'Possible causa',text:causeText || policy.factors,evidence:'Els factors condicionants són plausibles; només els marcats com a observats consten directament a les dades.'},
+          {level:'probable',title:'Condicions associades',text:selectedRelations.length ? `Cal contrastar conjuntament ${selectedRelations.map(item => item.factor).join(', ')}.` : base.relationships,evidence:'Comprovar compatibilitat espacial i temporal abans d’interpretar la coincidència.'},
+          {level:'potencial',title:'Conseqüències potencials',text:consequenceText,evidence:'No s’atribueixen efectes a una sola variable ni a espècies concretes sense validació.'}
+        ],
+        ecologicalPathways:[
+          {level:'potencial',title:'Vegetació',text:policy.vegetation,evidence:'Contrastar NDVI, NDMI, cobertura, temperatura, fenologia, regeneració i herbivoria quan siguin pertinents.'},
+          {level:'potencial',title:'Fauna',text:policy.fauna,evidence:'Només s’inclouen mecanismes indirectes ecològicament plausibles; cal inventari o seguiment per confirmar resposta.'},
+          {level:'potencial',title:'Hàbitats',text:policy.habitats,evidence:`Alinyà disposa de ${ca(D.metrics.hicHa,2)} ha d’HIC cartografiats; la coincidència específica s’ha de calcular o validar.`},
+          {level:'potencial',title:'Processos ecològics',text:policy.processes,evidence:'Separar procés observat, condició associada i evolució possible.'}
+        ],
+        fireDimensions:[
+          {level:'observat',title:'Perill conjuntural',text:`${fireToday} Aquesta informació descriu la situació operativa disponible, amb la data real de cada component.`,evidence:'Pla Alfa és context oficial separat i no entra numèricament a l’índex EcoRadar.'},
+          {level:'potencial',title:'Vulnerabilitat estructural',text:policy.structuralFire,evidence:'Coberta, continuïtat, pendent, orientació i combustible real requereixen resolució i validació pròpies.'},
+          {level:'potencial',title:'Exposició',text:policy.fireExposure,evidence:'No es calcula una probabilitat de dany ni s’inventa exposició per cel·la.'}
+        ],
+        evolutionScenarios:[
+          {level:'potencial',title:'Deteriorament coherent',conditions:'El canvi desfavorable coincideix amb menys humitat o vigor, més temperatura o pèrdua funcional de coberta.',interpretation:`Només reforça la diagnosi amb dates i resolucions comparables. ${diagnostic.evolution?.decrease || base.changes || ''}`,management:'Elevar seguiment i validar el mecanisme abans d’actuar.'},
+          {level:'potencial',title:'Evolució favorable o alternativa',conditions:'Altres lectures evolucionen en sentit favorable o contradiuen la interpretació negativa.',interpretation:`Pot reflectir fenologia, recuperació, canvi de coberta o font. ${diagnostic.evolution?.increase || base.changes || ''}`,management:'Confirmar persistència i compatibilitat amb hàbitats.'},
+          {level:'potencial',title:'Canvi no interpretable',conditions:'Dates, estacions, resolucions o cobertures no són comparables.',interpretation:'No es pot atribuir una tendència ecològica.',management:'Esperar una observació comparable o usar una base comuna.'}
+        ],
+        priorityAssessment:{category:policy.priority,rationale:policy.priorityRationale,rule:'Sense senyals destacables = cap coincidència preocupant; Seguiment = anomalia o buit sense coincidència suficient; Atenció = diverses lectures coherents; Prioritari = confluència verificada, afectació potencial i resposta de gestió justificada.'},
+        monitoringPlan:[
+          {step:'1 · Comprovar',action:managementFirst?.validation || 'Verificar al camp la causa material, l’estat i la pressió real als sectors que destaquen.',indicator:'Fitxa de camp georeferenciada, amb sector de referència i data.'},
+          {step:'2 · Seguir',action:'Repetir les lectures complementàries amb calendari i resolució compatibles i conservar l’històric.',indicator:policy.indicator},
+          {step:'3 · Avaluar la resposta',action:managementFirst?.action || 'Si es confirma un problema gestionable, aplicar la mesura mínima suficient i comparar abans/després amb un sector de referència.',indicator:'Resposta de la lectura activa més l’indicador del procés afectat; no només superfície tractada.'}
+        ].slice(0, 2)
+      };
+    }
     const diagnosticExtensions = {
       base:{
         causes:[{level:'observat',factor:'Relleu i gradient altitudinal',reasoning:'El desnivell entre aproximadament 607 i 2.379 m estructura exposició, circulació d’aigua i accessibilitat.',evidence:'Model d’elevacions ICGC incorporat al mapa.'},{level:'potencial',factor:'Orientació i posició topogràfica',reasoning:'Solanes, obagues, fondals i carenes poden generar respostes microclimàtiques diferents.',evidence:'Cal una anàlisi zonal específica per quantificar-les.'}],
@@ -335,13 +409,25 @@
       const technical=technicalProfiles[semanticKey] || {};
       const diagnostic=diagnosticExtensions[semanticKey] || genericDiagnostic(base);
       const relationLevel = item => item.level || (/no hi ha|manca|no s’ha|hipòtesi|pendent/i.test(`${item.reasoning} ${item.evidence}`) ? 'potencial' : 'probable');
+      const integrated=buildIntegratedFields(semanticKey, base, technical, diagnostic);
       const profile={
         name:guide.title || guide.label || key,
         generatedAt:new Date().toLocaleString('ca-ES',{timeZone:'Europe/Madrid'}),
         dataDate:base.date || 'segons la font indicada al visor', sources:base.sources || ['Font indicada a la lectura activa del visor'],
         facts:(base.facts || []).map(([label,value,note])=>({label,value,note})),
         technicalSynthesis:technical.technicalSynthesis,
-        crossRelations:(technical.crossRelations || []).map(item=>({...item,level:relationLevel(item)})),
+        variableExplanation:integrated.variableExplanation,
+        territorialDiagnosis:integrated.territorialDiagnosis,
+        jointDiagnosis:integrated.jointDiagnosis,
+        crossRelations:integrated.selectedRelations.map(item=>({...item,level:relationLevel(item)})),
+        concordances:integrated.concordances,
+        contradictions:integrated.contradictions,
+        causalFramework:integrated.causalFramework,
+        ecologicalPathways:integrated.ecologicalPathways,
+        fireDimensions:integrated.fireDimensions,
+        evolutionScenarios:integrated.evolutionScenarios,
+        priorityAssessment:integrated.priorityAssessment,
+        monitoringPlan:integrated.monitoringPlan,
         unverified:technical.unverified || [],
         causes:diagnostic.causes || [], chainEffects:diagnostic.chainEffects || [],
         spatialAssessment:diagnostic.spatialAssessment, evolution:diagnostic.evolution,

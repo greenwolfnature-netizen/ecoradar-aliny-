@@ -39,26 +39,24 @@ assert "activeGuide = {type:'mode', key:activeMode};" in html
 assert "activeGuide = next ? {type:'layer'" not in html
 
 required_sections = (
-    'Què estem mesurant?',
-    'Què ens aporta aquesta informació?',
-    'Què ens diu la lectura d’Alinyà?',
-    'Possibles causes i factors condicionants',
-    'Creuament amb altres lectures EcoRadar',
-    'Efectes en cadena',
-    'Com pot evolucionar aquesta lectura?',
-    'Conseqüències ecològiques',
-    'Relació amb els incendis',
-    'Sectors prioritaris',
-    'Implicacions per a la gestió',
-    'Conclusió integrada',
+    'Què mesura aquesta lectura i per què és útil?',
+    'Lectura territorial real d’Alinyà',
+    'Diagnosi conjunta amb altres lectures EcoRadar',
+    'Evidències complementàries seleccionades',
+    'Coincidències, matisos i contradiccions',
+    'Possible causa · condicions associades · conseqüències',
+    'Vies d’afectació ecològica',
+    'Foc: perill conjuntural, vulnerabilitat estructural i exposició',
+    'Què passaria si la lectura augmentés o disminuís?',
+    'Possibles efectes en cadena',
+    'Priorització territorial justificada',
+    'Implicacions de gestió i seguiment',
+    'Conclusions i decisions que es poden defensar',
 )
 for heading in required_sections:
     assert heading in engine, heading
 
-for heading in (
-    'Diagnosi tècnica integrada',
-    'Factors rellevants no verificats amb aquesta lectura',
-):
+for heading in ('Factors rellevants no verificats amb aquesta lectura',):
     assert heading in engine, heading
 
 for mode in ('base','habitats','biodiversity','vegetation','vigor','moisture','climateRefuges','temperature','albedo','management','fireDanger','fireCurrent','fires'):
