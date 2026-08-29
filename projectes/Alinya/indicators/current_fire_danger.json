@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at_utc": "2026-08-28T23:39:43Z",
-  "checked_at_utc": "2026-08-28T23:39:43Z",
+  "generated_at_utc": "2026-08-29T07:52:29Z",
+  "checked_at_utc": "2026-08-29T07:52:29Z",
   "reading": "Perill d'incendi actual",
   "scope": "Muntanya d'Alinyà",
   "status": "incompleta en algunes cel·les",
@@ -21,127 +21,127 @@
     "webp": "projectes/Alinya/maps/incendis/current_fire_danger.webp"
   },
   "summary": {
-    "mean_index_0_100": 43.2,
+    "mean_index_0_100": 43.6,
     "predominant_category": "moderat",
-    "maximum_index_0_100": 68.6,
+    "maximum_index_0_100": 69.1,
     "maximum_category": "alt",
     "area_by_category_ha": {
       "molt baix": 0.0,
-      "baix": 1711.56,
-      "moderat": 3593.39,
-      "alt": 48.71,
+      "baix": 1590.55,
+      "moderat": 3712.58,
+      "alt": 50.54,
       "molt alt": 0.0,
       "extrem": 0.0
     },
     "very_high_or_extreme_area_pct": 0.0,
     "dominant_variables": [
-      "relative_humidity_inverse",
       "creaf_fire_potential",
-      "structural"
+      "structural",
+      "wind"
     ],
     "dominant_labels": [
-      "Humitat relativa baixa",
       "Potencial de foc ForestDrought elevat",
-      "Perill estructural elevat"
+      "Perill estructural elevat",
+      "Vent fort"
     ],
-    "latest_update_utc": "2026-08-28T22:30:00Z",
-    "confidence_pct": 49.7,
-    "confidence": "baixa",
-    "eligible_base_weight_pct": 69.3,
+    "latest_update_utc": "2026-08-29T07:00:00Z",
+    "confidence_pct": 50.7,
+    "confidence": "mitjana",
+    "eligible_base_weight_pct": 70.9,
     "temporally_excluded_variables": [
       "ndmi_dryness"
     ]
   },
   "weather": {
     "air_temperature_c": {
-      "value": 16.2,
-      "timestamp_utc": "2026-08-28T22:30:00Z",
+      "value": 13.7,
+      "timestamp_utc": "2026-08-29T07:00:00Z",
       "validation_code": "",
-      "history_p05": 15.5,
+      "history_p05": 15.4,
       "history_p95": 31.1
     },
     "wind_speed_ms": {
-      "value": 0.7,
-      "timestamp_utc": "2026-08-28T22:30:00Z",
+      "value": 3.5,
+      "timestamp_utc": "2026-08-29T07:00:00Z",
       "validation_code": "",
       "history_p05": 0.6,
       "history_p95": 7.2
     },
     "wind_direction_deg": {
-      "value": 226.0,
-      "timestamp_utc": "2026-08-28T22:30:00Z",
+      "value": 18.0,
+      "timestamp_utc": "2026-08-29T07:00:00Z",
       "validation_code": "",
       "history_p05": 11.0,
       "history_p95": 339.0
     },
     "relative_humidity_pct": {
-      "value": 41.0,
-      "timestamp_utc": "2026-08-28T22:30:00Z",
+      "value": 57.0,
+      "timestamp_utc": "2026-08-29T07:00:00Z",
       "validation_code": "",
       "history_p05": 27.0,
       "history_p95": 83.0
     },
     "precipitation_mm": {
       "value": 0.0,
-      "timestamp_utc": "2026-08-28T22:30:00Z",
+      "timestamp_utc": "2026-08-29T07:00:00Z",
       "validation_code": ""
     },
     "wind_gust_ms": {
-      "value": 2.4,
-      "timestamp_utc": "2026-08-28T22:30:00Z",
+      "value": 7.4,
+      "timestamp_utc": "2026-08-29T07:00:00Z",
       "validation_code": "",
       "history_p05": 1.7,
       "history_p95": 12.4
     },
     "wind_gust_direction_deg": {
-      "value": 313.0,
-      "timestamp_utc": "2026-08-28T22:30:00Z",
+      "value": 32.0,
+      "timestamp_utc": "2026-08-29T07:00:00Z",
       "validation_code": "",
       "history_p05": 16.0,
-      "history_p95": 316.0
+      "history_p95": 317.0999999999999
     },
-    "daily_min_relative_humidity_pct": 22.0,
-    "daily_max_wind_gust_ms": 9.2
+    "daily_min_relative_humidity_pct": 43.0,
+    "daily_max_wind_gust_ms": 7.5
   },
   "meteorology_context": {
     "air_temperature": {
-      "value": 16.2,
-      "timestamp_utc": "2026-08-28T22:30:00Z",
+      "value": 13.7,
+      "timestamp_utc": "2026-08-29T07:00:00Z",
       "validation_code": "",
-      "history_p05": 15.5,
+      "history_p05": 15.4,
       "history_p95": 31.1
     },
     "relative_humidity": {
-      "value": 41.0,
-      "timestamp_utc": "2026-08-28T22:30:00Z",
+      "value": 57.0,
+      "timestamp_utc": "2026-08-29T07:00:00Z",
       "validation_code": "",
       "history_p05": 27.0,
       "history_p95": 83.0
     },
     "wind": {
-      "value": 0.7,
-      "timestamp_utc": "2026-08-28T22:30:00Z",
+      "value": 3.5,
+      "timestamp_utc": "2026-08-29T07:00:00Z",
       "validation_code": "",
       "history_p05": 0.6,
       "history_p95": 7.2
     },
     "wind_gust": {
-      "value": 2.4,
-      "timestamp_utc": "2026-08-28T22:30:00Z",
+      "value": 7.4,
+      "timestamp_utc": "2026-08-29T07:00:00Z",
       "validation_code": "",
       "history_p05": 1.7,
       "history_p95": 12.4
     },
     "precipitation_latest_period": {
       "value": 0.0,
-      "timestamp_utc": "2026-08-28T22:30:00Z",
+      "timestamp_utc": "2026-08-29T07:00:00Z",
       "validation_code": ""
     },
     "precipitation_accumulated": {
       "status": "available",
-      "data_at_utc": "2026-08-28T22:30:00Z",
+      "data_at_utc": "2026-08-29T07:00:00Z",
       "recent_24h_mm": 0.0,
-      "last_7_days_mm": 18.2,
+      "last_7_days_mm": 18.0,
       "last_30_days_mm": 50.3,
       "days_without_significant_rain": 4,
       "significant_rain_threshold_mm_day": 1.0,
@@ -152,7 +152,7 @@
       "freshness": {
         "status": "current",
         "status_label": "actual",
-        "age_hours": 1.2,
+        "age_hours": 0.9,
         "current_max_age_hours": 3.0,
         "too_old_after_hours": 24.0
       }
@@ -160,7 +160,7 @@
     "freshness": {
       "status": "current",
       "status_label": "actual",
-      "age_hours": 1.2,
+      "age_hours": 0.9,
       "current_max_age_hours": 3.0,
       "too_old_after_hours": 24.0
     },
@@ -177,7 +177,7 @@
     "level": 0,
     "label": "baix",
     "data_at_utc": "2026-08-18T13:57:13.598000Z",
-    "checked_at_utc": "2026-08-28T23:39:43Z",
+    "checked_at_utc": "2026-08-29T07:52:29Z",
     "status": "verified",
     "source_url": "https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/Pla_Alfa_Municipal_Avui_FL_2_view/FeatureServer/0",
     "official_page": "https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/index.html",
@@ -186,27 +186,27 @@
     "freshness": {
       "status": "too_old",
       "status_label": "massa antiga",
-      "age_hours": 249.7,
+      "age_hours": 257.9,
       "current_max_age_hours": 18.0,
       "too_old_after_hours": 72.0
     }
   },
   "variables_today": {
     "creaf_fire_potential": {
-      "value": "mediana 70.3/100",
+      "value": "mediana 52.0/100",
       "source": "CREAF/EMF · ForestDrought daily modelled forests",
-      "date_utc": "2026-08-23T00:00:00Z",
-      "weight_pct": 11.5,
+      "date_utc": "2026-08-24T00:00:00Z",
+      "weight_pct": 13.3,
       "base_weight_pct": 20.0,
-      "freshness_factor_pct": 57.3,
+      "freshness_factor_pct": 66.7,
       "temporal_status": "recent",
-      "temporal_status_label": "recent · pes reduït al 57 %",
-      "age_hours": 143.7,
+      "temporal_status_label": "recent · pes reduït al 67 %",
+      "age_hours": 127.9,
       "freshness_kind": "dynamic",
       "full_weight_max_age_hours": 72.0,
       "exclude_after_hours": 240.0,
       "quality": "verificada",
-      "update_status": "recent · pes reduït al 57 %"
+      "update_status": "recent · pes reduït al 67 %"
     },
     "structural": {
       "value": "mediana 4.0/10",
@@ -233,7 +233,7 @@
       "freshness_factor_pct": 0.0,
       "temporal_status": "too_old",
       "temporal_status_label": "massa antiga · pes exclòs",
-      "age_hours": 1261.0,
+      "age_hours": 1269.3,
       "freshness_kind": "dynamic",
       "full_weight_max_age_hours": 240.0,
       "exclude_after_hours": 720.0,
@@ -244,17 +244,17 @@
       "value": "mediana 28.7 °C",
       "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
       "date_utc": "2026-08-09T10:36:27.291477Z",
-      "weight_pct": 2.8,
+      "weight_pct": 2.6,
       "base_weight_pct": 10.0,
-      "freshness_factor_pct": 27.9,
+      "freshness_factor_pct": 25.7,
       "temporal_status": "recent",
-      "temporal_status_label": "recent · pes reduït al 28 %",
-      "age_hours": 469.1,
+      "temporal_status_label": "recent · pes reduït al 26 %",
+      "age_hours": 477.3,
       "freshness_kind": "dynamic",
       "full_weight_max_age_hours": 192.0,
       "exclude_after_hours": 576.0,
       "quality": "verificada",
-      "update_status": "recent · pes reduït al 28 %"
+      "update_status": "recent · pes reduït al 26 %"
     },
     "vegetation_continuity": {
       "value": "mitjana 49.7/100",
@@ -273,15 +273,15 @@
       "update_status": "estructural · vigent"
     },
     "wind": {
-      "value": "vent 2.5 km/h · ratxa 8.6 km/h",
+      "value": "vent 12.6 km/h · ratxa 26.6 km/h",
       "source": "Meteocat XEMA · CJ Organyà · 9,2 km de Y4 · el component usa el màxim normalitzat entre vent i ratxa",
-      "date_utc": "2026-08-28T22:30:00Z",
+      "date_utc": "2026-08-29T07:00:00Z",
       "weight_pct": 10.0,
       "base_weight_pct": 10.0,
       "freshness_factor_pct": 100.0,
       "temporal_status": "current",
       "temporal_status_label": "actual · pes complet",
-      "age_hours": 1.2,
+      "age_hours": 0.9,
       "freshness_kind": "dynamic",
       "full_weight_max_age_hours": 3.0,
       "exclude_after_hours": 24.0,
@@ -289,15 +289,15 @@
       "update_status": "actual · pes complet"
     },
     "relative_humidity_inverse": {
-      "value": "41 %",
+      "value": "57 %",
       "source": "Meteocat XEMA · Y4 Alinyà",
-      "date_utc": "2026-08-28T22:30:00Z",
+      "date_utc": "2026-08-29T07:00:00Z",
       "weight_pct": 10.0,
       "base_weight_pct": 10.0,
       "freshness_factor_pct": 100.0,
       "temporal_status": "current",
       "temporal_status_label": "actual · pes complet",
-      "age_hours": 1.2,
+      "age_hours": 0.9,
       "freshness_kind": "dynamic",
       "full_weight_max_age_hours": 3.0,
       "exclude_after_hours": 24.0,
@@ -364,10 +364,10 @@
     "aspect": 0.02
   },
   "effective_weights": {
-    "creaf_fire_potential": 0.1146882,
+    "creaf_fire_potential": 0.1334824,
     "structural": 0.2,
     "ndmi_dryness": 0.0,
-    "surface_temperature": 0.027850399999999997,
+    "surface_temperature": 0.0257117,
     "vegetation_continuity": 0.1,
     "wind": 0.1,
     "relative_humidity_inverse": 0.1,
@@ -425,7 +425,7 @@
   "methodology": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
   "sources": {
     "meteocat": {
-      "generated_at_utc": "2026-08-28T23:40:23.962423+00:00",
+      "generated_at_utc": "2026-08-29T07:52:38.720160+00:00",
       "connector": "meteocat_xema_socrata",
       "responsibility": "download_and_normalize_only",
       "source": "Dades meteorològiques de la XEMA",
@@ -433,9 +433,9 @@
       "official_dataset": "https://analisi.transparenciacatalunya.cat/d/nzvn-apee",
       "station_code": "Y4",
       "station_name": "Alinyà",
-      "records": 5034,
-      "first_observation_utc": "2026-07-25T00:00:00Z",
-      "last_observation_utc": "2026-08-28T22:30:00Z",
+      "records": 5037,
+      "first_observation_utc": "2026-07-25T08:00:00Z",
+      "last_observation_utc": "2026-08-29T07:00:00Z",
       "variables": {
         "air_temperature_c": "32",
         "wind_speed_ms": "30",
@@ -450,8 +450,8 @@
       "output_csv": "projectes/Alinya/raw/meteocat_xema/Y4_observations.csv"
     },
     "meteocat_wind": {
-      "generated_at_utc": "2026-08-28T23:39:43Z",
-      "latest_catalog_check_utc": "2026-08-28T23:39:43Z",
+      "generated_at_utc": "2026-08-29T07:52:29Z",
+      "latest_catalog_check_utc": "2026-08-29T07:52:29Z",
       "connector": "meteocat_xema_socrata_nearest_wind",
       "responsibility": "download_and_normalize_only",
       "source": "Dades meteorològiques de la XEMA",
@@ -474,9 +474,9 @@
         "wind_gust_ms": "50",
         "wind_gust_direction_deg": "51"
       },
-      "records": 6712,
-      "first_observation_utc": "2026-07-25T00:00:00Z",
-      "last_observation_utc": "2026-08-28T22:30:00Z",
+      "records": 6716,
+      "first_observation_utc": "2026-07-25T08:00:00Z",
+      "last_observation_utc": "2026-08-29T07:00:00Z",
       "connector_status": "verified",
       "limitation": "Observació puntual a Organyà, 9,2 km de Y4; no és vent mesurat dins la Muntanya d'Alinyà ni una superfície de vent.",
       "output_csv": "projectes/Alinya/raw/meteocat_xema/CJ_wind_observations.csv"
@@ -747,8 +747,8 @@
       "source_metadata": "projectes/Alinya/metadata/landsat_connector.json"
     },
     "forestdrought": {
-      "generated_at_utc": "2026-08-28T23:39:43Z",
-      "latest_catalog_check_utc": "2026-08-28T23:39:43Z",
+      "generated_at_utc": "2026-08-29T07:52:29Z",
+      "latest_catalog_check_utc": "2026-08-29T07:52:29Z",
       "connector": "creaf_forestdrought_daily_modelled_forests",
       "responsibility": "discover_download_subset_and_normalize_only",
       "scope": "Muntanya d'Alinyà",
@@ -757,10 +757,10 @@
       "provider_role": "modelled forest drought and fire-potential data provider",
       "application_url": "https://laboratoriforestal.creaf.cat/forestdrought_app/",
       "repository_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/",
-      "source_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/20260823.gpkg",
+      "source_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/20260824.gpkg",
       "service_type": "public HTTPS GeoPackage repository",
-      "model_date": "2026-08-23",
-      "data_at_utc": "2026-08-23T00:00:00Z",
+      "model_date": "2026-08-24",
+      "data_at_utc": "2026-08-24T00:00:00Z",
       "crs": "EPSG:25830",
       "cell_size_m": 500,
       "geometry_type": "forest grid cell centre points",
@@ -779,7 +779,7 @@
       "usage_license": "Public download and reuse stated by CREAF; formal license identifier pending verification.",
       "connector_status": "verified",
       "status_note": "Latest published model file found by descending date search. The model date is preserved separately from the daily check.",
-      "updated": false
+      "updated": true
     },
     "pla_alfa": {
       "schema_version": "1.0",
@@ -792,7 +792,7 @@
       "level": 0,
       "label": "baix",
       "data_at_utc": "2026-08-18T13:57:13.598000Z",
-      "checked_at_utc": "2026-08-28T23:39:43Z",
+      "checked_at_utc": "2026-08-29T07:52:29Z",
       "status": "verified",
       "source_url": "https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/Pla_Alfa_Municipal_Avui_FL_2_view/FeatureServer/0",
       "official_page": "https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/index.html",
@@ -801,7 +801,7 @@
       "freshness": {
         "status": "too_old",
         "status_label": "massa antiga",
-        "age_hours": 249.7,
+        "age_hours": 257.9,
         "current_max_age_hours": 18.0,
         "too_old_after_hours": 72.0
       }

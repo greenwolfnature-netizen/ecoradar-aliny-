@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-08-28T23:39:43Z",
-  "latest_catalog_check_utc": "2026-08-28T23:39:43Z",
+  "generated_at_utc": "2026-08-29T07:52:29Z",
+  "latest_catalog_check_utc": "2026-08-29T07:52:29Z",
   "connector": "creaf_forestdrought_daily_modelled_forests",
   "responsibility": "discover_download_subset_and_normalize_only",
   "scope": "Muntanya d'Alinyà",
@@ -9,10 +9,10 @@
   "provider_role": "modelled forest drought and fire-potential data provider",
   "application_url": "https://laboratoriforestal.creaf.cat/forestdrought_app/",
   "repository_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/",
-  "source_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/20260823.gpkg",
+  "source_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/20260824.gpkg",
   "service_type": "public HTTPS GeoPackage repository",
-  "model_date": "2026-08-23",
-  "data_at_utc": "2026-08-23T00:00:00Z",
+  "model_date": "2026-08-24",
+  "data_at_utc": "2026-08-24T00:00:00Z",
   "crs": "EPSG:25830",
   "cell_size_m": 500,
   "geometry_type": "forest grid cell centre points",
@@ -31,5 +31,5 @@
   "usage_license": "Public download and reuse stated by CREAF; formal license identifier pending verification.",
   "connector_status": "verified",
   "status_note": "Latest published model file found by descending date search. The model date is preserved separately from the daily check.",
-  "updated": false
+  "updated": true
 }
