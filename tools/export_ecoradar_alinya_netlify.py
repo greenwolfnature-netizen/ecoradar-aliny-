@@ -1401,7 +1401,10 @@ def render_index(data: dict) -> str:
   window.addEventListener('beforeprint', expandDetailsForPrint);
   window.addEventListener('afterprint', restoreDetailsAfterPrint);
   if (window.matchMedia('print').matches) expandDetailsForPrint();
-  const svg = d3.select(root).select('svg');
+  // The biodiversity diagnosis owns a separate SVG before the main map in the
+  // DOM. Target the cartographic SVG explicitly so a new module cannot steal
+  // the base-map render merely by being inserted earlier in the page.
+  const svg = d3.select(root).select('.eu-map-panel svg');
   const tooltip = d3.select(root).select('.eu-tooltip');
   const firePopup = root.querySelector('.eu-fire-popup');
   const width = 1000, height = 720;

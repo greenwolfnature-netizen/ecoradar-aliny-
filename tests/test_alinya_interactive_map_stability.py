@@ -23,6 +23,8 @@ def _assert_stable_map_layout(text: str) -> None:
     assert 'data-layer="biodiversity"' not in text
     assert 'data-layer="fires"' not in text
     assert "Com llegir la lectura activa" in text
+    assert "d3.select(root).select('.eu-map-panel svg')" in text
+    assert "d3.select(root).select('svg');" not in text
     assert "const keepMapPosition = mapRectBefore.bottom > 0" in text
     assert "window.scrollBy(0, displacement)" in text
 
