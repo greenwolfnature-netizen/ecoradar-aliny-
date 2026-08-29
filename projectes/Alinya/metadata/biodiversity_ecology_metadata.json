@@ -1,0 +1,38 @@
+{
+  "generated_at_utc": "2026-08-29T09:27:31.056044+00:00",
+  "status": "definitive_ecological_module",
+  "unit": "Geometries reals d’hàbitats, connectors i interseccions; quadrícula d’1 km només per agregar cobertura del coneixement.",
+  "privacy": "Cap nom de taxó ni coordenada d’ocurrència s’exporta. La fauna i la flora es representen mitjançant recomptes agregats d’1 km.",
+  "knowledge_thresholds": {
+    "positive_q25": 3.0,
+    "positive_q60": 9.199999999999996
+  },
+  "dynamic_data": {
+    "ndvi_ndmi": {
+      "date": "2026-07-07T10:37:01.024000Z",
+      "status": "massa antiga · pes exclòs"
+    },
+    "surface_temperature": {
+      "date": "2026-08-09T10:36:27.291477Z",
+      "status": "recent · pes reduït al 26 %"
+    },
+    "current_fire": {
+      "checked_at_utc": "2026-08-29T07:52:29Z",
+      "status": "actualització diària; data exacta preservada"
+    }
+  },
+  "limitations": [
+    "Les coincidències espacials no demostren causalitat ni impacte.",
+    "La cartografia d’hàbitats no determina l’estat local de conservació.",
+    "Pocs registres signifiquen coneixement insuficient, no baixa biodiversitat.",
+    "Els connectors descriuen continuïtat cartogràfica potencial, no ús funcional verificat per fauna."
+  ],
+  "counts": {
+    "habitat_features": 452,
+    "connector_features": 5,
+    "value_overlap_features": 13,
+    "situations": 6,
+    "knowledge_cells": 84,
+    "prospecting_cells": 32
+  }
+}
