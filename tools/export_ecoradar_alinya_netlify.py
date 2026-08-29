@@ -974,8 +974,9 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-bh-head-actions {{ display:flex; flex-wrap:wrap; justify-content:flex-end; gap:7px; }}
     #ecoradar-alinya .eu-bh-back, #ecoradar-alinya .eu-bh-report {{ min-height:37px; padding:8px 11px; border:1px solid #c9ded0; border-radius:5px; color:#fff; background:rgba(255,255,255,.08); cursor:pointer; font-size:9px; font-weight:750; }}
     #ecoradar-alinya .eu-bh-report {{ color:#15382f; background:#d7e8cf; }}
-    #ecoradar-alinya .eu-bh-summary {{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-bottom:14px; }}
-    #ecoradar-alinya .eu-bh-filter {{ position:relative; min-height:142px; padding:16px 16px 14px; overflow:hidden; border:1px solid #cbd5ca; border-radius:9px; background:rgba(255,255,255,.96); color:#29465d; text-align:left; cursor:pointer; box-shadow:0 8px 24px rgba(18,47,39,.08); }}
+    #ecoradar-alinya .eu-bh-situation-sentence {{ margin:0 0 14px; padding:13px 15px; border-left:4px solid #b8d8ad; border-radius:5px; color:#173d34; background:rgba(255,255,255,.94); font-size:11px; line-height:1.55; }}
+    #ecoradar-alinya .eu-bh-summary {{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-bottom:14px; }}
+    #ecoradar-alinya .eu-bh-filter {{ position:relative; min-height:154px; padding:17px 16px 15px; overflow:hidden; border:1px solid #cbd5ca; border-radius:9px; background:rgba(255,255,255,.96); color:#29465d; text-align:left; cursor:pointer; box-shadow:0 8px 24px rgba(18,47,39,.08); }}
     #ecoradar-alinya .eu-bh-filter::before {{ content:attr(data-bh-number); position:absolute; right:11px; top:7px; color:#dce5da; font-size:40px; font-weight:800; line-height:1; }}
     #ecoradar-alinya .eu-bh-filter strong, #ecoradar-alinya .eu-bh-filter span, #ecoradar-alinya .eu-bh-filter small {{ position:relative; display:block; }}
     #ecoradar-alinya .eu-bh-filter strong {{ max-width:80%; margin-bottom:9px; color:#173d34; font-size:13px; letter-spacing:.035em; text-transform:uppercase; }}
@@ -1000,6 +1001,9 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-bh-detail h5 {{ margin:13px 0 5px; color:var(--green); font-size:9px; text-transform:uppercase; letter-spacing:.055em; }}
     #ecoradar-alinya .eu-bh-detail p, #ecoradar-alinya .eu-bh-detail li {{ color:#405563; font-size:10px; line-height:1.52; }}
     #ecoradar-alinya .eu-bh-detail ul {{ margin:5px 0; padding-left:17px; }}
+    #ecoradar-alinya .eu-bh-technical {{ margin-top:16px; border-top:1px solid #d9ded7; }}
+    #ecoradar-alinya .eu-bh-technical summary {{ padding:13px 0 8px; color:#173d34; font-size:10px; font-weight:800; cursor:pointer; text-transform:uppercase; letter-spacing:.045em; }}
+    #ecoradar-alinya .eu-bh-technical[open] summary {{ color:#2f743f; }}
     #ecoradar-alinya .eu-bh-why {{ margin-top:14px; padding:12px; border-left:4px solid #2f743f; background:#edf4ea; }}
     #ecoradar-alinya .eu-bh-why h5 {{ margin-top:0; color:#173d34; font-size:11px; }}
     #ecoradar-alinya .eu-bh-result {{ display:block; margin-top:8px; color:#173d34; font-size:11px; font-weight:800; }}
@@ -1088,18 +1092,17 @@ def render_index(data: dict) -> str:
       <div class="eu-bh-pilot-head">
         <div>
           <span class="eu-bh-eyebrow">Mòdul de diagnosi ecològica i suport a la gestió</span>
-          <h2>Quadre de situació ecològica d’Alinyà</h2>
-          <p>No és una capa de biodiversitat ni un recompte d’espècies. Permet explorar on coincideixen valors, pressions, connectivitat, buits d’informació i necessitats de seguiment. Les coincidències espacials orienten comprovacions: no demostren causalitat, estat de conservació ni absència d’espècies.</p>
+          <h2>Biodiversitat i hàbitats</h2>
+          <p>Un quadre de diagnosi per entendre en pocs segons què coneixem, on es concentra el valor ecològic, com es troben els sectors i quina informació cal completar. No és una capa convencional ni un índex sintètic.</p>
         </div>
         <div class="eu-bh-head-actions"><button class="eu-bh-back" type="button" data-bh-back>Tornar al visor general</button><button class="eu-bh-report" type="button" data-generate-reading-report>Generar informe</button></div>
       </div>
-      <div class="eu-bh-summary" role="group" aria-label="Sis entrades del quadre de situació ecològica">
-        <button class="eu-bh-filter" type="button" data-bh-filter="value" data-bh-number="01" aria-pressed="true"><strong>Valor ecològic</strong><span>On es concentren HIC, HIC prioritaris, connectors, continuïtat de cobertes o coneixement públic destacable i per què.</span><small>{data['biodiversityPilot']['metadata']['counts']['valuable']} sectors assenyalats</small></button>
-        <button class="eu-bh-filter" type="button" data-bh-filter="pressure" data-bh-number="02" aria-pressed="false"><strong>Sectors sota pressió</strong><span>Sectors amb valor ecològic on coincideixen estrès hídric, calor, foc o accessibilitat potencial.</span><small>{sum(1 for feature in data['biodiversityPilot']['sectors']['features'] if feature['properties']['valuable'] and feature['properties']['pressured'])} sectors amb coincidències</small></button>
-        <button class="eu-bh-filter is-unavailable" type="button" data-bh-filter="changes" data-bh-number="03" aria-pressed="false"><strong>Canvis detectats</strong><span>Canvis temporals ecològicament rellevants en vegetació, humitat o coberta.</span><small>Informació espacial insuficient</small></button>
-        <button class="eu-bh-filter" type="button" data-bh-filter="connectivity" data-bh-number="04" aria-pressed="false"><strong>Connectivitat</strong><span>Connectors oficials i continuïtat de cobertes com a context territorial, sense simular funcionalitat per espècie.</span><small>{data['biodiversityPilot']['metadata']['counts']['connectivity']} sectors assenyalats</small></button>
-        <button class="eu-bh-filter" type="button" data-bh-filter="knowledge" data-bh-number="05" aria-pressed="false"><strong>Buits de coneixement</strong><span>Zones amb informació biològica pública escassa o nul·la. No equivalen a baixa biodiversitat.</span><small>{data['biodiversityPilot']['metadata']['counts']['knowledge_insufficient']} sectors insuficientment coneguts</small></button>
-        <button class="eu-bh-filter" type="button" data-bh-filter="followup" data-bh-number="06" aria-pressed="false"><strong>Seguiment prioritari</strong><span>Sectors on la coincidència entre valor i pressions justifica atenció o comprovació de camp. Els buits de coneixement es consulten separadament.</span><small>{sum(1 for feature in data['biodiversityPilot']['sectors']['features'] if feature['properties']['followup'] in ['Atenció','Prioritat de comprovació'])} sectors per revisar</small></button>
+      <p class="eu-bh-situation-sentence"><strong>Situació coneguda.</strong> Alinyà reuneix {data['metrics']['habitats']} hàbitats cartografiats, {format(data['metrics']['hicHa'], '.2f').replace('.', ',')} ha d’HIC i {format(data['metrics']['hicPriorHa'], '.2f').replace('.', ',')} ha d’HIC prioritaris. EcoRadar identifica {data['biodiversityPilot']['metadata']['counts']['valuable']} sectors amb valor cartografiat, {sum(1 for feature in data['biodiversityPilot']['sectors']['features'] if feature['properties']['valuable'] and feature['properties']['pressured'])} amb coincidències que mereixen atenció i {data['biodiversityPilot']['metadata']['counts']['knowledge_insufficient']} amb coneixement biològic insuficient. Són evidències per orientar seguiment, no un diagnòstic automàtic de l’estat de conservació.</p>
+      <div class="eu-bh-summary" role="group" aria-label="Quatre preguntes del quadre de biodiversitat i hàbitats">
+        <button class="eu-bh-filter" type="button" data-bh-filter="inventory" data-bh-number="01" aria-pressed="true"><strong>Què hi ha?</strong><span>La biodiversitat coneguda d’Alinyà</span><small>Hàbitats, HIC, flora i fauna documentada</small></button>
+        <button class="eu-bh-filter" type="button" data-bh-filter="relevance" data-bh-number="02" aria-pressed="false"><strong>On és més rellevant?</strong><span>Els sectors de major interès ecològic i per què</span><small>{data['biodiversityPilot']['metadata']['counts']['valuable']} sectors amb evidència cartografiada</small></button>
+        <button class="eu-bh-filter" type="button" data-bh-filter="condition" data-bh-number="03" aria-pressed="false"><strong>Com està?</strong><span>Estat, canvis i pressions sobre els elements de biodiversitat</span><small>{sum(1 for feature in data['biodiversityPilot']['sectors']['features'] if feature['properties']['valuable'] and feature['properties']['pressured'])} coincidències per contrastar</small></button>
+        <button class="eu-bh-filter" type="button" data-bh-filter="knowledge" data-bh-number="04" aria-pressed="false"><strong>Què ens falta saber?</strong><span>Coneixement, seguiment i necessitats de camp</span><small>{data['biodiversityPilot']['metadata']['counts']['knowledge_insufficient']} sectors insuficientment coneguts</small></button>
       </div>
       <div class="eu-bh-layout">
         <div class="eu-bh-map">
@@ -1107,7 +1110,7 @@ def render_index(data: dict) -> str:
           <div class="eu-bh-map-state" data-bh-map-state hidden></div>
           <div class="eu-bh-map-legend" data-bh-legend></div>
         </div>
-        <article class="eu-bh-detail" data-bh-detail aria-live="polite"><h4>Valor ecològic</h4><p>Selecciona un sector destacat al mapa. La fitxa identificarà les dades responsables de la diagnosi, les coincidències amb altres lectures i els aspectes que cal comprovar.</p></article>
+        <article class="eu-bh-detail" data-bh-detail aria-live="polite"><h4>Què hi ha?</h4><p>Selecciona un sector al mapa per veure una síntesi directa. La diagnosi tècnica, les fonts i les limitacions queden disponibles en un segon nivell.</p></article>
       </div>
       <div class="eu-bh-notes">
         <div class="eu-bh-note"><strong>Privacitat ecològica.</strong> El mòdul no mostra noms ni coordenades de taxons. Els registres públics s’agreguen per sector només per descriure intensitat de coneixement.</div>
@@ -1383,8 +1386,8 @@ def render_index(data: dict) -> str:
 </div>
 <script src="./vendor/d3.min.js"></script>
 <script src="./vendor/html2pdf.bundle.min.js"></script>
-<script src="./vendor/ecoradar-reading-report.js?v=20260828-5"></script>
-<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260828-5"></script>
+<script src="./vendor/ecoradar-reading-report.js?v=20260829-1"></script>
+<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260829-1"></script>
 <script>
 (() => {{
   const root = document.getElementById('ecoradar-alinya');
@@ -2126,18 +2129,17 @@ def render_index(data: dict) -> str:
       'Poca informació':'#d2a54a',
       'Pràcticament sense dades':'#66798a'
     }};
-    let activeFilter = 'value';
+    let activeFilter = 'inventory';
     let selectedId = null;
-    const isHighlighted = p => activeFilter === 'value' ? p.valuable
-      : activeFilter === 'pressure' ? p.valuable && p.pressured
-      : activeFilter === 'changes' ? p.change_detected
-      : activeFilter === 'connectivity' ? p.connected
-      : activeFilter === 'knowledge' ? ['Pràcticament sense dades','Poca informació'].includes(p.knowledge_class)
-      : ['Atenció','Prioritat de comprovació'].includes(p.followup);
+    const isHighlighted = p => activeFilter === 'inventory'
+      ? p.hic_ha > .05 || p.priority_hic_ha > .05 || p.connector_ha > .05 || p.records > 0
+      : activeFilter === 'relevance' ? p.valuable
+      : activeFilter === 'condition' ? p.valuable && p.pressured
+      : ['Pràcticament sense dades','Poca informació'].includes(p.knowledge_class);
     const sectorColor = p => {{
-      if (activeFilter === 'value') return p.priority_hic_ha > .1 ? '#1f5b39' : p.connector_ha > .1 ? '#4b8a55' : '#8bb06c';
-      if (activeFilter === 'pressure') return (p.pressure_reasons || []).length >= 2 ? '#c64b36' : '#e4a23c';
-      if (activeFilter === 'connectivity') return p.connector_ha > .1 ? '#276f61' : '#79a886';
+      if (activeFilter === 'inventory') return p.priority_hic_ha > .1 ? '#173d34' : p.hic_ha > .1 ? '#3f7d4b' : p.connector_ha > .1 ? '#38858a' : '#7d79a8';
+      if (activeFilter === 'relevance') return p.priority_hic_ha > .1 ? '#185237' : p.connector_ha > .1 ? '#2d7565' : '#87aa58';
+      if (activeFilter === 'condition') return (p.pressure_reasons || []).length >= 2 ? '#b83d32' : '#e08a2e';
       if (activeFilter === 'knowledge') return knowledgeColors[p.knowledge_class] || '#aeb8ad';
       return followupColors[p.followup] || '#aeb8ad';
     }};
@@ -2158,20 +2160,31 @@ def render_index(data: dict) -> str:
       if (p.priority_hic_ha > .05) what.push(`${{ca1(p.priority_hic_ha)}} ha d’HIC prioritari cartografiat`);
       if (p.connector_ha > .05) what.push(`${{ca1(p.connector_ha)}} ha de connector oficial`);
       what.push(`${{p.records}} registres públics agregats; és coneixement disponible, no abundància`);
-      const whyVariables = activeFilter === 'connectivity' ? p.connectivity_reasons
-        : activeFilter === 'knowledge' ? [`${{p.knowledge_class}} · ${{p.records}} registres públics agregats`]
-        : activeFilter === 'value' ? p.value_reasons
+      const stateSummary = p.pressured
+        ? `Hi coincideixen ${{(p.pressure_reasons || []).length}} senyals territorials que cal contrastar; la coincidència no demostra impacte ni causalitat.`
+        : 'No s’hi ha identificat una coincidència de pressió diferencial amb les dades actuals. Això no acredita un estat favorable.';
+      const attentionSummary = ['Atenció','Prioritat de comprovació'].includes(p.followup)
+        ? `${{p.followup}}: el valor cartografiat coincideix amb senyals que justifiquen comprovació.`
+        : p.followup === 'Coneixement insuficient'
+          ? 'El principal senyal és el buit de coneixement, no una baixa biodiversitat.'
+          : 'No hi ha un senyal diferencial que elevi l’atenció amb les fonts actuals.';
+      const whyVariables = activeFilter === 'inventory' ? [...(p.value_reasons || []), `${{p.records}} registres públics agregats`]
+        : activeFilter === 'relevance' ? [...(p.value_reasons || []), ...(p.connectivity_reasons || [])]
+        : activeFilter === 'knowledge' ? [`${{p.knowledge_class}} · ${{p.records}} registres públics agregats`, ...(p.missing || [])]
         : [...(p.value_reasons || []),...(p.pressure_reasons || [])];
       pilotRoot.querySelector('[data-bh-detail]').innerHTML = `
         <h4>Sector ${{esc(p.sector_id)}}</h4><span class="eu-bh-category" style="background:${{followupColors[p.followup] || '#66798a'}}">${{esc(p.followup)}}</span>
-        <h5>Què hi ha</h5>${{list(what,'No hi ha elements diferencials cartografiats amb les fonts actuals.')}}
-        <h5>Per què és rellevant</h5>${{list(p.value_reasons,'No s’ha identificat un senyal de valor diferencial; això no implica absència de valor ecològic.')}}
-        <h5>Què està detectant EcoRadar</h5>${{list(p.detected,'Cap senyal diferencial amb les dades disponibles.')}}
-        <h5>Amb quines altres lectures coincideix</h5>${{list(p.reading_coincidences,'No hi ha coincidències destacables amb els contrastos territorials disponibles.')}}
-        <h5>Quina és la possible implicació ecològica</h5>${{list(p.possible_implications,'Les dades actuals no permeten formular una implicació ecològica sectorial específica.')}}
-        <h5>Què no sabem</h5>${{list(p.missing,'No consta cap buit addicional documentat.')}}
-        <h5>Què convindria comprovar o seguir</h5><p>${{esc(p.recommendation)}}</p>
-        <div class="eu-bh-why"><h5>Per què EcoRadar ho assenyala?</h5>${{list(whyVariables,'Informació insuficient per justificar una diagnosi sectorial específica.')}}<span class="eu-bh-result">→ ${{esc(p.followup)}}</span><p>No és una suma de punts. La categoria deriva de regles qualitatives explícites i coincidències espacials; no afirma causalitat ni estat de conservació.</p></div>`;
+        <h5>Què hi ha aquí?</h5>${{list(what,'No hi ha elements diferencials cartografiats amb les fonts actuals.')}}
+        <h5>Per què és important?</h5>${{list(p.value_reasons,'No s’ha identificat un senyal de valor diferencial; això no implica absència de valor ecològic.')}}
+        <h5>Com està?</h5><p>${{esc(stateSummary)}}</p>
+        <h5>Hi ha alguna cosa que mereixi atenció?</h5><p>${{esc(attentionSummary)}}</p>
+        <h5>Què convindria fer?</h5><p>${{esc(p.recommendation)}}</p>
+        <details class="eu-bh-technical"><summary>Veure diagnosi tècnica →</summary>
+          <h5>Variables i coincidències</h5>${{list(p.reading_coincidences,'No hi ha coincidències destacables amb els contrastos territorials disponibles.')}}
+          <h5>Possible implicació ecològica</h5>${{list(p.possible_implications,'Les dades actuals no permeten formular una implicació ecològica sectorial específica.')}}
+          <h5>Informació que falta</h5>${{list(p.missing,'No consta cap buit addicional documentat.')}}
+          <div class="eu-bh-why"><h5>Per què EcoRadar ho assenyala?</h5>${{list(whyVariables,'Informació insuficient per justificar una diagnosi sectorial específica.')}}<span class="eu-bh-result">→ ${{esc(p.followup)}}</span><p>No és una suma de punts. La categoria deriva de regles qualitatives i coincidències espacials. No afirma causalitat, estat de conservació, pressió real ni absència d’espècies.</p><p><strong>Fonts i dates:</strong> ${{esc((D.biodiversityPilot.metadata?.sources || []).join(' · '))}}</p><p><strong>Confiança i límits:</strong> unitat sectorial de cribratge; dades biològiques oportunistes agregades i variables remotes amb la data preservada al visor.</p></div>
+        </details>`;
     }}
     function renderUnavailable() {{
       const info = availability.changes || {{}};
@@ -2183,28 +2196,33 @@ def render_index(data: dict) -> str:
     }}
     function renderFilterIntro() {{
       const copy = {{
-        value:['Valor ecològic','Clica un sector verd per veure quins hàbitats, connectors o altres evidències cartografiades expliquen el seu valor.'],
-        pressure:['Sectors sota pressió','Només es mostren sectors amb valor ecològic on coincideix almenys una pressió relativa detectada per EcoRadar.'],
-        connectivity:['Connectivitat','Mostra connectors oficials o sectors amb continuïtat elevada de cobertes naturals. No demostra ús funcional per fauna.'],
-        knowledge:['Buits de coneixement','Mostra informació pública escassa o nul·la. No s’interpreta com a baixa biodiversitat.'],
-        followup:['Seguiment prioritari','Mostra sectors que requereixen observació, seguiment o comprovació de camp segons regles qualitatives explícites.']
+        inventory:['Què hi ha?','Llegeix el patrimoni conegut: HIC prioritaris, altres HIC, connectors i registres públics agregats. La disponibilitat d’informació no equival a biodiversitat real.'],
+        relevance:['On és més rellevant?','Mostra només sectors amb evidència de valor: HIC, HIC prioritari, connector o continuïtat elevada de coberta natural. No utilitza cap puntuació 0–100.'],
+        condition:['Com està?','Mostra sectors de valor on coincideixen senyals relatius d’NDMI, NDVI, temperatura, foc o accessibilitat. No demostra impacte. No hi ha una sèrie multitemporal homogènia per afirmar canvi ecològic.'],
+        knowledge:['Què ens falta saber?','Mostra els sectors amb informació pública escassa o nul·la i les necessitats de camp. Pocs registres no equivalen a baixa biodiversitat.']
       }}[activeFilter];
-      pilotRoot.querySelector('[data-bh-detail]').innerHTML = `<h4>${{esc(copy[0])}}</h4><p>${{esc(copy[1])}}</p><h5>Com continuar</h5><p>Selecciona un sector destacat al mapa per obrir la fitxa de diagnosi.</p>`;
+      const groupRows = Object.entries(D.metrics.biodiversityGroups?.records || {{}})
+        .map(([group, records])=>`${{esc(group)}}: <strong>${{records}}</strong> registres · ${{D.metrics.biodiversityGroups?.taxa?.[group] || 0}} tàxons`);
+      const inventorySummary = activeFilter === 'inventory' ? `
+        <h5>Patrimoni conegut</h5>
+        <p><strong>${{D.metrics.habitats}} hàbitats cartografiats</strong> · ${{ca2(D.metrics.hicHa)}} ha d’HIC · ${{ca2(D.metrics.hicPriorHa)}} ha d’HIC prioritaris.</p>
+        <p><strong>Flora i fauna documentades:</strong> ${{groupRows.join(' · ')}}.</p>
+        <p>No s’ha incorporat una classificació completa i verificada de l’estat de conservació o sensibilitat de cada taxó. Les localitzacions potencialment sensibles no es mostren.</p>` : '';
+      const conditionLimit = activeFilter === 'condition' ? `<div class="eu-bh-why"><h5>Canvi temporal</h5><p><strong>${{esc(availability.changes?.message || 'Informació insuficient per generar aquesta diagnosi.')}}</strong> Les escenes disponibles permeten contrastar l’estat relatiu de variables, però no afirmar una trajectòria ecològica homogènia.</p></div>` : '';
+      pilotRoot.querySelector('[data-bh-detail]').innerHTML = `<h4>${{esc(copy[0])}}</h4><p>${{esc(copy[1])}}</p>${{inventorySummary}}${{conditionLimit}}<h5>Com continuar</h5><p>Selecciona un sector destacat al mapa per obrir la fitxa de diagnosi.</p><details class="eu-bh-technical"><summary>Veure detall tècnic →</summary><p>La unitat són sectors cartogràfics oficials de connectivitat retallats a l’àmbit. Les classificacions són qualitatives i provenen de regles explícites; no són un índex de biodiversitat.</p><p>${{esc((D.biodiversityPilot.metadata?.limitations || []).join(' '))}}</p></details>`;
     }}
     function update() {{
-      paths.attr('fill',d=>sectorColor(d.properties)).attr('fill-opacity',d=>isHighlighted(d.properties) ? .82 : .22)
+      paths.attr('fill',d=>sectorColor(d.properties)).attr('fill-opacity',d=>isHighlighted(d.properties) ? (activeFilter === 'knowledge' ? .72 : .82) : .08)
+        .attr('stroke',d=>activeFilter === 'knowledge' && !isHighlighted(d.properties) ? '#8fa095' : '#fff')
+        .attr('stroke-dasharray',d=>activeFilter === 'knowledge' && !isHighlighted(d.properties) ? '3 3' : null)
         .classed('is-muted',d=>!isHighlighted(d.properties)).classed('is-selected',d=>d.properties.sector_id===selectedId);
-      const legend = activeFilter === 'value'
-        ? 'Verd fosc: HIC prioritari · verd mitjà: connector oficial · verd clar: altres senyals de valor. Els sectors apagats no tenen un senyal diferencial amb les dades actuals.'
-        : activeFilter === 'pressure'
-          ? 'Taronja: una coincidència de pressió · vermell: dues o més, sempre dins un sector amb valor ecològic. No són impactes demostrats.'
-          : activeFilter === 'changes'
-            ? 'Sense sectors: no hi ha una sèrie espacial multitemporal homogènia que permeti diagnosticar canvi ecològic.'
-            : activeFilter === 'connectivity'
-              ? 'Verd blavós fosc: connector terrestre oficial · verd blavós clar: continuïtat elevada de cobertes com a context.'
-              : activeFilter === 'knowledge'
-                ? 'Groc: poca informació · blau gris: pràcticament sense dades. Pocs registres no equivalen a baixa biodiversitat.'
-                : 'Verd gris: sense senyals · verd: seguiment · taronja: atenció · vermell: comprovació prioritària · blau gris: coneixement insuficient.';
+      const legend = activeFilter === 'inventory'
+        ? 'Verd fosc: HIC prioritari · verd: altres HIC · blau verd: connector · violeta: coneixement biològic publicat. Les categories descriuen què es coneix, no qualitat ecològica.'
+        : activeFilter === 'relevance'
+          ? 'Verd fosc: HIC prioritari · verd blavós: connector oficial · verd clar: altres evidències de valor. Els sectors apagats no són sectors sense valor: no hi ha evidència diferencial amb les fonts actuals.'
+          : activeFilter === 'condition'
+            ? 'Taronja: una coincidència territorial · vermell: dues o més, sempre en sectors amb valor cartografiat. Són senyals per comprovar, no impactes ni causes demostrades.'
+            : 'Groc: poca informació · blau gris: pràcticament sense dades · contorn discontinu: coneixement moderat o alt. Pocs registres no equivalen a baixa biodiversitat.';
       pilotRoot.querySelector('[data-bh-legend]').textContent = legend;
     }}
     pilotRoot.querySelectorAll('[data-bh-filter]').forEach(button=>button.addEventListener('click',()=>{{
@@ -2214,7 +2232,7 @@ def render_index(data: dict) -> str:
       const state = pilotRoot.querySelector('[data-bh-map-state]');
       state.hidden = true;
       state.innerHTML = '';
-      if (activeFilter === 'changes') renderUnavailable(); else renderFilterIntro();
+      renderFilterIntro();
       update();
     }}));
     pilotRoot.querySelector('[data-bh-back]').addEventListener('click',()=>root.querySelector('.eu-mode[data-mode="base"]').click());
@@ -2258,8 +2276,8 @@ def write_package() -> None:
         html_text
         .replace('<script src="./vendor/d3.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/d3.min.js"></script>')
         .replace('<script src="./vendor/html2pdf.bundle.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/html2pdf.bundle.min.js"></script>')
-        .replace('<script src="./vendor/ecoradar-reading-report.js?v=20260828-5"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js?v=20260828-5"></script>')
-        .replace('<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260828-5"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js?v=20260828-5"></script>'),
+        .replace('<script src="./vendor/ecoradar-reading-report.js?v=20260829-1"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js?v=20260829-1"></script>')
+        .replace('<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260829-1"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js?v=20260829-1"></script>'),
         encoding="utf-8",
     )
     (OUT_DIR / "netlify.toml").write_text(

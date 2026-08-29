@@ -33,6 +33,19 @@
     const fireDimensions = labeled(report.fireDimensions || [], 'err-diagnostic-grid');
     const scenarios = cards(report.evolutionScenarios || [], 'err-scenario-grid', item => `<article class="err-scenario">${item.level ? badge(item.level) : ''}<strong>${esc(item.title)}</strong>${paragraph(item.conditions)}${paragraph(item.interpretation)}${item.management ? `<small><b>Implicació:</b> ${esc(item.management)}</small>` : ''}</article>`);
     const monitoring = cards(report.monitoringPlan || [], 'err-management-grid', item => `<article class="err-management"><strong>${esc(item.step || item.priority)}</strong><p>${esc(item.action)}</p>${item.indicator ? `<small><b>Indicador de resposta:</b> ${esc(item.indicator)}</small>` : ''}${item.validation ? `<small><b>Validació:</b> ${esc(item.validation)}</small>` : ''}</article>`);
+    if (report.reportKind === 'biodiversity-habitats' && report.biodiversityChapters?.length) {
+      const chapters = report.biodiversityChapters.map((chapter, index) => {
+        const map = index === 1 && mapSvg ? `<div class="err-map-frame"><div class="err-map">${mapSvg}</div></div>` : '';
+        return `<section class="${index === 11 ? 'err-limits' : ''}"><h2>${index + 1}. ${esc(chapter.title)}</h2>${map}${paragraph(chapter.body)}</section>`;
+      }).join('');
+      return `<article class="err-document">
+        <header class="err-cover"><div><span>ECORADAR · MUNTANYA D’ALINYÀ</span><h1>${esc(report.name)}</h1><p>Diagnosi ecològica i suport a la gestió</p></div><div class="err-date">Generat ${esc(report.generatedAt)}</div></header>
+        <section class="err-metadata"><div><b>Espai</b><span>Muntanya d’Alinyà</span></div><div><b>Data de les dades</b><span>${esc(report.dataDate)}</span></div><div><b>Lectura</b><span>${esc(report.name)}</span></div></section>
+        ${facts ? `<section><h2>Síntesi d’evidències disponibles</h2><div class="err-facts">${facts}</div></section>` : ''}
+        ${chapters}
+        <footer>EcoRadar · diagnosi basada exclusivament en dades disponibles. Les coincidències orienten seguiment i validació; no demostren causalitat, estat de conservació ni absència d’espècies.</footer>
+      </article>`;
+    }
     return `<article class="err-document">
       <header class="err-cover"><div><span>ECORADAR · MUNTANYA D’ALINYÀ</span><h1>${esc(report.name)}</h1><p>Informe específic de la lectura activa</p></div><div class="err-date">Generat ${esc(report.generatedAt)}</div></header>
       <section class="err-metadata"><div><b>Espai</b><span>Muntanya d’Alinyà</span></div><div><b>Data de les dades</b><span>${esc(report.dataDate)}</span></div><div><b>Lectura</b><span>${esc(report.name)}</span></div></section>

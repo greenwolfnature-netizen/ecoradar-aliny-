@@ -41,22 +41,20 @@ for feature in features:
     assert "score" not in properties
 
 for label in (
-    "Quadre de situació ecològica d’Alinyà",
-    "Valor ecològic",
-    "Sectors sota pressió",
-    "Canvis detectats",
-    "Connectivitat",
-    "Buits de coneixement",
-    "Seguiment prioritari",
+    "Biodiversitat i hàbitats",
+    "Què hi ha?",
+    "On és més rellevant?",
+    "Com està?",
+    "Què ens falta saber?",
+    "Situació coneguda.",
     "Per què EcoRadar ho assenyala?",
 ):
     assert label in html
-assert 'data-bh-filter="value"' in html
-assert 'data-bh-filter="pressure"' in html
-assert 'data-bh-filter="changes"' in html
-assert 'data-bh-filter="connectivity"' in html
+assert 'data-bh-filter="inventory"' in html
+assert 'data-bh-filter="relevance"' in html
+assert 'data-bh-filter="condition"' in html
 assert 'data-bh-filter="knowledge"' in html
-assert 'data-bh-filter="followup"' in html
+assert html.count('data-bh-filter=') == 4
 assert html.count('class="eu-biodiversity-situation" data-bh-pilot') == 1
 assert "Informació insuficient per generar aquesta diagnosi." in html
 assert metadata["diagnostic_availability"]["changes"]["available"] is False
@@ -64,17 +62,35 @@ assert metadata["counts"]["changes_detected"] == 0
 assert metadata["counts"]["connectivity"] > 0
 assert "No és una suma de punts" in html
 for heading in (
-    "Què hi ha",
-    "Per què és rellevant",
-    "Què està detectant EcoRadar",
-    "Amb quines altres lectures coincideix",
-    "Quina és la possible implicació ecològica",
-    "Què no sabem",
-    "Què convindria comprovar o seguir",
+    "Què hi ha aquí?",
+    "Per què és important?",
+    "Com està?",
+    "Hi ha alguna cosa que mereixi atenció?",
+    "Què convindria fer?",
+    "Veure diagnosi tècnica →",
 ):
     assert heading in html
 assert 'biodiversitySituation.hidden = !isBiodiversitySituation' in html
 assert 'mapStack.hidden = isBiodiversitySituation' in html
 assert 'Biodiversitat<small>quadre de situació ecològica</small>' in html
+
+profiles = (ROOT / "vendor" / "ecoradar-alinya-report-profiles.js").read_text(encoding="utf-8")
+engine = (ROOT / "vendor" / "ecoradar-reading-report.js").read_text(encoding="utf-8")
+for chapter in (
+    "Patrimoni biològic conegut",
+    "Elements i sectors ecològicament valuosos",
+    "Connectivitat ecològica",
+    "Estat actual dels elements de biodiversitat",
+    "Canvis detectats i tendència",
+    "Pressions i coincidències que mereixen atenció",
+    "Relació amb el foc",
+    "Buits de coneixement",
+    "Sectors recomanats per al seguiment",
+    "Necessitats de validació de camp",
+    "Conclusions i implicacions per a la gestió",
+    "Fonts, dates, limitacions i confiança",
+):
+    assert chapter in profiles
+assert "biodiversity-habitats" in engine
 
 print("ALINYA_BIODIVERSITY_HABITAT_PILOT=PASS")

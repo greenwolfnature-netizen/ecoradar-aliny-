@@ -13,6 +13,8 @@
     const sat = D.metrics.satellite || {};
     const readings = D.dailyReadings?.readings || {};
     const analytics = D.dailyHistory?.analytics || {};
+    const biodiversitySectors = D.biodiversityPilot?.sectors?.features?.map(feature => feature.properties) || [];
+    const biodiversityMetadata = D.biodiversityPilot?.metadata || {};
     const sentinelDate = sat.sentinelDate || readings.ndvi?.data_at_utc;
     const readingEvidence = key => {
       const item = readings[key];
@@ -446,6 +448,38 @@
         conclusions:base.conclusions || ['Utilitzar la lectura com a evidència de cribratge, no com una ordre automàtica d’actuació.','Prioritzar els sectors que destaquen per al contrast amb la resta d’indicadors i la validació de camp.','Conservar la traçabilitat de font, data, resolució i incertesa abans de decidir.'],
         limits:[guide.limit || commonLimits, commonLimits], temporal:base.temporal || 'No hi ha una comparació temporal homogènia disponible per a aquesta lectura.'
       };
+      if (semanticKey === 'biodiversity') {
+        const valuable = biodiversitySectors.filter(item => item.valuable);
+        const pressured = biodiversitySectors.filter(item => item.valuable && item.pressured);
+        const knowledgeGaps = biodiversitySectors.filter(item => ['Poca informació','Pràcticament sense dades'].includes(item.knowledge_class));
+        const priorityChecks = biodiversitySectors.filter(item => item.followup === 'Prioritat de comprovació');
+        const connected = biodiversitySectors.filter(item => item.connected);
+        const groups = Object.entries(D.metrics.biodiversityGroups?.records || {}).map(([group, records]) => `${group}: ${records} registres i ${D.metrics.biodiversityGroups?.taxa?.[group] || 0} tàxons`).join('; ');
+        const sourcesText = (biodiversityMetadata.sources || profile.sources).join('; ');
+        const limitsText = (biodiversityMetadata.limitations || profile.limits).join(' ');
+        profile.reportKind = 'biodiversity-habitats';
+        profile.name = 'Biodiversitat i hàbitats';
+        profile.facts = [
+          {label:'Hàbitats cartografiats',value:String(D.metrics.habitats)},
+          {label:'HIC',value:`${ca(D.metrics.hicHa,2)} ha`},
+          {label:'HIC prioritaris',value:`${ca(D.metrics.hicPriorHa,2)} ha`},
+          {label:'Coneixement públic',value:`${D.metrics.records} registres · ${D.metrics.species} tàxons citats`}
+        ];
+        profile.biodiversityChapters = [
+          {title:'Patrimoni biològic conegut',body:[`Alinyà disposa de ${D.metrics.habitats} hàbitats cartografiats, ${ca(D.metrics.hicHa,2)} ha d’hàbitats d’interès comunitari i ${ca(D.metrics.hicPriorHa,2)} ha d’HIC prioritaris. Les fonts públiques aporten ${D.metrics.records} registres i ${D.metrics.species} tàxons citats. Per grups: ${groups}.`,`Aquest inventari descriu el coneixement disponible, no la biodiversitat real ni l’abundància. La concentració de registres també reflecteix accessibilitat, esforç d’observació, detectabilitat i publicació. Les localitzacions sensibles no es mostren.`]},
+          {title:'Elements i sectors ecològicament valuosos',body:[`${valuable.length} dels ${biodiversitySectors.length} sectors tenen almenys una evidència territorial de valor: HIC, HIC prioritari, connector oficial o continuïtat elevada de coberta natural. El mapa reprodueix la pregunta activa del visor i permet consultar la justificació de cada sector.`,`Aquesta selecció no és un rànquing 0–100 ni una avaluació de l’estat de conservació. Un sector no destacat no és necessàriament menys valuós: pot no disposar d’una evidència diferencial amb les fonts actuals.`]},
+          {title:'Connectivitat ecològica',body:[`${connected.length} sectors incorporen connector oficial o continuïtat elevada de cobertes naturals com a context. Aquest patró ajuda a identificar continuïtats que poden sostenir moviments, dispersió i resposta a pertorbacions.`,`La cartografia no demostra funcionalitat per a una espècie concreta ni identifica totes les barreres. Cal contrastar estructura, permeabilitat, punts de pas, ecotons, aigua i requeriments dels grups objectiu.`]},
+          {title:'Estat actual dels elements de biodiversitat',body:[`${pressured.length} sectors de valor coincideixen amb almenys un senyal territorial relatiu procedent d’altres lectures EcoRadar. La lectura conjunta considera NDMI, NDVI, temperatura superficial, sòl nu, antecedents i perill d’incendi, accessibilitat potencial i continuïtat de coberta quan les dades ho permeten.`,`La coincidència és un cribratge per decidir on comprovar. No equival a impacte, estat desfavorable, pressió real o causalitat. L’estat local dels HIC, l’ocupació i la tendència de les poblacions no estan mesurats de manera homogènia.`]},
+          {title:'Canvis detectats i tendència',body:[biodiversityMetadata.diagnostic_availability?.changes?.message || 'Informació insuficient per generar aquesta diagnosi.',`No hi ha una sèrie espacial multitemporal homogènia de vegetació, humitat, coberta i dades biològiques que permeti atribuir una trajectòria ecològica sectorial. Les fotografies espectrals disponibles descriuen dates concretes; comparar fonts o dates no equivalents produiria una falsa tendència.`]},
+          {title:'Pressions i coincidències que mereixen atenció',body:[`${pressured.length} sectors combinen valor cartografiat i un o més senyals relatius. ${priorityChecks.length} arriben a la categoria qualitativa «Prioritat de comprovació» perquè hi coincideixen dues o més pressions amb valor ecològic.`,`NDMI baix, temperatura elevada o accessibilitat potencial són indicadors diferents i amb límits propis. La xarxa OSM no mesura freqüentació; les dades espectrals no substitueixen l’estat fisiològic o la humitat de combustible; la coincidència espacial no demostra una causa.`]},
+          {title:'Relació amb el foc',body:[`EcoRadar separa vulnerabilitat estructural, perill d’incendi actual i exposició dels valors ecològics. Pendent, orientació, continuïtat i estructura vegetal caracteritzen predisposició territorial; meteorologia, precipitació acumulada i variables dinàmiques vigents descriuen la situació del dia.`,`Els HIC i els registres biològics no entren com a factors que augmentin el perill. Serveixen per identificar elements potencialment exposats i per filtrar la compatibilitat ecològica de qualsevol mesura. El Pla Alfa és context oficial separat i no entra numèricament en l’índex EcoRadar.`]},
+          {title:'Buits de coneixement',body:[`${knowledgeGaps.length} sectors tenen poca informació o pràcticament cap dada biològica pública. Això significa coneixement insuficient, no baixa biodiversitat. Els ratpenats no tenen registres públics en el conjunt actual i són un exemple clar de grup infrarepresentat.`,`També falten dades homogènies sobre abundància, ocupació, reproducció, tendència, estat local dels HIC, herbivoria, freqüentació i barreres funcionals. Sense aquestes dades no es poden convertir buits en absències ni coincidències en impactes.`]},
+          {title:'Sectors recomanats per al seguiment',body:[`La priorització és qualitativa: sense senyals destacables, seguiment recomanat, atenció, prioritat de comprovació o coneixement insuficient. Els ${priorityChecks.length} sectors de comprovació prioritària s’han seleccionat per coincidència entre valor i almenys dues pressions relatives; no per una puntuació sintètica.`,`Els sectors amb coneixement insuficient s’han de tractar com a objectius de prospecció, no com a sectors degradats. La fitxa interactiva mostra per a cada sector les variables responsables, les possibles implicacions i la recomanació.`]},
+          {title:'Necessitats de validació de camp',body:[`Cal un mostreig estratificat per hàbitat, altitud, aigua, connectivitat i accessibilitat, amb esforç, data, estació i mètode registrats. Als sectors sota atenció cal comprovar l’estat local de l’hàbitat, el mecanisme de la pressió, la freqüentació real, el combustible i la resposta de flora o fauna.`,`Per detectar canvis cal repetir indicadors amb resolució, màscara de qualitat, estació i unitats territorials comparables. La validació ha de separar fenologia, estructura natural i pertorbació abans de proposar actuacions.`]},
+          {title:'Conclusions i implicacions per a la gestió',body:[`La responsabilitat principal és conservar els HIC i continuïtats documentades, validar els sectors on valor i pressions coincideixen i completar els buits que poden esbiaixar la decisió. No es justifica una intervenció generalitzada ni un tractament uniforme del territori.`,`L’ordre defensable és: protegir sense deteriorar; comprovar la pressió i el mecanisme; escollir no-intervenció, retirada de pressió o restauració focalitzada; definir un indicador de resposta; i revisar la decisió amb seguiment. El foc, l’aigua, l’herbivoria i l’ús públic s’han de gestionar com processos relacionats amb els valors, no com capes independents.`]},
+          {title:'Fonts, dates, limitacions i confiança',body:[`Fonts integrades: ${sourcesText}. Cada lectura dinàmica conserva la seva data real al visor; la data de comprovació no substitueix la data d’observació.`,`La confiança és adequada per a cribratge territorial i disseny de seguiment, però no per certificar estat de conservació, causalitat o absència. ${limitsText} Els llindars interns són quartils territorials relatius, no llindars ecològics, legals o causals.`]}
+        ];
+      }
       return profile;
     };
   }
