@@ -1403,8 +1403,8 @@ def render_index(data: dict) -> str:
 </div>
 <script src="./vendor/d3.min.js"></script>
 <script src="./vendor/html2pdf.bundle.min.js"></script>
-<script src="./vendor/ecoradar-reading-report.js?v=20260829-1"></script>
-<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260829-1"></script>
+<script src="./vendor/ecoradar-reading-report.js?v=20260829-2"></script>
+<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260829-2"></script>
 <script>
 (() => {{
   const root = document.getElementById('ecoradar-alinya');
@@ -2267,8 +2267,8 @@ def write_package() -> None:
         html_text
         .replace('<script src="./vendor/d3.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/d3.min.js"></script>')
         .replace('<script src="./vendor/html2pdf.bundle.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/html2pdf.bundle.min.js"></script>')
-        .replace('<script src="./vendor/ecoradar-reading-report.js?v=20260829-1"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js?v=20260829-1"></script>')
-        .replace('<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260829-1"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js?v=20260829-1"></script>'),
+        .replace('<script src="./vendor/ecoradar-reading-report.js?v=20260829-2"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js?v=20260829-2"></script>')
+        .replace('<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260829-2"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js?v=20260829-2"></script>'),
         encoding="utf-8",
     )
     (OUT_DIR / "netlify.toml").write_text(
