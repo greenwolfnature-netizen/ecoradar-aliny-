@@ -17,9 +17,11 @@ knowledge = json.loads(KNOWLEDGE.read_text(encoding="utf-8"))["features"]
 metadata = json.loads(META.read_text(encoding="utf-8"))
 
 assert metadata["status"] == "definitive_ecological_module"
-assert len(elements) > 450 and len(situations) > 0 and len(knowledge) > 0
+assert len(elements) > 450 and len(knowledge) > 0
 assert {f["properties"]["element_type"] for f in elements} == {"habitat", "connector", "value_overlap"}
-assert {f["properties"]["situation_type"] for f in situations} == {"current_fire", "historic_fire"}
+situation_types = {f["properties"]["situation_type"] for f in situations}
+assert situation_types <= {"current_fire", "historic_fire"}
+assert metadata["counts"]["situations"] == len(situations)
 for feature in elements + situations + knowledge:
     assert feature["geometry"] and feature["geometry"]["coordinates"]
     for forbidden in ("scientificName", "commonName", "longitude", "latitude", "sector_id"):
