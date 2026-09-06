@@ -1,10 +1,10 @@
 {
-  "checked_at_utc": "2026-09-05T17:25:30Z",
-  "data_at_utc": "2026-09-05T13:00:00Z",
-  "data_at_local": "2026-09-05T15:00:00+02:00",
+  "checked_at_utc": "2026-09-06T17:19:43Z",
+  "data_at_utc": "2026-09-06T13:00:00Z",
+  "data_at_local": "2026-09-06T15:00:00+02:00",
   "value": {
-    "shade_pct": 0.5,
-    "solar_elevation_deg": 51.9,
+    "shade_pct": 0.6,
+    "solar_elevation_deg": 51.6,
     "solar_azimuth_deg": 207.5
   },
   "source": "ICGC Model d'elevacions del terreny 5 m + posició solar calculada",
