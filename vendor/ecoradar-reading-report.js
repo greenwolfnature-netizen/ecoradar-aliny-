@@ -60,17 +60,17 @@
     }
     if (report.ecologicalContext) {
       const c=report.ecologicalContext;
-      const relationshipCards=c.relations.map(r=>({title:r.label,level:r.compatible?'observat':'potencial',text:r.purpose+' '+(r.compatible?`${r.scope==='historical'?'Associació del període històric':'Dades compatibles del període indicat'}; no demostra causalitat. ${r.evidence}`:'Relació ecològica a contrastar; el creuament de dades encara no està verificat.')}));
+      const relationshipCards=c.relations.filter(r=>r.compatible).map(r=>({title:r.label,level:'observat',text:`${r.scope==='historical'?'Contrast històric':'Contrast del període indicat'}. ${r.evidence} ${r.purpose}`}));
       const extra=report.biodiversityChapters?.length?`<section><details><summary>Consultar la diagnosi específica de biodiversitat i hàbitats</summary>${report.biodiversityChapters.map(ch=>`<h3>${esc(ch.title)}</h3>${paragraph(ch.body)}`).join('')}</details></section>`:'';
       return `<article class="err-document" data-report-kind="ecological-context">
         <header class="err-cover"><div><span>ECORADAR · MUNTANYA D’ALINYÀ</span><h1>${esc(report.name)}</h1><p>Diagnosi ecològica contextual i suport a la gestió</p></div><div class="err-date">Generat ${esc(report.generatedAt)}</div></header>
         <section><h2>1. Valor disponible i significat ecològic</h2><div class="err-facts">${facts}</div>${paragraph(c.observation)}${paragraph(c.meaning)}</section>
         <section><h2>2. Distribució territorial i processos ecològics</h2>${mapSvg?`<div class="err-map-frame"><div class="err-map">${mapSvg}</div></div>`:''}${paragraph(c.processes)}${paragraph(report.territorial)}</section>
         <section><h2>3. Relacions amb altres lectures</h2>${labeled(relationshipCards)}${!relationshipCards.length?'<p>No hi ha un creuament específic verificat per a aquesta lectura.</p>':''}</section>
-        <section><h2>4. Combinacions que reforçarien o matisarien la interpretació</h2><p>Hipòtesis condicionals per contrastar, no coincidències territorials demostrades:</p>${paragraph(c.combinations)}</section>
+        <section><h2>4. Diagnosi conjunta i interpretacions alternatives</h2>${paragraph(c.combinations)}</section>
         <section><h2>5. Possibles trajectòries ecològiques</h2>${labeled(c.scenarios.map(s=>({title:s.label,text:s.text,level:'potencial'})))}</section>
-        <section><h2>6. Implicacions per a la gestió</h2>${paragraph(c.management)}${paragraph('Prioritzar unitats on el camp confirmi el procés i una pressió o necessitat de conservació. Sense creuament espacial compatible no s’assignen sectors d’actuació automàtics.')}</section>
-        <section class="err-limits"><h2>7. Fonts, dades i limitacions</h2><p>Data de la lectura representada: ${esc(report.dataDate)}.</p><ul>${sources}</ul>${c.relations.filter(r=>r.compatible).map(r=>`<p style="overflow-wrap:anywhere"><strong>${esc(r.label)}:</strong> ${esc(r.provenance)}</p>`).join('')}${paragraph(c.limitations)}${c.relations.some(r=>!r.compatible)?paragraph('Pendents de compatibilitat: '+[...new Set(c.relations.filter(r=>!r.compatible).flatMap(r=>r.reasons))].join('; ')+'.'):''}${paragraph([...new Set(report.limits || [])].filter(text=>!text.startsWith('La lectura identifica patrons')))}<p>${c.references.map(r=>`<a href="${esc(r.url)}">${esc(r.label)}</a>`).join(' · ')}</p></section>
+        <section><h2>6. Implicacions per a la gestió</h2>${paragraph(c.management)}</section>
+        <section class="err-limits"><h2>7. Fonts, dades i limitacions</h2><p>Data de la lectura representada: ${esc(report.dataDate)}.</p><ul>${sources}</ul>${c.relations.filter(r=>r.compatible).map(r=>`<p style="overflow-wrap:anywhere"><strong>${esc(r.label)}:</strong> ${esc(r.provenance)}</p>`).join('')}${paragraph(c.limitations)}${paragraph(c.relations.filter(r=>!r.compatible).map(r=>r.excluded))}${c.relations.some(r=>!r.compatible)?paragraph('Pendents de compatibilitat: '+[...new Set(c.relations.filter(r=>!r.compatible).flatMap(r=>r.reasons))].join('; ')+'.'):''}${paragraph([...new Set(report.limits || [])].filter(text=>!text.startsWith('La lectura identifica patrons')))}<p>${c.references.map(r=>`<a href="${esc(r.url)}">${esc(r.label)}</a>`).join(' · ')}</p></section>
         ${extra}<footer>EcoRadar · Muntanya d’Alinyà · diagnosi vinculada a la lectura activa</footer>
       </article>`;
     }
