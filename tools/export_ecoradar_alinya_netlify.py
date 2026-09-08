@@ -457,6 +457,52 @@ def source_matrix_md() -> str:
     return "\n".join(lines) + "\n"
 
 
+def build_ecological_evidence(project: Path) -> dict:
+    """Verify native spectral grid/mask and summaries; never invent harmonization."""
+    import hashlib
+    try:
+        import numpy as np
+        import rasterio
+    except ImportError:
+        return {}
+    try:
+        metadata = read_json(project / 'indicators' / 'teledeteccio_sentinel2.json')
+    except (OSError, ValueError):
+        return {}
+    if not metadata.get('acquired_at_utc') or not metadata.get('source_scene') or not metadata.get('methods', {}).get('quality_mask'):
+        return {}
+    evidence = {}
+    for key, variable in [('vigor', 'ndvi'), ('moisture', 'ndmi'), ('albedo', 'albedo')]:
+        try:
+            path = project / 'processed' / 'teledeteccio' / (variable + '.tif')
+            with rasterio.open(path) as dataset:
+                values = dataset.read(1, masked=True)
+                valid = ~np.ma.getmaskarray(values) & np.isfinite(values.data)
+                count = int(valid.sum())
+                if count == 0 or count != metadata.get('valid_pixels') or dataset.crs is None:
+                    continue
+                expected = metadata.get('metrics', {}).get(variable, {})
+                median = float(np.median(values.data[valid]))
+                mean = float(np.mean(values.data[valid]))
+                if any(not isinstance(expected.get(k), (int, float)) or abs(value - expected[k]) > 0.00051 for k, value in [('median', median), ('mean', mean)]):
+                    continue
+                grid = json.dumps([str(dataset.crs), list(dataset.transform), dataset.shape])
+                evidence[key] = {
+                    'value': expected['median'], 'source': 'Copernicus Sentinel-2 L2A · ' + metadata['source_scene'],
+                    'data_at_utc': metadata['acquired_at_utc'], 'quality_verified': True,
+                    'coverage_verified': True, 'support_id': metadata['source_scene'],
+                    'grid_id': hashlib.sha256(grid.encode()).hexdigest(),
+                    'mask_id': hashlib.sha256(valid.tobytes()).hexdigest(),
+                    'resolution': list(dataset.res), 'resolution_unit': 'degrees' if dataset.crs.is_geographic else dataset.crs.linear_units,
+                    'crs': str(dataset.crs), 'valid_pixels': count,
+                    'quality': metadata['methods']['quality_mask'],
+                    'artifact_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                }
+        except (OSError, ValueError, KeyError, rasterio.errors.RasterioError):
+            continue
+    return evidence
+
+
 def build_data() -> dict:
     study = feature_collection(
         PROJECT / "maps" / "ecoradar_core" / "study_area.geojson",
@@ -549,6 +595,7 @@ def build_data() -> dict:
     open_like = sum(float(r["superficie_ha"]) for r in covers if any(t in r["tipus_coberta"].lower() for t in ["prats", "conreus"]))
     high_plus = updated_similarity_areas.get("alta", 0) + updated_similarity_areas.get("mitjana_alta", 0)
     return {
+        "ecologicalEvidence": build_ecological_evidence(PROJECT),
         "bbox": map_bbox,
         "studyBbox": raster_bbox,
         "rasterBboxes": {
@@ -1403,8 +1450,8 @@ def render_index(data: dict) -> str:
 </div>
 <script src="./vendor/d3.min.js"></script>
 <script src="./vendor/html2pdf.bundle.min.js"></script>
-<script src="./vendor/ecoradar-reading-report.js?v=20260829-2"></script>
-<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260829-2"></script>
+<script src="./vendor/ecoradar-reading-report.js?v=20260908-ecological-context"></script>
+<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260908-ecological-context"></script>
 <script>
 (() => {{
   const root = document.getElementById('ecoradar-alinya');
@@ -2267,8 +2314,8 @@ def write_package() -> None:
         html_text
         .replace('<script src="./vendor/d3.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/d3.min.js"></script>')
         .replace('<script src="./vendor/html2pdf.bundle.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/html2pdf.bundle.min.js"></script>')
-        .replace('<script src="./vendor/ecoradar-reading-report.js?v=20260829-2"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js?v=20260829-2"></script>')
-        .replace('<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260829-2"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js?v=20260829-2"></script>'),
+        .replace('<script src="./vendor/ecoradar-reading-report.js?v=20260908-ecological-context"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js?v=20260908-ecological-context"></script>')
+        .replace('<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260908-ecological-context"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js?v=20260908-ecological-context"></script>'),
         encoding="utf-8",
     )
     (OUT_DIR / "netlify.toml").write_text(
