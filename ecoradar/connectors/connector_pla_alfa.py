@@ -19,7 +19,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[2]
 SERVICE = (
     "https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/"
-    "Pla_Alfa_Municipal_Avui_FL_2_view/FeatureServer/0"
+    "Pla_Alfa_Municipal_Avui_FL_alternatiu_VW/FeatureServer/0"
 )
 MUNICIPALITY_CODE = "259084"
 MUNICIPALITY_NAME = "Fígols i Alinyà"
@@ -102,7 +102,7 @@ def run() -> dict:
         "status": "verified",
         "source_url": SERVICE,
         "official_page": "https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/index.html",
-        "service_item_id": "de0d15089dc141a69dc1d674ba9f9959",
+        "service_item_id": "02c89a3c7f9a4b269aa3ddd117d48691",
         "note": "Nivell operatiu oficial municipal; no és un càlcul EcoRadar ni s'incorpora numèricament a l'índex 0-100.",
     }
     metadata_result = {
