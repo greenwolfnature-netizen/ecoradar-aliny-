@@ -1,38 +1,41 @@
-# Capa comuna de diagnosi ecològica dels informes
+# Diagnosi contextual global dels informes EcoRadar
 
-Revisió del 08/09/2026. S’amplia el generador existent d’Alinyà; no s’alteren índexs, capes cartogràfiques, fórmules ni fonts externes. No s’afegeix cap connector.
+Revisió 08/09/2026. Es manté la implementació, el disseny i el càlcul dels indicadors. La revisió afecta el generador d’informes i les metadades analítiques que necessita; no afegeix connectors ni fonts externes.
 
-## Arquitectura
+## Components
 
-`vendor/ecoradar-alinya-report-profiles.js` exposa `buildEcologicalContext(D, key, profile, now)` i `compatibleEvidence(a, b, now)`. `buildFactory` incorpora `ecologicalContext` a les 17 lectures actuals, inclosos foc i biodiversitat. El catàleg té significat, processos, lectures complementàries, combinacions condicionals, tres trajectòries i gestió. Vigor i humitat tenen regles específiques més detallades. Les altres lectures disposen d’interpretació pròpia de la seva funció ecològica; els escenaris no equivalen automàticament augment de valor a millora.
+- `vendor/ecoradar-alinya-report-profiles.js`: motor compartit, polítiques pròpies de cada indicador, compatibilitat, interpretació de contrastos, escenaris i gestió.
+- `vendor/ecoradar-reading-report.js`: set apartats amb el disseny existent. Les limitacions i fonts excloses queden al final. S’elimina la recomanació genèrica afegida a tots els informes. Es conserva la lectura operativa d’incendi i el detall desplegable de biodiversitat.
+- `tools/export_ecoradar_alinya_netlify.py`: verifica ràsters i genera metadades i contrastos espacials de la mateixa escena; exporta les còpies habituals. També amplia únicament la tipografia del bloc executiu d’incendi (títol 18 px, etiquetes 14 px, valors 17 px, nota 12 px), sense modificar amplades.
 
-`vendor/ecoradar-reading-report.js` presenta set apartats amb les classes visuals existents. Manté l’informe operatiu especialitzat de foc, enriquit amb context ecològic; conserva íntegra la diagnosi específica de biodiversitat en un desplegable de l’informe. El desplegable pot obrir-se abans de desar el PDF per incloure’n el contingut. La resta utilitza la capa comuna. Els camps tècnics previs es conserven per compatibilitat, però la nova presentació no reprodueix relacions quantitatives antigues sense comprovació.
+## Interpretació específica
 
-`tools/export_ecoradar_alinya_netlify.py::build_ecological_evidence` verifica els ràsters espectrals locals en cada empaquetat. Reutilitza l’escena i la màscara de qualitat documentades a `teledeteccio_sentinel2.json`; comprova CRS, resolució nativa, transformació, dimensions, màscara de píxels vàlids, recompte, mitjana i mediana (tolerància de 0,00051 per l’arrodoniment publicat). Calcula hashes de malla, màscara i fitxer. No reprojecta ni interpola dades. Si falten dependències, fitxers o controls, no emet evidència verificada; la lectura continua disponible com a contrast pendent.
+`buildEcologicalContext(D,key,profile,now)` aplica una política de `diagnosticPolicies`: significat del valor disponible, processos, alternatives, trajectòries pròpies i comprovacions de gestió. S’han retirat els escenaris genèrics heretats. Les polítiques cobreixen les 17 lectures actuals i les lectures de connectivitat i aigua. Un augment no es converteix automàticament en millora: tancament de prats, pèrdua de sòl, recuperació hídrica, permeabilitat i esforç de prospecció tenen interpretacions diferents.
 
-## Contracte de compatibilitat
+Les lectures futures han de registrar una política amb `registerDiagnosticPolicy(key,{peers,diagnose})`. No es permet sobreescriure silenciosament una política existent. Sense política específica, el motor identifica que manca la diagnosi i no omple una plantilla amb el nom de la nova variable. `diagnose` retorna `meaning`, `processes`, `alternatives`, `scenarios` (parelles de títol i text) i `management`.
 
-Les dades a `D.ecologicalEvidence[key]` necessiten valor, font, `quality_verified`, data o període vàlids, `coverage_verified`, `support_id`, `grid_id`, `mask_id` i resolució. S’admet `resolution_m` o `resolution: [x,y]`, `resolution_unit` i `crs` per malles natives. Les unitats angulars no es transformen fictíciament en metres.
+## Evidència i contrastos reals
 
-Per presentar una associació quantitativa han de coincidir el període, suport, malla, màscara i resolució. Una agregació o harmonització legítima l’ha de produir i documentar el motor de dades; el generador no la infereix d’un nom de municipi, una data semblant o una resolució nominal. Una capa estructural d’un altre any es pot descriure com a condicionant plausible, però no supera automàticament el control d’un creuament actual. L’evidència verificada continua essent associació, mai causalitat.
+`build_ecological_evidence` verifica font, escena, màscara de qualitat, CRS, transformació, dimensions, recompte vàlid, mitjana i mediana (tolerància 0,00051 per arrodoniment). Conserva hashes de fitxer, malla i màscara. Si manca una dependència o comprovació, no inventa compatibilitat.
 
-La regla de presentació de més de 30 dies identifica context històric. No és una caducitat física universal ni altera els controls de frescor del motor d’incendis. Les observacions més recents també es mostren amb data, sense certificar-ne vigència per qualsevol procés. Es rebutgen períodes absents, invertits o futurs. La meteorologia d’estació no s’atribueix a una malla satel·litària. La lectura principal espectral usa l’escena representada al mapa i evita barrejar-la amb una actualització diària posterior.
+Per cada ràster espectral vàlid calcula els quartils espacials 25 i 75. Dins els píxels de cada extrem, calcula les medianes de les altres variables de la mateixa escena i màscara. `spatial_contrasts` conserva límits, recomptes, variable contrastada, medianes i mètode `native_same_mask_spatial_quartiles_v1`. No reprojecta ni interpola; una malla o màscara diferent bloqueja el contrast. Un ràster constant no produeix falsos sectors extrems. Els quantils són contrastos dins l’escena, no categories de salut ni anomalies climàtiques.
 
-La comprovació real de NDVI i NDMI mostra la mateixa escena del 07/07/2026, CRS EPSG:4326, malla i màscara amb 377.656 píxels vàlids. Per això se’n permet una associació històrica. Les lectures meteorològiques de setembre no són simultànies i no es presenten com una explicació demostrada d’aquella escena.
+El motor canvia la interpretació segons el sentit real de la relació: verdor i hidratació concordants o desacoblades, reflectància amb vegetació conservada o amb menor senyal vegetal. Les medianes territorials es distingeixen dels contrastos per píxels. Els inventaris estructurals aporten context separat; la síntesi existent d’interseccions HIC prioritari–connector i buits de coneixement informa activament els informes d’hàbitats, biodiversitat, connectivitat i gestió, amb la data de generació identificada com a tal.
 
-## Abast científic
+Exemple verificat, exclusivament de l’escena 07/07/2026: albedo ≤0,145, NDVI mediana 0,725 i NDMI 0,224; albedo ≥0,208, NDVI 0,404 i NDMI −0,012. És coherent amb menys verdor i senyal hídric a les superfícies més reflectants; no discrimina roca natural, sòl descobert i vegetació seca. No descriu l’estat actual de setembre.
 
-NDVI: verdor, activitat vegetal relativa, protecció potencial del sòl, estructura d’hàbitat, recursos tròfics i regeneració com a processos a contrastar. Biomassa i combustible no es calculen a partir d’NDVI sense calibratge.
+## Compatibilitat i vigència
 
-NDMI: senyal de contingut hídric vegetal, interpretat amb fenologia, coberta, pluja i calor. No s’equipara a humitat de sòl, combustible fi mort, estrès fisiològic demostrat ni probabilitat d’incendi.
+`compatibleEvidence` requereix valor, font, qualitat verificada, període vàlid no futur, cobertura, suport, malla, màscara i resolució coincidents. S’accepta resolució mètrica o nativa amb unitats i CRS. Una agregació temporal o harmonització s’ha de calcular i documentar abans; no s’infereix perquè les dades pertanyin al mateix municipi.
 
-Referències oficials: [USGS NDVI](https://www.usgs.gov/landsat-missions/landsat-normalized-difference-vegetation-index), [USGS NDMI](https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index), [USGS fenologia](https://www.usgs.gov/special-topics/remote-sensing-phenology/science/ndvi-foundation-remote-sensing-phenology). Aquestes fonts fonamenten la interpretació dels índexs; les conseqüències ecològiques es formulen com a hipòtesis condicionals, no com a observacions locals ni resultats calibrats.
+El mapa espectral manté el valor i data de la seva escena, sense substituir-los per una lectura diària més nova. Una distribució antiga no es combina amb una observació nova. La composició tèrmica es presenta com a composició, sense assignar-li la data d’una escena individual ni convertir-la en temperatura de l’aire. Les observacions de més de 30 dies s’etiqueten com a context històric; les més recents també queden vinculades a la data, sense vigència universal. Els controls de frescor específics de foc es conserven.
 
-## Proves i manteniment
+Es diferencien observació, interpretació plausible i escenari condicional. No es calculen probabilitats, velocitats de propagació, severitat, abundància, mortalitat ni funcionalitat biològica a partir d’una associació. Les fonts incompatibles i els controls pendents figuren al final de l’informe.
 
-- `node --test tests/js/ecological-context.test.mjs tests/js/fire-report.test.mjs`
-- `python tests/test_ecological_evidence.py` amb numpy i rasterio del projecte.
+## Verificació
 
-Cobertura: totes les lectures actuals; metadades absents; data, resolució, suport i màscara discordants; qualitat, valors i dates invàlids; evidència històrica; fidelitat a l’escena del mapa; preservació del detall de biodiversitat i de l’informe de foc. Proves de ràsters sintètics per recompte, resums, qualitat i fitxers absents. Cap fixture sintètica entra al visor.
+- `node --test tests/js/ecological-context.test.mjs tests/js/fire-report.test.mjs`: 27 proves; totes les lectures, diagnosi dependent de dades, dades absents, canvi de data/malla/màscara, polítiques futures, coincidències estructurals i regressions d’incendi.
+- `python tests/test_ecological_evidence.py`: 7 proves amb ràsters sintètics; resums, qualitat, fitxers absents, parelles reals de píxels, ràsters constants i malles diferents. Les fixtures no entren al visor.
+- Contrast calculat sobre els ràsters reals d’Alinyà; generació de l’informe des del visor i revisió de desbordaments i mides CSS.
 
-Les còpies de vendor del paquet han de coincidir amb les de l’arrel. L’HTML de l’arrel, paquet i versió autònoma conté les metadades verificades de l’empaquetat. Les execucions futures les regeneren a partir dels ràsters presents. Afegir una lectura requereix un perfil i metadades verificables; la manca de perfil produeix una sortida explícita sense inventar interpretacions.
+Referències de base: [USGS NDVI](https://www.usgs.gov/landsat-missions/landsat-normalized-difference-vegetation-index), [USGS NDMI](https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index), [USGS fenologia](https://www.usgs.gov/special-topics/remote-sensing-phenology/science/ndvi-foundation-remote-sensing-phenology). Les conseqüències ecològiques es formulen com a interpretacions condicionals, no com a observacions locals ni llindars calibrats.
