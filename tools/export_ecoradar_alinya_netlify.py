@@ -472,6 +472,7 @@ def build_ecological_evidence(project: Path) -> dict:
     if not metadata.get('acquired_at_utc') or not metadata.get('source_scene') or not metadata.get('methods', {}).get('quality_mask'):
         return {}
     evidence = {}
+    verified_arrays = {}
     for key, variable in [('vigor', 'ndvi'), ('moisture', 'ndmi'), ('albedo', 'albedo')]:
         try:
             path = project / 'processed' / 'teledeteccio' / (variable + '.tif')
@@ -487,7 +488,9 @@ def build_ecological_evidence(project: Path) -> dict:
                 if any(not isinstance(expected.get(k), (int, float)) or abs(value - expected[k]) > 0.00051 for k, value in [('median', median), ('mean', mean)]):
                     continue
                 grid = json.dumps([str(dataset.crs), list(dataset.transform), dataset.shape])
+                verified_arrays[key] = values.data[valid].copy()
                 evidence[key] = {
+                    'distribution': {name: float(np.percentile(values.data[valid], quantile)) for name, quantile in [('p10', 10), ('p90', 90)]},
                     'value': expected['median'], 'source': 'Copernicus Sentinel-2 L2A · ' + metadata['source_scene'],
                     'data_at_utc': metadata['acquired_at_utc'], 'quality_verified': True,
                     'coverage_verified': True, 'support_id': metadata['source_scene'],
@@ -500,6 +503,26 @@ def build_ecological_evidence(project: Path) -> dict:
                 }
         except (OSError, ValueError, KeyError, rasterio.errors.RasterioError):
             continue
+    # Native, same-scene quartile contrasts: spatial associations, not health classes.
+    for key, item in evidence.items():
+        values = verified_arrays[key]
+        low_max, high_min = np.percentile(values, [25, 75])
+        if low_max >= high_min:
+            continue
+        low, high = values <= low_max, values >= high_min
+        item['spatial_contrasts'] = []
+        for peer, other in evidence.items():
+            if peer == key or any(item[field] != other[field] for field in ['grid_id', 'mask_id', 'support_id', 'data_at_utc', 'resolution']):
+                continue
+            peer_values = verified_arrays[peer]
+            item['spatial_contrasts'].append({
+                'peer': peer, 'quality_verified': True,
+                'low_max': float(low_max), 'high_min': float(high_min),
+                'low_pixels': int(low.sum()), 'high_pixels': int(high.sum()),
+                'low_peer_median': float(np.median(peer_values[low])),
+                'high_peer_median': float(np.median(peer_values[high])),
+                'method': 'native_same_mask_spatial_quartiles_v1',
+            })
     return evidence
 
 
@@ -1012,6 +1035,10 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-fire-executive {{ text-align:center; }}
     #ecoradar-alinya .eu-fire-executive .eu-facts {{ max-width:1120px; margin:0 auto; }}
     #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; padding:10px 12px; }}
+    #ecoradar-alinya .eu-fire-executive h3 {{ font-size:18px; }}
+    #ecoradar-alinya .eu-fire-executive .eu-fact span {{ font-size:14px; }}
+    #ecoradar-alinya .eu-fire-executive .eu-fact strong {{ font-size:17px; }}
+    #ecoradar-alinya .eu-fire-executive .eu-source {{ font-size:12px!important; }}
     #ecoradar-alinya .eu-fire-executive .eu-fact span,
     #ecoradar-alinya .eu-fire-executive .eu-fact strong {{ text-align:center; overflow-wrap:anywhere; }}
     #ecoradar-alinya .eu-fire-executive .eu-source {{ max-width:1120px; margin:12px auto 0; text-align:center; }}
@@ -1450,8 +1477,8 @@ def render_index(data: dict) -> str:
 </div>
 <script src="./vendor/d3.min.js"></script>
 <script src="./vendor/html2pdf.bundle.min.js"></script>
-<script src="./vendor/ecoradar-reading-report.js?v=20260908-ecological-context"></script>
-<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260908-ecological-context"></script>
+<script src="./vendor/ecoradar-reading-report.js?v=20260908-evidence-diagnosis"></script>
+<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260908-evidence-diagnosis"></script>
 <script>
 (() => {{
   const root = document.getElementById('ecoradar-alinya');
@@ -2314,8 +2341,8 @@ def write_package() -> None:
         html_text
         .replace('<script src="./vendor/d3.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/d3.min.js"></script>')
         .replace('<script src="./vendor/html2pdf.bundle.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/html2pdf.bundle.min.js"></script>')
-        .replace('<script src="./vendor/ecoradar-reading-report.js?v=20260908-ecological-context"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js?v=20260908-ecological-context"></script>')
-        .replace('<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260908-ecological-context"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js?v=20260908-ecological-context"></script>'),
+        .replace('<script src="./vendor/ecoradar-reading-report.js?v=20260908-evidence-diagnosis"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js?v=20260908-evidence-diagnosis"></script>')
+        .replace('<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260908-evidence-diagnosis"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js?v=20260908-evidence-diagnosis"></script>'),
         encoding="utf-8",
     )
     (OUT_DIR / "netlify.toml").write_text(
