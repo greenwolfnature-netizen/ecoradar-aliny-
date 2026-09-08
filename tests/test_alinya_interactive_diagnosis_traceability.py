@@ -13,6 +13,7 @@ GENERATED = (
     / "ecoradar-alinya-netlify-v2"
     / "index.html"
 )
+METHODOLOGY = ROOT / "docs" / "metodologia_oficial_ecoradar.md"
 
 
 class InteractiveDiagnosisTraceabilityTests(unittest.TestCase):
@@ -20,6 +21,7 @@ class InteractiveDiagnosisTraceabilityTests(unittest.TestCase):
     def setUpClass(cls):
         cls.source = SOURCE.read_text(encoding="utf-8")
         cls.generated = GENERATED.read_text(encoding="utf-8")
+        cls.methodology = METHODOLOGY.read_text(encoding="utf-8")
 
     def test_fire_executive_text_is_centered_and_mobile_safe(self):
         self.assertIn(".eu-fire-executive .eu-fact span", self.generated)
@@ -54,6 +56,39 @@ class InteractiveDiagnosisTraceabilityTests(unittest.TestCase):
         for number in range(1, 13):
             self.assertIn(f"CORE_{number:02d}:", self.source)
         self.assertIn('id="eu-core-decision-evidence"', self.generated)
+
+    def test_all_radar_cards_expose_the_five_explanation_blocks(self):
+        for number in range(1, 13):
+            self.assertRegex(
+                self.source,
+                rf'"CORE_{number:02d}": \{{\n\s+"kind":',
+            )
+        self.assertIn('id="eu-core-explainer"', self.generated)
+        self.assertIn('aria-controls="eu-core-explainer"', self.generated)
+        self.assertIn('data-core-code=', self.generated)
+        for heading in (
+            "1 · Què mesura",
+            "2 · En què es basa",
+            "3 · Com es calcula",
+            "4 · Com interpretar el resultat",
+            "5 · Confiança",
+        ):
+            self.assertIn(heading, self.generated)
+
+    def test_direct_ndvi_is_not_presented_as_a_synthetic_score(self):
+        self.assertIn("Lectura directa · NDVI", self.generated)
+        self.assertIn("NDVI 0,616 no es transforma en 61,6/100", self.generated)
+        self.assertIn("la lectura directa `NDVI 0,616` tampoc", self.methodology)
+
+    def test_radar_12_documents_the_actual_equal_weight_mean(self):
+        self.assertIn("Mitjana aritmètica simple, amb el mateix pes", self.generated)
+        self.assertIn("mitjana aritmètica simple, amb el mateix pes", self.methodology)
+        self.assertNotIn("No és una mitjana simple", self.methodology)
+
+    def test_explanations_name_inputs_that_do_not_enter_current_formulas(self):
+        self.assertIn("Hàbitats i hidrologia no intervenen numèricament", self.generated)
+        self.assertIn("meteorologia actual, NDMI, LST, Pla Alfa ni combustible mesurat", self.generated)
+        self.assertIn("El relleu, l’NDWI, el cabal, la qualitat i la permanència", self.generated)
 
     def test_dynamic_diagnosis_targets_are_unique(self):
         identifiers = re.findall(r'\bid="([^"]+)"', self.generated)
