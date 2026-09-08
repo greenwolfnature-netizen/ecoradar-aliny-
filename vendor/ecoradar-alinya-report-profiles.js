@@ -9,6 +9,210 @@
   const commonLimits = 'La lectura identifica patrons i sectors candidats, però no demostra per si sola causalitat, estat ecològic complet ni efectes sobre espècies concretes. Cal interpretar-la amb la resolució, la data i les limitacions de la font i validar al camp les decisions que puguin alterar hàbitats o processos.';
   const commonManagement = 'Prioritzar la comprovació dels sectors que destaquen, contrastar-los amb hàbitats, biodiversitat, aigua, accessibilitat i usos, definir un objectiu ecològic explícit i aplicar seguiment abans i després de qualsevol actuació. No es justifica una intervenció generalitzada només a partir d’aquesta capa.';
 
+  // Operational narrative only: this module never recalculates the fire index.
+  const finite = value => typeof value === 'number' && Number.isFinite(value);
+  const score = value => finite(value) && value >= 0 && value <= 100 ? `${ca(value)}/100` : 'No calculable amb les dades disponibles';
+  const instant = value => value && Number.isFinite(Date.parse(value)) ? Date.parse(value) : null;
+  function temporalState(item, now, structural = false) {
+    if (structural || item?.freshness_kind === 'structural') return 'structural';
+    const at = instant(item?.date_utc || item?.timestamp_utc || item?.data_at_utc);
+    if (at == null || at > now.getTime()) return 'unavailable';
+    const age = (now.getTime() - at) / 3600000;
+    const full = item?.full_weight_max_age_hours ?? item?.freshness?.current_max_age_hours ?? 3;
+    const end = item?.exclude_after_hours ?? item?.freshness?.too_old_after_hours ?? 24;
+    if (item?.temporal_status === 'too_old' || item?.freshness_factor_pct === 0 || age >= end) return 'context';
+    return age <= full ? 'current' : 'recent';
+  }
+  const stateLabel = state => ({current:'Actual',recent:'Recent · interpretació atenuada',context:'Antiga · només context',structural:'Estructural',unavailable:'Vigència no verificable'}[state]);
+  const fireLabels = {creaf_fire_potential:'ForestDrought',structural:'Perill estructural',ndmi_dryness:'NDMI',surface_temperature:'Temperatura superficial',vegetation_continuity:'Continuïtat vegetal',wind:'Vent i ratxa',relative_humidity_inverse:'Humitat relativa',slope:'Pendent',aspect:'Orientació'};
+  const insideRing = (point, ring) => {
+    let inside = false;
+    for (let i=0,j=ring.length-1;i<ring.length;j=i++) {
+      const [x,y]=ring[i], [u,v]=ring[j];
+      if ((y>point[1]) !== (v>point[1]) && point[0] < (u-x)*(point[1]-y)/(v-y)+x) inside=!inside;
+    }
+    return inside;
+  };
+  const containsPoint = (geometry, point) => {
+    const polygons = geometry?.type === 'Polygon' ? [geometry.coordinates] : geometry?.type === 'MultiPolygon' ? geometry.coordinates : [];
+    return polygons.some(rings => rings.length && insideRing(point,rings[0]) && !rings.slice(1).some(r=>insideRing(point,r)));
+  };
+  // Optional GeoJSON ignition contract. No invented ignition, wind field or corridor.
+  function prepareIgnitionScenario(input = {}, now = new Date()) {
+    const result = {status:'no_ignition',missing:[],cellId:null,potentialDirection:null,potentialCorridor:null};
+    const ignition = input.ignition;
+    if (!ignition) return result;
+    const coordinates = ignition.geometry?.coordinates;
+    if (ignition.geometry?.type !== 'Point' || !Array.isArray(coordinates) || coordinates.length !== 2 || !coordinates.every(finite) || Math.abs(coordinates[0])>180 || Math.abs(coordinates[1])>90 || !ignition.properties?.source || instant(ignition.properties?.observed_at_utc)==null || instant(ignition.properties.observed_at_utc)>now.getTime()) {
+      return {...result,status:'invalid_ignition',missing:['Punt WGS84, font i data de la ignició vàlids']};
+    }
+    const cells=(input.cells?.features || []).filter(f=>containsPoint(f.geometry,coordinates));
+    if (cells.length !== 1) return {...result,status:'insufficient_data',missing:['Una única cel·la amb cobertura al punt']};
+    const cell=cells[0], raw=cell.properties?.raw || {};
+    const wind=input.wind;
+    const missing=[];
+    if (!finite(raw.slope_deg) || raw.slope_deg<0 || raw.slope_deg>90 || !finite(raw.aspect_deg) || raw.aspect_deg<0 || raw.aspect_deg>=360) missing.push('Pendent i orientació vàlids');
+    if (!wind || !finite(wind.speed_kmh) || wind.speed_kmh<=0 || !finite(wind.from_degrees) || wind.from_degrees<0 || wind.from_degrees>=360 || temporalState(wind,now)!=='current' || !wind.source || wind.spatial_scope!=='ignition_local') missing.push('Vent local actual amb velocitat i direcció de procedència');
+    for (const [key,label] of [['fuel','Combustible i humitat'],['barriers','Barreres'],['exposedElements','Elements exposats']]) {
+      const layer=input[key];
+      if (!layer?.verified || !layer?.source || !layer?.coverage_verified || !Array.isArray(layer.features) || temporalState(layer,now)!=='current') missing.push(`${label}: capa vigent, font i cobertura verificades`);
+    }
+    return {...result,status:missing.length?'insufficient_data':'ready_for_validated_model',cellId:cell.properties.cell_id,missing,
+      context:{ignition,cell,wind:wind || null,fuel:input.fuel || null,barriers:input.barriers || null,exposedElements:input.exposedElements || null},
+      // These are input axes, never a combined direction or a simulated path.
+      axes:missing.length ? null : {upslope_degrees:raw.slope_deg>0?(raw.aspect_deg+180)%360:null,downwind_degrees:(wind.from_degrees+180)%360},
+      uncertainty:'Cal un model de propagació validat i una anàlisi de sensibilitat abans de produir un corredor; els eixos topogràfic i meteorològic no són una trajectòria.'};
+  }
+  function buildFireReport(D, now = new Date()) {
+    const fire=D.currentFire || {}, summary=fire.summary || {}, meteo=fire.meteorology || {}, vars=fire.variables || {}, pla=fire.plaAlfa || {};
+    const rain=meteo.precipitation_accumulated || {}, states=Object.fromEntries(Object.entries(vars).map(([key,item])=>[key,temporalState(item,now)]));
+    const humidity=meteo.relative_humidity, wind=meteo.wind, gust=meteo.wind_gust;
+    const currentRH=finite(humidity?.value) && temporalState(humidity,now)==='current';
+    const currentWind=finite(wind?.value) && temporalState(wind,now)==='current';
+    const currentGust=finite(gust?.value) && temporalState(gust,now)==='current';
+    const currentRain=temporalState(rain,now)==='current';
+    const speed=currentWind ? wind.value*3.6 : null, gustSpeed=currentGust ? gust.value*3.6 : null;
+    const currentWeather=currentRH && currentWind && currentGust;
+    const lowWind=currentWeather && speed<=10 && gustSpeed<=20;
+    const forcingWind=currentWeather && (speed>=20 || gustSpeed>=40);
+    const favour=[], limit=[];
+    if (currentRH && humidity.value<=40) favour.push(`Humitat relativa del ${ca(humidity.value,0)} % a Y4: afavoreix l’assecament dels combustibles fins exposats.`);
+    if (currentRH && humidity.value>=70) limit.push(`Humitat relativa del ${ca(humidity.value,0)} % a Y4: pot frenar l’assecament dels combustibles fins.`);
+    if (currentWind && currentGust) {
+      const text=`Vent ${ca(speed)} km/h i ratxa ${ca(gustSpeed)} km/h a CJ Organyà`;
+      if (lowWind) limit.push(`${text}: el senyal observat d’impuls pel vent és feble.`);
+      else if (forcingWind) favour.push(`${text}: pot reforçar la propagació en sectors exposats al flux.`);
+    }
+    if (currentRain && finite(rain.days_without_significant_rain) && rain.days_without_significant_rain>=7) favour.push(`${ca(rain.days_without_significant_rain,0)} dies sense pluja diària ≥${ca(rain.significant_rain_threshold_mm_day ?? 1)} mm; ${finite(rain.last_7_days_mm)?ca(rain.last_7_days_mm)+' mm en 7 dies':'acumulat setmanal no calculable'}. El dèficit recent d’aportació d’aigua pot mantenir l’assecament superficial.`);
+    if (currentRain && finite(rain.recent_24h_mm) && rain.recent_24h_mm>=1) limit.push(`S’han observat ${ca(rain.recent_24h_mm)} mm en 24 h a Y4: possible humectació temporal de superfícies exposades, a comprovar localment.`);
+    if (!favour.length) favour.push('Les observacions vigents no permeten identificar un factor meteorològic clarament afavoridor. Cal comprovar combustible i condicions locals.');
+    if (!limit.length) limit.push('No s’ha verificat cap factor actual que limiti clarament la propagació.');
+    const cells=(fire.cells?.features || []).filter(f=>instant(f.properties?.updated_at_utc)===instant(fire.checkedAtUtc) && instant(fire.checkedAtUtc)!=null && finite(f.properties?.index_0_100));
+    const ranked=[...cells].sort((a,b)=>b.properties.index_0_100-a.properties.index_0_100);
+    const maximum=summary.maximum_index_0_100 ?? summary.max_index_0_100;
+    const areas=Object.entries(summary.area_by_category_ha || {}).filter(([,a])=>finite(a) && a>0);
+    const territory=areas.length ? areas.map(([category,area])=>`${ca(area,2)} ha en categoria ${category}`).join('; ')+'.' : 'Distribució per categories no calculable amb les dades disponibles.';
+    const top=ranked.slice(0,3).map(f=>{
+      const p=f.properties,r=p.raw || {};
+      return {label:p.cell_id,value:score(p.index_0_100),note:[finite(r.slope_deg)?`pendent ${ca(r.slope_deg)}°`:null,r.aspect_cardinal?`orientació ${r.aspect_cardinal}`:null,finite(r.vegetation_continuity_0_100)?`continuïtat relativa ${ca(r.vegetation_continuity_0_100)}/100`:null].filter(Boolean).join(' · ')};
+    });
+    const structuralCells=cells.filter(f=>finite(f.properties.raw?.slope_deg) && finite(f.properties.raw?.vegetation_continuity_0_100));
+    const quantile=(values,q)=>values.sort((a,b)=>a-b)[Math.floor((values.length-1)*q)];
+    const steep=structuralCells.length ? quantile(structuralCells.map(f=>f.properties.raw.slope_deg),.75) : null;
+    const continuous=structuralCells.length ? quantile(structuralCells.map(f=>f.properties.raw.vegetation_continuity_0_100),.75) : null;
+    const aligned=steep>0 && continuous>0 ? structuralCells.filter(f=>f.properties.raw.slope_deg>=steep && f.properties.raw.vegetation_continuity_0_100>=continuous).sort((a,b)=>b.properties.index_0_100-a.properties.index_0_100).slice(0,3) : [];
+    const sectors=aligned.length ? `Per comprovar l’alineació de pendent i continuïtat, destaquen ${aligned.map(f=>f.properties.cell_id).join(', ')}: totes dues variables són al quart superior de la malla disponible. Són punts de revisió del terreny, no corredors calculats.` : 'No es poden situar sectors amb coincidència de pendent i continuïtat a la malla vigent.';
+    const uncertainty=!currentWeather ? 'La meteorologia disponible no és prou actual o completa per descriure un escenari d’ignició ara.' : 'No hi ha humitat fina ni estructura vertical del combustible mesurades per sector; el vent observat a Organyà pot diferir del de les valls i carenes d’Alinyà.';
+    const explanation=[];
+    if (currentWind && currentGust) explanation.push(`Vent actual: ${ca(speed)} km/h; ratxa ${ca(gustSpeed)} km/h. ${lowWind?'La lectura no mostra un impuls meteorològic fort pel vent.':forcingWind?'El vent mereix atenció com a possible impulsor de la progressió.':'El vent aporta un condicionant, però no permet establir per si sol quin factor dominaria.'}`);
+    if (vars.creaf_fire_potential) explanation.push(`ForestDrought: ${vars.creaf_fire_potential.value}. ${stateLabel(states.creaf_fire_potential)}; model del ${date(vars.creaf_fire_potential.date_utc)}. ${states.creaf_fire_potential==='current'?'Aporta un indicador modelitzat del potencial del combustible forestal.': 'No es tracta com una observació de combustible d’avui.'}`);
+    if (vars.ndmi_dryness) explanation.push(`NDMI: ${vars.ndmi_dryness.value}, del ${date(vars.ndmi_dryness.date_utc)}. ${states.ndmi_dryness==='context'?'Només context històric: queda exclòs de la interpretació de l’estat hídric actual.':states.ndmi_dryness==='current'?'Context espectral recent per comparar sectors.':'Interpretació atenuada; no acredita l’estat hídric d’avui.'}`);
+    const scenario=!currentWeather ? ['No es pot establir el comportament potencial amb les condicions d’ara fins a disposar de vent, ratxes i humitat actuals. La malla serveix només per revisar la predisposició territorial.'] : [
+      lowWind ? 'Amb el vent feble observat, l’escenari potencial estaria més condicionat localment pel pendent i la continuïtat del combustible disponible. Una ignició al peu d’un vessant amb vegetació contínua podria trobar una progressió afavorida cap amunt.' : forcingWind ? 'El vent podria condicionar especialment la progressió en zones exposades. L’alineació amb un vessant ascendent i combustible continu podria reforçar-la; manca direcció local del vent per situar aquesta coincidència.' : 'La progressió potencial dependria de la combinació de vent, pendent i continuïtat del combustible. Amb aquestes dades no es pot jerarquitzar un únic motor dominant.',
+      'Les interrupcions reals del combustible podrien dificultar la continuïtat de la progressió. La coberta escassa és un lloc on comprovar-les; camins, prats i cursos d’aigua no es consideren barreres eficaces sense verificar-ne l’estat.',sectors];
+    const ignition=prepareIgnitionScenario({...(fire.ignitionContext || {}),ignition:fire.ignition,cells:fire.cells},now);
+    if (fire.ignition) scenario.push(ignition.status==='ready_for_validated_model'?'Punt d’ignició creuat amb les capes disponibles; resta aplicar i validar el model direccional.':`Punt d’ignició: ${ignition.missing.join('; ')}. No es genera cap corredor.`);
+    const overlaps=(D.biodiversityEcology?.situations?.features || []).filter(f=>f.properties?.situation_type==='current_fire');
+    const exposure=['Comprovar hàbitats d’interès comunitari, connectors, nuclis i accessos que coincideixin amb els sectors revisats al mapa. Sense un corredor de propagació no es delimita una zona d’afectació.'];
+    const exposureDate=D.biodiversityEcology?.metadata?.dynamic_data?.current_fire?.checked_at_utc;
+    if (overlaps.length && instant(exposureDate)!=null && instant(exposureDate) === instant(fire.checkedAtUtc)) {
+      const names=[...new Set(overlaps.map(f=>f.properties.ecological_element).filter(Boolean))].slice(0,3);
+      exposure.push(`${overlaps.length} interseccions verificades entre HIC i perill actual alt, de la mateixa comprovació. Elements a revisar: ${names.join('; ')}.`);
+    } else if (overlaps.length) exposure.push('Les coincidències ecològiques disponibles són d’una altra comprovació; cal actualitzar el creuament abans d’assignar exposició actual.');
+    const sources=Object.entries(vars).map(([key,item])=>({label:fireLabels[key] || key,value:item.value ?? 'No calculable',date:date(item.date_utc),source:key==='wind'?'Meteocat XEMA · CJ Organyà':item.source || 'Font no indicada',state:stateLabel(states[key]),weight:finite(item.weight_pct)?`${ca(item.weight_pct)} %`:'—'}));
+    const plaState=temporalState({...pla,freshness:pla.freshness || {current_max_age_hours:18,too_old_after_hours:72}},now);
+    sources.unshift({label:'Pla Alfa',value:finite(pla.level)?`Nivell ${pla.level} · ${pla.label}`:'No verificable',date:date(pla.data_at_utc),source:pla.organization || 'Agents Rurals',url:pla.source_url,state:stateLabel(plaState),weight:'Independent'});
+    const readings=D.dailyReadings?.readings || {};
+    for (const key of ['air_temperature','precipitation_7d','precipitation_30d','ndvi']) {
+      const item=readings[key];
+      if (item) sources.push({label:item.label,value:item.value,date:date(item.data_at_utc),source:item.source,state:key==='ndvi'?'Context espectral; no entra al càlcul':stateLabel(temporalState(item,now)),weight:'Context'});
+    }
+    return {reportKind:'fire-current',name:'Perill d’incendi avui',generatedAt:date(now.toISOString()),dataDate:date(fire.checkedAtUtc),
+      facts:[{label:'Índex EcoRadar · categoria predominant',value:`${score(summary.mean_index_0_100)}${summary.predominant_category?' · '+summary.predominant_category:''}`,note:`Càlcul comprovat ${date(fire.checkedAtUtc)}`},{label:'Pla Alfa · context oficial independent',value:finite(pla.level)?`Nivell ${pla.level} · ${pla.label}`:'No verificable',note:`${stateLabel(plaState)} · ${date(pla.data_at_utc)}`},{label:'Confiança del càlcul',value:summary.confidence || 'No verificable',note:finite(summary.confidence_pct)?`${ca(summary.confidence_pct)} % · qualitat i cobertura de les entrades`:''}],
+      favour,limit,uncertainty,compatibility:'Un índex EcoRadar moderat i un Pla Alfa alt no són contradictoris: EcoRadar sintetitza els components disponibles dins l’àmbit; el Pla Alfa estableix el nivell operatiu oficial municipal. El Pla Alfa no entra en el càlcul EcoRadar.',
+      territory,maximum:score(maximum),top,sectors,explanation,scenario,exposure,ignition,
+      management:[`Vigilar canvis de vent i ratxes, recuperació de la humitat i qualsevol ignició comunicada. ${finite(pla.level)?'Aplicar les mesures oficials corresponents al Pla Alfa vigent.':'Consultar el Pla Alfa oficial abans de planificar activitats.'}`,top.length?`Revisar primer ${top.map(t=>t.label).join(', ')} i els vessants amb pendent i vegetació contínua; comprovar combustible fi, discontinuïtats i accessos.`:'Completar la malla vigent abans d’assignar prioritats territorials.', 'Un augment del vent o les ratxes i una baixada de la humitat podrien empitjorar ràpidament l’escenari. La disminució del vent, la recuperació sostinguda de la humitat i pluja efectiva podrien moderar-lo. Verificar que el canvi arriba al terreny.'],
+      sources,limits:[
+        'Escenari potencial, no predicció d’incendi: no estima probabilitats, velocitat, superfície cremada ni severitat.',
+        'Malla de 100 m amb fonts de resolució pròpia. XEMA Y4: humitat, temperatura i pluja; CJ Organyà, a 9,2 km: vent i ratxes, sense direcció local. Coberta i NDVI/NDMI no mesuren càrrega ni humitat fina del combustible.',
+        'Comprovació i observació tenen dates diferents. Pesos del càlcul guardat, abans de renormalitzar per disponibilitat; vigència revisada en generar l’informe. Les dades antigues són context; les coincidències no proven causalitat ni afectació.',
+        'Regles descriptives documentades, sense llindars de propagació calibrats. Un corredor requereix ignició verificada, vent local direccional, combustible, barreres i exposició vigents, i un model validat.'
+      ],references:[{label:'Agents Rurals · Pla Alfa',url:pla.official_page || 'https://interior.gencat.cat/pla-alfa'},{label:'NWCG · vent i humitat del combustible',url:'https://www.nwcg.gov/publications/pms425-1/6-general-winds'},{label:'NWCG · dades necessàries per al comportament del foc',url:'https://www.nwcg.gov/publications/pms437/surface-fire/surface-fire-behavior-worksheet'}]};
+  }
+
+  // Shared interpretation contract: observations, compatible associations and hypotheses stay separate.
+  const ecologicalKeys = {vigor:'ndvi',moisture:'ndmi',temperature:'surface_temperature',vegetation:'vegetation',climateRefuges:'climateRefuges',fireCurrent:'fireCurrent'};
+  const ecologicalRules = {
+    vigor:{meaning:'L’NDVI descriu verdor espectral i permet comparar activitat vegetal relativa entre cobertes semblants. Un valor aïllat no determina salut, productivitat ni regeneració.',processes:['Una coberta viva persistent pot contribuir a protegir el sòl i oferir estructura d’hàbitat. Cal contrastar cobertura real, estrat herbaci i discontinuïtats abans d’atribuir aquesta funció al valor.','L’activitat vegetal pot sostenir recursos per a herbívors i xarxes tròfiques; no mesura aliment disponible, floració ni abundància de fauna. La regeneració requereix identificar plançons i trajectòries.','Verdor i biomassa poden estar relacionades, però la saturació de l’índex, la composició i l’estructura impedeixen convertir NDVI en biomassa o combustible sense calibratge. El combustible potencial depèn també d’humitat, material mort i continuïtat.'],peers:['moisture','vegetation','habitats','fireCurrent'],reinforce:'Si NDVI i NDMI mantenen una resposta favorable respecte d’una referència fenològica comparable, i la coberta es conserva, la combinació seria coherent amb activitat vegetal sostinguda.',contradict:'Un NDVI elevat amb NDMI en descens podria indicar verdor encara conservada amb menor contingut hídric; NDVI baix en un prat estival pot ser fenologia i no degradació.',persist:'Si persisteix la verdor amb coberta i aigua conservades, podria mantenir-se l’aportació d’estructura i recursos. Cal seguir fenologia i composició.',improve:'La recuperació respecte d’una referència de la mateixa estació podria ser coherent amb recuperació vegetal si també es recuperen coberta i humitat.',worsen:'Una caiguda persistent fora del cicle estacional, amb pèrdua de coberta, podria reduir protecció del sòl i recursos; cal separar sequera, pertorbació i canvis de gestió.',management:'Comparar escenes equivalents per hàbitat; comprovar sòl nu, plançons, herbivoria i estructura abans de decidir restauració. Conservar prats i ecotons quan l’objectiu sigui el mosaic, sense perseguir un NDVI màxim.'},
+    moisture:{meaning:'L’NDMI aporta un senyal espectral relacionat amb el contingut hídric de la vegetació. El valor depèn de coberta, estructura i fenologia; no és una mesura directa d’estrès fisiològic ni d’aigua disponible al sòl.',processes:['Una disminució persistent, amb manca de precipitació i calor compatibles, seria coherent amb més limitació hídrica. Cal humitat de sòl o observació fisiològica per confirmar estrès.','La persistència de vegetació hidratada pot afavorir manteniment foliar, regeneració i recursos dels hàbitats; espècies i etapes fenològiques responen de manera diferent.','Una menor hidratació pot augmentar vulnerabilitat a calor i sequera i modificar combustible viu. NDMI no mesura humitat del combustible fi mort ni determina perill d’ignició o resiliència per si sol.'],peers:['vigor','temperature','precipitation_30d','climateRefuges','fireCurrent'],reinforce:'Una baixada d’NDMI amb calor i dèficit de precipitació del mateix període reforçaria la hipòtesi de limitació hídrica, especialment si també cau la verdor.',contradict:'Una baixada d’NDMI sense pèrdua de verdor pot reflectir resposta primerenca o fenologia. Pluja a l’estació no garanteix recuperació hídrica a tots els vessants.',persist:'Si la baixa hidratació es confirma i persisteix, podria limitar creixement i regeneració; la resposta dependrà d’espècies, arrels i reserves d’aigua.',improve:'Una recuperació després de pluja efectiva, sostinguda en escenes equivalents i validada a camp, podria reduir limitació hídrica.',worsen:'Una disminució sostinguda amb calor i manca de pluja podria augmentar vulnerabilitat vegetal i disponibilitat d’alguns combustibles; no permet quantificar mortalitat ni propagació.',management:'Prioritzar seguiment de sòl, fonts, riberes i regeneració; comprovar pressions sobre infiltració i ombra. Comparar la mateixa fase fenològica abans d’atribuir sequera o prescriure actuacions.'}
+  };
+  const ecologicalFamilies = {
+    base:['El relleu condiciona insolació, escorrentia i distribució de microclimes; els mateixos valors ambientals poden tenir efectes diferents en fondals i carenes.',['temperature','moisture','habitats'],'Conservar processos hídrics i situar mostreigs segons pendent, orientació i altitud.'],
+    habitats:['La superfície i tipologia d’hàbitat orienten responsabilitats de conservació i requeriments de flora i fauna, però no certifiquen estat ni funcionalitat.',['vigor','moisture','biodiversity'],'Validar composició, estructura, regeneració i pressions dins els hàbitats abans d’actuar.'],
+    biodiversity:['Els registres aporten coneixement de presència; cobertura i esforç desiguals poden ocultar grups discrets. No equivalen a abundància ni a tendència poblacional.',['habitats','connectivity','publicUse'],'Prioritzar mostreig comparable per hàbitat i grup biològic, especialment als buits de coneixement.'],
+    vegetation:['La coberta pot protegir el sòl, modular aigua i microclima i aportar estructura d’hàbitat; el tancament d’espais oberts també pot limitar espècies de prat i ecotò.',['vigor','moisture','habitats'],'Comprovar sòl, estrats i mosaic; mantenir espais oberts funcionals sense equiparar més coberta a millor estat.'],
+    temperature:['La temperatura superficial descriu intercanvi d’energia i contrast tèrmic. Pot orientar comprovacions de microclima, limitació hídrica i refugis, sense equivaler a temperatura de l’aire o tolerància d’una espècie.',['moisture','vigor','vegetation'],'Seguir els contrastos tèrmics en dates equivalents i validar ombra, aigua i resposta dels hàbitats.'],
+    albedo:['La reflectància modifica l’energia absorbida, però sòl nu, neu, roca i vegetació poden generar senyals semblants amb funcions ecològiques diferents.',['temperature','vegetation','moisture'],'Identificar la coberta responsable abans d’interpretar canvi o proposar mesures.'],
+    climateRefuges:['La coincidència de frescor, aigua i coberta pot mantenir microambients útils per a organismes sensibles; un candidat cartogràfic requereix validar persistència i ús biològic.',['temperature','moisture','habitats','connectivity'],'Mesurar microclima durant episodis extrems i protegir continuïtat hídrica i accessibilitat ecològica dels candidats validats.'],
+    fireDanger:['La vulnerabilitat estructural orienta on comprovar continuïtat de combustible, relleu i valors exposats; no descriu la probabilitat d’ignició ni la resposta ecològica d’un incendi.',['vegetation','moisture','habitats','fireCurrent'],'Verificar combustible i compatibilitat amb hàbitats abans de plantejar tractaments selectius.'],
+    fireCurrent:['El perill actual és un cribratge de condicions; les conseqüències potencials sobre hàbitats depenen de combustible, localització i comportament del foc.',['moisture','vegetation','habitats'],'Coordinar vigilància amb el context oficial i comprovar els elements ecològics potencialment exposats.'],
+    fires:['Un perímetre històric situa una pertorbació, però regeneració, sòl i mosaic determinen la trajectòria posterior i els grups que hi poden trobar recursos.',['vigor','vegetation','habitats','moisture'],'Seguir regeneració i erosió en sectors de referència abans de decidir restauració postincendi.'],
+    management:['La prioritat depèn de valor ecològic, pressió demostrada i procés afectat; una suma de lectures no defineix automàticament una intervenció.',['habitats','biodiversity','moisture','access'],'Definir objectiu, indicador, llindar de resposta i seguiment abans d’intervenir.'],
+    access:['Els accessos poden facilitar gestió i mostreig, però també fragmentació o molèsties si hi ha ús real; cartografia viària no mesura intensitat de pressió.',['habitats','connectivity','publicUse'],'Mesurar usos i conflictes en punts verificats abans de modificar l’accés.'],
+    publicUse:['Els elements d’ús públic orienten on mesurar freqüentació i possibles efectes sobre sòl, fauna i hàbitats. No acrediten una pressió actual.',['access','habitats','biodiversity'],'Mesurar freqüentació, erosió i resposta de fauna abans d’ordenar o ampliar serveis.'],
+    places:['Els nuclis són referències territorials per contrastar usos i elements exposats; els punts cartogràfics no delimiten població ni impacte ecològic.',['access','fireCurrent','habitats'],'Verificar ocupació i interfícies reals abans d’assignar exposició o pressions.'],
+    landcover:['El mosaic de cobertes orienta continuïtats, ecotons i protecció del sòl. Una classe de coberta no acredita estructura, qualitat ni disponibilitat de recursos.',['vegetation','vigor','habitats'],'Validar transicions de coberta i funció dels ecotons abans de gestionar el mosaic.'],
+    connectivity:['La continuïtat cartogràfica pot facilitar moviments i dispersió; la permeabilitat funcional depèn del grup biològic, barreres i usos.',['habitats','biodiversity','access'],'Comprovar passos i barreres amb grups objectiu abans de certificar funcionalitat.'],
+    water:['Aigua superficial, fonts i drenatges poden sostenir hàbitats humits i refugis; la cartografia no garanteix cabal ni disponibilitat actual.',['moisture','habitats','temperature'],'Verificar cabals, persistència, qualitat i alteracions locals abans d’assignar funció hídrica.']
+  };
+  const ecologyLabels={vigor:'Vigor vegetal / NDVI',moisture:'Humitat vegetal / NDMI',vegetation:'Cobertura vegetal',habitats:'Hàbitats',biodiversity:'Biodiversitat',temperature:'Temperatura superficial',climateRefuges:'Refugis climàtics',fireCurrent:'Perill d’incendi avui',precipitation_30d:'Precipitació de 30 dies',connectivity:'Connectivitat',access:'Accessibilitat',publicUse:'Ús públic'};
+  function ecologicalEvidence(D,key) {
+    const reading=D.dailyReadings?.readings?.[ecologicalKeys[key] || key];
+    // Spatial metadata must be supplied by the producer, never inferred from a shared place name.
+    const meta=D.ecologicalEvidence?.[key];
+    const evidence={key,label:ecologyLabels[key] || key,...reading,...meta};
+    if (!meta && ['vigor','moisture','albedo'].includes(key)) {
+      const satellite=D.metrics?.satellite, variable={vigor:'ndvi',moisture:'ndmi',albedo:'albedo'}[key];
+      // The map and its primary facts use this scene, which can differ from a newer daily reading.
+      if (satellite?.sentinelDate && finite(satellite[variable]?.median)) {
+        evidence.value=ca(satellite[variable].median,3);
+        evidence.data_at_utc=satellite.sentinelDate;
+        evidence.source='Copernicus Sentinel-2 · escena representada al visor';
+      }
+    }
+    return evidence;
+  }
+  const resolutionSignature = item => finite(item?.resolution_m) && item.resolution_m>0 ? `${item.resolution_m} m` : Array.isArray(item?.resolution) && item.resolution.length===2 && item.resolution.every(n=>finite(n)&&n>0) && item.resolution_unit && item.crs ? `${item.resolution.join(' × ')} ${item.resolution_unit} · ${item.crs}` : null;
+  function compatibleEvidence(a,b,now=new Date()) {
+    const reasons=[];
+    for(const item of [a,b]) {
+      if (!item?.source || item.value==null || (typeof item.value==='number' && !finite(item.value)) || (typeof item.value==='string' && (!item.value.trim() || /no disponible|no calculable|NaN/i.test(item.value))) || item.quality_verified!==true) reasons.push('Valor, font o control de qualitat del creuament incomplets');
+      const start=instant(item?.period_start_utc || item?.data_at_utc),end=instant(item?.period_end_utc || item?.data_at_utc);
+      if(start==null || end==null || start>end || end>now.getTime()) reasons.push('Període no verificable');
+      if(!item?.support_id || !item?.grid_id || !item?.mask_id || !resolutionSignature(item) || !item?.coverage_verified) reasons.push('Resolució o cobertura del creuament no verificades');
+    }
+    if((a.period_start_utc || a.data_at_utc)!==(b.period_start_utc || b.data_at_utc) || (a.period_end_utc || a.data_at_utc)!==(b.period_end_utc || b.data_at_utc)) reasons.push('Períodes diferents: cal una agregació temporal validada');
+    if(a.support_id!==b.support_id || a.grid_id!==b.grid_id || a.mask_id!==b.mask_id || resolutionSignature(a)!==resolutionSignature(b)) reasons.push('Suport espacial, malla o màscara diferents: cal un creuament harmonitzat');
+    const newest=Math.max(instant(a.period_end_utc || a.data_at_utc) || 0,instant(b.period_end_utc || b.data_at_utc) || 0);
+    return {compatible:reasons.length===0,reasons:[...new Set(reasons)],scope:now.getTime()-newest>30*86400000?'historical':'dated'};
+  }
+  function buildEcologicalContext(D,key,profile={},now=new Date()) {
+    const family=ecologicalFamilies[key];
+    const rule=ecologicalRules[key] || (family?{meaning:profile.what || family[0],processes:[family[0]],peers:family[1],management:family[2]}:{meaning:profile.what || 'Lectura sense perfil ecològic específic validat.',processes:['Cal identificar el procés representat i els hàbitats o grups pertinents abans d’atribuir conseqüències.'],peers:[],management:'Completar el perfil ecològic i les metadades abans d’assignar prioritats.'});
+    const primary=ecologicalEvidence(D,key),at=instant(primary.data_at_utc);
+    const observation=primary.value!=null?`${primary.label}: ${primary.value}. Observació: ${date(primary.data_at_utc)}. ${at==null?'Vigència no verificable.':now.getTime()-at>30*86400000?'Context històric; no descriu l’estat d’avui.':'Lectura datada; la vigència depèn del procés i de la font.'}`:`Dada de referència: ${profile.dataDate || 'no verificable'}. Cartografia o síntesi disponible; no acredita una observació actual.`;
+    const relations=(rule.peers || []).map(peer=>{
+      const other=ecologicalEvidence(D,peer),check=compatibleEvidence(primary,other,now);
+      const purpose=({vigor:'Contrastar verdor i trajectòria vegetal.',moisture:'Contrastar hidratació i possible limitació hídrica.',temperature:'Contrastar calor superficial i modulació microclimàtica.',vegetation:'Comprovar coberta, discontinuïtats i protecció del sòl.',habitats:'Identificar estructures, requeriments i valors de conservació afectats.',biodiversity:'Comprovar resposta de grups biològics amb mostreig comparable.',fireCurrent:'Separar l’estat ecològic de les condicions operatives del foc.',climateRefuges:'Comprovar persistència d’aigua i frescor en episodis extrems.',connectivity:'Contrastar permeabilitat i continuïtat funcional.',access:'Contrastar barreres i usos reals.',publicUse:'Verificar freqüentació i possibles molèsties.',precipitation_30d:'Contrastar aportacions d’aigua del període amb la resposta vegetal.'})[peer] || 'Contrastar la funció ecològica amb evidència complementària.';
+      return {key:peer,label:other.label,purpose,...check,provenance:check.compatible?`${[...new Set([primary.source,other.source])].join('; ')}. Resolució nativa: ${resolutionSignature(primary)}. Màscara comuna amb ${primary.valid_pixels || 'nombre no indicat de'} píxels vàlids.`:null,evidence:check.compatible?`${primary.label}: ${typeof primary.value==='number'?ca(primary.value,3):primary.value}; ${other.label}: ${typeof other.value==='number'?ca(other.value,3):other.value}. Període ${date(primary.period_start_utc || primary.data_at_utc)} – ${date(primary.period_end_utc || primary.data_at_utc)}; mateixa malla i màscara verificades.`:null};
+    });
+    return {key,observation,meaning:rule.meaning,processes:rule.processes,relations,
+      combinations:[rule.reinforce || 'La persistència del patró amb processos, estructura d’hàbitat i observacions de camp coherents reforçaria la interpretació; cal demostrar la coincidència.',rule.contradict || 'Canvis de cobertura, esforç de mostreig, fenologia o resolució poden explicar un contrast aparent; un valor major no implica millor estat ecològic.'],
+      scenarios:[{label:'Si es manté',text:rule.persist || 'Si el patró es manté en observacions comparables, cal seguir si es conserven les funcions i els grups biològics associats; persistència cartogràfica no prova estabilitat ecològica.'},{label:'Si millora ecològicament',text:rule.improve || 'La millora s’ha de definir com a recuperació de la funció objectiu i retirada d’una pressió verificada, no com un augment automàtic de l’indicador.'},{label:'Si empitjora ecològicament',text:rule.worsen || 'Una pèrdua funcional verificada justificaria revisar pressions i prioritat de seguiment; cal comparar la mateixa unitat, estació i mètode.'}],
+      management:rule.management,limitations:['Les relacions són associacions plausibles, no causalitat demostrada. Les combinacions i escenaris són condicionals; no s’afirmen canvis detectats sense una sèrie comparable.','Només es mostren valors conjunts quan qualitat, període, resolució, malla i cobertura estan verificats i coincideixen. Les altres lectures s’identifiquen com a contrastos pendents. Una observació antiga es manté vinculada al seu període.'],
+      references:[{label:'USGS · interpretació del NDVI',url:'https://www.usgs.gov/landsat-missions/landsat-normalized-difference-vegetation-index'},{label:'USGS · interpretació del NDMI',url:'https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index'}]};
+  }
+
   function buildFactory(D, modeGuides, layerGuides) {
     const sat = D.metrics.satellite || {};
     const readings = D.dailyReadings?.readings || {};
@@ -410,6 +614,11 @@
     return function build(selection) {
       const key=selection.key, guide=selection.guide || {}, aliases={hic:'habitats',biodiversity:'biodiversity',fires:'fires'};
       const semanticKey=selection.type === 'layer' ? (aliases[key] || key) : key;
+      if (semanticKey === 'fireCurrent') {
+        const report=buildFireReport(D);
+        report.ecologicalContext=buildEcologicalContext(D,semanticKey,report);
+        return report;
+      }
       const base=selection.type === 'layer' ? (layerSpecific[key] || structural[aliases[key]]) || {} : (optional[key] ? optional[key]() : structural[key]) || {};
       const technical=technicalProfiles[semanticKey] || {};
       const diagnostic=diagnosticExtensions[semanticKey] || genericDiagnostic(base);
@@ -489,8 +698,9 @@
           {title:'Fonts, dates, limitacions i confiança',body:[`Fonts: Generalitat de Catalunya, hàbitats terrestres i infraestructura verda; GBIF i iNaturalist agregats; perímetres oficials d’incendi; lectures EcoRadar amb data preservada.`,`Confiança adequada per a cribratge i disseny de seguiment, no per certificar estat, causalitat o absència. ${limitsText}`]}
         ];
       }
+      profile.ecologicalContext=buildEcologicalContext(D,semanticKey,profile);
       return profile;
     };
   }
-  global.EcoRadarAlinyaReportProfiles = { buildFactory };
+  global.EcoRadarAlinyaReportProfiles = { buildFactory, buildFireReport, prepareIgnitionScenario, buildEcologicalContext, compatibleEvidence };
 })(window);
