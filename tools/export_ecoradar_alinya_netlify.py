@@ -76,7 +76,7 @@ CORE_RADAR_GUIDES = {
     "CORE_03": {
         "kind": "direct_reading",
         "measure": "Mostra la mediana NDVI de l’escena Sentinel-2 vigent al visor: una lectura espectral directa del vigor o activitat fotosintètica relativa de la vegetació en aquella data.",
-        "basis": "Sentinel-2 L2A del 07.07.2026, amb màscara de qualitat i píxels vàlids dins l’àmbit. El visor no combina aquesta xifra amb altres lectures.",
+        "basis": "Escena Sentinel-2 L2A indicada al resultat, amb màscara de qualitat i píxels vàlids dins l’àmbit. La data d’adquisició prové del registre de l’escena; el visor no combina aquesta xifra amb altres lectures.",
         "calculation": "És la mediana dels píxels NDVI vàlids de l’escena, expressada en l’escala pròpia de l’NDVI. El motor CORE conserva CORE_03 sense puntuació sintètica perquè el càlcul complet previst requeriria també NDMI, NDWI i context climàtic compatible. Per tant, NDVI 0,616 no es transforma en 61,6/100 ni entra a RADAR_12.",
         "interpretation": "És una lectura directa: valors NDVI més baixos solen correspondre a menys activitat verda i valors més alts a més vigor o cobertura verda, sempre segons coberta i època. No és una puntuació EcoRadar 0–100, un percentatge de vegetació, una mesura d’humitat, biodiversitat o estat sanitari.",
         "confidence": "PARCIAL i MITJANA perquè es mostra una única lectura NDVI datada, però falta la puntuació sintètica CORE_03 i la combinació temporalment compatible de vigor, humitat i clima.",
@@ -868,7 +868,11 @@ def build_data() -> dict:
                     "display": f"NDVI {sentinel['metrics']['ndvi']['median']:.3f}".replace(".", ",") if r["code"] == "CORE_03" else None,
                     "measurementKind": "direct_reading" if r["code"] == "CORE_03" else "synthetic_score",
                     "category": None if r["code"] == "CORE_03" else r["category"],
-                    "status": "PARCIAL · escena 07.07.2026" if r["code"] == "CORE_03" else r["status"],
+                    "status": (
+                        f"PARCIAL · escena {sentinel['acquired_at_utc'][8:10]}.{sentinel['acquired_at_utc'][5:7]}.{sentinel['acquired_at_utc'][:4]}"
+                        if r["code"] == "CORE_03"
+                        else r["status"]
+                    ),
                     "confidence": "mitjana" if r["code"] == "CORE_03" else r["confidence"],
                     "sourceDate": sentinel["acquired_at_utc"] if r["code"] == "CORE_03" else None,
                     "sourcesUsed": [item.strip() for item in r["sources_used"].split(";") if item.strip()],
