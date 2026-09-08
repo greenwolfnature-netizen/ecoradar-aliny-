@@ -33,6 +33,47 @@
     const fireDimensions = labeled(report.fireDimensions || [], 'err-diagnostic-grid');
     const scenarios = cards(report.evolutionScenarios || [], 'err-scenario-grid', item => `<article class="err-scenario">${item.level ? badge(item.level) : ''}<strong>${esc(item.title)}</strong>${paragraph(item.conditions)}${paragraph(item.interpretation)}${item.management ? `<small><b>Implicació:</b> ${esc(item.management)}</small>` : ''}</article>`);
     const monitoring = cards(report.monitoringPlan || [], 'err-management-grid', item => `<article class="err-management"><strong>${esc(item.step || item.priority)}</strong><p>${esc(item.action)}</p>${item.indicator ? `<small><b>Indicador de resposta:</b> ${esc(item.indicator)}</small>` : ''}${item.validation ? `<small><b>Validació:</b> ${esc(item.validation)}</small>` : ''}</article>`);
+    if (report.reportKind === 'fire-current') {
+      const link = item => /^https:\/\//.test(item.url || '') ? `<a href="${esc(item.url)}">${esc(item.label || item.source)}</a>` : esc(item.label || item.source);
+      const rows = report.sources.map(item => `<tr><td>${esc(item.label)}<br><small>${item.url ? link({url:item.url,label:item.source}) : esc(item.source)}</small></td><td>${esc(item.value)}</td><td>${esc(item.date)}<br>${esc(item.state)}</td><td>${esc(item.weight)}</td></tr>`).join('');
+      const territoryFacts = report.top.map(item=>`<article class="err-diagnostic-card"><strong>${esc(item.label)} · ${esc(item.value)}</strong><small>${esc(item.note)}</small></article>`).join('');
+      return `<article class="err-document" data-report-kind="fire-current">
+        <header class="err-cover"><div><span>ECORADAR · MUNTANYA D’ALINYÀ</span><h1>${esc(report.name)}</h1><p>Lectura operativa per a la gestió de l’espai</p></div><div class="err-date">Generat ${esc(report.generatedAt)}</div></header>
+        <section><h2>1. Situació actual</h2><div class="err-facts">${facts}</div>
+          <div class="err-diagnostic-grid"><article class="err-diagnostic-card"><strong>Factors que afavoreixen el foc</strong>${paragraph(report.favour)}</article><article class="err-diagnostic-card"><strong>Factors que limiten la propagació</strong>${paragraph(report.limit)}</article></div>
+          <p><strong>Principal incertesa.</strong> ${esc(report.uncertainty)}</p><p>${esc(report.compatibility)}</p>
+        </section>
+        <section class="err-map-section"><h2>2. Distribució territorial</h2>${paragraph(report.territory)}<p><strong>Màxim territorial:</strong> ${esc(report.maximum)}.</p>
+          ${mapSvg ? `<div class="err-map-frame"><div class="err-map">${mapSvg}</div></div>` : ''}
+          ${territoryFacts ? `<div class="err-sector-summary"><p>Cel·les amb els valors més elevats de la malla disponible:</p><div class="err-diagnostic-grid">${territoryFacts}</div></div>` : '<p>No hi ha cel·les de la mateixa comprovació disponibles per localitzar els màxims.</p>'}
+        </section>
+        <section><h2>3. Factors explicatius</h2>${paragraph(report.explanation)}${report.ecologicalContext ? paragraph([...new Set([report.ecologicalContext.meaning, ...report.ecologicalContext.processes, ...report.ecologicalContext.combinations])]) : ''}</section>
+        <section><h2>4. Què podria passar si es produís una ignició ara?</h2>${paragraph(report.scenario)}</section>
+        <section><h2>5. Elements potencialment exposats</h2>${paragraph(report.exposure)}</section>
+        <section><h2>6. Implicacions per a la gestió avui</h2>${paragraph(report.management)}${report.ecologicalContext ? paragraph(report.ecologicalContext.management) : ''}</section>
+        <section class="err-limits"><h2>7. Fonts, dades i limitacions</h2>
+          <p>Comprovació del càlcul: ${esc(report.dataDate)}. Les dates següents corresponen a cada font.</p>
+          <table class="eu-data-table"><thead><tr><th>Font / variable</th><th>Lectura</th><th>Data i vigència</th><th>Pes guardat</th></tr></thead><tbody>${rows}</tbody></table>
+          ${paragraph(report.limits)}<p>${report.references.map(link).join(' · ')}</p>
+        </section><footer>EcoRadar · Muntanya d’Alinyà</footer>
+      </article>`;
+    }
+    if (report.ecologicalContext) {
+      const c=report.ecologicalContext;
+      const relationshipCards=c.relations.map(r=>({title:r.label,level:r.compatible?'observat':'potencial',text:r.purpose+' '+(r.compatible?`${r.scope==='historical'?'Associació del període històric':'Dades compatibles del període indicat'}; no demostra causalitat. ${r.evidence}`:'Relació ecològica a contrastar; el creuament de dades encara no està verificat.')}));
+      const extra=report.biodiversityChapters?.length?`<section><details><summary>Consultar la diagnosi específica de biodiversitat i hàbitats</summary>${report.biodiversityChapters.map(ch=>`<h3>${esc(ch.title)}</h3>${paragraph(ch.body)}`).join('')}</details></section>`:'';
+      return `<article class="err-document" data-report-kind="ecological-context">
+        <header class="err-cover"><div><span>ECORADAR · MUNTANYA D’ALINYÀ</span><h1>${esc(report.name)}</h1><p>Diagnosi ecològica contextual i suport a la gestió</p></div><div class="err-date">Generat ${esc(report.generatedAt)}</div></header>
+        <section><h2>1. Valor disponible i significat ecològic</h2><div class="err-facts">${facts}</div>${paragraph(c.observation)}${paragraph(c.meaning)}</section>
+        <section><h2>2. Distribució territorial i processos ecològics</h2>${mapSvg?`<div class="err-map-frame"><div class="err-map">${mapSvg}</div></div>`:''}${paragraph(c.processes)}${paragraph(report.territorial)}</section>
+        <section><h2>3. Relacions amb altres lectures</h2>${labeled(relationshipCards)}${!relationshipCards.length?'<p>No hi ha un creuament específic verificat per a aquesta lectura.</p>':''}</section>
+        <section><h2>4. Combinacions que reforçarien o matisarien la interpretació</h2><p>Hipòtesis condicionals per contrastar, no coincidències territorials demostrades:</p>${paragraph(c.combinations)}</section>
+        <section><h2>5. Possibles trajectòries ecològiques</h2>${labeled(c.scenarios.map(s=>({title:s.label,text:s.text,level:'potencial'})))}</section>
+        <section><h2>6. Implicacions per a la gestió</h2>${paragraph(c.management)}${paragraph('Prioritzar unitats on el camp confirmi el procés i una pressió o necessitat de conservació. Sense creuament espacial compatible no s’assignen sectors d’actuació automàtics.')}</section>
+        <section class="err-limits"><h2>7. Fonts, dades i limitacions</h2><p>Data de la lectura representada: ${esc(report.dataDate)}.</p><ul>${sources}</ul>${c.relations.filter(r=>r.compatible).map(r=>`<p style="overflow-wrap:anywhere"><strong>${esc(r.label)}:</strong> ${esc(r.provenance)}</p>`).join('')}${paragraph(c.limitations)}${c.relations.some(r=>!r.compatible)?paragraph('Pendents de compatibilitat: '+[...new Set(c.relations.filter(r=>!r.compatible).flatMap(r=>r.reasons))].join('; ')+'.'):''}${paragraph([...new Set(report.limits || [])].filter(text=>!text.startsWith('La lectura identifica patrons')))}<p>${c.references.map(r=>`<a href="${esc(r.url)}">${esc(r.label)}</a>`).join(' · ')}</p></section>
+        ${extra}<footer>EcoRadar · Muntanya d’Alinyà · diagnosi vinculada a la lectura activa</footer>
+      </article>`;
+    }
     if (report.reportKind === 'biodiversity-habitats' && report.biodiversityChapters?.length) {
       const chapters = report.biodiversityChapters.map((chapter, index) => {
         const map = index === 1 && mapSvg ? `<div class="err-map-frame"><div class="err-map">${mapSvg}</div></div>` : '';
@@ -91,7 +132,18 @@
         const selection = options.getSelection();
         lastReport = options.buildReport(selection);
         const svg = options.getMapSvg && options.getMapSvg();
-        const mapSvg = svg ? svg.cloneNode(true).outerHTML : '';
+        const mapClone = svg ? svg.cloneNode(true) : null;
+        if (svg && (lastReport.reportKind === 'fire-current' || lastReport.ecologicalContext)) {
+          // Preserve the selected layers when the SVG leaves the active map.
+          const original = svg.querySelectorAll('*');
+          mapClone.querySelectorAll('*').forEach((node, index) => {
+            const style = global.getComputedStyle(original[index]);
+            node.style.display = style.display;
+            node.style.visibility = style.visibility;
+            node.style.opacity = style.opacity;
+          });
+        }
+        const mapSvg = mapClone ? mapClone.outerHTML : '';
         lastBody = reportHtml(lastReport, mapSvg);
         preview.innerHTML = lastBody;
         modal.querySelector('[data-reading-report-title]').textContent = lastReport.name;
@@ -118,6 +170,21 @@
       exportDocument.style.margin = '0';
       exportDocument.style.boxShadow = 'none';
       exportDocument.style.position = 'relative';
+      if (lastReport.reportKind === 'fire-current' || lastReport.ecologicalContext) {
+        // Keep inherited EcoRadar styling when html2pdf clones outside the viewer.
+        const computed = global.getComputedStyle(documentNode);
+        exportDocument.style.fontFamily = computed.fontFamily;
+        for (const token of ['--green','--blue','--line','--orange']) {
+          exportDocument.style.setProperty(token, computed.getPropertyValue(token));
+        }
+        exportDocument.querySelectorAll('.err-map svg').forEach(svg => {
+          svg.setAttribute('width', '634');
+          svg.setAttribute('height', '340');
+          svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+        });
+        if (lastReport.reportKind === 'fire-current') exportDocument.querySelector('.err-limits').style.breakBefore = 'page';
+        exportDocument.querySelectorAll('.eu-data-table th, .eu-data-table td').forEach(cell => { cell.style.padding = '4px 10px'; });
+      }
       const exportStyle = document.createElement('style');
       exportStyle.textContent = Array.from(document.styleSheets).flatMap(sheet => {
         try { return Array.from(sheet.cssRules).map(rule => rule.cssText.replaceAll('#ecoradar-alinya ', '')); }
@@ -135,7 +202,7 @@
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
         pagebreak: {
           mode: ['css', 'legacy'],
-          avoid: ['.err-map-frame', '.err-map', '.err-fact', '.err-diagnostic-card', '.err-relation', '.err-chain-step', '.err-sector', '.err-management', '.err-evolution article', '.err-scenario', '.err-priority-summary']
+          avoid: ['[data-report-kind="ecological-context"] > section', '[data-report-kind="ecological-context"] .err-diagnostic-grid', '[data-report-kind="ecological-context"] .err-diagnostic-card', '[data-report-kind="fire-current"] tr', '[data-report-kind="fire-current"] .err-sector-summary', '[data-report-kind="fire-current"] .err-diagnostic-grid', '.err-map-frame', '.err-map', '.err-fact', '.err-diagnostic-card', '.err-relation', '.err-chain-step', '.err-sector', '.err-management', '.err-evolution article', '.err-scenario', '.err-priority-summary']
         }
       };
       global.html2pdf().set(options).from(exportMarkup, 'string').save()
@@ -145,5 +212,5 @@
     global.EcoRadarReadingReportTest = { reportHtml, pdfFilename };
   }
 
-  global.EcoRadarReadingReport = { mount };
+  global.EcoRadarReadingReport = { mount, reportHtml };
 })(window);
