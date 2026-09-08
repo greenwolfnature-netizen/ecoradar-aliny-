@@ -1,0 +1,10 @@
+{
+  "base": "d2be55b4d949af2bde65a97dae3c0adb5a106290f9b1c5afdaca62a7826cc9e1",
+  "habitats": "9b9407b77f51d42660a0eb2c965aba582b0b62fae82a29b7f2edad2dcac949e2",
+  "biodiversity": "3eb211c4acc8b27db0af72e252c19cfda4329b7f904b39725eb390c587710ced",
+  "vigor": "c2f8c39e66debc1cbaec3c9dae927ff9ccd9d751c91b7c22f42e62495d895714",
+  "moisture": "ec937449c65384ba41b9e1c2e454a18a2043c7eb1bc7610dadbdc3d765d4cfad",
+  "temperature": "dcc93ae79a8d3a0cf122df87165d6f933811c54c85c023cc2a7923312bb11c82",
+  "fireDanger": "6e283ce1bb629fb6fa6da2f791f8d39490f1743ee855edc3a7a2661bbeda8f8c",
+  "fires": "56ea0cb573276ede4d5c6c640e2b04349c12bb472092884ffdd72d494141b537"
+}
