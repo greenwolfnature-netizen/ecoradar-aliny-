@@ -53,6 +53,109 @@ if not DAILY_FUNCTION.is_file():
     DAILY_FUNCTION = ROOT / "netlify" / "functions" / "daily-readings.mjs"
 
 
+# Public, code-level explanation of the calculations implemented in
+# ecoradar/indicators/engine.py. Keep this mapping aligned with that engine:
+# it documents the current formulas but does not alter them.
+CORE_RADAR_GUIDES = {
+    "CORE_01": {
+        "kind": "synthetic_score",
+        "measure": "Resumeix l’heterogeneïtat estructural del paisatge que detecten les capes disponibles: diversitat de cobertes, equilibri de la superfície forestal, presència d’espais oberts, baixa artificialització, riquesa cartografiada d’hàbitats i pes del connector principal.",
+        "basis": "Cobertes del sòl de l’ICGC; cartografia d’hàbitats terrestres v3; connectors de la Infraestructura Verda de Catalunya; superfície de l’àmbit.",
+        "calculation": "Mitjana aritmètica, amb el mateix pes (1/6), de sis components normalitzats a 0–100: entropia de Shannon de les cobertes; cobertura forestal amb òptim entre 35% i 75%; espais oberts i agraris que arriben a 100 als 18%; artificialització invertida que arriba a 0 al 10%; nombre d’hàbitats que arriba a 100 amb 50; i superfície del connector principal que arriba a 100 quan ocupa el 25% de l’àmbit. Tots els components es limiten a 0–100.",
+        "interpretation": "Un valor baix indica poca heterogeneïtat segons aquests sis proxies; un valor intermedi, una combinació desigual; i un valor alt, una estructura que la fórmula considera diversa i amb elements de mosaic. No és un percentatge de paisatge en bon estat, ni diferencia per si sol mosaic funcional de fragmentació o degradació.",
+        "confidence": "COMPLET i ALTA perquè les capes numèriques requerides per aquesta execució són disponibles. La confiança descriu la completesa cartogràfica del càlcul; no valida al camp la qualitat dels espais oberts, els ecotons o els hàbitats.",
+    },
+    "CORE_02": {
+        "kind": "synthetic_score",
+        "measure": "Expressa la responsabilitat cartogràfica associada a la diversitat d’hàbitats i a la superfície d’hàbitats d’interès comunitari (HIC), inclosos els prioritaris.",
+        "basis": "Cartografia d’hàbitats terrestres v3 i els seus camps HIC i HIC_PRIOR, retallats a l’àmbit; superfície total de l’àmbit.",
+        "calculation": "Mitjana aritmètica, amb el mateix pes (1/3), de: nombre d’hàbitats (100 amb 45 o més), percentatge de superfície HIC (100 al 60%) i percentatge de superfície d’HIC prioritaris (100 al 20%). Cada component es limita a 0–100.",
+        "interpretation": "Un valor baix indica poca representació cartografiada segons aquests tres components; un valor intermedi, responsabilitat moderada; i un valor alt, molta diversitat o extensió HIC. No és un percentatge d’estat de conservació, qualitat local, representativitat ni favorable estat dels HIC.",
+        "confidence": "COMPLET i ALTA perquè la cartografia d’hàbitats i els camps HIC necessaris són disponibles. No incorpora una avaluació de camp de l’estat de conservació.",
+    },
+    "CORE_03": {
+        "kind": "direct_reading",
+        "measure": "Mostra la mediana NDVI de l’escena Sentinel-2 vigent al visor: una lectura espectral directa del vigor o activitat fotosintètica relativa de la vegetació en aquella data.",
+        "basis": "Sentinel-2 L2A del 07.07.2026, amb màscara de qualitat i píxels vàlids dins l’àmbit. El visor no combina aquesta xifra amb altres lectures.",
+        "calculation": "És la mediana dels píxels NDVI vàlids de l’escena, expressada en l’escala pròpia de l’NDVI. El motor CORE conserva CORE_03 sense puntuació sintètica perquè el càlcul complet previst requeriria també NDMI, NDWI i context climàtic compatible. Per tant, NDVI 0,616 no es transforma en 61,6/100 ni entra a RADAR_12.",
+        "interpretation": "És una lectura directa: valors NDVI més baixos solen correspondre a menys activitat verda i valors més alts a més vigor o cobertura verda, sempre segons coberta i època. No és una puntuació EcoRadar 0–100, un percentatge de vegetació, una mesura d’humitat, biodiversitat o estat sanitari.",
+        "confidence": "PARCIAL i MITJANA perquè es mostra una única lectura NDVI datada, però falta la puntuació sintètica CORE_03 i la combinació temporalment compatible de vigor, humitat i clima.",
+    },
+    "CORE_04": {
+        "kind": "synthetic_score",
+        "measure": "Estima potencial estructural de refugi climàtic amb els proxies disponibles de coberta forestal, orientació mitjana i presència cartografiada d’aigua.",
+        "basis": "Cobertes del sòl de l’ICGC; model digital del terreny de l’ICGC, convertit a component d’obaga/solana; resum de cursos i fonts de l’ACA, la CHE i l’ICGC.",
+        "calculation": "Mitjana aritmètica, amb el mateix pes (1/3), del percentatge forestal; l’orientació mitjana transformada de −1…1 a 0…100, on més obaga puntua més; i RADAR_10 (aigua cartografiada). No hi entren numèricament LST, NDMI ni NDVI en aquest resultat actual.",
+        "interpretation": "Un valor baix indica pocs proxies estructurals de frescor; un valor intermedi, presència parcial; i un valor alt, més bosc, orientació favorable i aigua cartografiada segons la fórmula. No demostra un microclima fresc, aigua permanent, refugi funcional ni presència d’espècies sensibles.",
+        "confidence": "PARCIAL i MITJANA perquè el resultat existeix però falten observacions microclimàtiques i espectrals crítiques per confirmar el refugi actual.",
+    },
+    "CORE_05": {
+        "kind": "synthetic_score",
+        "measure": "Resumeix vulnerabilitat climàtica estructural amb proxies de poca coberta forestal, pendent, exposició sud, artificialització i poca aigua cartografiada.",
+        "basis": "Cobertes del sòl de l’ICGC; pendent i orientació del model digital del terreny de l’ICGC; RADAR_10 d’aigua cartografiada.",
+        "calculation": "Mitjana aritmètica, amb el mateix pes (1/5), de: dèficit forestal respecte del 90%; pendent mitjà que arriba a 100 als 35°; component de solana; artificialització que arriba a 100 al 10%; i invers de RADAR_10. Tots els components es limiten a 0–100. No hi entren numèricament LST, NDMI, meteorologia ni sequera en aquest resultat actual.",
+        "interpretation": "Un valor baix indica poca vulnerabilitat segons aquests proxies; un valor intermedi, factors estructurals mixtos; i un valor alt, acumulació de condicions que la fórmula tracta com a vulnerables. No mesura dany observat, estrès hídric actual ni risc climàtic probabilístic.",
+        "confidence": "PARCIAL i MITJANA perquè el càlcul estructural és possible, però falten o no s’integren sèries climàtiques i lectures actuals necessàries per descriure l’estat present.",
+    },
+    "CORE_06": {
+        "kind": "synthetic_score",
+        "measure": "Mesura la quantitat i amplitud del coneixement públic de biodiversitat disponible, no l’estat biològic complet del territori.",
+        "basis": "Registres normalitzats de GBIF i iNaturalist: nombre de taxons, proporció de registres recents i nombre de grups taxonòmics amb registres.",
+        "calculation": "Mitjana aritmètica, amb el mateix pes (1/3), de: taxons registrats (100 amb 600), proporció de registres recents sobre el total i grups taxonòmics representats (100 amb 10). Els components es limiten a 0–100.",
+        "interpretation": "Un valor baix indica poc coneixement públic segons aquests comptatges; un valor intermedi, cobertura documental desigual; i un valor alt, molts taxons, registres recents i grups representats. No és un percentatge de biodiversitat, riquesa real, abundància, ocupació, qualitat d’hàbitat ni absència d’espècies on no hi ha cites.",
+        "confidence": "COMPLET i ALTA respecte de les fonts públiques processades. Aquesta confiança no corregeix el biaix d’esforç, accessibilitat, taxonomia o estacionalitat dels registres oportunistes.",
+    },
+    "CORE_07": {
+        "kind": "synthetic_score",
+        "measure": "Quantifica accessibilitat i pressió humana potencial a partir dels elements cartografiats a OpenStreetMap.",
+        "basis": "Longitud de camins i pistes OSM dins l’àmbit i nombre de punts OSM relacionats amb ús públic, normalitzats per superfície.",
+        "calculation": "Mitjana aritmètica, amb el mateix pes (1/2), de: densitat de camins en km/km², que arriba a 100 amb 4 km/km²; i punts d’ús públic per 1.000 ha, que arriben a 100 amb 8 punts/1.000 ha. Els dos components es limiten a 0–100.",
+        "interpretation": "Un valor baix indica poca accessibilitat cartografiada; un valor intermedi, xarxa o equipaments moderats; i un valor alt, més potencial d’accés i interacció humana. No mesura visitants, intensitat, comportament, impacte ecològic, capacitat de càrrega ni conflicte real.",
+        "confidence": "COMPLET i ALTA perquè els components OSM previstos són disponibles. La confiança s’aplica al càlcul cartogràfic, no a la freqüentació, que requeriria comptadors o treball de camp.",
+    },
+    "CORE_08": {
+        "kind": "synthetic_score",
+        "measure": "Resumeix una connectivitat estructural potencial mitjançant coberta natural, pes dels connectors oficials i baixa pressió d’accés cartografiada.",
+        "basis": "Cobertes naturals de l’ICGC; connectors de la Infraestructura Verda de Catalunya; RADAR_07 derivat d’OpenStreetMap.",
+        "calculation": "Mitjana aritmètica, amb el mateix pes (1/3), del percentatge de cobertes considerades naturals; la superfície del connector principal, que arriba a 100 al 25% de l’àmbit; i l’invers de RADAR_07. Hàbitats i hidrologia no intervenen numèricament en aquest resultat actual.",
+        "interpretation": "Un valor baix indica una matriu menys natural, menys connector o més accés segons la fórmula; un valor intermedi, condicions mixtes; i un valor alt, continuïtat estructural potencial. No demostra connectivitat funcional per a una espècie, flux genètic, permeabilitat de barreres ni qualitat dels hàbitats.",
+        "confidence": "COMPLET i ALTA perquè els tres components numèrics són disponibles. La funcionalitat ecològica continua pendent de contrast específic per espècie, procés i barreres reals.",
+    },
+    "CORE_09": {
+        "kind": "synthetic_score",
+        "measure": "Resumeix la resistència estructural potencial davant el foc segons continuïtat de coberta, mosaic obert, relleu, antecedents cremats, accessibilitat i aigua cartografiada.",
+        "basis": "Cobertes del sòl de l’ICGC; pendent del model digital del terreny; perímetres històrics d’incendis de la Generalitat; xarxa OSM; RADAR_10 d’aigua cartografiada.",
+        "calculation": "Mitjana aritmètica, amb el mateix pes (1/6), de: invers de bosc més matollar respecte del 95%; espais oberts i agraris que arriben a 100 al 20%; invers del pendent respecte de 35°; invers de la superfície històricament cremada respecte de 100 ha; densitat OSM que arriba a 100 amb 4 km/km²; i RADAR_10. No hi entren numèricament meteorologia actual, NDMI, LST, Pla Alfa ni combustible mesurat.",
+        "interpretation": "Un valor baix indica poca resistència segons aquests proxies; un valor intermedi, factors mixtos; i un valor alt, més discontinuïtat, relleu menys desfavorable, accessibilitat o aigua segons la fórmula. No és perill d’incendi actual, probabilitat d’ignició, velocitat de propagació, severitat, capacitat d’extinció ni resiliència ecològica postincendi.",
+        "confidence": "PARCIAL i MITJANA perquè és una síntesi estructural i falten capes crítiques de combustible i estat hídric actual per interpretar el comportament del foc.",
+    },
+    "CORE_10": {
+        "kind": "synthetic_score",
+        "measure": "Quantifica la presència cartografiada de xarxa hidrogràfica i fonts com a proxy molt bàsic de funcionalitat hídrica.",
+        "basis": "Longitud de cursos i eixos de drenatge de l’ACA i la CHE, i nombre de fonts cartografiades per l’ICGC, normalitzats per superfície.",
+        "calculation": "Mitjana aritmètica, amb el mateix pes (1/2), de: km de xarxa hídrica per 100 ha, que arriben a 100 amb 1,5 km/100 ha; i nombre de fonts, que arriba a 100 amb 15. El relleu, l’NDWI, el cabal, la qualitat i la permanència no intervenen numèricament en aquest resultat actual.",
+        "interpretation": "Un valor baix indica poca aigua cartografiada segons els dos comptatges; un valor intermedi, presència parcial; i un valor alt, més densitat de xarxa o fonts. No és un percentatge d’aigua disponible, cabal, qualitat, permanència, connectivitat aquàtica ni ús efectiu per la fauna.",
+        "confidence": "PARCIAL i MITJANA perquè la cartografia permet calcular el proxy, però no hi ha verificació de cabal, temporalitat, estat, qualitat ni funcionalitat ecològica.",
+    },
+    "CORE_11": {
+        "kind": "synthetic_score",
+        "measure": "Agrega condicions que el motor associa a oportunitat potencial de restauració: valor d’hàbitats, vulnerabilitat, dèficit d’aigua, pressió potencial i connectivitat.",
+        "basis": "Resultats dels RADAR_02, RADAR_05, RADAR_10, RADAR_07 i RADAR_08; no incorpora una capa directa de degradació o necessitat d’actuació.",
+        "calculation": "Mitjana aritmètica, amb el mateix pes (1/5), de RADAR_02; RADAR_05; l’invers de RADAR_10; RADAR_07 transformat amb màxim entre 20 i 60 i descens fora d’aquest rang; i RADAR_08. Els valors absents s’ometen de la mitjana.",
+        "interpretation": "Un valor baix indica poca coincidència dels cinc criteris; un valor intermedi, oportunitats condicionades; i un valor alt, coincidència elevada segons la fórmula. No demostra degradació, no localitza una actuació, no calcula el benefici de restaurar i no converteix el valor en una ordre d’intervenir.",
+        "confidence": "PARCIAL i MITJANA perquè integra RADAR amb limitacions i no disposa de diagnosi directa de degradació, trajectòria ni resposta esperada a la restauració.",
+    },
+    "CORE_12": {
+        "kind": "synthetic_score",
+        "measure": "Ofereix una síntesi numèrica de tots els RADAR CORE que tenen puntuació calculable.",
+        "basis": "Valors numèrics disponibles de RADAR_01 a RADAR_11. La lectura directa NDVI mostrada a RADAR_03 no és una puntuació CORE i queda exclosa.",
+        "calculation": "Mitjana aritmètica simple, amb el mateix pes, de tots els RADAR_01–RADAR_11 amb valor numèric. Els RADAR no calculables s’ometen; en l’execució actual RADAR_03 no hi entra. No hi ha ponderació addicional per confiança, urgència, superfície o tipus d’indicador.",
+        "interpretation": "Un valor baix, intermedi o alt només situa la mitjana dins els llindars EcoRadar. No és un percentatge d’estat de conservació, una prioritat espacial, una urgència operativa ni prova que tots els components tinguin el mateix significat ecològic.",
+        "confidence": "PARCIAL i MITJANA per disseny: hereta buits i limitacions dels indicadors disponibles i el motor força l’estat parcial. Cal obrir els RADAR anteriors per entendre què empeny la mitjana.",
+    },
+}
+
+
 def read_json(path: Path) -> dict:
     with path.open("r", encoding="utf-8") as f:
         return json.load(f)
@@ -762,9 +865,15 @@ def build_data() -> dict:
                     "code": r["code"],
                     "name": r["name"],
                     "value": None if r["value_0_100"] == "" else float(r["value_0_100"]),
-                    "display": f"NDVI {sentinel['metrics']['ndvi']['median']:.3f}" if r["code"] == "CORE_03" else None,
+                    "display": f"NDVI {sentinel['metrics']['ndvi']['median']:.3f}".replace(".", ",") if r["code"] == "CORE_03" else None,
+                    "measurementKind": "direct_reading" if r["code"] == "CORE_03" else "synthetic_score",
+                    "category": None if r["code"] == "CORE_03" else r["category"],
                     "status": "PARCIAL · escena 07.07.2026" if r["code"] == "CORE_03" else r["status"],
                     "confidence": "mitjana" if r["code"] == "CORE_03" else r["confidence"],
+                    "sourceDate": sentinel["acquired_at_utc"] if r["code"] == "CORE_03" else None,
+                    "sourcesUsed": [item.strip() for item in r["sources_used"].split(";") if item.strip()],
+                    "sourcesAbsent": [item.strip() for item in r["sources_absent"].split(";") if item.strip()],
+                    "limitations": [item.strip() for item in r["limitations"].split(";") if item.strip()],
                 }
                 for r in core
             ],
@@ -1007,12 +1116,31 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-data-table th {{ color:#fff; background:var(--blue); font-size:9px; letter-spacing:.035em; text-transform:uppercase; }}
     #ecoradar-alinya .eu-data-table td.num {{ color:var(--green); font-weight:800; white-space:nowrap; }}
     #ecoradar-alinya .eu-score-grid {{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:9px; margin-top:16px; }}
-    #ecoradar-alinya .eu-score {{ padding:13px; border:1px solid var(--line); background:#fff; }}
-    #ecoradar-alinya .eu-score-head {{ display:flex; justify-content:space-between; gap:8px; color:#415461; font-size:10px; }}
-    #ecoradar-alinya .eu-score strong {{ color:var(--green); font-size:16px; }}
+    #ecoradar-alinya .eu-score {{ width:100%; padding:13px; border:1px solid var(--line); border-radius:3px; background:#fff; color:inherit; font:inherit; text-align:left; cursor:pointer; transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease; }}
+    #ecoradar-alinya .eu-score:hover {{ border-color:#7fa184; box-shadow:0 5px 14px rgba(23,51,45,.09); transform:translateY(-1px); }}
+    #ecoradar-alinya .eu-score:focus-visible {{ outline:3px solid rgba(47,116,63,.27); outline-offset:2px; }}
+    #ecoradar-alinya .eu-score[aria-expanded="true"] {{ border-color:var(--green); box-shadow:inset 0 0 0 1px var(--green); background:#f6faf4; }}
+    #ecoradar-alinya .eu-score-head {{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; color:#415461; font-size:10px; }}
+    #ecoradar-alinya .eu-score-title {{ min-width:0; line-height:1.35; }}
+    #ecoradar-alinya .eu-score-value {{ display:flex; flex:0 0 auto; align-items:center; gap:7px; }}
+    #ecoradar-alinya .eu-score strong {{ color:var(--green); font-size:16px; white-space:nowrap; }}
+    #ecoradar-alinya .eu-score-info {{ display:inline-grid; width:20px; height:20px; place-items:center; border:1px solid #93a994; border-radius:50%; color:var(--green); background:#eef5eb; font-size:11px; font-style:normal; font-weight:850; line-height:1; }}
     #ecoradar-alinya .eu-score-track {{ height:5px; margin-top:8px; overflow:hidden; border-radius:9px; background:#e4e1d9; }}
     #ecoradar-alinya .eu-score-fill {{ height:100%; background:var(--green); }}
     #ecoradar-alinya .eu-status {{ display:inline-block; margin-top:8px; padding:3px 6px; border-radius:999px; background:#edf1ec; color:#506159; font-size:8px; text-transform:uppercase; }}
+    #ecoradar-alinya .eu-core-explainer {{ margin-top:12px; padding:18px; border:1px solid #9eb69f; border-radius:8px; background:#f7fbf5; box-shadow:0 8px 22px rgba(23,51,45,.08); }}
+    #ecoradar-alinya .eu-core-explainer-head {{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; padding-bottom:13px; border-bottom:1px solid #d6e1d3; }}
+    #ecoradar-alinya .eu-core-explainer h3 {{ margin:0 0 7px; color:var(--blue); font-size:18px; line-height:1.25; }}
+    #ecoradar-alinya .eu-core-kind {{ display:inline-block; padding:5px 8px; border-radius:999px; color:#fff; background:var(--blue); font-size:9px; font-weight:800; letter-spacing:.035em; text-transform:uppercase; }}
+    #ecoradar-alinya .eu-core-kind.direct {{ background:#5d468b; }}
+    #ecoradar-alinya .eu-core-close {{ flex:0 0 auto; min-width:34px; min-height:34px; border:1px solid #b7c6b7; border-radius:50%; color:var(--blue); background:#fff; font-size:18px; line-height:1; cursor:pointer; }}
+    #ecoradar-alinya .eu-core-close:focus-visible {{ outline:3px solid rgba(47,116,63,.27); outline-offset:2px; }}
+    #ecoradar-alinya .eu-core-explainer-grid {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px; margin-top:14px; }}
+    #ecoradar-alinya .eu-core-explainer-block {{ padding:13px; border:1px solid #dde4da; border-radius:6px; background:#fff; }}
+    #ecoradar-alinya .eu-core-explainer-block.wide {{ grid-column:1/-1; }}
+    #ecoradar-alinya .eu-core-explainer-block h4 {{ margin:0 0 6px; color:var(--green); font-size:10px; letter-spacing:.045em; text-transform:uppercase; }}
+    #ecoradar-alinya .eu-core-explainer-block p {{ margin:0; color:#405563; font-size:11px; line-height:1.58; }}
+    #ecoradar-alinya .eu-core-explainer-meta {{ margin-top:11px!important; color:#617078!important; font-size:9px!important; }}
     #ecoradar-alinya details.eu-detail {{ margin-top:10px; border:1px solid var(--line); background:#fff; }}
     #ecoradar-alinya details.eu-detail summary {{ cursor:pointer; padding:12px 14px; color:var(--blue); font-size:11px; font-weight:750; }}
     #ecoradar-alinya details.eu-detail > div {{ padding:0 14px 14px; color:#405563; font-size:10px; line-height:1.55; }}
@@ -1101,7 +1229,7 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-bh-note {{ padding:12px; border:1px solid #d7d1c4; border-radius:6px; background:#fff; color:#52636e; font-size:9px; line-height:1.5; }}
     @media (max-width:1050px) {{ #ecoradar-alinya .eu-grid {{ grid-template-columns:230px minmax(0,1fr); }} #ecoradar-alinya .eu-map-panel {{ min-height:480px; }} #ecoradar-alinya .eu-foot {{ grid-column:1/-1; }} }}
     @media (max-width:900px) {{ #ecoradar-alinya .eu-guide-horizontal-grid {{ grid-template-columns:1fr 1fr; }} #ecoradar-alinya .eu-guide-interpretation {{ grid-column:1/-1; }} #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-bh-summary {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} #ecoradar-alinya .eu-bh-layout {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-bh-detail {{ min-height:0; max-height:none; }} }}
-    @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right .eu-fire-summary-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-variables-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-formula-panel {{ grid-column:auto; grid-row:auto; }} #ecoradar-alinya .eu-map-panel {{ height:420px; min-height:420px; max-height:none; aspect-ratio:auto; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:1fr; gap:4px; }} }}
+    @media (max-width:760px) {{ #ecoradar-alinya .eu-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-column.eu-right .eu-fire-summary-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-variables-panel, #ecoradar-alinya .eu-column.eu-right .eu-fire-formula-panel {{ grid-column:auto; grid-row:auto; }} #ecoradar-alinya .eu-map-panel {{ height:420px; min-height:420px; max-height:none; aspect-ratio:auto; }} #ecoradar-alinya .eu-card-grid, #ecoradar-alinya .eu-card-grid.eu-two, #ecoradar-alinya .eu-card-grid.eu-four, #ecoradar-alinya .eu-score-grid, #ecoradar-alinya .eu-core-explainer-grid, #ecoradar-alinya .eu-exec-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-core-explainer-block.wide {{ grid-column:auto; }} #ecoradar-alinya .eu-executive-intro {{ padding-right:0; padding-left:0; }} #ecoradar-alinya .eu-report-section {{ padding:32px 14px; }} #ecoradar-alinya .eu-data-table {{ display:block; overflow-x:auto; }} #ecoradar-alinya .eu-technical-intro span {{ display:block; margin:5px 0 0; }} #ecoradar-alinya .eu-fire-executive .eu-fact {{ grid-template-columns:1fr; gap:4px; }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .eu-guide-horizontal-grid {{ grid-template-columns:1fr; gap:10px; }} #ecoradar-alinya .eu-guide-interpretation {{ grid-column:auto; }} #ecoradar-alinya .eu-guide-horizontal-grid .eu-guide-reading {{ padding-top:8px; border-top:1px solid #e5e1d8; }} #ecoradar-alinya .err-modal {{ padding:0; }} #ecoradar-alinya .err-dialog {{ width:100%; height:100vh; border-radius:0; }} #ecoradar-alinya .err-preview {{ padding:8px; }} #ecoradar-alinya .err-cover {{ flex-direction:column; min-height:0; padding:20px; }} #ecoradar-alinya .err-cover h1 {{ margin-top:14px; font-size:22px; }} #ecoradar-alinya .err-metadata, #ecoradar-alinya .err-facts, #ecoradar-alinya .err-diagnostic-grid, #ecoradar-alinya .err-sector-grid, #ecoradar-alinya .err-management-grid, #ecoradar-alinya .err-evolution, #ecoradar-alinya .err-scenario-grid {{ grid-template-columns:1fr; }} #ecoradar-alinya .err-document > section, #ecoradar-alinya .err-document > footer {{ padding:15px 18px; }} #ecoradar-alinya .err-limits, #ecoradar-alinya .err-fire-assessment, #ecoradar-alinya .err-conclusion {{ margin:0 18px; }} #ecoradar-alinya .err-map {{ height:240px; }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .err-synthesis, #ecoradar-alinya .err-unverified {{ margin:0 18px; }} #ecoradar-alinya .err-relation > div {{ align-items:flex-start; flex-direction:column; gap:2px; }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .eu-layer-list {{ grid-template-columns:repeat(3,minmax(0,1fr)); }} }}
@@ -1338,6 +1466,7 @@ def render_index(data: dict) -> str:
       </div>
       <div class="eu-callout"><strong>Lectura de les cobertes forestals.</strong> «Boscos densos de coníferes» i «Boscos clars de coníferes» són etiquetes de cobertura; dens o clar indica el grau de cobertura arbòria. Permeten interpretar la continuïtat horitzontal de la coberta cartografiada, però no permeten afirmar estructura vertical, càrrega de combustible, estat sanitari ni qualitat d’hàbitat sense validació específica.</div>
       <div class="eu-score-grid" id="eu-core-scores" aria-label="Indicadors Radar EcoRadar"></div>
+      <section class="eu-core-explainer" id="eu-core-explainer" aria-live="polite" hidden></section>
     </section>
 
     <section class="eu-report-section" id="biodiversitat">
@@ -1830,6 +1959,7 @@ def render_index(data: dict) -> str:
     CORE_11:'Orienta on verificar necessitat de restauració; un valor alt no justifica restauració generalitzada ni substitueix la trajectòria ecològica.',
     CORE_12:'Síntesi de prioritat de gestió; només és interpretable amb els indicadors anteriors, les dates de les fonts i els criteris de camp.'
   }};
+  const coreRadarGuides = {json.dumps(CORE_RADAR_GUIDES, ensure_ascii=False, separators=(",", ":"))};
   const fireAreaColors = {{
     'molt baix':'#2f8f4e', 'baix':'#a8c94a', 'moderat':'#f0d84b',
     'alt':'#ef8b2c', 'molt alt':'#d43d2f', 'extrem':'#711d2d'
@@ -1950,12 +2080,65 @@ def render_index(data: dict) -> str:
   root.querySelector('#eu-top-birds').innerHTML = topText('Ocells', (biodiv.top['Ocells'] || []).slice(0,4));
   root.querySelector('#eu-top-leps').innerHTML = topText('Papallones i arnes', (biodiv.top['Papallones i arnes'] || []).slice(0,4));
 
-  root.querySelector('#eu-core-scores').innerHTML = D.metrics.core.map(metric => {{
+  const coreScoreGrid = root.querySelector('#eu-core-scores');
+  const coreExplainer = root.querySelector('#eu-core-explainer');
+  coreScoreGrid.innerHTML = D.metrics.core.map(metric => {{
     const value = metric.value == null ? null : Math.max(0,Math.min(100,metric.value));
     const valueText = metric.display || (value == null ? 'N/D' : ca1(value));
     const publicCode = String(metric.code || '').replace('CORE_','RADAR_');
-    return `<article class="eu-score"><div class="eu-score-head"><span>${{publicCode}} · ${{metric.name}}</span><strong>${{valueText}}</strong></div><div class="eu-score-track"><div class="eu-score-fill" style="width:${{value == null ? 0 : value}}%"></div></div><span class="eu-status">${{metric.status}} · confiança ${{metric.confidence}}</span></article>`;
+    const kind = metric.measurementKind === 'direct_reading' ? 'lectura directa' : 'puntuació 0–100';
+    return `<button type="button" class="eu-score" data-core-code="${{esc(metric.code)}}" aria-expanded="false" aria-controls="eu-core-explainer"><div class="eu-score-head"><span class="eu-score-title">${{esc(publicCode)}} · ${{esc(metric.name)}}</span><span class="eu-score-value"><strong>${{esc(valueText)}}</strong><i class="eu-score-info" aria-hidden="true">i</i></span></div><div class="eu-score-track" aria-hidden="true"><div class="eu-score-fill" style="width:${{value == null ? 0 : value}}%"></div></div><span class="eu-status">${{esc(metric.status)}} · confiança ${{esc(metric.confidence)}} · ${{kind}}</span></button>`;
   }}).join('');
+
+  function closeCoreExplainer(returnFocus=false) {{
+    const activeCode = coreExplainer.dataset.openCode;
+    coreExplainer.hidden = true;
+    delete coreExplainer.dataset.openCode;
+    coreScoreGrid.querySelectorAll('[data-core-code]').forEach(button => button.setAttribute('aria-expanded','false'));
+    if (returnFocus && activeCode) coreScoreGrid.querySelector(`[data-core-code="${{activeCode}}"]`)?.focus();
+  }}
+
+  function openCoreExplainer(metric, button) {{
+    const guide = coreRadarGuides[metric.code];
+    if (!guide) return;
+    const publicCode = String(metric.code || '').replace('CORE_','RADAR_');
+    const direct = guide.kind === 'direct_reading';
+    const valueText = metric.display || (metric.value == null ? 'No calculable amb les dades disponibles' : `${{ca1(metric.value)}}/100`);
+    const resultMeta = direct
+      ? `Valor mostrat: ${{esc(valueText)}} · adquisició ${{esc(humanDate(metric.sourceDate))}}. Aquest valor conserva l’escala directa de l’NDVI.`
+      : `Puntuació actual: ${{esc(valueText)}} · categoria ${{esc(metric.category || 'no disponible')}}. Els llindars de lectura són: 0–&lt;20 molt baix; 20–&lt;40 baix; 40–&lt;60 mitjà; 60–&lt;80 alt; 80–100 molt alt.`;
+    coreExplainer.innerHTML = `
+      <div class="eu-core-explainer-head">
+        <div><h3>${{esc(publicCode)}} · ${{esc(metric.name)}}</h3><span class="eu-core-kind ${{direct ? 'direct' : ''}}">${{direct ? 'Lectura directa · NDVI' : 'Puntuació sintètica EcoRadar · 0–100'}}</span></div>
+        <button type="button" class="eu-core-close" aria-label="Tanca l’explicació de ${{esc(publicCode)}}">×</button>
+      </div>
+      <div class="eu-core-explainer-grid">
+        <section class="eu-core-explainer-block"><h4>1 · Què mesura</h4><p>${{esc(guide.measure)}}</p></section>
+        <section class="eu-core-explainer-block"><h4>2 · En què es basa</h4><p>${{esc(guide.basis)}}</p></section>
+        <section class="eu-core-explainer-block wide"><h4>3 · Com es calcula</h4><p>${{esc(guide.calculation)}}</p></section>
+        <section class="eu-core-explainer-block wide"><h4>4 · Com interpretar el resultat</h4><p>${{esc(guide.interpretation)}}</p><p class="eu-core-explainer-meta">${{resultMeta}}</p></section>
+        <section class="eu-core-explainer-block wide"><h4>5 · Confiança</h4><p><strong>${{esc(metric.status)}} · confiança ${{esc(metric.confidence)}}.</strong> ${{esc(guide.confidence)}}</p></section>
+      </div>`;
+    coreScoreGrid.querySelectorAll('[data-core-code]').forEach(candidate => candidate.setAttribute('aria-expanded',String(candidate === button)));
+    coreExplainer.dataset.openCode = metric.code;
+    coreExplainer.hidden = false;
+  }}
+
+  coreScoreGrid.querySelectorAll('[data-core-code]').forEach(button => button.addEventListener('click', () => {{
+    const metric = D.metrics.core.find(item => item.code === button.dataset.coreCode);
+    if (!metric) return;
+    if (!coreExplainer.hidden && coreExplainer.dataset.openCode === metric.code) {{
+      closeCoreExplainer();
+      return;
+    }}
+    openCoreExplainer(metric, button);
+  }}));
+  coreExplainer.addEventListener('click', event => {{
+    if (event.target.closest('.eu-core-close')) closeCoreExplainer(true);
+  }});
+  root.addEventListener('keydown', event => {{
+    if (event.key === 'Escape' && !coreExplainer.hidden) closeCoreExplainer(true);
+  }});
 
   let activeMode = 'base';
   let activeGuide = {{type:'mode', key:'base'}};
