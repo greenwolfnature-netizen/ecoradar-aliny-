@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-08T20:47:59.689838+00:00",
+  "generated_at_utc": "2026-09-08T20:58:41.875280+00:00",
   "connector": "meteocat_xema_socrata",
   "responsibility": "download_and_normalize_only",
   "source": "Dades meteorològiques de la XEMA",

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generated_at_utc": "2026-09-08T20:47:55Z",
-  "checked_at_utc": "2026-09-08T20:47:55Z",
+  "generated_at_utc": "2026-09-08T20:58:38Z",
+  "checked_at_utc": "2026-09-08T20:58:38Z",
   "reading": "Perill d'incendi actual",
   "scope": "Muntanya d'Alinyà",
   "status": "incompleta en algunes cel·les",
@@ -27,8 +27,8 @@
     "maximum_category": "alt",
     "area_by_category_ha": {
       "molt baix": 0.0,
-      "baix": 1076.48,
-      "moderat": 4136.21,
+      "baix": 1077.48,
+      "moderat": 4135.21,
       "alt": 140.97,
       "molt alt": 0.0,
       "extrem": 0.0
@@ -152,7 +152,7 @@
       "freshness": {
         "status": "current",
         "status_label": "actual",
-        "age_hours": 0.8,
+        "age_hours": 1.0,
         "current_max_age_hours": 3.0,
         "too_old_after_hours": 24.0
       }
@@ -160,7 +160,7 @@
     "freshness": {
       "status": "current",
       "status_label": "actual",
-      "age_hours": 0.8,
+      "age_hours": 1.0,
       "current_max_age_hours": 3.0,
       "too_old_after_hours": 24.0
     },
@@ -177,7 +177,7 @@
     "level": 2,
     "label": "alt",
     "data_at_utc": "2026-09-08T07:16:55.800000Z",
-    "checked_at_utc": "2026-09-08T20:47:55Z",
+    "checked_at_utc": "2026-09-08T20:58:38Z",
     "status": "verified",
     "source_url": "https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/Pla_Alfa_Municipal_Avui_FL_alternatiu_VW/FeatureServer/0",
     "official_page": "https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/index.html",
@@ -186,7 +186,7 @@
     "freshness": {
       "status": "current",
       "status_label": "actual",
-      "age_hours": 13.5,
+      "age_hours": 13.7,
       "current_max_age_hours": 18.0,
       "too_old_after_hours": 72.0
     }
@@ -198,10 +198,10 @@
       "date_utc": "2026-09-03T00:00:00Z",
       "weight_pct": 11.8,
       "base_weight_pct": 20.0,
-      "freshness_factor_pct": 59.0,
+      "freshness_factor_pct": 58.9,
       "temporal_status": "recent",
       "temporal_status_label": "recent · pes reduït al 59 %",
-      "age_hours": 140.8,
+      "age_hours": 141.0,
       "freshness_kind": "dynamic",
       "full_weight_max_age_hours": 72.0,
       "exclude_after_hours": 240.0,
@@ -233,7 +233,7 @@
       "freshness_factor_pct": 0.0,
       "temporal_status": "too_old",
       "temporal_status_label": "massa antiga · pes exclòs",
-      "age_hours": 1522.2,
+      "age_hours": 1522.4,
       "freshness_kind": "dynamic",
       "full_weight_max_age_hours": 240.0,
       "exclude_after_hours": 720.0,
@@ -249,7 +249,7 @@
       "freshness_factor_pct": 59.8,
       "temporal_status": "recent",
       "temporal_status_label": "recent · pes reduït al 60 %",
-      "age_hours": 346.2,
+      "age_hours": 346.4,
       "freshness_kind": "dynamic",
       "full_weight_max_age_hours": 192.0,
       "exclude_after_hours": 576.0,
@@ -281,7 +281,7 @@
       "freshness_factor_pct": 100.0,
       "temporal_status": "current",
       "temporal_status_label": "actual · pes complet",
-      "age_hours": 0.8,
+      "age_hours": 1.0,
       "freshness_kind": "dynamic",
       "full_weight_max_age_hours": 3.0,
       "exclude_after_hours": 24.0,
@@ -297,7 +297,7 @@
       "freshness_factor_pct": 100.0,
       "temporal_status": "current",
       "temporal_status_label": "actual · pes complet",
-      "age_hours": 0.8,
+      "age_hours": 1.0,
       "freshness_kind": "dynamic",
       "full_weight_max_age_hours": 3.0,
       "exclude_after_hours": 24.0,
@@ -364,10 +364,10 @@
     "aspect": 0.02
   },
   "effective_weights": {
-    "creaf_fire_potential": 0.1180968,
+    "creaf_fire_potential": 0.1178842,
     "structural": 0.2,
     "ndmi_dryness": 0.0,
-    "surface_temperature": 0.0598463,
+    "surface_temperature": 0.05979980000000001,
     "vegetation_continuity": 0.1,
     "wind": 0.1,
     "relative_humidity_inverse": 0.1,
@@ -425,7 +425,7 @@
   "methodology": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
   "sources": {
     "meteocat": {
-      "generated_at_utc": "2026-09-08T20:47:59.689838+00:00",
+      "generated_at_utc": "2026-09-08T20:58:41.875280+00:00",
       "connector": "meteocat_xema_socrata",
       "responsibility": "download_and_normalize_only",
       "source": "Dades meteorològiques de la XEMA",
@@ -450,8 +450,8 @@
       "output_csv": "projectes/Alinya/raw/meteocat_xema/Y4_observations.csv"
     },
     "meteocat_wind": {
-      "generated_at_utc": "2026-09-08T20:47:55Z",
-      "latest_catalog_check_utc": "2026-09-08T20:47:55Z",
+      "generated_at_utc": "2026-09-08T20:58:38Z",
+      "latest_catalog_check_utc": "2026-09-08T20:58:38Z",
       "connector": "meteocat_xema_socrata_nearest_wind",
       "responsibility": "download_and_normalize_only",
       "source": "Dades meteorològiques de la XEMA",
@@ -533,7 +533,7 @@
       }
     },
     "landsat": {
-      "generated_at_utc": "2026-09-08T20:49:14.535584+00:00",
+      "generated_at_utc": "2026-09-08T20:59:51.937431+00:00",
       "connector": "landsat_usgs_c2_l2_summer_composite",
       "responsibility": "download_and_normalize_only",
       "scope": "Muntanya d'Alinyà",
@@ -761,8 +761,8 @@
       "source_metadata": "projectes/Alinya/metadata/landsat_connector.json"
     },
     "forestdrought": {
-      "generated_at_utc": "2026-09-08T20:47:55Z",
-      "latest_catalog_check_utc": "2026-09-08T20:47:55Z",
+      "generated_at_utc": "2026-09-08T20:58:38Z",
+      "latest_catalog_check_utc": "2026-09-08T20:58:38Z",
       "connector": "creaf_forestdrought_daily_modelled_forests",
       "responsibility": "discover_download_subset_and_normalize_only",
       "scope": "Muntanya d'Alinyà",
@@ -806,7 +806,7 @@
       "level": 2,
       "label": "alt",
       "data_at_utc": "2026-09-08T07:16:55.800000Z",
-      "checked_at_utc": "2026-09-08T20:47:55Z",
+      "checked_at_utc": "2026-09-08T20:58:38Z",
       "status": "verified",
       "source_url": "https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/Pla_Alfa_Municipal_Avui_FL_alternatiu_VW/FeatureServer/0",
       "official_page": "https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/index.html",
@@ -815,7 +815,7 @@
       "freshness": {
         "status": "current",
         "status_label": "actual",
-        "age_hours": 13.5,
+        "age_hours": 13.7,
         "current_max_age_hours": 18.0,
         "too_old_after_hours": 72.0
       }
