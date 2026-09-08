@@ -39,4 +39,25 @@ class EvidenceTest(unittest.TestCase):
         self.meta['valid_pixels']=4;self.meta['methods']={};self.write_meta();self.assertEqual(module.build_ecological_evidence(self.project),{})
     def test_missing_files_are_explicitly_empty(self):
         self.assertEqual(module.build_ecological_evidence(self.project/'absent'),{})
+    def test_contrasts_use_actual_paired_pixels(self):
+        for name,values in [('ndvi',[0.2,0.4,0.6,0.8]),('ndmi',[0.4,0.3,0.2,0.1])]:
+            with rasterio.open(self.project/f'processed/teledeteccio/{name}.tif','r+') as dst:
+                dst.write(np.array(values,dtype='float32').reshape(2,2),1)
+        result=module.build_ecological_evidence(self.project)
+        contrast=result['vigor']['spatial_contrasts'][0]
+        self.assertEqual(contrast['peer'],'moisture')
+        self.assertAlmostEqual(contrast['low_peer_median'],0.4,places=6)
+        self.assertAlmostEqual(contrast['high_peer_median'],0.1,places=6)
+        self.assertEqual(contrast['low_pixels'],1)
+        self.assertEqual(contrast['high_pixels'],1)
+    def test_flat_rasters_do_not_fabricate_extreme_sectors(self):
+        result=module.build_ecological_evidence(self.project)
+        self.assertNotIn('spatial_contrasts',result['vigor'])
+    def test_different_grids_never_produce_paired_contrasts(self):
+        for name,values in [('ndvi',[0.2,0.4,0.6,0.8]),('ndmi',[0.4,0.3,0.2,0.1])]:
+            with rasterio.open(self.project/f'processed/teledeteccio/{name}.tif','r+') as dst:
+                dst.write(np.array(values,dtype='float32').reshape(2,2),1)
+                if name=='ndmi':dst.transform=from_origin(300020,4600000,20,20)
+        result=module.build_ecological_evidence(self.project)
+        self.assertEqual(result['vigor']['spatial_contrasts'],[])
 if __name__=='__main__': unittest.main()
