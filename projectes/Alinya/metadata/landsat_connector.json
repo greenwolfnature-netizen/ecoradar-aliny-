@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-09T18:00:29.443340+00:00",
+  "generated_at_utc": "2026-09-09T20:12:29.919372+00:00",
   "connector": "landsat_usgs_c2_l2_summer_composite",
   "responsibility": "download_and_normalize_only",
   "scope": "Muntanya d'Alinyà",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T19:26:02+00:00",
+  "generated_at": "2026-09-09T20:13:03+00:00",
   "project": "Alinya",
   "methodology_version": "alinya_core_v2_2026-09-09",
   "preflight_reports": {
@@ -108,7 +108,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-cf6279f49825df5c"
+      "snapshot_input": "alinya-e186c4753bf7e4bd"
     },
     {
       "code": "CORE_02",
@@ -190,7 +190,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-cf6279f49825df5c"
+      "snapshot_input": "alinya-e186c4753bf7e4bd"
     },
     {
       "code": "CORE_03",
@@ -270,7 +270,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia.",
-      "snapshot_input": "alinya-cf6279f49825df5c"
+      "snapshot_input": "alinya-e186c4753bf7e4bd"
     },
     {
       "code": "CORE_04",
@@ -369,7 +369,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia, validacio.",
-      "snapshot_input": "alinya-cf6279f49825df5c"
+      "snapshot_input": "alinya-e186c4753bf7e4bd"
     },
     {
       "code": "CORE_05",
@@ -405,8 +405,8 @@
           "status": "context actual/parcial",
           "readings": {
             "air_temperature": {
-              "value": "16,8 °C",
-              "data_at_utc": "2026-09-09T17:00:00Z",
+              "value": "14,1 °C",
+              "data_at_utc": "2026-09-09T19:00:00Z",
               "period_start_utc": null,
               "period_end_utc": null,
               "temporal_kind": "observation",
@@ -415,7 +415,7 @@
             },
             "precipitation_30d": {
               "value": "45,0 mm",
-              "data_at_utc": "2026-09-09T17:00:00Z",
+              "data_at_utc": "2026-09-09T19:00:00Z",
               "period_start_utc": null,
               "period_end_utc": null,
               "temporal_kind": "observation",
@@ -424,7 +424,7 @@
             },
             "days_without_significant_rain": {
               "value": "0 dies",
-              "data_at_utc": "2026-09-09T17:00:00Z",
+              "data_at_utc": "2026-09-09T19:00:00Z",
               "period_start_utc": null,
               "period_end_utc": null,
               "temporal_kind": "observation",
@@ -502,7 +502,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-cf6279f49825df5c"
+      "snapshot_input": "alinya-e186c4753bf7e4bd"
     },
     {
       "code": "CORE_06",
@@ -598,7 +598,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-cf6279f49825df5c"
+      "snapshot_input": "alinya-e186c4753bf7e4bd"
     },
     {
       "code": "CORE_07",
@@ -677,7 +677,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-cf6279f49825df5c"
+      "snapshot_input": "alinya-e186c4753bf7e4bd"
     },
     {
       "code": "CORE_08",
@@ -767,7 +767,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-cf6279f49825df5c"
+      "snapshot_input": "alinya-e186c4753bf7e4bd"
     },
     {
       "code": "CORE_09",
@@ -799,13 +799,13 @@
       "measurement_kind": "four_axis_profile",
       "direct_value": null,
       "direct_unit": null,
-      "source_date_utc": "2026-09-09T17:00:00Z",
+      "source_date_utc": "2026-09-09T19:00:00Z",
       "primary_result": "Propagació actual moderat · recuperació NO AVALUABLE",
       "interpretation_short": "La propagació actual és avaluable parcialment; sensibilitat i recuperació necessiten dades pròpies.",
       "methodology_version": "alinya_core_v2_2026-09-09",
       "profile": {
         "propagation_current": {
-          "ecoradar_index_0_100": 53.0,
+          "ecoradar_index_0_100": 53.8,
           "category": "moderat",
           "valid_coverage_pct": 98.0,
           "dominant_variables": [
@@ -813,7 +813,7 @@
             "Potencial de foc ForestDrought elevat",
             "Perill estructural elevat"
           ],
-          "data_at_utc": "2026-09-09T17:00:00Z",
+          "data_at_utc": "2026-09-09T19:00:00Z",
           "pla_alfa_context": {
             "level": 1,
             "label": "moderat",
@@ -870,7 +870,7 @@
         },
         "qa": {
           "rating": "limitada",
-          "reason": "Qualitat/actualització efectiva del producte 47.9 %; no s’anomena confiança ecològica."
+          "reason": "Qualitat/actualització efectiva del producte 47.8 %; no s’anomena confiança ecològica."
         },
         "representativitat": {
           "rating": "limitada",
@@ -886,7 +886,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-cf6279f49825df5c"
+      "snapshot_input": "alinya-e186c4753bf7e4bd"
     },
     {
       "code": "CORE_10",
@@ -968,7 +968,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-cf6279f49825df5c"
+      "snapshot_input": "alinya-e186c4753bf7e4bd"
     },
     {
       "code": "CORE_11",
@@ -1049,7 +1049,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, vigencia, cobertura, resolucio, qa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-cf6279f49825df5c"
+      "snapshot_input": "alinya-e186c4753bf7e4bd"
     },
     {
       "code": "CORE_12",
@@ -1233,8 +1233,8 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-cf6279f49825df5c"
+      "snapshot_input": "alinya-e186c4753bf7e4bd"
     }
   ],
-  "snapshot_id": "alinya-d712326d21b18f95"
+  "snapshot_id": "alinya-804a204e984fd089"
 }

@@ -1,6 +1,6 @@
 {
   "source_gate": "verified",
-  "checked_at_utc": "2026-09-09T17:58:24Z",
+  "checked_at_utc": "2026-09-09T20:10:32Z",
   "config": "config/current_fire_danger.json",
   "inputs": {
     "official_structural": "projectes/Alinya/raw/incendis/perill_basic_2024/PERILLBASICINCENDI.tif",
@@ -16,8 +16,8 @@
   },
   "result": {
     "schema_version": "1.0",
-    "generated_at_utc": "2026-09-09T17:58:24Z",
-    "checked_at_utc": "2026-09-09T17:58:24Z",
+    "generated_at_utc": "2026-09-09T20:10:32Z",
+    "checked_at_utc": "2026-09-09T20:10:32Z",
     "reading": "Perill d'incendi actual",
     "scope": "Muntanya d'Alinyà",
     "status": "incompleta en algunes cel·les",
@@ -37,15 +37,15 @@
       "webp": "projectes/Alinya/maps/incendis/current_fire_danger.webp"
     },
     "summary": {
-      "mean_index_0_100": 53.0,
+      "mean_index_0_100": 53.8,
       "predominant_category": "moderat",
-      "maximum_index_0_100": 78.6,
+      "maximum_index_0_100": 79.3,
       "maximum_category": "alt",
       "area_by_category_ha": {
         "molt baix": 0.0,
-        "baix": 294.59,
-        "moderat": 4140.46,
-        "alt": 918.61,
+        "baix": 234.32,
+        "moderat": 4044.98,
+        "alt": 1074.36,
         "molt alt": 0.0,
         "extrem": 0.0
       },
@@ -65,10 +65,10 @@
         "Potencial de foc ForestDrought elevat",
         "Perill estructural elevat"
       ],
-      "latest_update_utc": "2026-09-09T17:00:00Z",
-      "confidence_pct": 47.9,
+      "latest_update_utc": "2026-09-09T19:00:00Z",
+      "confidence_pct": 47.8,
       "confidence": "baixa",
-      "eligible_base_weight_pct": 67.1,
+      "eligible_base_weight_pct": 66.9,
       "temporally_excluded_variables": [
         "ndmi_dryness",
         "surface_temperature"
@@ -76,92 +76,92 @@
     },
     "weather": {
       "air_temperature_c": {
-        "value": 16.8,
-        "timestamp_utc": "2026-09-09T17:00:00Z",
+        "value": 14.1,
+        "timestamp_utc": "2026-09-09T19:00:00Z",
         "validation_code": "",
         "history_p05": 15.5,
-        "history_p95": 30.90999999999999
+        "history_p95": 30.914999999999985
       },
       "wind_speed_ms": {
-        "value": 6.7,
-        "timestamp_utc": "2026-09-09T17:00:00Z",
+        "value": 7.5,
+        "timestamp_utc": "2026-09-09T19:00:00Z",
         "validation_code": "",
         "history_p05": 0.7,
-        "history_p95": 6.9
+        "history_p95": 7.0
       },
       "wind_direction_deg": {
-        "value": 32.0,
-        "timestamp_utc": "2026-09-09T17:00:00Z",
+        "value": 38.0,
+        "timestamp_utc": "2026-09-09T19:00:00Z",
         "validation_code": "",
         "history_p05": 7.0,
         "history_p95": 349.0
       },
       "relative_humidity_pct": {
-        "value": 57.0,
-        "timestamp_utc": "2026-09-09T17:00:00Z",
+        "value": 56.0,
+        "timestamp_utc": "2026-09-09T19:00:00Z",
         "validation_code": "",
         "history_p05": 24.0,
         "history_p95": 83.0
       },
       "precipitation_mm": {
         "value": 0.0,
-        "timestamp_utc": "2026-09-09T17:00:00Z",
+        "timestamp_utc": "2026-09-09T19:00:00Z",
         "validation_code": ""
       },
       "wind_gust_ms": {
-        "value": 10.9,
-        "timestamp_utc": "2026-09-09T17:00:00Z",
+        "value": 11.5,
+        "timestamp_utc": "2026-09-09T19:00:00Z",
         "validation_code": "",
         "history_p05": 1.8,
         "history_p95": 12.2
       },
       "wind_gust_direction_deg": {
-        "value": 48.0,
-        "timestamp_utc": "2026-09-09T17:00:00Z",
+        "value": 47.0,
+        "timestamp_utc": "2026-09-09T19:00:00Z",
         "validation_code": "",
         "history_p05": 13.0,
-        "history_p95": 323.0999999999999
+        "history_p95": 323.14999999999986
       },
-      "daily_min_relative_humidity_pct": 57.0,
-      "daily_max_wind_gust_ms": 10.9
+      "daily_min_relative_humidity_pct": 56.0,
+      "daily_max_wind_gust_ms": 11.5
     },
     "meteorology_context": {
       "air_temperature": {
-        "value": 16.8,
-        "timestamp_utc": "2026-09-09T17:00:00Z",
+        "value": 14.1,
+        "timestamp_utc": "2026-09-09T19:00:00Z",
         "validation_code": "",
         "history_p05": 15.5,
-        "history_p95": 30.90999999999999
+        "history_p95": 30.914999999999985
       },
       "relative_humidity": {
-        "value": 57.0,
-        "timestamp_utc": "2026-09-09T17:00:00Z",
+        "value": 56.0,
+        "timestamp_utc": "2026-09-09T19:00:00Z",
         "validation_code": "",
         "history_p05": 24.0,
         "history_p95": 83.0
       },
       "wind": {
-        "value": 6.7,
-        "timestamp_utc": "2026-09-09T17:00:00Z",
+        "value": 7.5,
+        "timestamp_utc": "2026-09-09T19:00:00Z",
         "validation_code": "",
         "history_p05": 0.7,
-        "history_p95": 6.9
+        "history_p95": 7.0
       },
       "wind_gust": {
-        "value": 10.9,
-        "timestamp_utc": "2026-09-09T17:00:00Z",
+        "value": 11.5,
+        "timestamp_utc": "2026-09-09T19:00:00Z",
         "validation_code": "",
         "history_p05": 1.8,
         "history_p95": 12.2
       },
       "precipitation_latest_period": {
         "value": 0.0,
-        "timestamp_utc": "2026-09-09T17:00:00Z",
+        "timestamp_utc": "2026-09-09T19:00:00Z",
         "validation_code": ""
       },
       "precipitation_accumulated": {
         "status": "available",
-        "data_at_utc": "2026-09-09T17:00:00Z",
+        "data_at_utc": "2026-09-09T19:00:00Z",
         "recent_24h_mm": 3.7,
         "last_7_days_mm": 4.5,
         "last_30_days_mm": 45.0,
@@ -174,7 +174,7 @@
         "freshness": {
           "status": "current",
           "status_label": "actual",
-          "age_hours": 1.0,
+          "age_hours": 1.2,
           "current_max_age_hours": 3.0,
           "too_old_after_hours": 24.0
         }
@@ -182,7 +182,7 @@
       "freshness": {
         "status": "current",
         "status_label": "actual",
-        "age_hours": 1.0,
+        "age_hours": 1.2,
         "current_max_age_hours": 3.0,
         "too_old_after_hours": 24.0
       },
@@ -199,7 +199,7 @@
       "level": 1,
       "label": "moderat",
       "data_at_utc": "2026-09-09T07:59:20.329000Z",
-      "checked_at_utc": "2026-09-09T17:58:24Z",
+      "checked_at_utc": "2026-09-09T20:10:32Z",
       "status": "verified",
       "source_url": "https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/Pla_Alfa_Municipal_Avui_FL_alternatiu_VW/FeatureServer/0",
       "official_page": "https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/index.html",
@@ -208,7 +208,7 @@
       "freshness": {
         "status": "current",
         "status_label": "actual",
-        "age_hours": 10.0,
+        "age_hours": 12.2,
         "current_max_age_hours": 18.0,
         "too_old_after_hours": 72.0
       }
@@ -218,17 +218,17 @@
         "value": "mediana 72.0/100",
         "source": "CREAF/EMF · ForestDrought daily modelled forests",
         "date_utc": "2026-09-04T00:00:00Z",
-        "weight_pct": 12.1,
+        "weight_pct": 11.9,
         "base_weight_pct": 20.0,
-        "freshness_factor_pct": 60.7,
+        "freshness_factor_pct": 59.4,
         "temporal_status": "recent",
-        "temporal_status_label": "recent · pes reduït al 61 %",
-        "age_hours": 138.0,
+        "temporal_status_label": "recent · pes reduït al 59 %",
+        "age_hours": 140.2,
         "freshness_kind": "dynamic",
         "full_weight_max_age_hours": 72.0,
         "exclude_after_hours": 240.0,
         "quality": "verificada",
-        "update_status": "recent · pes reduït al 61 %"
+        "update_status": "recent · pes reduït al 59 %"
       },
       "structural": {
         "value": "mediana 4.0/10",
@@ -255,7 +255,7 @@
         "freshness_factor_pct": 0.0,
         "temporal_status": "too_old",
         "temporal_status_label": "massa antiga · pes exclòs",
-        "age_hours": 1543.4,
+        "age_hours": 1545.6,
         "freshness_kind": "dynamic",
         "full_weight_max_age_hours": 240.0,
         "exclude_after_hours": 720.0,
@@ -299,15 +299,15 @@
         "update_status": "estructural · vigent"
       },
       "wind": {
-        "value": "vent 24.1 km/h · ratxa 39.2 km/h",
+        "value": "vent 27.0 km/h · ratxa 41.4 km/h",
         "source": "Meteocat XEMA · CJ Organyà · 9,2 km de Y4 · el component usa el màxim normalitzat entre vent i ratxa",
-        "date_utc": "2026-09-09T17:00:00Z",
+        "date_utc": "2026-09-09T19:00:00Z",
         "weight_pct": 10.0,
         "base_weight_pct": 10.0,
         "freshness_factor_pct": 100.0,
         "temporal_status": "current",
         "temporal_status_label": "actual · pes complet",
-        "age_hours": 1.0,
+        "age_hours": 1.2,
         "freshness_kind": "dynamic",
         "full_weight_max_age_hours": 3.0,
         "exclude_after_hours": 24.0,
@@ -315,15 +315,15 @@
         "update_status": "actual · pes complet"
       },
       "relative_humidity_inverse": {
-        "value": "57 %",
+        "value": "56 %",
         "source": "Meteocat XEMA · Y4 Alinyà",
-        "date_utc": "2026-09-09T17:00:00Z",
+        "date_utc": "2026-09-09T19:00:00Z",
         "weight_pct": 10.0,
         "base_weight_pct": 10.0,
         "freshness_factor_pct": 100.0,
         "temporal_status": "current",
         "temporal_status_label": "actual · pes complet",
-        "age_hours": 1.0,
+        "age_hours": 1.2,
         "freshness_kind": "dynamic",
         "full_weight_max_age_hours": 3.0,
         "exclude_after_hours": 24.0,
@@ -390,7 +390,7 @@
       "aspect": 0.02
     },
     "effective_weights": {
-      "creaf_fire_potential": 0.12146040000000001,
+      "creaf_fire_potential": 0.1188386,
       "structural": 0.2,
       "ndmi_dryness": 0.0,
       "surface_temperature": 0.0,
@@ -451,7 +451,7 @@
     "methodology": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
     "sources": {
       "meteocat": {
-        "generated_at_utc": "2026-09-09T17:58:44.074938+00:00",
+        "generated_at_utc": "2026-09-09T20:10:37.909752+00:00",
         "connector": "meteocat_xema_socrata",
         "responsibility": "download_and_normalize_only",
         "source": "Dades meteorològiques de la XEMA",
@@ -459,9 +459,9 @@
         "official_dataset": "https://analisi.transparenciacatalunya.cat/d/nzvn-apee",
         "station_code": "Y4",
         "station_name": "Alinyà",
-        "records": 5037,
-        "first_observation_utc": "2026-08-05T18:00:00Z",
-        "last_observation_utc": "2026-09-09T17:00:00Z",
+        "records": 5034,
+        "first_observation_utc": "2026-08-05T20:30:00Z",
+        "last_observation_utc": "2026-09-09T19:00:00Z",
         "variables": {
           "air_temperature_c": "32",
           "wind_speed_ms": "30",
@@ -476,8 +476,8 @@
         "output_csv": "projectes/Alinya/raw/meteocat_xema/Y4_observations.csv"
       },
       "meteocat_wind": {
-        "generated_at_utc": "2026-09-09T17:58:24Z",
-        "latest_catalog_check_utc": "2026-09-09T17:58:24Z",
+        "generated_at_utc": "2026-09-09T20:10:32Z",
+        "latest_catalog_check_utc": "2026-09-09T20:10:32Z",
         "connector": "meteocat_xema_socrata_nearest_wind",
         "responsibility": "download_and_normalize_only",
         "source": "Dades meteorològiques de la XEMA",
@@ -500,9 +500,9 @@
           "wind_gust_ms": "50",
           "wind_gust_direction_deg": "51"
         },
-        "records": 6716,
-        "first_observation_utc": "2026-08-05T18:00:00Z",
-        "last_observation_utc": "2026-09-09T17:00:00Z",
+        "records": 6712,
+        "first_observation_utc": "2026-08-05T20:30:00Z",
+        "last_observation_utc": "2026-09-09T19:00:00Z",
         "connector_status": "verified",
         "limitation": "Observació puntual a Organyà, 9,2 km de Y4; no és vent mesurat dins la Muntanya d'Alinyà ni una superfície de vent.",
         "output_csv": "projectes/Alinya/raw/meteocat_xema/CJ_wind_observations.csv"
@@ -561,10 +561,10 @@
           "ndmi": "maps/teledeteccio/ndmi.webp",
           "albedo": "maps/teledeteccio/albedo.webp"
         },
-        "snapshot_id": "alinya-d718dcb429fb9281"
+        "snapshot_id": "alinya-d712326d21b18f95"
       },
       "landsat": {
-        "generated_at_utc": "2026-09-09T18:00:29.443340+00:00",
+        "generated_at_utc": "2026-09-09T20:12:29.919372+00:00",
         "connector": "landsat_usgs_c2_l2_summer_composite",
         "responsibility": "download_and_normalize_only",
         "scope": "Muntanya d'Alinyà",
@@ -798,8 +798,8 @@
         "source_metadata": "projectes/Alinya/metadata/landsat_connector.json"
       },
       "forestdrought": {
-        "generated_at_utc": "2026-09-09T17:58:24Z",
-        "latest_catalog_check_utc": "2026-09-09T17:58:24Z",
+        "generated_at_utc": "2026-09-09T20:10:32Z",
+        "latest_catalog_check_utc": "2026-09-09T20:10:32Z",
         "connector": "creaf_forestdrought_daily_modelled_forests",
         "responsibility": "discover_download_subset_and_normalize_only",
         "scope": "Muntanya d'Alinyà",
@@ -843,7 +843,7 @@
         "level": 1,
         "label": "moderat",
         "data_at_utc": "2026-09-09T07:59:20.329000Z",
-        "checked_at_utc": "2026-09-09T17:58:24Z",
+        "checked_at_utc": "2026-09-09T20:10:32Z",
         "status": "verified",
         "source_url": "https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/Pla_Alfa_Municipal_Avui_FL_alternatiu_VW/FeatureServer/0",
         "official_page": "https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/index.html",
@@ -852,7 +852,7 @@
         "freshness": {
           "status": "current",
           "status_label": "actual",
-          "age_hours": 10.0,
+          "age_hours": 12.2,
           "current_max_age_hours": 18.0,
           "too_old_after_hours": 72.0
         }
@@ -928,7 +928,7 @@
       "ForestDrought és un model forestal de 500 m; no és una observació, una ignició ni una alerta oficial.",
       "La continuïtat vegetal HRL és horitzontal i no quantifica càrrega, espècie ni estructura vertical del combustible."
     ],
-    "snapshot_id": "alinya-d712326d21b18f95"
+    "snapshot_id": "alinya-804a204e984fd089"
   },
-  "snapshot_id": "alinya-d712326d21b18f95"
+  "snapshot_id": "alinya-804a204e984fd089"
 }

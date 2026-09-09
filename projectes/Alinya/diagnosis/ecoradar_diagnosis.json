@@ -1,6 +1,6 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-09T19:26:20+00:00",
+  "generated_at": "2026-09-09T20:13:03+00:00",
   "methodology_version": "alinya_core_v2_2026-09-09",
   "snapshot_input": null,
   "scope": "diagnosi ecològica basada en indicadors; sense recomanacions, fitxa ni informe final",
@@ -317,5 +317,5 @@
       "snapshot_id": null
     }
   ],
-  "snapshot_id": "alinya-d712326d21b18f95"
+  "snapshot_id": "alinya-804a204e984fd089"
 }
