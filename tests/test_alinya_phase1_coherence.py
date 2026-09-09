@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -142,6 +143,13 @@ class Phase1CoherenceTests(unittest.TestCase):
         floor = html[marker:marker + 7000]
         for size in ("font-size:11px!important", "font-size:12px!important", "font-size:13px!important"):
             self.assertIn(size, floor)
+
+    def test_report_assets_use_content_hashes_to_avoid_stale_explanations(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        for name in ("ecoradar-reading-report.js", "ecoradar-alinya-report-profiles.js"):
+            asset = ROOT / "vendor" / name
+            version = hashlib.sha256(asset.read_bytes()).hexdigest()[:12]
+            self.assertIn(f"./vendor/{name}?v={version}", html)
 
 
 if __name__ == "__main__":

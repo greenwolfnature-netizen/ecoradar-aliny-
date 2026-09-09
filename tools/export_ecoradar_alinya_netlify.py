@@ -13,6 +13,7 @@ from __future__ import annotations
 import base64
 import csv
 from collections import Counter, defaultdict
+import hashlib
 import json
 import math
 import shutil
@@ -31,6 +32,8 @@ if not VENDOR_D3.is_file():
     VENDOR_D3 = ROOT / "projectes" / "LaSeu_Urba" / "maps" / "ecoradar-la-seu-netlify" / "vendor" / "d3.min.js"
 REPORT_ENGINE = ROOT / "vendor" / "ecoradar-reading-report.js"
 REPORT_PROFILES = ROOT / "vendor" / "ecoradar-alinya-report-profiles.js"
+REPORT_ENGINE_VERSION = hashlib.sha256(REPORT_ENGINE.read_bytes()).hexdigest()[:12]
+REPORT_PROFILES_VERSION = hashlib.sha256(REPORT_PROFILES.read_bytes()).hexdigest()[:12]
 HTML2PDF = ROOT / "vendor" / "html2pdf.bundle.min.js"
 HTML2PDF_LICENSE = ROOT / "vendor" / "html2pdf.bundle.min.js.LICENSE.txt"
 BRANDING = PROJECT / "assets" / "branding"
@@ -1728,8 +1731,8 @@ def render_index(data: dict) -> str:
 </div>
 <script src="./vendor/d3.min.js"></script>
 <script src="./vendor/html2pdf.bundle.min.js"></script>
-<script src="./vendor/ecoradar-reading-report.js?v=20260908-evidence-diagnosis"></script>
-<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260908-evidence-diagnosis"></script>
+<script src="./vendor/ecoradar-reading-report.js?v={REPORT_ENGINE_VERSION}"></script>
+<script src="./vendor/ecoradar-alinya-report-profiles.js?v={REPORT_PROFILES_VERSION}"></script>
 <script>
 (() => {{
   const root = document.getElementById('ecoradar-alinya');
@@ -2656,8 +2659,8 @@ def write_package() -> None:
         html_text
         .replace('<script src="./vendor/d3.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/d3.min.js"></script>')
         .replace('<script src="./vendor/html2pdf.bundle.min.js"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/html2pdf.bundle.min.js"></script>')
-        .replace('<script src="./vendor/ecoradar-reading-report.js?v=20260908-evidence-diagnosis"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js?v=20260908-evidence-diagnosis"></script>')
-        .replace('<script src="./vendor/ecoradar-alinya-report-profiles.js?v=20260908-evidence-diagnosis"></script>', '<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js?v=20260908-evidence-diagnosis"></script>'),
+        .replace(f'<script src="./vendor/ecoradar-reading-report.js?v={REPORT_ENGINE_VERSION}"></script>', f'<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-reading-report.js?v={REPORT_ENGINE_VERSION}"></script>')
+        .replace(f'<script src="./vendor/ecoradar-alinya-report-profiles.js?v={REPORT_PROFILES_VERSION}"></script>', f'<script src="./ecoradar-alinya-netlify-v2/vendor/ecoradar-alinya-report-profiles.js?v={REPORT_PROFILES_VERSION}"></script>'),
         encoding="utf-8",
     )
     (OUT_DIR / "netlify.toml").write_text(
