@@ -14,6 +14,7 @@ import base64
 import csv
 from collections import Counter, defaultdict
 import hashlib
+import html
 import json
 import math
 import shutil
@@ -54,109 +55,6 @@ if not THIRD_PARTY_NOTICES.is_file():
 DAILY_FUNCTION = ROOT / "netlify" / "functions" / "daily-readings-alinya.mjs"
 if not DAILY_FUNCTION.is_file():
     DAILY_FUNCTION = ROOT / "netlify" / "functions" / "daily-readings.mjs"
-
-
-# Public, code-level explanation of the calculations implemented in
-# ecoradar/indicators/engine.py. Keep this mapping aligned with that engine:
-# it documents the current formulas but does not alter them.
-CORE_RADAR_GUIDES = {
-    "CORE_01": {
-        "kind": "synthetic_score",
-        "measure": "Resumeix l’heterogeneïtat estructural del paisatge que detecten les capes disponibles: diversitat de cobertes, equilibri de la superfície forestal, presència d’espais oberts, baixa artificialització, riquesa cartografiada d’hàbitats i pes del connector principal.",
-        "basis": "Cobertes del sòl de l’ICGC; cartografia d’hàbitats terrestres v3; connectors de la Infraestructura Verda de Catalunya; superfície de l’àmbit.",
-        "calculation": "Mitjana aritmètica, amb el mateix pes (1/6), de sis components normalitzats a 0–100: entropia de Shannon de les cobertes; cobertura forestal amb òptim entre 35% i 75%; espais oberts i agraris que arriben a 100 als 18%; artificialització invertida que arriba a 0 al 10%; nombre d’hàbitats que arriba a 100 amb 50; i superfície del connector principal que arriba a 100 quan ocupa el 25% de l’àmbit. Tots els components es limiten a 0–100.",
-        "interpretation": "Un valor baix indica poca heterogeneïtat segons aquests sis proxies; un valor intermedi, una combinació desigual; i un valor alt, una estructura que la fórmula considera diversa i amb elements de mosaic. No és un percentatge de paisatge en bon estat, ni diferencia per si sol mosaic funcional de fragmentació o degradació.",
-        "confidence": "COMPLET i ALTA perquè les capes numèriques requerides per aquesta execució són disponibles. La confiança descriu la completesa cartogràfica del càlcul; no valida al camp la qualitat dels espais oberts, els ecotons o els hàbitats.",
-    },
-    "CORE_02": {
-        "kind": "synthetic_score",
-        "measure": "Expressa la responsabilitat cartogràfica associada a la diversitat d’hàbitats i a la superfície d’hàbitats d’interès comunitari (HIC), inclosos els prioritaris.",
-        "basis": "Cartografia d’hàbitats terrestres v3 i els seus camps HIC i HIC_PRIOR, retallats a l’àmbit; superfície total de l’àmbit.",
-        "calculation": "Mitjana aritmètica, amb el mateix pes (1/3), de: nombre d’hàbitats (100 amb 45 o més), percentatge de superfície HIC (100 al 60%) i percentatge de superfície d’HIC prioritaris (100 al 20%). Cada component es limita a 0–100.",
-        "interpretation": "Un valor baix indica poca representació cartografiada segons aquests tres components; un valor intermedi, responsabilitat moderada; i un valor alt, molta diversitat o extensió HIC. No és un percentatge d’estat de conservació, qualitat local, representativitat ni favorable estat dels HIC.",
-        "confidence": "COMPLET i ALTA perquè la cartografia d’hàbitats i els camps HIC necessaris són disponibles. No incorpora una avaluació de camp de l’estat de conservació.",
-    },
-    "CORE_03": {
-        "kind": "direct_reading",
-        "measure": "Mostra la mediana NDVI de l’escena Sentinel-2 vigent al visor: una lectura espectral directa del vigor o activitat fotosintètica relativa de la vegetació en aquella data.",
-        "basis": "Escena Sentinel-2 L2A indicada al resultat, amb màscara de qualitat i píxels vàlids dins l’àmbit. La data d’adquisició prové del registre de l’escena; el visor no combina aquesta xifra amb altres lectures.",
-        "calculation": "És la mediana dels píxels NDVI vàlids de l’escena, expressada en l’escala pròpia de l’NDVI. El motor CORE conserva CORE_03 sense puntuació sintètica perquè el càlcul complet previst requeriria també NDMI, NDWI i context climàtic compatible. Per tant, NDVI 0,616 no es transforma en 61,6/100 ni entra a RADAR_12.",
-        "interpretation": "És una lectura directa: valors NDVI més baixos solen correspondre a menys activitat verda i valors més alts a més vigor o cobertura verda, sempre segons coberta i època. No és una puntuació EcoRadar 0–100, un percentatge de vegetació, una mesura d’humitat, biodiversitat o estat sanitari.",
-        "confidence": "PARCIAL i MITJANA perquè es mostra una única lectura NDVI datada, però falta la puntuació sintètica CORE_03 i la combinació temporalment compatible de vigor, humitat i clima.",
-    },
-    "CORE_04": {
-        "kind": "synthetic_score",
-        "measure": "Estima potencial estructural de refugi climàtic amb els proxies disponibles de coberta forestal, orientació mitjana i presència cartografiada d’aigua.",
-        "basis": "Cobertes del sòl de l’ICGC; model digital del terreny de l’ICGC, convertit a component d’obaga/solana; resum de cursos i fonts de l’ACA, la CHE i l’ICGC.",
-        "calculation": "Mitjana aritmètica, amb el mateix pes (1/3), del percentatge forestal; l’orientació mitjana transformada de −1…1 a 0…100, on més obaga puntua més; i RADAR_10 (aigua cartografiada). No hi entren numèricament LST, NDMI ni NDVI en aquest resultat actual.",
-        "interpretation": "Un valor baix indica pocs proxies estructurals de frescor; un valor intermedi, presència parcial; i un valor alt, més bosc, orientació favorable i aigua cartografiada segons la fórmula. No demostra un microclima fresc, aigua permanent, refugi funcional ni presència d’espècies sensibles.",
-        "confidence": "PARCIAL i MITJANA perquè el resultat existeix però falten observacions microclimàtiques i espectrals crítiques per confirmar el refugi actual.",
-    },
-    "CORE_05": {
-        "kind": "synthetic_score",
-        "measure": "Resumeix vulnerabilitat climàtica estructural amb proxies de poca coberta forestal, pendent, exposició sud, artificialització i poca aigua cartografiada.",
-        "basis": "Cobertes del sòl de l’ICGC; pendent i orientació del model digital del terreny de l’ICGC; RADAR_10 d’aigua cartografiada.",
-        "calculation": "Mitjana aritmètica, amb el mateix pes (1/5), de: dèficit forestal respecte del 90%; pendent mitjà que arriba a 100 als 35°; component de solana; artificialització que arriba a 100 al 10%; i invers de RADAR_10. Tots els components es limiten a 0–100. No hi entren numèricament LST, NDMI, meteorologia ni sequera en aquest resultat actual.",
-        "interpretation": "Un valor baix indica poca vulnerabilitat segons aquests proxies; un valor intermedi, factors estructurals mixtos; i un valor alt, acumulació de condicions que la fórmula tracta com a vulnerables. No mesura dany observat, estrès hídric actual ni risc climàtic probabilístic.",
-        "confidence": "PARCIAL i MITJANA perquè el càlcul estructural és possible, però falten o no s’integren sèries climàtiques i lectures actuals necessàries per descriure l’estat present.",
-    },
-    "CORE_06": {
-        "kind": "synthetic_score",
-        "measure": "Mesura la quantitat i amplitud del coneixement públic de biodiversitat disponible, no l’estat biològic complet del territori.",
-        "basis": "Registres normalitzats de GBIF i iNaturalist: nombre de taxons, proporció de registres recents i nombre de grups taxonòmics amb registres.",
-        "calculation": "Mitjana aritmètica, amb el mateix pes (1/3), de: taxons registrats (100 amb 600), proporció de registres recents sobre el total i grups taxonòmics representats (100 amb 10). Els components es limiten a 0–100.",
-        "interpretation": "Un valor baix indica poc coneixement públic segons aquests comptatges; un valor intermedi, cobertura documental desigual; i un valor alt, molts taxons, registres recents i grups representats. No és un percentatge de biodiversitat, riquesa real, abundància, ocupació, qualitat d’hàbitat ni absència d’espècies on no hi ha cites.",
-        "confidence": "COMPLET i ALTA respecte de les fonts públiques processades. Aquesta confiança no corregeix el biaix d’esforç, accessibilitat, taxonomia o estacionalitat dels registres oportunistes.",
-    },
-    "CORE_07": {
-        "kind": "synthetic_score",
-        "measure": "Quantifica accessibilitat i pressió humana potencial a partir dels elements cartografiats a OpenStreetMap.",
-        "basis": "Longitud de camins i pistes OSM dins l’àmbit i nombre de punts OSM relacionats amb ús públic, normalitzats per superfície.",
-        "calculation": "Mitjana aritmètica, amb el mateix pes (1/2), de: densitat de camins en km/km², que arriba a 100 amb 4 km/km²; i punts d’ús públic per 1.000 ha, que arriben a 100 amb 8 punts/1.000 ha. Els dos components es limiten a 0–100.",
-        "interpretation": "Un valor baix indica poca accessibilitat cartografiada; un valor intermedi, xarxa o equipaments moderats; i un valor alt, més potencial d’accés i interacció humana. No mesura visitants, intensitat, comportament, impacte ecològic, capacitat de càrrega ni conflicte real.",
-        "confidence": "COMPLET i ALTA perquè els components OSM previstos són disponibles. La confiança s’aplica al càlcul cartogràfic, no a la freqüentació, que requeriria comptadors o treball de camp.",
-    },
-    "CORE_08": {
-        "kind": "synthetic_score",
-        "measure": "Resumeix una connectivitat estructural potencial mitjançant coberta natural, pes dels connectors oficials i baixa pressió d’accés cartografiada.",
-        "basis": "Cobertes naturals de l’ICGC; connectors de la Infraestructura Verda de Catalunya; RADAR_07 derivat d’OpenStreetMap.",
-        "calculation": "Mitjana aritmètica, amb el mateix pes (1/3), del percentatge de cobertes considerades naturals; la superfície del connector principal, que arriba a 100 al 25% de l’àmbit; i l’invers de RADAR_07. Hàbitats i hidrologia no intervenen numèricament en aquest resultat actual.",
-        "interpretation": "Un valor baix indica una matriu menys natural, menys connector o més accés segons la fórmula; un valor intermedi, condicions mixtes; i un valor alt, continuïtat estructural potencial. No demostra connectivitat funcional per a una espècie, flux genètic, permeabilitat de barreres ni qualitat dels hàbitats.",
-        "confidence": "COMPLET i ALTA perquè els tres components numèrics són disponibles. La funcionalitat ecològica continua pendent de contrast específic per espècie, procés i barreres reals.",
-    },
-    "CORE_09": {
-        "kind": "synthetic_score",
-        "measure": "Resumeix la resistència estructural potencial davant el foc segons continuïtat de coberta, mosaic obert, relleu, antecedents cremats, accessibilitat i aigua cartografiada.",
-        "basis": "Cobertes del sòl de l’ICGC; pendent del model digital del terreny; perímetres històrics d’incendis de la Generalitat; xarxa OSM; RADAR_10 d’aigua cartografiada.",
-        "calculation": "Mitjana aritmètica, amb el mateix pes (1/6), de: invers de bosc més matollar respecte del 95%; espais oberts i agraris que arriben a 100 al 20%; invers del pendent respecte de 35°; invers de la superfície històricament cremada respecte de 100 ha; densitat OSM que arriba a 100 amb 4 km/km²; i RADAR_10. No hi entren numèricament meteorologia actual, NDMI, LST, Pla Alfa ni combustible mesurat.",
-        "interpretation": "Un valor baix indica poca resistència segons aquests proxies; un valor intermedi, factors mixtos; i un valor alt, més discontinuïtat, relleu menys desfavorable, accessibilitat o aigua segons la fórmula. No és perill d’incendi actual, probabilitat d’ignició, velocitat de propagació, severitat, capacitat d’extinció ni resiliència ecològica postincendi.",
-        "confidence": "PARCIAL i MITJANA perquè és una síntesi estructural i falten capes crítiques de combustible i estat hídric actual per interpretar el comportament del foc.",
-    },
-    "CORE_10": {
-        "kind": "synthetic_score",
-        "measure": "Quantifica la presència cartografiada de xarxa hidrogràfica i fonts com a proxy molt bàsic de funcionalitat hídrica.",
-        "basis": "Longitud de cursos i eixos de drenatge de l’ACA i la CHE, i nombre de fonts cartografiades per l’ICGC, normalitzats per superfície.",
-        "calculation": "Mitjana aritmètica, amb el mateix pes (1/2), de: km de xarxa hídrica per 100 ha, que arriben a 100 amb 1,5 km/100 ha; i nombre de fonts, que arriba a 100 amb 15. El relleu, l’NDWI, el cabal, la qualitat i la permanència no intervenen numèricament en aquest resultat actual.",
-        "interpretation": "Un valor baix indica poca aigua cartografiada segons els dos comptatges; un valor intermedi, presència parcial; i un valor alt, més densitat de xarxa o fonts. No és un percentatge d’aigua disponible, cabal, qualitat, permanència, connectivitat aquàtica ni ús efectiu per la fauna.",
-        "confidence": "PARCIAL i MITJANA perquè la cartografia permet calcular el proxy, però no hi ha verificació de cabal, temporalitat, estat, qualitat ni funcionalitat ecològica.",
-    },
-    "CORE_11": {
-        "kind": "synthetic_score",
-        "measure": "Agrega condicions que el motor associa a oportunitat potencial de restauració: valor d’hàbitats, vulnerabilitat, dèficit d’aigua, pressió potencial i connectivitat.",
-        "basis": "Resultats dels RADAR_02, RADAR_05, RADAR_10, RADAR_07 i RADAR_08; no incorpora una capa directa de degradació o necessitat d’actuació.",
-        "calculation": "Mitjana aritmètica, amb el mateix pes (1/5), de RADAR_02; RADAR_05; l’invers de RADAR_10; RADAR_07 transformat amb màxim entre 20 i 60 i descens fora d’aquest rang; i RADAR_08. Els valors absents s’ometen de la mitjana.",
-        "interpretation": "Un valor baix indica poca coincidència dels cinc criteris; un valor intermedi, oportunitats condicionades; i un valor alt, coincidència elevada segons la fórmula. No demostra degradació, no localitza una actuació, no calcula el benefici de restaurar i no converteix el valor en una ordre d’intervenir.",
-        "confidence": "PARCIAL i MITJANA perquè integra RADAR amb limitacions i no disposa de diagnosi directa de degradació, trajectòria ni resposta esperada a la restauració.",
-    },
-    "CORE_12": {
-        "kind": "synthetic_score",
-        "measure": "Ofereix una síntesi numèrica de tots els RADAR CORE que tenen puntuació calculable.",
-        "basis": "Valors numèrics disponibles de RADAR_01 a RADAR_11. La lectura directa NDVI mostrada a RADAR_03 no és una puntuació CORE i queda exclosa.",
-        "calculation": "Mitjana aritmètica simple, amb el mateix pes, de tots els RADAR_01–RADAR_11 amb valor numèric. Els RADAR no calculables s’ometen; en l’execució actual RADAR_03 no hi entra. No hi ha ponderació addicional per confiança, urgència, superfície o tipus d’indicador.",
-        "interpretation": "Un valor baix, intermedi o alt només situa la mitjana dins els llindars EcoRadar. No és un percentatge d’estat de conservació, una prioritat espacial, una urgència operativa ni prova que tots els components tinguin el mateix significat ecològic.",
-        "confidence": "PARCIAL i MITJANA per disseny: hereta buits i limitacions dels indicadors disponibles i el motor força l’estat parcial. Cal obrir els RADAR anteriors per entendre què empeny la mitjana.",
-    },
-}
 
 
 def read_json(path: Path) -> dict:
@@ -694,7 +592,8 @@ def build_data() -> dict:
         if feature["properties"].get("highway") in road_highways
     )
 
-    core = read_csv(PROJECT / "indicators" / "ecoradar_core_indicators.csv")
+    core_payload = read_json(PROJECT / "indicators" / "ecoradar_core_indicators.json")
+    core = core_payload.get("indicators", [])
     basic = {r["indicador"]: r for r in read_csv(PROJECT / "indicators" / "ecoradar_01_resum.csv")}
     hydrology = read_csv(PROJECT / "indicators" / "hidrologia_resum.csv")
     connectivity = read_csv(PROJECT / "indicators" / "connectivitat_resum.csv")
@@ -716,20 +615,6 @@ def build_data() -> dict:
     daily_readings = read_json(PROJECT / "indicators" / "daily_readings.json")
     daily_history = read_json(PROJECT / "indicators" / "daily_history.json")
     reading_registry = read_json(PROJECT / "metadata" / "reading_registry.json")
-    core = [
-        {
-            "code": item["code"],
-            "name": item["name"],
-            "value_0_100": "" if item.get("value_0_100") is None else str(item["value_0_100"]),
-            "category": item.get("category", ""),
-            "status": item.get("status", ""),
-            "confidence": item.get("confidence", ""),
-            "sources_used": "; ".join(item.get("sources_used", [])),
-            "sources_absent": "; ".join(item.get("sources_absent", [])),
-            "limitations": "; ".join(item.get("limitations", [])),
-        }
-        for item in reading_registry.get("core_indicators", {}).values()
-    ]
     current_fire_cells = feature_collection(
         PROJECT / "maps" / "incendis" / "current_fire_danger_cells.geojson",
         max_points=8,
@@ -892,20 +777,23 @@ def build_data() -> dict:
                 {
                     "code": r["code"],
                     "name": r["name"],
-                    "value": None if r["value_0_100"] == "" else float(r["value_0_100"]),
-                    "display": f"NDVI {sentinel['metrics']['ndvi']['median']:.3f}".replace(".", ",") if r["code"] == "CORE_03" else None,
-                    "measurementKind": "direct_reading" if r["code"] == "CORE_03" else "synthetic_score",
-                    "category": None if r["code"] == "CORE_03" else r["category"],
-                    "status": (
-                        f"PARCIAL · escena {sentinel['acquired_at_utc'][8:10]}.{sentinel['acquired_at_utc'][5:7]}.{sentinel['acquired_at_utc'][:4]}"
-                        if r["code"] == "CORE_03"
-                        else r["status"]
-                    ),
-                    "confidence": "mitjana" if r["code"] == "CORE_03" else r["confidence"],
-                    "sourceDate": sentinel["acquired_at_utc"] if r["code"] == "CORE_03" else None,
-                    "sourcesUsed": [item.strip() for item in r["sources_used"].split(";") if item.strip()],
-                    "sourcesAbsent": [item.strip() for item in r["sources_absent"].split(";") if item.strip()],
-                    "limitations": [item.strip() for item in r["limitations"].split(";") if item.strip()],
+                    "value": r.get("value_0_100"),
+                    "display": r.get("primary_result") or "NO AVALUABLE",
+                    "measurementKind": r.get("measurement_kind"),
+                    "category": r.get("category"),
+                    "status": r.get("status"),
+                    "confidence": r.get("confidence"),
+                    "sourceDate": r.get("source_date_utc"),
+                    "sourcesUsed": r.get("sources_used", []),
+                    "sourcesAbsent": r.get("sources_absent", []),
+                    "limitations": r.get("limitations", []),
+                    "interpretationShort": r.get("interpretation_short"),
+                    "calculation": r.get("calculation_explanation"),
+                    "profile": r.get("profile", {}),
+                    "guide": r.get("guide", {}),
+                    "confidenceDimensions": r.get("confidence_dimensions", {}),
+                    "confidenceReason": r.get("confidence_reason"),
+                    "methodologyVersion": r.get("methodology_version"),
                 }
                 for r in core
             ],
@@ -934,6 +822,28 @@ def render_index(data: dict) -> str:
         f" ({lst_contributing_count} amb píxels vàlids dins l’àmbit)"
         if lst_contributing_count is not None
         else ""
+    )
+    core_by_code = {item["code"]: item for item in data["metrics"]["core"]}
+    core12 = core_by_code["CORE_12"]
+    decision_rows = core12.get("profile", {}).get("rows", [])
+    version_label = f"Fase 2 · snapshot {str(data.get('snapshotId') or '')[-8:]}"
+    observations_html = "".join(
+        f"<li><strong>{html.escape(item['display'])}</strong> · {html.escape(item.get('interpretationShort') or '')}</li>"
+        for item in (core_by_code["CORE_01"], core_by_code["CORE_02"], core_by_code["CORE_03"])
+    )
+    priorities_html = "".join(
+        f"<li><strong>{html.escape(str(item.get('result') or ''))}</strong> · {html.escape(str(item.get('alternative') or ''))} — {html.escape(str(item.get('sector') or ''))}</li>"
+        for item in decision_rows
+    )
+    management_rows_html = "".join(
+        "<tr>"
+        f"<td>{html.escape(str(item.get('sector') or ''))}</td>"
+        f"<td>{html.escape(str(item.get('alternative') or ''))}</td>"
+        f"<td class=\"num\">{html.escape(str(item.get('result') or ''))}</td>"
+        f"<td>{html.escape('; '.join(item.get('vetoes') or []) or str(item.get('robustness') or ''))}</td>"
+        f"<td>{html.escape(str(item.get('confidence') or ''))} · {html.escape(str(item.get('robustness') or ''))}</td>"
+        "</tr>"
+        for item in decision_rows
     )
     return f"""<!doctype html>
 <html lang="ca">
@@ -1170,13 +1080,14 @@ def render_index(data: dict) -> str:
     #ecoradar-alinya .eu-score:hover {{ border-color:#7fa184; box-shadow:0 5px 14px rgba(23,51,45,.09); transform:translateY(-1px); }}
     #ecoradar-alinya .eu-score:focus-visible {{ outline:3px solid rgba(47,116,63,.27); outline-offset:2px; }}
     #ecoradar-alinya .eu-score[aria-expanded="true"] {{ border-color:var(--green); box-shadow:inset 0 0 0 1px var(--green); background:#f6faf4; }}
-    #ecoradar-alinya .eu-score-head {{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; color:#415461; font-size:10px; }}
+    #ecoradar-alinya .eu-score-head {{ display:grid; gap:8px; color:#415461; font-size:10px; }}
     #ecoradar-alinya .eu-score-title {{ min-width:0; line-height:1.35; }}
-    #ecoradar-alinya .eu-score-value {{ display:flex; flex:0 0 auto; align-items:center; gap:7px; }}
-    #ecoradar-alinya .eu-score strong {{ color:var(--green); font-size:16px; white-space:nowrap; }}
+    #ecoradar-alinya .eu-score-value {{ display:flex; align-items:flex-start; justify-content:space-between; gap:7px; }}
+    #ecoradar-alinya .eu-score strong {{ color:var(--green); font-size:14px; line-height:1.25; overflow-wrap:anywhere; }}
     #ecoradar-alinya .eu-score-info {{ display:inline-grid; width:20px; height:20px; place-items:center; border:1px solid #93a994; border-radius:50%; color:var(--green); background:#eef5eb; font-size:11px; font-style:normal; font-weight:850; line-height:1; }}
     #ecoradar-alinya .eu-score-track {{ height:5px; margin-top:8px; overflow:hidden; border-radius:9px; background:#e4e1d9; }}
     #ecoradar-alinya .eu-score-fill {{ height:100%; background:var(--green); }}
+    #ecoradar-alinya .eu-score-interpretation {{ min-height:3.2em; margin:8px 0 0; color:#52636e; font-size:11px; line-height:1.45; }}
     #ecoradar-alinya .eu-status {{ display:inline-block; margin-top:8px; padding:3px 6px; border-radius:999px; background:#edf1ec; color:#506159; font-size:8px; text-transform:uppercase; }}
     #ecoradar-alinya .eu-core-explainer {{ margin-top:12px; padding:18px; border:1px solid #9eb69f; border-radius:8px; background:#f7fbf5; box-shadow:0 8px 22px rgba(23,51,45,.08); }}
     #ecoradar-alinya .eu-core-explainer-head {{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; padding-bottom:13px; border-bottom:1px solid #d6e1d3; }}
@@ -1389,11 +1300,11 @@ def render_index(data: dict) -> str:
   <header class="eu-head">
     <h1>ECORADAR<span>MUNTANYA D'ALINYÀ</span><small>DIAGNOSI ECOLÒGICA INTEGRADA</small></h1>
     <div class="eu-title"><h2>TERRITORI, BIODIVERSITAT I DECISIÓ</h2><p>Lectura executiva i diagnosi tècnica completa · fonts oficials i indicadors traçables</p></div>
-    <div class="eu-brand-stack"><div class="eu-brand-logos" aria-label="EcoRadar i Green Wolf Nature"><img src="{ecoradar_logo}" alt="Logotip EcoRadar"><img src="{green_wolf_logo}" alt="Logotip Green Wolf Nature"></div><div class="eu-badge">Dades obertes · versió 20.07.2026</div></div>
+    <div class="eu-brand-stack"><div class="eu-brand-logos" aria-label="EcoRadar i Green Wolf Nature"><img src="{ecoradar_logo}" alt="Logotip EcoRadar"><img src="{green_wolf_logo}" alt="Logotip Green Wolf Nature"></div><div class="eu-badge">{version_label}</div></div>
   </header>
 
   <nav class="eu-report-nav" aria-label="Capítols de la fitxa interactiva">
-    <a href="#resum">1 · Resum territorial</a><a href="#cartografia">Mapa interactiu</a><a href="#mosaic">2 · Mosaic i hàbitats</a><a href="#biodiversitat">3 · Biodiversitat</a><a href="#aigua">4 · Aigua i connectivitat</a><a href="#pressions">5 · Accessibilitat i ús públic</a><a href="#foc">6 · Foc i resiliència</a><a href="#gestio">7 · Prioritats de gestió</a><a href="#fonts">8 · Fonts i metodologia</a>
+    <a href="#resum">1 · Resum territorial</a><a href="#cartografia">Mapa interactiu</a><a href="#mosaic">2 · Mosaic i hàbitats</a><a href="#biodiversitat">3 · Biodiversitat</a><a href="#aigua">4 · Aigua i connectivitat</a><a href="#pressions">5 · Accessibilitat i ús potencial</a><a href="#foc">6 · Foc i resposta</a><a href="#gestio">7 · Síntesi de gestió</a><a href="#fonts">8 · Fonts i metodologia</a>
   </nav>
 
   <section class="eu-report-section eu-executive" id="resum">
@@ -1402,7 +1313,7 @@ def render_index(data: dict) -> str:
         <div><p class="eu-section-kicker">01 · Resum territorial</p></div>
         <aside class="eu-reading-path"><strong>Dues profunditats, una mateixa diagnosi</strong><p>Aquesta primera pantalla permet una lectura directiva en dos minuts. El mapa i els set capítols següents conserven íntegrament la lectura tècnica, les fitxes, les fonts, les capes i les limitacions.</p></aside>
       </div>
-      <p class="eu-lead">La Muntanya d’Alinyà conserva una matriu forestal extensa, una elevada responsabilitat sobre hàbitats d’interès comunitari i una biodiversitat pública ben documentada. El procés territorial central és el tancament progressiu del paisatge: prats, herbassars, vores i ecotons tenen una funció desproporcionada com a hàbitat, espai de campeig i discontinuïtat del combustible.</p>
+      <p class="eu-lead">La Muntanya d’Alinyà presenta una matriu forestal extensa i una responsabilitat territorial elevada pels HIC. El coneixement públic de biodiversitat és abundant però espacialment desigual; la configuració funcional del mosaic, l’estat local dels hàbitats i la resposta dels receptors necessiten validació específica abans d’ordenar actuacions.</p>
       <div class="eu-actions"><a class="eu-action" href="#cartografia">Explorar el mapa interactiu</a><a class="eu-action secondary" href="#gestio">Anar a les prioritats de gestió</a><a class="eu-action secondary" href="#mosaic">Començar la lectura tècnica</a></div>
     </div>
     <div class="eu-card-grid eu-four">
@@ -1424,10 +1335,10 @@ def render_index(data: dict) -> str:
       <p class="eu-source">Pla Alfa és el nivell operatiu oficial municipal dels Agents Rurals. L’índex 0–100 és una lectura EcoRadar separada; no converteix el Pla Alfa en una puntuació ni n’inventa una resolució de 100 m.</p>
     </article>
     <div class="eu-exec-grid">
-      <article class="eu-report-card green"><h3>Conclusions clau</h3><ul class="eu-exec-list"><li>Una base ecològica forta que demana governar el canvi, no transformar de manera general.</li><li>No es justifica una restauració generalitzada. Cal validar, actuar només si el camp confirma un problema funcional i fer seguiment de la resposta.</li><li>Fonts, drenatges, fondals i corredors poden concentrar funcions ecològiques durant la sequera, la calor o la recuperació postpertorbació.</li></ul></article>
-      <article class="eu-report-card blue"><h3>Prioritats de gestió</h3><ul class="eu-exec-list"><li>P1 · Delimitar sectors candidats de referència i no-intervenció.</li><li>P2 · Restaurar processos de mosaic i connectivitat, prioritzant la retirada de pressions.</li><li>P3 · Inventariar i protegir processos hídrics, refugis i continuïtat de ribera.</li><li>P4 · Reduir pressions d’accés i ús públic abans d’augmentar infraestructura o capacitat de visita.</li></ul></article>
+      <article class="eu-report-card green"><h3>Observacions interpretables</h3><ul class="eu-exec-list">{observations_html}</ul></article>
+      <article class="eu-report-card blue"><h3>Matriu sector × alternativa</h3><ul class="eu-exec-list">{priorities_html}</ul></article>
     </div>
-    <div class="eu-callout"><strong>Decisió prioritària.</strong> Aplicar una regla de no-deteriorament; mantenir una xarxa d’espais oberts seleccionada per funció; validar al camp hàbitats, aigua, pressions i estructura forestal; i actuar només quan el benefici ecològic i el seguiment siguin explícits.</div>
+    <div class="eu-callout"><strong>{core12['display']}.</strong> {core12['interpretationShort']} Les categories P1/P2 s’apliquen a una alternativa i un sector concrets; no són puntuacions ecològiques.</div>
   </section>
 
   <p class="eu-map-access-label">Accés cartogràfic · totes les capes i interaccions originals</p>
@@ -1577,7 +1488,7 @@ def render_index(data: dict) -> str:
     </aside>
     </div>
 
-    <footer class="eu-foot"><span>Fonts: Generalitat perill estructural 2024 i incendis · Meteocat XEMA · USGS Landsat 8/9 · Copernicus Sentinel-2/CLMS · ICGC · Hàbitats/HIC · ACA · GBIF/iNaturalist · OSM</span><span>EcoRadar Alinyà · versió 20.07.2026</span></footer>
+    <footer class="eu-foot"><span>Fonts: Generalitat perill estructural 2024 i incendis · Meteocat XEMA · USGS Landsat 8/9 · Copernicus Sentinel-2/CLMS · ICGC · Hàbitats/HIC · ACA · GBIF/iNaturalist · OSM</span><span>EcoRadar Alinyà · {version_label}</span></footer>
   </main>
 
   <article class="eu-report" aria-label="Informe complet interactiu">
@@ -1614,8 +1525,8 @@ def render_index(data: dict) -> str:
 
     <section class="eu-report-section" id="aigua">
       <p class="eu-section-kicker">04 · Aigua, refugis climàtics i connectivitat</p>
-      <h2>Refugis potencials i corredors s’han de llegir com un mateix sistema</h2>
-      <p class="eu-lead">Fonts, drenatges, fondals i corredors poden concentrar funcions ecològiques durant la sequera, la calor o la recuperació postpertorbació.</p>
+      <h2>Presència hídrica, potencial estructural i senyal satel·lital es mantenen separats</h2>
+      <p class="eu-lead">Cursos, drenatges i fonts descriuen presència cartografiada. El potencial estructural de refugi i el senyal LST/NDMI/NDVI són lectures diferents; cap d’elles confirma permanència de l’aigua, microclima o ús ecològic sense validació.</p>
       <div class="eu-card-grid">
         <article class="eu-report-card blue"><span class="eu-big" id="report-water-km"></span><h3>Xarxa hídrica</h3><p>Cursos i eixos de drenatge cartografiats.</p></article>
         <article class="eu-report-card green"><span class="eu-big" id="report-springs"></span><h3>Fonts</h3><p>Presència oficial; permanència, qualitat, ombra i ús faunístic pendents de camp.</p></article>
@@ -1634,11 +1545,11 @@ def render_index(data: dict) -> str:
         <article class="eu-report-card"><h3>Pressió coneguda i pressió real</h3><p>Els camins i els punts d’ús públic localitzen on cal observar, però no substitueixen comptatges, estacionalitat, incidències ni resposta ecològica.</p><p>Els 124,8 km representen camins i pistes cartografiats i els 18 punts representen elements d’ús públic registrats a OSM. Mostren accessibilitat potencial, no freqüentació ni pressió real, i serveixen per prioritzar la validació de possibles conflictes amb hàbitats o fauna.</p></article>
       </div>
       <div class="eu-callout"><strong>Llegenda del mapa.</strong> Línies grises: camins i pistes OSM (124,8 km). Punts foscos: elements d’ús públic OSM (18 punts). La seva coincidència amb hàbitats o registres de fauna indica on prioritzar la comprovació de camp; no quantifica l’ús ni l’impacte.</div>
-      <details class="eu-detail"><summary>Com s’ha d’interpretar la pressió humana?</summary><div>Els 124,8 km de xarxa i els 18 punts d’ús són localitzadors de pressió potencial. La decisió exigeix comptatges i observació de l’activitat, la temporalitat i la resposta dels hàbitats o la fauna, especialment on coincideixen amb HIC, aigua, rapinyaires o corredors.</div></details>
+      <details class="eu-detail"><summary>Com s’ha d’interpretar l’accessibilitat cartografiada?</summary><div>Els 124,8 km de xarxa i els 18 punts d’ús localitzen on mesurar l’ús potencial. La decisió exigeix comptatges i observació de l’activitat, la temporalitat i la resposta dels hàbitats o la fauna, especialment on coincideixen amb HIC, aigua o connectors.</div></details>
     </section>
 
     <section class="eu-report-section eu-fire-chapter" id="foc">
-      <p class="eu-section-kicker">06 · Foc i resiliència territorial</p>
+      <p class="eu-section-kicker">06 · Foc: propagació, sensibilitat, recuperació i resposta</p>
       <p class="eu-subtle">Document postincendi · fitxes 10–14</p>
       <h2>Del precedent històric a una decisió professional, selectiva i verificable</h2>
       <p class="eu-subtle">MEMÒRIA DEL FOC · DIAGNOSI ECOLÒGICA POSTFOC · MOSAIC, CONCURRÈNCIA I DECISIÓ</p>
@@ -1648,7 +1559,7 @@ def render_index(data: dict) -> str:
         <article class="eu-report-card orange"><h3>Missatge clau</h3><p><strong>El senyal estructural no és la superfície cremada, sinó la coincidència entre continuïtat bosc-matollar, accessibilitat i condicions topogràfiques semblants als focs històrics.</strong></p><p>La situació operativa del dia es llegeix separadament amb l’índex EcoRadar actual, meteorologia XEMA, acumulació de precipitació, ForestDrought, observacions satel·litàries amb control de frescor i Pla Alfa oficial com a context no numèric.</p><h3 style="margin-top:14px">Límit metodològic</h3><p>Ni el mapa estructural ni l’índex actual són una probabilitat oficial d’incendi. La decisió de tractament continua requerint combustible i humitat fina validats al camp, exposició, valors ecològics afectats i viabilitat de manteniment.</p></article>
       </div>
       <div class="eu-card-grid eu-two" style="margin-top:12px">
-        <article class="eu-report-card green"><h3>Situació operativa actualitzada</h3><div class="eu-facts"><div class="eu-fact"><span>Perill EcoRadar avui</span><strong id="report-fire-chapter-today"></strong></div><div class="eu-fact"><span>Pla Alfa oficial</span><strong id="report-fire-chapter-pla"></strong></div><div class="eu-fact"><span>Meteorologia</span><strong id="report-fire-chapter-weather"></strong></div><div class="eu-fact"><span>Sequera acumulada</span><strong id="report-fire-chapter-drought"></strong></div><div class="eu-fact"><span>Tendència</span><strong id="report-fire-chapter-trend"></strong></div><div class="eu-fact"><span>Confiança del producte</span><strong id="report-fire-chapter-confidence"></strong></div><div class="eu-fact"><span>Darrera comprovació</span><strong id="report-fire-chapter-update"></strong></div></div></article>
+        <article class="eu-report-card green"><h3>Situació operativa actualitzada</h3><div class="eu-facts"><div class="eu-fact"><span>Perill EcoRadar avui</span><strong id="report-fire-chapter-today"></strong></div><div class="eu-fact"><span>Pla Alfa oficial</span><strong id="report-fire-chapter-pla"></strong></div><div class="eu-fact"><span>Meteorologia</span><strong id="report-fire-chapter-weather"></strong></div><div class="eu-fact"><span>Sequera acumulada</span><strong id="report-fire-chapter-drought"></strong></div><div class="eu-fact"><span>Tendència</span><strong id="report-fire-chapter-trend"></strong></div><div class="eu-fact"><span>Qualitat/actualització efectiva</span><strong id="report-fire-chapter-confidence"></strong></div><div class="eu-fact"><span>Darrera comprovació</span><strong id="report-fire-chapter-update"></strong></div></div></article>
         <article class="eu-report-card blue"><h3>Què determina la lectura d’avui?</h3><p id="report-fire-chapter-dominants"></p><p id="report-fire-chapter-freshness"></p><p><strong>Interpretació de gestió:</strong> el valor diari serveix per graduar la urgència de comprovació, vigilància i preparació operativa. No converteix automàticament una cel·la en zona d’actuació silvícola: aquesta decisió ha de creuar HIC, biodiversitat, aigua, connectivitat, accessibilitat, combustible real i objectiu ecològic.</p></article>
       </div>
       <details class="eu-detail"><summary>Traçabilitat de totes les variables del perill d’incendi avui</summary><div><div class="eu-fire-table-wrap"><table class="eu-fire-table eu-evidence-table"><thead><tr><th>Variable</th><th>Valor</th><th>Data real</th><th>Pes efectiu</th><th>Estat temporal</th><th>Funció en la diagnosi</th></tr></thead><tbody id="report-fire-chapter-variables"></tbody></table></div><p>Temperatura de l’aire, precipitació recent i acumulada i Pla Alfa completen el context operatiu amb data pròpia; el Pla Alfa no entra numèricament a l’índex. Les dades dinàmiques massa antigues es mantenen visibles com a context, però no poden aportar el seu pes complet.</p></div></details>
@@ -1665,10 +1576,10 @@ def render_index(data: dict) -> str:
     </section>
 
     <section class="eu-report-section" id="gestio">
-      <p class="eu-section-kicker">07 · Prioritats de gestió</p>
-      <h2>Decidir des dels processos ecològics: EUROPARC, gestió adaptativa i rewilding</h2>
-      <p class="eu-lead">La finalitat no és conservar una fotografia fixa del paisatge, sinó reforçar integritat ecològica, connectivitat, resiliència i capacitat d’autoregulació. La intervenció és un mitjà temporal: s’escull el nivell mínim necessari i es revisa segons resultats.</p>
-      <article class="eu-report-card blue"><h3>Decisions</h3><p><strong>Mantenir obert:</strong> prioritzar prats, feixes i pastura extensiva on redueixen combustible continu sense comprometre HIC.</p><p><strong>Trencar continuïtat:</strong> actuar selectivament on coincideixen accessos, bosc-matollar i concurrència alta o mitjana-alta.</p><p><strong>No sobreactuar:</strong> evitar restauració generalitzada si no hi ha erosió o recuperació lenta validada.</p></article>
+      <p class="eu-section-kicker">07 · Síntesi multicriteri per a la gestió</p>
+      <h2>Comparar cada alternativa dins una unitat documentada, amb vetos i incertesa explícits</h2>
+      <p class="eu-lead">CORE_12 no agrega els RADAR ni fabrica una nota territorial. Conserva separades les alternatives, les restriccions i la robustesa; una dada favorable no compensa una obligació de no-deteriorament ni l’absència d’una dada essencial.</p>
+      <article class="eu-report-card blue"><h3>Resultat de la instantània</h3><p><strong>{core12['display']}.</strong> {core12['interpretationShort']}</p><p>Les categories P1/P2/P3 pertanyen a files concretes de la matriu sector × alternativa. `NO AVALUABLE` impedeix ordenar una actuació quan falta evidència essencial.</p></article>
       <div class="eu-card-grid" style="margin-top:12px">
         <article class="eu-report-card green"><h3>1 · Objectiu i diagnòstic</h3><p>Identificar l’objecte de conservació o el procés que es vol recuperar, el seu estat inicial, les pressions demostrades i l’escala territorial. No confondre descripció amb diagnòstic.</p></article>
         <article class="eu-report-card blue"><h3>2 · Trajectòria rewilding</h3><p>Definir una trajectòria futura viable, no una còpia rígida del passat: més processos naturals, permeabilitat, heterogeneïtat, interaccions ecològiques i menor dependència de manteniment continu.</p></article>
@@ -1687,16 +1598,10 @@ def render_index(data: dict) -> str:
         </tbody>
       </table>
       <div class="eu-callout"><strong>Marc metodològic.</strong> EUROPARC-España (2018, PDF pàg. 29–32) proposa territori com a sistema, successió ecològica, seguiment i gestió adaptativa. EUROPARC-España (2008, PDF pàg. 75–77 i 98) vincula objectiu, diagnòstic, mesura, resultat i avaluació, i admet un gradient entre no-intervenció i maneig actiu. El rewilding reforça processos autoregulats, connectivitat, context social i seguiment adaptatiu segons les <a href="https://portals.iucn.org/library/node/52582">directrius IUCN</a> i els <a href="https://doi.org/10.1111/cobi.13730">principis de Carver et al. (2021)</a>.</div>
-      <h3 style="margin:22px 0 8px;color:#163f35">Programa inicial derivat del marc de decisió</h3>
+      <h3 style="margin:22px 0 8px;color:#163f35">Matriu sector × alternativa de la instantània actual</h3>
       <table class="eu-data-table">
-        <thead><tr><th>Prioritat</th><th>Horitzó</th><th>Actuació</th><th>Indicador de verificació</th></tr></thead>
-        <tbody>
-          <tr><td class="num">P1</td><td>0–6 mesos</td><td>Delimitar sectors candidats de referència i no-intervenció creuant HIC, refugis, aigua, tranquil·litat i regeneració.</td><td>Línia base, objectiu de procés i llindar de revisió per sector.</td></tr>
-          <tr><td class="num">P2</td><td>0–18 mesos</td><td>Restaurar processos de mosaic i connectivitat; prioritzar retirada de pressions i herbivoria compatible abans que desbrossament recurrent.</td><td>Heterogeneïtat, permeabilitat i qualitat d’ecotons sense deteriorament d’HIC.</td></tr>
-          <tr><td class="num">P3</td><td>0–12 mesos</td><td>Inventariar i protegir processos hídrics, refugis i continuïtat de ribera per permanència, estat, fauna i pressions.</td><td>Funcionalitat hídrica i resposta d’espècies o microhàbitats indicadors.</td></tr>
-          <tr><td class="num">P4</td><td>0–18 mesos</td><td>Reduir pressions d’accés i ús públic abans d’augmentar infraestructura o capacitat de visita.</td><td>Comptatges, incidències i resposta de fauna o hàbitat abans/després.</td></tr>
-          <tr><td class="num">P5</td><td>Abans d’actuar</td><td>Validar combustible, humitat fina, exposició i manteniment; intervenir només on el risc funcional i el benefici ecològic coincideixin.</td><td>Cap tractament basat només en índexs; resultat i efectes col·laterals mesurats.</td></tr>
-        </tbody>
+        <thead><tr><th>Sector</th><th>Alternativa</th><th>Resultat</th><th>Veto o límit</th><th>Confiança i robustesa</th></tr></thead>
+        <tbody>{management_rows_html}</tbody>
       </table>
       <div class="eu-card-grid" style="margin-top:12px">
         <article class="eu-report-card green"><h3>Camp ecològic</h3><p>Estat d’HIC i ecotons; estructura forestal i fusta morta; permanència i qualitat de l’aigua; espècies indicadores, microhàbitats i pressions reals.</p></article>
@@ -1707,7 +1612,7 @@ def render_index(data: dict) -> str:
       <p class="eu-lead">Les lectures variables no redefineixen cada dia els valors estructurals del territori. Serveixen per ajustar la situació operativa, detectar canvis i decidir quan cal validar o accelerar una actuació. La taula mostra la dada real disponible, la seva data i la funció concreta que té en la decisió.</p>
       <div class="eu-fire-table-wrap"><table class="eu-data-table eu-evidence-table"><thead><tr><th>Lectura</th><th>Valor i estat</th><th>Data real</th><th>Com entra en la diagnosi i la gestió</th></tr></thead><tbody id="eu-daily-decision-evidence"></tbody></table></div>
       <h3 style="margin:22px 0 8px;color:#163f35">Traçabilitat dels indicadors Radar</h3>
-      <p class="eu-lead">Els dotze indicadors Radar sintetitzen dimensions diferents i no són dotze ordres d’actuació. La prioritat s’estableix quan diversos indicadors coincideixen, la font és adequada i el camp confirma una necessitat funcional.</p>
+      <p class="eu-lead">Els dotze RADAR tenen tipus de resultat diferents. CORE_12 els utilitza com a evidència no agregada dins una matriu de decisió; no els converteix en una escala comuna ni en dotze ordres d’actuació.</p>
       <div class="eu-fire-table-wrap"><table class="eu-data-table eu-evidence-table"><thead><tr><th>Indicador</th><th>Valor, estat i confiança</th><th>Ús en la decisió</th></tr></thead><tbody id="eu-core-decision-evidence"></tbody></table></div>
     </section>
 
@@ -2078,20 +1983,19 @@ def render_index(data: dict) -> str:
     current_fire_danger:'Síntesi diària per prioritzar comprovació i preparació; no ordena tractaments sense creuar valors ecològics i validació de combustible.'
   }};
   const coreDecisionRoles = {{
-    CORE_01:'Sustenta P2: conservar o recuperar mosaic funcional després de validar ús, trajectòria i qualitat dels espais oberts.',
-    CORE_02:'Filtre transversal de no-deteriorament per a P1–P5; la cartografia HIC no substitueix l’estat de conservació de camp.',
-    CORE_03:'Orienta seguiment de vigor i humitat, però la puntuació parcial i la data de l’escena impedeixen decidir una actuació per si sola.',
-    CORE_04:'Sustenta P1 i P3 com a cribratge de sectors potencialment frescos; exigeix permanència hídrica i validació microclimàtica.',
-    CORE_05:'Orienta on combinar calor, sequera, relleu i sensibilitat; no equival a impacte observat ni urgència automàtica.',
-    CORE_06:'Filtre de biodiversitat per a totes les prioritats; els registres públics documenten presències i buits, no abundància ni absència.',
-    CORE_07:'Sustenta P4 com a accessibilitat potencial; cal mesurar freqüentació i conflictes abans de restringir o ampliar l’ús.',
-    CORE_08:'Sustenta P2 i P3 per mantenir permeabilitat terrestre i hídrica, amb comprovació de barreres i funcionalitat real.',
-    CORE_09:'Sustenta P5 i el capítol 06; combina vulnerabilitat estructural amb la lectura diària, sense convertir-la en ordre de tractament.',
-    CORE_10:'Sustenta P3; la xarxa i les fonts orienten inventari, però permanència, qualitat i ús faunístic resten pendents de camp.',
-    CORE_11:'Orienta on verificar necessitat de restauració; un valor alt no justifica restauració generalitzada ni substitueix la trajectòria ecològica.',
-    CORE_12:'Síntesi de prioritat de gestió; només és interpretable amb els indicadors anteriors, les dates de les fonts i els criteris de camp.'
+    CORE_01:'Descriu composició i configuració; la funció del mosaic s’ha de validar per hàbitat o procés.',
+    CORE_02:'Activa la regla preventiva P1 de no-deteriorament; no informa de l’estat local de conservació.',
+    CORE_03:'Aporta una observació NDVI datada; no descriu l’estat actual ni ordena actuacions sense sèrie fenològica.',
+    CORE_04:'Localitza candidats estructurals i satel·litals a refugi; exigeix coherència temporal i validació microclimàtica.',
+    CORE_05:'Manté exposició, sensibilitat i capacitat separades; la vulnerabilitat és NO AVALUABLE amb les dades actuals.',
+    CORE_06:'Orienta prospecció segons cobertura i biaixos del coneixement; no puntua la biodiversitat real.',
+    CORE_07:'Selecciona xarxa i punts on mesurar ús; no permet afirmar pressió o impacte real.',
+    CORE_08:'Descriu continuïtat general; no afirma permeabilitat funcional sense receptor, resistències i validació.',
+    CORE_09:'Separa propagació actual, sensibilitat, recuperació i context operatiu; no crea una nota única de resiliència.',
+    CORE_10:'Inventaria xarxa i fonts; permanència, qualitat, cabal i funció requereixen comprovació.',
+    CORE_11:'Aplica una porta de decisió i retorna NO AVALUABLE perquè degradació, referència i benefici no estan demostrats.',
+    CORE_12:'Compara sector i alternativa amb vetos; conserva opcions no dominades i no genera una prioritat global.'
   }};
-  const coreRadarGuides = {json.dumps(CORE_RADAR_GUIDES, ensure_ascii=False, separators=(",", ":"))};
   const fireAreaColors = {{
     'molt baix':'#2f8f4e', 'baix':'#a8c94a', 'moderat':'#f0d84b',
     'alt':'#ef8b2c', 'molt alt':'#d43d2f', 'extrem':'#711d2d'
@@ -2122,7 +2026,7 @@ def render_index(data: dict) -> str:
       ['Superfície vàlida',`${{ca1(fire.summary.valid_area_ha)}} ha`],
       ['Superfície sense dada',`${{ca1(fire.summary.no_data_area_ha)}} ha`],
       ['Cobertura de l’àmbit',`${{ca1(fire.summary.valid_coverage_pct)}} %`],
-      ['Confiança del producte',`${{ca1(fire.summary.confidence_pct)}} % · ${{fire.summary.confidence}}`],
+      ['Qualitat/actualització efectiva',`${{ca1(fire.summary.confidence_pct)}} % · ${{fire.summary.confidence}}`],
       ['Factors dominants',(fire.summary.dominant_labels || []).join(' · ')]
     ].map(([label,value]) => `<span>${{esc(label)}}</span><strong>${{esc(value)}}</strong>`).join('');
     root.querySelector('#eu-fire-current-areas').innerHTML = Object.entries(fire.summary.area_by_category_ha || {{}})
@@ -2219,10 +2123,12 @@ def render_index(data: dict) -> str:
   const coreExplainer = root.querySelector('#eu-core-explainer');
   coreScoreGrid.innerHTML = D.metrics.core.map(metric => {{
     const value = metric.value == null ? null : Math.max(0,Math.min(100,metric.value));
-    const valueText = metric.display || (value == null ? 'N/D' : ca1(value));
+    const valueText = metric.display || (value == null ? 'NO AVALUABLE' : ca1(value));
     const publicCode = String(metric.code || '').replace('CORE_','RADAR_');
-    const kind = metric.measurementKind === 'direct_reading' ? 'lectura directa' : 'puntuació 0–100';
-    return `<button type="button" class="eu-score" data-core-code="${{esc(metric.code)}}" aria-expanded="false" aria-controls="eu-core-explainer"><div class="eu-score-head"><span class="eu-score-title">${{esc(publicCode)}} · ${{esc(metric.name)}}</span><span class="eu-score-value"><strong>${{esc(valueText)}}</strong><i class="eu-score-info" aria-hidden="true">i</i></span></div><div class="eu-score-track" aria-hidden="true"><div class="eu-score-fill" style="width:${{value == null ? 0 : value}}%"></div></div><span class="eu-status">${{esc(metric.status)}} · confiança ${{esc(metric.confidence)}} · ${{kind}}</span></button>`;
+    const kindLabels = {{direct_reading:'lectura directa',direct_inventory:'inventari directe',descriptive_profile:'perfil descriptiu',dual_profile:'perfil doble',three_axis_profile:'perfil de 3 eixos',knowledge_profile:'perfil de coneixement',two_level_profile:'perfil de 2 nivells',four_axis_profile:'perfil de 4 eixos',decision_gate:'porta de decisió',multicriteria_decision:'síntesi multicriteri'}};
+    const kind = kindLabels[metric.measurementKind] || 'resultat metodològic';
+    const track = value == null ? '' : `<div class="eu-score-track" aria-hidden="true"><div class="eu-score-fill" style="width:${{value}}%"></div></div>`;
+    return `<button type="button" class="eu-score" data-core-code="${{esc(metric.code)}}" aria-expanded="false" aria-controls="eu-core-explainer"><div class="eu-score-head"><span class="eu-score-title">${{esc(publicCode)}} · ${{esc(metric.name)}}</span><span class="eu-score-value"><strong>${{esc(valueText)}}</strong><i class="eu-score-info" aria-hidden="true">i</i></span></div>${{track}}<p class="eu-score-interpretation">${{esc(metric.interpretationShort || '')}}</p><span class="eu-status">${{esc(metric.status)}} · confiança ${{esc(metric.confidence)}} · ${{kind}}</span></button>`;
   }}).join('');
 
   function closeCoreExplainer(returnFocus=false) {{
@@ -2234,17 +2140,16 @@ def render_index(data: dict) -> str:
   }}
 
   function openCoreExplainer(metric, button) {{
-    const guide = coreRadarGuides[metric.code];
+    const guide = metric.guide;
     if (!guide) return;
     const publicCode = String(metric.code || '').replace('CORE_','RADAR_');
-    const direct = guide.kind === 'direct_reading';
-    const valueText = metric.display || (metric.value == null ? 'No calculable amb les dades disponibles' : `${{ca1(metric.value)}}/100`);
-    const resultMeta = direct
-      ? `Valor mostrat: ${{esc(valueText)}} · adquisició ${{esc(humanDate(metric.sourceDate))}}. Aquest valor conserva l’escala directa de l’NDVI.`
-      : `Puntuació actual: ${{esc(valueText)}} · categoria ${{esc(metric.category || 'no disponible')}}. Els llindars de lectura són: 0–&lt;20 molt baix; 20–&lt;40 baix; 40–&lt;60 mitjà; 60–&lt;80 alt; 80–100 molt alt.`;
+    const direct = metric.measurementKind === 'direct_reading';
+    const valueText = metric.display || 'NO AVALUABLE';
+    const resultMeta = `Resultat actual: ${{esc(valueText)}} · ${{esc(metric.category || 'sense categoria')}}${{metric.sourceDate ? ` · data ${{esc(humanDate(metric.sourceDate))}}` : ''}}.`;
+    const confidenceVector = Object.entries(metric.confidenceDimensions || {{}}).map(([key,item]) => `${{key}}: ${{item.rating}}`).join(' · ');
     coreExplainer.innerHTML = `
       <div class="eu-core-explainer-head">
-        <div><h3>${{esc(publicCode)}} · ${{esc(metric.name)}}</h3><span class="eu-core-kind ${{direct ? 'direct' : ''}}">${{direct ? 'Lectura directa · NDVI' : 'Puntuació sintètica EcoRadar · 0–100'}}</span></div>
+        <div><h3>${{esc(publicCode)}} · ${{esc(metric.name)}}</h3><span class="eu-core-kind ${{direct ? 'direct' : ''}}">${{esc(metric.measurementKind.replaceAll('_',' '))}}</span></div>
         <button type="button" class="eu-core-close" aria-label="Tanca l’explicació de ${{esc(publicCode)}}">×</button>
       </div>
       <div class="eu-core-explainer-grid">
@@ -2252,7 +2157,8 @@ def render_index(data: dict) -> str:
         <section class="eu-core-explainer-block"><h4>2 · En què es basa</h4><p>${{esc(guide.basis)}}</p></section>
         <section class="eu-core-explainer-block wide"><h4>3 · Com es calcula</h4><p>${{esc(guide.calculation)}}</p></section>
         <section class="eu-core-explainer-block wide"><h4>4 · Com interpretar el resultat</h4><p>${{esc(guide.interpretation)}}</p><p class="eu-core-explainer-meta">${{resultMeta}}</p></section>
-        <section class="eu-core-explainer-block wide"><h4>5 · Confiança</h4><p><strong>${{esc(metric.status)}} · confiança ${{esc(metric.confidence)}}.</strong> ${{esc(guide.confidence)}}</p></section>
+        <section class="eu-core-explainer-block wide"><h4>5 · Confiança</h4><p><strong>${{esc(metric.status)}} · confiança ${{esc(metric.confidence)}}.</strong> ${{esc(metric.confidenceReason || '')}}</p><p class="eu-core-explainer-meta">${{esc(confidenceVector)}}</p></section>
+        <section class="eu-core-explainer-block wide"><h4>Fonts, data i límits</h4><p>${{esc(guide.limits || metric.limitations.join(' '))}}</p><p class="eu-core-explainer-meta">Fonts efectives: ${{esc((metric.sourcesUsed || []).join(' · ') || 'cap font suficient')}} · metodologia ${{esc(metric.methodologyVersion || '')}}</p></section>
       </div>`;
     coreScoreGrid.querySelectorAll('[data-core-code]').forEach(candidate => candidate.setAttribute('aria-expanded',String(candidate === button)));
     coreExplainer.dataset.openCode = metric.code;
@@ -2434,7 +2340,7 @@ def render_index(data: dict) -> str:
     firePopup.innerHTML = `<button class="eu-fire-popup-close" type="button" aria-label="Tancar detall">×</button>
       <h3>${{esc(p.cell_id)}} · perill actual</h3>
       <div class="eu-fire-popup-main">${{ca1(p.index_0_100)}}/100 · ${{esc(p.category)}}</div>
-      <p><strong>Confiança del producte en aquesta cel·la:</strong> ${{ca1(p.confidence_pct)}} % · ${{esc(p.confidence)}}. <strong>Cobertura del pes temporalment elegible:</strong> ${{ca1(p.available_weight_pct)}} %; <strong>pes base encara elegible:</strong> ${{ca1(p.eligible_base_weight_pct)}} %.</p>
+      <p><strong>Qualitat/actualització efectiva en aquesta cel·la:</strong> ${{ca1(p.confidence_pct)}} % · ${{esc(p.confidence)}}. <strong>Cobertura del pes temporalment elegible:</strong> ${{ca1(p.available_weight_pct)}} %; <strong>pes base encara elegible:</strong> ${{ca1(p.eligible_base_weight_pct)}} %.</p>
       <p><strong>Vent contextual XEMA · CJ Organyà:</strong> ${{esc(windValue)}} · observació ${{esc(windDate)}}. <span class="eu-muted">${{esc(p.source_freshness?.wind?.status_label || '')}} · estació oficial de referència situada a 9,2 km de l’estació Y4 d’Alinyà.</span></p>
       <p><strong>Meteorologia actual:</strong> temperatura ${{esc(metricText(meteo.air_temperature,'°C'))}} · humitat ${{esc(metricText(meteo.relative_humidity,'%',1,0))}} · vent ${{esc(metricText(meteo.wind,'km/h',3.6))}} · ratxa ${{esc(metricText(meteo.wind_gust,'km/h',3.6))}} · pluja 24 h ${{accumulated.recent_24h_mm == null ? '—' : ca1(accumulated.recent_24h_mm) + ' mm'}}. <span class="eu-muted">${{esc(meteoFreshness)}}.</span></p>
       <p><strong>Sequera meteorològica acumulada:</strong> ${{esc(rainText)}}. <span class="eu-muted">Acumulacions XEMA fins a ${{esc(humanDate(accumulated.data_at_utc))}} · ${{esc(rainFreshness)}}; si la cobertura és insuficient es mostra “dada no disponible”.</span></p>

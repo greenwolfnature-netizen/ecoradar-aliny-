@@ -79,5 +79,5 @@
     "product_map": "maps/producte/mapa_refugis_climatics_alinya.png"
   },
   "limitations": "Relative screening layer based on a two-summer daytime LST composite and one Sentinel-2 date. Hydrology is drawn as cartographic context and does not enter the numeric formula. It is not air temperature, a climatic normal, microclimate monitoring or a field-validated refuge inventory. Weights and thresholds are explicit EcoRadar analysis assumptions.",
-  "snapshot_id": "alinya-2581ff169adb0155"
+  "snapshot_id": "alinya-d712326d21b18f95"
 }

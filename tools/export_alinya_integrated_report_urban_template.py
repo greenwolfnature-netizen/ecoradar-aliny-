@@ -34,7 +34,7 @@ from tools import export_postfoc_ecoradar_alinya_a4 as postfire_export
 PROJECT = ROOT / "projectes" / "Alinya"
 DEFAULT_BODY = PROJECT / "reports" / "informe_ecoradar_alinya_plantilla_urba_cos.pdf"
 DEFAULT_OUTPUT = PROJECT / "reports" / "informe_complet_muntanya_alinya.pdf"
-DEFAULT_FITXA = PROJECT / "reports" / "releases" / "fitxa_ecoradar_alinya_v1.pdf"
+DEFAULT_FITXA = PROJECT / "reports" / "fitxa_ecoradar_alinya_v1.pdf"
 OUTPUT_COPY = ROOT / "output" / "pdf" / "informe_complet_muntanya_alinya.pdf"
 
 PAGE_W, PAGE_H = landscape(A4)
@@ -765,6 +765,12 @@ def sources_page(c: canvas.Canvas, page: int) -> None:
 
 
 def build_body(path: Path, data: dict[str, Any]) -> None:
+    if source.phase2_methodology(data):
+        # The Phase 2 CORE contract has no common 0–100 scale. Reuse the
+        # compact project report so the legacy score-based body is never
+        # rendered for the revised Alinyà methodology.
+        source.build_report(path, data, include_all_pages=True)
+        return
     urban.register_fonts()
     urban.build_styles()
     biodiversity = biodiversity_breakdown()

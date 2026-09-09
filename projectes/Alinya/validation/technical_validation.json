@@ -1,6 +1,6 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-07-08T14:38:06+00:00",
+  "generated_at": "2026-09-09T19:55:38+00:00",
   "level": "technical",
   "summary": {
     "checks": 8,
@@ -92,7 +92,7 @@
             "path": "projectes/Alinya/processed/biodiversitat.gpkg",
             "exists": true,
             "status": "inside",
-            "feature_count": 731,
+            "feature_count": 3680,
             "crs": "EPSG:25831",
             "outside_area_m2": 0.0,
             "outside_pct": 0.0
@@ -153,7 +153,7 @@
       "title": "Fonts documentades",
       "status": "PASS",
       "severity": "critical",
-      "message": "Fonts al catàleg: 29; fonts incompletes: 0.",
+      "message": "Fonts al catàleg: 30; fonts incompletes: 0.",
       "evidence": {
         "undocumented_sources": []
       }

@@ -40,14 +40,21 @@ class DiagnosisConclusion:
     confidence: str
     limitations: tuple[str, ...]
     robustness: str
+    evidence_type: str = "interpretació plausible"
+    snapshot_id: str | None = None
 
 
-def run_diagnosis_engine(project_root: str | Path = "projectes/Alinya") -> dict[str, Any]:
+def run_diagnosis_engine(
+    project_root: str | Path = "projectes/Alinya",
+    *,
+    allow_partial_copernicus: bool = False,
+) -> dict[str, Any]:
     """Run the diagnosis engine after mandatory indicator outputs exist."""
 
     root = Path(project_root)
     _ensure_inputs(root)
-    ensure_mandatory_copernicus(root)
+    if not allow_partial_copernicus:
+        ensure_mandatory_copernicus(root)
     (root / "diagnosis").mkdir(parents=True, exist_ok=True)
     (root / "metadata").mkdir(parents=True, exist_ok=True)
     (root / "reports").mkdir(parents=True, exist_ok=True)
@@ -110,6 +117,10 @@ def _load_context(root: Path) -> dict[str, Any]:
 
 
 def _build_conclusions(context: dict[str, Any]) -> list[DiagnosisConclusion]:
+    if context.get("indicators_payload", {}).get("methodology_version") == "alinya_core_v2_2026-09-09":
+        from ecoradar.diagnosis.alinya_phase2 import build_alinya_phase2_diagnosis
+
+        return [DiagnosisConclusion(**record) for record in build_alinya_phase2_diagnosis(context)]
     by_code = context["by_code"]
     conclusions = [
         _overall_state(context),
@@ -346,9 +357,12 @@ def _field_validation_needs(context: dict[str, Any]) -> DiagnosisConclusion:
 
 
 def _diagnosis_payload(root: Path, context: dict[str, Any], conclusions: list[DiagnosisConclusion]) -> dict[str, Any]:
+    methodology = context.get("indicators_payload", {}).get("methodology_version")
     return {
         "project": root.name,
         "generated_at": _now(),
+        "methodology_version": methodology,
+        "snapshot_input": context.get("indicators_payload", {}).get("snapshot_id"),
         "scope": "diagnosi ecològica basada en indicadors; sense recomanacions, fitxa ni informe final",
         "inputs": {
             "indicators": "indicators/ecoradar_core_indicators.json",
@@ -356,7 +370,11 @@ def _diagnosis_payload(root: Path, context: dict[str, Any], conclusions: list[Di
             "data_availability_report": "metadata/data_availability_report.json",
         },
         "summary": {
-            "overall_state": "diagnosi parcial defensable",
+            "overall_state": (
+                "diagnosi contextual amb perfils no compensatoris"
+                if methodology == "alinya_core_v2_2026-09-09"
+                else "diagnosi parcial defensable"
+            ),
             "confidence": _overall_confidence(conclusions),
             "robust_conclusions": sum(1 for item in conclusions if item.robustness == "robusta"),
             "provisional_conclusions": sum(1 for item in conclusions if item.robustness == "provisional"),
@@ -417,6 +435,7 @@ def _diagnosis_markdown(payload: dict[str, Any]) -> str:
                 f"- Fonts: {', '.join(conclusion['sources_used']) or '-'}",
                 f"- Confiança: `{conclusion['confidence']}`",
                 f"- Robustesa: `{conclusion['robustness']}`",
+                f"- Tipus d'evidència: `{conclusion.get('evidence_type', 'interpretació plausible')}`",
                 f"- Limitacions: {'; '.join(conclusion['limitations']) or '-'}",
                 "",
             ]

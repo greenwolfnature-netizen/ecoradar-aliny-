@@ -262,7 +262,7 @@ def _build_records() -> tuple[dict[str, Any], dict[str, Any]]:
         "connectivity": ("Connectivitat cartografiada", None, None, sources["connectivity"], "study_area_vectors", sources["connectivity"].get("source")),
         "access": ("Accessibilitat cartografiada", None, None, _read("metadata/recreational_pressure_metadata.json"), "study_area_lines", "OpenStreetMap / Overpass"),
         "publicUse": ("Punts d'ús públic cartografiats", None, None, _read("metadata/recreational_pressure_metadata.json"), "study_area_points", "OpenStreetMap / Overpass"),
-        "water": ("Aigua i funcionalitat hídrica cartografiada", None, None, sources["hydrology"], "study_area_vectors", sources["hydrology"].get("source")),
+        "water": ("Presència hídrica cartografiada", None, None, sources["hydrology"], "study_area_vectors", sources["hydrology"].get("source")),
         "historical_fires": ("Perímetres històrics d'incendi", sources["historical_fires"].get("features_clipped"), "perímetres", sources["historical_fires"], "study_area_vectors", sources["historical_fires"].get("source")),
     }
     for key, (label, value, unit, metadata, spatial_support, source_name) in structural_specs.items():
@@ -309,7 +309,11 @@ def _snapshot_seed(products: dict[str, Any], sources: dict[str, Any]) -> dict[st
         "core": {
             key: {
                 field: item.get(field)
-                for field in ("value_0_100", "direct_value", "status", "confidence", "sources_used", "sources_absent")
+                for field in (
+                    "value_0_100", "direct_value", "primary_result", "measurement_kind",
+                    "methodology_version", "status", "confidence", "confidence_dimensions",
+                    "sources_used", "sources_absent", "profile",
+                )
             }
             for key, item in sorted(products["core"].items())
         },
@@ -342,7 +346,7 @@ def build() -> dict[str, Any]:
             SNAPSHOT_HISTORY.mkdir(parents=True, exist_ok=True)
             shutil.copy2(REGISTRY, SNAPSHOT_HISTORY / f"{previous_id}.json")
     registry = {
-        "schema_version": "1.0",
+        "schema_version": "2.0",
         "snapshot_id": snapshot_id,
         "generated_at_utc": _iso_now(),
         "checked_at_utc": products["daily"].get("checked_at_utc"),
@@ -356,6 +360,7 @@ def build() -> dict[str, Any]:
     REGISTRY.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     stamp_paths = [
         "indicators/daily_readings.json", "metadata/daily_readings.json",
+        "indicators/daily_history.json", "metadata/daily_history.json",
         "indicators/current_fire_danger.json", "metadata/current_fire_danger.json",
         "indicators/ecoradar_core_indicators.json", "metadata/indicator_engine_report.json",
         "metadata/indicators_completeness_report.json", "metadata/data_availability_report.json",
@@ -368,6 +373,10 @@ def build() -> dict[str, Any]:
         "indicators/biodiversity_ecological_elements.geojson",
         "indicators/biodiversity_ecological_situations.geojson",
         "indicators/biodiversity_knowledge_coverage.geojson",
+        "diagnosis/ecoradar_diagnosis.json",
+        "metadata/diagnosis_engine_report.json",
+        "recommendations/recommendations.json",
+        "recommendations/priority_matrix.json",
     ]
     for relative in stamp_paths:
         _stamp(PROJECT / relative, snapshot_id)

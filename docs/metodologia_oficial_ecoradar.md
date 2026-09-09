@@ -231,139 +231,61 @@ El projecte manté una base integrada que inventaria les dades oficials utilitza
 
 ## 10. Sistema d'indicadors EcoRadar Core
 
-Els indicadors EcoRadar Core són indicadors mestres. No pretenen substituir anàlisis especialitzades, sinó crear una radiografia ecològica comparable i útil per a la gestió.
+Els Core poden ser lectures directes, inventaris, perfils descriptius, portes de decisió o síntesis multicriteri. Només utilitzen una escala 0-100 quan hi ha una normalització ecològica explícita i validada. La implementació metodològica d'Alinyà és `alinya_core_v2_2026-09-09` i conserva, per a cada resultat, fonts, instantània, data, càlcul, limitacions i vector de confiança.
 
-Cada indicador inclou:
+### 10.1 CORE_01 · Configuració del mosaic del paisatge
 
-- identificador;
-- nom;
-- valor normalitzat 0-100 quan és calculable;
-- categoria: molt baix, baix, mitjà, alt o molt alt;
-- estat: complet, parcial o no disponible;
-- confiança: alta, mitjana o baixa;
-- fonts utilitzades;
-- fonts absents;
-- explicació del càlcul;
-- limitacions;
-- impacte sobre la diagnosi.
+Perfil de composició i configuració espacial: cobertes, nombre i mida de taques, taca màxima, mida efectiva de malla, densitat de vores i continuïtat cartografiada. No agrega aquests descriptors ni premia automàticament més fragments o més vores. La funció d'interior i ecotó queda no avaluable fins que s'aprovin una distància de vora i receptors ecològics.
 
-### 10.1 CORE_01 · Mosaic del paisatge
+### 10.2 CORE_02 · Responsabilitat territorial d'hàbitats
 
-**Càlcul implementat:** mitjana aritmètica amb el mateix pes de sis components, tots limitats a 0-100: entropia de Shannon normalitzada de les cobertes; cobertura forestal amb òptim entre 35% i 75%; superfície oberta o agrària que arriba a 100 al 18%; artificialització invertida que arriba a 0 al 10%; nombre d'hàbitats que arriba a 100 amb 50; i superfície del connector principal que arriba a 100 al 25% de l'àmbit.
+Inventari directe de superfície HIC i HIC prioritari sobre el polígon complet de l'àmbit. Les presències puntuals es mostren com a traçabilitat i no entren en el denominador d'àrea. El resultat expressa responsabilitat cartografiada; l'estat de conservació local és no avaluable sense seguiment específic.
 
-**Fonts numèriques:** cobertes del sòl de l'ICGC, cartografia d'hàbitats terrestres v3 i connectors de la Infraestructura Verda de Catalunya.
+### 10.3 CORE_03 · Vigor observat de la vegetació
 
-**Interpretació:** mesura heterogeneïtat estructural segons aquests proxies. No és un percentatge de paisatge en bon estat ni diferencia, sense camp, mosaic funcional de fragmentació o degradació.
+Lectura directa de la mediana NDVI de l'escena Sentinel-2 vàlida, amb data, cobertura i QA. `NDVI 0,616` no equival a `61,6/100` ni entra com una puntuació a la síntesi. Sense sèrie fenològica comparable no es classifica com a anomalia favorable o desfavorable.
 
-### 10.2 CORE_02 · Valor d'hàbitats
+### 10.4 CORE_04 · Refugi climàtic potencial i senyal observat
 
-**Càlcul implementat:** mitjana aritmètica amb el mateix pes de tres components: nombre d'hàbitats (100 amb 45 o més), percentatge de superfície HIC (100 al 60%) i percentatge d'HIC prioritaris (100 al 20%).
+Separa el potencial estructural, basat en coberta i topografia, del senyal satel·lital observat, basat en LST, NDMI i NDVI compatibles dins la seva vigència. El percentatge satel·lital usa com a denominador els píxels vegetats amb les tres lectures vàlides; no demostra permanència ni ús biològic.
 
-**Fonts numèriques:** cartografia d'hàbitats terrestres v3 i els seus camps HIC i HIC_PRIOR, retallats a l'àmbit.
+### 10.5 CORE_05 · Perfil de vulnerabilitat climàtica
 
-**Interpretació:** representa responsabilitat cartogràfica associada als hàbitats. No és un percentatge d'estat de conservació, qualitat local o representativitat.
+Organitza exposició, sensibilitat i capacitat adaptativa sense compensar-les. Amb les dades actuals només es descriu una exposició parcial; sensibilitat i capacitat adaptativa queden no avaluables. No es publica una puntuació de vulnerabilitat.
 
-### 10.3 CORE_03 · Estat de la vegetació
+### 10.6 CORE_06 · Cobertura del coneixement de biodiversitat
 
-**Càlcul implementat:** el motor CORE no calcula actualment una puntuació sintètica per a CORE_03. Al visor es mostra, de manera separada, la mediana NDVI directa de l'escena Sentinel-2 L2A amb màscara de qualitat del 07.07.2026.
+Descriu registres públics, cobertura en quadrícula d'1 km, vigència, grups i biaixos de mostreig, inclosa la paginació de GBIF. Mesura informació disponible i esforç desigual, no biodiversitat real, riquesa, abundància o absència.
 
-**Distinció necessària:** `NDVI 0,616` és una lectura directa en l'escala pròpia de l'NDVI. No equival a `61,6/100`, no és un percentatge i no entra en CORE_12. Una puntuació sintètica d'estat de la vegetació requeriria la combinació compatible de vigor, humitat i context climàtic que el motor encara no executa.
+### 10.7 CORE_07 · Accessibilitat cartografiada i ús potencial
 
-### 10.4 CORE_04 · Refugis climàtics
+Inventari directe de longitud i densitat de xarxa OSM i punts d'ús. No infereix freqüentació, pressió ecològica, impacte o capacitat de càrrega sense dades d'intensitat i observació.
 
-**Càlcul implementat:** mitjana aritmètica amb el mateix pes del percentatge forestal, l'orientació mitjana transformada de -1…1 a 0…100 amb més puntuació d'obaga, i CORE_10 com a proxy d'aigua cartografiada.
+### 10.8 CORE_08 · Continuïtat estructural del paisatge
 
-**Fonts numèriques:** cobertes del sòl de l'ICGC, model digital del terreny de l'ICGC i resum hidrogràfic de l'ACA, la CHE i l'ICGC.
+Perfil de cobertes i connectors oficials amb les dependències que entren realment al càlcul. La connectivitat funcional i la permeabilitat per espècies són no avaluables sense receptors, resistències i validació de camp.
 
-**Interpretació:** és potencial estructural. LST, NDMI i NDVI no entren numèricament en aquest CORE actual; el resultat no demostra un microclima fresc, aigua permanent o un refugi funcional.
+### 10.9 CORE_09 · Perfil de foc: propagació, sensibilitat i recuperació
 
-### 10.5 CORE_05 · Vulnerabilitat climàtica
+Manté separats el perill EcoRadar actual, la sensibilitat ecològica, la recuperació postincendi i el context operatiu oficial del Pla Alfa. Cap dimensió compensa una altra. Els camins i la superfície cremada històrica no reben un signe lineal de resiliència; la recuperació és no avaluable sense severitat, trajectòria i resposta observada.
 
-**Càlcul implementat:** mitjana aritmètica amb el mateix pes del dèficit forestal respecte del 90%, pendent mitjà que arriba a 100 als 35°, component de solana, artificialització que arriba a 100 al 10% i invers de CORE_10.
+### 10.10 CORE_10 · Presència cartografiada d'aigua
 
-**Fonts numèriques:** cobertes del sòl i model digital del terreny de l'ICGC, més CORE_10.
+Inventari directe de xarxa hídrica i fonts cartografiades. No afirma cabal, permanència, qualitat, disponibilitat efectiva, connectivitat aquàtica o funcionalitat ecològica.
 
-**Interpretació:** és vulnerabilitat estructural segons cinc proxies. LST, NDMI, meteorologia i sequera no entren numèricament en aquest CORE actual; no mesura estrès o dany observat ni risc probabilístic.
+### 10.11 CORE_11 · Porta de decisió de restauració
 
-### 10.6 CORE_06 · Biodiversitat coneguda
+Porta no compensatòria que exigeix degradació demostrada, referència o trajectòria, objectiu, benefici comparat amb no-intervenció, viabilitat i risc. El resultat actual és `NO AVALUABLE`; això no significa absència de necessitat, sinó falta d'evidència essencial per justificar una intervenció.
 
-**Càlcul implementat:** mitjana aritmètica amb el mateix pes de taxons registrats (100 amb 600), proporció de registres recents i grups taxonòmics amb registres (100 amb 10).
+### 10.12 CORE_12 · Síntesi multicriteri per a la gestió
 
-**Fonts numèriques:** registres normalitzats de GBIF i iNaturalist.
+Matriu sector per alternativa amb restriccions, vetos, factors decisius, robustesa i confiança. No calcula una mitjana global ni converteix dimensions no commensurables en un únic 0-100. Cada fila pot donar `P1`, `P2`, `P3`, `NO AVALUABLE` o `SENSE PRIORITAT ÚNICA`; l'ordenació final requereix unitats, objectius i preferències aprovats pel gestor.
 
-**Interpretació:** mesura coneixement públic disponible. No és un percentatge de biodiversitat, riquesa real, abundància, ocupació, qualitat d'hàbitat ni absència on no hi ha cites.
+## 11. Escales, categories i confiança
 
-### 10.7 CORE_07 · Pressió humana i ús públic
+No existeix una escala comuna obligatòria per als dotze Core. Cada resultat manté la unitat i el tipus de mesura més defensables. Una lectura directa, un inventari, un perfil o una porta de decisió no es presenten com un percentatge d'estat ecològic. Quan una versió futura utilitzi 0-100, haurà de documentar referència, sentit ecològic, llindars i validació.
 
-**Càlcul implementat:** mitjana aritmètica amb el mateix pes de la densitat OSM de camins, que arriba a 100 amb 4 km/km², i els punts OSM d'ús públic per 1.000 ha, que arriben a 100 amb 8 punts/1.000 ha.
-
-**Font numèrica:** OpenStreetMap.
-
-**Interpretació:** representa accessibilitat i pressió potencial cartografiades. No mesura visitants, intensitat, comportament, impacte, capacitat de càrrega o conflicte real.
-
-### 10.8 CORE_08 · Connectivitat ecològica
-
-**Càlcul implementat:** mitjana aritmètica amb el mateix pes del percentatge de cobertes considerades naturals, la superfície del connector principal normalitzada a 100 al 25% de l'àmbit, i l'invers de CORE_07.
-
-**Fonts numèriques:** cobertes del sòl de l'ICGC, connectors de la Infraestructura Verda de Catalunya i CORE_07 derivat d'OSM. Hàbitats i hidrologia no entren numèricament en el resultat actual.
-
-**Interpretació:** és connectivitat estructural potencial. No demostra funcionalitat per a una espècie, flux genètic, permeabilitat de barreres ni qualitat dels hàbitats.
-
-### 10.9 CORE_09 · Resiliència davant del foc
-
-**Càlcul implementat:** mitjana aritmètica amb el mateix pes de sis components: invers de bosc més matollar respecte del 95%; superfície oberta o agrària que arriba a 100 al 20%; invers del pendent respecte de 35°; invers de la superfície històricament cremada respecte de 100 ha; densitat OSM que arriba a 100 amb 4 km/km²; i CORE_10.
-
-**Fonts numèriques:** cobertes del sòl i model digital del terreny de l'ICGC, perímetres històrics d'incendis de la Generalitat, OSM i CORE_10. Meteorologia actual, NDMI, LST, Pla Alfa i combustible mesurat no entren numèricament en aquest CORE.
-
-**Interpretació:** representa resistència estructural potencial segons aquests proxies. No és perill actual, probabilitat d'ignició, velocitat, severitat, capacitat d'extinció o resiliència ecològica postincendi.
-
-### 10.10 CORE_10 · Aigua i funcionalitat hídrica
-
-**Càlcul implementat:** mitjana aritmètica amb el mateix pes dels km de xarxa hídrica per 100 ha, que arriben a 100 amb 1,5 km/100 ha, i el nombre de fonts, que arriba a 100 amb 15.
-
-**Fonts numèriques:** cursos i eixos de drenatge de l'ACA i la CHE, i fonts cartografiades per l'ICGC. Relleu, NDWI, cabal, qualitat i permanència no entren numèricament en aquest CORE.
-
-**Interpretació:** és un proxy de presència cartogràfica d'aigua. No és disponibilitat, cabal, qualitat, permanència, connectivitat aquàtica o ús faunístic.
-
-### 10.11 CORE_11 · Potencial de restauració
-
-**Càlcul implementat:** mitjana aritmètica amb el mateix pes de CORE_02, CORE_05, l'invers de CORE_10, CORE_07 amb màxim entre 20 i 60 i descens fora d'aquest rang, i CORE_08. Els valors absents s'ometen.
-
-**Fonts numèriques:** els cinc CORE anteriors. No incorpora una capa directa de degradació, trajectòria o necessitat d'actuació.
-
-**Interpretació:** indica coincidència de criteris que el motor tracta com a oportunitat potencial. No demostra degradació, no localitza una intervenció ni calcula el benefici de restaurar.
-
-### 10.12 CORE_12 · Prioritat de gestió
-
-**Càlcul implementat:** mitjana aritmètica simple, amb el mateix pes, dels CORE_01 a CORE_11 que tenen puntuació numèrica. Els CORE no calculables s'ometen. En l'execució actual CORE_03 no hi entra i la lectura directa `NDVI 0,616` tampoc.
-
-**Ponderacions:** no hi ha ponderació addicional per confiança, urgència, superfície o naturalesa de l'indicador.
-
-**Interpretació:** situa la mitjana dins els llindars EcoRadar, però no és un percentatge d'estat de conservació, una prioritat espacial o una urgència operativa. El motor força l'estat PARCIAL perquè la síntesi hereta buits i limitacions.
-
-## 11. Normalització, categories i confiança
-
-Els valors 0-100 permeten comparar indicadors de naturalesa diferent. La normalització no elimina la lectura ecològica: un 80 en biodiversitat coneguda i un 80 en pressió humana no signifiquen el mateix. Per això cada indicador manté nom, fonts, limitacions i interpretació pròpia.
-
-Les categories s'utilitzen com a llenguatge de lectura ràpida:
-
-- 0-20: molt baix;
-- 20-40: baix;
-- 40-60: mitjà;
-- 60-80: alt;
-- 80-100: molt alt.
-
-La confiança es determina per:
-
-- completesa de fonts;
-- qualitat i escala de les dades;
-- actualitat;
-- coherència espacial;
-- dependència de dades oportunistes;
-- existència de validació de camp;
-- presència de fonts crítiques absents.
-
-Un indicador pot tenir valor numèric i confiança mitjana o baixa si les fonts són parcials. El valor no s'amaga, però tampoc es presenta com a conclusió definitiva.
+La confiança `ALTA / MITJANA / BAIXA` resumeix un vector explícit de vuit dimensions: completesa, vigència, cobertura, resolució, QA, representativitat, biaix i validació. La disponibilitat d'un fitxer, per si sola, no implica qualitat ecològica ni confiança alta. El visor i els informes conserven el vector perquè el gestor pugui veure què limita cada resultat.
 
 ## 12. Diagnosi ecològica
 

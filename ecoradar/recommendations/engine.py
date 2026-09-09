@@ -36,9 +36,18 @@ GROUP_ORDER = {
     "Dades pendents": 6,
 }
 
-URGENCY_SCORE = {"molt alta": 4, "alta": 3, "mitjana": 2, "baixa": 1}
-DIFFICULTY_SCORE = {"baixa": 3, "mitjana": 2, "alta": 1}
-CONFIDENCE_SCORE = {"alta": 3, "mitjana": 2, "baixa": 1}
+PRIORITY_ORDER = {"P1": 1, "P2": 2, "P3": 3, "NO AVALUABLE": 4, "SENSE PRIORITAT ÚNICA": 5}
+PRIORITY_BY_ID = {
+    "CONS-001": "P1",
+    "CONS-002": "P2",
+    "GEST-001": "P2",
+    "CAMP-001": "P2",
+    "DADES-001": "P2",
+    "HIDRO-001": "P2",
+    "FOC-001": "P2",
+    "REST-001": "NO AVALUABLE",
+    "AGR-001": "P2",
+}
 
 
 @dataclass(frozen=True)
@@ -60,22 +69,28 @@ class Recommendation:
     confidence: str
     dependencies: tuple[str, ...]
     diagnosis_conclusions: tuple[str, ...]
-    ecological_priority_score: float
+    priority_class: str
+    decision_status: str
 
 
-def run_recommendation_engine(project_root: str | Path = "projectes/Alinya") -> dict[str, Any]:
+def run_recommendation_engine(
+    project_root: str | Path = "projectes/Alinya",
+    *,
+    allow_partial_copernicus: bool = False,
+) -> dict[str, Any]:
     """Run the recommendation engine after diagnosis exists."""
 
     root = Path(project_root)
     _ensure_inputs(root)
-    ensure_mandatory_copernicus(root)
+    if not allow_partial_copernicus:
+        ensure_mandatory_copernicus(root)
     out_dir = root / "recommendations"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     context = _load_context(root)
     recommendations = sorted(
         _build_recommendations(context),
-        key=lambda item: (-item.ecological_priority_score, GROUP_ORDER.get(item.group, 99), item.id),
+        key=lambda item: (PRIORITY_ORDER.get(item.priority_class, 99), GROUP_ORDER.get(item.group, 99), item.id),
     )
 
     recommendations_json = root / RECOMMENDATIONS_JSON
@@ -169,8 +184,8 @@ def _conserve_habitats(context: dict[str, Any]) -> Recommendation:
         "conservar",
         "Conservació",
         (
-            "La diagnosi identifica els hàbitats com un dels valors ecològics principals: CORE_02 és molt alt "
-            "i combina riquesa d'hàbitats, HIC i HIC prioritaris."
+            "CORE_02 documenta responsabilitat territorial per HIC i HIC prioritaris, sense atribuir-los estat de conservació. "
+            "La possible irreversibilitat justifica una regla preventiva de no-deteriorament."
         ),
         ("CORE_02", "CORE_06", "CORE_08"),
         conclusion.get("sources_used", []),
@@ -186,7 +201,7 @@ def _conserve_habitats(context: dict[str, Any]) -> Recommendation:
 
 
 def _maintain_connectivity(context: dict[str, Any]) -> Recommendation:
-    conclusion = _find(context, "funcionament_ecologic")
+    conclusion = _find(context, "connectivitat_i_us")
     main_connectors = _sum(
         (row for row in context["connectivity"] if "principals" in str(row.get("layer_id"))),
         "area_ha",
@@ -196,7 +211,7 @@ def _maintain_connectivity(context: dict[str, Any]) -> Recommendation:
         "Mantenir la matriu natural connectada i evitar noves barreres",
         "millorar connectivitat",
         "Conservació",
-        "La diagnosi relaciona mosaic alt, connectivitat alta i hàbitats de valor; cap capa aïllada explica el funcionament del territori.",
+        "La diagnosi descriu configuració del mosaic, HIC i continuïtat estructural per separat; cap capa aïllada prova funcionalitat ecològica.",
         ("CORE_01", "CORE_02", "CORE_08", "CORE_10"),
         conclusion.get("sources_used", []),
         "Connectors oficials i zones de matriu natural identificades per Infraestructura Verda i cobertes del sòl.",
@@ -211,7 +226,7 @@ def _maintain_connectivity(context: dict[str, Any]) -> Recommendation:
 
 
 def _validate_public_use(context: dict[str, Any]) -> Recommendation:
-    conclusion = _find(context, "pressions")
+    conclusion = _find(context, "connectivitat_i_us")
     values = _metric_dict(context["pressure"])
     km = values.get("osm_path_track_road_km", 0.0)
     points = values.get("osm_recreational_point_features", 0.0)
@@ -220,7 +235,7 @@ def _validate_public_use(context: dict[str, Any]) -> Recommendation:
         "Validar i ordenar l'ús públic on es pot solapar amb hàbitats d'alt valor",
         "ordenar ús públic",
         "Gestió",
-        "La diagnosi detecta valor ecològic molt alt i pressió humana potencial mitjana; això no prova conflicte, però obliga a validar accessos i freqüentació.",
+        "CORE_07 documenta accessibilitat cartografiada, no pressió. La coincidència espacial amb HIC o connectors indica on mesurar ús i impacte abans de regular.",
         ("CORE_02", "CORE_06", "CORE_07"),
         conclusion.get("sources_used", []),
         "Camins, pistes i punts d'ús públic cartografiats per OSM, especialment propers a HIC i zones connectores.",
@@ -235,7 +250,7 @@ def _validate_public_use(context: dict[str, Any]) -> Recommendation:
 
 
 def _field_validation(context: dict[str, Any]) -> Recommendation:
-    conclusion = _find(context, "validacio_camp")
+    conclusion = _find(context, "situacio_actual")
     area = _study_area_ha(context)
     return _recommendation(
         "CAMP-001",
@@ -257,14 +272,14 @@ def _field_validation(context: dict[str, Any]) -> Recommendation:
 
 
 def _complete_remote_sensing_climate(context: dict[str, Any]) -> Recommendation:
-    conclusion = _find(context, "dades_critiques_absents")
+    conclusion = _find(context, "vulnerabilitats")
     area = _study_area_ha(context)
     return _recommendation(
         "DADES-001",
         "Desbloquejar Copernicus i clima abans de tancar vegetació, refugis climàtics i vulnerabilitat",
         "investigar",
         "Dades pendents",
-        "La diagnosi identifica teledetecció i clima com les dades que més condicionen vegetació, clima, foc, restauració i prioritat de gestió.",
+        "L’escena Sentinel-2 disponible és del 07/07/2026 i la LST és un compost multitemporal. Cal una nova escena QA-vàlida i normals compatibles per actualitzar vegetació i clima.",
         ("CORE_03", "CORE_04", "CORE_05", "CORE_09", "CORE_11", "CORE_12"),
         conclusion.get("sources_used", []),
         "Tot l'àmbit d'Alinyà; lectura raster i climàtica homogènia.",
@@ -273,13 +288,13 @@ def _complete_remote_sensing_climate(context: dict[str, Any]) -> Recommendation:
         "molt alta",
         "baixa",
         conclusion.get("confidence", "alta"),
-        ("Credencials Copernicus, Meteocat/AEMET i definició de producte LST.",),
+        ("COPERNICUS_CLIENT_ID i COPERNICUS_CLIENT_SECRET per seleccionar una escena recent amb cobertura real i SCL; normals climàtiques verificades.",),
         (conclusion.get("title", ""),),
     )
 
 
 def _validate_hydrology(context: dict[str, Any]) -> Recommendation:
-    conclusion = _find(context, "debilitats")
+    conclusion = _find(context, "aigua")
     rows = context["hydrology"]
     km = _sum(rows, "length_km")
     springs = sum(int(_float(row.get("feature_count"))) for row in rows if str(row.get("theme")) == "springs")
@@ -303,14 +318,14 @@ def _validate_hydrology(context: dict[str, Any]) -> Recommendation:
 
 
 def _validate_fire_fuel(context: dict[str, Any]) -> Recommendation:
-    conclusion = _find_by_title(context, "La resiliència davant del foc queda condicionada")
+    conclusion = _find(context, "foc")
     area = _study_area_ha(context)
     return _recommendation(
         "FOC-001",
         "Validar combustible, humitat vegetal i discontinuïtats abans de proposar gestió forestal",
         "validar al camp",
         "Treball de camp",
-        "La diagnosi no tanca resiliència al foc perquè falten NDMI, LST i estructura oficial de combustible.",
+        "CORE_09 separa propagació actual, sensibilitat, recuperació i operativa. NDMI i LST disponibles són massa antics o multitemporals per descriure l'estat actual i falta combustible de camp.",
         ("CORE_09", "CORE_01", "CORE_10"),
         conclusion.get("sources_used", []),
         "Masses forestals, matollars, prats i discontinuïtats detectades per cobertes del sòl i DEM.",
@@ -319,42 +334,42 @@ def _validate_fire_fuel(context: dict[str, Any]) -> Recommendation:
         "alta",
         "mitjana",
         conclusion.get("confidence", "mitjana"),
-        ("NDMI, LST, font oficial de combustible/estructura forestal i validació de camp.",),
+        ("Nova escena NDMI QA-vàlida, combustible/estructura forestal i validació de camp.",),
         (conclusion.get("title", ""),),
     )
 
 
 def _validate_restoration_candidates(context: dict[str, Any]) -> Recommendation:
-    conclusion = _find(context, "oportunitats")
+    conclusion = _find(context, "implicacions_gestio")
     area = _study_area_ha(context)
     return _recommendation(
         "REST-001",
         "Validar zones candidates de restauració abans de convertir el potencial en actuacions",
         "validar al camp",
         "Restauració",
-        "La diagnosi detecta potencial de restauració alt, però encara no priorització espacial ni hàbitats degradats validats.",
+        "CORE_11 retorna NO AVALUABLE: no hi ha degradació demostrada, referència, objectiu, benefici comparat amb no-intervenció ni viabilitat.",
         ("CORE_11", "CORE_12"),
         conclusion.get("sources_used", []),
-        "Àmbit complet; priorització pendent de Sentinel, camp, combustible i SIGPAC/DUN.",
+        "Cap sector de restauració és justificable fins completar la porta de decisió.",
         f"{_fmt(area)} ha d'anàlisi; superfície d'actuació no delimitada",
         "Evitar restauracions mal localitzades i preparar una cartera de zones candidates amb criteri ecològic.",
         "mitjana",
         "mitjana",
         conclusion.get("confidence", "mitjana"),
-        ("Sentinel, hàbitats degradats, hàbitats font, SIGPAC/DUN i treball de camp.",),
+        ("Degradació demostrada, ecosistema de referència, objectiu, benefici, viabilitat, risc i treball de camp.",),
         (conclusion.get("title", ""),),
     )
 
 
 def _verify_agricultural_open_areas(context: dict[str, Any]) -> Recommendation:
-    conclusion = _find(context, "fortaleses")
+    conclusion = _find(context, "distribucio_territorial")
     area = _study_area_ha(context)
     return _recommendation(
         "AGR-001",
         "Verificar prats, conreus residuals i espais oberts amb SIGPAC/DUN abans de gestió agrària",
         "gestió agrària",
         "Dades pendents",
-        "La diagnosi apunta que els espais oberts poden tenir funció ecològica desproporcionada, però SIGPAC/DUN no està disponible.",
+        "CORE_01 descriu un 9,34 % d'espais oberts i agraris, però no els assigna qualitat ni signe ecològic sense objectiu i contrast.",
         ("CORE_01", "CORE_09"),
         conclusion.get("sources_used", []),
         "Prats, herbassars, conreus residuals i ecotons detectats per cobertes/hàbitats.",
@@ -385,7 +400,8 @@ def _recommendation(
     dependencies: tuple[str, ...],
     conclusions: tuple[str, ...],
 ) -> Recommendation:
-    score = _priority_score(urgency, difficulty, confidence)
+    priority_class = PRIORITY_BY_ID.get(rec_id, "SENSE PRIORITAT ÚNICA")
+    decision_status = "veto per manca d'evidència essencial" if priority_class == "NO AVALUABLE" else "alternativa candidata documentada"
     return Recommendation(
         id=rec_id,
         title=title,
@@ -402,24 +418,19 @@ def _recommendation(
         confidence=confidence,
         dependencies=dependencies,
         diagnosis_conclusions=conclusions,
-        ecological_priority_score=score,
+        priority_class=priority_class,
+        decision_status=decision_status,
     )
-
-
-def _priority_score(urgency: str, difficulty: str, confidence: str) -> float:
-    raw = (URGENCY_SCORE[urgency] * 0.45) + (DIFFICULTY_SCORE[difficulty] * 0.20) + (CONFIDENCE_SCORE[confidence] * 0.35)
-    return round(raw / 3.55 * 100, 2)
 
 
 def _priority_matrix(root: Path, recommendations: list[Recommendation]) -> dict[str, Any]:
     return {
         "project": root.name,
         "generated_at": _now(),
-        "scoring": {
-            "urgency_weight": 0.45,
-            "difficulty_weight": 0.20,
-            "confidence_weight": 0.35,
-            "note": "La matriu ordena recomanacions derivades de diagnosi; no crea noves dades.",
+        "decision_method": {
+            "type": "non_compensatory_categories",
+            "allowed_results": ["P1", "P2", "P3", "NO AVALUABLE", "SENSE PRIORITAT ÚNICA"],
+            "note": "La categoria s'aplica a una alternativa documentada; urgència, dificultat i confiança es mostren sense convertir-les en una mitjana.",
         },
         "rows": [asdict(item) for item in recommendations],
     }
@@ -458,7 +469,8 @@ def _markdown(payload: dict[str, Any]) -> str:
                     f"### {item['id']} · {item['title']}",
                     "",
                     f"- Tipus: `{item['type']}`",
-                    f"- Prioritat ecològica: `{item['ecological_priority_score']}`",
+                    f"- Categoria de decisió: `{item['priority_class']}`",
+                    f"- Estat de decisió: `{item['decision_status']}`",
                     f"- Urgència: `{item['urgency']}`",
                     f"- Dificultat: `{item['difficulty']}`",
                     f"- Confiança: `{item['confidence']}`",

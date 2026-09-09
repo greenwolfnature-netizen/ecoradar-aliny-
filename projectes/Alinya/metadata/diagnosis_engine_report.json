@@ -1,6 +1,6 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-07-08T14:37:56+00:00",
+  "generated_at": "2026-09-09T19:26:20+00:00",
   "preflight_checked": {
     "indicators/ecoradar_core_indicators.json": true,
     "metadata/indicator_engine_report.json": true,
@@ -11,20 +11,23 @@
     "diagnosis_markdown": "reports/ecoradar_diagnosis.md",
     "engine_report": "metadata/diagnosis_engine_report.json"
   },
-  "conclusion_count": 11,
+  "conclusion_count": 10,
   "confidence_counts": {
-    "mitjana": 7,
-    "alta": 3,
-    "baixa": 1
+    "baixa": 4,
+    "mitjana": 6
   },
   "robustness_counts": {
-    "provisional": 8,
-    "robusta": 3
+    "provisional": 6,
+    "robusta per responsabilitat; provisional per estat": 1,
+    "robusta per l’escena; no vigent per avui": 1,
+    "caduca amb la següent instantània diària": 1,
+    "robusta en els vetos; provisional en l’ordenació": 1
   },
   "rules_enforced": [
     "No s'han calculat recomanacions.",
     "No s'ha generat fitxa ni informe final.",
     "Cada conclusió inclou indicadors, fonts, confiança, limitacions i robustesa.",
     "Les conclusions dependents d'indicadors parcials s'han marcat com a provisionals."
-  ]
+  ],
+  "snapshot_id": "alinya-d712326d21b18f95"
 }

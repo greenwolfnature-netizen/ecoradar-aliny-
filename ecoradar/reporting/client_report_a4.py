@@ -240,7 +240,7 @@ def metric(rows: list[dict[str, str]], key: str) -> str:
 def core_metric(rows: list[dict[str, str]], code: str) -> str:
     for row in rows:
         if row.get("code") == code:
-            return row.get("value_0_100") or row.get("normalized_value", "")
+            return row.get("primary_result") or row.get("value_0_100") or row.get("normalized_value", "")
     return ""
 
 
@@ -362,7 +362,7 @@ def source_status(data: dict[str, Any], source_id: str) -> str:
 def core_summary_row(data: dict[str, Any], code: str) -> list[str]:
     row = core_row(data["core"], code)
     complete = indicator_completeness(data, code)
-    value = client_value(row.get("value_0_100") or row.get("normalized_value"))
+    value = client_value(row.get("primary_result") or row.get("value_0_100") or row.get("normalized_value"))
     missing = ", ".join(complete.get("missing_sources", [])[:3])
     if not missing:
         missing = "cap font crítica pendent"
@@ -401,6 +401,8 @@ class Report:
             "small": ParagraphStyle("small", fontName="Helvetica", fontSize=7.2, leading=9.0, textColor=TEXT),
             "tiny": ParagraphStyle("tiny", fontName="Helvetica", fontSize=6.4, leading=7.6, textColor=MUTED),
             "h2": ParagraphStyle("h2", fontName="Helvetica-Bold", fontSize=12, leading=14, textColor=GREEN_DARK),
+            "card_title": ParagraphStyle("card_title", fontName="Helvetica-Bold", fontSize=8.7, leading=10.2, textColor=GREEN_DARK),
+            "small_bold": ParagraphStyle("small_bold", fontName="Helvetica-Bold", fontSize=7.2, leading=9.0, textColor=TEXT),
             "white": ParagraphStyle("white", fontName="Helvetica", fontSize=8.2, leading=10.5, textColor=colors.white),
             "table": ParagraphStyle("table", fontName="Helvetica", fontSize=6.2, leading=7.6, textColor=TEXT),
             "table_header": ParagraphStyle("table_header", fontName="Helvetica-Bold", fontSize=6.2, leading=7.6, textColor=colors.white),
@@ -503,9 +505,11 @@ class Report:
 
 
 def prepare_inputs() -> dict[str, Any]:
+    core_payload = read_json(INDICATORS / "ecoradar_core_indicators.json")
     return {
         "basic": read_csv(INDICATORS / "ecoradar_01_resum.csv"),
-        "core": read_csv(INDICATORS / "ecoradar_core_indicators.csv"),
+        "core": core_payload.get("indicators", []),
+        "core_payload": core_payload,
         "cover": read_csv(INDICATORS / "cobertes_sol_resum.csv"),
         "habitats": read_csv(INDICATORS / "habitats_resum.csv"),
         "biodiv": read_csv(INDICATORS / "biodiversitat_resum.csv"),
@@ -569,6 +573,10 @@ def core_values(core: list[dict[str, str]]) -> list[tuple[str, float | None, str
             )
         )
     return values
+
+
+def phase2_methodology(data: dict[str, Any]) -> bool:
+    return data.get("core_payload", {}).get("methodology_version") == "alinya_core_v2_2026-09-09"
 
 
 def core_row(core: list[dict[str, str]], code: str) -> dict[str, str]:
@@ -4717,9 +4725,131 @@ def management_report_chapters(data: dict[str, Any]) -> list[dict[str, Any]]:
     return chapters
 
 
+def page_phase2_overview(report: Report, data: dict[str, Any]) -> None:
+    report.new_page("12 RADAR · metodologia revisada", "Lectures directes, perfils i decisions sense escala comuna 0–100")
+    m = report.margin
+    top = report.height - 48 * mm
+    snapshot = data.get("core_payload", {}).get("snapshot_id") or "pendent de segellat"
+    report.card(m, top - 28 * mm, 178 * mm, 23 * mm, "Contracte metodològic", fill=GREEN_PALE)
+    report.para_fit(
+        f"Metodologia alinya_core_v2_2026-09-09 · snapshot {snapshot}. Cada RADAR conserva la seva escala, unitat i límits; COMPLET/PARCIAL/NO AVALUABLE no descriuen qualitat ecològica.",
+        m + 6 * mm, top - 19 * mm, 166 * mm, 8 * mm, "small", 6.8,
+    )
+    rows = [["RADAR", "Resultat", "Tipus", "Estat", "Confiança"]]
+    for item in data["core"]:
+        rows.append([
+            item.get("code", "").replace("CORE_", "RADAR_"),
+            item.get("primary_result") or "NO AVALUABLE",
+            str(item.get("measurement_kind", "")).replace("_", " "),
+            item.get("status", ""),
+            item.get("confidence", ""),
+        ])
+    draw_table(report, rows, m, top - 35 * mm, [22 * mm, 69 * mm, 36 * mm, 29 * mm, 22 * mm], 6.0)
+    report.card(m, 28 * mm, 178 * mm, 26 * mm, "Regla de lectura")
+    report.para_fit(
+        "Només el perill d'incendi diari manté una escala sintètica pròpia fora dels CORE. NDVI, superfícies, longituds i recomptes són valors directes; els perfils no s'aplanen i CORE_12 compara alternatives amb vetos.",
+        m + 6 * mm, 40 * mm, 166 * mm, 10 * mm, "small", 6.8,
+    )
+    report.footer()
+
+
+def page_phase2_details(report: Report, data: dict[str, Any], items: list[dict[str, Any]], title: str) -> None:
+    report.new_page(title, "Què mesura, resultat, interpretació i confiança")
+    m = report.margin
+    top = report.height - 48 * mm
+    gap = 6 * mm
+    card_w = 86 * mm
+    card_h = 59 * mm
+    for index, item in enumerate(items):
+        col = index % 2
+        row = index // 2
+        x = m + col * (card_w + gap)
+        y = top - (row + 1) * card_h - row * gap
+        report.card(x, y, card_w, card_h, fill=GREEN_PALE if item.get("status") == "COMPLET" else CREAM)
+        report.c.setFillColor(ACCENT)
+        report.c.roundRect(x + 5 * mm, y + card_h - 17 * mm, 14 * mm, 1.1 * mm, 0.5, fill=1, stroke=0)
+        report.para_fit(
+            f"{item.get('code', '').replace('CORE_', 'RADAR_')} · {item.get('name', '')}",
+            x + 5 * mm, y + card_h - 5 * mm, card_w - 10 * mm, 10 * mm, "card_title", 7.2,
+        )
+        report.para_fit(
+            item.get('primary_result') or 'NO AVALUABLE',
+            x + 5 * mm, y + card_h - 20 * mm, card_w - 10 * mm, 8 * mm, "small_bold", 6.6,
+        )
+        report.para_fit(
+            item.get("interpretation_short", ""),
+            x + 5 * mm, y + card_h - 31 * mm, card_w - 10 * mm, 14 * mm, "small", 6.4,
+        )
+        report.para_fit(
+            f"{item.get('status')} · confiança {item.get('confidence')}. {item.get('confidence_reason', '')}",
+            x + 5 * mm, y + 15 * mm, card_w - 10 * mm, 11 * mm, "tiny", 5.9,
+        )
+    report.footer()
+
+
+def page_phase2_diagnosis(report: Report, data: dict[str, Any]) -> None:
+    report.new_page("Diagnosi contextual", "Observació → significat → incertesa → implicació de gestió")
+    m = report.margin
+    top = report.height - 49 * mm
+    rows = [["Tipus", "Conclusió específica", "Implicació per al gestor", "Conf."]]
+    for item in data.get("diagnosis", {}).get("conclusions", []):
+        rows.append([
+            item.get("evidence_type", "interpretació"),
+            item.get("title", ""),
+            item.get("management_implication", ""),
+            item.get("confidence", ""),
+        ])
+    draw_table(report, rows, m, top, [28 * mm, 53 * mm, 76 * mm, 21 * mm], 5.9)
+    report.card(m, 25 * mm, 178 * mm, 30 * mm, "Vigència")
+    report.para_fit(
+        "Meteorologia, Pla Alfa i perill d'incendi caduquen amb l'actualització diària. L'NDVI descriu el 07/07/2026 i el producte de refugis combina aquesta escena amb un compost LST 2025–2026; tots dos són context, no estat actual.",
+        m + 6 * mm, 41 * mm, 166 * mm, 12 * mm, "small", 6.8,
+    )
+    report.footer()
+
+
+def page_phase2_decision(report: Report, data: dict[str, Any]) -> None:
+    report.new_page("Síntesi multicriteri", "CORE_12 · sector × alternativa, vetos i opcions no dominades")
+    m = report.margin
+    top = report.height - 49 * mm
+    core12 = core_row(data["core"], "CORE_12")
+    rows = [["Sector o unitat documentada", "Alternativa", "Resultat", "Veto o límit"]]
+    for item in core12.get("profile", {}).get("rows", []):
+        rows.append([
+            item.get("sector", ""),
+            item.get("alternative", ""),
+            item.get("result", ""),
+            "; ".join(item.get("vetoes", [])) or item.get("robustness", ""),
+        ])
+    draw_table(report, rows, m, top, [48 * mm, 55 * mm, 21 * mm, 54 * mm], 6.2)
+    report.card(m, 57 * mm, 178 * mm, 36 * mm, "Resultat global", fill=GREEN_PALE)
+    report.para_fit(
+        f"{core12.get('primary_result')}. {core12.get('interpretation_short')} No s'aplica cap mitjana, compensació o puntuació territorial única.",
+        m + 6 * mm, 79 * mm, 166 * mm, 16 * mm, "small", 6.8,
+    )
+    core11 = core_row(data["core"], "CORE_11")
+    report.card(m, 25 * mm, 178 * mm, 26 * mm, "Porta de restauració")
+    report.para_fit(
+        f"{core11.get('primary_result')}. {core11.get('interpretation_short')}",
+        m + 6 * mm, 38 * mm, 166 * mm, 9 * mm, "small", 6.8,
+    )
+    report.footer()
+
+
+def build_phase2_report(report: Report, data: dict[str, Any], include_all_pages: bool) -> None:
+    page_phase2_overview(report, data)
+    if include_all_pages:
+        page_phase2_details(report, data, data["core"][:6], "RADAR 01–06")
+        page_phase2_details(report, data, data["core"][6:], "RADAR 07–12")
+        page_phase2_diagnosis(report, data)
+        page_phase2_decision(report, data)
+
+
 def build_report(path: Path, data: dict[str, Any], include_all_pages: bool = True) -> None:
     report = Report(path, f"Informe EcoRadar A4 - {project_display_name()}")
-    if include_all_pages:
+    if phase2_methodology(data):
+        build_phase2_report(report, data, include_all_pages)
+    elif include_all_pages:
         page_cover(report, data)
         for block in management_report_blocks(data):
             page_management_block_intro(report, block)

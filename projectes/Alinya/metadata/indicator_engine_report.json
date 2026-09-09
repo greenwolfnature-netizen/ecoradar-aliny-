@@ -1,7 +1,7 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-09T18:00:41+00:00",
-  "scope": "EcoRadar Core Indicator Engine; sense diagnosi, recomanacions, fitxa ni informe final",
+  "generated_at": "2026-09-09T19:26:02+00:00",
+  "scope": "EcoRadar Core Indicator Engine; lectures directes, perfils i síntesi no compensatòria",
   "preflight_checked": {
     "data_availability_report.json": true,
     "connectors_status_report.json": true,
@@ -14,18 +14,21 @@
     "report_md": "reports/indicator_engine_report.md"
   },
   "status_counts": {
-    "COMPLET": 7,
-    "PARCIAL": 5
+    "PARCIAL": 6,
+    "COMPLET": 4,
+    "NO AVALUABLE": 2
   },
   "confidence_counts": {
-    "alta": 7,
-    "mitjana": 5
+    "mitjana": 9,
+    "baixa": 3
   },
   "rules_enforced": [
     "No s'han inventat dades.",
     "No s'ha substituït cap font absent per estimacions arbitràries.",
-    "Les fonts absents redueixen estat i confiança segons el Data Source Manager.",
+    "La confiança integra completesa, vigència, cobertura, resolució, QA, representativitat, biaix i validació.",
+    "L'estat del resultat és independent de la confiança i de la simple existència de fitxers.",
+    "No s'ha aplicat una escala 0-100 comuna a dimensions no commensurables.",
     "No s'ha generat diagnosi, recomanacions, fitxa ni PDF."
   ],
-  "snapshot_id": "alinya-2581ff169adb0155"
+  "snapshot_id": "alinya-d712326d21b18f95"
 }

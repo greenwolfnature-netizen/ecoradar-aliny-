@@ -59,12 +59,17 @@ class ValidationCheck:
     evidence: dict[str, Any]
 
 
-def run_validation_engine(project_root: str | Path = "projectes/Alinya") -> dict[str, Any]:
+def run_validation_engine(
+    project_root: str | Path = "projectes/Alinya",
+    *,
+    allow_partial_copernicus: bool = False,
+) -> dict[str, Any]:
     """Run all EcoRadar validation levels for a project."""
 
     root = Path(project_root)
     _ensure_inputs(root)
-    ensure_mandatory_copernicus(root)
+    if not allow_partial_copernicus:
+        ensure_mandatory_copernicus(root)
     (root / "validation").mkdir(parents=True, exist_ok=True)
     (root / "reports").mkdir(parents=True, exist_ok=True)
 
@@ -148,15 +153,19 @@ def _load_context(root: Path) -> dict[str, Any]:
     diagnosis = _read_json(root / "diagnosis" / "ecoradar_diagnosis.json")
     recommendations_payload = _read_json(root / "recommendations" / "recommendations.json")
     availability = _read_json(root / "metadata" / "data_availability_report.json")
+    reading_registry = _read_json(root / "metadata" / "reading_registry.json")
+    catalog_source_ids = {
+        row.get("source_id") or row.get("id")
+        for row in availability.get("sources", [])
+        if row.get("source_id") or row.get("id")
+    }
+    reading_ids = set((reading_registry.get("readings") or {}).keys())
     return {
         "root": root,
         "study_area_metadata": _read_json(root / "metadata" / "study_area_metadata.json"),
         "availability": availability,
-        "source_ids": {
-            row.get("source_id") or row.get("id")
-            for row in availability.get("sources", [])
-            if row.get("source_id") or row.get("id")
-        },
+        "source_ids": catalog_source_ids | reading_ids,
+        "reading_registry": reading_registry,
         "connectors": _read_json(root / "metadata" / "connectors_status_report.json"),
         "completeness": _read_json(root / "metadata" / "indicators_completeness_report.json"),
         "indicators_payload": indicators_payload,
@@ -240,10 +249,15 @@ def _technical_validation(context: dict[str, Any]) -> list[ValidationCheck]:
         )
     )
 
+    phase2 = context.get("indicators_payload", {}).get("methodology_version") == "alinya_core_v2_2026-09-09"
     empty_critical = [
         item
         for item in indicators
-        if item.get("status") == "COMPLET" and (item.get("value_0_100") is None or not item.get("sources_used"))
+        if item.get("status") == "COMPLET"
+        and (
+            (not item.get("primary_result") if phase2 else item.get("value_0_100") is None)
+            or not item.get("sources_used")
+        )
     ]
     checks.append(
         _check(
@@ -316,6 +330,8 @@ def _technical_validation(context: dict[str, Any]) -> list[ValidationCheck]:
 
 
 def _ecological_validation(context: dict[str, Any]) -> list[ValidationCheck]:
+    if context.get("indicators_payload", {}).get("methodology_version") == "alinya_core_v2_2026-09-09":
+        return _ecological_validation_phase2(context)
     by_code = context["indicator_by_code"]
     conclusions = context["conclusions"]
     text = " ".join(
@@ -404,6 +420,71 @@ def _ecological_validation(context: dict[str, Any]) -> list[ValidationCheck]:
     return checks
 
 
+def _ecological_validation_phase2(context: dict[str, Any]) -> list[ValidationCheck]:
+    by_code = context["indicator_by_code"]
+    indicators = context["indicators"]
+    text = " ".join(
+        " ".join(str(item.get(key, "")) for key in ("title", "interpretation", "management_implication"))
+        for item in context["conclusions"]
+    ).casefold()
+    expected_dimensions = {
+        "completesa", "vigencia", "cobertura", "resolucio", "qa", "representativitat", "biaix", "validacio"
+    }
+    core12 = by_code.get("CORE_12", {})
+    return [
+        _check(
+            "ECO_V2_01", "ecological", "Cap CORE força una escala comuna 0–100",
+            all(item.get("value_0_100") is None for item in indicators), "critical",
+            "Els dotze CORE han de ser lectures, perfils o decisions amb l'escala pròpia.",
+            {"affected": [item.get("code") for item in indicators if item.get("value_0_100") is not None]},
+        ),
+        _check(
+            "ECO_V2_02", "ecological", "Vector de confiança complet i independent",
+            all(set(item.get("confidence_dimensions", {})) == expected_dimensions for item in indicators), "critical",
+            "Cada RADAR ha d'explicar les vuit dimensions de confiança.", {},
+        ),
+        _check(
+            "ECO_V2_03", "ecological", "HIC no es presenta com a estat de conservació",
+            by_code.get("CORE_02", {}).get("profile", {}).get("conservation_status") == "NO AVALUABLE"
+            and "responsabilitat" in str(by_code.get("CORE_02", {}).get("category", "")).casefold(),
+            "critical", "CORE_02 només pot informar responsabilitat territorial amb les dades actuals.",
+            {"CORE_02": by_code.get("CORE_02")},
+        ),
+        _check(
+            "ECO_V2_04", "ecological", "Vegetació directa, datada i sense puntuació",
+            by_code.get("CORE_03", {}).get("measurement_kind") == "direct_reading"
+            and bool(by_code.get("CORE_03", {}).get("source_date_utc")),
+            "critical", "CORE_03 ha de conservar NDVI en l'escala i data pròpies.",
+            {"CORE_03": by_code.get("CORE_03")},
+        ),
+        _check(
+            "ECO_V2_05", "ecological", "Vulnerabilitat i restauració no sobreinterpretades",
+            by_code.get("CORE_05", {}).get("status") == "NO AVALUABLE"
+            and by_code.get("CORE_11", {}).get("status") == "NO AVALUABLE",
+            "critical", "Sense receptor, degradació i referència no es pot fabricar vulnerabilitat o potencial de restauració.",
+            {code: by_code.get(code) for code in ("CORE_05", "CORE_11")},
+        ),
+        _check(
+            "ECO_V2_06", "ecological", "CORE_12 és no compensatori",
+            core12.get("measurement_kind") == "multicriteria_decision"
+            and core12.get("profile", {}).get("global_score") is None
+            and bool(core12.get("profile", {}).get("rows")),
+            "critical", "CORE_12 ha de comparar sector i alternativa amb vetos, sense mitjana global.",
+            {"CORE_12": core12},
+        ),
+        _check(
+            "ECO_V2_07", "ecological", "La diagnosi respecta vigència i significat",
+            "07/07/2026" in text and "no l’estat actual" in text and "no hi ha pressió real" in text,
+            "major", "La diagnosi ha d'identificar dades antigues i evitar causalitat o estat actual no suportats.", {},
+        ),
+        _warn(
+            "ECO_V2_08", "ecological", "Perfils pendents de dades de camp i decisions metodològiques",
+            "La validació permet publicar els resultats perquè els buits generen NO AVALUABLE o PARCIAL i no valors inventats.",
+            {"limited": [item.get("code") for item in indicators if item.get("status") != "COMPLET"]},
+        ),
+    ]
+
+
 def _recommendations_validation(context: dict[str, Any]) -> list[ValidationCheck]:
     indicator_codes = {item.get("code") for item in context["indicators"]}
     indicators = context["indicator_by_code"]
@@ -430,7 +511,7 @@ def _recommendations_validation(context: dict[str, Any]) -> list[ValidationCheck
         if not rec.get("location") or rec.get("location") in {"-", "no disponible"}:
             missing_localization.append(rec_id)
         depends_on_partial = any(
-            indicators.get(code, {}).get("status") in {"PARCIAL", "NO DISPONIBLE"} for code in rec_indicators
+            indicators.get(code, {}).get("status") in {"PARCIAL", "NO DISPONIBLE", "NO AVALUABLE"} for code in rec_indicators
         )
         if depends_on_partial and rec.get("type") in FINAL_ACTION_TYPES and not rec.get("dependencies"):
             overinterpreted.append(rec_id)

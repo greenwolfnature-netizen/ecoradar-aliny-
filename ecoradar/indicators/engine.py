@@ -7,7 +7,7 @@ calculation and never creates substitute or fictional values.
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 import csv
 import json
@@ -59,6 +59,14 @@ class CoreIndicator:
     direct_value: float | None = None
     direct_unit: str | None = None
     source_date_utc: str | None = None
+    primary_result: str | None = None
+    interpretation_short: str = ""
+    methodology_version: str = "legacy_core_v1"
+    profile: dict[str, Any] = field(default_factory=dict)
+    guide: dict[str, str] = field(default_factory=dict)
+    confidence_dimensions: dict[str, dict[str, str]] = field(default_factory=dict)
+    confidence_reason: str = ""
+    snapshot_input: str | None = None
 
 
 def run_indicator_engine(
@@ -120,10 +128,22 @@ def _load_context(root: Path) -> dict[str, Any]:
         "connectivity": _read_csv(root / "indicators" / "connectivitat_resum.csv"),
         "fires": _read_csv(root / "indicators" / "incendis_resum.csv"),
         "sentinel2": _read_json(root / "indicators" / "teledeteccio_sentinel2.json"),
+        "climate_refuges": _read_json(root / "indicators" / "refugis_climatics_potencials.json"),
+        "current_fire": _read_json(root / "indicators" / "current_fire_danger.json"),
+        "reading_registry": _read_json(root / "metadata" / "reading_registry.json"),
+        "habitats_metadata": _read_json(root / "metadata" / "habitats_metadata.json"),
+        "biodiversity_metadata": _read_json(root / "metadata" / "biodiversitat_metadata.json"),
+        "biodiversity_ecology_metadata": _read_json(root / "metadata" / "biodiversity_ecology_metadata.json"),
+        "biodiversity_pilot_metadata": _read_json(root / "metadata" / "biodiversity_habitat_pilot_metadata.json"),
+        "biodiversity_knowledge": _read_json(root / "indicators" / "biodiversity_knowledge_coverage.geojson"),
     }
 
 
 def _calculate_indicators(context: dict[str, Any]) -> list[CoreIndicator]:
+    if context["root"].name.casefold() in {"alinya", "alinyà"}:
+        from ecoradar.indicators.alinya_phase2 import build_alinya_phase2
+
+        return [CoreIndicator(**record) for record in build_alinya_phase2(context)]
     calculators: tuple[Callable[[dict[str, Any]], CoreIndicator], ...] = (
         _core_01_mosaic,
         _core_02_habitats,
@@ -572,8 +592,10 @@ def _write_csv(path: Path, indicators: list[CoreIndicator]) -> None:
         writer.writeheader()
         for indicator in indicators:
             row = asdict(indicator)
-            for field in ("sources_used", "sources_absent", "limitations"):
-                row[field] = "; ".join(row[field])
+            for field_name in ("sources_used", "sources_absent", "limitations"):
+                row[field_name] = "; ".join(row[field_name])
+            for field_name in ("profile", "guide", "confidence_dimensions"):
+                row[field_name] = json.dumps(row[field_name], ensure_ascii=False, sort_keys=True)
             writer.writerow(row)
 
 
@@ -581,6 +603,7 @@ def _write_json(path: Path, indicators: list[CoreIndicator], context: dict[str, 
     payload = {
         "generated_at": _now(),
         "project": context["root"].name,
+        "methodology_version": indicators[0].methodology_version if indicators else None,
         "preflight_reports": {
             "data_availability_report": "metadata/data_availability_report.json",
             "connectors_status_report": "metadata/connectors_status_report.json",
@@ -595,7 +618,7 @@ def _report_payload(root: Path, indicators: list[CoreIndicator], context: dict[s
     return {
         "project": root.name,
         "generated_at": _now(),
-        "scope": "EcoRadar Core Indicator Engine; sense diagnosi, recomanacions, fitxa ni informe final",
+        "scope": "EcoRadar Core Indicator Engine; lectures directes, perfils i síntesi no compensatòria",
         "preflight_checked": {
             "data_availability_report.json": (root / "metadata" / "data_availability_report.json").exists(),
             "connectors_status_report.json": (root / "metadata" / "connectors_status_report.json").exists(),
@@ -612,7 +635,9 @@ def _report_payload(root: Path, indicators: list[CoreIndicator], context: dict[s
         "rules_enforced": [
             "No s'han inventat dades.",
             "No s'ha substituït cap font absent per estimacions arbitràries.",
-            "Les fonts absents redueixen estat i confiança segons el Data Source Manager.",
+            "La confiança integra completesa, vigència, cobertura, resolució, QA, representativitat, biaix i validació.",
+            "L'estat del resultat és independent de la confiança i de la simple existència de fitxers.",
+            "No s'ha aplicat una escala 0-100 comuna a dimensions no commensurables.",
             "No s'ha generat diagnosi, recomanacions, fitxa ni PDF.",
         ],
     }
@@ -645,11 +670,11 @@ def _report_markdown(payload: dict[str, Any], indicators: list[CoreIndicator]) -
         "",
         "## Indicadors EcoRadar Core",
         "",
-        "| Codi | Indicador | Valor 0-100 | Categoria | Estat | Confiança | Fonts utilitzades | Fonts absents |",
-        "| --- | --- | ---: | --- | --- | --- | --- | --- |",
+        "| Codi | Indicador | Resultat | Tipus | Estat | Confiança | Fonts utilitzades | Fonts absents |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- |",
     ])
     for indicator in indicators:
-        value = "NO DISPONIBLE" if indicator.value_0_100 is None else str(indicator.value_0_100)
+        value = indicator.primary_result or "NO AVALUABLE"
         lines.append(
             "| "
             + " | ".join(
@@ -657,7 +682,7 @@ def _report_markdown(payload: dict[str, Any], indicators: list[CoreIndicator]) -
                     indicator.code,
                     indicator.name,
                     value,
-                    indicator.category,
+                    indicator.measurement_kind,
                     indicator.status,
                     indicator.confidence,
                     ", ".join(indicator.sources_used) or "-",
@@ -670,6 +695,9 @@ def _report_markdown(payload: dict[str, Any], indicators: list[CoreIndicator]) -
     for indicator in indicators:
         lines.append(f"### {indicator.code} · {indicator.name}")
         lines.append(f"- Càlcul: {indicator.calculation_explanation}")
+        lines.append(f"- Resultat: {indicator.primary_result or 'NO AVALUABLE'}")
+        lines.append(f"- Vector de confiança: {json.dumps(indicator.confidence_dimensions, ensure_ascii=False)}")
+        lines.append(f"- Raó de confiança: {indicator.confidence_reason}")
         lines.append(f"- Limitacions: {'; '.join(indicator.limitations) if indicator.limitations else '-'}")
         lines.append(f"- Impacte: {indicator.diagnosis_impact}")
         lines.append("")

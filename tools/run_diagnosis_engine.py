@@ -15,9 +15,14 @@ from ecoradar.diagnosis.engine import run_diagnosis_engine
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run EcoRadar ecological diagnosis engine")
     parser.add_argument("--project", default="projectes/Alinya")
+    parser.add_argument(
+        "--allow-partial-copernicus",
+        action="store_true",
+        help="Generate diagnosis from the dated validated scene while keeping missing recent Copernicus data explicit.",
+    )
     args = parser.parse_args()
 
-    result = run_diagnosis_engine(args.project)
+    result = run_diagnosis_engine(args.project, allow_partial_copernicus=args.allow_partial_copernicus)
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
 
