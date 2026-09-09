@@ -151,6 +151,17 @@ class Phase1CoherenceTests(unittest.TestCase):
             version = hashlib.sha256(asset.read_bytes()).hexdigest()[:12]
             self.assertIn(f"./vendor/{name}?v={version}", html)
 
+    def test_biodiversity_summary_uses_the_current_paginated_dataset(self):
+        module = load_module("test_alinya_exporter", "tools/export_ecoradar_alinya_netlify.py")
+        biodiversity = module.biodiversity_breakdown()
+        records = f"{biodiversity['total_records']:,}".replace(",", ".")
+        taxa = f"{biodiversity['total_taxa']:,}".replace(",", ".")
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn(
+            f"Els {records} registres normalitzats de GBIF i iNaturalist documenten presències i {taxa} taxons",
+            html,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
