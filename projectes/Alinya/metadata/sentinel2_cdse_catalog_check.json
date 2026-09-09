@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "checked_at_utc": "2026-09-09T12:38:36.921921+00:00",
+  "checked_at_utc": "2026-09-09T13:14:22.113213+00:00",
   "source": "Copernicus Data Space Ecosystem Sentinel-2 L2A STAC",
   "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&datetime=2026-07-26T00%3A00%3A00Z%2F2026-09-09T23%3A59%3A59Z&limit=100",
   "search_period": {

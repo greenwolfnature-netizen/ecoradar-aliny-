@@ -9,7 +9,7 @@
         "ecological_element": "Boixedes xerotermòfiles permanents, dels vessants rocosos",
         "hic_code": "5110",
         "is_priority": false,
-        "area_ha": 0.061,
+        "area_ha": 0.173,
         "what_happens": "Una part concreta de l’HIC coincideix amb cel·les on el producte diari EcoRadar classifica el perill actual com a alt.",
         "why_flagged": [
           "HIC cartografiat",
@@ -41,43 +41,305 @@
           "NDMI i NDVI quan hi hagi una observació nova i vàlida",
           "temperatura superficial amb data i frescor"
         ],
-        "max_fire_index": 64.3
+        "max_fire_index": 65.2
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                1.440886838202745,
+                42.15984259528708
+              ],
+              [
+                1.4405944977758027,
+                42.159838621267234
+              ],
+              [
+                1.4408807785141622,
+                42.16008937916745
+              ],
+              [
+                1.440886838202745,
+                42.15984259528708
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                1.3873286159470537,
+                42.16180740671055
+              ],
+              [
+                1.3873267825282325,
+                42.16187963559874
+              ],
+              [
+                1.3873535225923612,
+                42.16197394289048
+              ],
+              [
+                1.3873509553585048,
+                42.16207506278498
+              ],
+              [
+                1.3873495060467662,
+                42.16214546614029
+              ],
+              [
+                1.3874536148721506,
+                42.162164737493306
+              ],
+              [
+                1.3874924268036493,
+                42.16221293956279
+              ],
+              [
+                1.3875648754581031,
+                42.16227323331383
+              ],
+              [
+                1.3875756838426676,
+                42.16184764916862
+              ],
+              [
+                1.3874910028095235,
+                42.16181250411369
+              ],
+              [
+                1.3874911630249962,
+                42.16180619582436
+              ],
+              [
+                1.387329748549067,
+                42.16180392648476
+              ],
+              [
+                1.3873286159470537,
+                42.16180740671055
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                1.3902361912371601,
+                42.163415589468755
+              ],
+              [
+                1.3901667943802,
+                42.16331838312474
+              ],
+              [
+                1.3900415944994444,
+                42.163203440495664
+              ],
+              [
+                1.389963719695416,
+                42.16314728446961
+              ],
+              [
+                1.3899538328030896,
+                42.16353714476231
+              ],
+              [
+                1.3900822972533282,
+                42.16351515830261
+              ],
+              [
+                1.390229571189414,
+                42.16345219442162
+              ],
+              [
+                1.3902361912371601,
+                42.163415589468755
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "situation_type": "current_fire",
+        "title": "Prats -i fàcies emmatades- medioeuropeus, seminaturals, sobre substrat calcari (Festuco-Brometea) · comprovació de camp",
+        "ecological_element": "Prats -i fàcies emmatades- medioeuropeus, seminaturals, sobre substrat calcari (Festuco-Brometea)",
+        "hic_code": "6210",
+        "is_priority": false,
+        "area_ha": 0.2668,
+        "what_happens": "Una part concreta de l’HIC coincideix amb cel·les on el producte diari EcoRadar classifica el perill actual com a alt.",
+        "why_flagged": [
+          "HIC cartografiat",
+          "perill d’incendi actual alt"
+        ],
+        "structural": [
+          "hàbitat HIC",
+          "vulnerabilitat territorial incorporada al producte de foc"
+        ],
+        "current": [
+          "perill EcoRadar actual alt; meteorologia i frescor de dades segons la lectura diària"
+        ],
+        "meaning": "La coincidència justifica vigilància i verificació de combustible i estat de l’hàbitat; no demostra impacte ni obliga a intervenir.",
+        "scenario": "Si les condicions desfavorables es mantenen, l’exposició al foc pot persistir; no és una predicció d’incendi.",
+        "ecological_mechanism": "Un incendi podria alterar estructura, cobertura i recursos de l’hàbitat, amb resposta diferent segons intensitat, recurrència i espècies.",
+        "unknown": [
+          "estat local de conservació",
+          "humitat del combustible mesurada al camp",
+          "resposta real de flora i fauna"
+        ],
+        "recommendation": "comprovació de camp",
+        "field_check": [
+          "estructura i continuïtat del combustible",
+          "regeneració i senyals de deteriorament",
+          "evidència d’ús de fauna sense publicar localitzacions sensibles"
+        ],
+        "monitor": [
+          "perill d’incendi actual",
+          "NDMI i NDVI quan hi hagi una observació nova i vàlida",
+          "temperatura superficial amb data i frescor"
+        ],
+        "max_fire_index": 61.1
       },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
           [
             [
-              1.3900822972533282,
-              42.16351515830261
+              1.4361147116938415,
+              42.15770807689239
             ],
             [
-              1.390229571189414,
-              42.16345219442162
+              1.4361016252752596,
+              42.1576542825696
             ],
             [
-              1.3902361912371601,
-              42.163415589468755
+              1.4363507636291104,
+              42.15748611414993
             ],
             [
-              1.3901667943802,
-              42.16331838312474
+              1.4365124045221906,
+              42.15735964313555
             ],
             [
-              1.3900415944994444,
-              42.163203440495664
+              1.4367444943503354,
+              42.15729846787224
             ],
             [
-              1.389963719695416,
-              42.16314728446961
+              1.4369186933317377,
+              42.15724722771381
             ],
             [
-              1.3899538328030896,
-              42.16353714476231
+              1.4370213869131692,
+              42.15717356678694
             ],
             [
-              1.3900822972533282,
-              42.16351515830261
+              1.437094740029658,
+              42.15712095127485
+            ],
+            [
+              1.4372676192991964,
+              42.15712330670855
+            ],
+            [
+              1.4373220233652098,
+              42.15713762846694
+            ],
+            [
+              1.4373231394082169,
+              42.157092276132744
+            ],
+            [
+              1.436113136765047,
+              42.1570757852862
+            ],
+            [
+              1.4360969424323755,
+              42.15773335065186
+            ],
+            [
+              1.4361147116938415,
+              42.15770807689239
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "situation_type": "current_fire",
+        "title": "Boscos de pi negre (Pinus uncinata) calcícoles · comprovació de camp",
+        "ecological_element": "Boscos de pi negre (Pinus uncinata) calcícoles",
+        "hic_code": "9430*",
+        "is_priority": true,
+        "area_ha": 1.0,
+        "what_happens": "Una part concreta de l’HIC coincideix amb cel·les on el producte diari EcoRadar classifica el perill actual com a alt.",
+        "why_flagged": [
+          "HIC cartografiat",
+          "perill d’incendi actual alt"
+        ],
+        "structural": [
+          "hàbitat HIC",
+          "vulnerabilitat territorial incorporada al producte de foc"
+        ],
+        "current": [
+          "perill EcoRadar actual alt; meteorologia i frescor de dades segons la lectura diària"
+        ],
+        "meaning": "La coincidència justifica vigilància i verificació de combustible i estat de l’hàbitat; no demostra impacte ni obliga a intervenir.",
+        "scenario": "Si les condicions desfavorables es mantenen, l’exposició al foc pot persistir; no és una predicció d’incendi.",
+        "ecological_mechanism": "Un incendi podria alterar estructura, cobertura i recursos de l’hàbitat, amb resposta diferent segons intensitat, recurrència i espècies.",
+        "unknown": [
+          "estat local de conservació",
+          "humitat del combustible mesurada al camp",
+          "resposta real de flora i fauna"
+        ],
+        "recommendation": "comprovació de camp",
+        "field_check": [
+          "estructura i continuïtat del combustible",
+          "regeneració i senyals de deteriorament",
+          "evidència d’ús de fauna sense publicar localitzacions sensibles"
+        ],
+        "monitor": [
+          "perill d’incendi actual",
+          "NDMI i NDVI quan hi hagi una observació nova i vàlida",
+          "temperatura superficial amb data i frescor"
+        ],
+        "max_fire_index": 61.0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1.4878010676036173,
+              42.17217859770684
+            ],
+            [
+              1.4878225179242117,
+              42.17127827228087
+            ],
+            [
+              1.486612216237863,
+              42.17126230969468
+            ],
+            [
+              1.4865935893784175,
+              42.17204350442948
+            ],
+            [
+              1.4865907487650403,
+              42.17216263461987
+            ],
+            [
+              1.486919092886274,
+              42.17216696646541
+            ],
+            [
+              1.4878010676036173,
+              42.17217859770684
             ]
           ]
         ]
@@ -928,5 +1190,5 @@
       }
     }
   ],
-  "snapshot_id": "alinya-8c6cffc65f2082fe"
+  "snapshot_id": "alinya-21338352bfa9c462"
 }
