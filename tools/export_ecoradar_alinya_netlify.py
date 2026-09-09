@@ -917,6 +917,8 @@ def render_index(data: dict) -> str:
     d_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     ecoradar_logo = data["branding"]["ecoradar"]
     green_wolf_logo = data["branding"]["greenWolf"]
+    biodiversity_records_label = f"{data['metrics']['records']:,}".replace(",", ".")
+    biodiversity_taxa_label = f"{data['metrics']['species']:,}".replace(",", ".")
     satellite_metrics = data["metrics"]["satellite"]
     lst_scene_count = satellite_metrics["temperatureSceneCount"]
     lst_contributing_count = satellite_metrics.get("temperatureContributingSceneCount")
@@ -1599,7 +1601,7 @@ def render_index(data: dict) -> str:
       <h2>Què tenim, què és especialment valuós, què coincideix amb pressions i on ens falta informació?</h2>
       <p class="eu-lead">Aquest pilot orientat a la gestió creua hàbitats, connectors, registres públics agregats i lectures ambientals sense crear cap índex sintètic. Els sectors són unitats cartogràfiques oficials de connectivitat retallades a l’àmbit: serveixen per explorar i prioritzar comprovacions, no són una zonificació definitiva de gestió.</p>
       <h3>Detall dels registres públics agregats</h3>
-      <p class="eu-lead">Els 731 registres normalitzats de GBIF i iNaturalist documenten presències i 516 taxons, però no estimen abundància, densitat de població ni riquesa completa. La distribució dels registres també reflecteix l’esforç desigual d’observació.</p>
+      <p class="eu-lead">Els {biodiversity_records_label} registres normalitzats de GBIF i iNaturalist documenten presències i {biodiversity_taxa_label} taxons, però no estimen abundància, densitat de població ni riquesa completa. La distribució dels registres també reflecteix l’esforç desigual d’observació.</p>
       <table class="eu-data-table">
         <thead><tr><th>Grup</th><th>Observacions</th><th>Taxons</th><th>Lectura ecològica</th></tr></thead>
         <tbody id="eu-biodiversity-table"></tbody>

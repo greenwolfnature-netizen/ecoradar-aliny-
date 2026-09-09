@@ -11,15 +11,15 @@ Instantània comuna: identificador versionat `snapshot_id`, validat a cada execu
 - CORE_03: mostra `NDVI 0,616` com a lectura directa Sentinel-2 del 07.07.2026, sense conversió a 61,6/100 i sense aportar valor numèric a CORE_12.
 - Perill d'incendi: superfície vàlida, superfície sense dada, cobertura de l'àmbit i confiança del producte explícites; el 95% històric queda etiquetat com a qualitat de la sèrie.
 - Refugis climàtics: fórmula vigent documentada separant LST, NDMI i NDVI dels contextos cartogràfics; el 42,3% explicita el denominador de píxels vegetats vàlids.
-- Traçabilitat: procedència pendent de l'àmbit de treball declarada; hàbitats puntuals incorporats sense entrar a les superfícies ni RADAR; dates dels incendis normalitzades; GBIF paginat; registre únic de metadades per lectura.
+- Traçabilitat: procedència pendent de l'àmbit de treball declarada; hàbitats puntuals incorporats sense entrar a les superfícies ni RADAR; dates dels incendis normalitzades; GBIF paginat; recompte visible i diagnosi de biodiversitat derivats del conjunt processat vigent; registre únic de metadades per lectura.
 - Llegibilitat: els textos abans definits entre 7 i 10 px s'han elevat a 11–13 px sense modificar amplades ni la graella general.
 - Coherència de publicació: els dos recursos del generador d'informes utilitzen una versió derivada del seu contingut, de manera que el navegador no conserva explicacions o etiquetes anteriors després d'un desplegament.
 
 ## Verificació superada
 
-- 31 proves Python específiques d'Alinyà.
-- 7 proves d'evidència ecològica.
-- 32 proves JavaScript de context, informes, instantània i API.
+- 32 proves Python específiques d'Alinyà.
+- 8 proves d'evidència ecològica.
+- 33 proves JavaScript de context, informes, instantània i API.
 - Compilació Python, coherència temporal i `git diff --check`.
 - Revisió funcional en navegador de la vista principal, la capa de perill actual, RADAR_03 i l'informe automàtic.
 
