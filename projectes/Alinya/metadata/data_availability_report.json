@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T08:09:41+00:00",
+  "generated_at": "2026-09-09T11:31:16+00:00",
   "project_root": "projectes/Alinya",
   "config": "config/data_sources.yaml",
   "policy": {
@@ -14,16 +14,16 @@
   "summary": {
     "total_sources": 30,
     "status_counts": {
-      "consultada_correctament": 14,
+      "consultada_correctament": 18,
       "manual_pendent": 8,
-      "requereix_credencials": 7,
+      "requereix_credencials": 3,
       "legalment_condicionada": 1
     },
-    "sources_ok": 14,
+    "sources_ok": 18,
     "sources_partial": 0,
     "sources_failed": 0,
     "sources_not_implemented": 0,
-    "sources_require_credentials": 7,
+    "sources_require_credentials": 3,
     "sources_manual_pending": 8,
     "sources_legal_conditioned": 1
   },
@@ -74,7 +74,8 @@
       "block_name": "Copernicus / Sentinel",
       "source_count": 5,
       "status_counts": {
-        "requereix_credencials": 5
+        "consultada_correctament": 3,
+        "requereix_credencials": 2
       }
     },
     {
@@ -133,7 +134,8 @@
       "block_name": "Clima",
       "source_count": 3,
       "status_counts": {
-        "requereix_credencials": 2,
+        "consultada_correctament": 1,
+        "requereix_credencials": 1,
         "manual_pendent": 1
       }
     },
@@ -462,7 +464,7 @@
       "access_type": "STAC/API",
       "expected_format": "GeoTIFF, CSV, JSON",
       "responsible_connector": "connector_copernicus_teledeteccio",
-      "connector_status": "requereix intervenció manual",
+      "connector_status": "parcial",
       "minimum_fields": [
         "ndvi_mean",
         "ndvi_min",
@@ -480,23 +482,17 @@
         "CORE_12"
       ],
       "required": true,
-      "status": "requereix_credencials",
+      "status": "consultada_correctament",
       "missing_credentials": [
         "COPERNICUS_CLIENT_ID",
         "COPERNICUS_CLIENT_SECRET"
       ],
       "downloaded_data": [
         "processed/teledeteccio/ndvi.tif",
-        "metadata/teledeteccio_metadata.json"
+        "maps/teledeteccio/ndvi.webp",
+        "indicators/teledeteccio_sentinel2.json"
       ],
-      "missing_outputs": [
-        "maps/teledeteccio/ndvi.png",
-        "indicators/teledeteccio_resum.csv",
-        "metadata/teledeteccio_stats.json",
-        "metadata/teledeteccio_percentiles.json",
-        "metadata/teledeteccio_classification.json",
-        "metadata/teledeteccio_ecological_summary.json"
-      ],
+      "missing_outputs": [],
       "on_failure": "BLOCK_ECORADAR_CORE_AND_DIAGNOSIS",
       "error_message": "Copernicus/Sentinel no ha generat NDVI validat.",
       "confidence_if_missing": "baixa"
@@ -510,7 +506,7 @@
       "access_type": "STAC/API",
       "expected_format": "GeoTIFF, CSV, JSON",
       "responsible_connector": "connector_copernicus_teledeteccio",
-      "connector_status": "requereix intervenció manual",
+      "connector_status": "parcial",
       "minimum_fields": [
         "ndmi_mean",
         "ndmi_min",
@@ -530,23 +526,17 @@
         "CORE_12"
       ],
       "required": true,
-      "status": "requereix_credencials",
+      "status": "consultada_correctament",
       "missing_credentials": [
         "COPERNICUS_CLIENT_ID",
         "COPERNICUS_CLIENT_SECRET"
       ],
       "downloaded_data": [
         "processed/teledeteccio/ndmi.tif",
-        "metadata/teledeteccio_metadata.json"
+        "maps/teledeteccio/ndmi.webp",
+        "indicators/teledeteccio_sentinel2.json"
       ],
-      "missing_outputs": [
-        "maps/teledeteccio/ndmi.png",
-        "indicators/teledeteccio_resum.csv",
-        "metadata/teledeteccio_stats.json",
-        "metadata/teledeteccio_percentiles.json",
-        "metadata/teledeteccio_classification.json",
-        "metadata/teledeteccio_ecological_summary.json"
-      ],
+      "missing_outputs": [],
       "on_failure": "BLOCK_ECORADAR_CORE_AND_DIAGNOSIS",
       "error_message": "Copernicus/Sentinel no ha generat NDMI validat.",
       "confidence_if_missing": "baixa"
@@ -650,20 +640,18 @@
     {
       "block_id": "copernicus_sentinel",
       "block_name": "Copernicus / Sentinel",
-      "source_id": "copernicus_lst",
-      "source_name": "LST / Land Surface Temperature o equivalent tèrmic validat",
-      "url": "https://dataspace.copernicus.eu/",
-      "access_type": "STAC/API",
-      "expected_format": "GeoTIFF, PNG, CSV, JSON",
-      "responsible_connector": "connector_copernicus_teledeteccio",
-      "connector_status": "requereix intervenció manual",
+      "source_id": "detailed_surface_temperature",
+      "source_name": "Temperatura superficial detallada Landsat/ECOSTRESS",
+      "url": "https://landsatlook.usgs.gov/stac-server/",
+      "access_type": "STAC/COG/API",
+      "expected_format": "GeoTIFF, WebP, JSON",
+      "responsible_connector": "connector_detailed_surface_temperature",
+      "connector_status": "parcial",
       "minimum_fields": [
-        "lst_mean",
-        "lst_min",
-        "lst_max",
-        "lst_percentiles",
-        "lst_classification",
-        "capture_date",
+        "temporal_kind",
+        "acquired_at_or_period",
+        "lst_metrics",
+        "qa",
         "resolution"
       ],
       "feeds_indicators": [
@@ -675,23 +663,15 @@
         "CORE_12"
       ],
       "required": true,
-      "status": "requereix_credencials",
-      "missing_credentials": [
-        "COPERNICUS_CLIENT_ID",
-        "COPERNICUS_CLIENT_SECRET"
-      ],
+      "status": "consultada_correctament",
+      "missing_credentials": [],
       "downloaded_data": [
-        "metadata/teledeteccio_metadata.json"
+        "processed/landsat/landsat_lst.tif",
+        "maps/teledeteccio/landsat_lst.webp",
+        "indicators/teledeteccio_satellite_layers.json",
+        "metadata/current_surface_temperature.json"
       ],
-      "missing_outputs": [
-        "processed/teledeteccio/lst.tif",
-        "maps/teledeteccio/lst.png",
-        "indicators/teledeteccio_resum.csv",
-        "metadata/teledeteccio_stats.json",
-        "metadata/teledeteccio_percentiles.json",
-        "metadata/teledeteccio_classification.json",
-        "metadata/teledeteccio_ecological_summary.json"
-      ],
+      "missing_outputs": [],
       "on_failure": "BLOCK_ECORADAR_CORE_AND_DIAGNOSIS",
       "error_message": "LST no està disponible com a raster validat per l'àrea.",
       "confidence_if_missing": "baixa"
@@ -1131,8 +1111,8 @@
       "url": "https://api.meteo.cat/",
       "access_type": "API",
       "expected_format": "JSON, CSV",
-      "responsible_connector": "pending_meteocat_connector",
-      "connector_status": "requereix intervenció manual",
+      "responsible_connector": "connector_meteocat_xema",
+      "connector_status": "parcial",
       "minimum_fields": [
         "temperature",
         "precipitation",
@@ -1149,15 +1129,13 @@
         "CORE_12"
       ],
       "required": true,
-      "status": "requereix_credencials",
-      "missing_credentials": [
-        "METEOCAT_API_KEY"
+      "status": "consultada_correctament",
+      "missing_credentials": [],
+      "downloaded_data": [
+        "raw/meteocat_xema/Y4_observations.csv",
+        "raw/meteocat_xema/Y4_metadata.json"
       ],
-      "downloaded_data": [],
-      "missing_outputs": [
-        "processed/clima/meteocat.csv",
-        "metadata/clima_metadata.json"
-      ],
+      "missing_outputs": [],
       "on_failure": "MARK_CLIMATE_CONTEXT_PARTIAL_AND_REQUIRE_CREDENTIALS",
       "error_message": "Meteocat requereix credencials o endpoint seleccionat.",
       "confidence_if_missing": "baixa"
@@ -1277,11 +1255,17 @@
     "indicators/hidrologia_resum.csv",
     "indicators/incendis_resum.csv",
     "indicators/recreational_pressure_resum.csv",
+    "indicators/teledeteccio_satellite_layers.json",
+    "indicators/teledeteccio_sentinel2.json",
     "maps/producte/mapa_base_alinya.png",
     "maps/producte/mapa_espai_alinya.png",
+    "maps/teledeteccio/landsat_lst.webp",
+    "maps/teledeteccio/ndmi.webp",
+    "maps/teledeteccio/ndvi.webp",
     "metadata/biodiversitat_metadata.json",
     "metadata/cobertes_sol_metadata.json",
     "metadata/connectivitat_metadata.json",
+    "metadata/current_surface_temperature.json",
     "metadata/habitats_metadata.json",
     "metadata/hidrologia_metadata.json",
     "metadata/incendis_metadata.json",
@@ -1295,6 +1279,7 @@
     "processed/habitats.gpkg",
     "processed/hidrologia.gpkg",
     "processed/incendis.gpkg",
+    "processed/landsat/landsat_lst.tif",
     "processed/recreational_pressure.gpkg",
     "processed/study_area.gpkg",
     "processed/teledeteccio/ndmi.tif",
@@ -1307,6 +1292,8 @@
     "raw/biodiversitat/gbif_raw.json",
     "raw/biodiversitat/inaturalist_raw.json",
     "raw/incendis/effis_drf_datasets.json",
+    "raw/meteocat_xema/Y4_metadata.json",
+    "raw/meteocat_xema/Y4_observations.csv",
     "raw/recreational_pressure/overpass_osm_raw.json"
   ],
   "unavailable_data": [
@@ -1351,34 +1338,6 @@
       "message": "El mapa de cultius/DUN no està integrat automàticament o no és accessible amb llicència verificada."
     },
     {
-      "source_id": "copernicus_sentinel_ndvi",
-      "source_name": "Copernicus Data Space Sentinel-2 NDVI",
-      "status": "requereix_credencials",
-      "required": true,
-      "affected_indicators": [
-        "CORE_03",
-        "CORE_04",
-        "CORE_11",
-        "CORE_12"
-      ],
-      "message": "Copernicus/Sentinel no ha generat NDVI validat."
-    },
-    {
-      "source_id": "copernicus_sentinel_ndmi",
-      "source_name": "Copernicus Data Space Sentinel-2 NDMI",
-      "status": "requereix_credencials",
-      "required": true,
-      "affected_indicators": [
-        "CORE_03",
-        "CORE_04",
-        "CORE_05",
-        "CORE_09",
-        "CORE_11",
-        "CORE_12"
-      ],
-      "message": "Copernicus/Sentinel no ha generat NDMI validat."
-    },
-    {
       "source_id": "copernicus_sentinel_ndwi",
       "source_name": "Copernicus Data Space Sentinel-2 NDWI",
       "status": "requereix_credencials",
@@ -1403,21 +1362,6 @@
         "CORE_12"
       ],
       "message": "Copernicus/Sentinel no ha generat NBR validat."
-    },
-    {
-      "source_id": "copernicus_lst",
-      "source_name": "LST / Land Surface Temperature o equivalent tèrmic validat",
-      "status": "requereix_credencials",
-      "required": true,
-      "affected_indicators": [
-        "CORE_03",
-        "CORE_04",
-        "CORE_05",
-        "CORE_09",
-        "CORE_11",
-        "CORE_12"
-      ],
-      "message": "LST no està disponible com a raster validat per l'àrea."
     },
     {
       "source_id": "bdbc",
@@ -1468,20 +1412,6 @@
         "CORE_12"
       ],
       "message": "Continuïtat de combustible no està calculada."
-    },
-    {
-      "source_id": "meteocat",
-      "source_name": "Meteocat API",
-      "status": "requereix_credencials",
-      "required": true,
-      "affected_indicators": [
-        "CORE_03",
-        "CORE_04",
-        "CORE_05",
-        "CORE_11",
-        "CORE_12"
-      ],
-      "message": "Meteocat requereix credencials o endpoint seleccionat."
     },
     {
       "source_id": "aemet",
@@ -1543,22 +1473,16 @@
       "land_cover_mcsc",
       "sigpac_catalunya",
       "dun_cultius",
-      "copernicus_sentinel_ndmi",
       "copernicus_sentinel_nbr",
-      "copernicus_lst",
       "fuel_continuity"
     ],
     "CORE_11": [
       "sigpac_catalunya",
       "dun_cultius",
-      "copernicus_sentinel_ndvi",
-      "copernicus_sentinel_ndmi",
       "copernicus_sentinel_ndwi",
       "copernicus_sentinel_nbr",
-      "copernicus_lst",
       "field_biodiversity",
       "fuel_continuity",
-      "meteocat",
       "aemet",
       "spei",
       "field_validation"
@@ -1566,43 +1490,20 @@
     "CORE_12": [
       "sigpac_catalunya",
       "dun_cultius",
-      "copernicus_sentinel_ndvi",
-      "copernicus_sentinel_ndmi",
       "copernicus_sentinel_ndwi",
       "copernicus_sentinel_nbr",
-      "copernicus_lst",
       "bdbc",
       "field_biodiversity",
       "strava_heatmap",
       "fuel_continuity",
-      "meteocat",
       "aemet",
       "spei",
       "field_validation"
     ],
     "CORE_03": [
-      "copernicus_sentinel_ndvi",
-      "copernicus_sentinel_ndmi",
       "copernicus_sentinel_ndwi",
       "copernicus_sentinel_nbr",
-      "copernicus_lst",
-      "meteocat",
       "aemet"
-    ],
-    "CORE_04": [
-      "copernicus_sentinel_ndvi",
-      "copernicus_sentinel_ndmi",
-      "copernicus_lst",
-      "meteocat",
-      "aemet",
-      "spei"
-    ],
-    "CORE_05": [
-      "copernicus_sentinel_ndmi",
-      "copernicus_lst",
-      "meteocat",
-      "aemet",
-      "spei"
     ],
     "CORE_10": [
       "copernicus_sentinel_ndwi",
@@ -1623,6 +1524,15 @@
       "field_biodiversity",
       "strava_heatmap",
       "field_validation"
+    ],
+    "CORE_04": [
+      "aemet",
+      "spei"
+    ],
+    "CORE_05": [
+      "aemet",
+      "spei"
     ]
-  }
+  },
+  "snapshot_id": "alinya-1ce1ee286762c656"
 }

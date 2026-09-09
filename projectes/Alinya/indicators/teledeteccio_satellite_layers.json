@@ -1,10 +1,10 @@
 {
-  "generated_at_utc": "2026-09-03T18:03:23.529978+00:00",
+  "generated_at_utc": "2026-09-09T10:57:58.276209+00:00",
   "scope": "Muntanya d'Alinyà",
   "study_bbox_epsg4326": [
-    1.3639979999999998,
-    42.14442699999999,
-    1.5199389999999997,
+    1.363998,
+    42.144427,
+    1.5199389999999993,
     42.22512200000001
   ],
   "vegetation_cover": {
@@ -17,11 +17,15 @@
   "surface_temperature": {
     "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
     "source_key": "landsat",
-    "acquired_at_utc": "2026-08-25T10:36:29.966485Z",
+    "temporal_kind": "multitemporal_composite",
+    "acquired_at_utc": null,
+    "period_start_utc": "2025-06-03T10:36:04.004415Z",
+    "period_end_utc": "2026-08-25T10:36:29.966485Z",
     "resolution_m": 30,
-    "quality": "QA_PIXEL applied; median composition of valid summer observations",
+    "quality": "QA_PIXEL applied; per-pixel median of valid summer observations",
     "date_range": "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z",
     "scene_count": 26,
+    "contributing_scene_count": 23,
     "composite_method": "Per-pixel median of every valid QA-screened summer observation",
     "coverage_pct": 100.0,
     "metrics_c": {
@@ -40,6 +44,7 @@
   },
   "limitations": {
     "vegetation": "coverage presence, not biodiversity, habitat quality or fuel load",
-    "temperature": "detailed satellite surface temperature at acquisition time; not air temperature, personal exposure or a climatic normal"
-  }
+    "temperature": "detailed satellite surface temperature; a multitemporal median is period context and never a single-date observation; it is not air temperature, personal exposure or a climatic normal"
+  },
+  "snapshot_id": "alinya-1ce1ee286762c656"
 }

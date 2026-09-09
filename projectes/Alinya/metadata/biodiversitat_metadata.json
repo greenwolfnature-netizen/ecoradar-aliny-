@@ -10,7 +10,7 @@
       "url": "https://api.inaturalist.org/v1/observations"
     }
   ],
-  "query_date": "2026-07-06T19:38:49.678857+00:00",
+  "query_date": "2026-09-09T10:58:45.631171+00:00",
   "filters": {
     "gbif": {
       "hasCoordinate": true,
@@ -23,20 +23,29 @@
     },
     "local_clip": "records clipped to study area polygon after download",
     "recent_year_threshold": 2016,
-    "max_records_per_source": 1000
+    "max_records_per_source": 10000
   },
   "buffer_m": 0,
   "study_area_surface_ha": 5464.031656330243,
   "query_area_surface_ha": 5464.031656330243,
   "records_downloaded": {
-    "GBIF": 1000,
-    "iNaturalist": 838
+    "GBIF": 10000,
+    "iNaturalist": 949
+  },
+  "gbif_pagination": {
+    "total_matches": 31169,
+    "downloaded_records": 10000,
+    "page_size": 300,
+    "page_count": 34,
+    "end_of_records": false,
+    "safety_ceiling": 10000,
+    "download_limit_reached": true
   },
   "download_limit_reached": {
     "GBIF": true,
     "iNaturalist": false
   },
-  "records_normalized_after_clip": 731,
+  "records_normalized_after_clip": 3680,
   "crs": "EPSG:25831",
   "raw_files": {
     "GBIF": "projectes/Alinya/raw/biodiversitat/gbif_raw.json",

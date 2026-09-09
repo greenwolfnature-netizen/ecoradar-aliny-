@@ -1,0 +1,2587 @@
+{
+  "schema_version": "1.0",
+  "snapshot_id": "alinya-9bc6d9b247413d13",
+  "generated_at_utc": "2026-09-09T11:06:30.910967Z",
+  "checked_at_utc": "2026-09-09T10:58:00Z",
+  "scope": "Muntanya d'Alinyà",
+  "contract": "Single metadata state consumed by readings, RADAR, completeness, viewer and report generator.",
+  "readings": {
+    "air_temperature": {
+      "reading_id": "air_temperature",
+      "label": "Temperatura de l'aire",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "17,4 °C",
+      "value_numeric": 17.4,
+      "unit": "°C",
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "data_at_utc": "2026-09-09T10:00:00Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": null,
+      "coverage": null,
+      "spatial_support": "station_point",
+      "support_id": "XEMA Y4 Alinyà",
+      "grid_id": null,
+      "mask_id": null,
+      "qa": "provisional XEMA",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily check; source subdaily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Observació puntual de l'estació Y4; no representa cada vessant de la Muntanya d'Alinyà."
+    },
+    "wind_gust": {
+      "reading_id": "wind_gust",
+      "label": "Ratxa de vent",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "18,0 km/h",
+      "value_numeric": 18.0,
+      "unit": "km/h",
+      "source": "Meteocat XEMA · estació CJ Organyà · 9,2 km de Y4",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "data_at_utc": "2026-09-09T10:00:00Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": null,
+      "coverage": null,
+      "spatial_support": "station_point_context",
+      "support_id": "XEMA CJ Organyà",
+      "grid_id": null,
+      "mask_id": null,
+      "qa": "provisional XEMA",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily check; source subdaily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Ratxa puntual de l'estació oficial de context; no representa el vent de cada vall o carena d'Alinyà."
+    },
+    "relative_humidity": {
+      "reading_id": "relative_humidity",
+      "label": "Humitat relativa",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "71 %",
+      "value_numeric": 71.0,
+      "unit": "%",
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "data_at_utc": "2026-09-09T10:00:00Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": null,
+      "coverage": null,
+      "spatial_support": "station_point",
+      "support_id": "XEMA Y4 Alinyà",
+      "grid_id": null,
+      "mask_id": null,
+      "qa": "provisional XEMA",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily check; source subdaily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Observació puntual; no és una malla territorial d'humitat."
+    },
+    "wind": {
+      "reading_id": "wind",
+      "label": "Vent",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "8,6 km/h",
+      "value_numeric": 8.6,
+      "unit": "km/h",
+      "source": "Meteocat XEMA · estació CJ Organyà · 9,2 km de Y4",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "data_at_utc": "2026-09-09T10:00:00Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": null,
+      "coverage": null,
+      "spatial_support": "station_point_context",
+      "support_id": "XEMA CJ Organyà",
+      "grid_id": null,
+      "mask_id": null,
+      "qa": "provisional XEMA",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily check; source subdaily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Context puntual de l'estació més propera amb vent; no és vent mesurat dins Alinyà ni un camp per a valls i carenes."
+    },
+    "precipitation": {
+      "reading_id": "precipitation",
+      "label": "Precipitació",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "0,0 mm",
+      "value_numeric": 0.0,
+      "unit": "mm",
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "data_at_utc": "2026-09-09T10:00:00Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": null,
+      "coverage": null,
+      "spatial_support": "station_point",
+      "support_id": "XEMA Y4 Alinyà",
+      "grid_id": null,
+      "mask_id": null,
+      "qa": "provisional XEMA",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily check; source subdaily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Acumulació dels períodes XEMA disponibles del 2026-09-09."
+    },
+    "precipitation_7d": {
+      "reading_id": "precipitation_7d",
+      "label": "Precipitació últims 7 dies",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "1,1 mm",
+      "value_numeric": 1.1,
+      "unit": "mm",
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "data_at_utc": "2026-09-09T10:00:00Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": null,
+      "coverage": null,
+      "spatial_support": "station_time_series",
+      "support_id": "XEMA Y4 Alinyà",
+      "grid_id": null,
+      "mask_id": null,
+      "qa": "derivada de períodes XEMA amb cobertura ≥80 %",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Suma de períodes XEMA de 30 minuts fins a l'última observació; s'oculta si la cobertura és inferior al 80%."
+    },
+    "precipitation_30d": {
+      "reading_id": "precipitation_30d",
+      "label": "Precipitació últims 30 dies",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "43,1 mm",
+      "value_numeric": 43.1,
+      "unit": "mm",
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "data_at_utc": "2026-09-09T10:00:00Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": null,
+      "coverage": null,
+      "spatial_support": "station_time_series",
+      "support_id": "XEMA Y4 Alinyà",
+      "grid_id": null,
+      "mask_id": null,
+      "qa": "derivada de períodes XEMA amb cobertura ≥80 %",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Suma de períodes XEMA de 30 minuts fins a l'última observació; s'oculta si la cobertura és inferior al 80%."
+    },
+    "days_without_significant_rain": {
+      "reading_id": "days_without_significant_rain",
+      "label": "Dies sense pluja significativa",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "0 dies",
+      "value_numeric": 0.0,
+      "unit": "dies",
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "data_at_utc": "2026-09-09T10:00:00Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": null,
+      "coverage": null,
+      "spatial_support": "station_time_series",
+      "support_id": "XEMA Y4 Alinyà",
+      "grid_id": null,
+      "mask_id": null,
+      "qa": "derivada de períodes XEMA amb cobertura ≥80 %",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Suma de períodes XEMA de 30 minuts fins a l'última observació; s'oculta si la cobertura és inferior al 80%. Llindar de pluja significativa: 1,0 mm/dia."
+    },
+    "pla_alfa": {
+      "reading_id": "pla_alfa",
+      "label": "Pla Alfa",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "Nivell 1 · moderat",
+      "value_numeric": 1.0,
+      "unit": "nivell oficial 0–4",
+      "source": "Cos d'Agents Rurals / Generalitat de Catalunya",
+      "source_url": "https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/",
+      "data_at_utc": "2026-09-09T07:59:20.329000Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": null,
+      "coverage": null,
+      "spatial_support": "municipality",
+      "support_id": "Fígols i Alinyà",
+      "grid_id": null,
+      "mask_id": null,
+      "qa": "dada oficial municipal",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Nivell operatiu oficial de Fígols i Alinyà; no és un càlcul EcoRadar ni entra numèricament a l'índex 0–100."
+    },
+    "surface_temperature": {
+      "reading_id": "surface_temperature",
+      "label": "Temperatura superficial",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "28,5 °C",
+      "value_numeric": 28.5,
+      "unit": "°C",
+      "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
+      "source_url": "https://landsatlook.usgs.gov/stac-server/",
+      "data_at_utc": null,
+      "temporal_kind": "multitemporal_composite",
+      "period_start_utc": "2025-06-03T10:36:04.004415Z",
+      "period_end_utc": "2026-08-25T10:36:29.966485Z",
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": 30,
+      "coverage": {
+        "valid_pct": 100.0,
+        "denominator": "rasterized study polygon"
+      },
+      "spatial_support": "study_area_raster",
+      "support_id": "Alinyà study polygon",
+      "grid_id": "surface_temperature:landsat:30m",
+      "mask_id": "source_QA_and_study_area",
+      "qa": "QA_PIXEL applied; per-pixel median of valid summer observations",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "context del període",
+      "update_frequency": "per new QA-valid scene",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Compost multitemporal de 26 escenes: descriu el patró tèrmic del període i no una observació del darrer dia component."
+    },
+    "ndmi": {
+      "reading_id": "ndmi",
+      "label": "NDMI",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "0,106",
+      "value_numeric": 0.106,
+      "unit": "índex",
+      "source": "Copernicus Sentinel-2 MSI L2A",
+      "source_url": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a",
+      "data_at_utc": "2026-07-07T10:37:01.024000Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": 10,
+      "coverage": {
+        "valid_area_ha": 5461.4,
+        "valid_pct": 99.95,
+        "denominator": "rasterized study polygon"
+      },
+      "spatial_support": "study_area_raster",
+      "support_id": "Alinyà study polygon",
+      "grid_id": "sentinel2:S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508:EPSG:4326:10m",
+      "mask_id": "SCL_4_5_6:S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508",
+      "qa": "dataMask=1 and SCL classes 4, 5 or 6; cloud, cirrus, shadow, snow and invalid classes excluded",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "última dada disponible",
+      "update_frequency": "per new QA-valid scene",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Mediana de l'àmbit de l'última escena local vàlida."
+    },
+    "ndvi": {
+      "reading_id": "ndvi",
+      "label": "NDVI",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "0,616",
+      "value_numeric": 0.616,
+      "unit": "índex",
+      "source": "Copernicus Sentinel-2 MSI L2A",
+      "source_url": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a",
+      "data_at_utc": "2026-07-07T10:37:01.024000Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": 10,
+      "coverage": {
+        "valid_area_ha": 5461.4,
+        "valid_pct": 99.95,
+        "denominator": "rasterized study polygon"
+      },
+      "spatial_support": "study_area_raster",
+      "support_id": "Alinyà study polygon",
+      "grid_id": "sentinel2:S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508:EPSG:4326:10m",
+      "mask_id": "SCL_4_5_6:S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508",
+      "qa": "dataMask=1 and SCL classes 4, 5 or 6; cloud, cirrus, shadow, snow and invalid classes excluded",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "última dada disponible",
+      "update_frequency": "per new QA-valid scene",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Mediana de l'àmbit de l'última escena local vàlida."
+    },
+    "albedo": {
+      "reading_id": "albedo",
+      "label": "Albedo",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "0,173",
+      "value_numeric": 0.173,
+      "unit": "índex",
+      "source": "Copernicus Sentinel-2 MSI L2A",
+      "source_url": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a",
+      "data_at_utc": "2026-07-07T10:37:01.024000Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": 10,
+      "coverage": {
+        "valid_area_ha": 5461.4,
+        "valid_pct": 99.95,
+        "denominator": "rasterized study polygon"
+      },
+      "spatial_support": "study_area_raster",
+      "support_id": "Alinyà study polygon",
+      "grid_id": "sentinel2:S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508:EPSG:4326:10m",
+      "mask_id": "SCL_4_5_6:S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508",
+      "qa": "dataMask=1 and SCL classes 4, 5 or 6; cloud, cirrus, shadow, snow and invalid classes excluded",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "última dada disponible",
+      "update_frequency": "per new QA-valid scene",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Mediana de l'àmbit de l'última escena local vàlida."
+    },
+    "air_quality": {
+      "reading_id": "air_quality",
+      "label": "Qualitat de l'aire",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "PM2,5 · 8,78 µg/m³",
+      "value_numeric": 8.78,
+      "unit": "µg/m³ PM2,5",
+      "source": "Copernicus CAMS European air-quality forecast",
+      "source_url": "https://ads.atmosphere.copernicus.eu/",
+      "data_at_utc": "2026-09-09T00:00:00Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": 10000,
+      "coverage": null,
+      "spatial_support": "model_grid_context",
+      "support_id": "CAMS 0.1 degree",
+      "grid_id": "CAMS 0.1 degree",
+      "mask_id": null,
+      "qa": "model 0,1° (~10 km)",
+      "quality_verified": true,
+      "coverage_verified": false,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Context modelitzat supramunicipal; no és una estació local ni una concentració de sender o nucli."
+    },
+    "thermal_comfort": {
+      "reading_id": "thermal_comfort",
+      "label": "Confort tèrmic contextual",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "16,4 °C aparents",
+      "value_numeric": 16.4,
+      "unit": "°C aparents",
+      "source": "Derivat EcoRadar · temperatura aparent de Steadman amb XEMA",
+      "source_url": "docs/data_sources/alinya_daily_readings.md",
+      "data_at_utc": "2026-09-09T10:00:00Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": null,
+      "coverage": null,
+      "spatial_support": "station_point_derived",
+      "support_id": "XEMA Y4/CJ",
+      "grid_id": null,
+      "mask_id": null,
+      "qa": "provisional XEMA",
+      "quality_verified": true,
+      "coverage_verified": false,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Estimació puntual; no és UTCI, WBGT, exposició individual ni risc clínic."
+    },
+    "terrain_shade": {
+      "reading_id": "terrain_shade",
+      "label": "Ombra topogràfica diària · 15 h",
+      "measurement_kind": "direct_or_derived_reading",
+      "value": "0,6 %",
+      "value_numeric": 0.6,
+      "unit": "%",
+      "source": "ICGC MDT 5 m + posició solar calculada",
+      "source_url": "https://www.icgc.cat/ca/Geoinformacio-i-mapes/Dades-i-productes/Geoinformacio-cartografica/Altimetria",
+      "data_at_utc": "2026-09-09T13:00:00Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": 5,
+      "coverage": null,
+      "spatial_support": "study_area_raster",
+      "support_id": "Alinyà polygon",
+      "grid_id": "Alinyà polygon",
+      "mask_id": "study_area",
+      "qa": "derivada verificada",
+      "quality_verified": true,
+      "coverage_verified": false,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "Considera pendent i orientació del relleu; no incorpora arbres, edificis ni horitzó llunyà."
+    },
+    "current_fire_danger": {
+      "reading_id": "current_fire_danger",
+      "label": "Perill actual d'incendi",
+      "measurement_kind": "synthetic_score",
+      "value": "33,6/100 · baix",
+      "value_numeric": 33.6,
+      "unit": "índex 0–100",
+      "source": "Índex EcoRadar derivat · fonts detallades a la lectura",
+      "source_url": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
+      "data_at_utc": "2026-09-09T10:00:00Z",
+      "temporal_kind": "observation",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:00Z",
+      "resolution_m": 100,
+      "coverage": {
+        "valid_area_ha": 5353.66,
+        "no_data_area_ha": 110.37,
+        "valid_pct": 98.0,
+        "denominator": "entire study-area polygon"
+      },
+      "spatial_support": "study_area_grid",
+      "support_id": "Alinyà study polygon",
+      "grid_id": "current_fire_danger:EPSG25831:100m",
+      "mask_id": "study_area_and_available_components",
+      "qa": "confiança del producte baixa · 40.6 %",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "actualitzada avui",
+      "update_frequency": "daily",
+      "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
+      "note": "No és una alerta oficial ni substitueix el Pla Alfa."
+    },
+    "climate_refuges": {
+      "reading_id": "climate_refuges",
+      "label": "Potencial relatiu de refugi climatic",
+      "measurement_kind": "derived_screening",
+      "value": 42.3,
+      "value_numeric": 42.3,
+      "unit": "% of vegetated valid denominator",
+      "source": "EcoRadar derivation from LST, NDMI and NDVI",
+      "source_url": null,
+      "data_at_utc": null,
+      "temporal_kind": "mixed_period_derived",
+      "period_start_utc": "2025-06-03T10:36:04.004415Z",
+      "period_end_utc": "2026-07-07T10:37:01.024000Z",
+      "resolution_m": 10,
+      "coverage": {
+        "name": "vegetated pixels with valid LST, NDMI and NDVI",
+        "rule": "inside the study polygon; all three formula inputs valid; NDVI >= 0.30",
+        "valid_pixels": 351637,
+        "valid_area_ha": 5085.1,
+        "study_polygon_rasterized_pixels": 377841,
+        "study_polygon_area_ha": 5464.0,
+        "area_method": "Study-area area apportioned by the share of rasterized study pixels.",
+        "share_of_study_raster_pct": 93.1
+      },
+      "spatial_support": "vegetated_valid_pixels",
+      "support_id": "Alinyà study polygon",
+      "grid_id": "sentinel2_grid:10m",
+      "mask_id": "valid_LST_NDMI_NDVI_and_NDVI>=0.30",
+      "qa": "All formula inputs valid; hydrology is display context only.",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "period context",
+      "compatibility": "Mixed-period screening; not a current microclimate observation.",
+      "note": "Relative screening layer based on a two-summer daytime LST composite and one Sentinel-2 date. Hydrology is drawn as cartographic context and does not enter the numeric formula. It is not air temperature, a climatic normal, microclimate monitoring or a field-validated refuge inventory. Weights and thresholds are explicit EcoRadar analysis assumptions."
+    },
+    "vegetation": {
+      "reading_id": "vegetation",
+      "label": "Cobertura vegetal",
+      "measurement_kind": "inventory_or_structural_context",
+      "value": 69.0,
+      "value_numeric": 69.0,
+      "unit": "%",
+      "source": "CLMS HRL Tree Cover Density 2023 + Herbaceous Cover 2023",
+      "source_url": "https://geoserveis.icgc.cat/servei/catalunya/cobertes-sol/wms",
+      "data_at_utc": null,
+      "temporal_kind": "inventory_version",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": null,
+      "update_frequency": "when official source version changes",
+      "resolution_m": null,
+      "coverage": {
+        "study_area_ha": 5464.031656330243
+      },
+      "spatial_support": "study_area_raster",
+      "support_id": "Alinyà study polygon",
+      "grid_id": null,
+      "mask_id": "study_area",
+      "qa": "Official source geometry clipped to the documented study area",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "structural or inventory context",
+      "compatibility": "Do not describe as current; use with the documented source version and spatial support.",
+      "note": null
+    },
+    "habitats": {
+      "reading_id": "habitats",
+      "label": "Hàbitats cartografiats",
+      "measurement_kind": "inventory_or_structural_context",
+      "value": 452,
+      "value_numeric": 452,
+      "unit": "polígons",
+      "source": "Cartografia dels habitats terrestres, versio 3 (2019/2024)",
+      "source_url": "https://sig.gencat.cat/ows/wfs",
+      "data_at_utc": null,
+      "temporal_kind": "inventory_version",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:50:11.529211+00:00",
+      "update_frequency": "when official source version changes",
+      "resolution_m": null,
+      "coverage": {
+        "study_area_ha": 5464.031656330243
+      },
+      "spatial_support": "study_area_vectors",
+      "support_id": "Alinyà study polygon",
+      "grid_id": null,
+      "mask_id": "study_area",
+      "qa": "Official source geometry clipped to the documented study area",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "structural or inventory context",
+      "compatibility": "Do not describe as current; use with the documented source version and spatial support.",
+      "note": [
+        "The official page states that each polygon habitat is present in at least 75 percent of the polygon.",
+        "Habitats smaller than 15000 m2 may be represented as points. They are retained in habitats_punts for traceability and do not enter polygon-area summaries or current RADAR formulas.",
+        "The WFS BBOX response may return multipart habitat features beyond the study-area envelope; final outputs are clipped locally to the study-area geometry.",
+        "Areas are calculated after clipping in EPSG:25831 and may differ from official AREA_M2 source attributes."
+      ]
+    },
+    "biodiversity": {
+      "reading_id": "biodiversity",
+      "label": "Registres públics normalitzats",
+      "measurement_kind": "inventory_or_structural_context",
+      "value": 3680,
+      "value_numeric": 3680,
+      "unit": "registres",
+      "source": "GBIF + iNaturalist",
+      "source_url": null,
+      "data_at_utc": null,
+      "temporal_kind": "inventory_version",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T10:58:45.631171+00:00",
+      "update_frequency": "when official source version changes",
+      "resolution_m": null,
+      "coverage": {
+        "study_area_ha": 5464.031656330243
+      },
+      "spatial_support": "study_area_points",
+      "support_id": "Alinyà study polygon",
+      "grid_id": null,
+      "mask_id": "study_area",
+      "qa": "Official source geometry clipped to the documented study area",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "structural or inventory context",
+      "compatibility": "Do not describe as current; use with the documented source version and spatial support.",
+      "note": [
+        "GBIF and iNaturalist records are opportunistic/public records and do not prove complete species absence or current presence.",
+        "Old records are marked historic and should not be interpreted as current presence without field or recent supporting evidence.",
+        "iNaturalist is queried by bounding box and then clipped locally to the study-area polygon.",
+        "Coordinate uncertainty, obscured coordinates, taxonomic revisions and observer effort can affect record quality.",
+        "No Ornitho or other non-authorized portal scraping is performed."
+      ]
+    },
+    "connectivity": {
+      "reading_id": "connectivity",
+      "label": "Connectivitat cartografiada",
+      "measurement_kind": "inventory_or_structural_context",
+      "source": "Infraestructura Verda / Connectivitat ecològica",
+      "source_url": "https://sig.gencat.cat/ows/INFRAESTRUCTURA_VERDA/wfs",
+      "data_at_utc": null,
+      "temporal_kind": "inventory_version",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-07-07T17:36:47.553555+00:00",
+      "update_frequency": "when official source version changes",
+      "resolution_m": null,
+      "coverage": {
+        "study_area_ha": 5464.031656330243
+      },
+      "spatial_support": "study_area_vectors",
+      "support_id": "Alinyà study polygon",
+      "grid_id": null,
+      "mask_id": "study_area",
+      "qa": "Official source geometry clipped to the documented study area",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "structural or inventory context",
+      "compatibility": "Do not describe as current; use with the documented source version and spatial support.",
+      "note": [
+        "The connector stores official connectivity layers clipped to the study area.",
+        "It does not calculate EcoRadar connectivity scores or corridor prioritization.",
+        "Large polygon layers may include features selected by BBOX and then clipped locally."
+      ]
+    },
+    "access": {
+      "reading_id": "access",
+      "label": "Accessibilitat cartografiada",
+      "measurement_kind": "inventory_or_structural_context",
+      "source": "OpenStreetMap / Overpass",
+      "source_url": "https://wiki.openstreetmap.org/wiki/Overpass_API",
+      "data_at_utc": null,
+      "temporal_kind": "inventory_version",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": null,
+      "update_frequency": "when official source version changes",
+      "resolution_m": null,
+      "coverage": {
+        "study_area_ha": 5464.031656330243
+      },
+      "spatial_support": "study_area_lines",
+      "support_id": "Alinyà study polygon",
+      "grid_id": null,
+      "mask_id": "study_area",
+      "qa": "Official source geometry clipped to the documented study area",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "structural or inventory context",
+      "compatibility": "Do not describe as current; use with the documented source version and spatial support.",
+      "note": [
+        "OpenStreetMap is volunteered geographic information and may be incomplete or unevenly mapped.",
+        "The connector normalizes infrastructure and access features only; it does not estimate visitor numbers.",
+        "Strava Global Heatmap, Wikiloc, counters and manager datasets remain excluded until authorized connector-grade access is documented.",
+        "Later EcoRadar analysis should combine OSM with fieldwork before diagnosing real public-use pressure."
+      ]
+    },
+    "publicUse": {
+      "reading_id": "publicUse",
+      "label": "Punts d'ús públic cartografiats",
+      "measurement_kind": "inventory_or_structural_context",
+      "source": "OpenStreetMap / Overpass",
+      "source_url": "https://wiki.openstreetmap.org/wiki/Overpass_API",
+      "data_at_utc": null,
+      "temporal_kind": "inventory_version",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": null,
+      "update_frequency": "when official source version changes",
+      "resolution_m": null,
+      "coverage": {
+        "study_area_ha": 5464.031656330243
+      },
+      "spatial_support": "study_area_points",
+      "support_id": "Alinyà study polygon",
+      "grid_id": null,
+      "mask_id": "study_area",
+      "qa": "Official source geometry clipped to the documented study area",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "structural or inventory context",
+      "compatibility": "Do not describe as current; use with the documented source version and spatial support.",
+      "note": [
+        "OpenStreetMap is volunteered geographic information and may be incomplete or unevenly mapped.",
+        "The connector normalizes infrastructure and access features only; it does not estimate visitor numbers.",
+        "Strava Global Heatmap, Wikiloc, counters and manager datasets remain excluded until authorized connector-grade access is documented.",
+        "Later EcoRadar analysis should combine OSM with fieldwork before diagnosing real public-use pressure."
+      ]
+    },
+    "water": {
+      "reading_id": "water",
+      "label": "Aigua i funcionalitat hídrica cartografiada",
+      "measurement_kind": "inventory_or_structural_context",
+      "source": "ACA / Gencat AIGUA WFS",
+      "source_url": "https://sig.gencat.cat/ows/AIGUA/wfs",
+      "data_at_utc": null,
+      "temporal_kind": "inventory_version",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-07-07T17:30:57.648563+00:00",
+      "update_frequency": "when official source version changes",
+      "resolution_m": null,
+      "coverage": {
+        "study_area_ha": 5464.031656330243
+      },
+      "spatial_support": "study_area_vectors",
+      "support_id": "Alinyà study polygon",
+      "grid_id": null,
+      "mask_id": "study_area",
+      "qa": "Official source geometry clipped to the documented study area",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "structural or inventory context",
+      "compatibility": "Do not describe as current; use with the documented source version and spatial support.",
+      "note": [
+        "Some official WFS layers can legitimately return zero features inside the study area.",
+        "The connector stores source geometry and simple length/area summaries only; it does not classify ecological water functionality.",
+        "Springs, ponds and wetlands require field validation before management decisions."
+      ]
+    },
+    "historical_fires": {
+      "reading_id": "historical_fires",
+      "label": "Perímetres històrics d'incendi",
+      "measurement_kind": "inventory_or_structural_context",
+      "value": 2,
+      "value_numeric": 2,
+      "unit": "perímetres",
+      "source": "Superfícies afectades per incendis forestals v1.1",
+      "source_url": "https://sig.gencat.cat/ows/VEGETACIO/wfs",
+      "data_at_utc": null,
+      "temporal_kind": "inventory_version",
+      "period_start_utc": null,
+      "period_end_utc": null,
+      "checked_at_utc": "2026-09-09T06:09:30.160353+00:00",
+      "update_frequency": "when official source version changes",
+      "resolution_m": null,
+      "coverage": {
+        "study_area_ha": 5464.031656330243
+      },
+      "spatial_support": "study_area_vectors",
+      "support_id": "Alinyà study polygon",
+      "grid_id": null,
+      "mask_id": "study_area",
+      "qa": "Official source geometry clipped to the documented study area",
+      "quality_verified": true,
+      "coverage_verified": true,
+      "validity": "structural or inventory context",
+      "compatibility": "Do not describe as current; use with the documented source version and spatial support.",
+      "note": [
+        "Gencat burned-area polygons describe historical perimeters, not current operational fire risk.",
+        "EFFIS is included as a verified public catalogue only; no local EFFIS product geometry is used until product-specific request workflow, CRS, licence and schema are documented.",
+        "IncendisCat is not used as an EcoRadar data source.",
+        "The connector does not calculate fire probability or resilience indicators."
+      ]
+    }
+  },
+  "core_indicators": {
+    "CORE_01": {
+      "code": "CORE_01",
+      "name": "Mosaic del paisatge",
+      "value_0_100": 70.71,
+      "category": "alt",
+      "status": "COMPLET",
+      "confidence": "alta",
+      "sources_used": [
+        "land_cover_icgc_cobertes_sol",
+        "habitats_terrestres_v3",
+        "connectivity_infraestructura_verda"
+      ],
+      "sources_absent": [
+        "land_cover_mcsc",
+        "sigpac_catalunya",
+        "dun_cultius"
+      ],
+      "calculation_explanation": "Combina diversitat de cobertes, proporció forestal, espais oberts/agroforestals, artificialització, riquesa d'hàbitats i presència de connectors oficials.",
+      "limitations": [
+        "SIGPAC, DUN i MCSC no estan disponibles; l'ús agrari fi no entra al càlcul.",
+        "La continuïtat forestal es tracta com a proxy de composició, no com a mètrica espacial completa."
+      ],
+      "diagnosis_impact": "El mosaic es pot comparar i usar com a base de context, però les decisions agràries fines necessiten SIGPAC/DUN.",
+      "measurement_kind": "synthetic_score",
+      "direct_value": null,
+      "direct_unit": null,
+      "source_date_utc": null,
+      "completeness": {
+        "indicator": "CORE_01",
+        "required_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "connectivity_infraestructura_verda"
+        ],
+        "all_sources": [
+          "study_area_file",
+          "icgc_base_maps",
+          "icgc_orthophoto",
+          "land_cover_icgc_cobertes_sol",
+          "land_cover_mcsc",
+          "sigpac_catalunya",
+          "dun_cultius",
+          "connectivity_infraestructura_verda"
+        ],
+        "available_sources": [
+          "study_area_file",
+          "icgc_base_maps",
+          "icgc_orthophoto",
+          "land_cover_icgc_cobertes_sol",
+          "connectivity_infraestructura_verda"
+        ],
+        "partial_sources": [],
+        "missing_sources": [
+          "land_cover_mcsc",
+          "sigpac_catalunya",
+          "dun_cultius"
+        ],
+        "data_available_percent": 100.0,
+        "status": "DISPONIBLE",
+        "confidence": "alta"
+      }
+    },
+    "CORE_02": {
+      "code": "CORE_02",
+      "name": "Valor d'hàbitats",
+      "value_0_100": 98.91,
+      "category": "molt alt",
+      "status": "COMPLET",
+      "confidence": "alta",
+      "sources_used": [
+        "habitats_terrestres_v3",
+        "hic_v2"
+      ],
+      "sources_absent": [
+        "field_biodiversity",
+        "field_validation"
+      ],
+      "calculation_explanation": "Combina nombre d'hàbitats, superfície d'HIC i superfície d'HIC prioritaris dins l'àrea.",
+      "limitations": [
+        "No hi ha validació de camp d'hàbitats.",
+        "No hi ha encara llista EcoRadar d'hàbitats sensibles/degradats aplicada com a capa independent."
+      ],
+      "diagnosis_impact": "La lectura d'hàbitats és sòlida a escala cartogràfica, però les actuacions sobre hàbitats concrets necessiten validació de camp.",
+      "measurement_kind": "synthetic_score",
+      "direct_value": null,
+      "direct_unit": null,
+      "source_date_utc": null,
+      "completeness": {
+        "indicator": "CORE_02",
+        "required_sources": [
+          "study_area_file",
+          "habitats_terrestres_v3",
+          "hic_v2"
+        ],
+        "all_sources": [
+          "study_area_file",
+          "habitats_terrestres_v3",
+          "hic_v2",
+          "field_biodiversity",
+          "field_validation"
+        ],
+        "available_sources": [
+          "study_area_file",
+          "habitats_terrestres_v3",
+          "hic_v2"
+        ],
+        "partial_sources": [],
+        "missing_sources": [
+          "field_biodiversity",
+          "field_validation"
+        ],
+        "data_available_percent": 100.0,
+        "status": "DISPONIBLE",
+        "confidence": "alta"
+      }
+    },
+    "CORE_03": {
+      "code": "CORE_03",
+      "name": "Estat de la vegetació",
+      "value_0_100": null,
+      "category": "lectura directa",
+      "status": "PARCIAL",
+      "confidence": "mitjana",
+      "sources_used": [
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi"
+      ],
+      "sources_absent": [
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr",
+        "aemet"
+      ],
+      "calculation_explanation": "Lectura directa de la mediana NDVI de l'escena Sentinel-2 L2A amb màscara SCL; no es transforma en una puntuació sintètica 0–100.",
+      "limitations": [
+        "Una sola escena descriu el vigor espectral de la data, no una tendència ni l'estat de conservació.",
+        "NDWI, NBR i context climàtic homogeni continuen absents del RADAR sintètic."
+      ],
+      "diagnosis_impact": "Aporta una observació directa traçable sense alterar la fórmula ni la síntesi CORE_12.",
+      "measurement_kind": "direct_reading",
+      "direct_value": 0.616,
+      "direct_unit": "NDVI",
+      "source_date_utc": "2026-07-07T10:37:01.024000Z",
+      "completeness": {
+        "indicator": "CORE_03",
+        "required_sources": [
+          "copernicus_sentinel_ndvi",
+          "copernicus_sentinel_ndmi",
+          "copernicus_sentinel_ndwi",
+          "copernicus_sentinel_nbr",
+          "detailed_surface_temperature",
+          "meteocat"
+        ],
+        "all_sources": [
+          "copernicus_sentinel_ndvi",
+          "copernicus_sentinel_ndmi",
+          "copernicus_sentinel_ndwi",
+          "copernicus_sentinel_nbr",
+          "detailed_surface_temperature",
+          "meteocat",
+          "aemet"
+        ],
+        "available_sources": [
+          "copernicus_sentinel_ndvi",
+          "copernicus_sentinel_ndmi",
+          "detailed_surface_temperature",
+          "meteocat"
+        ],
+        "partial_sources": [],
+        "missing_sources": [
+          "copernicus_sentinel_ndwi",
+          "copernicus_sentinel_nbr",
+          "aemet"
+        ],
+        "data_available_percent": 66.7,
+        "status": "PARCIAL",
+        "confidence": "mitjana"
+      }
+    },
+    "CORE_04": {
+      "code": "CORE_04",
+      "name": "Refugis climàtics",
+      "value_0_100": 59.2,
+      "category": "mitjà",
+      "status": "COMPLET",
+      "confidence": "alta",
+      "sources_used": [
+        "land_cover_icgc_cobertes_sol",
+        "icgc_dem_mdt",
+        "aca_hydrology"
+      ],
+      "sources_absent": [
+        "aemet",
+        "spei"
+      ],
+      "calculation_explanation": "Combina coberta forestal, orientació/northness del DEM i presència relativa de cursos/fonts oficials.",
+      "limitations": [
+        "Falten LST, NDMI i NDVI; no es delimiten refugis tèrmics finals.",
+        "El valor és un proxy topogràfic-hídric i de coberta, no un mapa final de refugi climàtic."
+      ],
+      "diagnosis_impact": "Permet detectar potencial preliminar, però no ha de servir encara per delimitar refugis prioritaris sense teledetecció.",
+      "measurement_kind": "synthetic_score",
+      "direct_value": null,
+      "direct_unit": null,
+      "source_date_utc": null,
+      "completeness": {
+        "indicator": "CORE_04",
+        "required_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "copernicus_sentinel_ndvi",
+          "copernicus_sentinel_ndmi",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "meteocat"
+        ],
+        "all_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "copernicus_sentinel_ndvi",
+          "copernicus_sentinel_ndmi",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "meteocat",
+          "aemet",
+          "spei"
+        ],
+        "available_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "copernicus_sentinel_ndvi",
+          "copernicus_sentinel_ndmi",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "meteocat"
+        ],
+        "partial_sources": [],
+        "missing_sources": [
+          "aemet",
+          "spei"
+        ],
+        "data_available_percent": 100.0,
+        "status": "DISPONIBLE",
+        "confidence": "alta"
+      }
+    },
+    "CORE_05": {
+      "code": "CORE_05",
+      "name": "Vulnerabilitat climàtica",
+      "value_0_100": 37.31,
+      "category": "baix",
+      "status": "COMPLET",
+      "confidence": "alta",
+      "sources_used": [
+        "land_cover_icgc_cobertes_sol",
+        "icgc_dem_mdt",
+        "aca_hydrology"
+      ],
+      "sources_absent": [
+        "aemet",
+        "spei"
+      ],
+      "calculation_explanation": "Combina menor coberta forestal, pendent, exposició sud proxy, artificialització i menor senyal hídric disponible.",
+      "limitations": [
+        "Falten LST, NDMI, sequera SPEI i clima Meteocat/AEMET.",
+        "El valor representa vulnerabilitat estructural parcial, no vulnerabilitat climàtica completa."
+      ],
+      "diagnosis_impact": "Pot orientar quines variables cal completar; no ha de convertir-se encara en mapa final de vulnerabilitat.",
+      "measurement_kind": "synthetic_score",
+      "direct_value": null,
+      "direct_unit": null,
+      "source_date_utc": null,
+      "completeness": {
+        "indicator": "CORE_05",
+        "required_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "copernicus_sentinel_ndmi",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "meteocat"
+        ],
+        "all_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "copernicus_sentinel_ndmi",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "meteocat",
+          "aemet",
+          "spei"
+        ],
+        "available_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "copernicus_sentinel_ndmi",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "meteocat"
+        ],
+        "partial_sources": [],
+        "missing_sources": [
+          "aemet",
+          "spei"
+        ],
+        "data_available_percent": 100.0,
+        "status": "DISPONIBLE",
+        "confidence": "alta"
+      }
+    },
+    "CORE_06": {
+      "code": "CORE_06",
+      "name": "Biodiversitat coneguda",
+      "value_0_100": 83.06,
+      "category": "molt alt",
+      "status": "COMPLET",
+      "confidence": "alta",
+      "sources_used": [
+        "gbif_occurrences",
+        "inaturalist_observations"
+      ],
+      "sources_absent": [
+        "bdbc",
+        "field_biodiversity",
+        "field_validation"
+      ],
+      "calculation_explanation": "Combina riquesa d'espècies citades, proporció de registres recents i cobertura de grups taxonòmics.",
+      "limitations": [
+        "Falten BDBC, dades pròpies de camp i llistes creuades d'espècies protegides, amenaçades o invasores.",
+        "Les fonts públiques són oportunistes i no equivalen a inventari complet."
+      ],
+      "diagnosis_impact": "Serveix per valorar coneixement disponible, però les decisions sobre espècies sensibles necessiten camp i llistes normatives.",
+      "measurement_kind": "synthetic_score",
+      "direct_value": null,
+      "direct_unit": null,
+      "source_date_utc": null,
+      "completeness": {
+        "indicator": "CORE_06",
+        "required_sources": [
+          "habitats_terrestres_v3",
+          "gbif_occurrences",
+          "inaturalist_observations"
+        ],
+        "all_sources": [
+          "habitats_terrestres_v3",
+          "gbif_occurrences",
+          "inaturalist_observations",
+          "bdbc",
+          "field_biodiversity",
+          "field_validation"
+        ],
+        "available_sources": [
+          "habitats_terrestres_v3",
+          "gbif_occurrences",
+          "inaturalist_observations"
+        ],
+        "partial_sources": [],
+        "missing_sources": [
+          "bdbc",
+          "field_biodiversity",
+          "field_validation"
+        ],
+        "data_available_percent": 100.0,
+        "status": "DISPONIBLE",
+        "confidence": "alta"
+      }
+    },
+    "CORE_07": {
+      "code": "CORE_07",
+      "name": "Pressió humana i ús públic",
+      "value_0_100": 49.15,
+      "category": "mitjà",
+      "status": "COMPLET",
+      "confidence": "alta",
+      "sources_used": [
+        "osm_public_use"
+      ],
+      "sources_absent": [
+        "field_biodiversity",
+        "strava_heatmap",
+        "field_validation"
+      ],
+      "calculation_explanation": "Combina densitat de camins/pistes OSM i concentració de punts d'ús públic cartografiats.",
+      "limitations": [
+        "OSM no mesura intensitat real de visitants.",
+        "Strava queda legalment condicionat i no s'ha usat; falten comptadors, gestors i camp."
+      ],
+      "diagnosis_impact": "Indica pressió potencial per accessibilitat, però no afluència real.",
+      "measurement_kind": "synthetic_score",
+      "direct_value": null,
+      "direct_unit": null,
+      "source_date_utc": null,
+      "completeness": {
+        "indicator": "CORE_07",
+        "required_sources": [
+          "osm_public_use"
+        ],
+        "all_sources": [
+          "field_biodiversity",
+          "osm_public_use",
+          "strava_heatmap",
+          "field_validation"
+        ],
+        "available_sources": [
+          "osm_public_use"
+        ],
+        "partial_sources": [],
+        "missing_sources": [
+          "field_biodiversity",
+          "strava_heatmap",
+          "field_validation"
+        ],
+        "data_available_percent": 100.0,
+        "status": "DISPONIBLE",
+        "confidence": "alta"
+      }
+    },
+    "CORE_08": {
+      "code": "CORE_08",
+      "name": "Connectivitat ecològica",
+      "value_0_100": 79.5,
+      "category": "alt",
+      "status": "COMPLET",
+      "confidence": "alta",
+      "sources_used": [
+        "connectivity_infraestructura_verda",
+        "land_cover_icgc_cobertes_sol",
+        "habitats_terrestres_v3",
+        "aca_hydrology",
+        "osm_public_use"
+      ],
+      "sources_absent": [
+        "land_cover_mcsc",
+        "sigpac_catalunya",
+        "dun_cultius",
+        "strava_heatmap"
+      ],
+      "calculation_explanation": "Combina cobertes naturals, connectors oficials, context d'hàbitats/hidrologia i pressió per accessibilitat.",
+      "limitations": [
+        "No hi ha model de barreres fines ni permeabilitat específica per espècie.",
+        "La pressió humana s'integra com a proxy d'infraestructura, no d'intensitat d'ús."
+      ],
+      "diagnosis_impact": "Útil com a lectura estructural preliminar; els corredors prioritaris requereixen model espacial específic.",
+      "measurement_kind": "synthetic_score",
+      "direct_value": null,
+      "direct_unit": null,
+      "source_date_utc": null,
+      "completeness": {
+        "indicator": "CORE_08",
+        "required_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "habitats_terrestres_v3",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "connectivity_infraestructura_verda",
+          "osm_public_use"
+        ],
+        "all_sources": [
+          "study_area_file",
+          "icgc_base_maps",
+          "icgc_orthophoto",
+          "land_cover_icgc_cobertes_sol",
+          "land_cover_mcsc",
+          "habitats_terrestres_v3",
+          "sigpac_catalunya",
+          "dun_cultius",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "connectivity_infraestructura_verda",
+          "osm_public_use",
+          "strava_heatmap"
+        ],
+        "available_sources": [
+          "study_area_file",
+          "icgc_base_maps",
+          "icgc_orthophoto",
+          "land_cover_icgc_cobertes_sol",
+          "habitats_terrestres_v3",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "connectivity_infraestructura_verda",
+          "osm_public_use"
+        ],
+        "partial_sources": [],
+        "missing_sources": [
+          "land_cover_mcsc",
+          "sigpac_catalunya",
+          "dun_cultius",
+          "strava_heatmap"
+        ],
+        "data_available_percent": 100.0,
+        "status": "DISPONIBLE",
+        "confidence": "alta"
+      }
+    },
+    "CORE_09": {
+      "code": "CORE_09",
+      "name": "Resiliència davant del foc",
+      "value_0_100": 44.17,
+      "category": "mitjà",
+      "status": "PARCIAL",
+      "confidence": "mitjana",
+      "sources_used": [
+        "land_cover_icgc_cobertes_sol",
+        "icgc_dem_mdt",
+        "fires_burned_areas",
+        "osm_public_use",
+        "aca_hydrology"
+      ],
+      "sources_absent": [
+        "land_cover_mcsc",
+        "sigpac_catalunya",
+        "dun_cultius",
+        "copernicus_sentinel_nbr",
+        "fuel_continuity"
+      ],
+      "calculation_explanation": "Combina continuïtat forestal/matollar proxy, mosaic obert, pendent, incendis històrics, accessibilitat i punts/cursos d'aigua.",
+      "limitations": [
+        "Falten NDMI, LST i font oficial de combustible/estructura forestal.",
+        "No calcula risc d'incendi; només resiliència estructural parcial."
+      ],
+      "diagnosis_impact": "Serveix per identificar quines capes falten abans de parlar de risc o de prioritzar gestió forestal.",
+      "measurement_kind": "synthetic_score",
+      "direct_value": null,
+      "direct_unit": null,
+      "source_date_utc": null,
+      "completeness": {
+        "indicator": "CORE_09",
+        "required_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "copernicus_sentinel_ndmi",
+          "copernicus_sentinel_nbr",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "osm_public_use",
+          "fires_burned_areas",
+          "fuel_continuity"
+        ],
+        "all_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "land_cover_mcsc",
+          "sigpac_catalunya",
+          "dun_cultius",
+          "copernicus_sentinel_ndmi",
+          "copernicus_sentinel_nbr",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "osm_public_use",
+          "fires_burned_areas",
+          "effis",
+          "fuel_continuity"
+        ],
+        "available_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "copernicus_sentinel_ndmi",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "osm_public_use",
+          "fires_burned_areas",
+          "effis"
+        ],
+        "partial_sources": [],
+        "missing_sources": [
+          "land_cover_mcsc",
+          "sigpac_catalunya",
+          "dun_cultius",
+          "copernicus_sentinel_nbr",
+          "fuel_continuity"
+        ],
+        "data_available_percent": 77.8,
+        "status": "PARCIAL",
+        "confidence": "mitjana"
+      }
+    },
+    "CORE_10": {
+      "code": "CORE_10",
+      "name": "Aigua i funcionalitat hídrica",
+      "value_0_100": 47.18,
+      "category": "mitjà",
+      "status": "PARCIAL",
+      "confidence": "mitjana",
+      "sources_used": [
+        "aca_hydrology",
+        "icgc_dem_mdt"
+      ],
+      "sources_absent": [
+        "copernicus_sentinel_ndwi",
+        "field_biodiversity",
+        "spei",
+        "field_validation"
+      ],
+      "calculation_explanation": "Combina densitat de cursos/drenatge, fonts oficials i disponibilitat de DEM per contextualitzar funcionalitat hídrica.",
+      "limitations": [
+        "Falten NDWI, basses/zones humides amb presència dins l'àrea i punts d'aigua validats al camp.",
+        "No incorpora estat ecològic de masses d'aigua."
+      ],
+      "diagnosis_impact": "Permet saber que hi ha base hidrològica, però no avalua encara qualitat ni funcionalitat ecològica completa.",
+      "measurement_kind": "synthetic_score",
+      "direct_value": null,
+      "direct_unit": null,
+      "source_date_utc": null,
+      "completeness": {
+        "indicator": "CORE_10",
+        "required_sources": [
+          "study_area_file",
+          "copernicus_sentinel_ndwi",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "connectivity_infraestructura_verda"
+        ],
+        "all_sources": [
+          "study_area_file",
+          "copernicus_sentinel_ndwi",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "connectivity_infraestructura_verda",
+          "field_biodiversity",
+          "spei",
+          "field_validation"
+        ],
+        "available_sources": [
+          "study_area_file",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "connectivity_infraestructura_verda"
+        ],
+        "partial_sources": [],
+        "missing_sources": [
+          "copernicus_sentinel_ndwi",
+          "field_biodiversity",
+          "spei",
+          "field_validation"
+        ],
+        "data_available_percent": 80.0,
+        "status": "PARCIAL",
+        "confidence": "alta"
+      }
+    },
+    "CORE_11": {
+      "code": "CORE_11",
+      "name": "Potencial de restauració",
+      "value_0_100": 73.71,
+      "category": "alt",
+      "status": "PARCIAL",
+      "confidence": "mitjana",
+      "sources_used": [
+        "habitats_terrestres_v3",
+        "land_cover_icgc_cobertes_sol",
+        "icgc_dem_mdt",
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "osm_public_use"
+      ],
+      "sources_absent": [
+        "sigpac_catalunya",
+        "dun_cultius",
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr",
+        "field_biodiversity",
+        "fuel_continuity",
+        "aemet",
+        "spei",
+        "field_validation"
+      ],
+      "calculation_explanation": "Combina valor d'hàbitats, vulnerabilitat climàtica parcial, funcionalitat hídrica, pressió humana gestionable i connectivitat.",
+      "limitations": [
+        "Falten Sentinel, hàbitats degradats validats, hàbitats font, SIGPAC/DUN i treball de camp.",
+        "No delimita zones de restauració; només calcula potencial agregat provisional."
+      ],
+      "diagnosis_impact": "Pot orientar on cal completar dades abans de proposar restauració; no és encara una priorització espacial.",
+      "measurement_kind": "synthetic_score",
+      "direct_value": null,
+      "direct_unit": null,
+      "source_date_utc": null,
+      "completeness": {
+        "indicator": "CORE_11",
+        "required_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "habitats_terrestres_v3",
+          "copernicus_sentinel_ndvi",
+          "copernicus_sentinel_ndmi",
+          "copernicus_sentinel_ndwi",
+          "copernicus_sentinel_nbr",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "connectivity_infraestructura_verda",
+          "gbif_occurrences",
+          "inaturalist_observations",
+          "osm_public_use",
+          "fires_burned_areas",
+          "fuel_continuity",
+          "meteocat"
+        ],
+        "all_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "habitats_terrestres_v3",
+          "sigpac_catalunya",
+          "dun_cultius",
+          "copernicus_sentinel_ndvi",
+          "copernicus_sentinel_ndmi",
+          "copernicus_sentinel_ndwi",
+          "copernicus_sentinel_nbr",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "connectivity_infraestructura_verda",
+          "gbif_occurrences",
+          "inaturalist_observations",
+          "field_biodiversity",
+          "osm_public_use",
+          "fires_burned_areas",
+          "fuel_continuity",
+          "meteocat",
+          "aemet",
+          "spei",
+          "field_validation"
+        ],
+        "available_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "habitats_terrestres_v3",
+          "copernicus_sentinel_ndvi",
+          "copernicus_sentinel_ndmi",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "connectivity_infraestructura_verda",
+          "gbif_occurrences",
+          "inaturalist_observations",
+          "osm_public_use",
+          "fires_burned_areas",
+          "meteocat"
+        ],
+        "partial_sources": [],
+        "missing_sources": [
+          "sigpac_catalunya",
+          "dun_cultius",
+          "copernicus_sentinel_ndwi",
+          "copernicus_sentinel_nbr",
+          "field_biodiversity",
+          "fuel_continuity",
+          "aemet",
+          "spei",
+          "field_validation"
+        ],
+        "data_available_percent": 82.4,
+        "status": "PARCIAL",
+        "confidence": "alta"
+      }
+    },
+    "CORE_12": {
+      "code": "CORE_12",
+      "name": "Prioritat de gestió",
+      "value_0_100": 64.29,
+      "category": "alt",
+      "status": "PARCIAL",
+      "confidence": "mitjana",
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "fires_burned_areas",
+        "gbif_occurrences",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "icgc_dem_mdt",
+        "inaturalist_observations",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "sources_absent": [
+        "aemet",
+        "bdbc",
+        "copernicus_sentinel_nbr",
+        "copernicus_sentinel_ndwi",
+        "dun_cultius",
+        "field_biodiversity",
+        "field_validation",
+        "fuel_continuity",
+        "land_cover_mcsc",
+        "sigpac_catalunya",
+        "spei",
+        "strava_heatmap"
+      ],
+      "calculation_explanation": "Síntesi dels indicadors Core calculables. Manté estat parcial si qualsevol font crítica de síntesi continua absent.",
+      "limitations": [
+        "No genera recomanacions ni zones prioritàries.",
+        "La síntesi queda limitada per absència de Copernicus, clima, combustible oficial i treball de camp."
+      ],
+      "diagnosis_impact": "Ofereix només una lectura agregada de motor; no substitueix diagnosi ni priorització de gestió.",
+      "measurement_kind": "synthetic_score",
+      "direct_value": null,
+      "direct_unit": null,
+      "source_date_utc": null,
+      "completeness": {
+        "indicator": "CORE_12",
+        "required_sources": [
+          "study_area_file",
+          "land_cover_icgc_cobertes_sol",
+          "habitats_terrestres_v3",
+          "hic_v2",
+          "copernicus_sentinel_ndvi",
+          "copernicus_sentinel_ndmi",
+          "copernicus_sentinel_ndwi",
+          "copernicus_sentinel_nbr",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "connectivity_infraestructura_verda",
+          "gbif_occurrences",
+          "inaturalist_observations",
+          "osm_public_use",
+          "fires_burned_areas",
+          "fuel_continuity",
+          "meteocat"
+        ],
+        "all_sources": [
+          "study_area_file",
+          "icgc_base_maps",
+          "icgc_orthophoto",
+          "land_cover_icgc_cobertes_sol",
+          "habitats_terrestres_v3",
+          "hic_v2",
+          "sigpac_catalunya",
+          "dun_cultius",
+          "copernicus_sentinel_ndvi",
+          "copernicus_sentinel_ndmi",
+          "copernicus_sentinel_ndwi",
+          "copernicus_sentinel_nbr",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "connectivity_infraestructura_verda",
+          "gbif_occurrences",
+          "inaturalist_observations",
+          "bdbc",
+          "field_biodiversity",
+          "osm_public_use",
+          "strava_heatmap",
+          "fires_burned_areas",
+          "effis",
+          "fuel_continuity",
+          "meteocat",
+          "aemet",
+          "spei",
+          "field_validation"
+        ],
+        "available_sources": [
+          "study_area_file",
+          "icgc_base_maps",
+          "icgc_orthophoto",
+          "land_cover_icgc_cobertes_sol",
+          "habitats_terrestres_v3",
+          "hic_v2",
+          "copernicus_sentinel_ndvi",
+          "copernicus_sentinel_ndmi",
+          "detailed_surface_temperature",
+          "icgc_dem_mdt",
+          "aca_hydrology",
+          "connectivity_infraestructura_verda",
+          "gbif_occurrences",
+          "inaturalist_observations",
+          "osm_public_use",
+          "fires_burned_areas",
+          "effis",
+          "meteocat"
+        ],
+        "partial_sources": [],
+        "missing_sources": [
+          "sigpac_catalunya",
+          "dun_cultius",
+          "copernicus_sentinel_ndwi",
+          "copernicus_sentinel_nbr",
+          "bdbc",
+          "field_biodiversity",
+          "strava_heatmap",
+          "fuel_continuity",
+          "aemet",
+          "spei",
+          "field_validation"
+        ],
+        "data_available_percent": 83.3,
+        "status": "PARCIAL",
+        "confidence": "alta"
+      }
+    }
+  },
+  "sources": {
+    "study_area": {
+      "source": "User-supplied Instamaps export",
+      "source_file": "InstamapsExport.gpkg",
+      "source_layer": "limits_zip",
+      "authority": null,
+      "license": null,
+      "provenance_status": "pending_verification",
+      "crs": "EPSG:25831",
+      "coverage_ha": 5464.031656330243,
+      "use": "analysis boundary and denominator"
+    },
+    "habitats": {
+      "project": "Alinya",
+      "source_id": "biodiversity_habitats_terrestres_v3",
+      "source": "Cartografia dels habitats terrestres, versio 3 (2019/2024)",
+      "url": "https://mediambient.gencat.cat/ca/05_ambits_dactuacio/patrimoni_natural/sistemes_dinformacio/habitats/habitats_terrestres/mapa-dels-habitats-terrestres/cartografia-dels-habitats-versio-3-2025/",
+      "service_url": "https://sig.gencat.cat/ows/wfs",
+      "layer": "HABITATS_TERRESTPOL",
+      "point_layer": "HABITATS:HABITATS_TERRESTPNT",
+      "query_date": "2026-09-09T10:50:11.529211+00:00",
+      "crs": "EPSG:25831",
+      "original_crs": "EPSG:25831",
+      "scale_or_resolution": "Version 3 terrestrial habitat polygons; minimum polygon threshold 15000 m2 according to the official page.",
+      "study_area_surface_ha": 5464.031656330243,
+      "clipped_surface_ha": 5464.031656330236,
+      "features_downloaded": 779,
+      "features_clipped": 452,
+      "point_features_downloaded": 551,
+      "point_features_clipped": 289,
+      "raw_file": "projectes/Alinya/raw/habitats/habitats_terrestres_v3_alinya_bbox.geojson",
+      "raw_points_file": "projectes/Alinya/raw/habitats/habitats_terrestres_v3_punts_alinya_bbox.geojson",
+      "processed_file": "projectes/Alinya/processed/habitats.gpkg",
+      "processed_layers": [
+        "habitats",
+        "habitats_punts"
+      ],
+      "summary_file": "projectes/Alinya/indicators/habitats_resum.csv",
+      "limitations": [
+        "The official page states that each polygon habitat is present in at least 75 percent of the polygon.",
+        "Habitats smaller than 15000 m2 may be represented as points. They are retained in habitats_punts for traceability and do not enter polygon-area summaries or current RADAR formulas.",
+        "The WFS BBOX response may return multipart habitat features beyond the study-area envelope; final outputs are clipped locally to the study-area geometry.",
+        "Areas are calculated after clipping in EPSG:25831 and may differ from official AREA_M2 source attributes."
+      ]
+    },
+    "biodiversity": {
+      "project": "Alinya",
+      "sources_consulted": [
+        {
+          "source": "GBIF Occurrence API",
+          "url": "https://api.gbif.org/v1/occurrence/search"
+        },
+        {
+          "source": "iNaturalist Observations API",
+          "url": "https://api.inaturalist.org/v1/observations"
+        }
+      ],
+      "query_date": "2026-09-09T10:58:45.631171+00:00",
+      "filters": {
+        "gbif": {
+          "hasCoordinate": true,
+          "hasGeospatialIssue": false,
+          "bbox": "study area bounding box in WGS84"
+        },
+        "inaturalist": {
+          "geo": true,
+          "bbox": "study area bounding box in WGS84"
+        },
+        "local_clip": "records clipped to study area polygon after download",
+        "recent_year_threshold": 2016,
+        "max_records_per_source": 10000
+      },
+      "buffer_m": 0,
+      "study_area_surface_ha": 5464.031656330243,
+      "query_area_surface_ha": 5464.031656330243,
+      "records_downloaded": {
+        "GBIF": 10000,
+        "iNaturalist": 949
+      },
+      "gbif_pagination": {
+        "total_matches": 31169,
+        "downloaded_records": 10000,
+        "page_size": 300,
+        "page_count": 34,
+        "end_of_records": false,
+        "safety_ceiling": 10000,
+        "download_limit_reached": true
+      },
+      "download_limit_reached": {
+        "GBIF": true,
+        "iNaturalist": false
+      },
+      "records_normalized_after_clip": 3680,
+      "crs": "EPSG:25831",
+      "raw_files": {
+        "GBIF": "projectes/Alinya/raw/biodiversitat/gbif_raw.json",
+        "iNaturalist": "projectes/Alinya/raw/biodiversitat/inaturalist_raw.json"
+      },
+      "processed_file": "projectes/Alinya/processed/biodiversitat.gpkg",
+      "summary_file": "projectes/Alinya/indicators/biodiversitat_resum.csv",
+      "limitations": [
+        "GBIF and iNaturalist records are opportunistic/public records and do not prove complete species absence or current presence.",
+        "Old records are marked historic and should not be interpreted as current presence without field or recent supporting evidence.",
+        "iNaturalist is queried by bounding box and then clipped locally to the study-area polygon.",
+        "Coordinate uncertainty, obscured coordinates, taxonomic revisions and observer effort can affect record quality.",
+        "No Ornitho or other non-authorized portal scraping is performed."
+      ]
+    },
+    "historical_fires": {
+      "project": "Alinya",
+      "source": "Superfícies afectades per incendis forestals v1.1",
+      "responsible_organization": "Generalitat de Catalunya / Departament competent en medi natural / ICGC / Cos d'Agents Rurals",
+      "service_url": "https://sig.gencat.cat/ows/VEGETACIO/wfs",
+      "layer": "VEGETACIO:VEGETACIO_INCENDIS",
+      "service_type": "WFS 2.0.0",
+      "query_date": "2026-09-09T06:09:30.160353+00:00",
+      "crs": "EPSG:25831",
+      "study_area_surface_ha": 5464.031656330243,
+      "raw_file": "projectes/Alinya/raw/incendis/vegetacio_incendis_alinya_bbox.geojson",
+      "processed_file": "projectes/Alinya/processed/incendis.gpkg",
+      "summary_file": "projectes/Alinya/indicators/incendis_resum.csv",
+      "features_clipped": 2,
+      "burned_area_ha": 17.4489,
+      "fire_years": [
+        "2000",
+        "2012"
+      ],
+      "features_with_date": 2,
+      "features_without_date": 0,
+      "effis": {
+        "status": "catalogue_only",
+        "url": "https://api.effis.emergency.copernicus.eu/rest/drf/datasets/",
+        "raw_file": "projectes/Alinya/raw/incendis/effis_drf_datasets.json",
+        "dataset_count": 3,
+        "local_geometry_downloaded": false
+      },
+      "summary": [
+        {
+          "metric": "gencat_fire_polygons",
+          "value": 2,
+          "unit": "features"
+        },
+        {
+          "metric": "gencat_burned_area_ha",
+          "value": 17.4489,
+          "unit": "ha"
+        },
+        {
+          "metric": "gencat_fire_years",
+          "value": "2000, 2012",
+          "unit": "years"
+        },
+        {
+          "metric": "effis_catalog_datasets",
+          "value": 3,
+          "unit": "datasets"
+        },
+        {
+          "metric": "effis_local_geometry_downloaded",
+          "value": 0,
+          "unit": "boolean"
+        }
+      ],
+      "limitations": [
+        "Gencat burned-area polygons describe historical perimeters, not current operational fire risk.",
+        "EFFIS is included as a verified public catalogue only; no local EFFIS product geometry is used until product-specific request workflow, CRS, licence and schema are documented.",
+        "IncendisCat is not used as an EcoRadar data source.",
+        "The connector does not calculate fire probability or resilience indicators."
+      ]
+    },
+    "land_cover": {
+      "font": "ICGC - Cobertes del Sol de Catalunya",
+      "url": "https://geoserveis.icgc.cat/servei/catalunya/cobertes-sol/wms",
+      "service_type": "WCS/WMS",
+      "coverage_id": "cobertes_2024",
+      "data_consulta": "2026-07-06T19:08:56+00:00",
+      "crs": "EPSG:25831",
+      "escala_resolucio": "1 m raster classified coverage, according to WCS DescribeCoverage offset vectors",
+      "limitacions": [
+        "Connector uses ICGC WCS classified raster values and WMS GetFeatureInfo labels.",
+        "The WCS GeoTIFF is RGB-rendered; classes are resolved from sampled RGB pixels through official WMS GetFeatureInfo responses.",
+        "Areas are calculated from 1 m pixels after masking with the study area.",
+        "Pixel-based clipping may differ slightly from vector-source areas along boundaries.",
+        "No EcoRadar ecological interpretation or index is calculated."
+      ],
+      "study_area_path": "projectes/Alinya/processed/study_area.gpkg",
+      "processed_path": "projectes/Alinya/processed/cobertes_sol.gpkg",
+      "summary_path": "projectes/Alinya/indicators/cobertes_sol_resum.csv",
+      "raw_tiles": [
+        "projectes/Alinya/raw/cobertes_sol/cobertes_2024_364868_4666982_368868_4670982.tif",
+        "projectes/Alinya/raw/cobertes_sol/cobertes_2024_364868_4670982_368868_4674982.tif",
+        "projectes/Alinya/raw/cobertes_sol/cobertes_2024_364868_4674982_368868_4676013.tif",
+        "projectes/Alinya/raw/cobertes_sol/cobertes_2024_368868_4666982_372868_4670982.tif",
+        "projectes/Alinya/raw/cobertes_sol/cobertes_2024_368868_4670982_372868_4674982.tif",
+        "projectes/Alinya/raw/cobertes_sol/cobertes_2024_368868_4674982_372868_4676013.tif",
+        "projectes/Alinya/raw/cobertes_sol/cobertes_2024_372868_4666982_376868_4670982.tif",
+        "projectes/Alinya/raw/cobertes_sol/cobertes_2024_372868_4670982_376868_4674982.tif",
+        "projectes/Alinya/raw/cobertes_sol/cobertes_2024_372868_4674982_376868_4676013.tif",
+        "projectes/Alinya/raw/cobertes_sol/cobertes_2024_376868_4666982_377779_4670982.tif",
+        "projectes/Alinya/raw/cobertes_sol/cobertes_2024_376868_4670982_377779_4674982.tif",
+        "projectes/Alinya/raw/cobertes_sol/cobertes_2024_376868_4674982_377779_4676013.tif"
+      ],
+      "tile_count": 12,
+      "class_count": 24,
+      "surface_ha_from_classified_pixels": 5464.0226,
+      "study_area_surface_ha": 5464.031656330243
+    },
+    "hydrology": {
+      "project": "Alinya",
+      "source": "ACA / Gencat AIGUA WFS",
+      "responsible_organization": "Agència Catalana de l'Aigua / Generalitat de Catalunya",
+      "url": "https://aca.gencat.cat/",
+      "service_url": "https://sig.gencat.cat/ows/AIGUA/wfs",
+      "service_type": "WFS 2.0.0",
+      "query_date": "2026-07-07T17:30:57.648563+00:00",
+      "crs": "EPSG:25831",
+      "study_area_surface_ha": 5464.031656330243,
+      "layers": [
+        {
+          "layer_id": "rius_aca_che",
+          "type_name": "AIGUA:AIGUA_RIUS_ACA_CHE",
+          "theme": "courses",
+          "description": "Rius ACA/CHE",
+          "raw_path": "projectes/Alinya/raw/hidrologia/rius_aca_che.geojson",
+          "feature_count": 2,
+          "geometry_types": [
+            "MultiLineString"
+          ],
+          "length_km": 11.6975,
+          "area_ha": 0.0
+        },
+        {
+          "layer_id": "eixos_drenatge",
+          "type_name": "AIGUA:AIGUA_EIXOS_DRENATGE_ASDT",
+          "theme": "drainage_axes",
+          "description": "Eixos de drenatge ASDT",
+          "raw_path": "projectes/Alinya/raw/hidrologia/eixos_drenatge.geojson",
+          "feature_count": 1,
+          "geometry_types": [
+            "LineString"
+          ],
+          "length_km": 0.0744,
+          "area_ha": 0.0
+        },
+        {
+          "layer_id": "fonts",
+          "type_name": "AIGUA:AIGUA_FONTS",
+          "theme": "springs",
+          "description": "Fonts",
+          "raw_path": "projectes/Alinya/raw/hidrologia/fonts.geojson",
+          "feature_count": 12,
+          "geometry_types": [
+            "Point"
+          ],
+          "length_km": 0.0,
+          "area_ha": 0.0
+        },
+        {
+          "layer_id": "masses_rius",
+          "type_name": "AIGUA:AIGUA_CONQUES_MASSES_RIUS",
+          "theme": "river_water_bodies",
+          "description": "Conques i masses de rius",
+          "raw_path": "projectes/Alinya/raw/hidrologia/masses_rius.geojson",
+          "feature_count": 0,
+          "geometry_types": [],
+          "length_km": 0.0,
+          "area_ha": 0.0
+        },
+        {
+          "layer_id": "preses_basses",
+          "type_name": "AIGUA:AIGUA_PRESES_BASSES",
+          "theme": "ponds_reservoirs",
+          "description": "Preses i basses",
+          "raw_path": "projectes/Alinya/raw/hidrologia/preses_basses.geojson",
+          "feature_count": 0,
+          "geometry_types": [],
+          "length_km": 0.0,
+          "area_ha": 0.0
+        },
+        {
+          "layer_id": "estanys",
+          "type_name": "AIGUA:AIGUA_MA_ESTANYS",
+          "theme": "lakes",
+          "description": "Masses d'aigua estanys",
+          "raw_path": "projectes/Alinya/raw/hidrologia/estanys.geojson",
+          "feature_count": 0,
+          "geometry_types": [],
+          "length_km": 0.0,
+          "area_ha": 0.0
+        },
+        {
+          "layer_id": "zones_humides_estanys",
+          "type_name": "AIGUA:AIGUA_PDG_ZH_ESTANYS_CIC_222",
+          "theme": "wetlands_lakes",
+          "description": "Zones humides i estanys del pla de gestió",
+          "raw_path": "projectes/Alinya/raw/hidrologia/zones_humides_estanys.geojson",
+          "feature_count": 0,
+          "geometry_types": [],
+          "length_km": 0.0,
+          "area_ha": 0.0
+        }
+      ],
+      "processed_path": "projectes/Alinya/processed/hidrologia.gpkg",
+      "processed_layers": {
+        "rius_aca_che": "projectes/Alinya/processed/hidrologia.gpkg",
+        "eixos_drenatge": "projectes/Alinya/processed/hidrologia.gpkg",
+        "fonts": "projectes/Alinya/processed/hidrologia.gpkg"
+      },
+      "summary_path": "projectes/Alinya/indicators/hidrologia_resum.csv",
+      "limitations": [
+        "Some official WFS layers can legitimately return zero features inside the study area.",
+        "The connector stores source geometry and simple length/area summaries only; it does not classify ecological water functionality.",
+        "Springs, ponds and wetlands require field validation before management decisions."
+      ]
+    },
+    "connectivity": {
+      "project": "Alinya",
+      "source": "Infraestructura Verda / Connectivitat ecològica",
+      "responsible_organization": "Generalitat de Catalunya",
+      "url": "https://mediambient.gencat.cat/",
+      "service_url": "https://sig.gencat.cat/ows/INFRAESTRUCTURA_VERDA/wfs",
+      "service_type": "WFS 2.0.0",
+      "query_date": "2026-07-07T17:36:47.553555+00:00",
+      "crs": "EPSG:25831",
+      "study_area_surface_ha": 5464.031656330243,
+      "processed_path": "projectes/Alinya/processed/connectivitat.gpkg",
+      "summary_path": "projectes/Alinya/indicators/connectivitat_resum.csv",
+      "layers": [
+        {
+          "layer_id": "connectivitat_terrestre_index",
+          "type_name": "INFRAESTRUCTURA_VERDA:CONECO_INDX_CONNEC_TERR_GRAL",
+          "theme": "terrestrial_connectivity_index",
+          "raw_path": "projectes/Alinya/raw/connectivitat/connectivitat_terrestre_index.geojson",
+          "feature_count": 49,
+          "geometry_types": [
+            "MultiPolygon",
+            "Polygon"
+          ],
+          "area_ha": 5464.0317,
+          "length_km": 283.3514
+        },
+        {
+          "layer_id": "connectors_fluvials_complementaris",
+          "type_name": "INFRAESTRUCTURA_VERDA:CONECO_CONNECTORS_FLUV_COMPL",
+          "theme": "fluvial_connectors_complementary",
+          "raw_path": "projectes/Alinya/raw/connectivitat/connectors_fluvials_complementaris.geojson",
+          "feature_count": 1,
+          "geometry_types": [
+            "LineString"
+          ],
+          "area_ha": 0.0,
+          "length_km": 0.0208
+        },
+        {
+          "layer_id": "connectors_fluvials_principals",
+          "type_name": "INFRAESTRUCTURA_VERDA:CONECO_CONNECTORS_FLUV_PPAL",
+          "theme": "fluvial_connectors_main",
+          "raw_path": "projectes/Alinya/raw/connectivitat/connectors_fluvials_principals.geojson",
+          "feature_count": 0,
+          "geometry_types": [],
+          "area_ha": 0.0,
+          "length_km": 0.0
+        },
+        {
+          "layer_id": "connectors_terrestres_complementaris",
+          "type_name": "INFRAESTRUCTURA_VERDA:CONECO_CONNECTORS_TERR_COMPL",
+          "theme": "terrestrial_connectors_complementary",
+          "raw_path": "projectes/Alinya/raw/connectivitat/connectors_terrestres_complementaris.geojson",
+          "feature_count": 0,
+          "geometry_types": [],
+          "area_ha": 0.0,
+          "length_km": 0.0
+        },
+        {
+          "layer_id": "connectors_terrestres_principals",
+          "type_name": "INFRAESTRUCTURA_VERDA:CONECO_CONNECTORS_TERR_PPAL",
+          "theme": "terrestrial_connectors_main",
+          "raw_path": "projectes/Alinya/raw/connectivitat/connectors_terrestres_principals.geojson",
+          "feature_count": 4,
+          "geometry_types": [
+            "MultiPolygon",
+            "Polygon"
+          ],
+          "area_ha": 1198.6046,
+          "length_km": 49.9162
+        },
+        {
+          "layer_id": "zones_connectors_infraestructura_verda",
+          "type_name": "INFRAESTRUCTURA_VERDA:INFRAVERD_ZONES_CONNECTORS",
+          "theme": "green_infrastructure_connector_zones",
+          "raw_path": "projectes/Alinya/raw/connectivitat/zones_connectors_infraestructura_verda.geojson",
+          "feature_count": 1,
+          "geometry_types": [
+            "MultiPolygon"
+          ],
+          "area_ha": 6.3477,
+          "length_km": 2.3636
+        }
+      ],
+      "limitations": [
+        "The connector stores official connectivity layers clipped to the study area.",
+        "It does not calculate EcoRadar connectivity scores or corridor prioritization.",
+        "Large polygon layers may include features selected by BBOX and then clipped locally."
+      ]
+    },
+    "terrain": {
+      "project": "Alinya",
+      "source": "ICGC Model d'elevacions del terreny 5 m",
+      "responsible_organization": "Institut Cartogràfic i Geològic de Catalunya",
+      "url": "https://datacloud.icgc.cat/datacloud/model-elevacions-terreny/tif_unzip/model-elevacions-terreny-topografic-catalunya-5m-2009-2018.tif",
+      "service_type": "Cloud Optimized GeoTIFF / raster file",
+      "query_date": "2026-07-07T17:25:46.656556+00:00",
+      "crs": "EPSG:25831",
+      "resolution_m": [
+        5.0,
+        5.0
+      ],
+      "width": 2583,
+      "height": 1806,
+      "bounds": [
+        364868.461,
+        4666982.395,
+        377783.461,
+        4676012.395
+      ],
+      "study_area_surface_ha": 5464.031656330243,
+      "outputs": {
+        "dem": "projectes/Alinya/processed/terrain/dem.tif",
+        "slope": "projectes/Alinya/processed/terrain/slope.tif",
+        "aspect": "projectes/Alinya/processed/terrain/aspect.tif",
+        "northness": "projectes/Alinya/processed/terrain/northness.tif",
+        "solana_obaga": "projectes/Alinya/processed/terrain/solana_obaga.tif"
+      },
+      "variables": {
+        "altitude_m": {
+          "min": 607.26,
+          "max": 2378.46,
+          "mean": 1484.5076,
+          "std": 376.0356
+        },
+        "slope_degrees": {
+          "min": 0.0,
+          "max": 85.6557,
+          "mean": 25.6153,
+          "std": 11.7632
+        },
+        "aspect_degrees": {
+          "min": 0.0,
+          "max": 359.9897,
+          "mean": 158.997,
+          "std": 93.9135
+        },
+        "northness": {
+          "min": -1.0,
+          "max": 1.0,
+          "mean": -0.1599,
+          "std": 0.7333
+        }
+      },
+      "limitations": [
+        "Pendent, orientació i obaga/solana són derivats geomorfològics del DEM, no indicadors ecològics finals.",
+        "La classificació obaga/solana és una capa normalitzada simple basada en orientació; la insolació real requeriria model solar amb data, ombres i horizon.",
+        "El connector no calcula cap indicador EcoRadar."
+      ]
+    },
+    "sentinel2": {
+      "generated_at_utc": "2026-07-20T17:49:53.447098+00:00",
+      "source": "Copernicus Sentinel-2 MSI Level-2A",
+      "organization": "European Union Copernicus programme / ESA",
+      "scene_id": "S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508",
+      "acquired_at_utc": "2026-07-07T10:37:01.024000Z",
+      "source_file": "projectes/Alinya/raw/sentinel2_cdse/S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508_analytical_uint8.tif",
+      "source_sha256": "a2ba776617842c161ab73e0c7ed8647d92bc9a906955f7566433288cdac008c8",
+      "official_urls": {
+        "stac": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a",
+        "browser": "https://browser.dataspace.copernicus.eu/",
+        "process_api": "https://sh.dataspace.copernicus.eu/api/v1/process"
+      },
+      "service_type": "authenticated CDSE Browser analytical GeoTIFF export",
+      "credentials": "free CDSE user session required; no credential stored",
+      "license": "Copernicus Sentinel data policy",
+      "connector_status": "verified",
+      "quality_selection": {
+        "scope_pixels": 377841,
+        "valid_aoi_pixels": 377656,
+        "invalid_or_masked_aoi_pixels": 185,
+        "valid_aoi_coverage_pct": 99.95,
+        "accepted_scl_classes": [
+          4,
+          5,
+          6
+        ],
+        "note": "Coverage reconstructed from the preserved QA-masked analytical export; scene replacement requires authenticated SCL/dataMask evaluation."
+      },
+      "study_bbox_epsg4326": [
+        1.363998,
+        42.144427,
+        1.5199389999999993,
+        42.22512200000001
+      ],
+      "crs": "EPSG:4326",
+      "export_bounds": [
+        1.2390518188476565,
+        42.108411365705855,
+        1.603660583496094,
+        42.291532494305976
+      ],
+      "export_grid_resolution": [
+        0.000145843505859375,
+        0.00010809983978755645
+      ],
+      "transport_encoding": {
+        "band_1": "NDVI encoded as round(255*((NDVI+1)/2))",
+        "band_2": "NDMI encoded as round(255*((NDMI+1)/2))",
+        "band_3": "albedo encoded as round(255*albedo)",
+        "validity": "evalscript returns RGB 0/0/0 outside dataMask=1 and SCL {4,5,6}; Browser export used Clip extra bands"
+      }
+    },
+    "landsat": {
+      "generated_at_utc": "2026-09-09T10:52:25.035313+00:00",
+      "connector": "landsat_usgs_c2_l2_summer_composite",
+      "responsibility": "download_and_normalize_only",
+      "scope": "Muntanya d'Alinyà",
+      "study_bbox_epsg4326": [
+        1.3639980000000003,
+        42.14442700000001,
+        1.5199389999999995,
+        42.22512200000001
+      ],
+      "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
+      "organization": "United States Geological Survey",
+      "official_catalog_url": "https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l2-sr",
+      "access_mirror_search_url": "https://planetarycomputer.microsoft.com/api/stac/v1/search",
+      "service_type": "STAC plus signed Cloud Optimized GeoTIFF range reads",
+      "license": "USGS Landsat data are in the public domain",
+      "date_range": "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z",
+      "scene_count": 26,
+      "scenes": [
+        {
+          "item_id": "LC08_L2SP_198031_20250830_02_T1",
+          "acquired_at_utc": "2025-08-30T10:36:43.258150Z",
+          "scene_cloud_cover_pct": 0.76,
+          "valid_study_pixels": 59555,
+          "valid_study_pct": 98.1
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20250627_02_T1",
+          "acquired_at_utc": "2025-06-27T10:36:23.048888Z",
+          "scene_cloud_cover_pct": 0.88,
+          "valid_study_pixels": 60648,
+          "valid_study_pct": 99.9
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20260622_02_T1",
+          "acquired_at_utc": "2026-06-22T10:36:04.112465Z",
+          "scene_cloud_cover_pct": 1.61,
+          "valid_study_pixels": 59306,
+          "valid_study_pct": 97.69
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20250915_02_T1",
+          "acquired_at_utc": "2025-09-15T10:36:49.286864Z",
+          "scene_cloud_cover_pct": 1.94,
+          "valid_study_pixels": 60619,
+          "valid_study_pct": 99.85
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20260817_02_T1",
+          "acquired_at_utc": "2026-08-17T10:36:21.837677Z",
+          "scene_cloud_cover_pct": 2.57,
+          "valid_study_pixels": 60323,
+          "valid_study_pct": 99.36
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20250729_02_T1",
+          "acquired_at_utc": "2025-07-29T10:36:31.577467Z",
+          "scene_cloud_cover_pct": 2.83,
+          "valid_study_pixels": 60329,
+          "valid_study_pct": 99.37
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20250814_02_T1",
+          "acquired_at_utc": "2025-08-14T10:36:40.794171Z",
+          "scene_cloud_cover_pct": 3.19,
+          "valid_study_pixels": 59720,
+          "valid_study_pct": 98.37
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20260708_02_T1",
+          "acquired_at_utc": "2026-07-08T10:36:09.180240Z",
+          "scene_cloud_cover_pct": 5.63,
+          "valid_study_pixels": 22555,
+          "valid_study_pct": 37.15
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20250619_02_T1",
+          "acquired_at_utc": "2025-06-19T10:36:16.127205Z",
+          "scene_cloud_cover_pct": 5.78,
+          "valid_study_pixels": 60514,
+          "valid_study_pct": 99.68
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20260630_02_T1",
+          "acquired_at_utc": "2026-06-30T10:36:00.611167Z",
+          "scene_cloud_cover_pct": 7.47,
+          "valid_study_pixels": 51154,
+          "valid_study_pct": 84.26
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20260825_02_T1",
+          "acquired_at_utc": "2026-08-25T10:36:29.966485Z",
+          "scene_cloud_cover_pct": 7.8,
+          "valid_study_pixels": 59554,
+          "valid_study_pct": 98.09
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20250713_02_T1",
+          "acquired_at_utc": "2025-07-13T10:36:26.693516Z",
+          "scene_cloud_cover_pct": 7.99,
+          "valid_study_pixels": 56476,
+          "valid_study_pct": 93.02
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20250923_02_T1",
+          "acquired_at_utc": "2025-09-23T10:36:54.399413Z",
+          "scene_cloud_cover_pct": 8.5,
+          "valid_study_pixels": 57877,
+          "valid_study_pct": 95.33
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20250822_02_T1",
+          "acquired_at_utc": "2025-08-22T10:36:45.415514Z",
+          "scene_cloud_cover_pct": 9.79,
+          "valid_study_pixels": 47150,
+          "valid_study_pct": 77.66
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20260809_02_T1",
+          "acquired_at_utc": "2026-08-09T10:36:27.291477Z",
+          "scene_cloud_cover_pct": 10.7,
+          "valid_study_pixels": 60671,
+          "valid_study_pct": 99.93
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20260614_02_T1",
+          "acquired_at_utc": "2026-06-14T10:35:47.609599Z",
+          "scene_cloud_cover_pct": 12.37,
+          "valid_study_pixels": 59434,
+          "valid_study_pct": 97.9
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20250611_02_T1",
+          "acquired_at_utc": "2025-06-11T10:36:13.236887Z",
+          "scene_cloud_cover_pct": 13.78,
+          "valid_study_pixels": 60692,
+          "valid_study_pct": 99.97
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20260724_02_T1",
+          "acquired_at_utc": "2026-07-24T10:36:22.020782Z",
+          "scene_cloud_cover_pct": 15.13,
+          "valid_study_pixels": 60698,
+          "valid_study_pct": 99.98
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20250806_02_T1",
+          "acquired_at_utc": "2025-08-06T10:36:36.976511Z",
+          "scene_cloud_cover_pct": 16.09,
+          "valid_study_pixels": 60701,
+          "valid_study_pct": 99.98
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20250721_02_T1",
+          "acquired_at_utc": "2025-07-21T10:36:29.059307Z",
+          "scene_cloud_cover_pct": 16.23,
+          "valid_study_pixels": 52839,
+          "valid_study_pct": 87.03
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20260801_02_T1",
+          "acquired_at_utc": "2026-08-01T10:36:15.780468Z",
+          "scene_cloud_cover_pct": 17.11,
+          "valid_study_pixels": 60710,
+          "valid_study_pct": 100.0
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20250603_02_T1",
+          "acquired_at_utc": "2025-06-03T10:36:04.004415Z",
+          "scene_cloud_cover_pct": 25.06,
+          "valid_study_pixels": 40354,
+          "valid_study_pct": 66.47
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20250907_02_T1",
+          "acquired_at_utc": "2025-09-07T10:36:51.063658Z",
+          "scene_cloud_cover_pct": 35.61,
+          "valid_study_pixels": 7015,
+          "valid_study_pct": 11.55
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20260606_02_T1",
+          "acquired_at_utc": "2026-06-06T10:35:53.038167Z",
+          "scene_cloud_cover_pct": 64.01,
+          "valid_study_pixels": 0,
+          "valid_study_pct": 0.0
+        },
+        {
+          "item_id": "LC09_L2SP_198031_20250705_02_T1",
+          "acquired_at_utc": "2025-07-05T10:36:21.879307Z",
+          "scene_cloud_cover_pct": 68.19,
+          "valid_study_pixels": 0,
+          "valid_study_pct": 0.0
+        },
+        {
+          "item_id": "LC08_L2SP_198031_20260716_02_T1",
+          "acquired_at_utc": "2026-07-16T10:36:04.150287Z",
+          "scene_cloud_cover_pct": 79.15,
+          "valid_study_pixels": 0,
+          "valid_study_pct": 0.0
+        }
+      ],
+      "crs": "EPSG:32631",
+      "resolution_m": 30.0,
+      "variables": [
+        "ST_B10",
+        "QA_PIXEL"
+      ],
+      "normalization": "LST_C = ST_B10 * scale + offset - 273.15; QA bits 0-5 excluded",
+      "composite_method": "Per-pixel median of every valid QA-screened summer observation",
+      "study_pixels": 60711,
+      "valid_pixels": 60711,
+      "study_coverage_pct": 100.0,
+      "normalized_tif": "projectes/Alinya/processed/landsat/landsat_lst.tif",
+      "sha256": "7ba4afd8f3c959944332ccb9fc3aafdc180b394568a38f738d36c927b8d0de56",
+      "connector_status": "verified"
+    },
+    "sentinel2_catalog_check": {
+      "schema_version": "1.0",
+      "checked_at_utc": "2026-09-09T10:46:26.131044+00:00",
+      "source": "Copernicus Data Space Ecosystem Sentinel-2 L2A STAC",
+      "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.363998%2C42.144427%2C1.5199389999999993%2C42.22512200000001&datetime=2026-07-26T00%3A00%3A00Z%2F2026-09-09T23%3A59%3A59Z&limit=100",
+      "search_period": {
+        "start": "2026-07-26",
+        "end": "2026-09-09"
+      },
+      "maximum_tile_cloud_pct": 10.0,
+      "candidate_count": 16,
+      "candidates": [
+        {
+          "scene_id": "S2C_MSIL2A_20260906T104621_N0512_R051_T31TCG_20260906T184616",
+          "acquired_at_utc": "2026-09-06T10:46:21.025000Z",
+          "scene_cloud_cover_pct": 5.95,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2A_MSIL2A_20260905T104041_N0512_R008_T31TCG_20260905T184007",
+          "acquired_at_utc": "2026-09-05T10:40:41.024000Z",
+          "scene_cloud_cover_pct": 9.4,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2C_MSIL2A_20260903T103621_N0512_R008_T31TCG_20260903T171417",
+          "acquired_at_utc": "2026-09-03T10:36:21.025000Z",
+          "scene_cloud_cover_pct": 0.0,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2A_MSIL2A_20260829T105041_N0512_R051_T31TCG_20260829T191916",
+          "acquired_at_utc": "2026-08-29T10:50:41.024000Z",
+          "scene_cloud_cover_pct": 0.02,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2B_MSIL2A_20260829T103619_N0512_R008_T31TCG_20260829T143417",
+          "acquired_at_utc": "2026-08-29T10:36:19.024000Z",
+          "scene_cloud_cover_pct": 0.05,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2A_MSIL2A_20260819T104651_N0512_R051_T31TCG_20260819T191953",
+          "acquired_at_utc": "2026-08-19T10:46:51.024000Z",
+          "scene_cloud_cover_pct": 0.0,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2B_MSIL2A_20260819T103619_N0512_R008_T31TCG_20260819T143522",
+          "acquired_at_utc": "2026-08-19T10:36:19.024000Z",
+          "scene_cloud_cover_pct": 0.0,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2C_MSIL2A_20260817T104621_N0512_R051_T31TCG_20260817T144114",
+          "acquired_at_utc": "2026-08-17T10:46:21.025000Z",
+          "scene_cloud_cover_pct": 9.54,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2C_MSIL2A_20260814T104021_N0512_R008_T31TCG_20260814T153403",
+          "acquired_at_utc": "2026-08-14T10:40:21.025000Z",
+          "scene_cloud_cover_pct": 6.78,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2B_MSIL2A_20260812T104619_N0512_R051_T31TCG_20260812T132436",
+          "acquired_at_utc": "2026-08-12T10:46:19.024000Z",
+          "scene_cloud_cover_pct": 0.27,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2C_MSIL2A_20260807T104621_N0512_R051_T31TCG_20260807T143318",
+          "acquired_at_utc": "2026-08-07T10:46:21.025000Z",
+          "scene_cloud_cover_pct": 0.6,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2B_MSIL2A_20260802T104619_N0512_R051_T31TCG_20260802T144452",
+          "acquired_at_utc": "2026-08-02T10:46:19.024000Z",
+          "scene_cloud_cover_pct": 0.3,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2A_MSIL2A_20260730T104701_N0512_R051_T31TCG_20260730T191810",
+          "acquired_at_utc": "2026-07-30T10:47:01.024000Z",
+          "scene_cloud_cover_pct": 0.64,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2B_MSIL2A_20260730T103629_N0512_R008_T31TCG_20260730T143638",
+          "acquired_at_utc": "2026-07-30T10:36:29.024000Z",
+          "scene_cloud_cover_pct": 0.0,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2C_MSIL2A_20260728T104621_N0512_R051_T31TCG_20260728T144218",
+          "acquired_at_utc": "2026-07-28T10:46:21.025000Z",
+          "scene_cloud_cover_pct": 0.01,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2A_MSIL2A_20260727T104041_N0512_R008_T31TCG_20260727T184256",
+          "acquired_at_utc": "2026-07-27T10:40:41.024000Z",
+          "scene_cloud_cover_pct": 0.15,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        }
+      ],
+      "connector_status": "requires_credentials",
+      "missing_requirements": [
+        "COPERNICUS_CLIENT_ID",
+        "COPERNICUS_CLIENT_SECRET"
+      ],
+      "limitation": "The public catalogue exposes footprint and tile cloud metadata only. Actual valid coverage inside Alinyà must be evaluated from SCL/dataMask through the authenticated Process API before selection."
+    }
+  }
+}

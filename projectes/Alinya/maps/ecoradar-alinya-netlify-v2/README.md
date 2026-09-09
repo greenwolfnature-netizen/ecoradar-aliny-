@@ -23,7 +23,7 @@ opcionalment, `ECORADAR_GITHUB_BRANCH` (per defecte `main`).
 - `metadata/current_fire_danger.json`: comprovacio, variables, pesos, resultats i limitacions.
 - `metadata/biodiversity_habitat_pilot_metadata.json`: regles qualitatives, fonts, llindars relatius i limitacions del pilot.
 - `metadata/biodiversity_habitat_pilot.geojson`: sectors agregats sense noms ni coordenades de taxons.
-- `metadata/daily_readings.json` i `metadata/daily_history.json`: reserva coherent.
+- `metadata/daily_readings.json`, `metadata/daily_history.json` i `metadata/reading_registry.json`: reserva coherent amb un únic `snapshot_id`.
 - `netlify/functions/daily-readings.mjs`: lectura remota del repositori canònic.
 
 La capa de concurrencia no es probabilitat oficial d'incendi ni perill diari.

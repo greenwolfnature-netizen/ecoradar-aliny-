@@ -12,7 +12,7 @@
     "LST/equivalent"
   ],
   "lst_status": "not_available_until_operational_collection_mapping_is_configured",
-  "query_date": "2026-08-06T08:09:41.424829+00:00",
+  "query_date": "2026-09-09T11:31:16.570647+00:00",
   "capture_date": null,
   "scene_id": null,
   "spatial_resolution_m": 20,
@@ -20,7 +20,7 @@
   "cloud_cover_percent": null,
   "date_window": {
     "start": "2026-06-01",
-    "end": "2026-08-06"
+    "end": "2026-09-09"
   },
   "study_area_surface_ha": 5464.031656330243,
   "required_credentials": [

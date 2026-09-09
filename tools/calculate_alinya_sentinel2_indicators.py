@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+import shutil
 
 import geopandas as gpd
 import numpy as np
@@ -25,10 +26,33 @@ INDICATORS = PROJECT / "indicators" / "teledeteccio_sentinel2.json"
 CONNECTOR = PROJECT / "metadata" / "sentinel2_cdse_automated_connector.json"
 
 
+def _archive_previous(scene_id: str) -> None:
+    if not INDICATORS.exists():
+        return
+    previous = json.loads(INDICATORS.read_text(encoding="utf-8"))
+    previous_scene = str(previous.get("source_scene") or "unknown_scene")
+    if previous_scene == scene_id:
+        return
+    archive = PROJECT / "history" / "sentinel2" / previous_scene / "indicators"
+    archive.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(INDICATORS, archive / INDICATORS.name)
+    for source_path in (
+        DERIVED / "ndvi.tif",
+        DERIVED / "ndmi.tif",
+        DERIVED / "albedo.tif",
+        MAPS / "ndvi.webp",
+        MAPS / "ndmi.webp",
+        MAPS / "albedo.webp",
+    ):
+        if source_path.exists():
+            shutil.copy2(source_path, archive / source_path.name)
+
+
 def calculate() -> dict:
     if not SOURCE.is_file():
         raise FileNotFoundError("Run fetch_alinya_cdse_sentinel2.py before calculating indicators.")
     connector = json.loads(CONNECTOR.read_text(encoding="utf-8"))
+    _archive_previous(connector["scene_id"])
     with rasterio.open(SOURCE) as source:
         if source.count != 7:
             raise RuntimeError("The normalized CDSE raster must contain B02, B04, B08, B11, B12, SCL and dataMask.")
@@ -80,6 +104,8 @@ def calculate() -> dict:
     _write_webp(MAPS / "albedo.webp", _rgba(albedo, [0.05, 0.12, 0.20, 0.30, 0.45], [(45, 59, 71), (94, 111, 116), (159, 163, 151), (218, 206, 168), (249, 239, 207)], valid_albedo))
 
     pixel_area_m2 = abs(profile["transform"].a * profile["transform"].e)
+    scope_pixels = int(scope.sum())
+    valid_pixels = int(valid.sum())
     bbox = tuple(float(value) for value in gpd.read_file(STUDY).to_crs(4326).total_bounds)
     payload = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -93,8 +119,12 @@ def calculate() -> dict:
         "crs": str(profile["crs"]),
         "output_resolution_m": 10,
         "native_band_resolution_m": connector["native_resolution_m"],
-        "valid_pixels": int(valid.sum()),
-        "valid_area_ha": round(float(valid.sum() * pixel_area_m2 / 10000), 1),
+        "scope_pixels": scope_pixels,
+        "valid_pixels": valid_pixels,
+        "invalid_or_masked_pixels": scope_pixels - valid_pixels,
+        "valid_coverage_pct": round(100.0 * valid_pixels / max(scope_pixels, 1), 2),
+        "valid_area_ha": round(float(valid_pixels * pixel_area_m2 / 10000), 1),
+        "rasterized_scope_area_ha": round(float(scope_pixels * pixel_area_m2 / 10000), 1),
         "metrics": {
             "ndvi": _stats(ndvi, valid_ndvi),
             "ndmi": _stats(ndmi, valid_ndmi),

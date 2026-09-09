@@ -223,6 +223,10 @@ def calculate() -> dict:
     product_map(rgba, bounds)
 
     valid_count = int(valid.sum())
+    study_pixel_count = int(study_mask.sum())
+    study_metadata = json.loads((PROJECT / "metadata" / "study_area_metadata.json").read_text(encoding="utf-8"))
+    study_area_ha = float(study_metadata["surface_ha"])
+    average_rasterized_pixel_area_ha = study_area_ha / max(study_pixel_count, 1)
     distribution = {}
     class_masks = {
         "suport": valid & (index >= THRESHOLDS["suport"]) & (index < THRESHOLDS["alt"]),
@@ -252,8 +256,27 @@ def calculate() -> dict:
             "vegetation_filter": "NDVI >= 0.30",
             "weights": WEIGHTS,
             "thresholds": THRESHOLDS,
+            "formula_inputs": [
+                {"reading": "Landsat LST", "role": "numeric input", "weight": 0.50, "temporal_semantics": satellite["surface_temperature"].get("temporal_kind", "unknown")},
+                {"reading": "Sentinel-2 NDMI", "role": "numeric input", "weight": 0.30, "date_utc": sentinel.get("acquired_at_utc")},
+                {"reading": "Sentinel-2 NDVI", "role": "numeric input and NDVI >= 0.30 denominator filter", "weight": 0.20, "date_utc": sentinel.get("acquired_at_utc")},
+            ],
+            "cartographic_context_only": [
+                "ACA drainage and river geometries",
+                "project-normalized spring points",
+            ],
         },
         "distribution": distribution,
+        "denominator": {
+            "name": "vegetated pixels with valid LST, NDMI and NDVI",
+            "rule": "inside the study polygon; all three formula inputs valid; NDVI >= 0.30",
+            "valid_pixels": valid_count,
+            "valid_area_ha": round(valid_count * average_rasterized_pixel_area_ha, 1),
+            "study_polygon_rasterized_pixels": study_pixel_count,
+            "study_polygon_area_ha": round(study_area_ha, 1),
+            "area_method": "Study-area area apportioned by the share of rasterized study pixels.",
+            "share_of_study_raster_pct": round(100.0 * valid_count / max(study_pixel_count, 1), 1),
+        },
         "high_or_very_high_share_of_vegetated_valid_pct": round(
             distribution["alt"]["share_of_vegetated_valid_pct"] + distribution["molt_alt"]["share_of_vegetated_valid_pct"], 1
         ),
@@ -264,6 +287,7 @@ def calculate() -> dict:
         },
         "limitations": (
             "Relative screening layer based on a two-summer daytime LST composite and one Sentinel-2 date. "
+            "Hydrology is drawn as cartographic context and does not enter the numeric formula. "
             "It is not air temperature, a climatic normal, microclimate monitoring or a field-validated refuge inventory. "
             "Weights and thresholds are explicit EcoRadar analysis assumptions."
         ),

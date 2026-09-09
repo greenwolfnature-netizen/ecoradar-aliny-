@@ -18,7 +18,9 @@ assert "global.html2pdf().set(options).from(exportMarkup, 'string').save()" in e
 assert "replaceAll('#ecoradar-alinya ', '')" in engine
 assert 'class="err-map-section"' in engine
 assert 'class="err-map-frame"' in engine
-assert "avoid: ['.err-map-frame', '.err-map'" in engine
+assert "pagebreak:" in engine
+assert "'.err-map-frame'" in engine
+assert "'.err-map'" in engine
 assert '#ecoradar-alinya .err-map-frame, #ecoradar-alinya .err-map { break-inside:avoid; page-break-inside:avoid; }' in html
 assert 'window.open' not in engine
 assert 'print()' not in engine

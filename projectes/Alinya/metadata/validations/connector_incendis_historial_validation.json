@@ -1,7 +1,7 @@
 {
   "connector": "connector_incendis_historial",
   "project": "Alinya",
-  "validated_at": "2026-07-07T17:33:05+00:00",
+  "validated_at": "2026-09-09T06:09:30+00:00",
   "status": "completed",
   "can_advance_to_next_connector": true,
   "source": "Superfícies afectades per incendis forestals v1.1",

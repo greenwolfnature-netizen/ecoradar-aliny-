@@ -229,6 +229,7 @@ def biodiversity_breakdown() -> dict:
     records = Counter()
     taxa = defaultdict(set)
     names = defaultdict(Counter)
+    all_taxa = set()
     for source_name, record_id, scientific_name, taxon_group in processed:
         order, canonical = taxonomy.get((source_name, str(record_id)), (None, None))
         group = category(taxon_group or "", order)
@@ -236,12 +237,16 @@ def biodiversity_breakdown() -> dict:
         records[group] += 1
         taxa[group].add(taxon_name)
         names[group][taxon_name] += 1
+        if canonical or scientific_name:
+            all_taxa.add(taxon_name)
     records.setdefault("Ratpenats", 0)
     taxa.setdefault("Ratpenats", set())
     return {
         "records": dict(records),
         "taxa": {key: len(value) for key, value in taxa.items()},
         "top": {key: value.most_common(6) for key, value in names.items()},
+        "total_records": len(processed),
+        "total_taxa": len(all_taxa),
     }
 
 
@@ -707,6 +712,21 @@ def build_data() -> dict:
     habitat_catalogue = read_csv(PROJECT / "indicators" / "habitats_resum.csv")
     daily_readings = read_json(PROJECT / "indicators" / "daily_readings.json")
     daily_history = read_json(PROJECT / "indicators" / "daily_history.json")
+    reading_registry = read_json(PROJECT / "metadata" / "reading_registry.json")
+    core = [
+        {
+            "code": item["code"],
+            "name": item["name"],
+            "value_0_100": "" if item.get("value_0_100") is None else str(item["value_0_100"]),
+            "category": item.get("category", ""),
+            "status": item.get("status", ""),
+            "confidence": item.get("confidence", ""),
+            "sources_used": "; ".join(item.get("sources_used", [])),
+            "sources_absent": "; ".join(item.get("sources_absent", [])),
+            "limitations": "; ".join(item.get("limitations", [])),
+        }
+        for item in reading_registry.get("core_indicators", {}).values()
+    ]
     current_fire_cells = feature_collection(
         PROJECT / "maps" / "incendis" / "current_fire_danger_cells.geojson",
         max_points=8,
@@ -721,6 +741,8 @@ def build_data() -> dict:
     open_like = sum(float(r["superficie_ha"]) for r in covers if any(t in r["tipus_coberta"].lower() for t in ["prats", "conreus"]))
     high_plus = updated_similarity_areas.get("alta", 0) + updated_similarity_areas.get("mitjana_alta", 0)
     return {
+        "snapshotId": reading_registry["snapshot_id"],
+        "readingRegistry": reading_registry,
         "ecologicalEvidence": build_ecological_evidence(PROJECT),
         "bbox": map_bbox,
         "studyBbox": raster_bbox,
@@ -799,8 +821,8 @@ def build_data() -> dict:
             "openLikePct": open_like / study_ha * 100,
             "hicHa": 3170.95,
             "hicPriorHa": 1229.39,
-            "records": 731,
-            "species": 516,
+            "records": biodiversity_detail["total_records"],
+            "species": biodiversity_detail["total_taxa"],
             "habitats": int(float(basic["nombre_habitats"]["valor"])),
             "forestPct": float(basic["percentatge_coberta_forestal"]["valor"]),
             "grasslandPct": float(basic["percentatge_prats_pastures_herbassars"]["valor"]),
@@ -817,6 +839,9 @@ def build_data() -> dict:
                 "temperature": satellite["surface_temperature"]["metrics_c"],
                 "temperatureDateRange": satellite["surface_temperature"]["date_range"],
                 "temperatureSceneCount": satellite["surface_temperature"]["scene_count"],
+                "temperatureContributingSceneCount": satellite["surface_temperature"].get("contributing_scene_count"),
+                "temperaturePeriodStartUtc": satellite["surface_temperature"].get("period_start_utc"),
+                "temperaturePeriodEndUtc": satellite["surface_temperature"].get("period_end_utc"),
                 "temperatureCoveragePct": satellite["surface_temperature"]["coverage_pct"],
                 "vegetationCoverHa": satellite["vegetation_cover"]["covered_area_ha"],
                 "vegetationCoverPct": satellite["vegetation_cover"]["covered_pct"],
@@ -889,6 +914,22 @@ def render_index(data: dict) -> str:
     d_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     ecoradar_logo = data["branding"]["ecoradar"]
     green_wolf_logo = data["branding"]["greenWolf"]
+    satellite_metrics = data["metrics"]["satellite"]
+    lst_scene_count = satellite_metrics["temperatureSceneCount"]
+    lst_contributing_count = satellite_metrics.get("temperatureContributingSceneCount")
+    lst_period_start = str(satellite_metrics.get("temperaturePeriodStartUtc") or "")[:10]
+    lst_period_end = str(satellite_metrics.get("temperaturePeriodEndUtc") or "")[:10]
+    sentinel_date = str(satellite_metrics.get("sentinelDate") or "")[:10]
+    sentinel_date_ca = (
+        ".".join(reversed(sentinel_date.split("-")))
+        if len(sentinel_date.split("-")) == 3
+        else sentinel_date
+    )
+    lst_contributing_text = (
+        f" ({lst_contributing_count} amb píxels vàlids dins l’àmbit)"
+        if lst_contributing_count is not None
+        else ""
+    )
     return f"""<!doctype html>
 <html lang="ca">
 <head>
@@ -1238,6 +1279,83 @@ def render_index(data: dict) -> str:
     @media (max-width:760px) {{ #ecoradar-alinya .err-synthesis, #ecoradar-alinya .err-unverified {{ margin:0 18px; }} #ecoradar-alinya .err-relation > div {{ align-items:flex-start; flex-direction:column; gap:2px; }} }}
     @media (max-width:760px) {{ #ecoradar-alinya .eu-layer-list {{ grid-template-columns:repeat(3,minmax(0,1fr)); }} }}
     @media (max-width:560px) {{ #ecoradar-alinya .eu-bh-summary, #ecoradar-alinya .eu-bh-notes {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-biodiversity-situation {{ padding:11px; background:linear-gradient(160deg,#0f3029 0,#183f35 20%,#f7f4ec 20.1%,#f7f4ec 100%); }} #ecoradar-alinya .eu-bh-pilot-head {{ grid-template-columns:1fr; }} #ecoradar-alinya .eu-bh-head-actions {{ justify-content:flex-start; }} #ecoradar-alinya .eu-bh-filter {{ min-height:118px; }} #ecoradar-alinya .eu-bh-map, #ecoradar-alinya .eu-bh-map svg {{ min-height:360px; height:360px; }} }}
+    /* Phase 1 legibility floor. It changes type size only; panel widths and the
+       responsive grid remain unchanged. */
+    #ecoradar-alinya .eu-layer small,
+    #ecoradar-alinya .err-metadata b,
+    #ecoradar-alinya .err-fact span,
+    #ecoradar-alinya .err-document footer,
+    #ecoradar-alinya .err-document small,
+    #ecoradar-alinya .err-status,
+    #ecoradar-alinya .eu-source,
+    #ecoradar-alinya .eu-fire-popup th,
+    #ecoradar-alinya .eu-fire-table,
+    #ecoradar-alinya .eu-foot,
+    #ecoradar-alinya .eu-status,
+    #ecoradar-alinya .eu-bh-filter small,
+    #ecoradar-alinya .eu-bh-map-legend {{ font-size:11px!important; }}
+    #ecoradar-alinya .eu-mode small,
+    #ecoradar-alinya .eu-context-intro p,
+    #ecoradar-alinya .eu-context-status,
+    #ecoradar-alinya .eu-layer strong,
+    #ecoradar-alinya .eu-fact span,
+    #ecoradar-alinya .eu-map-label,
+    #ecoradar-alinya .eu-reset,
+    #ecoradar-alinya .eu-map-note,
+    #ecoradar-alinya .eu-legend,
+    #ecoradar-alinya .eu-guide-label,
+    #ecoradar-alinya .err-cover span,
+    #ecoradar-alinya .err-cover p,
+    #ecoradar-alinya .err-date,
+    #ecoradar-alinya .err-diagnostic-card small,
+    #ecoradar-alinya .err-sector small,
+    #ecoradar-alinya .err-management small,
+    #ecoradar-alinya .err-scenario small,
+    #ecoradar-alinya .err-priority-summary small,
+    #ecoradar-alinya .err-chain-note,
+    #ecoradar-alinya .err-relation span,
+    #ecoradar-alinya .err-relation small,
+    #ecoradar-alinya .err-close,
+    #ecoradar-alinya .err-pdf,
+    #ecoradar-alinya .eu-tooltip,
+    #ecoradar-alinya .eu-fire-summary span,
+    #ecoradar-alinya .eu-fire-area,
+    #ecoradar-alinya .eu-fire-weights,
+    #ecoradar-alinya .eu-live-status,
+    #ecoradar-alinya .eu-report-nav a,
+    #ecoradar-alinya .eu-subtle,
+    #ecoradar-alinya .eu-data-table th,
+    #ecoradar-alinya .eu-core-kind,
+    #ecoradar-alinya .eu-core-explainer-meta,
+    #ecoradar-alinya .eu-bh-eyebrow,
+    #ecoradar-alinya .eu-bh-back,
+    #ecoradar-alinya .eu-bh-report,
+    #ecoradar-alinya .eu-bh-filter span,
+    #ecoradar-alinya .eu-bh-subnav button,
+    #ecoradar-alinya .eu-bh-catalogue button,
+    #ecoradar-alinya .eu-bh-category,
+    #ecoradar-alinya .eu-bh-detail h5,
+    #ecoradar-alinya .eu-bh-note {{ font-size:12px!important; }}
+    #ecoradar-alinya .eu-badge,
+    #ecoradar-alinya .eu-panel p,
+    #ecoradar-alinya .eu-mode,
+    #ecoradar-alinya .eu-layer,
+    #ecoradar-alinya .eu-fire-popup,
+    #ecoradar-alinya .eu-section-kicker,
+    #ecoradar-alinya .eu-data-table,
+    #ecoradar-alinya .eu-score-head,
+    #ecoradar-alinya .eu-core-explainer-block h4,
+    #ecoradar-alinya details.eu-detail > div,
+    #ecoradar-alinya .eu-reading-path p,
+    #ecoradar-alinya .eu-action,
+    #ecoradar-alinya .eu-generate-report,
+    #ecoradar-alinya .eu-technical-intro span,
+    #ecoradar-alinya .eu-map-access-label,
+    #ecoradar-alinya .eu-bh-map-state p,
+    #ecoradar-alinya .eu-bh-map-state li,
+    #ecoradar-alinya .eu-bh-detail p,
+    #ecoradar-alinya .eu-bh-detail li,
+    #ecoradar-alinya .eu-bh-technical summary {{ font-size:13px!important; }}
     @media print {{
       @page {{ size:A4 landscape; margin:10mm; }}
       body {{ background:#fff!important; }}
@@ -1283,7 +1401,7 @@ def render_index(data: dict) -> str:
       <div class="eu-actions"><a class="eu-action" href="#cartografia">Explorar el mapa interactiu</a><a class="eu-action secondary" href="#gestio">Anar a les prioritats de gestió</a><a class="eu-action secondary" href="#mosaic">Començar la lectura tècnica</a></div>
     </div>
     <div class="eu-card-grid eu-four">
-      <article class="eu-report-card"><span class="eu-big" id="report-area"></span><h3>Àmbit validat</h3><p>Base espacial comuna per a totes les capes, en ETRS89 / UTM 31N (EPSG:25831).</p></article>
+      <article class="eu-report-card"><span class="eu-big" id="report-area"></span><h3>Àmbit de treball</h3><p>Base espacial comuna en ETRS89 / UTM 31N (EPSG:25831). Procedència institucional i llicència pendents de verificar.</p></article>
       <article class="eu-report-card green"><span class="eu-big" id="report-forest"></span><h3>Coberta forestal</h3><p>Matriu dominant. La dada de coberta no descriu per si sola estructura, vigor ni combustible.</p></article>
       <article class="eu-report-card orange"><span class="eu-big" id="report-open"></span><h3>Prats i herbassars</h3><p>Peces escasses que poden mantenir ecotons, recursos florals i discontinuïtat funcional.</p></article>
       <article class="eu-report-card blue"><span class="eu-big" id="report-hic"></span><h3>Hàbitats HIC</h3><p>Responsabilitat de conservació que ha de filtrar qualsevol actuació transformadora.</p></article>
@@ -1351,8 +1469,8 @@ def render_index(data: dict) -> str:
           <button class="eu-mode" data-mode="vigor" aria-pressed="false">Vigor vegetal<small>NDVI · Sentinel-2</small></button>
           <button class="eu-mode" data-mode="moisture" aria-pressed="false">Humitat vegetal<small>NDMI · Sentinel-2</small></button>
           <button class="eu-mode" data-mode="climateRefuges" aria-pressed="false">Refugis climàtics<small>LST + NDMI + NDVI + aigua</small></button>
-          <button class="eu-mode" data-mode="temperature" aria-pressed="false">Temperatura<small>Landsat 8/9 · estius 2025–2026</small></button>
-          <button class="eu-mode" data-mode="albedo" aria-pressed="false">Albedo<small>Sentinel-2 · 07.07.2026</small></button>
+          <button class="eu-mode" data-mode="temperature" aria-pressed="false">Temperatura<small>Landsat 8/9 · {lst_period_start}–{lst_period_end}</small></button>
+          <button class="eu-mode" data-mode="albedo" aria-pressed="false">Albedo<small>Sentinel-2 · {sentinel_date_ca}</small></button>
           <button class="eu-mode" data-mode="management" aria-pressed="false">Cribratge de gestió<small>restriccions i validació</small></button>
           <button class="eu-mode" data-mode="fireDanger" aria-pressed="false">Perill d'incendi<small>Generalitat + LST + NDMI + cobertes</small></button>
           <button class="eu-mode" data-mode="fireCurrent" aria-pressed="false">Perill d'incendi avui<small id="eu-fire-current-date">darrera comprovació · índex EcoRadar 100 m</small></button>
@@ -1525,7 +1643,7 @@ def render_index(data: dict) -> str:
         <article class="eu-report-card orange"><h3>Missatge clau</h3><p><strong>El senyal estructural no és la superfície cremada, sinó la coincidència entre continuïtat bosc-matollar, accessibilitat i condicions topogràfiques semblants als focs històrics.</strong></p><p>La situació operativa del dia es llegeix separadament amb l’índex EcoRadar actual, meteorologia XEMA, acumulació de precipitació, ForestDrought, observacions satel·litàries amb control de frescor i Pla Alfa oficial com a context no numèric.</p><h3 style="margin-top:14px">Límit metodològic</h3><p>Ni el mapa estructural ni l’índex actual són una probabilitat oficial d’incendi. La decisió de tractament continua requerint combustible i humitat fina validats al camp, exposició, valors ecològics afectats i viabilitat de manteniment.</p></article>
       </div>
       <div class="eu-card-grid eu-two" style="margin-top:12px">
-        <article class="eu-report-card green"><h3>Situació operativa actualitzada</h3><div class="eu-facts"><div class="eu-fact"><span>Perill EcoRadar avui</span><strong id="report-fire-chapter-today"></strong></div><div class="eu-fact"><span>Pla Alfa oficial</span><strong id="report-fire-chapter-pla"></strong></div><div class="eu-fact"><span>Meteorologia</span><strong id="report-fire-chapter-weather"></strong></div><div class="eu-fact"><span>Sequera acumulada</span><strong id="report-fire-chapter-drought"></strong></div><div class="eu-fact"><span>Tendència</span><strong id="report-fire-chapter-trend"></strong></div><div class="eu-fact"><span>Confiança</span><strong id="report-fire-chapter-confidence"></strong></div><div class="eu-fact"><span>Darrera comprovació</span><strong id="report-fire-chapter-update"></strong></div></div></article>
+        <article class="eu-report-card green"><h3>Situació operativa actualitzada</h3><div class="eu-facts"><div class="eu-fact"><span>Perill EcoRadar avui</span><strong id="report-fire-chapter-today"></strong></div><div class="eu-fact"><span>Pla Alfa oficial</span><strong id="report-fire-chapter-pla"></strong></div><div class="eu-fact"><span>Meteorologia</span><strong id="report-fire-chapter-weather"></strong></div><div class="eu-fact"><span>Sequera acumulada</span><strong id="report-fire-chapter-drought"></strong></div><div class="eu-fact"><span>Tendència</span><strong id="report-fire-chapter-trend"></strong></div><div class="eu-fact"><span>Confiança del producte</span><strong id="report-fire-chapter-confidence"></strong></div><div class="eu-fact"><span>Darrera comprovació</span><strong id="report-fire-chapter-update"></strong></div></div></article>
         <article class="eu-report-card blue"><h3>Què determina la lectura d’avui?</h3><p id="report-fire-chapter-dominants"></p><p id="report-fire-chapter-freshness"></p><p><strong>Interpretació de gestió:</strong> el valor diari serveix per graduar la urgència de comprovació, vigilància i preparació operativa. No converteix automàticament una cel·la en zona d’actuació silvícola: aquesta decisió ha de creuar HIC, biodiversitat, aigua, connectivitat, accessibilitat, combustible real i objectiu ecològic.</p></article>
       </div>
       <details class="eu-detail"><summary>Traçabilitat de totes les variables del perill d’incendi avui</summary><div><div class="eu-fire-table-wrap"><table class="eu-fire-table eu-evidence-table"><thead><tr><th>Variable</th><th>Valor</th><th>Data real</th><th>Pes efectiu</th><th>Estat temporal</th><th>Funció en la diagnosi</th></tr></thead><tbody id="report-fire-chapter-variables"></tbody></table></div><p>Temperatura de l’aire, precipitació recent i acumulada i Pla Alfa completen el context operatiu amb data pròpia; el Pla Alfa no entra numèricament a l’índex. Les dades dinàmiques massa antigues es mantenen visibles com a context, però no poden aportar el seu pes complet.</p></div></details>
@@ -1592,7 +1710,7 @@ def render_index(data: dict) -> str:
       <p class="eu-section-kicker">08 · Fonts, metodologia i limitacions</p>
       <h2>La força de la diagnosi depèn tant de les dades incorporades com dels límits explícits</h2>
       <div class="eu-card-grid eu-two" style="margin-top:20px">
-        <article class="eu-report-card"><h3>Fonts incorporades</h3><ul><li>Copernicus Sentinel-2 L2A: NDVI, NDMI i albedo del 07.07.2026.</li><li>Copernicus CLMS HRL 2023: densitat arbòria i coberta herbàcia.</li><li>USGS Landsat 8/9 C2 L2: composició de 20 escenes de temperatura superficial dels estius 2025–2026.</li><li>Generalitat: Mapa bàsic de perill d’incendi forestal 2024, hàbitats, HIC, infraestructura verda i incendis.</li><li>Meteocat XEMA, estació Y4 Alinyà: temperatura de l’aire, humitat relativa i precipitació; estació CJ Organyà: vent i ratxes com a context puntual a 9,2 km.</li><li>Cos d’Agents Rurals: Pla Alfa oficial municipal de Fígols i Alinyà, vista pública «Avui».</li><li>ICGC: cobertes del sòl i model d’elevacions.</li><li>ACA, GBIF, iNaturalist i OpenStreetMap: aigua, registres biològics i accessibilitat.</li><li>EcoRadar: potencial relatiu de refugi climàtic derivat de LST, NDMI i NDVI, amb pesos i llindars documentats.</li></ul></article>
+        <article class="eu-report-card"><h3>Fonts incorporades</h3><ul><li>Copernicus Sentinel-2 L2A: NDVI, NDMI i albedo del {sentinel_date_ca}.</li><li>Copernicus CLMS HRL 2023: densitat arbòria i coberta herbàcia.</li><li>USGS Landsat 8/9 C2 L2: compost multitemporal de {lst_scene_count} escenes candidates{lst_contributing_text}, període {lst_period_start}–{lst_period_end}; no és una observació d’un sol dia.</li><li>Generalitat: Mapa bàsic de perill d’incendi forestal 2024, hàbitats, HIC, infraestructura verda i incendis.</li><li>Meteocat XEMA, estació Y4 Alinyà: temperatura de l’aire, humitat relativa i precipitació; estació CJ Organyà: vent i ratxes com a context puntual a 9,2 km.</li><li>Cos d’Agents Rurals: Pla Alfa oficial municipal de Fígols i Alinyà, vista pública «Avui».</li><li>ICGC: cobertes del sòl i model d’elevacions.</li><li>ACA, GBIF, iNaturalist i OpenStreetMap: aigua, registres biològics i accessibilitat.</li><li>EcoRadar: potencial relatiu de refugi climàtic derivat de LST, NDMI i NDVI, amb pesos i llindars documentats.</li></ul></article>
         <article class="eu-report-card orange"><h3>Limitacions que afecten decisions</h3><ul><li>Hàbitats i punts d’aigua necessiten validació de camp.</li><li>GBIF/iNaturalist no permeten afirmar absències ni equivalen a cens.</li><li>OSM no mesura intensitat real de visitants.</li><li>NDVI i NDMI són instantànies; la LST és una composició estival i no una normal climàtica.</li><li>El perill integrat és una lectura analítica estructural; els pesos i el potencial de combustible per coberta requereixen contrast de camp.</li><li>La lectura de perill actual és un índex EcoRadar, no una alerta oficial ni el Pla Alfa; la humitat és puntual a Y4 i el vent és context puntual de CJ Organyà, a 9,2 km.</li><li>Qualsevol obra o tractament requereix projecte, permisos i validació específica.</li></ul></article>
       </div>
       <details class="eu-detail"><summary>Estat de publicació i validació</summary><div>Producte apte a escala de diagnosi. Els controls tècnics i de recomanacions del projecte estan superats; la validació ecològica manté limitacions explícites. Les entrades de l’informe complet es van validar el 08.07.2026 i la capa històrica d’incendis es va consultar el 17.07.2026.</div></details>
@@ -1704,6 +1822,11 @@ def render_index(data: dict) -> str:
   const north = svg.append('g').attr('transform','translate(946 70)');
   north.append('path').attr('d','M0,24 L0,-16 M0,-16 L-6,-5 M0,-16 L6,-5').attr('stroke','#173249').attr('stroke-width',2).attr('fill','none');
   north.append('text').attr('y',-25).attr('text-anchor','middle').attr('font-size',13).attr('font-weight',700).text('N');
+  const guideDate = value => {{
+    const iso = String(value || '').slice(0,10);
+    const parts = iso.split('-');
+    return parts.length === 3 ? `${{parts[2]}}/${{parts[1]}}/${{parts[0]}}` : (iso || 'data no disponible');
+  }};
 
   const modeGuides = {{
     base: {{
@@ -1755,7 +1878,7 @@ def render_index(data: dict) -> str:
     temperature: {{
       label:`Temperatura superficial · mediana ${{Number(D.metrics.satellite.temperature.median).toFixed(1).replace('.',',')}} °C`,
       title:'Temperatura superficial estival completa',
-      copy:`La composició de ${{D.metrics.satellite.temperatureSceneCount}} escenes Landsat 8/9 dels estius 2025–2026 cobreix el ${{Number(D.metrics.satellite.temperatureCoveragePct).toFixed(1).replace('.',',')}} % de l’àmbit. La mediana és ${{Number(D.metrics.satellite.temperature.median).toFixed(1).replace('.',',')}} °C; el 80% central se situa entre ${{Number(D.metrics.satellite.temperature.p10).toFixed(1).replace('.',',')}} i ${{Number(D.metrics.satellite.temperature.p90).toFixed(1).replace('.',',')}} °C.`,
+      copy:`El compost multitemporal Landsat 8/9 del ${{guideDate(D.metrics.satellite.temperaturePeriodStartUtc)}} al ${{guideDate(D.metrics.satellite.temperaturePeriodEndUtc)}} agrega ${{D.metrics.satellite.temperatureSceneCount}} escenes candidates (${{D.metrics.satellite.temperatureContributingSceneCount}} amb píxels vàlids dins l’àmbit) i cobreix el ${{Number(D.metrics.satellite.temperatureCoveragePct).toFixed(1).replace('.',',')}} % de l’àmbit. No és una observació d’un sol dia. La mediana és ${{Number(D.metrics.satellite.temperature.median).toFixed(1).replace('.',',')}} °C; el 80% central se situa entre ${{Number(D.metrics.satellite.temperature.p10).toFixed(1).replace('.',',')}} i ${{Number(D.metrics.satellite.temperature.p90).toFixed(1).replace('.',',')}} °C.`,
       reading:'Els verds indiquen superfícies relativament més fresques; grocs i taronges, escalfament intermedi; i vermells o granats, superfícies més calentes. La temperatura és la de la pell del sòl o de la vegetació, no la de l’aire.',
       limit:'Límit: és la mediana de les observacions diürnes vàlides de dues temporades càlides. Redueix els buits per núvols, però no és una data única, una normal climàtica, temperatura de l’aire ni confort tèrmic.',
       layers:['access'],
@@ -1795,7 +1918,7 @@ def render_index(data: dict) -> str:
     vigor: {{
       label:`NDVI · mediana ${{Number(D.metrics.satellite.ndvi.median).toFixed(3).replace('.',',')}}`,
       title:'Vigor fotosintètic de la vegetació (NDVI)',
-      copy:`L’NDVI de Sentinel-2 del 07.07.2026 compara la llum roja i l’infraroig proper. La mediana és ${{Number(D.metrics.satellite.ndvi.median).toFixed(3).replace('.',',')}} i el 80% central va de ${{Number(D.metrics.satellite.ndvi.p10).toFixed(3).replace('.',',')}} a ${{Number(D.metrics.satellite.ndvi.p90).toFixed(3).replace('.',',')}}.`,
+      copy:`L’NDVI de Sentinel-2 del ${{guideDate(D.metrics.satellite.sentinelDate)}} compara la llum roja i l’infraroig proper. La mediana és ${{Number(D.metrics.satellite.ndvi.median).toFixed(3).replace('.',',')}} i el 80% central va de ${{Number(D.metrics.satellite.ndvi.p10).toFixed(3).replace('.',',')}} a ${{Number(D.metrics.satellite.ndvi.p90).toFixed(3).replace('.',',')}}.`,
       reading:'Marró: vigor espectral baix o poca vegetació. Verd clar: activitat intermèdia. Verd fosc: vigor espectral alt en la data de captura.',
       limit:'Límit: l’NDVI no mesura biodiversitat, salut individual ni humitat; és sensible al sòl i pot saturar-se en cobertes vegetals denses.',
       layers:['access'],
@@ -1805,7 +1928,7 @@ def render_index(data: dict) -> str:
     moisture: {{
       label:`NDMI · mediana ${{Number(D.metrics.satellite.ndmi.median).toFixed(3).replace('.',',')}}`,
       title:'Humitat relativa de la vegetació (NDMI)',
-      copy:`L’NDMI de Sentinel-2 del 07.07.2026 combina infraroig proper i infraroig d’ona curta. La mediana és ${{Number(D.metrics.satellite.ndmi.median).toFixed(3).replace('.',',')}}; el 80% central va de ${{Number(D.metrics.satellite.ndmi.p10).toFixed(3).replace('.',',')}} a ${{Number(D.metrics.satellite.ndmi.p90).toFixed(3).replace('.',',')}}.`,
+      copy:`L’NDMI de Sentinel-2 del ${{guideDate(D.metrics.satellite.sentinelDate)}} combina infraroig proper i infraroig d’ona curta. La mediana és ${{Number(D.metrics.satellite.ndmi.median).toFixed(3).replace('.',',')}}; el 80% central va de ${{Number(D.metrics.satellite.ndmi.p10).toFixed(3).replace('.',',')}} a ${{Number(D.metrics.satellite.ndmi.p90).toFixed(3).replace('.',',')}}.`,
       reading:'Marró: vegetació relativament més seca. Tons clars: situació intermèdia. Blau: humitat relativa espectral més alta. És una comparació espacial en una data, no un percentatge d’aigua.',
       limit:'Límit: l’NDMI no equival a humitat mesurada al camp, humitat fina del combustible, humitat del sòl ni risc diari d’incendi.',
       layers:['access'],
@@ -1825,7 +1948,7 @@ def render_index(data: dict) -> str:
     albedo: {{
       label:`Albedo · mediana ${{Number(D.metrics.satellite.albedo.median).toFixed(3).replace('.',',')}}`,
       title:'Quanta radiació solar reflecteix la superfície',
-      copy:`L’albedo estimat amb Sentinel-2 del 07.07.2026 expressa la fracció de radiació solar reflectida. La mediana és ${{Number(D.metrics.satellite.albedo.median).toFixed(3).replace('.',',')}}; el 80% central va de ${{Number(D.metrics.satellite.albedo.p10).toFixed(3).replace('.',',')}} a ${{Number(D.metrics.satellite.albedo.p90).toFixed(3).replace('.',',')}}.`,
+      copy:`L’albedo estimat amb Sentinel-2 del ${{guideDate(D.metrics.satellite.sentinelDate)}} expressa la fracció de radiació solar reflectida. La mediana és ${{Number(D.metrics.satellite.albedo.median).toFixed(3).replace('.',',')}}; el 80% central va de ${{Number(D.metrics.satellite.albedo.p10).toFixed(3).replace('.',',')}} a ${{Number(D.metrics.satellite.albedo.p90).toFixed(3).replace('.',',')}}.`,
       reading:'Els tons foscos indiquen albedo baix, els grisos valors intermedis i els tons clars albedo alt. Superfícies més clares reflecteixen una proporció més gran de radiació.',
       limit:'Límit: és una estimació espectral de banda ampla, no una mesura radiomètrica de camp. No és temperatura, confort tèrmic ni balanç energètic complet.',
       layers:['access'],
@@ -1989,9 +2112,12 @@ def render_index(data: dict) -> str:
       ['Tendència',trendText],
       ['Índex mitjà',`${{ca1(fire.summary.mean_index_0_100)}}/100`],
       ['Categoria predominant',fire.summary.predominant_category],
-      ['Màxim territorial',`${{ca1(fire.summary.maximum_index_0_100)}}/100 · ${{fire.summary.maximum_category}}`],
+      ['Màxim territorial',fire.summary.maximum_index_0_100 == null ? 'No calculable amb les dades disponibles' : `${{ca1(fire.summary.maximum_index_0_100)}}/100 · ${{fire.summary.maximum_category}}`],
       ['Molt alt o extrem',`${{ca1(fire.summary.very_high_or_extreme_area_pct)}} %`],
-      ['Confiança',`${{ca1(fire.summary.confidence_pct)}} % · ${{fire.summary.confidence}}`],
+      ['Superfície vàlida',`${{ca1(fire.summary.valid_area_ha)}} ha`],
+      ['Superfície sense dada',`${{ca1(fire.summary.no_data_area_ha)}} ha`],
+      ['Cobertura de l’àmbit',`${{ca1(fire.summary.valid_coverage_pct)}} %`],
+      ['Confiança del producte',`${{ca1(fire.summary.confidence_pct)}} % · ${{fire.summary.confidence}}`],
       ['Factors dominants',(fire.summary.dominant_labels || []).join(' · ')]
     ].map(([label,value]) => `<span>${{esc(label)}}</span><strong>${{esc(value)}}</strong>`).join('');
     root.querySelector('#eu-fire-current-areas').innerHTML = Object.entries(fire.summary.area_by_category_ha || {{}})
@@ -2303,7 +2429,7 @@ def render_index(data: dict) -> str:
     firePopup.innerHTML = `<button class="eu-fire-popup-close" type="button" aria-label="Tancar detall">×</button>
       <h3>${{esc(p.cell_id)}} · perill actual</h3>
       <div class="eu-fire-popup-main">${{ca1(p.index_0_100)}}/100 · ${{esc(p.category)}}</div>
-      <p><strong>Confiança:</strong> ${{ca1(p.confidence_pct)}} % · ${{esc(p.confidence)}}. <strong>Cobertura del pes temporalment elegible:</strong> ${{ca1(p.available_weight_pct)}} %; <strong>pes base encara elegible:</strong> ${{ca1(p.eligible_base_weight_pct)}} %.</p>
+      <p><strong>Confiança del producte en aquesta cel·la:</strong> ${{ca1(p.confidence_pct)}} % · ${{esc(p.confidence)}}. <strong>Cobertura del pes temporalment elegible:</strong> ${{ca1(p.available_weight_pct)}} %; <strong>pes base encara elegible:</strong> ${{ca1(p.eligible_base_weight_pct)}} %.</p>
       <p><strong>Vent contextual XEMA · CJ Organyà:</strong> ${{esc(windValue)}} · observació ${{esc(windDate)}}. <span class="eu-muted">${{esc(p.source_freshness?.wind?.status_label || '')}} · estació oficial de referència situada a 9,2 km de l’estació Y4 d’Alinyà.</span></p>
       <p><strong>Meteorologia actual:</strong> temperatura ${{esc(metricText(meteo.air_temperature,'°C'))}} · humitat ${{esc(metricText(meteo.relative_humidity,'%',1,0))}} · vent ${{esc(metricText(meteo.wind,'km/h',3.6))}} · ratxa ${{esc(metricText(meteo.wind_gust,'km/h',3.6))}} · pluja 24 h ${{accumulated.recent_24h_mm == null ? '—' : ca1(accumulated.recent_24h_mm) + ' mm'}}. <span class="eu-muted">${{esc(meteoFreshness)}}.</span></p>
       <p><strong>Sequera meteorològica acumulada:</strong> ${{esc(rainText)}}. <span class="eu-muted">Acumulacions XEMA fins a ${{esc(humanDate(accumulated.data_at_utc))}} · ${{esc(rainFreshness)}}; si la cobertura és insuficient es mostra “dada no disponible”.</span></p>
@@ -2331,7 +2457,7 @@ def render_index(data: dict) -> str:
       if (!response.ok) throw new Error(`HTTP ${{response.status}}`);
       const snapshot = await response.json();
       const remote = snapshot.current_fire_danger;
-      if (!remote?.summary || !snapshot.checked_at_utc) throw new Error('resposta remota incompleta');
+      if (!remote?.summary || !snapshot.checked_at_utc || !snapshot.snapshot_id || snapshot.snapshot_id !== snapshot.reading_registry?.snapshot_id) throw new Error('resposta remota incompleta o incoherent');
       const fire = {{
         checkedAtUtc: snapshot.checked_at_utc,
         status: remote.status,
@@ -2348,6 +2474,8 @@ def render_index(data: dict) -> str:
       }};
       D.dailyReadings = snapshot.daily_readings;
       D.dailyHistory = snapshot.daily_history;
+      D.readingRegistry = snapshot.reading_registry;
+      D.snapshotId = snapshot.snapshot_id;
       updateCurrentFireSummary(fire);
       const token = encodeURIComponent(snapshot.checked_at_utc);
       if (snapshot.assets?.current_fire_raster_url) {{
@@ -2588,7 +2716,7 @@ opcionalment, `ECORADAR_GITHUB_BRANCH` (per defecte `main`).
 - `metadata/current_fire_danger.json`: comprovacio, variables, pesos, resultats i limitacions.
 - `metadata/biodiversity_habitat_pilot_metadata.json`: regles qualitatives, fonts, llindars relatius i limitacions del pilot.
 - `metadata/biodiversity_habitat_pilot.geojson`: sectors agregats sense noms ni coordenades de taxons.
-- `metadata/daily_readings.json` i `metadata/daily_history.json`: reserva coherent.
+- `metadata/daily_readings.json`, `metadata/daily_history.json` i `metadata/reading_registry.json`: reserva coherent amb un únic `snapshot_id`.
 - `netlify/functions/daily-readings.mjs`: lectura remota del repositori canònic.
 
 La capa de concurrencia no es probabilitat oficial d'incendi ni perill diari.
@@ -2622,6 +2750,7 @@ EFFIS, FIRMS ni registres operatius recents sense perimetre consolidat.
     )
     for name in ("daily_readings.json", "daily_history.json"):
         shutil.copy2(PROJECT / "indicators" / name, OUT_DIR / "metadata" / name)
+    shutil.copy2(PROJECT / "metadata" / "reading_registry.json", OUT_DIR / "metadata" / "reading_registry.json")
     for name in ("daily_readings_observations.jsonl", "daily_readings_checks.jsonl"):
         shutil.copy2(PROJECT / "history" / name, OUT_DIR / "history" / name)
     shutil.copy2(

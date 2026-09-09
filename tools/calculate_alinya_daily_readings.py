@@ -63,8 +63,12 @@ def _entry(
     note: str,
     value_numeric: float | None = None,
     unit: str | None = None,
+    temporal_kind: str = "observation",
+    period_start_utc: str | None = None,
+    period_end_utc: str | None = None,
+    status_override: tuple[str, str] | None = None,
 ) -> dict:
-    status_code, status = _public_status(data_at, checked_at)
+    status_code, status = status_override or _public_status(data_at, checked_at)
     return {
         "label": label,
         "value": value,
@@ -72,6 +76,9 @@ def _entry(
         "unit": unit,
         "source": source,
         "data_at_utc": data_at.isoformat().replace("+00:00", "Z") if data_at else None,
+        "temporal_kind": temporal_kind,
+        "period_start_utc": period_start_utc,
+        "period_end_utc": period_end_utc,
         "checked_at_utc": checked_at.isoformat().replace("+00:00", "Z"),
         "status_code": status_code,
         "status": status,
@@ -306,7 +313,8 @@ def calculate() -> dict:
     satellite = _read_json(PROJECT / "indicators" / "teledeteccio_satellite_layers.json")
     lst_metric = satellite.get("surface_temperature", {}).get("metrics_c", {})
     lst_value = lst_metric.get("median")
-    lst_date = _as_utc(selected_surface.get("acquired_at_utc"))
+    lst_temporal_kind = selected_surface.get("temporal_kind", "single_observation")
+    lst_date = _as_utc(selected_surface.get("acquired_at_utc")) if lst_temporal_kind == "single_observation" else None
     lst_source = selected_surface.get("source", "Temperatura superficial detallada")
     readings["surface_temperature"] = (
         _entry(
@@ -318,9 +326,17 @@ def calculate() -> dict:
             data_at=lst_date,
             checked_at=checked_at,
             quality=selected_surface.get("quality", "control de qualitat satel·litari aplicat"),
-            note="Temperatura superficial detallada QA-vàlida seleccionada per data d'adquisició; no és temperatura de l'aire.",
+            note=(
+                "Observació detallada QA-vàlida; no és temperatura de l'aire."
+                if lst_temporal_kind == "single_observation"
+                else "Compost multitemporal de 26 escenes: descriu el patró tèrmic del període i no una observació del darrer dia component."
+            ),
+            temporal_kind=lst_temporal_kind,
+            period_start_utc=selected_surface.get("period_start_utc"),
+            period_end_utc=selected_surface.get("period_end_utc"),
+            status_override=("period_context", "context del període") if lst_temporal_kind == "multitemporal_composite" else None,
         )
-        if lst_value is not None and lst_date
+        if lst_value is not None and (lst_date or selected_surface.get("period_end_utc"))
         else _missing(
             "Temperatura superficial",
             "USGS Landsat / NASA ECOSTRESS",
@@ -422,14 +438,14 @@ def calculate() -> dict:
             source="Índex EcoRadar derivat · fonts detallades a la lectura",
             data_at=fire_date,
             checked_at=checked_at,
-            quality=f"confiança {fire_summary.get('confidence', 'no disponible')} · {fire_summary.get('confidence_pct', '—')} %",
+            quality=f"confiança del producte {fire_summary.get('confidence', 'no disponible')} · {fire_summary.get('confidence_pct', '—')} %",
             note="No és una alerta oficial ni substitueix el Pla Alfa.",
         )
         if fire_value is not None and fire_date
         else _missing("Perill actual d'incendi", "Índex EcoRadar derivat", checked_at, "No hi ha càlcul vàlid.")
     )
 
-    counts = {name: 0 for name in ("updated_today", "last_available", "unavailable")}
+    counts = {name: 0 for name in ("updated_today", "last_available", "period_context", "unavailable")}
     for reading in readings.values():
         counts[reading["status_code"]] += 1
 

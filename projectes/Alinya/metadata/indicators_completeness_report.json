@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T08:09:41+00:00",
+  "generated_at": "2026-09-09T11:31:16+00:00",
   "indicators": [
     {
       "indicator": "CORE_01",
@@ -70,7 +70,7 @@
         "copernicus_sentinel_ndmi",
         "copernicus_sentinel_ndwi",
         "copernicus_sentinel_nbr",
-        "copernicus_lst",
+        "detailed_surface_temperature",
         "meteocat"
       ],
       "all_sources": [
@@ -78,24 +78,25 @@
         "copernicus_sentinel_ndmi",
         "copernicus_sentinel_ndwi",
         "copernicus_sentinel_nbr",
-        "copernicus_lst",
+        "detailed_surface_temperature",
         "meteocat",
         "aemet"
       ],
-      "available_sources": [],
-      "partial_sources": [],
-      "missing_sources": [
+      "available_sources": [
         "copernicus_sentinel_ndvi",
         "copernicus_sentinel_ndmi",
+        "detailed_surface_temperature",
+        "meteocat"
+      ],
+      "partial_sources": [],
+      "missing_sources": [
         "copernicus_sentinel_ndwi",
         "copernicus_sentinel_nbr",
-        "copernicus_lst",
-        "meteocat",
         "aemet"
       ],
-      "data_available_percent": 0.0,
-      "status": "NO DISPONIBLE",
-      "confidence": "baixa"
+      "data_available_percent": 66.7,
+      "status": "PARCIAL",
+      "confidence": "mitjana"
     },
     {
       "indicator": "CORE_04",
@@ -104,7 +105,7 @@
         "land_cover_icgc_cobertes_sol",
         "copernicus_sentinel_ndvi",
         "copernicus_sentinel_ndmi",
-        "copernicus_lst",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "aca_hydrology",
         "meteocat"
@@ -114,7 +115,7 @@
         "land_cover_icgc_cobertes_sol",
         "copernicus_sentinel_ndvi",
         "copernicus_sentinel_ndmi",
-        "copernicus_lst",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "aca_hydrology",
         "meteocat",
@@ -124,21 +125,21 @@
       "available_sources": [
         "study_area_file",
         "land_cover_icgc_cobertes_sol",
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
-        "aca_hydrology"
+        "aca_hydrology",
+        "meteocat"
       ],
       "partial_sources": [],
       "missing_sources": [
-        "copernicus_sentinel_ndvi",
-        "copernicus_sentinel_ndmi",
-        "copernicus_lst",
-        "meteocat",
         "aemet",
         "spei"
       ],
-      "data_available_percent": 50.0,
-      "status": "PARCIAL",
-      "confidence": "mitjana"
+      "data_available_percent": 100.0,
+      "status": "DISPONIBLE",
+      "confidence": "alta"
     },
     {
       "indicator": "CORE_05",
@@ -146,7 +147,7 @@
         "study_area_file",
         "land_cover_icgc_cobertes_sol",
         "copernicus_sentinel_ndmi",
-        "copernicus_lst",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "aca_hydrology",
         "meteocat"
@@ -155,7 +156,7 @@
         "study_area_file",
         "land_cover_icgc_cobertes_sol",
         "copernicus_sentinel_ndmi",
-        "copernicus_lst",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "aca_hydrology",
         "meteocat",
@@ -165,20 +166,20 @@
       "available_sources": [
         "study_area_file",
         "land_cover_icgc_cobertes_sol",
+        "copernicus_sentinel_ndmi",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
-        "aca_hydrology"
+        "aca_hydrology",
+        "meteocat"
       ],
       "partial_sources": [],
       "missing_sources": [
-        "copernicus_sentinel_ndmi",
-        "copernicus_lst",
-        "meteocat",
         "aemet",
         "spei"
       ],
-      "data_available_percent": 57.1,
-      "status": "PARCIAL",
-      "confidence": "mitjana"
+      "data_available_percent": 100.0,
+      "status": "DISPONIBLE",
+      "confidence": "alta"
     },
     {
       "indicator": "CORE_06",
@@ -289,7 +290,7 @@
         "land_cover_icgc_cobertes_sol",
         "copernicus_sentinel_ndmi",
         "copernicus_sentinel_nbr",
-        "copernicus_lst",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "osm_public_use",
         "fires_burned_areas",
@@ -303,7 +304,7 @@
         "dun_cultius",
         "copernicus_sentinel_ndmi",
         "copernicus_sentinel_nbr",
-        "copernicus_lst",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "osm_public_use",
         "fires_burned_areas",
@@ -313,6 +314,8 @@
       "available_sources": [
         "study_area_file",
         "land_cover_icgc_cobertes_sol",
+        "copernicus_sentinel_ndmi",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "osm_public_use",
         "fires_burned_areas",
@@ -323,12 +326,10 @@
         "land_cover_mcsc",
         "sigpac_catalunya",
         "dun_cultius",
-        "copernicus_sentinel_ndmi",
         "copernicus_sentinel_nbr",
-        "copernicus_lst",
         "fuel_continuity"
       ],
-      "data_available_percent": 55.6,
+      "data_available_percent": 77.8,
       "status": "PARCIAL",
       "confidence": "mitjana"
     },
@@ -378,7 +379,7 @@
         "copernicus_sentinel_ndmi",
         "copernicus_sentinel_ndwi",
         "copernicus_sentinel_nbr",
-        "copernicus_lst",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "aca_hydrology",
         "connectivity_infraestructura_verda",
@@ -399,7 +400,7 @@
         "copernicus_sentinel_ndmi",
         "copernicus_sentinel_ndwi",
         "copernicus_sentinel_nbr",
-        "copernicus_lst",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "aca_hydrology",
         "connectivity_infraestructura_verda",
@@ -418,33 +419,33 @@
         "study_area_file",
         "land_cover_icgc_cobertes_sol",
         "habitats_terrestres_v3",
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "aca_hydrology",
         "connectivity_infraestructura_verda",
         "gbif_occurrences",
         "inaturalist_observations",
         "osm_public_use",
-        "fires_burned_areas"
+        "fires_burned_areas",
+        "meteocat"
       ],
       "partial_sources": [],
       "missing_sources": [
         "sigpac_catalunya",
         "dun_cultius",
-        "copernicus_sentinel_ndvi",
-        "copernicus_sentinel_ndmi",
         "copernicus_sentinel_ndwi",
         "copernicus_sentinel_nbr",
-        "copernicus_lst",
         "field_biodiversity",
         "fuel_continuity",
-        "meteocat",
         "aemet",
         "spei",
         "field_validation"
       ],
-      "data_available_percent": 58.8,
+      "data_available_percent": 82.4,
       "status": "PARCIAL",
-      "confidence": "mitjana"
+      "confidence": "alta"
     },
     {
       "indicator": "CORE_12",
@@ -457,7 +458,7 @@
         "copernicus_sentinel_ndmi",
         "copernicus_sentinel_ndwi",
         "copernicus_sentinel_nbr",
-        "copernicus_lst",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "aca_hydrology",
         "connectivity_infraestructura_verda",
@@ -481,7 +482,7 @@
         "copernicus_sentinel_ndmi",
         "copernicus_sentinel_ndwi",
         "copernicus_sentinel_nbr",
-        "copernicus_lst",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "aca_hydrology",
         "connectivity_infraestructura_verda",
@@ -506,6 +507,9 @@
         "land_cover_icgc_cobertes_sol",
         "habitats_terrestres_v3",
         "hic_v2",
+        "copernicus_sentinel_ndvi",
+        "copernicus_sentinel_ndmi",
+        "detailed_surface_temperature",
         "icgc_dem_mdt",
         "aca_hydrology",
         "connectivity_infraestructura_verda",
@@ -513,34 +517,32 @@
         "inaturalist_observations",
         "osm_public_use",
         "fires_burned_areas",
-        "effis"
+        "effis",
+        "meteocat"
       ],
       "partial_sources": [],
       "missing_sources": [
         "sigpac_catalunya",
         "dun_cultius",
-        "copernicus_sentinel_ndvi",
-        "copernicus_sentinel_ndmi",
         "copernicus_sentinel_ndwi",
         "copernicus_sentinel_nbr",
-        "copernicus_lst",
         "bdbc",
         "field_biodiversity",
         "strava_heatmap",
         "fuel_continuity",
-        "meteocat",
         "aemet",
         "spei",
         "field_validation"
       ],
-      "data_available_percent": 61.1,
+      "data_available_percent": 83.3,
       "status": "PARCIAL",
-      "confidence": "mitjana"
+      "confidence": "alta"
     }
   ],
   "summary": {
-    "complete": 5,
-    "partial": 6,
-    "not_available": 1
-  }
+    "complete": 7,
+    "partial": 5,
+    "not_available": 0
+  },
+  "snapshot_id": "alinya-1ce1ee286762c656"
 }

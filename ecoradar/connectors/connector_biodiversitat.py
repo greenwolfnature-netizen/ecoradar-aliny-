@@ -49,7 +49,7 @@ class QueryConfig:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run EcoRadar biodiversity connector")
     parser.add_argument("--buffer-m", type=float, default=0, help="Buffer around study area in metres")
-    parser.add_argument("--max-records-per-source", type=int, default=1000, help="Maximum records per source")
+    parser.add_argument("--max-records-per-source", type=int, default=50000, help="Safety ceiling per source; GBIF is fetched in 300-record pages")
     args = parser.parse_args()
 
     try:
@@ -67,12 +67,12 @@ def main() -> None:
 
 
 def run_connector(config: QueryConfig | None = None) -> dict[str, Any]:
-    config = config or QueryConfig(buffer_m=0, max_records_per_source=1000, recent_year_threshold=RECENT_YEAR_THRESHOLD)
+    config = config or QueryConfig(buffer_m=0, max_records_per_source=50000, recent_year_threshold=RECENT_YEAR_THRESHOLD)
     _ensure_dirs()
     study_area = _load_study_area()
     query_area = _query_area(study_area, config.buffer_m)
 
-    gbif_raw = _fetch_gbif(query_area, config.max_records_per_source)
+    gbif_raw, gbif_query = _fetch_gbif(query_area, config.max_records_per_source)
     inat_raw = _fetch_inaturalist(query_area, config.max_records_per_source)
     _write_raw("gbif", gbif_raw)
     _write_raw("inaturalist", inat_raw)
@@ -89,7 +89,7 @@ def run_connector(config: QueryConfig | None = None) -> dict[str, Any]:
     clipped.to_file(PROCESSED_PATH, layer="biodiversitat", driver="GPKG")
 
     summary_rows = _write_summary(clipped, config.recent_year_threshold)
-    metadata = _write_metadata(study_area, query_area, config, gbif_raw, inat_raw, clipped)
+    metadata = _write_metadata(study_area, query_area, config, gbif_raw, gbif_query, inat_raw, clipped)
 
     return {
         "processed_path": str(PROCESSED_PATH),
@@ -128,11 +128,13 @@ def _query_area(study_area: gpd.GeoDataFrame, buffer_m: float) -> gpd.GeoDataFra
     return gpd.GeoDataFrame({"name": ["Alinya"], "buffer_m": [buffer_m]}, geometry=[geometry], crs=TARGET_CRS)
 
 
-def _fetch_gbif(query_area: gpd.GeoDataFrame, max_records: int) -> list[dict[str, Any]]:
+def _fetch_gbif(query_area: gpd.GeoDataFrame, max_records: int) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     bounds = query_area.to_crs(WGS84).total_bounds
     records: list[dict[str, Any]] = []
     limit = min(300, max_records)
     offset = 0
+    total_matches = 0
+    page_count = 0
     while len(records) < max_records:
         params = {
             "decimalLongitude": f"{bounds[0]},{bounds[2]}",
@@ -143,12 +145,22 @@ def _fetch_gbif(query_area: gpd.GeoDataFrame, max_records: int) -> list[dict[str
             "offset": offset,
         }
         payload = _get_json(f"{GBIF_URL}?{urlencode(params)}")
+        total_matches = int(payload.get("count", total_matches))
         page = payload.get("results", [])
+        page_count += 1
         records.extend(page)
         if payload.get("endOfRecords") or not page:
             break
         offset += len(page)
-    return records
+    return records, {
+        "total_matches": total_matches,
+        "downloaded_records": len(records),
+        "page_size": 300,
+        "page_count": page_count,
+        "end_of_records": bool(payload.get("endOfRecords")) if records else total_matches == 0,
+        "safety_ceiling": max_records,
+        "download_limit_reached": total_matches > len(records),
+    }
 
 
 def _fetch_inaturalist(query_area: gpd.GeoDataFrame, max_records: int) -> list[dict[str, Any]]:
@@ -330,6 +342,7 @@ def _write_metadata(
     query_area: gpd.GeoDataFrame,
     config: QueryConfig,
     gbif_raw: list[dict[str, Any]],
+    gbif_query: dict[str, Any],
     inat_raw: list[dict[str, Any]],
     clipped: gpd.GeoDataFrame,
 ) -> dict[str, Any]:
@@ -351,8 +364,9 @@ def _write_metadata(
         "study_area_surface_ha": float(study_area.geometry.union_all().area / 10000),
         "query_area_surface_ha": float(query_area.geometry.union_all().area / 10000),
         "records_downloaded": {"GBIF": len(gbif_raw), "iNaturalist": len(inat_raw)},
+        "gbif_pagination": gbif_query,
         "download_limit_reached": {
-            "GBIF": len(gbif_raw) >= config.max_records_per_source,
+            "GBIF": gbif_query["download_limit_reached"],
             "iNaturalist": len(inat_raw) >= config.max_records_per_source,
         },
         "records_normalized_after_clip": int(len(clipped)),

@@ -9,8 +9,12 @@
     1.5199389999999993,
     42.22512200000001
   ],
+  "scope_pixels": 377841,
   "valid_pixels": 377656,
-  "valid_area_ha": 5467.2,
+  "invalid_or_masked_pixels": 185,
+  "valid_coverage_pct": 99.95,
+  "valid_area_ha": 5461.4,
+  "valid_area_method": "Study-area area apportioned by the share of rasterized study pixels",
   "metrics": {
     "ndvi": {
       "mean": 0.579,
@@ -47,5 +51,6 @@
     "ndvi": "maps/teledeteccio/ndvi.webp",
     "ndmi": "maps/teledeteccio/ndmi.webp",
     "albedo": "maps/teledeteccio/albedo.webp"
-  }
+  },
+  "snapshot_id": "alinya-1ce1ee286762c656"
 }

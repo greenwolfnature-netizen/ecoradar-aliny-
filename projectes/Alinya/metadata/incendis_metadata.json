@@ -5,7 +5,7 @@
   "service_url": "https://sig.gencat.cat/ows/VEGETACIO/wfs",
   "layer": "VEGETACIO:VEGETACIO_INCENDIS",
   "service_type": "WFS 2.0.0",
-  "query_date": "2026-07-07T17:33:05.879936+00:00",
+  "query_date": "2026-09-09T06:09:30.160353+00:00",
   "crs": "EPSG:25831",
   "study_area_surface_ha": 5464.031656330243,
   "raw_file": "projectes/Alinya/raw/incendis/vegetacio_incendis_alinya_bbox.geojson",
@@ -13,7 +13,12 @@
   "summary_file": "projectes/Alinya/indicators/incendis_resum.csv",
   "features_clipped": 2,
   "burned_area_ha": 17.4489,
-  "fire_years": [],
+  "fire_years": [
+    "2000",
+    "2012"
+  ],
+  "features_with_date": 2,
+  "features_without_date": 0,
   "effis": {
     "status": "catalogue_only",
     "url": "https://api.effis.emergency.copernicus.eu/rest/drf/datasets/",
@@ -34,7 +39,7 @@
     },
     {
       "metric": "gencat_fire_years",
-      "value": "",
+      "value": "2000, 2012",
       "unit": "years"
     },
     {

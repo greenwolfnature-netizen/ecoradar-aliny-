@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "checked_at_utc": "2026-09-09T10:46:26.131044+00:00",
+  "source": "Copernicus Data Space Ecosystem Sentinel-2 L2A STAC",
+  "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.363998%2C42.144427%2C1.5199389999999993%2C42.22512200000001&datetime=2026-07-26T00%3A00%3A00Z%2F2026-09-09T23%3A59%3A59Z&limit=100",
+  "search_period": {
+    "start": "2026-07-26",
+    "end": "2026-09-09"
+  },
+  "maximum_tile_cloud_pct": 10.0,
+  "candidate_count": 16,
+  "candidates": [
+    {
+      "scene_id": "S2C_MSIL2A_20260906T104621_N0512_R051_T31TCG_20260906T184616",
+      "acquired_at_utc": "2026-09-06T10:46:21.025000Z",
+      "scene_cloud_cover_pct": 5.95,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2A_MSIL2A_20260905T104041_N0512_R008_T31TCG_20260905T184007",
+      "acquired_at_utc": "2026-09-05T10:40:41.024000Z",
+      "scene_cloud_cover_pct": 9.4,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2C_MSIL2A_20260903T103621_N0512_R008_T31TCG_20260903T171417",
+      "acquired_at_utc": "2026-09-03T10:36:21.025000Z",
+      "scene_cloud_cover_pct": 0.0,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2A_MSIL2A_20260829T105041_N0512_R051_T31TCG_20260829T191916",
+      "acquired_at_utc": "2026-08-29T10:50:41.024000Z",
+      "scene_cloud_cover_pct": 0.02,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2B_MSIL2A_20260829T103619_N0512_R008_T31TCG_20260829T143417",
+      "acquired_at_utc": "2026-08-29T10:36:19.024000Z",
+      "scene_cloud_cover_pct": 0.05,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2A_MSIL2A_20260819T104651_N0512_R051_T31TCG_20260819T191953",
+      "acquired_at_utc": "2026-08-19T10:46:51.024000Z",
+      "scene_cloud_cover_pct": 0.0,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2B_MSIL2A_20260819T103619_N0512_R008_T31TCG_20260819T143522",
+      "acquired_at_utc": "2026-08-19T10:36:19.024000Z",
+      "scene_cloud_cover_pct": 0.0,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2C_MSIL2A_20260817T104621_N0512_R051_T31TCG_20260817T144114",
+      "acquired_at_utc": "2026-08-17T10:46:21.025000Z",
+      "scene_cloud_cover_pct": 9.54,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2C_MSIL2A_20260814T104021_N0512_R008_T31TCG_20260814T153403",
+      "acquired_at_utc": "2026-08-14T10:40:21.025000Z",
+      "scene_cloud_cover_pct": 6.78,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2B_MSIL2A_20260812T104619_N0512_R051_T31TCG_20260812T132436",
+      "acquired_at_utc": "2026-08-12T10:46:19.024000Z",
+      "scene_cloud_cover_pct": 0.27,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2C_MSIL2A_20260807T104621_N0512_R051_T31TCG_20260807T143318",
+      "acquired_at_utc": "2026-08-07T10:46:21.025000Z",
+      "scene_cloud_cover_pct": 0.6,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2B_MSIL2A_20260802T104619_N0512_R051_T31TCG_20260802T144452",
+      "acquired_at_utc": "2026-08-02T10:46:19.024000Z",
+      "scene_cloud_cover_pct": 0.3,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2A_MSIL2A_20260730T104701_N0512_R051_T31TCG_20260730T191810",
+      "acquired_at_utc": "2026-07-30T10:47:01.024000Z",
+      "scene_cloud_cover_pct": 0.64,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2B_MSIL2A_20260730T103629_N0512_R008_T31TCG_20260730T143638",
+      "acquired_at_utc": "2026-07-30T10:36:29.024000Z",
+      "scene_cloud_cover_pct": 0.0,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2C_MSIL2A_20260728T104621_N0512_R051_T31TCG_20260728T144218",
+      "acquired_at_utc": "2026-07-28T10:46:21.025000Z",
+      "scene_cloud_cover_pct": 0.01,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
+    {
+      "scene_id": "S2A_MSIL2A_20260727T104041_N0512_R008_T31TCG_20260727T184256",
+      "acquired_at_utc": "2026-07-27T10:40:41.024000Z",
+      "scene_cloud_cover_pct": 0.15,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    }
+  ],
+  "connector_status": "requires_credentials",
+  "missing_requirements": [
+    "COPERNICUS_CLIENT_ID",
+    "COPERNICUS_CLIENT_SECRET"
+  ],
+  "limitation": "The public catalogue exposes footprint and tile cloud metadata only. Actual valid coverage inside Alinyà must be evaluated from SCL/dataMask through the authenticated Process API before selection."
+}

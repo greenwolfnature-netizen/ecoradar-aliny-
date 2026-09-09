@@ -12,7 +12,7 @@ oficial de perill.
 | --- | --- | --- | --- | --- | --- | --- |
 | Perill estructural | Mapa bàsic de perill d’incendi forestal 2024, Generalitat de Catalunya | Descàrrega oficial GeoTIFF | EPSG:25831, 100 m | Edició 2024 | Dades obertes Generalitat | `verified` |
 | Potencial de foc i sequera forestal | ForestDrought, CREAF / EMF | repositori HTTPS GeoPackage | cel·les forestals natives de 500 × 500 m | model diari; publicació amb possible retard | reutilització pública; identificador formal pendent | `verified` |
-| Temperatura superficial | Landsat 8/9 C2 L2 ST, USGS, o ECOSTRESS L2T V3, NASA/JPL | STAC/CMR i COG; GeoTIFF normalitzat | 30 o 70 m, reprojecció a EPSG:25831 | Segons nova escena QA-vàlida | política USGS / NASA Earthdata | Landsat `verified`; ECOSTRESS `requires_credentials` |
+| Temperatura superficial | Landsat 8/9 C2 L2 ST, USGS, o ECOSTRESS L2T V3, NASA/JPL | STAC/CMR i COG; GeoTIFF normalitzat | 30 o 70 m, reprojecció a EPSG:25831 | Segons nova escena QA-vàlida | política USGS / NASA Earthdata | compost Landsat `verified` com a context de període; ECOSTRESS `requires_credentials` |
 | NDMI | Sentinel-2 MSI L2A, Copernicus Data Space Ecosystem | OAuth/API de procés; GeoTIFF normalitzat | 10–20 m efectius, reprojecció a 100 m | Segons escena vàlida | Copernicus Data Policy | `verified` |
 | Continuïtat vegetal | CLMS HRL Tree Cover Density i Herbaceous Cover 2023 | WMS/GeoTIFF normalitzat | 10 m, reprojecció a 100 m | versió 2023 | Copernicus Data Policy | `verified` |
 | Pendent i orientació | Model d'elevacions del terreny 5 m, ICGC | GeoTIFF normalitzat | EPSG:25831, 5 m | edició de la font | CC BY 4.0 ICGC | `verified` |
@@ -73,6 +73,11 @@ factor és 1 dins el termini de pes complet, disminueix linealment fins a 0 i
 queda exclòs en superar el termini màxim. El valor antic continua visible al
 popup, amb data i estat «massa antiga», exclusivament com a context.
 
+La frescor només s’aplica a observacions individuals amb data d’adquisició. El
+compost Landsat actual agrega 26 escenes candidates (23 amb píxels vàlids) del
+03.06.2025 al 25.08.2026: es mostra com a context multitemporal i no rep el pes
+dinàmic corresponent a una observació del 25.08.2026.
+
 La meteorologia que sosté una lectura «d’avui» és obligatòria: si tant el vent
 com la humitat superen el límit màxim o no estan disponibles, el procés no
 publica un índex nou i conserva l’últim producte vàlid amb la seva data. La
@@ -122,3 +127,23 @@ python tools/export_ecoradar_alinya_netlify.py
   diferències internes de la Muntanya d’Alinyà. Es conserva com a context
   oficial, però no s’interpola ni es representa com una superfície detallada.
 - Cal consultar sempre Pla Alfa, avisos oficials i instruccions d’emergència.
+
+## Correcció de la font del Pla Alfa — 2026-09-08
+
+Estat: `verified`. La pàgina oficial d’Interior enllaça l’experiència
+`2cf7ebbe492f401db826cb21eae9bfae`, que utilitza el webmap «Pla Alfa Avui»
+`a696da9dc39f461dadfc0f22e910b4aa`. Les capes municipals vigents del webmap
+apunten a `Pla_Alfa_Municipal_Avui_FL_alternatiu_VW/FeatureServer/0`
+(item `02c89a3c7f9a4b269aa3ddd117d48691`). La capa anterior
+`Pla_Alfa_Municipal_Avui_FL_2_view` encara responia nivell 0, amb dades
+del 18 d’agost; la vigent retorna `PERIL_M=2` per `CODIMUNI=259084`
+(Fígols i Alinyà) el 8 de setembre.
+
+URL oficial del servei:
+https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/Pla_Alfa_Municipal_Avui_FL_alternatiu_VW/FeatureServer/0
+
+Es mantenen organisme, format JSON/ArcGIS FeatureServer, CRS EPSG:25831,
+variables CODIMUNI/NOMMUNI/NOMCOMAR/PERIL_M, cadència i condicions d’ús
+documentats. Exemple: `/query?where=CODIMUNI%3D%27259084%27&outFields=*&returnGeometry=false&f=json`.
+Correcció exclusiva del Pla Alfa; sense recalcular l’índex EcoRadar ni
+canviar la data de comprovació global de les altres lectures.

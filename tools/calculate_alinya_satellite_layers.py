@@ -70,18 +70,22 @@ def calculate() -> dict:
         "surface_temperature": {
             "source": selection["source"],
             "source_key": selection["source_key"],
-            "acquired_at_utc": selection["acquired_at_utc"],
+            "temporal_kind": selection.get("temporal_kind", "single_observation"),
+            "acquired_at_utc": selection.get("acquired_at_utc"),
+            "period_start_utc": selection.get("period_start_utc"),
+            "period_end_utc": selection.get("period_end_utc"),
             "resolution_m": selection["resolution_m"],
             "quality": selection["quality"],
-            "date_range": source_metadata.get("date_range", selection["acquired_at_utc"]),
+            "date_range": source_metadata.get("date_range") or selection.get("acquired_at_utc"),
             "scene_count": source_metadata.get("scene_count", 1),
+            "contributing_scene_count": selection.get("contributing_scene_count"),
             "composite_method": source_metadata.get("composite_method", "single locally QA-valid acquisition"),
             "coverage_pct": source_metadata.get("study_coverage_pct", 100.0),
             "metrics_c": _stats(lst,lst_valid,1),
             "valid_pixels": int(lst_valid.sum()),
         },
         "outputs":{"vegetation":"maps/teledeteccio/vegetation_cover_2023.webp", "temperature":"maps/teledeteccio/landsat_lst.webp"},
-        "limitations":{"vegetation":"coverage presence, not biodiversity, habitat quality or fuel load", "temperature":"detailed satellite surface temperature at acquisition time; not air temperature, personal exposure or a climatic normal"},
+        "limitations":{"vegetation":"coverage presence, not biodiversity, habitat quality or fuel load", "temperature":"detailed satellite surface temperature; a multitemporal median is period context and never a single-date observation; it is not air temperature, personal exposure or a climatic normal"},
     }
     OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
     return payload

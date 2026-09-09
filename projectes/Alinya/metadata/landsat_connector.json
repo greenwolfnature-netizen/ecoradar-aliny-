@@ -1,13 +1,13 @@
 {
-  "generated_at_utc": "2026-09-08T20:59:51.937431+00:00",
+  "generated_at_utc": "2026-09-09T10:52:25.035313+00:00",
   "connector": "landsat_usgs_c2_l2_summer_composite",
   "responsibility": "download_and_normalize_only",
   "scope": "Muntanya d'Alinyà",
   "study_bbox_epsg4326": [
     1.3639980000000003,
-    42.14442699999999,
-    1.519939,
-    42.225122000000006
+    42.14442700000001,
+    1.5199389999999995,
+    42.22512200000001
   ],
   "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
   "organization": "United States Geological Survey",
@@ -213,6 +213,6 @@
   "valid_pixels": 60711,
   "study_coverage_pct": 100.0,
   "normalized_tif": "projectes/Alinya/processed/landsat/landsat_lst.tif",
-  "sha256": "01aa2d191af356822baa94d3d32143c061fe4f42fca0da873cfd8f0947e8f4a5",
+  "sha256": "7ba4afd8f3c959944332ccb9fc3aafdc180b394568a38f738d36c927b8d0de56",
   "connector_status": "verified"
 }

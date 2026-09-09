@@ -195,13 +195,8 @@
           "requires_credentials": ["COPERNICUS_CLIENT_ID", "COPERNICUS_CLIENT_SECRET"],
           "expected_outputs": [
             "processed/teledeteccio/ndvi.tif",
-            "maps/teledeteccio/ndvi.png",
-            "indicators/teledeteccio_resum.csv",
-            "metadata/teledeteccio_metadata.json",
-            "metadata/teledeteccio_stats.json",
-            "metadata/teledeteccio_percentiles.json",
-            "metadata/teledeteccio_classification.json",
-            "metadata/teledeteccio_ecological_summary.json"
+            "maps/teledeteccio/ndvi.webp",
+            "indicators/teledeteccio_sentinel2.json"
           ]
         },
         {
@@ -220,13 +215,8 @@
           "requires_credentials": ["COPERNICUS_CLIENT_ID", "COPERNICUS_CLIENT_SECRET"],
           "expected_outputs": [
             "processed/teledeteccio/ndmi.tif",
-            "maps/teledeteccio/ndmi.png",
-            "indicators/teledeteccio_resum.csv",
-            "metadata/teledeteccio_metadata.json",
-            "metadata/teledeteccio_stats.json",
-            "metadata/teledeteccio_percentiles.json",
-            "metadata/teledeteccio_classification.json",
-            "metadata/teledeteccio_ecological_summary.json"
+            "maps/teledeteccio/ndmi.webp",
+            "indicators/teledeteccio_sentinel2.json"
           ]
         },
         {
@@ -280,28 +270,23 @@
           ]
         },
         {
-          "id": "copernicus_lst",
-          "name": "LST / Land Surface Temperature o equivalent tèrmic validat",
-          "url": "https://dataspace.copernicus.eu/",
-          "access_type": "STAC/API",
-          "expected_format": "GeoTIFF, PNG, CSV, JSON",
-          "responsible_connector": "connector_copernicus_teledeteccio",
-          "minimum_fields": ["lst_mean", "lst_min", "lst_max", "lst_percentiles", "lst_classification", "capture_date", "resolution"],
+          "id": "detailed_surface_temperature",
+          "name": "Temperatura superficial detallada Landsat/ECOSTRESS",
+          "url": "https://landsatlook.usgs.gov/stac-server/",
+          "access_type": "STAC/COG/API",
+          "expected_format": "GeoTIFF, WebP, JSON",
+          "responsible_connector": "connector_detailed_surface_temperature",
+          "minimum_fields": ["temporal_kind", "acquired_at_or_period", "lst_metrics", "qa", "resolution"],
           "feeds_indicators": ["CORE_03", "CORE_04", "CORE_05", "CORE_09", "CORE_11", "CORE_12"],
           "required": true,
           "on_failure": "BLOCK_ECORADAR_CORE_AND_DIAGNOSIS",
           "error_message": "LST no està disponible com a raster validat per l'àrea.",
           "confidence_if_missing": "baixa",
-          "requires_credentials": ["COPERNICUS_CLIENT_ID", "COPERNICUS_CLIENT_SECRET"],
           "expected_outputs": [
-            "processed/teledeteccio/lst.tif",
-            "maps/teledeteccio/lst.png",
-            "indicators/teledeteccio_resum.csv",
-            "metadata/teledeteccio_metadata.json",
-            "metadata/teledeteccio_stats.json",
-            "metadata/teledeteccio_percentiles.json",
-            "metadata/teledeteccio_classification.json",
-            "metadata/teledeteccio_ecological_summary.json"
+            "processed/landsat/landsat_lst.tif",
+            "maps/teledeteccio/landsat_lst.webp",
+            "indicators/teledeteccio_satellite_layers.json",
+            "metadata/current_surface_temperature.json"
           ]
         }
       ]
@@ -532,15 +517,14 @@
           "url": "https://api.meteo.cat/",
           "access_type": "API",
           "expected_format": "JSON, CSV",
-          "responsible_connector": "pending_meteocat_connector",
+          "responsible_connector": "connector_meteocat_xema",
           "minimum_fields": ["temperature", "precipitation", "humidity", "wind", "station_or_grid", "date"],
           "feeds_indicators": ["CORE_03", "CORE_04", "CORE_05", "CORE_11", "CORE_12"],
           "required": true,
           "on_failure": "MARK_CLIMATE_CONTEXT_PARTIAL_AND_REQUIRE_CREDENTIALS",
           "error_message": "Meteocat requereix credencials o endpoint seleccionat.",
           "confidence_if_missing": "baixa",
-          "requires_credentials": ["METEOCAT_API_KEY"],
-          "expected_outputs": ["processed/clima/meteocat.csv", "metadata/clima_metadata.json"]
+          "expected_outputs": ["raw/meteocat_xema/Y4_observations.csv", "raw/meteocat_xema/Y4_metadata.json"]
         },
         {
           "id": "aemet",

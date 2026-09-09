@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T17:43:24+00:00",
+  "generated_at": "2026-09-09T11:20:00+00:00",
   "project": "Alinya",
   "scope": "matriu de fonts del motor de recopilació; sense diagnosi ni indicadors nous",
   "status_legend": [
@@ -16,11 +16,11 @@
       "nom_font": "Límit de l'àrea d'estudi",
       "url_servei": "projectes/{project}/processed/study_area.gpkg",
       "tipus": "fitxer manual",
-      "estat": "✅ Funciona",
+      "estat": "⚠️ Parcial",
       "dades_que_retorna": "1 polígon; 5.464,0 ha; perímetre 93.286 m; CRS final EPSG:25831",
       "indicadors_ecoradar": "CORE_01, CORE_02, CORE_04, CORE_05, CORE_08, CORE_09, CORE_10, CORE_11, CORE_12",
-      "motiu_si_falla": "",
-      "accio_necessaria": "Cap: font base preparada."
+      "motiu_si_falla": "Àmbit aportat com a exportació d'Instamaps; organisme autor, URL de la capa original i llicència pendents de verificar.",
+      "accio_necessaria": "Verificar la procedència institucional abans de presentar-lo com a límit oficial; fins aleshores és l'àmbit de treball."
     },
     {
       "bloc": "Cartografia base ICGC",
@@ -65,10 +65,10 @@
       "url_servei": "https://mediambient.gencat.cat/ca/05_ambits_dactuacio/patrimoni_natural/sistemes_dinformacio/habitats/habitats_terrestres/mapa-dels-habitats-terrestres/cartografia-dels-habitats-versio-3-2025/",
       "tipus": "WFS/WMS",
       "estat": "✅ Funciona",
-      "dades_que_retorna": "779 polígons descarregats; 452 retallats; 47 hàbitats resumits.",
-      "indicadors_ecoradar": "CORE_02, CORE_06, CORE_08, CORE_11, CORE_12",
+      "dades_que_retorna": "779 polígons descarregats i 452 retallats; 551 punts oficials descarregats i 289 retallats; 47 hàbitats resumits.",
+      "indicadors_ecoradar": "CORE_02, CORE_08, CORE_11, CORE_12",
       "motiu_si_falla": "",
-      "accio_necessaria": "Cap per Alinyà; falta només incorporar capa puntual si es volen hàbitats <15.000 m2."
+      "accio_necessaria": "Els punts es conserven a habitats_punts per traçabilitat i no entren en superfícies ni fórmules RADAR."
     },
     {
       "bloc": "Hàbitats Generalitat / HIC",
@@ -100,11 +100,11 @@
       "nom_font": "Copernicus Data Space Sentinel-2 L2A NDVI/NDMI/albedo",
       "url_servei": "https://dataspace.copernicus.eu/",
       "tipus": "Browser analític/STAC/API",
-      "estat": "✅ Funciona",
-      "dades_que_retorna": "Escena 07.07.2026; 377.656 píxels vàlids; NDVI mediana 0,616; NDMI mediana 0,106; albedo mediana 0,173.",
-      "indicadors_ecoradar": "CORE_03, CORE_04, CORE_05, CORE_10, CORE_11, CORE_12",
-      "motiu_si_falla": "",
-      "accio_necessaria": "Exportació analítica autenticada documentada; credencials no emmagatzemades."
+      "estat": "⚠️ Parcial",
+      "dades_que_retorna": "Escena vigent 07.07.2026; 377.656 píxels vàlids de 377.841 dins l'àmbit (99,95%); NDVI mediana 0,616; NDMI mediana 0,106; albedo mediana 0,173.",
+      "indicadors_ecoradar": "CORE_03 (NDVI directe); refugis climàtics; perill d'incendi actual (NDMI amb control temporal)",
+      "motiu_si_falla": "El catàleg públic es comprova diàriament, però la selecció QA/SCL i la descàrrega d'una escena nova requereixen autenticació.",
+      "accio_necessaria": "Configurar COPERNICUS_CLIENT_ID i COPERNICUS_CLIENT_SECRET; no se selecciona cap escena nova només per cobertura de petjada."
     },
     {
       "bloc": "Copernicus / CLMS",
@@ -125,10 +125,10 @@
       "url_servei": "https://landsatlook.usgs.gov/stac-server/",
       "tipus": "STAC/COG",
       "estat": "✅ Funciona",
-      "dades_que_retorna": "Composició de 20 escenes càlides 2025–2026; cobertura 100%; mediana 27,3 °C; P10-P90 22,7-32,5 °C.",
-      "indicadors_ecoradar": "CORE_03, CORE_04, CORE_05, CORE_09, CORE_11, CORE_12",
+      "dades_que_retorna": "Compost multitemporal QA de 26 escenes candidates, 23 amb píxels vàlids dins l'àmbit, període 2025-06-03–2026-08-25; cobertura 100%; mediana 28,5 °C; P10-P90 24,1-33,6 °C.",
+      "indicadors_ecoradar": "Refugis climàtics; perill d'incendi actual (context amb control temporal)",
       "motiu_si_falla": "",
-      "accio_necessaria": "Mediana multitemporal diürna de superfície; no és temperatura de l'aire, una data única ni una normal climàtica."
+      "accio_necessaria": "Mantenir-lo etiquetat com a compost multitemporal; no assignar-li 25.08.2026 com si fos una observació individual."
     },
     {
       "bloc": "DEM / MDT",
@@ -173,10 +173,10 @@
       "url_servei": "https://api.gbif.org/v1/",
       "tipus": "API",
       "estat": "✅ Funciona",
-      "dades_que_retorna": "1000 registres bruts; 313 registres normalitzats dins l'àrea.",
-      "indicadors_ecoradar": "CORE_06, CORE_11, CORE_12",
-      "motiu_si_falla": "Límit GBIF assolit; mostra pública oportunista, no cens complet.",
-      "accio_necessaria": "Afegir paginació/descàrrega completa o filtre taxonòmic si es vol superar el límit actual."
+      "dades_que_retorna": "10.000 registres bruts descarregats en 34 pàgines de 300; 3.170 registres GBIF normalitzats dins l'àrea; 31.169 coincidències totals declarades per l'API.",
+      "indicadors_ecoradar": "CORE_06, CORE_12",
+      "motiu_si_falla": "Paginació implementada; l'execució auditada s'atura al sostre de seguretat de 10.000 i no és un cens complet.",
+      "accio_necessaria": "Augmentar explícitament el sostre de seguretat o aplicar un filtre taxonòmic si es necessita descarregar les 31.169 coincidències."
     },
     {
       "bloc": "Biodiversitat",
@@ -185,8 +185,8 @@
       "url_servei": "https://api.inaturalist.org/v1/observations",
       "tipus": "API",
       "estat": "✅ Funciona",
-      "dades_que_retorna": "838 registres bruts; 418 registres normalitzats dins l'àrea.",
-      "indicadors_ecoradar": "CORE_06, CORE_11, CORE_12",
+      "dades_que_retorna": "949 registres bruts; 510 registres iNaturalist normalitzats dins l'àrea.",
+      "indicadors_ecoradar": "CORE_06, CORE_12",
       "motiu_si_falla": "",
       "accio_necessaria": "Cap per Alinyà; mantenir filtre de qualitat i retall local."
     },

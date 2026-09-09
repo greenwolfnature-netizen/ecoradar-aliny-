@@ -115,7 +115,11 @@ def import_analytical(source: Path) -> dict:
     payload = {
         "generated_at_utc": generated, "scope": "Muntanya d'Alinyà", "source_scene": SCENE_ID,
         "acquired_at_utc": connector["acquired_at_utc"], "study_bbox_epsg4326": bbox,
-        "valid_pixels": int(valid.sum()), "valid_area_ha": round(float(valid.sum()*pixel_area/10000),1),
+        "scope_pixels": int(scope_mask.sum()),
+        "valid_pixels": int(valid.sum()),
+        "invalid_or_masked_pixels": int(scope_mask.sum() - valid.sum()),
+        "valid_coverage_pct": round(100.0 * float(valid.sum()) / max(int(scope_mask.sum()), 1), 2),
+        "valid_area_ha": round(float(valid.sum()*pixel_area/10000),1),
         "metrics": {"ndvi":_stats(ndvi, valid_ndvi), "ndmi":_stats(ndmi, valid_ndmi), "albedo":_stats(albedo, valid_albedo)},
         "methods": {
             "ndvi":"(B08-B04)/(B08+B04), Sentinel-2 L2A bottom-of-atmosphere reflectance",

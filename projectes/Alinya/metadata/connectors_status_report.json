@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T08:09:41+00:00",
+  "generated_at": "2026-09-09T11:31:16+00:00",
   "connectors": [
     {
       "connector": "blocked_strava_heatmap_connector",
@@ -66,31 +66,19 @@
         "copernicus_sentinel_ndvi",
         "copernicus_sentinel_ndmi",
         "copernicus_sentinel_ndwi",
-        "copernicus_sentinel_nbr",
-        "copernicus_lst"
+        "copernicus_sentinel_nbr"
       ],
       "downloaded_data": [
         "processed/teledeteccio/ndvi.tif",
-        "metadata/teledeteccio_metadata.json",
+        "maps/teledeteccio/ndvi.webp",
+        "indicators/teledeteccio_sentinel2.json",
         "processed/teledeteccio/ndmi.tif",
-        "metadata/teledeteccio_metadata.json",
-        "metadata/teledeteccio_metadata.json",
+        "maps/teledeteccio/ndmi.webp",
+        "indicators/teledeteccio_sentinel2.json",
         "metadata/teledeteccio_metadata.json",
         "metadata/teledeteccio_metadata.json"
       ],
       "missing_outputs": [
-        "maps/teledeteccio/ndvi.png",
-        "indicators/teledeteccio_resum.csv",
-        "metadata/teledeteccio_stats.json",
-        "metadata/teledeteccio_percentiles.json",
-        "metadata/teledeteccio_classification.json",
-        "metadata/teledeteccio_ecological_summary.json",
-        "maps/teledeteccio/ndmi.png",
-        "indicators/teledeteccio_resum.csv",
-        "metadata/teledeteccio_stats.json",
-        "metadata/teledeteccio_percentiles.json",
-        "metadata/teledeteccio_classification.json",
-        "metadata/teledeteccio_ecological_summary.json",
         "processed/teledeteccio/ndwi.tif",
         "maps/teledeteccio/ndwi.png",
         "indicators/teledeteccio_resum.csv",
@@ -104,16 +92,24 @@
         "metadata/teledeteccio_stats.json",
         "metadata/teledeteccio_percentiles.json",
         "metadata/teledeteccio_classification.json",
-        "metadata/teledeteccio_ecological_summary.json",
-        "processed/teledeteccio/lst.tif",
-        "maps/teledeteccio/lst.png",
-        "indicators/teledeteccio_resum.csv",
-        "metadata/teledeteccio_stats.json",
-        "metadata/teledeteccio_percentiles.json",
-        "metadata/teledeteccio_classification.json",
         "metadata/teledeteccio_ecological_summary.json"
       ],
       "requires_manual_intervention": true
+    },
+    {
+      "connector": "connector_detailed_surface_temperature",
+      "status": "parcial",
+      "sources": [
+        "detailed_surface_temperature"
+      ],
+      "downloaded_data": [
+        "processed/landsat/landsat_lst.tif",
+        "maps/teledeteccio/landsat_lst.webp",
+        "indicators/teledeteccio_satellite_layers.json",
+        "metadata/current_surface_temperature.json"
+      ],
+      "missing_outputs": [],
+      "requires_manual_intervention": false
     },
     {
       "connector": "connector_habitats",
@@ -175,6 +171,19 @@
         "metadata/incendis_metadata.json",
         "raw/incendis/effis_drf_datasets.json",
         "metadata/incendis_metadata.json"
+      ],
+      "missing_outputs": [],
+      "requires_manual_intervention": false
+    },
+    {
+      "connector": "connector_meteocat_xema",
+      "status": "parcial",
+      "sources": [
+        "meteocat"
+      ],
+      "downloaded_data": [
+        "raw/meteocat_xema/Y4_observations.csv",
+        "raw/meteocat_xema/Y4_metadata.json"
       ],
       "missing_outputs": [],
       "requires_manual_intervention": false
@@ -291,19 +300,6 @@
       "requires_manual_intervention": true
     },
     {
-      "connector": "pending_meteocat_connector",
-      "status": "requereix intervenció manual",
-      "sources": [
-        "meteocat"
-      ],
-      "downloaded_data": [],
-      "missing_outputs": [
-        "processed/clima/meteocat.csv",
-        "metadata/clima_metadata.json"
-      ],
-      "requires_manual_intervention": true
-    },
-    {
       "connector": "pending_sigpac_connector",
       "status": "requereix intervenció manual",
       "sources": [
@@ -325,8 +321,10 @@
     }
   ],
   "summary": {
-    "requereix intervenció manual": 11,
+    "requereix intervenció manual": 10,
     "implementat": 9,
+    "parcial": 2,
     "pendent": 1
-  }
+  },
+  "snapshot_id": "alinya-1ce1ee286762c656"
 }

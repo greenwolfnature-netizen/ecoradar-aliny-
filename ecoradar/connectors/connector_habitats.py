@@ -1,9 +1,8 @@
 """Official terrestrial habitats connector for EcoRadar.
 
-This connector uses the Generalitat de Catalunya Hipermapa WFS layer
-HABITATS_TERRESTPOL. It downloads the official vector features for the study
-area envelope, clips them to the Alinya study area, and writes a habitat-area
-summary. It does not calculate EcoRadar indices or ecological interpretation.
+This connector uses the Generalitat de Catalunya Hipermapa WFS polygon and
+point layers. Point habitats are preserved for traceability but do not enter
+the polygon-area summary or any existing EcoRadar score.
 """
 
 from __future__ import annotations
@@ -23,6 +22,7 @@ PROJECT_ROOT = Path("projectes/Alinya")
 STUDY_AREA_PATH = PROJECT_ROOT / "processed" / "study_area.gpkg"
 RAW_DIR = PROJECT_ROOT / "raw" / "habitats"
 RAW_GEOJSON_PATH = RAW_DIR / "habitats_terrestres_v3_alinya_bbox.geojson"
+RAW_POINTS_PATH = RAW_DIR / "habitats_terrestres_v3_punts_alinya_bbox.geojson"
 PROCESSED_PATH = PROJECT_ROOT / "processed" / "habitats.gpkg"
 SUMMARY_PATH = PROJECT_ROOT / "indicators" / "habitats_resum.csv"
 METADATA_PATH = PROJECT_ROOT / "metadata" / "habitats_metadata.json"
@@ -36,6 +36,7 @@ SOURCE_PAGE_URL = (
 )
 WFS_URL = "https://sig.gencat.cat/ows/wfs"
 LAYER_NAME = "HABITATS_TERRESTPOL"
+POINT_LAYER_NAME = "HABITATS:HABITATS_TERRESTPNT"
 TARGET_CRS = "EPSG:25831"
 
 KEEP_COLUMNS = [
@@ -73,8 +74,12 @@ def run_connector() -> dict[str, object]:
     _ensure_dirs()
     study_area = _load_study_area()
     raw_path = _download_source_if_needed(study_area)
+    raw_points_path = _download_layer_if_needed(study_area, POINT_LAYER_NAME, RAW_POINTS_PATH)
     source = gpd.read_file(raw_path).to_crs(TARGET_CRS)
     clipped = _clip_to_study_area(source, study_area)
+    point_source = gpd.read_file(raw_points_path).to_crs(TARGET_CRS)
+    clipped_points = _clip_to_study_area(point_source, study_area)
+    clipped_points = _unique_field_names(clipped_points)
 
     if clipped.empty:
         raise RuntimeError("No terrestrial habitat polygons were found inside the study area")
@@ -83,10 +88,12 @@ def run_connector() -> dict[str, object]:
     if PROCESSED_PATH.exists():
         PROCESSED_PATH.unlink()
     clipped.to_file(PROCESSED_PATH, layer="habitats", driver="GPKG")
+    if not clipped_points.empty:
+        clipped_points.to_file(PROCESSED_PATH, layer="habitats_punts", driver="GPKG", mode="a")
 
     study_area_ha = float(study_area.geometry.union_all().area / 10000)
     summary_rows = _write_summary(clipped, study_area_ha)
-    metadata = _write_metadata(study_area, source, clipped, raw_path)
+    metadata = _write_metadata(study_area, source, clipped, raw_path, point_source, clipped_points, raw_points_path)
 
     return {
         "processed_path": str(PROCESSED_PATH),
@@ -95,10 +102,25 @@ def run_connector() -> dict[str, object]:
         "raw_path": str(raw_path),
         "features_downloaded": int(len(source)),
         "features_clipped": int(len(clipped)),
+        "point_features_downloaded": int(len(point_source)),
+        "point_features_clipped": int(len(clipped_points)),
         "habitats": len(summary_rows),
         "surface_ha": float(clipped.geometry.area.sum() / 10000),
         "metadata": metadata,
     }
+
+
+def _unique_field_names(frame: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+    """Drop case-insensitive duplicate fields rejected by GeoPackage/SQLite."""
+    keep: list[str] = []
+    seen: set[str] = set()
+    for column in frame.columns:
+        key = str(column).casefold()
+        if key in seen and column != frame.geometry.name:
+            continue
+        keep.append(column)
+        seen.add(key)
+    return frame.loc[:, keep].copy()
 
 
 def _ensure_dirs() -> None:
@@ -119,15 +141,19 @@ def _load_study_area() -> gpd.GeoDataFrame:
 
 
 def _download_source_if_needed(study_area: gpd.GeoDataFrame) -> Path:
-    if RAW_GEOJSON_PATH.exists() and RAW_GEOJSON_PATH.stat().st_size > 0:
-        return RAW_GEOJSON_PATH
+    return _download_layer_if_needed(study_area, LAYER_NAME, RAW_GEOJSON_PATH)
+
+
+def _download_layer_if_needed(study_area: gpd.GeoDataFrame, layer_name: str, destination: Path) -> Path:
+    if destination.exists() and destination.stat().st_size > 0:
+        return destination
 
     xmin, ymin, xmax, ymax = [float(value) for value in study_area.total_bounds]
     params = {
         "service": "WFS",
         "version": "2.0.0",
         "request": "GetFeature",
-        "typeNames": LAYER_NAME,
+        "typeNames": layer_name,
         "outputFormat": "application/json",
         "srsName": TARGET_CRS,
         "BBOX": f"{xmin},{ymin},{xmax},{ymax},{TARGET_CRS}",
@@ -144,8 +170,8 @@ def _download_source_if_needed(study_area: gpd.GeoDataFrame) -> Path:
         payload = response.read()
     if payload.lstrip().startswith(b"<"):
         raise RuntimeError(payload[:1000].decode("utf-8", "ignore"))
-    RAW_GEOJSON_PATH.write_bytes(payload)
-    return RAW_GEOJSON_PATH
+    destination.write_bytes(payload)
+    return destination
 
 
 def _clip_to_study_area(source: gpd.GeoDataFrame, study_area: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
@@ -215,6 +241,9 @@ def _write_metadata(
     source: gpd.GeoDataFrame,
     clipped: gpd.GeoDataFrame,
     raw_path: Path,
+    point_source: gpd.GeoDataFrame,
+    clipped_points: gpd.GeoDataFrame,
+    raw_points_path: Path,
 ) -> dict[str, object]:
     metadata = {
         "project": "Alinya",
@@ -223,6 +252,7 @@ def _write_metadata(
         "url": SOURCE_PAGE_URL,
         "service_url": WFS_URL,
         "layer": LAYER_NAME,
+        "point_layer": POINT_LAYER_NAME,
         "query_date": datetime.now(timezone.utc).isoformat(),
         "crs": str(clipped.crs),
         "original_crs": str(source.crs),
@@ -231,12 +261,16 @@ def _write_metadata(
         "clipped_surface_ha": float(clipped.geometry.area.sum() / 10000),
         "features_downloaded": int(len(source)),
         "features_clipped": int(len(clipped)),
+        "point_features_downloaded": int(len(point_source)),
+        "point_features_clipped": int(len(clipped_points)),
         "raw_file": str(raw_path),
+        "raw_points_file": str(raw_points_path),
         "processed_file": str(PROCESSED_PATH),
+        "processed_layers": ["habitats"] + (["habitats_punts"] if not clipped_points.empty else []),
         "summary_file": str(SUMMARY_PATH),
         "limitations": [
             "The official page states that each polygon habitat is present in at least 75 percent of the polygon.",
-            "Habitats smaller than 15000 m2 may be represented as points; this connector currently processes the polygon layer HABITATS_TERRESTPOL only.",
+            "Habitats smaller than 15000 m2 may be represented as points. They are retained in habitats_punts for traceability and do not enter polygon-area summaries or current RADAR formulas.",
             "The WFS BBOX response may return multipart habitat features beyond the study-area envelope; final outputs are clipped locally to the study-area geometry.",
             "Areas are calculated after clipping in EPSG:25831 and may differ from official AREA_M2 source attributes.",
         ],

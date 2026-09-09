@@ -7,11 +7,15 @@ un únic `checked_at_utc`, encara que les dades d’origen no hagin canviat. La
 data de comprovació no substitueix mai la data real de cada observació.
 
 Els JSON empaquetats amb el visor són només una reserva. En producció, la funció
-Netlify consulta els tres registres canònics del repositori GitHub:
+Netlify consulta els quatre registres canònics del repositori GitHub:
 
 - `projectes/Alinya/indicators/daily_readings.json`;
 - `projectes/Alinya/indicators/daily_history.json`;
-- `projectes/Alinya/indicators/current_fire_danger.json`.
+- `projectes/Alinya/indicators/current_fire_danger.json`;
+- `projectes/Alinya/metadata/reading_registry.json`.
+
+Els quatre fitxers han de compartir el mateix `snapshot_id`; la funció remota
+rebutja qualsevol combinació parcial o desincronitzada.
 
 ## Fonts variables
 
@@ -30,9 +34,12 @@ Netlify consulta els tres registres canònics del repositori GitHub:
 | Perill actual d’incendi | EcoRadar sobre fonts oficials documentades | Analysis Engine | cel·les de 100 m | comprovació diària | indicador derivat |
 
 La temperatura superficial activa és sempre la capa local detallada QA-vàlida
-més recent entre Landsat i ECOSTRESS. Els productes contextuals de 3–9 km no
-poden substituir-la. Si el catàleg no aporta una observació nova, es conserva
-la darrera capa vàlida amb la seva data real.
+més recent entre Landsat i ECOSTRESS. Una escena individual conserva la seva
+data d’adquisició. El Landsat vigent és un compost estival multitemporal de 26
+escenes candidates, 23 de les quals aporten almenys un píxel vàlid a l’àmbit,
+entre el 03.06.2025 i el 25.08.2026; per això no s’etiqueta com una observació
+del 25.08.2026. Els productes contextuals de 3–9 km no poden substituir una
+capa detallada.
 
 ForestDrought es consulta diàriament, però es conserva la data del model
 publicat. Cada punt només s'aplica a la seva empremta forestal nativa de
@@ -68,7 +75,7 @@ d’ignició ni el Pla Alfa.
   Organyà, a 9,2 km, com a context oficial proper i no com una mesura feta dins
   la Muntanya d’Alinyà.
 - La temperatura Landsat és superficial i la capa vigent és una composició
-  estival, no temperatura de l’aire.
+  estival multitemporal, no una observació actual ni temperatura de l’aire.
 - CAMS només s’incorpora com a context supramunicipal.
 - L’ombra diària d’Alinyà és estrictament topogràfica: considera pendent i orientació del MDT, però no arbres, edificis ni horitzó llunyà.
 - Les escenes Sentinel-2 requereixen credencials gratuïtes CDSE per a

@@ -14,6 +14,7 @@ import csv
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+import re
 from typing import Any
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -174,6 +175,10 @@ def _fire_year(row: Any) -> str:
                     return token
             if text.isdigit() and len(text) == 4:
                 return text
+            match = re.search(r"\b(\d{1,2})/(\d{1,2})/(\d{2})\b", text)
+            if match:
+                year = int(match.group(3))
+                return str(2000 + year if year <= 68 else 1900 + year)
     return ""
 
 
@@ -236,6 +241,8 @@ def _write_metadata(
         "features_clipped": int(len(fires)),
         "burned_area_ha": round(float(fires.geometry.area.sum() / 10000), 4) if not fires.empty else 0,
         "fire_years": sorted({str(value) for value in fires.get("fire_year", []) if str(value)}),
+        "features_with_date": int(sum(bool(str(value)) for value in fires.get("fire_date", []))),
+        "features_without_date": int(sum(not bool(str(value)) for value in fires.get("fire_date", []))),
         "effis": {
             "status": "catalogue_only",
             "url": EFFIS_DRF_DATASETS_API,

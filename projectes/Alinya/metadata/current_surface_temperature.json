@@ -1,22 +1,34 @@
 {
   "schema_version": "1.0",
-  "selection_rule": "freshest normalized QA-valid local detailed LST; coarse contextual products are excluded",
+  "selection_rule": "Use the freshest normalized QA-valid single local observation when one exists; otherwise retain the Landsat multitemporal composite as period context. Coarse products are excluded.",
   "selected": {
     "source_key": "landsat",
     "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
     "organization": "United States Geological Survey",
-    "acquired_at_utc": "2026-08-25T10:36:29.966485Z",
+    "temporal_kind": "multitemporal_composite",
+    "acquired_at_utc": null,
+    "period_start_utc": "2025-06-03T10:36:04.004415Z",
+    "period_end_utc": "2026-08-25T10:36:29.966485Z",
+    "component_scene_count": 26,
+    "contributing_scene_count": 23,
+    "latest_component_acquired_at_utc": "2026-08-25T10:36:29.966485Z",
     "resolution_m": 30,
     "normalized_tif": "projectes/Alinya/processed/landsat/landsat_lst.tif",
-    "quality": "QA_PIXEL applied; median composition of valid summer observations",
+    "quality": "QA_PIXEL applied; per-pixel median of valid summer observations",
     "source_metadata": "projectes/Alinya/metadata/landsat_connector.json"
   },
   "eligible_sources": [
     {
       "source_key": "landsat",
       "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
-      "acquired_at_utc": "2026-08-25T10:36:29.966485Z",
+      "temporal_kind": "multitemporal_composite",
+      "acquired_at_utc": null,
+      "period_start_utc": "2025-06-03T10:36:04.004415Z",
+      "period_end_utc": "2026-08-25T10:36:29.966485Z",
+      "component_scene_count": 26,
+      "contributing_scene_count": 23,
       "resolution_m": 30
     }
-  ]
+  ],
+  "snapshot_id": "alinya-1ce1ee286762c656"
 }

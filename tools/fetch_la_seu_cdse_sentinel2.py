@@ -14,12 +14,16 @@ import json
 import math
 import os
 from pathlib import Path
+import shutil
 from urllib.error import HTTPError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from pyproj import Transformer
+import numpy as np
 import rasterio
+from rasterio.features import geometry_mask
+from shapely.ops import transform as shapely_transform
 from shapely.geometry import box, shape
 
 
@@ -41,6 +45,7 @@ TARGET_CRS = "EPSG:32631"
 RESOLUTION_M = 10
 BANDS = ["B02", "B04", "B08", "B11", "B12", "SCL", "dataMask"]
 SCOPE = "core"
+STUDY_GEOMETRY_PROVIDER = None
 
 
 def _configure_scope(scope: str) -> None:
@@ -127,7 +132,7 @@ def _search_scene(bbox4326, start: str, end: str, max_cloud: float) -> tuple[dic
     return candidates[0], query_url
 
 
-def _search_scene_catalog(token: str, bbox4326, start: str, end: str, max_cloud: float) -> tuple[dict, dict]:
+def _search_scenes_catalog(token: str, bbox4326, start: str, end: str, max_cloud: float) -> tuple[list[dict], dict]:
     search = {
         "collections": ["sentinel-2-l2a"],
         "bbox": list(bbox4326),
@@ -162,7 +167,49 @@ def _search_scene_catalog(token: str, bbox4326, start: str, end: str, max_cloud:
             float(item["properties"].get("eo:cloud_cover", 100)),
         )
     )
-    return candidates[0], search
+    return candidates, search
+
+
+def _scope_mask(profile: dict, bbox4326: tuple[float, float, float, float]):
+    if STUDY_GEOMETRY_PROVIDER is not None:
+        geometries = STUDY_GEOMETRY_PROVIDER(profile["crs"])
+    else:
+        transformer = Transformer.from_crs(4326, profile["crs"], always_xy=True)
+        geometries = [shapely_transform(transformer.transform, box(*bbox4326))]
+    return geometry_mask(
+        [geometry.__geo_interface__ for geometry in geometries if geometry is not None],
+        out_shape=(profile["height"], profile["width"]),
+        transform=profile["transform"],
+        invert=True,
+    )
+
+
+def _quality_metrics(path: Path, bbox4326: tuple[float, float, float, float]) -> dict:
+    with rasterio.open(path) as source:
+        scl, data_mask = source.read()
+        scope = _scope_mask(source.profile, bbox4326)
+    scope_pixels = int(scope.sum())
+    scl = scl.round().astype("uint8")
+    valid = scope & (data_mask > 0) & np.isin(scl, [4, 5, 6])
+    valid_pixels = int(valid.sum())
+    return {
+        "scope_pixels": scope_pixels,
+        "valid_aoi_pixels": valid_pixels,
+        "valid_aoi_coverage_pct": round(100.0 * valid_pixels / max(scope_pixels, 1), 2),
+        "invalid_or_masked_aoi_pixels": scope_pixels - valid_pixels,
+        "accepted_scl_classes": [4, 5, 6],
+    }
+
+
+def _archive_existing(normalized_path: Path) -> None:
+    if not METADATA.exists() or not normalized_path.exists():
+        return
+    existing = json.loads(METADATA.read_text(encoding="utf-8"))
+    scene_id = str(existing.get("scene_id") or "unknown_scene")
+    archive = PROJECT / "history" / "sentinel2" / scene_id
+    archive.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(normalized_path, archive / normalized_path.name)
+    shutil.copy2(METADATA, archive / "connector_metadata.json")
 
 
 def _token(client_id: str, client_secret: str) -> str:
@@ -266,7 +313,15 @@ def _credentials(credentials_file: str | None) -> tuple[str | None, str | None]:
     return client_id, client_secret
 
 
-def fetch(start: str, end: str, max_cloud: float, credentials_file: str | None = None) -> dict:
+def fetch(
+    start: str,
+    end: str,
+    max_cloud: float,
+    credentials_file: str | None = None,
+    *,
+    max_candidates: int = 8,
+    minimum_aoi_coverage_pct: float = 85.0,
+) -> dict:
     client_id, client_secret = _credentials(credentials_file)
     if not client_id or not client_secret:
         raise RuntimeError(
@@ -280,10 +335,43 @@ def fetch(start: str, end: str, max_cloud: float, credentials_file: str | None =
     bbox4326 = _study_bbox()
     bounds, width, height = _target_grid(bbox4326)
     token = _token(client_id, client_secret)
-    scene, catalog_query = _search_scene_catalog(token, bbox4326, start, end, max_cloud)
+    candidates, catalog_query = _search_scenes_catalog(token, bbox4326, start, end, max_cloud)
+    normalized_path = PROCESSED / "sentinel2_l2a_reflectance_quality.tif"
+    evaluated = []
+    for scene in candidates[:max_candidates]:
+        scene_id = scene["id"]
+        acquired_at = scene["properties"]["datetime"]
+        mask_path = RAW / f"{scene_id}_quality.tif"
+        mask_hash = _process_request(
+            token,
+            _payload(bounds, width, height, acquired_at, MASK_EVALSCRIPT, resampling="NEAREST"),
+            mask_path,
+        )
+        evaluated.append({
+            "feature": scene,
+            "mask_path": mask_path,
+            "mask_sha256": mask_hash,
+            **_quality_metrics(mask_path, bbox4326),
+        })
+    valid_candidates = [item for item in evaluated if item["valid_aoi_coverage_pct"] >= minimum_aoi_coverage_pct]
+    if not valid_candidates:
+        best = max(evaluated, key=lambda item: item["valid_aoi_coverage_pct"], default=None)
+        best_text = f"; best candidate covered {best['valid_aoi_coverage_pct']}%" if best else ""
+        raise RuntimeError(
+            "No recent Sentinel-2 L2A scene met the minimum actual SCL/dataMask "
+            f"coverage of {minimum_aoi_coverage_pct}% inside the study polygon{best_text}."
+        )
+    valid_candidates.sort(
+        key=lambda item: (
+            -_parse_utc(item["feature"]["properties"]["datetime"]).timestamp(),
+            -float(item["valid_aoi_coverage_pct"]),
+            float(item["feature"]["properties"].get("eo:cloud_cover", 100)),
+        )
+    )
+    selected = valid_candidates[0]
+    scene = selected["feature"]
     scene_id = scene["id"]
     acquired_at = scene["properties"]["datetime"]
-    normalized_path = PROCESSED / "sentinel2_l2a_reflectance_quality.tif"
     if METADATA.exists() and normalized_path.exists():
         existing = json.loads(METADATA.read_text(encoding="utf-8"))
         if existing.get("scene_id") == scene_id:
@@ -291,22 +379,28 @@ def fetch(start: str, end: str, max_cloud: float, credentials_file: str | None =
                 **existing,
                 "updated": False,
                 "latest_catalog_check_utc": datetime.now(timezone.utc).isoformat(),
+                "candidate_evaluations": [
+                    {key: item[key] for key in ("valid_aoi_coverage_pct", "valid_aoi_pixels", "scope_pixels")}
+                    | {
+                        "scene_id": item["feature"]["id"],
+                        "acquired_at_utc": item["feature"]["properties"]["datetime"],
+                        "scene_cloud_cover_pct": item["feature"]["properties"].get("eo:cloud_cover"),
+                    }
+                    for item in evaluated
+                ],
             }
             METADATA.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n")
             return record
 
+    _archive_existing(normalized_path)
     spectral_path = RAW / f"{scene_id}_reflectance.tif"
-    mask_path = RAW / f"{scene_id}_quality.tif"
+    mask_path = selected["mask_path"]
     spectral_hash = _process_request(
         token,
         _payload(bounds, width, height, acquired_at, SPECTRAL_EVALSCRIPT, resampling="BILINEAR"),
         spectral_path,
     )
-    mask_hash = _process_request(
-        token,
-        _payload(bounds, width, height, acquired_at, MASK_EVALSCRIPT, resampling="NEAREST"),
-        mask_path,
-    )
+    mask_hash = selected["mask_sha256"]
 
     with rasterio.open(spectral_path) as spectral, rasterio.open(mask_path) as quality:
         if (spectral.width, spectral.height) != (quality.width, quality.height):
@@ -349,6 +443,25 @@ def fetch(start: str, end: str, max_cloud: float, credentials_file: str | None =
         "scene_id": scene_id,
         "acquired_at_utc": acquired_at,
         "scene_cloud_cover_pct": scene["properties"].get("eo:cloud_cover"),
+        "actual_aoi_qa": {
+            key: selected[key]
+            for key in ("scope_pixels", "valid_aoi_pixels", "valid_aoi_coverage_pct", "invalid_or_masked_aoi_pixels", "accepted_scl_classes")
+        },
+        "selection_rule": (
+            "Evaluate up to the eight newest footprint-covering scenes with the actual "
+            "SCL/dataMask pixels inside the study polygon; require at least "
+            f"{minimum_aoi_coverage_pct}% valid coverage, then select the newest qualifying scene."
+        ),
+        "candidate_evaluations": [
+            {key: item[key] for key in ("valid_aoi_coverage_pct", "valid_aoi_pixels", "scope_pixels")}
+            | {
+                "scene_id": item["feature"]["id"],
+                "acquired_at_utc": item["feature"]["properties"]["datetime"],
+                "scene_cloud_cover_pct": item["feature"]["properties"].get("eo:cloud_cover"),
+                "selected": item is selected,
+            }
+            for item in evaluated
+        ],
         "study_bbox_epsg4326": bbox4326,
         "target_bounds_epsg32631": bounds,
         "width": width,

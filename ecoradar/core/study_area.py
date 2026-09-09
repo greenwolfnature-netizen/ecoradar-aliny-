@@ -138,6 +138,10 @@ def prepare_study_area_project(
     repair_geometry: bool = False,
     layer: str | None = None,
     overwrite: bool = False,
+    source_organization: str | None = None,
+    source_url: str | None = None,
+    source_license: str | None = None,
+    provenance_status: str = "pending_verification",
 ) -> PreparedStudyArea:
     """Load, validate, reproject, save and document a project study area."""
 
@@ -182,6 +186,10 @@ def prepare_study_area_project(
         "created_at": created_at,
         "source_path": str(study_area.source_path),
         "source_layer": layer,
+        "source_organization": source_organization,
+        "source_url": source_url,
+        "source_license": source_license,
+        "provenance_status": provenance_status,
         "processed_path": str(processed_path),
         "original_crs": study_area.input_crs,
         "final_crs": study_area.metric_crs,

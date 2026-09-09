@@ -15,6 +15,14 @@
   "credentials": "free CDSE user session required; no credential stored",
   "license": "Copernicus Sentinel data policy",
   "connector_status": "verified",
+  "quality_selection": {
+    "scope_pixels": 377841,
+    "valid_aoi_pixels": 377656,
+    "invalid_or_masked_aoi_pixels": 185,
+    "valid_aoi_coverage_pct": 99.95,
+    "accepted_scl_classes": [4, 5, 6],
+    "note": "Coverage reconstructed from the preserved QA-masked analytical export; scene replacement requires authenticated SCL/dataMask evaluation."
+  },
   "study_bbox_epsg4326": [
     1.363998,
     42.144427,

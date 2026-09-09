@@ -10,6 +10,7 @@ const SNAPSHOT_PATHS = {
   daily_readings: "indicators/daily_readings.json",
   daily_history: "indicators/daily_history.json",
   current_fire_danger: "indicators/current_fire_danger.json",
+  reading_registry: "metadata/reading_registry.json",
 };
 
 export function resolveDataBaseUrl(environment = process.env) {
@@ -43,7 +44,7 @@ async function fetchJson(baseUrl, relativePath, fetchImpl, bearerToken) {
   return response.json();
 }
 
-export function validateRemoteSnapshot(daily, history, fire) {
+export function validateRemoteSnapshot(daily, history, fire, registry) {
   const checkedAt = isoInstant(daily?.checked_at_utc, "daily_readings.checked_at_utc");
   const historyCheckedAt = isoInstant(history?.checked_at_utc, "daily_history.checked_at_utc");
   const fireCheckedAt = isoInstant(
@@ -55,13 +56,17 @@ export function validateRemoteSnapshot(daily, history, fire) {
       "daily_readings, daily_history i current_fire_danger no corresponen a la mateixa comprovació.",
     );
   }
+  const snapshotIds = [daily?.snapshot_id, history?.snapshot_id, fire?.snapshot_id, registry?.snapshot_id];
+  if (snapshotIds.some(value => !value) || new Set(snapshotIds).size !== 1) {
+    throw new Error("Les lectures, l'històric, el perill i el registre no comparteixen snapshot_id.");
+  }
   if (
     !daily?.readings || !daily?.source_checks || !history?.analytics || !fire?.summary ||
     !fire?.meteorology_context || !fire?.pla_alfa
   ) {
     throw new Error("La resposta remota és incompleta.");
   }
-  return { checkedAt, fireCheckedAt };
+  return { checkedAt, fireCheckedAt, snapshotId: snapshotIds[0] };
 }
 
 export async function loadRemoteSnapshot({
@@ -70,21 +75,23 @@ export async function loadRemoteSnapshot({
   servedAt = new Date(),
   bearerToken = null,
 }) {
-  const [daily, history, fire] = await Promise.all(
+  const [daily, history, fire, registry] = await Promise.all(
     Object.values(SNAPSHOT_PATHS).map((path) =>
       fetchJson(baseUrl, path, fetchImpl, bearerToken),
     ),
   );
-  const { checkedAt, fireCheckedAt } = validateRemoteSnapshot(daily, history, fire);
+  const { checkedAt, fireCheckedAt, snapshotId } = validateRemoteSnapshot(daily, history, fire, registry);
   return {
     schema_version: "2.0",
     delivery_mode: "remote_canonical_snapshot",
     served_at_utc: servedAt.toISOString(),
     checked_at_utc: checkedAt,
+    snapshot_id: snapshotId,
     source_checks: daily.source_checks,
     daily_readings: daily,
     daily_history: history,
     current_fire_danger: fire,
+    reading_registry: registry,
     assets: {
       current_fire_raster_url: `${baseUrl}/maps/incendis/current_fire_danger.webp`,
       current_fire_cells_url: `${baseUrl}/maps/incendis/current_fire_danger_cells.geojson`,

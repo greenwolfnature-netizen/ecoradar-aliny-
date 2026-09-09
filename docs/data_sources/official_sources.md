@@ -273,12 +273,12 @@ This document follows `AGENTS.md`: source inventory and verification come before
 - Service type: Hipermapa WMS/WFS.
 - Data format: vector; GeoJSON via WFS.
 - Coordinate reference system: `EPSG:25831`.
-- Available variables: CORINE habitat code/name, Habitat of Community Interest code/name, HIC priority flag, EUNIS and LPEHT correspondences, habitat value/threat attributes, geometry.
+- Available variables: CORINE habitat code/name, Habitat of Community Interest code/name, HIC priority flag, EUNIS and LPEHT correspondences, habitat value/threat attributes, polygon geometry and the official point representation for habitats below the polygon threshold.
 - Update frequency: versioned releases; official page update date 2025-06-11.
 - Usage license: gencat legal terms apply; public Hipermapa/WFS access verified.
-- Example connection: `https://sig.gencat.cat/ows/wfs?service=WFS&version=2.0.0&request=DescribeFeatureType&typeNames=HABITATS_TERRESTPOL`
+- Example connections: `https://sig.gencat.cat/ows/wfs?service=WFS&version=2.0.0&request=DescribeFeatureType&typeNames=HABITATS_TERRESTPOL` and point layer `HABITATS:HABITATS_TERRESTPNT`.
 - Connector status: `verified`.
-- Verification notes: the official page describes version 3 as terrestrial habitats catalogued with both the CORINE habitats list and Habitats Directive HIC list. The official Hipermapa layer `HABITATS_TERRESTPOL` exposes `COD_CORINE`, `CORINE_CA`, `COD_HIC`, `HIC_CA`, and `HIC_PRIOR`.
+- Verification notes: the official page describes version 3 as terrestrial habitats catalogued with both the CORINE habitats list and Habitats Directive HIC list. The polygon layer `HABITATS_TERRESTPOL` and point layer `HABITATS:HABITATS_TERRESTPNT` are retained separately; point habitats do not enter polygon-area summaries or current RADAR formulas.
 
 ### GBIF Species Occurrences
 
@@ -293,7 +293,7 @@ This document follows `AGENTS.md`: source inventory and verification come before
 - Usage license: record-level licenses; GBIF citation and dataset attribution requirements apply.
 - Example connection: `https://api.gbif.org/v1/occurrence/search?hasCoordinate=true&limit=1`
 - Connector status: `verified`.
-- Verification notes: official GBIF technical documentation identifies `https://api.gbif.org/` as the stable REST/JSON API base URL. Most API use does not require authentication; GBIF recommends setting a User-Agent and warns that search APIs may be rate limited.
+- Verification notes: official GBIF technical documentation identifies `https://api.gbif.org/` as the stable REST/JSON API base URL. The Alinyà connector paginates `occurrence/search` in 300-record pages until `endOfRecords` or a documented safety ceiling; it records total matches, pages and any truncation. Most API use does not require authentication; GBIF recommends setting a User-Agent and warns that search APIs may be rate limited.
 
 ### iNaturalist Species Observations
 

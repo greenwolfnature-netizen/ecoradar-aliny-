@@ -1,4 +1,4 @@
-"""Persist real observations and derive trends, confidence and alerts."""
+"""Persist real observations and derive trends, series quality and alerts."""
 
 from __future__ import annotations
 
@@ -110,7 +110,7 @@ def _quality_factor(item: dict, config: dict) -> tuple[float, str]:
     return factors["derived_verified"], "indicador derivat documentat"
 
 
-def _confidence(item: dict, rule: dict, config: dict, checked: datetime) -> dict:
+def _series_quality(item: dict, rule: dict, config: dict, checked: datetime) -> dict:
     weights = config["confidence"]["weights"]
     available = item.get("value_numeric") is not None and item.get("data_at_utc") is not None
     availability = 1.0 if available else 0.0
@@ -208,13 +208,14 @@ def update() -> dict:
         analytics[key] = {
             "frequency": {name: rule[name] for name in ("frequency_code", "frequency_label", "trigger")},
             "trend": _trend(by_reading[key], rule["trend_direction"], config["stable_variation_pct"]),
-            "confidence": _confidence(item, rule, config, checked),
+            "series_quality": _series_quality(item, rule, config, checked),
             "alerts": active_alerts,
             "observation_count": len(by_reading[key]),
         }
     public_series = by_reading
     payload = {
-        "schema_version": "1.0", "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "schema_version": "2.0", "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "snapshot_id": current.get("snapshot_id"),
         "checked_at_utc": current["checked_at_utc"], "analytics": analytics,
         "source_checks": current.get("source_checks", {}),
         "active_alerts": alerts, "series": public_series,

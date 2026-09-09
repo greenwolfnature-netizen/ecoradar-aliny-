@@ -1,14 +1,15 @@
 grup_taxonomic,nombre_registres,nombre_especies,registres_recents,registres_historics,font_principal,possibles_buits_informacio
-Plantae,273,225,273,0,iNaturalist,89 registres dubtosos
-Aves,196,85,195,0,GBIF,180 registres dubtosos; 1 registres sense data
-Insecta,164,136,162,2,iNaturalist,22 registres dubtosos
-Fungi,29,28,29,0,iNaturalist,7 registres dubtosos
-Mammalia,22,11,22,0,GBIF,18 registres dubtosos
+Aves,2296,133,552,1743,GBIF,2266 registres dubtosos; 1 registres sense data
+Plantae,475,346,470,5,GBIF,268 registres dubtosos
+Insecta,473,304,459,14,GBIF,138 registres dubtosos
+Mammalia,315,16,249,66,GBIF,42 registres dubtosos
+Fungi,33,31,31,2,iNaturalist,10 registres dubtosos
+Gastropoda,33,17,2,31,GBIF,2 registres dubtosos
 Arachnida,19,13,19,0,iNaturalist,cap buit evident en les fonts consultades
+Amphibia,8,6,4,4,GBIF,4 registres dubtosos
+Protozoa,7,5,3,4,GBIF,4 registres dubtosos
 Reptilia,7,4,7,0,iNaturalist,1 registres dubtosos
-Amphibia,6,5,4,2,iNaturalist,2 registres dubtosos
-Sense grup,5,0,5,0,iNaturalist,4 registres dubtosos
-Animalia,3,3,3,0,iNaturalist,cap buit evident en les fonts consultades
+Sense grup,6,0,6,0,iNaturalist,5 registres dubtosos
+Animalia,4,4,4,0,iNaturalist,cap buit evident en les fonts consultades
 Mollusca,3,3,3,0,iNaturalist,cap buit evident en les fonts consultades
-Protozoa,3,2,3,0,iNaturalist,cap buit evident en les fonts consultades
 Squamata,1,1,1,0,GBIF,1 registres dubtosos

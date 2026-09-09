@@ -450,7 +450,14 @@ def calculate() -> dict:
         "creaf_fire_potential": creaf_metadata.get("data_at_utc"),
         "structural": "2024-01-01T00:00:00Z",
         "ndmi_dryness": sentinel_metadata["acquired_at_utc"],
-        "surface_temperature": surface_selection["acquired_at_utc"],
+        # A multitemporal composite has a period, not an observation timestamp.
+        # It remains available as cartographic context but cannot receive the
+        # freshness weight of its newest component scene.
+        "surface_temperature": (
+            surface_selection.get("acquired_at_utc")
+            if surface_selection.get("temporal_kind", "single_observation") == "single_observation"
+            else None
+        ),
         "vegetation_continuity": "2023-12-31T00:00:00Z",
         "wind": max(wind_timestamps) if wind_timestamps else None,
         "relative_humidity_inverse": weather.get("relative_humidity_pct", {}).get("timestamp_utc"),
@@ -669,6 +676,9 @@ def calculate() -> dict:
         )[:3]
     ]
     total_area = sum(area_by_category.values())
+    study_area_ha = float(study_geometry.area / 10_000)
+    no_data_area_ha = max(0.0, study_area_ha - total_area)
+    valid_coverage_pct = 100.0 * total_area / study_area_ha if study_area_ha else 0.0
     very_high_area = area_by_category["molt alt"] + area_by_category["extrem"]
 
     variable_status = {
@@ -687,6 +697,10 @@ def calculate() -> dict:
         "surface_temperature": {
             "value": f"mediana {float(np.nanmedian(lst_raw[study_mask & np.isfinite(lst_raw)])):.1f} °C",
             "source": surface_selection["source"],
+            "temporal_kind": surface_selection.get("temporal_kind", "single_observation"),
+            "period_start_utc": surface_selection.get("period_start_utc"),
+            "period_end_utc": surface_selection.get("period_end_utc"),
+            "component_scene_count": surface_selection.get("component_scene_count", 1),
         },
         "vegetation_continuity": {
             "value": f"mitjana {float(np.nanmean(vegetation[study_mask & np.isfinite(vegetation)])):.1f}/100",
@@ -773,6 +787,11 @@ def calculate() -> dict:
             "area_by_category_ha": {
                 key: round(value, 2) for key, value in area_by_category.items()
             },
+            "study_area_ha": round(study_area_ha, 2),
+            "valid_area_ha": round(total_area, 2),
+            "no_data_area_ha": round(no_data_area_ha, 2),
+            "valid_coverage_pct": round(valid_coverage_pct, 1),
+            "coverage_denominator": "entire study-area polygon",
             "very_high_or_extreme_area_pct": round(
                 100 * very_high_area / total_area, 1
             ),

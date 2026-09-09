@@ -55,14 +55,23 @@ class CoreIndicator:
     calculation_explanation: str
     limitations: tuple[str, ...]
     diagnosis_impact: str
+    measurement_kind: str = "synthetic_score"
+    direct_value: float | None = None
+    direct_unit: str | None = None
+    source_date_utc: str | None = None
 
 
-def run_indicator_engine(project_root: str | Path = "projectes/Alinya") -> dict[str, Any]:
+def run_indicator_engine(
+    project_root: str | Path = "projectes/Alinya",
+    *,
+    allow_partial_copernicus: bool = False,
+) -> dict[str, Any]:
     """Run the mandatory EcoRadar Core Indicator Engine."""
 
     root = Path(project_root)
     DataSourceManager().ensure_ready_for_indicators(root)
-    ensure_mandatory_copernicus(root)
+    if not allow_partial_copernicus:
+        ensure_mandatory_copernicus(root)
     (root / "indicators").mkdir(parents=True, exist_ok=True)
     (root / "metadata").mkdir(parents=True, exist_ok=True)
     (root / "reports").mkdir(parents=True, exist_ok=True)
@@ -110,6 +119,7 @@ def _load_context(root: Path) -> dict[str, Any]:
         "hydrology": _read_csv(root / "indicators" / "hidrologia_resum.csv"),
         "connectivity": _read_csv(root / "indicators" / "connectivitat_resum.csv"),
         "fires": _read_csv(root / "indicators" / "incendis_resum.csv"),
+        "sentinel2": _read_json(root / "indicators" / "teledeteccio_sentinel2.json"),
     }
 
 
@@ -192,10 +202,42 @@ def _core_02_habitats(context: dict[str, Any]) -> CoreIndicator:
 
 
 def _core_03_vegetation(context: dict[str, Any]) -> CoreIndicator:
-    return _missing(
-        context,
-        "CORE_03",
-        "No hi ha NDVI, NDMI, NDWI ni clima validats; Copernicus/Meteocat/AEMET requereixen credencials.",
+    sentinel = context.get("sentinel2") or {}
+    ndvi = _nested_float(sentinel, ("metrics", "ndvi", "median"))
+    acquired = sentinel.get("acquired_at_utc")
+    if ndvi is None or not acquired:
+        return _missing(
+            context,
+            "CORE_03",
+            "No hi ha una lectura NDVI Sentinel-2 validada disponible.",
+        )
+    completeness = context["completeness_by_code"].get("CORE_03", {})
+    absent = tuple(
+        source for source in completeness.get("missing_sources", [])
+        if source not in {"copernicus_sentinel_ndvi", "copernicus_sentinel_ndmi"}
+    )
+    return CoreIndicator(
+        code="CORE_03",
+        name=CORE_NAMES["CORE_03"],
+        value_0_100=None,
+        category="lectura directa",
+        status="PARCIAL",
+        confidence="mitjana",
+        sources_used=("copernicus_sentinel_ndvi",),
+        sources_absent=absent,
+        calculation_explanation=(
+            "Lectura directa de la mediana NDVI de l'escena Sentinel-2 L2A amb màscara SCL; "
+            "no es transforma en una puntuació sintètica 0–100."
+        ),
+        limitations=(
+            "Una sola escena descriu el vigor espectral de la data, no una tendència ni l'estat de conservació.",
+            "NDWI, NBR i context climàtic homogeni continuen absents del RADAR sintètic.",
+        ),
+        diagnosis_impact="Aporta una observació directa traçable sense alterar la fórmula ni la síntesi CORE_12.",
+        measurement_kind="direct_reading",
+        direct_value=round(ndvi, 3),
+        direct_unit="NDVI",
+        source_date_utc=str(acquired),
     )
 
 
@@ -428,7 +470,12 @@ def _core_12_management_priority(context: dict[str, Any]) -> CoreIndicator:
     if not values:
         return _missing(context, "CORE_12", "No hi ha indicadors base calculables.")
     value = sum(values) / len(values)
-    used_sources = tuple(sorted({source for indicator in components for source in indicator.sources_used}))
+    used_sources = tuple(sorted({
+        source
+        for indicator in components
+        if indicator.value_0_100 is not None
+        for source in indicator.sources_used
+    }))
     missing_sources = tuple(sorted({source for indicator in components for source in indicator.sources_absent}))
     return _indicator(
         context,

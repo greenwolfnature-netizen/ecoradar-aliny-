@@ -5,7 +5,8 @@
   "url": "https://mediambient.gencat.cat/ca/05_ambits_dactuacio/patrimoni_natural/sistemes_dinformacio/habitats/habitats_terrestres/mapa-dels-habitats-terrestres/cartografia-dels-habitats-versio-3-2025/",
   "service_url": "https://sig.gencat.cat/ows/wfs",
   "layer": "HABITATS_TERRESTPOL",
-  "query_date": "2026-07-06T19:17:53.275017+00:00",
+  "point_layer": "HABITATS:HABITATS_TERRESTPNT",
+  "query_date": "2026-09-09T10:50:11.529211+00:00",
   "crs": "EPSG:25831",
   "original_crs": "EPSG:25831",
   "scale_or_resolution": "Version 3 terrestrial habitat polygons; minimum polygon threshold 15000 m2 according to the official page.",
@@ -13,12 +14,19 @@
   "clipped_surface_ha": 5464.031656330236,
   "features_downloaded": 779,
   "features_clipped": 452,
+  "point_features_downloaded": 551,
+  "point_features_clipped": 289,
   "raw_file": "projectes/Alinya/raw/habitats/habitats_terrestres_v3_alinya_bbox.geojson",
+  "raw_points_file": "projectes/Alinya/raw/habitats/habitats_terrestres_v3_punts_alinya_bbox.geojson",
   "processed_file": "projectes/Alinya/processed/habitats.gpkg",
+  "processed_layers": [
+    "habitats",
+    "habitats_punts"
+  ],
   "summary_file": "projectes/Alinya/indicators/habitats_resum.csv",
   "limitations": [
     "The official page states that each polygon habitat is present in at least 75 percent of the polygon.",
-    "Habitats smaller than 15000 m2 may be represented as points; this connector currently processes the polygon layer HABITATS_TERRESTPOL only.",
+    "Habitats smaller than 15000 m2 may be represented as points. They are retained in habitats_punts for traceability and do not enter polygon-area summaries or current RADAR formulas.",
     "The WFS BBOX response may return multipart habitat features beyond the study-area envelope; final outputs are clipped locally to the study-area geometry.",
     "Areas are calculated after clipping in EPSG:25831 and may differ from official AREA_M2 source attributes."
   ]

@@ -8,18 +8,22 @@ import {
 } from "../../netlify/functions/daily-readings.mjs";
 
 const checkedAt = "2026-07-23T08:15:00Z";
+const snapshotId = "alinya-0123456789abcdef";
 const daily = {
   checked_at_utc: checkedAt,
+  snapshot_id: snapshotId,
   readings: { air_temperature: { value: "20,0 °C" } },
   source_checks: { meteocat_xema: { status: "verified", checked_at_utc: checkedAt } },
 };
-const history = { checked_at_utc: checkedAt, analytics: {} };
+const history = { checked_at_utc: checkedAt, snapshot_id: snapshotId, analytics: {} };
 const fire = {
   checked_at_utc: checkedAt,
+  snapshot_id: snapshotId,
   summary: { mean_index_0_100: 42 },
   meteorology_context: { precipitation_accumulated: { last_7_days_mm: 10 } },
   pla_alfa: { official: true, municipality_code: "259084", level: 0 },
 };
+const registry = { checked_at_utc: checkedAt, snapshot_id: snapshotId, readings: {} };
 
 test("resolves a GitHub raw base URL when the explicit base is absent", () => {
   assert.equal(
@@ -38,6 +42,7 @@ test("rejects snapshots whose daily history belongs to another check", () => {
         daily,
         { ...history, checked_at_utc: "2026-07-22T08:15:00Z" },
         fire,
+        registry,
       ),
     /mateixa comprovació/,
   );
@@ -45,8 +50,15 @@ test("rejects snapshots whose daily history belongs to another check", () => {
 
 test("rejects a current-fire snapshot without official Pla Alfa context", () => {
   assert.throws(
-    () => validateRemoteSnapshot(daily, history, { ...fire, pla_alfa: null }),
+    () => validateRemoteSnapshot(daily, history, { ...fire, pla_alfa: null }, registry),
     /incompleta/,
+  );
+});
+
+test("rejects products that do not share the registry snapshot_id", () => {
+  assert.throws(
+    () => validateRemoteSnapshot(daily, history, fire, { ...registry, snapshot_id: "alinya-fedcba9876543210" }),
+    /snapshot_id/,
   );
 });
 
@@ -55,6 +67,7 @@ test("returns the remote checked_at_utc and never replaces it with served_at_utc
     ["indicators/daily_readings.json", daily],
     ["indicators/daily_history.json", history],
     ["indicators/current_fire_danger.json", fire],
+    ["metadata/reading_registry.json", registry],
   ]);
   const fetchImpl = async (url) => {
     const relative = url.split("/projectes/Alinya/")[1];
@@ -72,4 +85,6 @@ test("returns the remote checked_at_utc and never replaces it with served_at_utc
   assert.equal(result.checked_at_utc, "2026-07-23T08:15:00.000Z");
   assert.equal(result.served_at_utc, "2026-07-23T09:00:00.000Z");
   assert.equal(result.delivery_mode, "remote_canonical_snapshot");
+  assert.equal(result.snapshot_id, snapshotId);
+  assert.equal(result.reading_registry.snapshot_id, snapshotId);
 });

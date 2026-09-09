@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-03T18:03:24.762168+00:00",
+  "generated_at_utc": "2026-09-09T10:58:00.430340+00:00",
   "scope": "Muntanya d'Alinya",
   "status": "verified_analysis",
   "name": "Potencial relatiu de refugi climatic",
@@ -22,7 +22,31 @@
       "suport": 0.5,
       "alt": 0.65,
       "molt_alt": 0.8
-    }
+    },
+    "formula_inputs": [
+      {
+        "reading": "Landsat LST",
+        "role": "numeric input",
+        "weight": 0.5,
+        "temporal_semantics": "multitemporal_composite"
+      },
+      {
+        "reading": "Sentinel-2 NDMI",
+        "role": "numeric input",
+        "weight": 0.3,
+        "date_utc": "2026-07-07T10:37:01.024000Z"
+      },
+      {
+        "reading": "Sentinel-2 NDVI",
+        "role": "numeric input and NDVI >= 0.30 denominator filter",
+        "weight": 0.2,
+        "date_utc": "2026-07-07T10:37:01.024000Z"
+      }
+    ],
+    "cartographic_context_only": [
+      "ACA drainage and river geometries",
+      "project-normalized spring points"
+    ]
   },
   "distribution": {
     "suport": {
@@ -38,11 +62,22 @@
       "share_of_vegetated_valid_pct": 23.7
     }
   },
+  "denominator": {
+    "name": "vegetated pixels with valid LST, NDMI and NDVI",
+    "rule": "inside the study polygon; all three formula inputs valid; NDVI >= 0.30",
+    "valid_pixels": 351637,
+    "valid_area_ha": 5085.1,
+    "study_polygon_rasterized_pixels": 377841,
+    "study_polygon_area_ha": 5464.0,
+    "area_method": "Study-area area apportioned by the share of rasterized study pixels.",
+    "share_of_study_raster_pct": 93.1
+  },
   "high_or_very_high_share_of_vegetated_valid_pct": 42.3,
   "outputs": {
     "geotiff": "processed/teledeteccio/refugis_climatics_potencials.tif",
     "webp": "maps/teledeteccio/refugis_climatics_potencials.webp",
     "product_map": "maps/producte/mapa_refugis_climatics_alinya.png"
   },
-  "limitations": "Relative screening layer based on a two-summer daytime LST composite and one Sentinel-2 date. It is not air temperature, a climatic normal, microclimate monitoring or a field-validated refuge inventory. Weights and thresholds are explicit EcoRadar analysis assumptions."
+  "limitations": "Relative screening layer based on a two-summer daytime LST composite and one Sentinel-2 date. Hydrology is drawn as cartographic context and does not enter the numeric formula. It is not air temperature, a climatic normal, microclimate monitoring or a field-validated refuge inventory. Weights and thresholds are explicit EcoRadar analysis assumptions.",
+  "snapshot_id": "alinya-1ce1ee286762c656"
 }
