@@ -37,6 +37,11 @@ test('Biodiversity detail and fire-specific output remain accessible',()=>{
  const build=api.buildFactory(data,{},{}),b=build({key:'biodiversity',type:'mode',guide:{}}),f=build({key:'fireCurrent',type:'mode',guide:{}});
  assert.match(html(b,''),/Consultar la diagnosi específica/);assert.match(html(b,''),/Buits de coneixement/);assert.match(html(f,''),/ignició ara/);assert.match(html(f,''),/Pla Alfa/);
 });
+test('Biodiversity diagnosis follows the current paginated counts',()=>{
+ const d=structuredClone(data);d.metrics.records=4321;d.metrics.species=876;
+ const b=api.buildFactory(d,{}, {})({key:'biodiversity',type:'mode',guide:{}}),text=JSON.stringify(b);
+ assert.match(text,/4321 registres/);assert.match(text,/876 espècies/);assert.doesNotMatch(text,/731 registres i 516 espècies/);
+});
 test('Every indicator has distinct ecological scenarios, without inherited generic management',()=>{
  const build=api.buildFactory(data,{},{}),seen=new Set();
  for(const key of keys){const p=build({key,type:'mode',guide:{}}),c=p.ecologicalContext;
