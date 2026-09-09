@@ -1,7 +1,7 @@
 # EcoRadar Alinyà — Fase 1 de correccions
 
 Data de verificació: 2026-09-09
-Instantània comuna: `alinya-1ce1ee286762c656`
+Instantània comuna: identificador versionat `snapshot_id`, validat a cada execució i publicació.
 
 ## Correccions aplicades
 
@@ -13,12 +13,13 @@ Instantània comuna: `alinya-1ce1ee286762c656`
 - Refugis climàtics: fórmula vigent documentada separant LST, NDMI i NDVI dels contextos cartogràfics; el 42,3% explicita el denominador de píxels vegetats vàlids.
 - Traçabilitat: procedència pendent de l'àmbit de treball declarada; hàbitats puntuals incorporats sense entrar a les superfícies ni RADAR; dates dels incendis normalitzades; GBIF paginat; registre únic de metadades per lectura.
 - Llegibilitat: els textos abans definits entre 7 i 10 px s'han elevat a 11–13 px sense modificar amplades ni la graella general.
+- Coherència de publicació: els dos recursos del generador d'informes utilitzen una versió derivada del seu contingut, de manera que el navegador no conserva explicacions o etiquetes anteriors després d'un desplegament.
 
 ## Verificació superada
 
-- 30 proves Python específiques d'Alinyà.
+- 31 proves Python específiques d'Alinyà.
 - 7 proves d'evidència ecològica.
-- 33 proves JavaScript de context, informes, instantània i API.
+- 32 proves JavaScript de context, informes, instantània i API.
 - Compilació Python, coherència temporal i `git diff --check`.
 - Revisió funcional en navegador de la vista principal, la capa de perill actual, RADAR_03 i l'informe automàtic.
 
@@ -28,6 +29,7 @@ Instantània comuna: `alinya-1ce1ee286762c656`
 - ECOSTRESS necessita `EARTHDATA_TOKEN` per descarregar el grànul més recent detectat al catàleg.
 - L'organisme autor, la URL original i la llicència de l'exportació d'Instamaps usada com a àmbit continuen pendents; el visor l'anomena «Àmbit de treball».
 - GBIF declara 31.169 coincidències. L'execució auditada va descarregar 10.000 registres en 34 pàgines i va aturar-se al sostre de seguretat explícit.
+- La comprovació Landsat del desplegament va rebre temporalment `HTTP 429` del servei de signatura. El workflow va conservar el compost QA vàlid anterior, va continuar amb la resta de fonts i va superar totes les validacions.
 
 ## Decisions metodològiques no aplicades
 
