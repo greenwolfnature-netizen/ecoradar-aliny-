@@ -255,28 +255,37 @@ def build_layers(project) -> tuple[str, dict]:
 
 
 def build_metrics() -> dict:
-    core = read_csv_dicts(PROJECT / "indicators" / "ecoradar_core_indicators.csv")
+    core_payload = read_json(PROJECT / "indicators" / "ecoradar_core_indicators.json")
+    if core_payload.get("methodology_version") != "alinya_core_v2_2026-09-09":
+        raise RuntimeError(
+            "El visor d'Alinyà requereix la metodologia alinya_core_v2_2026-09-09; "
+            "s'ha bloquejat la generació d'un artefacte CORE 0–100 antic."
+        )
+    core = core_payload.get("indicators", [])
     inc = read_csv_dicts(PROJECT / "indicators" / "incendis_resum.csv")
     sim = read_csv_dicts(PROJECT / "indicators" / "incendis_similarity" / "similitud_condicions_resum.csv")
     covers = read_csv_dicts(PROJECT / "indicators" / "cobertes_sol_resum.csv")
     recs = read_csv_dicts(PROJECT / "recommendations" / "priority_matrix.csv")
+    study = read_json(PROJECT / "metadata" / "study_area_metadata.json")
 
     core_items = [
         {
             "code": r["code"],
             "name": r["name"],
-            "value": None if r["value_0_100"] == "" else float(r["value_0_100"]),
+            "display": r.get("primary_result") or "NO AVALUABLE",
+            "measurementKind": r.get("measurement_kind"),
             "category": r["category"],
             "status": r["status"],
             "confidence": r["confidence"],
-            "limit": r["limitations"],
+            "interpretation": r.get("interpretation_short", ""),
+            "limit": "; ".join(r.get("limitations", [])),
         }
         for r in core
     ]
     inc_metrics = {r["metric"]: r["value"] for r in inc}
     sim_metrics = {r["metric"]: float(r["value"]) for r in sim}
     cover_metrics = {r["tipus_coberta"]: float(r["superficie_ha"]) for r in covers}
-    study_ha = 5464.13568486
+    study_ha = float(study["surface_ha"])
     high_plus = sim_metrics.get("area_ha_alta", 0) + sim_metrics.get("area_ha_mitjana_alta", 0)
     forest_like = sum(
         v
@@ -294,13 +303,19 @@ def build_metrics() -> dict:
             "title": r["title"],
             "group": r["group"],
             "justification": r["ecological_justification"],
-            "urgency": r["urgency"],
+            "priorityClass": r["priority_class"],
+            "decisionStatus": r["decision_status"],
             "confidence": r["confidence"],
-            "score": r["ecological_priority_score"],
         }
-        for r in recs[:8]
+        for r in recs
     ]
+    by_code = {item["code"]: item for item in core}
+    biodiversity = by_code["CORE_06"]["profile"]
+    access = by_code["CORE_07"]["profile"]
+    core12 = by_code["CORE_12"]["profile"]
     return {
+        "methodologyVersion": core_payload.get("methodology_version"),
+        "snapshotId": core_payload.get("snapshot_id"),
         "core": core_items,
         "summary": {
             "studyHa": study_ha,
@@ -314,12 +329,15 @@ def build_metrics() -> dict:
             "forestLikePct": forest_like / study_ha * 100,
             "openLikeHa": open_like,
             "openLikePct": open_like / study_ha * 100,
-            "records": 731,
-            "species": 516,
-            "pathsKm": 124.83,
-            "publicPoints": 18,
+            "records": biodiversity["records_normalized"],
+            "knowledgeCells": biodiversity["knowledge_grid_1km"]["cells"],
+            "knowledgeCellsWithRecords": biodiversity["knowledge_grid_1km"]["cells_with_records"],
+            "pathsKm": access["mapped_network_km"],
+            "pathDensity": access["mapped_network_density_km_km2"],
+            "publicPoints": access["mapped_use_points"],
             "hicHa": 3170.95,
             "hicPriorHa": 1229.39,
+            "managementResult": core12["result"],
         },
         "recommendations": recommendations,
     }
@@ -327,8 +345,8 @@ def build_metrics() -> dict:
 
 def render_html(svg_layers: str, metrics: dict, counts: dict) -> str:
     data_json = json.dumps({"metrics": metrics, "counts": counts}, ensure_ascii=False)
-    green_wolf_logo = "../../LaSeu_Urba/assets/branding/green_wolf_nature_logo.png"
-    ecoradar_logo = "../../LaSeu_Urba/assets/branding/ecoradar_logo.png"
+    green_wolf_logo = "../assets/branding/green_wolf_nature_logo.png"
+    ecoradar_logo = "../assets/branding/ecoradar_logo.png"
     return f"""<!doctype html>
 <html lang="ca">
 <head>
@@ -413,11 +431,11 @@ svg {{ width:100%; height:100%; display:block; background:#edf0e8; }}
 .radar-grid {{ fill:none; stroke:#dce3dc; stroke-width:1; }}
 .radar-axis {{ stroke:#b9c6bd; stroke-width:1; }}
 .radar-poly {{ fill:#2f7b50; fill-opacity:.24; stroke:#1f6b49; stroke-width:2; }}
-.indicator {{ display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; border-bottom:1px solid #e0e6df; padding:8px 0; }}
+.indicator {{ display:grid; grid-template-columns:minmax(0,1fr); gap:7px; align-items:start; border-bottom:1px solid #e0e6df; padding:9px 0; }}
 .indicator:last-child {{ border-bottom:0; }}
 .indicator b {{ font-size:13px; }}
 .indicator span {{ color:var(--muted); font-size:12px; }}
-.pill {{ display:inline-flex; align-items:center; justify-content:center; min-width:58px; padding:4px 7px; border:1px solid #cdd8d0; background:#fff; font-weight:800; color:var(--green-900); }}
+.pill {{ display:inline-flex; align-items:center; justify-content:flex-start; max-width:100%; padding:5px 7px; border:1px solid #cdd8d0; background:#fff; font-weight:800; color:var(--green-900); font-size:12px; line-height:1.25; white-space:normal; }}
 .decision {{ background:#fff; border-left:4px solid var(--green-700); padding:10px; margin:8px 0; }}
 .decision b {{ display:block; font-size:13px; color:var(--green-900); margin-bottom:4px; }}
 .limit {{ border:1px solid #d5b08c; background:#fff7ed; padding:12px; }}
@@ -459,7 +477,7 @@ footer {{ padding:10px 16px; font-size:12px; color:#57645f; background:#f4f3ed; 
         <button class="layer-btn active" data-layer="fires">Incendis oficials<small>perímetres històrics dins l'àmbit</small></button>
         <button class="layer-btn active" data-layer="access">Accessibilitat<small>camins i pistes OSM processats</small></button>
         <button class="layer-btn" data-layer="hic">Hàbitats HIC<small>hàbitats d'interès comunitari cartografiats</small></button>
-        <button class="layer-btn" data-layer="biodiversity">Biodiversitat coneguda<small>registres públics GBIF/iNaturalist</small></button>
+        <button class="layer-btn" data-layer="biodiversity">Coneixement de biodiversitat<small>registres públics GBIF/iNaturalist; no biodiversitat real</small></button>
         <button class="layer-btn" data-layer="public">Ús públic<small>punts OSM d'informació i ús</small></button>
       </div>
       <h3>Indicadors crítics</h3>
@@ -467,7 +485,7 @@ footer {{ padding:10px 16px; font-size:12px; color:#57645f; background:#f4f3ed; 
       <h3>Límit metodològic</h3>
       <div class="limit">
         <p><strong>No és un mapa oficial de probabilitat d'incendi.</strong> És una lectura de concurrència territorial amb dades EcoRadar ja processades.</p>
-        <p>Per convertir-la en risc operatiu cal incorporar humitat de combustible/NDMI, clima Meteocat-AEMET/SPEI, perill diari Pla Alfa i validació de combustible al camp.</p>
+        <p>CORE_09 manté separats propagació actual, sensibilitat ecològica, recuperació postincendi i context operatiu. La recuperació continua NO AVALUABLE.</p>
       </div>
     </aside>
 
@@ -496,16 +514,16 @@ footer {{ padding:10px 16px; font-size:12px; color:#57645f; background:#f4f3ed; 
     </section>
 
     <aside>
-      <h2>Radar EcoRadar</h2>
+      <h2>RADAR EcoRadar · Fase 2</h2>
       <div class="radar-wrap">
-        <svg id="radar" viewBox="0 0 320 260" aria-label="Radar d'indicadors EcoRadar"></svg>
+        <div id="radar" aria-label="Resultats dels RADAR EcoRadar Fase 2"></div>
       </div>
       <h3>Argumentari</h3>
       <div id="argumentary"></div>
       <h3>Decisions</h3>
       <div id="decisions"></div>
       <h3>Fonts</h3>
-      <p class="sources">Fonts consultades en el projecte: Generalitat de Catalunya WFS VEGETACIO:VEGETACIO_INCENDIS per perímetres històrics, ICGC cobertes del sòl i DEM, Hàbitats terrestres i HIC, ACA hidrologia, GBIF/iNaturalist, OpenStreetMap, Infraestructura Verda. Fitxa generada el 17/07/2026 amb dades locals ja processades.</p>
+      <p class="sources">Fonts consultades en el projecte: Generalitat de Catalunya WFS VEGETACIO:VEGETACIO_INCENDIS per perímetres històrics, ICGC cobertes del sòl i DEM, Hàbitats terrestres i HIC, ACA hidrologia, GBIF/iNaturalist, OpenStreetMap i Infraestructura Verda. Resultats vinculats a <span id="methodology"></span>.</p>
     </aside>
   </main>
 
@@ -529,7 +547,7 @@ const MODES = {{
     ],
     arguments: [
       "L'àmbit té una matriu clarament forestal: bosc i matollar representen aproximadament el 90,6 % de la superfície processada.",
-      "Els dos perímetres oficials sumen 17,4 ha dins l'àmbit: la decisió no ha de partir de restauració extensiva, sinó de prevenció i mosaic.",
+      "Els dos perímetres oficials sumen 17,4 ha dins l'àmbit; aquesta dada és un antecedent i no avalua per si sola la recuperació o la necessitat d'intervenir.",
       "La concurrència alta o mitjana-alta ocupa 2.437,5 ha, un 44,6 % de l'àmbit, i identifica on coincideixen condicions semblants als focs observats."
     ]
   }},
@@ -546,32 +564,27 @@ const MODES = {{
     arguments: [
       "La lectura més robusta és estructural: continuïtat de combustible, accessibilitat i topografia poden repetir patrons locals.",
       "Les zones en vermell i taronja han de ser candidates a verificació de combustible, humitat i ús real, no a actuació automàtica.",
-      "Sense NDMI, clima, Pla Alfa i combustible oficial, parlar de probabilitat d'incendi seria metodològicament excessiu."
+      "NDMI i LST disponibles no tenen la vigència necessària per descriure l'estat actual; el Pla Alfa es manté com a context oficial independent."
     ]
   }},
   gestio: {{
     title: "Decisions de gestió",
-    copy: "Les decisions prioritzen retorn ecològic i prudència: actuar on el mosaic redueix continuïtat i evitar restauració generalitzada.",
+    copy: "CORE_12 mostra alternatives concretes per sector, amb vetos i sense una prioritat territorial única.",
     layers: ["similarity", "fires", "access", "hic", "biodiversity", "public"],
     readingTitle: "Què condiciona la decisió",
     reading: [
       "S'activen HIC, biodiversitat i ús públic perquè la prevenció del foc no pot contradir valors ecològics.",
       "La concurrència queda com a fons: orienta la prioritat, però la decisió final depèn de camp i combustible.",
-      "El resultat útil és separar zones candidates d'actuació selectiva de zones on cal conservar o validar abans."
+      "El resultat útil és distingir la regla preventiva P1, les verificacions P2 i la porta de restauració NO AVALUABLE."
     ],
     arguments: [
-      "Mantenir espais oberts té més valor que plantar o restaurar de forma extensa si la coberta ja funciona i no hi ha erosió confirmada.",
-      "Les actuacions forestals han de ser selectives, vinculades a vores, pistes i bosc-matollar on la concurrència és alta o mitjana-alta.",
-      "Les zones HIC i connectors s'han de tractar com a restriccions de qualitat ecològica abans de qualsevol intervenció."
+      "La proporció d'espais oberts i la densitat de vores són descriptors; el seu signe depèn del receptor, el procés i l'objectiu ecològic.",
+      "Les coincidències de foc, coberta, relleu i accés orienten comprovacions de camp, no actuacions territorials automàtiques.",
+      "Els HIC activen una regla preventiva de no-deteriorament; els connectors descriuen continuïtat estructural, no moviment demostrat d'espècies."
     ]
   }}
 }};
-const DECISIONS = [
-  ["Mantenir obert", "Prioritzar pastura extensiva, prats i feixes allà on redueixen combustible continu sense comprometre HIC."],
-  ["Trencar continuïtat", "Fer franges selectives només on coincideixen accessos, bosc-matollar i concurrència alta o mitjana-alta."],
-  ["No sobreactuar", "Amb 17,4 ha cremades dins l'àmbit, evitar restauració generalitzada si no hi ha erosió o recuperació lenta validada."],
-  ["Restaurar clapes", "Actuar localment només en sòl nu, erosió, pèrdua funcional o clapes de recuperació lenta confirmades al camp."]
-];
+const DECISIONS = DATA.metrics.recommendations;
 const LAYERS = {{
   similarity: [["#b84c35","Concurrència alta"],["#d79042","Concurrència mitjana-alta"],["#e2cf7c","Concurrència mitjana"],["#dbe5d2","Concurrència baixa"]],
   fires: [["#bf4033","Perímetres oficials d'incendi"],["#7d1c19","Any al centre del perímetre"]],
@@ -581,13 +594,16 @@ const LAYERS = {{
   public: [["#1f2a27","Punts d'ús públic OSM"]]
 }};
 const s = DATA.metrics.summary;
+document.getElementById("methodology").textContent = `${{DATA.metrics.methodologyVersion}} · snapshot ${{DATA.metrics.snapshotId}}`;
 document.getElementById("left-facts").innerHTML = [
   ["Àmbit", `${{s.studyHa.toLocaleString("ca-ES", {{maximumFractionDigits:0}})}} ha`],
   ["Incendis oficials", `${{s.fires}} perímetres`],
   ["Superfície cremada", `${{s.burnedHa.toLocaleString("ca-ES", {{maximumFractionDigits:1}})}} ha · ${{s.burnedPct.toLocaleString("ca-ES", {{maximumFractionDigits:2}})}} %`],
   ["Concurrència alta/mitjana-alta", `${{s.concurrenceHighHa.toLocaleString("ca-ES", {{maximumFractionDigits:1}})}} ha · ${{s.concurrenceHighPct.toLocaleString("ca-ES", {{maximumFractionDigits:1}})}} %`],
   ["Bosc + matollar", `${{s.forestLikeHa.toLocaleString("ca-ES", {{maximumFractionDigits:0}})}} ha · ${{s.forestLikePct.toLocaleString("ca-ES", {{maximumFractionDigits:1}})}} %`],
-  ["Prats + conreus", `${{s.openLikeHa.toLocaleString("ca-ES", {{maximumFractionDigits:0}})}} ha · ${{s.openLikePct.toLocaleString("ca-ES", {{maximumFractionDigits:1}})}} %`]
+  ["Prats + conreus", `${{s.openLikeHa.toLocaleString("ca-ES", {{maximumFractionDigits:0}})}} ha · ${{s.openLikePct.toLocaleString("ca-ES", {{maximumFractionDigits:1}})}} %`],
+  ["Coneixement de biodiversitat", `${{s.records.toLocaleString("ca-ES")}} registres · ${{s.knowledgeCellsWithRecords}}/${{s.knowledgeCells}} cel·les`],
+  ["Accessibilitat cartografiada", `${{s.pathsKm.toLocaleString("ca-ES", {{maximumFractionDigits:1}})}} km · ${{s.pathDensity.toLocaleString("ca-ES", {{maximumFractionDigits:2}})}} km/km² · ${{s.publicPoints}} punts`]
 ].map(([k,v]) => `<div class="fact"><span>${{k}}</span><strong>${{v}}</strong></div>`).join("");
 const root = document.getElementById("ecoradar-foc-alinya");
 const ALL_LAYERS = Object.keys(LAYERS);
@@ -662,29 +678,12 @@ svg.addEventListener("pointermove", e => {{
 svg.addEventListener("pointerup", () => dragging = false);
 function drawRadar() {{
   const radar = document.getElementById("radar");
-  const items = DATA.metrics.core.filter(d => d.value !== null).slice(0, 10);
-  const cx=160, cy=130, r=92;
-  const point = (i, val=100) => {{
-    const a = -Math.PI/2 + i * 2*Math.PI/items.length;
-    const rr = r * val/100;
-    return [cx + Math.cos(a)*rr, cy + Math.sin(a)*rr];
-  }};
-  let html = "";
-  [25,50,75,100].forEach(v => {{
-    const pts = items.map((_,i)=>point(i,v).join(",")).join(" ");
-    html += `<polygon class="radar-grid" points="${{pts}}"/>`;
-  }});
-  items.forEach((d,i) => {{
-    const p = point(i,100); html += `<line class="radar-axis" x1="${{cx}}" y1="${{cy}}" x2="${{p[0]}}" y2="${{p[1]}}"/>`;
-  }});
-  const poly = items.map((d,i)=>point(i,d.value).join(",")).join(" ");
-  html += `<polygon class="radar-poly" points="${{poly}}"/>`;
-  radar.innerHTML = html;
-  const list = DATA.metrics.core.slice(0, 12).map(d => `<div class="indicator"><div><b>${{d.name}}</b><br><span>${{d.status}} · confiança ${{d.confidence}}</span></div><span class="pill">${{d.value === null ? "n/d" : Math.round(d.value)}}</span></div>`).join("");
-  document.querySelector(".radar-wrap").insertAdjacentHTML("afterend", `<div>${{list}}</div>`);
+  const intro = `<p><strong>${{DATA.metrics.summary.managementResult}}</strong></p><p class="muted">Cada RADAR conserva la seva escala. Els valors directes, perfils i portes de decisió no formen una puntuació ecològica global.</p>`;
+  const list = DATA.metrics.core.map(d => `<div class="indicator"><div><b>${{d.code}} · ${{d.name}}</b><br><span>${{d.status}} · confiança ${{d.confidence}}</span><br><span>${{d.interpretation}}</span></div><span class="pill">${{d.display}}</span></div>`).join("");
+  radar.innerHTML = intro + list;
 }}
 function drawDecisions() {{
-  document.getElementById("decisions").innerHTML = DECISIONS.map(([k,v]) => `<div class="decision"><b>${{k}}</b><span>${{v}}</span></div>`).join("");
+  document.getElementById("decisions").innerHTML = DECISIONS.map(d => `<div class="decision"><b>${{d.priorityClass}} · ${{d.title}}</b><span>${{d.decisionStatus}}. ${{d.justification}}</span></div>`).join("");
 }}
 setMode("diagnosi");
 updateLegend();

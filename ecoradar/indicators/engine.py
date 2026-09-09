@@ -94,6 +94,8 @@ def run_indicator_engine(
 
     _write_csv(csv_path, indicators)
     _write_json(json_path, indicators, context)
+    if indicators and indicators[0].methodology_version == "alinya_core_v2_2026-09-09":
+        _write_alinya_phase2_compatibility_outputs(root, indicators, context)
     report_payload = _report_payload(root, indicators, context)
     report_json.write_text(json.dumps(report_payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     report_md.write_text(_report_markdown(report_payload, indicators), encoding="utf-8")
@@ -604,6 +606,7 @@ def _write_json(path: Path, indicators: list[CoreIndicator], context: dict[str, 
         "generated_at": _now(),
         "project": context["root"].name,
         "methodology_version": indicators[0].methodology_version if indicators else None,
+        "snapshot_id": context.get("reading_registry", {}).get("snapshot_id"),
         "preflight_reports": {
             "data_availability_report": "metadata/data_availability_report.json",
             "connectors_status_report": "metadata/connectors_status_report.json",
@@ -612,6 +615,87 @@ def _write_json(path: Path, indicators: list[CoreIndicator], context: dict[str, 
         "indicators": [asdict(indicator) for indicator in indicators],
     }
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def _write_alinya_phase2_compatibility_outputs(
+    root: Path,
+    indicators: list[CoreIndicator],
+    context: dict[str, Any],
+) -> None:
+    """Keep historical Alinyà filenames synchronized with the Phase 2 payload.
+
+    These aliases prevent old report and packaging entry points from exposing
+    pre-Phase-2 CORE scores. They contain the same records as the canonical
+    indicator output and do not calculate additional values.
+    """
+
+    canonical_json = root / JSON_OUTPUT
+    canonical_csv = root / CSV_OUTPUT
+    json_aliases = (
+        root / "indicators" / "ecoradar_core.json",
+        root / "indicators" / "ecoradar_indicators.json",
+    )
+    csv_aliases = (
+        root / "indicators" / "ecoradar_core.csv",
+        root / "indicators" / "ecoradar_indicators_summary.csv",
+    )
+    for path in json_aliases:
+        path.write_text(canonical_json.read_text(encoding="utf-8"), encoding="utf-8")
+    for path in csv_aliases:
+        path.write_bytes(canonical_csv.read_bytes())
+
+    snapshot_id = context.get("reading_registry", {}).get("snapshot_id")
+    metadata = {
+        "project": root.name,
+        "generated_at": _now(),
+        "methodology_version": "alinya_core_v2_2026-09-09",
+        "snapshot_id": snapshot_id,
+        "status": "compatibility_alias",
+        "canonical_json": JSON_OUTPUT,
+        "canonical_csv": CSV_OUTPUT,
+        "rule": "Els alias no contenen puntuacions CORE 0–100 ni executen cap càlcul addicional.",
+        "aliases": [
+            str(path.relative_to(root))
+            for path in (*json_aliases, *csv_aliases)
+        ],
+    }
+    for path in (
+        root / "metadata" / "ecoradar_core_metadata.json",
+        root / "metadata" / "ecoradar_indicators_metadata.json",
+    ):
+        path.write_text(json.dumps(metadata, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    maps_dir = root / "maps" / "ecoradar_core"
+    maps_dir.mkdir(parents=True, exist_ok=True)
+    for indicator in indicators:
+        result = indicator.primary_result or "NO AVALUABLE"
+        text = (
+            f"# {indicator.code} · {indicator.name}\n\n"
+            "Metodologia: `alinya_core_v2_2026-09-09`\n\n"
+            f"Resultat: `{result}`\n\n"
+            f"Estat: `{indicator.status}` · Confiança: `{indicator.confidence}`\n\n"
+            f"{indicator.interpretation_short}\n\n"
+            "Aquest document no expressa una puntuació ecològica global.\n"
+        )
+        (maps_dir / f"{indicator.code.lower()}.md").write_text(text, encoding="utf-8")
+
+    # The old executive summary recorded a smaller historical download. Keep
+    # its record-count field synchronized with the approved CORE_06 universe.
+    core06 = next((item for item in indicators if item.code == "CORE_06"), None)
+    basic_path = root / "indicators" / "ecoradar_01_resum.csv"
+    if core06 and basic_path.exists():
+        records = core06.profile.get("records_normalized")
+        rows = _read_csv(basic_path)
+        for row in rows:
+            if row.get("indicador") == "nombre_registres_biodiversitat" and records is not None:
+                row["valor"] = str(records)
+                row["font"] = "biodiversitat_metadata.json"
+                row["notes"] = "Registres normalitzats després del retall espacial; univers de CORE_06 Fase 2."
+        if rows:
+            with basic_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+                writer.writeheader()
+                writer.writerows(rows)
 
 
 def _report_payload(root: Path, indicators: list[CoreIndicator], context: dict[str, Any]) -> dict[str, Any]:

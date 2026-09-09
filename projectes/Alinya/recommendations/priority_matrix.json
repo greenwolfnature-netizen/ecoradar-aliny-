@@ -1,6 +1,6 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-09T19:26:23+00:00",
+  "generated_at": "2026-09-09T21:12:15+00:00",
   "decision_method": {
     "type": "non_compensatory_categories",
     "allowed_results": [
@@ -326,5 +326,6 @@
       "decision_status": "veto per manca d'evidència essencial"
     }
   ],
+  "methodology_version": "alinya_core_v2_2026-09-09",
   "snapshot_id": "alinya-d712326d21b18f95"
 }

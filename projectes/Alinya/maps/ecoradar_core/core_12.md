@@ -1,7 +1,11 @@
-# CORE_12 · Prioritat de gestio
+# CORE_12 · Síntesi multicriteri per a la gestió
 
-Estat: `no disponible`
+Metodologia: `alinya_core_v2_2026-09-09`
 
-Valor normalitzat: `no disponible`
+Resultat: `SENSE PRIORITAT ÚNICA · 1 P1, 4 P2 i 1 NO AVALUABLE`
 
-Aquest fitxer es un placeholder documental. El mapa derivat es generara quan les dades espacials requerides estiguin disponibles.
+Estat: `PARCIAL` · Confiança: `mitjana`
+
+Hi ha una regla preventiva P1 i diverses verificacions P2; no existeix una única acció dominant per a tot Alinyà.
+
+Aquest document no expressa una puntuació ecològica global.

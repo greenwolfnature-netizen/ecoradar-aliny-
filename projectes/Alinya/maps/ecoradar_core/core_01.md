@@ -1,7 +1,11 @@
-# CORE_01 · Mosaic del paisatge
+# CORE_01 · Configuració i mosaic funcional del paisatge
 
-Estat: `parcial`
+Metodologia: `alinya_core_v2_2026-09-09`
 
-Valor normalitzat: `60.01`
+Resultat: `Perfil estructural · bosc 88,4 % · taca màxima 477,4 ha`
 
-Aquest fitxer es un placeholder documental. El mapa derivat es generara quan les dades espacials requerides estiguin disponibles.
+Estat: `PARCIAL` · Confiança: `mitjana`
+
+Descriu composició i taques; no és una nota de qualitat ni pressuposa que més mosaic sigui millor.
+
+Aquest document no expressa una puntuació ecològica global.

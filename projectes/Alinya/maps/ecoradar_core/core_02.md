@@ -1,7 +1,11 @@
-# CORE_02 · Valor d'habitats
+# CORE_02 · Responsabilitat territorial per hàbitats d’interès
 
-Estat: `parcial`
+Metodologia: `alinya_core_v2_2026-09-09`
 
-Valor normalitzat: `98.91`
+Resultat: `3.171,0 ha HIC · 58,0 % · 1.229,4 ha prioritaris`
 
-Aquest fitxer es un placeholder documental. El mapa derivat es generara quan les dades espacials requerides estiguin disponibles.
+Estat: `COMPLET` · Confiança: `mitjana`
+
+Mesura responsabilitat cartografiada per HIC; no mesura estat de conservació.
+
+Aquest document no expressa una puntuació ecològica global.

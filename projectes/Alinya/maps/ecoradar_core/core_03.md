@@ -1,7 +1,11 @@
-# CORE_03 · Estat de la vegetacio
+# CORE_03 · Activitat verda observada (NDVI)
 
-Estat: `no disponible`
+Metodologia: `alinya_core_v2_2026-09-09`
 
-Valor normalitzat: `no disponible`
+Resultat: `NDVI 0,616 · 07/07/2026`
 
-Aquest fitxer es un placeholder documental. El mapa derivat es generara quan les dades espacials requerides estiguin disponibles.
+Estat: `COMPLET` · Confiança: `mitjana`
+
+Lectura espectral d’una escena concreta; sense sèrie fenològica no es classifica com a bona o dolenta.
+
+Aquest document no expressa una puntuació ecològica global.

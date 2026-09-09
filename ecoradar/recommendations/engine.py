@@ -101,6 +101,8 @@ def run_recommendation_engine(
     payload = {
         "project": root.name,
         "generated_at": _now(),
+        "methodology_version": context["diagnosis"].get("methodology_version"),
+        "snapshot_id": context["diagnosis"].get("snapshot_id"),
         "scope": "recomanacions derivades exclusivament de la diagnosi ecològica; sense fitxa ni PDF",
         "recommendations": [asdict(item) for item in recommendations],
         "groups": _grouped_ids(recommendations),
@@ -108,8 +110,11 @@ def run_recommendation_engine(
     recommendations_json.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     recommendations_md.write_text(_markdown(payload), encoding="utf-8")
     matrix = _priority_matrix(root, recommendations)
+    matrix["methodology_version"] = payload["methodology_version"]
+    matrix["snapshot_id"] = payload["snapshot_id"]
     priority_json.write_text(json.dumps(matrix, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     _write_priority_csv(priority_csv, recommendations)
+    _write_alinya_phase2_compatibility_outputs(root, payload, priority_csv)
 
     return {
         "recommendations_json": str(recommendations_json),
@@ -119,6 +124,24 @@ def run_recommendation_engine(
         "recommendation_count": len(recommendations),
         "groups": _grouped_ids(recommendations),
     }
+
+
+def _write_alinya_phase2_compatibility_outputs(
+    root: Path,
+    payload: dict[str, Any],
+    priority_csv: Path,
+) -> None:
+    """Keep former active aliases synchronized without reviving old results."""
+
+    if payload.get("methodology_version") != "alinya_core_v2_2026-09-09":
+        return
+    metadata_alias = root / "metadata" / "ecoradar_recommendations.json"
+    csv_alias = root / "indicators" / "ecoradar_recommendations.csv"
+    metadata_alias.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    csv_alias.write_bytes(priority_csv.read_bytes())
 
 
 def generate_recommendation_outputs(project_root: str | Path = "projectes/Alinya") -> dict[str, Any]:

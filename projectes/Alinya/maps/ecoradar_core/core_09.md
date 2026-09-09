@@ -1,7 +1,11 @@
-# CORE_09 · Resiliencia al foc
+# CORE_09 · Perfil de susceptibilitat i recuperació davant del foc
 
-Estat: `parcial`
+Metodologia: `alinya_core_v2_2026-09-09`
 
-Valor normalitzat: `32.65`
+Resultat: `Propagació actual moderat · recuperació NO AVALUABLE`
 
-Aquest fitxer es un placeholder documental. El mapa derivat es generara quan les dades espacials requerides estiguin disponibles.
+Estat: `PARCIAL` · Confiança: `mitjana`
+
+La propagació actual és avaluable parcialment; sensibilitat i recuperació necessiten dades pròpies.
+
+Aquest document no expressa una puntuació ecològica global.

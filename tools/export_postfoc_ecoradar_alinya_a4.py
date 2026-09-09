@@ -239,7 +239,7 @@ def mini_radar(c: canvas.Canvas, x: float, y: float, r: float, values: list[tupl
 
 def source_data() -> dict:
     core = read_csv(PROJECT / "indicators/ecoradar_core_indicators.csv")
-    summary = read_csv(PROJECT / "indicators/ecoradar_indicators_summary.csv")
+    core_payload = read_json(PROJECT / "indicators/ecoradar_core_indicators.json")
     cobertes = read_csv(PROJECT / "indicators/cobertes_sol_resum.csv")
     biodiversitat = read_csv(PROJECT / "indicators/biodiversitat_resum.csv")
     hidro = read_csv(PROJECT / "indicators/hidrologia_resum.csv")
@@ -258,11 +258,10 @@ def source_data() -> dict:
     matollar = sum(num(r["superficie_ha"]) for r in cobertes if "Matollar" in r["tipus_coberta"])
     conreus = sum(num(r["superficie_ha"]) for r in cobertes if "Conreus" in r["tipus_coberta"])
 
-    def ind_metric(name: str) -> float:
-        return metric_from(summary, name, "value")
-
     def core_metric(code: str) -> float:
         return metric_from(core, code)
+
+    core_results = {row["code"]: row.get("primary_result") or "NO AVALUABLE" for row in core}
 
     inc_dict = {r["metric"]: num(r["value"]) for r in inc}
     sim_dict = {r["metric"]: num(r["value"]) for r in sim}
@@ -272,6 +271,10 @@ def source_data() -> dict:
     rius = next((r for r in hidro if r["layer_id"] == "rius_aca_che"), None)
 
     return {
+        "phase2": core_payload.get("methodology_version") == "alinya_core_v2_2026-09-09",
+        "methodology_version": core_payload.get("methodology_version"),
+        "snapshot_id": core_payload.get("snapshot_id"),
+        "core_results": core_results,
         "study_ha": num(study["surface_ha"]),
         "forest_ha": forest,
         "forest_pct": forest / num(study["surface_ha"]) * 100,
@@ -338,6 +341,19 @@ def build_pdf(
     page_numbers: tuple[str, str, str, str, str] = ("07", "08", "09", "10", "11"),
 ) -> None:
     d = source_data()
+    if not d["phase2"]:
+        raise RuntimeError(
+            "L'exportador d'Alinyà requereix una instantània Fase 2 vàlida; "
+            "s'ha bloquejat l'exportació amb la metodologia CORE 0–100 antiga."
+        )
+    # The former post-fire layout relied on a common CORE 0–100 radar and
+    # prescriptive restoration text. Publish the canonical non-compensatory
+    # report contract at this compatibility path.
+    from ecoradar.reporting import client_report_a4 as phase2_report
+
+    phase2_report.configure_project(PROJECT)
+    phase2_report.build_report(output, phase2_report.prepare_inputs(), include_all_pages=True)
+    return
     output.parent.mkdir(parents=True, exist_ok=True)
     c = canvas.Canvas(str(output), pagesize=A4)
     c.setTitle("EcoRadar - Memoria del foc ampliada - Alinya")
@@ -429,7 +445,7 @@ def build_pdf(
     metric(ix + 86, iy + ih - 22, f"{fmt(d['burned_ha'], 1)} ha", "cremades", DARK, 15)
     metric(ix + 176, iy + ih - 22, f"{d['fire_polygons']}", "perímetres", RED, 15)
     rows = [
-        ("Perill", "resiliència al foc 44/100; no és alarma, és prioritat de verificació", ORANGE),
+        ("Perill", d["core_results"].get("CORE_09", "NO AVALUABLE"), ORANGE),
         ("Probabilitat", "no estadística: concurrència de condicions físiques i accessos", MID_GREEN),
         ("Conseqüència", "si el mosaic es tanca, augmenta la continuïtat de combustible", ORANGE),
         ("Decisió", "camp dirigit a vores, bosc-matollar i discontinuïtats útils", GREEN),
@@ -438,7 +454,18 @@ def build_pdf(
     for label, text, color in rows:
         small_row(ix, yy, label, text, color)
         yy -= 15
-    mini_radar(c, ix + iw - 150, iy + 10, 50, radar_values)
+    if d["phase2"]:
+        bounded_para(
+            c,
+            "La Fase 2 manté separats els 12 RADAR i no els dibuixa sobre una escala comuna 0–100.",
+            ix + iw - 158,
+            iy + 48,
+            148,
+            35,
+            STYLE_SMALL,
+        )
+    else:
+        mini_radar(c, ix + iw - 150, iy + 10, 50, radar_values)
     footer("Fonts: perímetres oficials d'incendi, ICGC/Generalitat, EcoRadar. Consulta: 2026-07-14.")
     c.showPage()
 
@@ -491,9 +518,20 @@ def build_pdf(
         c.line(ix, yy - 5, ix + iw, yy - 5)
         small_row(ix, yy, label, text, color)
         yy -= 23
-    bar(c, ix, iy + 5, iw * 0.34, "Foc", d["core"]["fire"], ORANGE)
-    bar(c, ix + iw * 0.38, iy + 5, iw * 0.26, "Mosaic", d["core"]["mosaic"], GREEN)
-    bar(c, ix + iw * 0.68, iy + 5, iw * 0.28, "Pressió", d["core"]["pressio"], YELLOW)
+    if d["phase2"]:
+        bounded_para(
+            c,
+            "CORE_01 descriu configuració, CORE_07 accessibilitat cartografiada i CORE_09 un perfil de foc. Cap d'aquests resultats és una puntuació ecològica global.",
+            ix,
+            iy + 19,
+            iw,
+            18,
+            STYLE_SMALL,
+        )
+    else:
+        bar(c, ix, iy + 5, iw * 0.34, "Foc", d["core"]["fire"], ORANGE)
+        bar(c, ix + iw * 0.38, iy + 5, iw * 0.26, "Mosaic", d["core"]["mosaic"], GREEN)
+        bar(c, ix + iw * 0.68, iy + 5, iw * 0.28, "Pressió", d["core"]["pressio"], YELLOW)
     footer("Criteri: concurrència espacial i condicions físiques semblants. No s'ha generat cap connector ni anàlisi nova.")
     c.showPage()
 

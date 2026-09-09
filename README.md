@@ -47,7 +47,7 @@ predicció d’ignició. No s’utilitza IncendisCat com a font.
 
 ## Informes inclosos
 
-- `projectes/Alinya/reports/fitxa_ecoradar_alinya_v1.pdf`
+- `projectes/Alinya/reports/fitxa_ecoradar_alinya_a4.pdf`
 - `projectes/Alinya/reports/informe_complet_muntanya_alinya.pdf`
 
 ## Validació local

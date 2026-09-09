@@ -1,6 +1,8 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-09T19:26:23+00:00",
+  "generated_at": "2026-09-09T21:12:15+00:00",
+  "methodology_version": "alinya_core_v2_2026-09-09",
+  "snapshot_id": "alinya-d712326d21b18f95",
   "scope": "recomanacions derivades exclusivament de la diagnosi ecològica; sense fitxa ni PDF",
   "recommendations": [
     {
@@ -338,6 +340,5 @@
       "AGR-001",
       "DADES-001"
     ]
-  },
-  "snapshot_id": "alinya-d712326d21b18f95"
+  }
 }

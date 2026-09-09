@@ -65,7 +65,7 @@ REQUIRED_PATHS = (
     "projectes/Alinya/raw/incendis/perill_basic_2024/PERILLBASICINCENDI.tif",
     "projectes/Alinya/maps/ecoradar_alinya_interactiu-v2.html",
     "projectes/Alinya/maps/ecoradar-alinya-netlify-v2/index.html",
-    "projectes/Alinya/reports/fitxa_ecoradar_alinya_v1.pdf",
+    "projectes/Alinya/reports/fitxa_ecoradar_alinya_a4.pdf",
     "projectes/Alinya/reports/informe_complet_muntanya_alinya.pdf",
 )
 
@@ -172,8 +172,8 @@ def _prepare_project_specific_files() -> None:
     reports = STAGING / "projectes" / "Alinya" / "reports"
     reports.mkdir(parents=True, exist_ok=True)
     shutil.copy2(
-        PROJECT / "reports" / "releases" / "fitxa_ecoradar_alinya_v1.pdf",
-        reports / "fitxa_ecoradar_alinya_v1.pdf",
+        PROJECT / "reports" / "fitxa_ecoradar_alinya_a4.pdf",
+        reports / "fitxa_ecoradar_alinya_a4.pdf",
     )
     shutil.copy2(
         PROJECT / "reports" / "informe_complet_muntanya_alinya-backup-20260721-six-axis-radar.pdf",

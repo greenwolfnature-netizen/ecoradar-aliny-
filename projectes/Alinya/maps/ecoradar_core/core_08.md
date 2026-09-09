@@ -1,7 +1,11 @@
-# CORE_08 · Connectivitat ecologica
+# CORE_08 · Continuïtat estructural i connectivitat potencial
 
-Estat: `parcial`
+Metodologia: `alinya_core_v2_2026-09-09`
 
-Valor normalitzat: `60.05`
+Resultat: `1.198,6 ha en connectors · funcionalitat NO AVALUABLE`
 
-Aquest fitxer es un placeholder documental. El mapa derivat es generara quan les dades espacials requerides estiguin disponibles.
+Estat: `PARCIAL` · Confiança: `mitjana`
+
+Mostra continuïtat general i connectors oficials; la connectivitat per espècie no és avaluable.
+
+Aquest document no expressa una puntuació ecològica global.

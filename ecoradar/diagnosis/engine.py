@@ -68,6 +68,13 @@ def run_diagnosis_engine(
     report_path = root / REPORT_OUTPUT
 
     json_path.write_text(json.dumps(diagnosis, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    if diagnosis.get("methodology_version") == "alinya_core_v2_2026-09-09":
+        # Keep the historical metadata path as an exact compatibility alias so
+        # no consumer can recover the pre-Phase-2 diagnosis by accident.
+        (root / "metadata" / "ecoradar_diagnosis.json").write_text(
+            json.dumps(diagnosis, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
     md_path.write_text(_diagnosis_markdown(diagnosis), encoding="utf-8")
     report = _engine_report(root, context, conclusions)
     report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

@@ -1,7 +1,11 @@
-# CORE_04 · Refugis climatics
+# CORE_04 · Potencial estructural de refugi climàtic
 
-Estat: `parcial`
+Metodologia: `alinya_core_v2_2026-09-09`
 
-Valor normalitzat: `88.42`
+Resultat: `Estructural parcial · senyal satel·lital 42,3 %`
 
-Aquest fitxer es un placeholder documental. El mapa derivat es generara quan les dades espacials requerides estiguin disponibles.
+Estat: `PARCIAL` · Confiança: `mitjana`
+
+Separa atributs estructurals i senyal tèrmic/hídric; cap dels dos confirma un refugi ecològic.
+
+Aquest document no expressa una puntuació ecològica global.

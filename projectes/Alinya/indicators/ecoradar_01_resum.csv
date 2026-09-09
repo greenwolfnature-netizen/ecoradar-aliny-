@@ -12,7 +12,7 @@ ndvi_mitja,no disponible,,no_disponible,teledeteccio_metadata.json,Copernicus bl
 ndmi_mitja,no disponible,,no_disponible,teledeteccio_metadata.json,Copernicus bloquejat: falten COPERNICUS_CLIENT_ID i COPERNICUS_CLIENT_SECRET.
 ndwi_mitja,no disponible,,no_disponible,teledeteccio_metadata.json,Copernicus bloquejat: falten COPERNICUS_CLIENT_ID i COPERNICUS_CLIENT_SECRET.
 lst_mitjana,no disponible,,no_disponible,teledeteccio_metadata.json,LST no habilitada: cal configurar col·leccio Sentinel-3/CLMS i credencials.
-nombre_registres_biodiversitat,731,registres,disponible,biodiversitat.gpkg,
+nombre_registres_biodiversitat,3680,registres,disponible,biodiversitat_metadata.json,Registres normalitzats després del retall espacial; univers de CORE_06 Fase 2.
 nombre_especies_registrades,516,especies,disponible,biodiversitat.gpkg,
 nombre_registres_recents,726,registres,disponible,biodiversitat.gpkg,Llindar recent definit pel connector de biodiversitat.
 densitat_camins_i_pistes,2.2846,km/km2,disponible,recreational_pressure_resum.csv,"Densitat calculada a partir de camins, pistes i vials menors OpenStreetMap retallats a l'àrea; no representa intensitat real de visitants."

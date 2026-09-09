@@ -1,5 +1,6 @@
 [build]
-  publish = "."
+  command = "python3 tools/build_alinya_public_site.py"
+  publish = "public"
   functions = "netlify/functions"
 
 [[redirects]]

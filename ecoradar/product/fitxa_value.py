@@ -60,7 +60,7 @@ def generate_fitxa_value_outputs(project_root: str | Path = "projectes/Alinya") 
 
 
 def build_fitxa_value_items(context: ProjectContext) -> tuple[FitxaValueItem, ...]:
-    core_rows = context.read_csv("indicators/ecoradar_core.csv")
+    core_rows = context.read_csv("indicators/ecoradar_core_indicators.csv")
     core = {row.get("code", ""): row for row in core_rows}
     candidates = [
         _item(
@@ -150,7 +150,8 @@ def _item(
 
 
 def _missing(core: dict[str, dict[str, str]], code: str, fallback: tuple[str, ...]) -> tuple[str, ...]:
-    raw = core.get(code, {}).get("missing_data", "")
+    row = core.get(code, {})
+    raw = row.get("sources_absent") or row.get("missing_data", "")
     values = tuple(item.strip() for item in raw.split(";") if item.strip())
     return values or fallback
 

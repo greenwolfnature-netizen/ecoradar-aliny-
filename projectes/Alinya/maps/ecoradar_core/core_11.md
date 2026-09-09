@@ -1,7 +1,11 @@
-# CORE_11 · Potencial de restauracio
+# CORE_11 · Cribratge de necessitat i oportunitat de restauració
 
-Estat: `no disponible`
+Metodologia: `alinya_core_v2_2026-09-09`
 
-Valor normalitzat: `no disponible`
+Resultat: `NO AVALUABLE · falta diagnosi de degradació`
 
-Aquest fitxer es un placeholder documental. El mapa derivat es generara quan les dades espacials requerides estiguin disponibles.
+Estat: `NO AVALUABLE` · Confiança: `baixa`
+
+No hi ha base per valorar potencial de restauració; cal demostrar degradació i definir referència i objectiu.
+
+Aquest document no expressa una puntuació ecològica global.

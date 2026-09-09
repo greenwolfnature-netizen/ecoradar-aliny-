@@ -1183,7 +1183,7 @@ def page_fitxa(report: Report, data: dict[str, Any]) -> None:
     c.drawString(144 * mm, 283.7 * mm, "ESTAT ECOLÒGIC")
     c.setFillColor(GREEN_2)
     c.setFont("Helvetica-Bold", 9.4)
-    c.drawString(144 * mm, 279 * mm, "Favorable però vulnerable")
+    c.drawString(144 * mm, 279 * mm, "Síntesi segons metodologia vigent")
     report.para_fit(
         "Bon estat general, però el tancament del paisatge exigeix gestió activa dels espais oberts.",
         144 * mm,
@@ -4725,6 +4725,151 @@ def management_report_chapters(data: dict[str, Any]) -> list[dict[str, Any]]:
     return chapters
 
 
+def page_phase2_fitxa(report: Report, data: dict[str, Any]) -> None:
+    """Render the one-page Alinyà executive sheet from the approved Phase 2 contract."""
+
+    report.new_page()
+    c = report.c
+    m = 10 * mm
+    content_w = report.width - 2 * m
+    core01 = core_row(data["core"], "CORE_01")
+    core02 = core_row(data["core"], "CORE_02")
+    core03 = core_row(data["core"], "CORE_03")
+    core06 = core_row(data["core"], "CORE_06")
+    core07 = core_row(data["core"], "CORE_07")
+    core11 = core_row(data["core"], "CORE_11")
+    core12 = core_row(data["core"], "CORE_12")
+    snapshot = data.get("core_payload", {}).get("snapshot_id") or "pendent de segellat"
+
+    # Header.
+    c.setFillColor(GREEN_DARK)
+    c.roundRect(m, 268 * mm, content_w, 20 * mm, 5, fill=1, stroke=0)
+    c.setFillColor(colors.HexColor("#DDEBDD"))
+    c.circle(m + 11 * mm, 278 * mm, 7 * mm, fill=1, stroke=0)
+    c.setFillColor(GREEN_DARK)
+    draw_centered_text(c, m + 11 * mm, 278 * mm, "ER", "Helvetica-Bold", 9.5)
+    c.setFillColor(colors.white)
+    c.setFont("Helvetica-Bold", 15)
+    c.drawString(m + 22 * mm, 281 * mm, "FITXA ECORADAR · ALINYÀ")
+    c.setFont("Helvetica", 7.3)
+    c.drawString(m + 22 * mm, 274 * mm, "Síntesi executiva de la metodologia Fase 2")
+    c.setFont("Helvetica-Bold", 6.6)
+    c.drawRightString(report.width - m - 5 * mm, 278 * mm, "alinya_core_v2_2026-09-09")
+    c.setFont("Helvetica", 5.8)
+    c.drawRightString(report.width - m - 5 * mm, 273.5 * mm, f"snapshot {snapshot}")
+
+    # Descriptive ecological state. There is deliberately no global rating.
+    report.card(m, 235 * mm, content_w, 27 * mm, "ESTAT ECOLÒGIC DESCRIT", fill=GREEN_PALE)
+    forest_pct = core01.get("profile", {}).get("composition", {}).get("forest_pct")
+    hic_pct = core02.get("profile", {}).get("hic_share_pct")
+    knowledge = core06.get("profile", {}).get("knowledge_grid_1km", {})
+    report.para_fit(
+        "Matriu forestal extensa "
+        f"({fmt(forest_pct, 1, '%')}) amb responsabilitat territorial elevada pels HIC "
+        f"({fmt(hic_pct, 1, '%')} de l'àmbit) i cobertura del coneixement biològic desigual "
+        f"({knowledge.get('cells_with_records', '—')}/{knowledge.get('cells', '—')} cel·les amb dades). "
+        "EcoRadar no calcula una qualificació ecològica global per a Alinyà.",
+        m + 6 * mm,
+        249 * mm,
+        content_w - 12 * mm,
+        10 * mm,
+        "small",
+        7.0,
+    )
+
+    # Direct and descriptive values retain their own units.
+    metric_gap = 4 * mm
+    metric_w = (content_w - 3 * metric_gap) / 4
+    metric_values = [
+        (fmt(data.get("study", {}).get("surface_ha"), 0), "ha", "àmbit validat"),
+        (fmt(forest_pct, 1, "%"), "", "coberta forestal"),
+        (fmt(core02.get("profile", {}).get("hic_area_ha"), 0), "ha", "HIC cartografiats"),
+        (fmt(core03.get("direct_value"), 3), "NDVI · 07/07/2026", "lectura directa datada"),
+    ]
+    for index, (value_text, unit, label) in enumerate(metric_values):
+        report.metric_card(m + index * (metric_w + metric_gap), 207 * mm, metric_w, label, value_text, unit)
+
+    # CORE_12: show the actual sector-by-alternative matrix and its non-compensatory result.
+    report.card(m, 124 * mm, content_w, 77 * mm, "CORE_12 · SÍNTESI DE GESTIÓ", fill=CREAM)
+    c.setFillColor(GREEN_DARK)
+    c.setFont("Helvetica-Bold", 11.5)
+    c.drawString(m + 6 * mm, 184 * mm, "SENSE PRIORITAT ÚNICA")
+    decision_rows = core12.get("profile", {}).get("rows", [])
+    counts = {"P1": 0, "P2": 0, "NO AVALUABLE": 0}
+    for item in decision_rows:
+        result = item.get("result", "")
+        if result in counts:
+            counts[result] += 1
+    c.setFillColor(MUTED)
+    c.setFont("Helvetica-Bold", 7.2)
+    c.drawRightString(
+        report.width - m - 6 * mm,
+        184.5 * mm,
+        f"{counts['P1']} P1  ·  {counts['P2']} P2  ·  {counts['NO AVALUABLE']} NO AVALUABLE",
+    )
+    rows = [["Sector documentat", "Alternativa concreta", "Resultat"]]
+    for item in decision_rows:
+        rows.append([item.get("sector", ""), item.get("alternative", ""), item.get("result", "")])
+    draw_table(report, rows, m + 6 * mm, 179 * mm, [61 * mm, 90 * mm, 20 * mm], 5.9)
+    report.para_fit(
+        "P1 i P2 són prioritats de decisió o verificació associades a cada alternativa i sector. No són puntuacions ecològiques globals ni s'agreguen en una mitjana.",
+        m + 6 * mm,
+        132 * mm,
+        content_w - 12 * mm,
+        6 * mm,
+        "tiny",
+        6.1,
+    )
+
+    # Knowledge coverage and mapped accessibility remain distinct from ecological state/pressure.
+    info_gap = 6 * mm
+    info_w = (content_w - info_gap) / 2
+    report.card(m, 91 * mm, info_w, 28 * mm, "CORE_06 · CONEIXEMENT DE BIODIVERSITAT", fill=GREEN_PALE)
+    report.para_fit(
+        f"{core06.get('primary_result')}. Mesura cobertura del coneixement; no riquesa, abundància o absència reals.",
+        m + 5 * mm,
+        106 * mm,
+        info_w - 10 * mm,
+        10 * mm,
+        "small",
+        6.8,
+    )
+    info_x = m + info_w + info_gap
+    report.card(info_x, 91 * mm, info_w, 28 * mm, "CORE_07 · ACCESSIBILITAT CARTOGRAFIADA", fill=colors.HexColor("#E8F0F4"))
+    report.para_fit(
+        f"{core07.get('primary_result')}. Descriu accés i ús potencial; no mesura freqüentació ni pressió humana real.",
+        info_x + 5 * mm,
+        106 * mm,
+        info_w - 10 * mm,
+        10 * mm,
+        "small",
+        6.8,
+    )
+
+    # Expert reading follows the approved observation-to-decision chain.
+    expert_rows = [
+        ["LECTURA EXPERTA", "Contingut derivat exclusivament dels RADAR Fase 2"],
+        ["Observació", f"{core01.get('primary_result')}; {core02.get('primary_result')}."],
+        ["Interpretació plausible", "La matriu forestal i els HIC descriuen estructura i responsabilitat territorial; no assignen un signe universal al tancament, l'obertura, el mosaic o els ecotons."],
+        ["Incertesa", "Falten receptor, objectiu ecològic, estat local i validació de camp per valorar configuració, conservació o necessitat d'intervenció."],
+        ["Implicació de gestió", "Aplicar les files sector × alternativa de CORE_12. Els nivells A–E són un marc general encara no assignat territorialment."],
+    ]
+    draw_table(report, expert_rows, m, 86 * mm, [39 * mm, content_w - 39 * mm], 6.3)
+
+    # CORE_11 remains a decision gate: no territorial restoration prescription is emitted.
+    report.card(m, 13 * mm, content_w, 25 * mm, "CORE_11 · PORTA DE RESTAURACIÓ", fill=ACCENT_PALE)
+    report.para_fit(
+        f"{core11.get('primary_result')}. {core11.get('interpretation_short')} No es delimita ni prescriu cap actuació territorial de restauració.",
+        m + 6 * mm,
+        26 * mm,
+        content_w - 12 * mm,
+        8 * mm,
+        "small",
+        6.8,
+    )
+    report.footer()
+
+
 def page_phase2_overview(report: Report, data: dict[str, Any]) -> None:
     report.new_page("12 RADAR · metodologia revisada", "Lectures directes, perfils i decisions sense escala comuna 0–100")
     m = report.margin
@@ -4837,12 +4982,14 @@ def page_phase2_decision(report: Report, data: dict[str, Any]) -> None:
 
 
 def build_phase2_report(report: Report, data: dict[str, Any], include_all_pages: bool) -> None:
-    page_phase2_overview(report, data)
     if include_all_pages:
+        page_phase2_overview(report, data)
         page_phase2_details(report, data, data["core"][:6], "RADAR 01–06")
         page_phase2_details(report, data, data["core"][6:], "RADAR 07–12")
         page_phase2_diagnosis(report, data)
         page_phase2_decision(report, data)
+    else:
+        page_phase2_fitxa(report, data)
 
 
 def build_report(path: Path, data: dict[str, Any], include_all_pages: bool = True) -> None:
@@ -4861,6 +5008,10 @@ def build_report(path: Path, data: dict[str, Any], include_all_pages: bool = Tru
     else:
         page_fitxa(report, data)
     report.finish()
+    if phase2_methodology(data) and not include_all_pages and path.resolve() == FITXA_PATH.resolve():
+        # Preserve old external links while ensuring their content can never
+        # expose the pre-Phase-2 executive sheet.
+        shutil.copy2(path, REPORTS / "fitxa_ecoradar_alinya_v1.pdf")
 
 
 def main() -> None:

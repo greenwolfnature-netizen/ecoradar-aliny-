@@ -34,7 +34,7 @@ from tools import export_postfoc_ecoradar_alinya_a4 as postfire_export
 PROJECT = ROOT / "projectes" / "Alinya"
 DEFAULT_BODY = PROJECT / "reports" / "informe_ecoradar_alinya_plantilla_urba_cos.pdf"
 DEFAULT_OUTPUT = PROJECT / "reports" / "informe_complet_muntanya_alinya.pdf"
-DEFAULT_FITXA = PROJECT / "reports" / "fitxa_ecoradar_alinya_v1.pdf"
+DEFAULT_FITXA = PROJECT / "reports" / "fitxa_ecoradar_alinya_a4.pdf"
 OUTPUT_COPY = ROOT / "output" / "pdf" / "informe_complet_muntanya_alinya.pdf"
 
 PAGE_W, PAGE_H = landscape(A4)
@@ -339,7 +339,7 @@ def framework(c: canvas.Canvas, page: int) -> None:
         ("SEGUIMENT", "Com comprovar el retorn ecologic."),
     ], MX, 133 * mm, CW)
     cards = [
-        ("Que es", urban.PALE_GREEN, ["Una diagnosi executiva vinculada a la Fitxa v1.", "Una lectura de processos ecologics, no una suma de capes.", "Un suport per prioritzar camp, conservacio i gestio adaptativa."]),
+        ("Que es", urban.PALE_GREEN, ["Una diagnosi executiva vinculada a la Fitxa EcoRadar vigent.", "Una lectura de processos ecologics, no una suma de capes.", "Un suport per prioritzar camp, conservacio i gestio adaptativa."]),
         ("Que no es", urban.PALE_ORANGE, ["No es un projecte executiu forestal, hidrologic o postincendi.", "No converteix accessibilitat OSM en frequentacio real.", "No declara absencies d'especies ni estat fisiologic sense dades."]),
         ("Criteri de gestio", urban.PALE_BLUE, ["Conservar abans de transformar.", "Validar quan la incertesa pot canviar la decisio.", "Mesurar el proces que justifica cada actuacio."]),
     ]
@@ -765,12 +765,15 @@ def sources_page(c: canvas.Canvas, page: int) -> None:
 
 
 def build_body(path: Path, data: dict[str, Any]) -> None:
-    if source.phase2_methodology(data):
-        # The Phase 2 CORE contract has no common 0–100 scale. Reuse the
-        # compact project report so the legacy score-based body is never
-        # rendered for the revised Alinyà methodology.
-        source.build_report(path, data, include_all_pages=True)
-        return
+    if not source.phase2_methodology(data):
+        raise RuntimeError(
+            "L'informe d'Alinyà requereix una instantània Fase 2 vàlida; "
+            "s'ha bloquejat l'exportació amb la metodologia CORE 0–100 antiga."
+        )
+    # The Phase 2 CORE contract has no common 0–100 scale. Reuse the compact
+    # project report so the legacy score-based body cannot be rendered.
+    source.build_report(path, data, include_all_pages=True)
+    return
     urban.register_fonts()
     urban.build_styles()
     biodiversity = biodiversity_breakdown()
@@ -846,7 +849,7 @@ def merge_documents(body: Path, fitxa: Path, output: Path) -> None:
     writer.add_metadata({
         "/Title": "EcoRadar - Informe complet de la Muntanya d'Alinya",
         "/Author": "EcoRadar",
-        "/Subject": "Diagnosi ecologica integrada amb Fitxa v1 i document postincendi",
+        "/Subject": "Diagnosi ecologica integrada amb la Fitxa EcoRadar Fase 2",
     })
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("wb") as handle:

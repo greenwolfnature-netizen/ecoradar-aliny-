@@ -1,7 +1,11 @@
-# CORE_10 · Aigua i funcionalitat hidrica
+# CORE_10 · Presència hídrica cartografiada
 
-Estat: `no disponible`
+Metodologia: `alinya_core_v2_2026-09-09`
 
-Valor normalitzat: `no disponible`
+Resultat: `11,8 km de xarxa · 12 fonts cartografiades`
 
-Aquest fitxer es un placeholder documental. El mapa derivat es generara quan les dades espacials requerides estiguin disponibles.
+Estat: `COMPLET` · Confiança: `mitjana`
+
+Descriu elements hídrics cartografiats; no diu si avui tenen aigua ni si funcionen ecològicament.
+
+Aquest document no expressa una puntuació ecològica global.

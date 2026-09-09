@@ -1,7 +1,11 @@
-# CORE_06 · Biodiversitat coneguda
+# CORE_06 · Cobertura del coneixement de biodiversitat
 
-Estat: `parcial`
+Metodologia: `alinya_core_v2_2026-09-09`
 
-Valor normalitzat: `99.66`
+Resultat: `3.680 registres · 66/84 cel·les amb dades`
 
-Aquest fitxer es un placeholder documental. El mapa derivat es generara quan les dades espacials requerides estiguin disponibles.
+Estat: `PARCIAL` · Confiança: `baixa`
+
+Mesura on i quant s’ha documentat; no mesura riquesa, abundància o absència reals.
+
+Aquest document no expressa una puntuació ecològica global.

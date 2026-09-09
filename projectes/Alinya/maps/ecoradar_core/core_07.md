@@ -1,7 +1,11 @@
-# CORE_07 · Pressio humana i us public
+# CORE_07 · Accessibilitat cartografiada i ús potencial
 
-Estat: `parcial`
+Metodologia: `alinya_core_v2_2026-09-09`
 
-Valor normalitzat: `39.32`
+Resultat: `124,8 km · 2,28 km/km² · 18 punts`
 
-Aquest fitxer es un placeholder documental. El mapa derivat es generara quan les dades espacials requerides estiguin disponibles.
+Estat: `COMPLET` · Confiança: `mitjana`
+
+Quantifica accés potencial cartografiat; la pressió real continua sense mesurar.
+
+Aquest document no expressa una puntuació ecològica global.

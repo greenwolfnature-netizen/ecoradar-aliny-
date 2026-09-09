@@ -1,258 +1,321 @@
 {
-  "project_name": "Alinya",
-  "generated_at": "2026-07-07T19:06:49+00:00",
-  "overall_state": "diagnosi parcial",
-  "confidence": "mitjana-baixa",
-  "executive_summary": "Alinya mostra senyals robustos de valor d'hàbitats i biodiversitat coneguda, però la diagnosi encara és parcial. Les decisions de conservació prudent estan justificades; les prioritats espacials finals han d'esperar teledetecció, hidrologia, topografia, foc i camp.",
-  "strengths": [
+  "project": "Alinya",
+  "generated_at": "2026-09-09T19:26:20+00:00",
+  "methodology_version": "alinya_core_v2_2026-09-09",
+  "snapshot_input": null,
+  "scope": "diagnosi ecològica basada en indicadors; sense recomanacions, fitxa ni informe final",
+  "inputs": {
+    "indicators": "indicators/ecoradar_core_indicators.json",
+    "indicator_engine_report": "metadata/indicator_engine_report.json",
+    "data_availability_report": "metadata/data_availability_report.json"
+  },
+  "summary": {
+    "overall_state": "diagnosi contextual amb perfils no compensatoris",
+    "confidence": "baixa",
+    "robust_conclusions": 0,
+    "provisional_conclusions": 6
+  },
+  "required_sections": {
+    "situacio_actual": [
+      "Diagnosi amb lectures directes, perfils i portes de decisió"
+    ],
+    "distribucio_territorial": [
+      "La configuració és forestal i la funció del mosaic depèn de l’objectiu"
+    ],
+    "valors_ecologics_principals": [
+      "Els HIC impliquen responsabilitat territorial, no estat favorable"
+    ],
+    "factors_explicatius": [
+      "L’NDVI descriu el 7 de juliol i no l’estat actual de setembre"
+    ],
+    "vulnerabilitats": [
+      "Refugis i vulnerabilitat climàtica requereixen dues lectures diferents"
+    ],
+    "biodiversitat": [
+      "La informació biològica està distribuïda de manera desigual"
+    ],
+    "connectivitat_i_us": [
+      "Accessibilitat i continuïtat estructural no demostren pressió ni moviment"
+    ],
+    "aigua": [
+      "La xarxa hídrica és un inventari, no una lectura de disponibilitat actual"
+    ],
+    "foc": [
+      "El foc es presenta com un perfil de propagació, sensibilitat, recuperació i operativa"
+    ],
+    "implicacions_gestio": [
+      "La síntesi manté prioritats per alternativa i rebutja una única nota global"
+    ]
+  },
+  "conclusions": [
     {
-      "theme": "hàbitats",
-      "title": "Valor d'hàbitats molt rellevant",
-      "interpretation": "El Core d'hàbitats és molt alt i combina riquesa d'hàbitats, HIC i HIC prioritaris.",
-      "management_implication": "Qualsevol actuació ha de començar comprovant afectació a HIC i hàbitats prioritaris.",
-      "evidence": [
+      "section": "situacio_actual",
+      "title": "Diagnosi amb lectures directes, perfils i portes de decisió",
+      "interpretation": "Els dotze RADAR ja no comparteixen una escala artificial. Al snapshot actual hi ha quatre resultats complets per a la dimensió exactament declarada, sis perfils parcials i dos resultats NO AVALUABLES. Aquesta distribució descriu aptitud de les dades, no qualitat ecològica del territori.",
+      "management_implication": "Llegir cada resultat segons el seu tipus i la seva vigència; cap perfil es pot convertir en una nota global de conservació.",
+      "supporting_indicators": [
+        "CORE_01",
         "CORE_02",
-        "habitats=47; HIC=3170.95 ha; prioritaris=1229.39 ha"
-      ],
-      "confidence": "mitjana"
-    },
-    {
-      "theme": "biodiversitat",
-      "title": "Base pública de biodiversitat útil",
-      "interpretation": "Les cites públiques aporten un primer mapa de coneixement, però no equivalen a inventari exhaustiu.",
-      "management_implication": "Serveix per orientar treball de camp, detectar grups febles i prioritzar validacions.",
-      "evidence": [
+        "CORE_03",
+        "CORE_04",
+        "CORE_05",
         "CORE_06",
-        "registres=731; especies=516; recents=726"
-      ],
-      "confidence": "mitjana"
-    },
-    {
-      "theme": "paisatge",
-      "title": "Matriu natural dominant amb espais oberts rellevants",
-      "interpretation": "La coberta forestal (88.4246%) domina, però els prats i herbassars (9.3344%) poden tenir una funció ecològica desproporcionada.",
-      "management_implication": "Cal conservar el mosaic existent i evitar actuacions uniformes sobre tota la matriu forestal.",
-      "evidence": [
-        "CORE_01",
-        "ecoradar_01_resum.csv"
-      ],
-      "confidence": "mitjana"
-    }
-  ],
-  "weaknesses": [
-    {
-      "theme": "foc",
-      "title": "Resiliència al foc encara feble i incompleta",
-      "interpretation": "La lectura actual només combina cobertes i mosaic obert; falten pendent, orientació, humitat vegetal, accessos i punts d'aigua.",
-      "management_implication": "No és prudent definir actuacions forestals espacials finals sense completar aquesta base.",
-      "evidence": [
-        "CORE_09",
-        "forestal=88.4246%; prats=9.3344%; agricola=0.0047%"
-      ],
-      "confidence": "baixa"
-    },
-    {
-      "theme": "aigua",
-      "title": "Funcionalitat hídrica no caracteritzada",
-      "interpretation": "Sense cursos, basses, fonts, zones humides i NDWI no es poden delimitar corredors hídrics ni refugis associats a l'aigua.",
-      "management_implication": "La hidrologia ha de ser una prioritat de dades abans de restauració o adaptació climàtica.",
-      "evidence": [
-        "CORE_10"
-      ],
-      "confidence": "baixa"
-    }
-  ],
-  "pressures": [
-    {
-      "theme": "ús públic",
-      "title": "Pressió humana només estimada com accessibilitat potencial",
-      "interpretation": "Pressio humana estimada parcialment amb xarxa OSM i punts d'us public; no representa nombre de visitants.",
-      "management_implication": "Cal validar accessos i punts d'ús abans de regular, tancar o redirigir fluxos.",
-      "evidence": [
         "CORE_07",
-        "densitat camins/pistes=2.2846 km/km2; punts us public=18"
+        "CORE_08",
+        "CORE_09",
+        "CORE_10",
+        "CORE_11",
+        "CORE_12"
       ],
-      "confidence": "baixa"
-    }
-  ],
-  "opportunities": [
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndvi",
+        "detailed_surface_temperature",
+        "fires_burned_areas",
+        "gbif_occurrences",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "icgc_dem_mdt",
+        "inaturalist_observations",
+        "land_cover_icgc_cobertes_sol",
+        "meteocat",
+        "osm_public_use",
+        "pla_alfa"
+      ],
+      "confidence": "baixa",
+      "limitations": [
+        "La confiança varia per RADAR i s’ha de consultar en les vuit dimensions publicades."
+      ],
+      "robustness": "provisional",
+      "evidence_type": "observació",
+      "snapshot_id": null
+    },
     {
-      "theme": "gestió",
-      "title": "Conservació prudent ja accionable",
-      "interpretation": "La combinació de valor d'hàbitats, biodiversitat coneguda i mosaic dona criteris inicials per evitar impactes i dirigir el camp.",
-      "management_implication": "Es poden establir zones de prudència i protocols de revisió abans d'actuacions.",
-      "evidence": [
-        "CORE_01",
-        "CORE_02",
+      "section": "distribucio_territorial",
+      "title": "La configuració és forestal i la funció del mosaic depèn de l’objectiu",
+      "interpretation": "Perfil estructural · bosc 88,4 % · taca màxima 477,4 ha. La cartografia conté 6.994 taques, amb una taca màxima de 477.38 ha i mida efectiva de 102.01 ha. Shannon, vora i nombre de taques es mantenen com a descriptors: no indiquen per si sols fragmentació perjudicial ni mosaic funcional.",
+      "management_implication": "Definir per hàbitat o procés quines continuïtats, clarianes i vores s’han de conservar abans d’ordenar actuacions de mosaic.",
+      "supporting_indicators": [
+        "CORE_01"
+      ],
+      "sources_used": [
+        "land_cover_icgc_cobertes_sol"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "La mida i la vora de taca depenen de l’escala i de la classificació de la font.",
+        "Els ecotons funcionals no es classifiquen sense contrast, objectiu i validació."
+      ],
+      "robustness": "provisional",
+      "evidence_type": "observació + interpretació plausible",
+      "snapshot_id": null
+    },
+    {
+      "section": "valors_ecologics_principals",
+      "title": "Els HIC impliquen responsabilitat territorial, no estat favorable",
+      "interpretation": "3.171,0 ha HIC · 58,0 % · 1.229,4 ha prioritaris. Aquestes superfícies i les presències puntuals documenten representació d’hàbitats. No existeixen encara dades locals suficients d’estructura, funcions, pressions i perspectives per classificar-ne l’estat de conservació.",
+      "management_implication": "Aplicar no-deteriorament i verificació d’hàbitat abans de qualsevol transformació; no interpretar més hectàrees com a millor estat.",
+      "supporting_indicators": [
+        "CORE_02"
+      ],
+      "sources_used": [
+        "habitats_terrestres_v3",
+        "hic_v2"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "No avalua estat de conservació.",
+        "La presència HIC incrementa responsabilitat i cautela, no qualitat ecològica."
+      ],
+      "robustness": "robusta per responsabilitat; provisional per estat",
+      "evidence_type": "observació",
+      "snapshot_id": null
+    },
+    {
+      "section": "factors_explicatius",
+      "title": "L’NDVI descriu el 7 de juliol i no l’estat actual de setembre",
+      "interpretation": "NDVI 0,616 · 07/07/2026. L’escena tenia 99.95 % de cobertura vàlida, amb P10 0.341 i P90 0.757. El valor és coherent amb una activitat verda desigual dins l’àmbit, però sense línia base per coberta i època no permet classificar vigor actual, anomalia fenològica o estat de conservació.",
+      "management_implication": "Esperar una nova escena QA-vàlida i comparar-la amb la mateixa època i coberta abans d’interpretar canvi o estrès.",
+      "supporting_indicators": [
+        "CORE_03"
+      ],
+      "sources_used": [
+        "copernicus_sentinel_ndvi"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "Descriu verdor espectral el 07/07/2026, no l’estat actual.",
+        "No és biodiversitat, biomassa, humitat ni estat de conservació."
+      ],
+      "robustness": "robusta per l’escena; no vigent per avui",
+      "evidence_type": "observació datada",
+      "snapshot_id": null
+    },
+    {
+      "section": "vulnerabilitats",
+      "title": "Refugis i vulnerabilitat climàtica requereixen dues lectures diferents",
+      "interpretation": "Estructural parcial · senyal satel·lital 42,3 %. El 42,3 % és la proporció alta o molt alta dins el denominador vegetat amb LST, NDMI i NDVI vàlids; combina un compost tèrmic 2025–2026 amb una escena del 07/07/2026. CORE_05 retorna NO AVALUABLE perquè només hi ha context parcial d’exposició i falten sensibilitat i capacitat adaptativa definides per receptor.",
+      "management_implication": "Usar el mapa de refugi per seleccionar candidats a sensors o camp, i no per declarar refugis permanents o vulnerabilitat territorial.",
+      "supporting_indicators": [
+        "CORE_04",
+        "CORE_05"
+      ],
+      "sources_used": [
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndvi",
+        "detailed_surface_temperature",
+        "icgc_dem_mdt",
+        "land_cover_icgc_cobertes_sol",
+        "meteocat"
+      ],
+      "confidence": "baixa",
+      "limitations": [
+        "El senyal no és una observació d’avui ni una normal climàtica.",
+        "Aigua i fonts es dibuixen com a context i no entren en la fórmula satel·lital.",
+        "Exposició alta no equival a vulnerabilitat alta.",
+        "Falten normals, extrems i resposta ecològica per receptor."
+      ],
+      "robustness": "provisional",
+      "evidence_type": "interpretació plausible",
+      "snapshot_id": null
+    },
+    {
+      "section": "biodiversitat",
+      "title": "La informació biològica està distribuïda de manera desigual",
+      "interpretation": "3.680 registres · 66/84 cel·les amb dades. La consulta GBIF es va aturar al sostre de seguretat de 10.000 sobre 31.169 coincidències, i 18 de 84 cel·les d’1 km no tenen cap registre públic. Això identifica buits de coneixement i biaix d’esforç; no permet ordenar biodiversitat real ni interpretar absències.",
+      "management_implication": "Prioritzar prospecció a les cel·les amb poc coneixement que coincideixen amb HIC o connectors, amb un protocol comparable per grup i estació.",
+      "supporting_indicators": [
         "CORE_06"
       ],
-      "confidence": "mitjana"
+      "sources_used": [
+        "gbif_occurrences",
+        "inaturalist_observations"
+      ],
+      "confidence": "baixa",
+      "limitations": [
+        "Pocs registres no signifiquen baixa biodiversitat.",
+        "La consulta GBIF arriba al sostre de seguretat de 10.000 registres."
+      ],
+      "robustness": "provisional",
+      "evidence_type": "observació",
+      "snapshot_id": null
     },
     {
-      "theme": "coneixement",
-      "title": "Els buits de dades ja defineixen un full de ruta",
-      "interpretation": "Les mancances no són soroll: indiquen quines dades poden canviar decisions de gestió.",
-      "management_implication": "Prioritzar teledetecció, hidrologia, topografia i camp aportarà salt qualitatiu immediat.",
-      "evidence": [
-        "CORE_03",
+      "section": "connectivitat_i_us",
+      "title": "Accessibilitat i continuïtat estructural no demostren pressió ni moviment",
+      "interpretation": "124,8 km · 2,28 km/km² · 18 punts; 1.198,6 ha en connectors · funcionalitat NO AVALUABLE. La xarxa OSM descriu potencial d’accés i els connectors descriuen continuïtat general. Sense freqüentació i impacte no hi ha pressió real; sense receptor, resistències i validació no hi ha connectivitat funcional.",
+      "management_implication": "Mesurar ús als trams que coincideixen amb valors sensibles i validar passos o barreres per receptors concrets abans de regular o restaurar corredors.",
+      "supporting_indicators": [
+        "CORE_07",
+        "CORE_08"
+      ],
+      "sources_used": [
+        "connectivity_infraestructura_verda",
+        "land_cover_icgc_cobertes_sol",
+        "osm_public_use"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "OSM no mesura freqüentació, comportament ni impacte.",
+        "Més accessibilitat també pot facilitar seguiment i resposta de gestió.",
+        "Continuïtat estructural no garanteix moviment o flux genètic.",
+        "Les vies OSM no reben un signe fix de barrera."
+      ],
+      "robustness": "provisional",
+      "evidence_type": "observació + hipòtesi",
+      "snapshot_id": null
+    },
+    {
+      "section": "aigua",
+      "title": "La xarxa hídrica és un inventari, no una lectura de disponibilitat actual",
+      "interpretation": "11,8 km de xarxa · 12 fonts cartografiades. Els elements localitzen on comprovar aigua, ribera i possible funció de refugi, però no informen de cabal, permanència, qualitat o ús per fauna. La seva absència a la capa tampoc prova absència al terreny.",
+      "management_implication": "Verificar les dotze fonts i trams seleccionats en període sec, documentant permanència, qualitat, ribera, pressions i sensibilitat.",
+      "supporting_indicators": [
         "CORE_10",
+        "CORE_04"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndvi",
+        "detailed_surface_temperature",
+        "icgc_dem_mdt",
+        "land_cover_icgc_cobertes_sol"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "No informa de cabal, permanència, qualitat o estat de ribera.",
+        "Zero basses o zones humides a la font retallada no prova absència al terreny."
+      ],
+      "robustness": "provisional",
+      "evidence_type": "observació",
+      "snapshot_id": null
+    },
+    {
+      "section": "foc",
+      "title": "El foc es presenta com un perfil de propagació, sensibilitat, recuperació i operativa",
+      "interpretation": "Propagació actual moderat · recuperació NO AVALUABLE. El perill EcoRadar actual conserva la seva escala 0–100 perquè és un producte diari específic, i el Pla Alfa continua com a context oficial independent. La sensibilitat ecològica i la recuperació postincendi no són avaluables amb perímetres, camins i aigua cartografiada.",
+      "management_implication": "Vigilar vent, humitat, pluja i potencial ForestDrought; abans de tractaments, verificar combustible, hàbitats i sòl als sectors candidats.",
+      "supporting_indicators": [
+        "CORE_09"
+      ],
+      "sources_used": [
+        "aca_hydrology",
+        "fires_burned_areas",
+        "icgc_dem_mdt",
+        "land_cover_icgc_cobertes_sol",
+        "meteocat",
+        "osm_public_use",
+        "pla_alfa"
+      ],
+      "confidence": "mitjana",
+      "limitations": [
+        "El perill actual no és probabilitat d’ignició ni predicció d’incendi.",
+        "Camins, aigua i superfície cremada no sumen ni resten resiliència de manera lineal."
+      ],
+      "robustness": "caduca amb la següent instantània diària",
+      "evidence_type": "escenari potencial",
+      "snapshot_id": null
+    },
+    {
+      "section": "implicacions_gestio",
+      "title": "La síntesi manté prioritats per alternativa i rebutja una única nota global",
+      "interpretation": "SENSE PRIORITAT ÚNICA · 1 P1, 4 P2 i 1 NO AVALUABLE. La regla preventiva sobre HIC és P1; prospecció, mesura d’ús, verificació hídrica i preparació davant del foc són P2. La restauració generalitzada queda vetada com a NO AVALUABLE perquè CORE_11 no disposa de degradació, referència, objectiu, benefici i viabilitat.",
+      "management_implication": "Aplicar la regla P1, programar les verificacions P2 i aprovar unitats/objectius abans d’ordenar alternatives no dominades.",
+      "supporting_indicators": [
         "CORE_11",
         "CORE_12"
       ],
-      "confidence": "alta"
+      "sources_used": [
+        "aca_hydrology",
+        "connectivity_infraestructura_verda",
+        "copernicus_sentinel_ndmi",
+        "copernicus_sentinel_ndvi",
+        "detailed_surface_temperature",
+        "fires_burned_areas",
+        "gbif_occurrences",
+        "habitats_terrestres_v3",
+        "hic_v2",
+        "icgc_dem_mdt",
+        "inaturalist_observations",
+        "land_cover_icgc_cobertes_sol",
+        "meteocat",
+        "osm_public_use",
+        "pla_alfa"
+      ],
+      "confidence": "baixa",
+      "limitations": [
+        "Responsabilitat HIC, vulnerabilitat o connectivitat no impliquen necessitat de restaurar.",
+        "No es delimiten superfícies ni actuacions candidates.",
+        "P1/P2 són categories de decisió per fila, no puntuacions ecològiques.",
+        "La síntesi s’ha de reexecutar amb cada snapshot i després d’aprovar unitats i objectius."
+      ],
+      "robustness": "robusta en els vetos; provisional en l’ordenació",
+      "evidence_type": "síntesi de decisió",
+      "snapshot_id": null
     }
   ],
-  "risks": [
-    {
-      "theme": "governança",
-      "title": "Risc de falsa precisió si es força una prioritat final",
-      "interpretation": "Diversos indicadors clau són parcials o no disponibles; una mitjana global amagaria incertesa.",
-      "management_implication": "EcoRadar ha de mantenir indicadors separats i recomanar validació quan la confiança és baixa.",
-      "evidence": [
-        "CORE_03",
-        "CORE_10",
-        "CORE_12"
-      ],
-      "confidence": "alta"
-    }
-  ],
-  "uncertainties": [
-    {
-      "theme": "Estat de la vegetacio",
-      "title": "Estat de la vegetacio",
-      "interpretation": "No es pot calcular sense teledeteccio real.",
-      "management_implication": "Configurar credencials Copernicus i generar rasters abans de valorar aquest indicador.",
-      "evidence": [
-        "CORE_03",
-        "NDVI; NDMI; NDWI; anomalia temporal"
-      ],
-      "confidence": "baixa"
-    },
-    {
-      "theme": "Refugis climatics",
-      "title": "Refugis climatics",
-      "interpretation": "Només es pot usar la cobertura forestal com a senyal parcial; el mapa de refugis queda pendent.",
-      "management_implication": "No prioritzar refugis climatics sense teledeteccio, topografia i hidrologia.",
-      "evidence": [
-        "CORE_04",
-        "LST; NDMI; orientacio nord/obaga; proximitat a cursos o punts d'aigua"
-      ],
-      "confidence": "baixa"
-    },
-    {
-      "theme": "Vulnerabilitat climatica",
-      "title": "Vulnerabilitat climatica",
-      "interpretation": "Vulnerabilitat només aproximada amb cobertura; no hi ha mapa de zones vulnerables.",
-      "management_implication": "Esperar teledeteccio, DEM i hidrologia abans de prioritzar restauracio climatica.",
-      "evidence": [
-        "CORE_05",
-        "LST alta; NDMI baix; orientacio sud; pendent; manca d'aigua"
-      ],
-      "confidence": "baixa"
-    },
-    {
-      "theme": "Connectivitat ecologica",
-      "title": "Connectivitat ecologica",
-      "interpretation": "Connectivitat aproximada només amb cobertes; corredors i barreres principals pendents.",
-      "management_implication": "No definir corredors fins incorporar barreres i xarxa hidrica.",
-      "evidence": [
-        "CORE_08",
-        "barreres; xarxa de riberes; infraestructures; corredors potencials"
-      ],
-      "confidence": "baixa"
-    },
-    {
-      "theme": "Aigua i funcionalitat hidrica",
-      "title": "Aigua i funcionalitat hidrica",
-      "interpretation": "No es pot valorar funcionalitat hidrica amb les dades actuals.",
-      "management_implication": "Implementar connector hidrologic oficial i executar NDWI quan Copernicus estigui disponible.",
-      "evidence": [
-        "CORE_10",
-        "cursos fluvials; basses; fonts; zones humides; NDWI; punts d'aigua de camp"
-      ],
-      "confidence": "baixa"
-    },
-    {
-      "theme": "Potencial de restauracio",
-      "title": "Potencial de restauracio",
-      "interpretation": "No es pot calcular potencial de restauracio sense els indicadors base complets.",
-      "management_implication": "Esperar les capes de vegetacio, pressio humana, hidrologia i camp abans de proposar zones.",
-      "evidence": [
-        "CORE_11",
-        "baixa qualitat de vegetacio; habitats degradats; baixa connectivitat; pressio gestionable; habitats font"
-      ],
-      "confidence": "baixa"
-    },
-    {
-      "theme": "Prioritat de gestio",
-      "title": "Prioritat de gestio",
-      "interpretation": "No es calcula cap prioritat global per evitar una mitjana simplista.",
-      "management_implication": "No generar top 10 zones prioritaries fins disposar de pressio humana, clima, foc, aigua i camp.",
-      "evidence": [
-        "CORE_12",
-        "refugis climatics; vulnerabilitat; pressio humana; resiliencia al foc; potencial de restauracio"
-      ],
-      "confidence": "baixa"
-    }
-  ],
-  "fieldwork_needs": [
-    {
-      "theme": "camp",
-      "title": "Validar hàbitats, accessos i grups infrarepresentats",
-      "interpretation": "Les fonts públiques orienten, però no certifiquen estat local ni absències.",
-      "management_implication": "Programar mostreig dirigit sobre HIC, prats, accessos principals, punts d'aigua i grups taxonòmics febles.",
-      "evidence": [
-        "CORE_02",
-        "CORE_06",
-        "CORE_07"
-      ],
-      "confidence": "mitjana"
-    }
-  ],
-  "data_insufficiencies": [
-    "LST",
-    "LST alta",
-    "NDMI",
-    "NDMI baix",
-    "NDVI",
-    "NDWI",
-    "accessos",
-    "anomalia temporal",
-    "baixa connectivitat",
-    "baixa qualitat de vegetacio",
-    "barreres",
-    "basses",
-    "buit espacial d'informacio",
-    "classificacio d'habitats sensibles",
-    "comptadors",
-    "continuïtat forestal espacial",
-    "corredors potencials",
-    "cursos fluvials",
-    "dades de gestors",
-    "especies indicadores",
-    "especies protegides/interes",
-    "fonts",
-    "habitats degradats",
-    "habitats font",
-    "heatmap autoritzat",
-    "infraestructures",
-    "manca d'aigua",
-    "observacions de camp",
-    "orientacio",
-    "orientacio nord/obaga",
-    "orientacio sud",
-    "pendent",
-    "potencial de restauracio",
-    "pressio gestionable",
-    "pressio humana",
-    "proximitat a cursos o punts d'aigua",
-    "punts d'aigua",
-    "punts d'aigua de camp",
-    "refugis climatics",
-    "resiliencia al foc",
-    "vulnerabilitat",
-    "xarxa de riberes",
-    "zones de mes valor espacialitzades",
-    "zones humides"
-  ]
+  "snapshot_id": "alinya-d712326d21b18f95"
 }

@@ -1,7 +1,11 @@
-# CORE_05 · Vulnerabilitat climatica
+# CORE_05 · Perfil d’exposició i vulnerabilitat climàtica ecològica
 
-Estat: `parcial`
+Metodologia: `alinya_core_v2_2026-09-09`
 
-Valor normalitzat: `22.99`
+Resultat: `NO AVALUABLE · només exposició parcial`
 
-Aquest fitxer es un placeholder documental. El mapa derivat es generara quan les dades espacials requerides estiguin disponibles.
+Estat: `NO AVALUABLE` · Confiança: `baixa`
+
+Hi ha context d’exposició, però la vulnerabilitat ecològica no es pot calcular sense receptor i resposta.
+
+Aquest document no expressa una puntuació ecològica global.
