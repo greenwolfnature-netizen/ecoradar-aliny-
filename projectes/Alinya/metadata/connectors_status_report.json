@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T11:31:16+00:00",
+  "generated_at": "2026-09-09T12:38:37+00:00",
   "connectors": [
     {
       "connector": "blocked_strava_heatmap_connector",
@@ -326,5 +326,5 @@
     "parcial": 2,
     "pendent": 1
   },
-  "snapshot_id": "alinya-1ce1ee286762c656"
+  "snapshot_id": "alinya-8c6cffc65f2082fe"
 }

@@ -1,6 +1,6 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-09T11:20:39+00:00",
+  "generated_at": "2026-09-09T12:38:37+00:00",
   "scope": "EcoRadar Core Indicator Engine; sense diagnosi, recomanacions, fitxa ni informe final",
   "preflight_checked": {
     "data_availability_report.json": true,
@@ -27,5 +27,5 @@
     "Les fonts absents redueixen estat i confiança segons el Data Source Manager.",
     "No s'ha generat diagnosi, recomanacions, fitxa ni PDF."
   ],
-  "snapshot_id": "alinya-1ce1ee286762c656"
+  "snapshot_id": "alinya-8c6cffc65f2082fe"
 }

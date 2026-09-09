@@ -8,3 +8,4 @@ Grid point: nearest
 Distance: 3.94509 km
 Grid point latitude: 42.15
 Grid point longitude:  1.45
+
