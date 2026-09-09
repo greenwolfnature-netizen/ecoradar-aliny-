@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-09T13:39:51.005341+00:00",
+  "generated_at_utc": "2026-09-09T18:01:02.501538+00:00",
   "status": "definitive_ecological_module",
   "unit": "Geometries reals d’hàbitats, connectors i interseccions; quadrícula d’1 km només per agregar cobertura del coneixement.",
   "privacy": "Cap nom de taxó ni coordenada d’ocurrència s’exporta. La fauna i la flora es representen mitjançant recomptes agregats d’1 km.",
@@ -17,7 +17,7 @@
       "status": "dada no disponible · pes exclòs"
     },
     "current_fire": {
-      "checked_at_utc": "2026-09-09T13:37:45Z",
+      "checked_at_utc": "2026-09-09T17:58:24Z",
       "status": "actualització diària; data exacta preservada"
     }
   },
@@ -31,9 +31,9 @@
     "habitat_features": 452,
     "connector_features": 5,
     "value_overlap_features": 13,
-    "situations": 3,
+    "situations": 13,
     "knowledge_cells": 84,
     "prospecting_cells": 29
   },
-  "snapshot_id": "alinya-d718dcb429fb9281"
+  "snapshot_id": "alinya-2581ff169adb0155"
 }
