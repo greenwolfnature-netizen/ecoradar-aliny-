@@ -41,6 +41,13 @@ def sync(repository_root: Path) -> list[Path]:
         if not source.is_file():
             raise FileNotFoundError(source)
         target = repository_root / name
+        if (
+            name == "netlify.toml"
+            and target.is_file()
+            and "tools/build_alinya_public_site.py" in target.read_text(encoding="utf-8")
+        ):
+            copied.append(target)
+            continue
         shutil.copy2(source, target)
         copied.append(target)
 

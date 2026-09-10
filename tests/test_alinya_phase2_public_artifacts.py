@@ -158,6 +158,11 @@ class AlinyaPhase2PublicArtifactTests(unittest.TestCase):
         self.assertIn("SENSE PRIORITAT ÚNICA", normalized(extracted["complete"][0][-1]))
 
     def test_public_bundle_contains_only_current_allowlisted_outputs(self):
+        netlify_config = (ROOT / "netlify.toml").read_text(encoding="utf-8")
+        workflow = (ROOT / ".github/workflows/update-current-fire-danger.yml").read_text(encoding="utf-8")
+        self.assertIn('publish = "public"', netlify_config)
+        self.assertIn('command = "python3 tools/build_alinya_public_site.py"', netlify_config)
+        self.assertIn("netlify-cli deploy --prod --dir public", workflow)
         with tempfile.TemporaryDirectory() as temporary:
             public = build_public_site(Path(temporary) / "public")
             self.assertEqual((public / "index.html").read_bytes(), (ROOT / "index.html").read_bytes())

@@ -363,6 +363,8 @@ def build() -> dict[str, Any]:
         "indicators/daily_history.json", "metadata/daily_history.json",
         "indicators/current_fire_danger.json", "metadata/current_fire_danger.json",
         "indicators/ecoradar_core_indicators.json", "metadata/indicator_engine_report.json",
+        "indicators/ecoradar_core.json", "indicators/ecoradar_indicators.json",
+        "metadata/ecoradar_core_metadata.json", "metadata/ecoradar_indicators_metadata.json",
         "metadata/indicators_completeness_report.json", "metadata/data_availability_report.json",
         "metadata/connectors_status_report.json", "indicators/teledeteccio_sentinel2.json",
         "indicators/teledeteccio_satellite_layers.json", "indicators/refugis_climatics_potencials.json",
@@ -374,8 +376,10 @@ def build() -> dict[str, Any]:
         "indicators/biodiversity_ecological_situations.geojson",
         "indicators/biodiversity_knowledge_coverage.geojson",
         "diagnosis/ecoradar_diagnosis.json",
+        "metadata/ecoradar_diagnosis.json",
         "metadata/diagnosis_engine_report.json",
         "recommendations/recommendations.json",
+        "metadata/ecoradar_recommendations.json",
         "recommendations/priority_matrix.json",
     ]
     for relative in stamp_paths:
