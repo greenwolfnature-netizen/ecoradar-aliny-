@@ -180,7 +180,7 @@ jobs:
             echo "sha=$remote_sha" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git add index.html netlify.toml THIRD_PARTY_NOTICES.md metadata history netlify vendor docs/current-fire-danger-source.md docs/data-sources-matrix.md docs/fire-source.md docs/alinya-daily-readings-source.md projectes/Alinya/raw/meteocat_xema projectes/Alinya/raw/pla_alfa projectes/Alinya/raw/cams projectes/Alinya/raw/creaf_forestdrought projectes/Alinya/processed/landsat projectes/Alinya/processed/incendis/current_fire_danger projectes/Alinya/processed/teledeteccio projectes/Alinya/maps projectes/Alinya/indicators projectes/Alinya/metadata projectes/Alinya/diagnosis projectes/Alinya/recommendations projectes/Alinya/history ':(exclude)projectes/Alinya/maps/*.zip'
+          git add index.html netlify.toml THIRD_PARTY_NOTICES.md metadata history netlify vendor docs/current-fire-danger-source.md docs/data-sources-matrix.md docs/fire-source.md docs/alinya-daily-readings-source.md projectes/Alinya/raw/meteocat_xema projectes/Alinya/raw/pla_alfa projectes/Alinya/raw/cams projectes/Alinya/raw/creaf_forestdrought projectes/Alinya/processed/landsat projectes/Alinya/processed/incendis/current_fire_danger projectes/Alinya/processed/teledeteccio projectes/Alinya/maps projectes/Alinya/indicators projectes/Alinya/metadata projectes/Alinya/diagnosis projectes/Alinya/recommendations projectes/Alinya/history projectes/Alinya/reports projectes/Alinya/validation ':(exclude)projectes/Alinya/maps/*.zip'
           if [ -e projectes/Alinya/processed/ecostress ]; then
             git add projectes/Alinya/processed/ecostress
           fi
