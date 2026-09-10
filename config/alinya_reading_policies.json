@@ -1,0 +1,864 @@
+{
+  "schema_version": "1.0",
+  "scope": "Alinya",
+  "rules": "Comprovació diària no implica observació diària. Cap fórmula ecològica modificada.",
+  "readings": {
+    "air_temperature": {
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "expected_frequency": "font cada 30 minuts · comprovació automatitzada diària",
+      "check_interval_hours": 24,
+      "max_age_hours": 2,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "XEMA codi_estat=V per considerar validada; provisional visible com PENDENT QA; acumulats amb cobertura ≥80 %",
+      "dependencies": [
+        "current_fire_danger",
+        "thermal_comfort",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "check_key": "meteocat_xema"
+    },
+    "wind_gust": {
+      "source": "Meteocat XEMA · estació CJ Organyà · 9,2 km de Y4",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "expected_frequency": "font cada 30 minuts · comprovació automatitzada diària",
+      "check_interval_hours": 24,
+      "max_age_hours": 2,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "XEMA codi_estat=V per considerar validada; provisional visible com PENDENT QA; acumulats amb cobertura ≥80 %",
+      "dependencies": [
+        "current_fire_danger",
+        "thermal_comfort",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "check_key": "meteocat_xema_wind"
+    },
+    "relative_humidity": {
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "expected_frequency": "font cada 30 minuts · comprovació automatitzada diària",
+      "check_interval_hours": 24,
+      "max_age_hours": 2,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "XEMA codi_estat=V per considerar validada; provisional visible com PENDENT QA; acumulats amb cobertura ≥80 %",
+      "dependencies": [
+        "current_fire_danger",
+        "thermal_comfort",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "check_key": "meteocat_xema"
+    },
+    "wind": {
+      "source": "Meteocat XEMA · estació CJ Organyà · 9,2 km de Y4",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "expected_frequency": "font cada 30 minuts · comprovació automatitzada diària",
+      "check_interval_hours": 24,
+      "max_age_hours": 2,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "XEMA codi_estat=V per considerar validada; provisional visible com PENDENT QA; acumulats amb cobertura ≥80 %",
+      "dependencies": [
+        "current_fire_danger",
+        "thermal_comfort",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "check_key": "meteocat_xema_wind"
+    },
+    "precipitation": {
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "expected_frequency": "font cada 30 minuts · comprovació automatitzada diària",
+      "check_interval_hours": 24,
+      "max_age_hours": 2,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "XEMA codi_estat=V per considerar validada; provisional visible com PENDENT QA; acumulats amb cobertura ≥80 %",
+      "dependencies": [
+        "current_fire_danger",
+        "thermal_comfort",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "check_key": "meteocat_xema"
+    },
+    "precipitation_7d": {
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "expected_frequency": "recalculada amb cada nou període XEMA Y4",
+      "check_interval_hours": 24,
+      "max_age_hours": 2,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "XEMA codi_estat=V per considerar validada; provisional visible com PENDENT QA; acumulats amb cobertura ≥80 %",
+      "dependencies": [
+        "current_fire_danger",
+        "thermal_comfort",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "check_key": "meteocat_xema",
+      "input_readings": [
+        "precipitation"
+      ]
+    },
+    "precipitation_30d": {
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "expected_frequency": "recalculada amb cada nou període XEMA Y4",
+      "check_interval_hours": 24,
+      "max_age_hours": 2,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "XEMA codi_estat=V per considerar validada; provisional visible com PENDENT QA; acumulats amb cobertura ≥80 %",
+      "dependencies": [
+        "current_fire_danger",
+        "thermal_comfort",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "check_key": "meteocat_xema",
+      "input_readings": [
+        "precipitation"
+      ]
+    },
+    "days_without_significant_rain": {
+      "source": "Meteocat XEMA · estació Y4 Alinyà",
+      "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
+      "expected_frequency": "recalculada amb cada nou període XEMA Y4",
+      "check_interval_hours": 24,
+      "max_age_hours": 2,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "XEMA codi_estat=V per considerar validada; provisional visible com PENDENT QA; acumulats amb cobertura ≥80 %",
+      "dependencies": [
+        "current_fire_danger",
+        "thermal_comfort",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "check_key": "meteocat_xema",
+      "input_readings": [
+        "precipitation"
+      ]
+    },
+    "pla_alfa": {
+      "source": "Cos d'Agents Rurals / Generalitat de Catalunya",
+      "source_url": "https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/",
+      "expected_frequency": "font oficial a les 00.00 i 09.30 h, o quan calgui",
+      "check_interval_hours": 24,
+      "max_age_hours": 48,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "check_key": "pla_alfa"
+    },
+    "surface_temperature": {
+      "source": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
+      "source_url": "https://landsatlook.usgs.gov/stac-server/",
+      "expected_frequency": "Landsat 8/9: revisita combinada 8 dies; ECOSTRESS irregular; QA local necessari",
+      "check_interval_hours": 24,
+      "max_age_hours": 768,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "QA_PIXEL / QC ECOSTRESS, valors finits, cobertura AOI; una composició conserva tot el període i mai és observació actual",
+      "dependencies": [
+        "climate_refuges",
+        "current_fire_danger",
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "metadata_path": "metadata/current_surface_temperature.json",
+      "check_key": "landsat_surface_temperature"
+    },
+    "ndmi": {
+      "source": "Copernicus Sentinel-2 MSI L2A",
+      "source_url": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a",
+      "expected_frequency": "Revisita nominal 5 dies; disponibilitat útil condicionada per núvols i QA",
+      "check_interval_hours": 24,
+      "max_age_hours": 360,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "L2A; SCL 4/5/6, cobertura vàlida AOI ≥85 %, bandes finites i mateixes escena/malla/màscara",
+      "dependencies": [
+        "climate_refuges",
+        "current_fire_danger",
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "metadata_path": "metadata/sentinel2_cdse_automated_connector.json",
+      "check_key": "sentinel2_indices"
+    },
+    "ndvi": {
+      "source": "Copernicus Sentinel-2 MSI L2A",
+      "source_url": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a",
+      "expected_frequency": "Revisita nominal 5 dies; disponibilitat útil condicionada per núvols i QA",
+      "check_interval_hours": 24,
+      "max_age_hours": 360,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "L2A; SCL 4/5/6, cobertura vàlida AOI ≥85 %, bandes finites i mateixes escena/malla/màscara",
+      "dependencies": [
+        "climate_refuges",
+        "current_fire_danger",
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "metadata_path": "metadata/sentinel2_cdse_automated_connector.json",
+      "check_key": "sentinel2_indices"
+    },
+    "albedo": {
+      "source": "Copernicus Sentinel-2 MSI L2A",
+      "source_url": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a",
+      "expected_frequency": "Revisita nominal 5 dies; disponibilitat útil condicionada per núvols i QA",
+      "check_interval_hours": 24,
+      "max_age_hours": 360,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "L2A; SCL 4/5/6, cobertura vàlida AOI ≥85 %, bandes finites i mateixes escena/malla/màscara",
+      "dependencies": [
+        "climate_refuges",
+        "current_fire_danger",
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "metadata_path": "metadata/sentinel2_cdse_automated_connector.json",
+      "check_key": "sentinel2_indices"
+    },
+    "air_quality": {
+      "source": "Copernicus CAMS European air-quality forecast",
+      "source_url": "https://ads.atmosphere.copernicus.eu/",
+      "expected_frequency": "font horària · comprovació automatitzada diària",
+      "check_interval_hours": 24,
+      "max_age_hours": 6,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "check_key": "cams_pm25"
+    },
+    "thermal_comfort": {
+      "source": "Derivat EcoRadar · temperatura aparent de Steadman amb XEMA",
+      "source_url": "docs/data_sources/alinya_daily_readings.md",
+      "expected_frequency": "font XEMA cada 30 minuts · comprovació automatitzada diària",
+      "check_interval_hours": 24,
+      "max_age_hours": 2,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "XEMA codi_estat=V per considerar validada; provisional visible com PENDENT QA; acumulats amb cobertura ≥80 %",
+      "dependencies": [
+        "current_fire_danger",
+        "thermal_comfort",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "check_key": "meteocat_xema",
+      "input_readings": [
+        "air_temperature",
+        "relative_humidity",
+        "wind"
+      ]
+    },
+    "terrain_shade": {
+      "source": "ICGC MDT 5 m + posició solar calculada",
+      "source_url": "https://www.icgc.cat/ca/Geoinformacio-i-mapes/Dades-i-productes/Geoinformacio-cartografica/Altimetria",
+      "expected_frequency": "diària a les 15.00 h locals",
+      "check_interval_hours": 24,
+      "max_age_hours": 30,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "check_key": "terrain_shade"
+    },
+    "current_fire_danger": {
+      "source": "Índex EcoRadar derivat · fonts detallades a la lectura",
+      "source_url": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
+      "expected_frequency": "diària després de comprovar totes les entrades",
+      "check_interval_hours": 24,
+      "max_age_hours": 30,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "input_readings": [
+        "relative_humidity",
+        "wind",
+        "wind_gust",
+        "ndmi",
+        "surface_temperature",
+        "forestdrought"
+      ],
+      "check_key": "current_fire_danger"
+    },
+    "climate_refuges": {
+      "source": "EcoRadar derivation from LST, NDMI and NDVI",
+      "source_url": null,
+      "expected_frequency": "Quan canvien LST, NDVI o NDMI",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "input_readings": [
+        "surface_temperature",
+        "ndvi",
+        "ndmi"
+      ]
+    },
+    "vegetation": {
+      "source": "CLMS HRL Tree Cover Density 2023 + Herbaceous Cover 2023",
+      "source_url": "https://land.copernicus.eu/en/products",
+      "expected_frequency": "Publicació per versions; calendari oficial no acreditat",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/copernicus_hrl_connector.json",
+      "source_version": "TCD 2023 + Herbaceous Cover 2023",
+      "input_readings": [
+        "tree_cover_density",
+        "grassland"
+      ]
+    },
+    "habitats": {
+      "source": "Cartografia dels habitats terrestres, versio 3 (2019/2024)",
+      "source_url": "https://sig.gencat.cat/ows/wfs",
+      "expected_frequency": "Publicació per versions; calendari oficial no acreditat",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/habitats_metadata.json"
+    },
+    "biodiversity": {
+      "source": "GBIF + iNaturalist",
+      "source_url": "https://api.gbif.org/v1/occurrence/search?limit=0",
+      "expected_frequency": "GBIF/iNaturalist: ingestió contínua i revisions; sense termini garantit",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Paginació completa, taxonomia, eventDate, llicència, incertesa, duplicats i retall; una nova consulta no fa actuals els registres antics",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/biodiversitat_metadata.json",
+      "additional_source_urls": [
+        "https://api.inaturalist.org/v1/observations?per_page=1"
+      ]
+    },
+    "connectivity": {
+      "source": "Infraestructura Verda / Connectivitat ecològica",
+      "source_url": "https://sig.gencat.cat/ows/INFRAESTRUCTURA_VERDA/wfs",
+      "expected_frequency": "Publicació per versions; calendari oficial no acreditat",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/connectivitat_metadata.json"
+    },
+    "access": {
+      "source": "OpenStreetMap / Overpass (font comunitària, no inventari oficial)",
+      "source_url": "https://wiki.openstreetmap.org/wiki/Overpass_API",
+      "expected_frequency": "OSM: edició contínua sense termini garantit; vigilància diària",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/recreational_pressure_metadata.json"
+    },
+    "publicUse": {
+      "source": "OpenStreetMap / Overpass (font comunitària, no inventari oficial)",
+      "source_url": "https://wiki.openstreetmap.org/wiki/Overpass_API",
+      "expected_frequency": "OSM: edició contínua sense termini garantit; vigilància diària",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/recreational_pressure_metadata.json"
+    },
+    "water": {
+      "source": "ACA / Gencat AIGUA WFS",
+      "source_url": "https://sig.gencat.cat/ows/AIGUA/wfs",
+      "expected_frequency": "Publicació per versions; calendari oficial no acreditat",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/hidrologia_metadata.json"
+    },
+    "historical_fires": {
+      "source": "Superfícies afectades per incendis forestals v1.1",
+      "source_url": "https://sig.gencat.cat/ows/VEGETACIO/wfs",
+      "expected_frequency": "Publicació per versions; calendari oficial no acreditat",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/incendis_metadata.json"
+    },
+    "hic": {
+      "source": "HIC",
+      "source_url": "https://sig.gencat.cat/ows/wfs",
+      "expected_frequency": "Publicació per versions; calendari oficial no acreditat",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/habitats_metadata.json",
+      "parent_reading": "habitats"
+    },
+    "land_cover": {
+      "source": "ICGC Cobertes del sòl 2024",
+      "source_url": "https://geoserveis.icgc.cat/servei/catalunya/cobertes-sol/wms",
+      "expected_frequency": "Publicació per versions; calendari oficial no acreditat",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/cobertes_sol_metadata.json",
+      "parent_reading": "vegetation",
+      "source_version": "cobertes_2024"
+    },
+    "terrain": {
+      "source": "ICGC MDT 5 m",
+      "source_url": "https://datacloud.icgc.cat/datacloud/model-elevacions-terreny/tif_unzip/model-elevacions-terreny-topografic-catalunya-5m-2009-2018.tif",
+      "expected_frequency": "Publicació per versions; calendari oficial no acreditat",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "terrain_shade",
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/terrain_metadata.json",
+      "parent_reading": "water",
+      "source_version": "MDT topogràfic 5 m 2009–2018"
+    },
+    "structural_fire_danger": {
+      "source": "Generalitat Mapa bàsic de perill d’incendi forestal 2024",
+      "source_url": "https://agricultura.gencat.cat/ca/serveis/cartografia-sig/bases-cartografiques/boscos/mapa-perill-incendi-forestal/mapa-perill-basic-incendi-forestal-2024",
+      "expected_frequency": "Publicació per versions; calendari oficial no acreditat",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": null,
+      "parent_reading": "historical_fires",
+      "source_version": "2024",
+      "artifact_path": "raw/incendis/perill_basic_2024/PERILLBASICINCENDI.tif"
+    },
+    "tree_cover_density": {
+      "source": "Densitat arbòria CLMS HRL",
+      "source_url": "https://land.copernicus.eu/en/products",
+      "expected_frequency": "Per edició del producte HRL; comprovar calendari específic, no assumir periodicitat diària",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/copernicus_hrl_connector.json",
+      "parent_reading": "vegetation",
+      "source_version": "Tree Cover Density 2023"
+    },
+    "grassland": {
+      "source": "Coberta herbàcia CLMS HRL",
+      "source_url": "https://land.copernicus.eu/en/products",
+      "expected_frequency": "Per edició del producte HRL; comprovar calendari específic, no assumir periodicitat diària",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/copernicus_hrl_connector.json",
+      "parent_reading": "vegetation",
+      "source_version": "Herbaceous Cover 2023"
+    },
+    "forestdrought": {
+      "source": "CREAF / EMF ForestDrought",
+      "source_url": "https://data-emf.creaf.cat/public/gpkg/daily_modelled_forests/",
+      "expected_frequency": "Model diari; publicació amb possible retard",
+      "check_interval_hours": 24,
+      "max_age_hours": 48,
+      "threshold_basis": "Llindar de vigilància operatiu de 48 h, no garantia de publicació CREAF",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Data real del model, esquema, valors finits i suport forestal natiu 500 m; sense extrapolar cobertura",
+      "dependencies": [
+        "current_fire_danger",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "metadata_path": "metadata/creaf_forestdrought_connector.json",
+      "check_key": "creaf_forestdrought"
+    },
+    "ecostress": {
+      "source": "NASA/JPL ECOSTRESS",
+      "source_url": "https://lpdaac.usgs.gov/products/eco_l2t_lstev003/",
+      "expected_frequency": "Adquisició irregular; consulta diària",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "Llindar operatiu EcoRadar existent; no és garantia de publicació de la font",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "QA_PIXEL / QC ECOSTRESS, valors finits, cobertura AOI; una composició conserva tot el període i mai és observació actual",
+      "dependencies": [
+        "surface_temperature",
+        "climate_refuges",
+        "current_fire_danger"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "metadata_path": "metadata/ecostress_connector.json",
+      "check_key": "ecostress_surface_temperature"
+    },
+    "places": {
+      "source": "Poblacions i topònims OSM",
+      "source_url": "https://wiki.openstreetmap.org/wiki/Overpass_API",
+      "expected_frequency": "OSM: edició contínua sense termini garantit; vigilància diària",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "RADAR",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "version_watch_qa_gate",
+      "blocking_reason": "Promoció automàtica de nova edició pendent de QA específic i reconstrucció cartogràfica; es conserva la versió validada",
+      "metadata_path": "metadata/relleu_base_icgc_osm.json"
+    },
+    "integrated_fire_danger": {
+      "source": "Perill integrat EcoRadar (context estructural)",
+      "source_url": null,
+      "expected_frequency": "Recalcular quan canvia una entrada vàlida; conservar períodes de cada component",
+      "check_interval_hours": 24,
+      "max_age_hours": null,
+      "threshold_basis": "No es dedueix caducitat d’una edició sense calendari oficial",
+      "new_valid_data": "Identificador, revisió o contingut diferent amb QA aprovat; no n’hi ha prou amb una nova data de consulta",
+      "qa_required": "Proveniència, data/període, esquema, CRS, àmbit, cobertura i màscares segons connector documentat",
+      "dependencies": [
+        "visor",
+        "reports"
+      ],
+      "impact": [
+        "visor: valor, mapa, data i estat",
+        "RADAR: recalcular només les entrades afectades",
+        "informes: mateix snapshot i vigència"
+      ],
+      "automation": "existing_daily_pipeline",
+      "blocking_reason": null,
+      "input_readings": [
+        "structural_fire_danger",
+        "ndmi",
+        "surface_temperature",
+        "land_cover"
+      ],
+      "metadata_path": "indicators/perill_integrat_ecoradar.json"
+    }
+  }
+}

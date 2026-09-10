@@ -775,13 +775,25 @@
       managementImplications:[{priority:'Criteri de prudència',action:'Utilitzar la lectura com a cribratge i no com una ordre automàtica.',rationale:'Evita convertir correlació en causalitat.',validation:'Font, data, resolució i camp.'}],
       integratedConclusion:'La lectura aporta un patró territorial útil, però la decisió requereix contrast amb altres variables, identificació de causa i validació de camp.'
     });
+    function withFreshness(report,key) {
+      const registry=D.readingRegistry?.readings?.[ecologicalKeys[key] || key];
+      const f=registry?.freshness;
+      report.snapshotId=D.snapshotId;
+      if(f) {
+        const timestamp=Date.parse(registry.data_at_utc || registry.period_end_utc), max=f.policy?.max_age_hours;
+        const stale=!['PENDENT QA','SENSE DADA'].includes(f.status) && Number.isFinite(timestamp) && max!=null && Date.now()-timestamp>max*3600000;
+        report.facts=[{label:'Vigència de la lectura',value:stale?'DESACTUALITZADA':f.status,note:`Última validada: ${f.last_validated_data_at_utc || f.source_version || 'data no acreditada'} · ${f.policy?.expected_frequency || ''}`},...(report.facts || [])];
+        report.sources=[...(report.sources || []),`Snapshot ${D.snapshotId} · ${f.blocking_reason || 'política de vigència aplicada'}`];
+      }
+      return report;
+    }
     return function build(selection) {
       const key=selection.key, guide=selection.guide || {}, aliases={hic:'habitats',biodiversity:'biodiversity',fires:'fires'};
       const semanticKey=selection.type === 'layer' ? (aliases[key] || key) : key;
       if (semanticKey === 'fireCurrent') {
         const report=buildFireReport(D);
         report.ecologicalContext=buildEcologicalContext(D,semanticKey,report);
-        return report;
+        return withFreshness(report,semanticKey);
       }
       const base=selection.type === 'layer' ? (layerSpecific[key] || structural[aliases[key]]) || {} : (optional[key] ? optional[key]() : structural[key]) || {};
       const technical=technicalProfiles[semanticKey] || {};
@@ -863,7 +875,7 @@
         ];
       }
       profile.ecologicalContext=buildEcologicalContext(D,semanticKey,profile);
-      return profile;
+      return withFreshness(profile,semanticKey);
     };
   }
   global.EcoRadarAlinyaReportProfiles = { buildFactory, buildFireReport, prepareIgnitionScenario, buildEcologicalContext, compatibleEvidence, registerDiagnosticPolicy };

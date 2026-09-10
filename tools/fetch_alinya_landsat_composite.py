@@ -35,7 +35,7 @@ OUTPUT_TIF = OUTPUT_DIR / "landsat_lst.tif"
 METADATA = PROJECT / "metadata" / "landsat_connector.json"
 SEARCH_URL = "https://planetarycomputer.microsoft.com/api/stac/v1/search"
 SIGN_URL = "https://planetarycomputer.microsoft.com/api/sas/v1/sign"
-DATE_RANGE = "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z"
+DATE_RANGE = "2025-06-01T00:00:00Z/" + datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 TARGET_CRS = "EPSG:32631"
 RESOLUTION = 30.0
 

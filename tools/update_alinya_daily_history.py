@@ -43,7 +43,7 @@ def _append_jsonl(path: Path, records: list[dict]) -> None:
 
 def _fingerprint(reading: str, data_at: str | None, value_numeric: float | None, value: str) -> str:
     # Display formatting (decimal comma, unit wording) must not create a new observation.
-    raw = json.dumps([reading, data_at], ensure_ascii=False, separators=(",", ":"))
+    raw = json.dumps([reading, data_at, value_numeric if value_numeric is not None else value], ensure_ascii=False, separators=(",", ":"))
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:20]
 
 

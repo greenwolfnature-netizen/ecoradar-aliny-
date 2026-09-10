@@ -1611,6 +1611,7 @@ def render_index(data: dict) -> str:
       <h3 style="margin:22px 0 8px;color:#163f35">Traçabilitat de les lectures variables actualitzades</h3>
       <p class="eu-lead">Les lectures variables no redefineixen cada dia els valors estructurals del territori. Serveixen per ajustar la situació operativa, detectar canvis i decidir quan cal validar o accelerar una actuació. La taula mostra la dada real disponible, la seva data i la funció concreta que té en la decisió.</p>
       <div class="eu-fire-table-wrap"><table class="eu-data-table eu-evidence-table"><thead><tr><th>Lectura</th><th>Valor i estat</th><th>Data real</th><th>Com entra en la diagnosi i la gestió</th></tr></thead><tbody id="eu-daily-decision-evidence"></tbody></table></div>
+      <details><summary>Vigència i actualització de totes les lectures</summary><p>Data de la dada i comprovació de la font són diferents. Una composició o un inventari conserva la seva versió.</p><div class="eu-fire-table-wrap"><table class="eu-data-table"><thead><tr><th>Lectura</th><th>Estat</th><th>Última validada / versió</th><th>Periodicitat de la font</th><th>Bloqueig</th></tr></thead><tbody id="eu-all-reading-freshness"></tbody></table></div></details>
       <h3 style="margin:22px 0 8px;color:#163f35">Traçabilitat dels indicadors Radar</h3>
       <p class="eu-lead">Els dotze RADAR tenen tipus de resultat diferents. CORE_12 els utilitza com a evidència no agregada dins una matriu de decisió; no els converteix en una escala comuna ni en dotze ordres d’actuació.</p>
       <div class="eu-fire-table-wrap"><table class="eu-data-table eu-evidence-table"><thead><tr><th>Indicador</th><th>Valor, estat i confiança</th><th>Ús en la decisió</th></tr></thead><tbody id="eu-core-decision-evidence"></tbody></table></div>
@@ -2060,9 +2061,20 @@ def render_index(data: dict) -> str:
   }}
   function renderDecisionEvidence() {{
     const readings = D.dailyReadings?.readings || {{}};
+    const registryReadings = D.readingRegistry?.readings || {{}};
+    const freshnessState = item => {{
+      const f=item?.freshness, stamp=Date.parse(item?.data_at_utc || item?.period_end_utc), max=f?.policy?.max_age_hours;
+      if (f?.status !== 'PENDENT QA' && f?.status !== 'SENSE DADA' && Number.isFinite(stamp) && max != null && Date.now()-stamp>max*3600000) return 'DESACTUALITZADA';
+      return f?.status || 'PENDENT QA';
+    }};
+    root.querySelector('#eu-all-reading-freshness').innerHTML = Object.entries(registryReadings).map(([key,item]) => {{
+      const f=item.freshness || {{}}, p=f.policy || {{}};
+      const dated=item.temporal_kind==='multitemporal_composite' ? `${{humanDate(item.period_start_utc)}} — ${{humanDate(item.period_end_utc)}} (composició)` : humanDate(f.last_validated_data_at_utc);
+      return `<tr><td>${{esc(item.label || key)}}</td><td>${{esc(freshnessState(item))}}</td><td>${{esc(dated)}}${{f.source_version ? ' · '+esc(f.source_version) : ''}}</td><td>${{esc(p.expected_frequency || 'pendent')}}</td><td>${{esc(f.blocking_reason || '—')}}</td></tr>`;
+    }}).join('');
     root.querySelector('#eu-daily-decision-evidence').innerHTML = dailyReadingOrder.map(key => {{
       const item = readings[key] || {{label:key, value:'dada no disponible', status:'dada no disponible', data_at_utc:null}};
-      return `<tr><td>${{esc(item.label || key)}}</td><td class="eu-reading-state"><strong>${{esc(item.value || 'dada no disponible')}}</strong><br><span class="eu-subtle">${{esc(item.status || 'estat no informat')}}</span></td><td>${{esc(humanDate(item.data_at_utc))}}</td><td>${{esc(dailyReadingRoles[key])}}</td></tr>`;
+      return `<tr><td>${{esc(item.label || key)}}</td><td class="eu-reading-state"><strong>${{esc(item.value || 'dada no disponible')}}</strong><br><span class="eu-subtle">${{esc(freshnessState(registryReadings[key]))}}</span></td><td>${{esc(humanDate(item.data_at_utc))}}</td><td>${{esc(dailyReadingRoles[key])}}</td></tr>`;
     }}).join('');
     root.querySelector('#eu-core-decision-evidence').innerHTML = D.metrics.core.map(metric => {{
       const value = metric.value == null ? null : Math.max(0,Math.min(100,metric.value));
@@ -2383,6 +2395,7 @@ def render_index(data: dict) -> str:
         normalization: remote.normalization,
         cells: D.currentFire.cells
       }};
+      if (snapshot.snapshot_id !== D.snapshotId) throw new Error('nova versió disponible: cal recarregar el visor complet per sincronitzar mapes, RADAR i informes');
       D.dailyReadings = snapshot.daily_readings;
       D.dailyHistory = snapshot.daily_history;
       D.readingRegistry = snapshot.reading_registry;

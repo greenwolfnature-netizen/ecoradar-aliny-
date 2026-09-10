@@ -34,7 +34,7 @@ def _landsat() -> dict | None:
     tif = PROJECT / "processed" / "landsat" / "landsat_lst.tif"
     if not contributing_scenes or not tif.is_file():
         return None
-    acquired_values = sorted(scene["acquired_at_utc"] for scene in all_scenes)
+    acquired_values = sorted(scene["acquired_at_utc"] for scene in contributing_scenes)
     return {
         "source_key": "landsat",
         "source": metadata.get("source", "USGS Landsat Collection 2 Level-2 Surface Temperature"),

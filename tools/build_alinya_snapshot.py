@@ -15,6 +15,9 @@ import json
 from pathlib import Path
 import shutil
 from typing import Any
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from alinya_reading_freshness import apply_policies, fingerprint, write_audit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -299,7 +302,6 @@ def _build_records() -> tuple[dict[str, Any], dict[str, Any]]:
 def _snapshot_seed(products: dict[str, Any], sources: dict[str, Any]) -> dict[str, Any]:
     daily = products["daily"]
     return {
-        "checked_at_utc": daily.get("checked_at_utc"),
         "readings": {
             key: {
                 field: item.get(field)
@@ -318,9 +320,9 @@ def _snapshot_seed(products: dict[str, Any], sources: dict[str, Any]) -> dict[st
             }
             for key, item in sorted(products["core"].items())
         },
-        "source_dates": {
-            key: value.get("query_date") or value.get("generated_at_utc") or value.get("created_at")
-            for key, value in sorted(sources.items()) if isinstance(value, dict)
+        "source_content": {
+            key: fingerprint(value)
+            for key, value in sorted(sources.items()) if isinstance(value, dict) and not key.endswith("catalog_check")
         },
     }
 
@@ -355,6 +357,9 @@ def _stamp_csv(path: Path, snapshot_id: str, field: str = "snapshot_input") -> N
 
 def build() -> dict[str, Any]:
     products, sources = _build_records()
+    previous = json.loads(REGISTRY.read_text(encoding="utf-8")) if REGISTRY.exists() else {}
+    evaluated_at = datetime.now(timezone.utc)
+    apply_policies(PROJECT, products["readings"], products["daily"], previous, evaluated_at)
     seed = _snapshot_seed(products, sources)
     digest = hashlib.sha256(json.dumps(seed, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
     snapshot_id = f"alinya-{digest[:16]}"
@@ -363,9 +368,12 @@ def build() -> dict[str, Any]:
         previous_id = previous.get("snapshot_id")
         if previous_id and previous_id != snapshot_id:
             SNAPSHOT_HISTORY.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(REGISTRY, SNAPSHOT_HISTORY / f"{previous_id}.json")
+            archived = SNAPSHOT_HISTORY / f"{previous_id}.json"
+            if not archived.exists():
+                shutil.copy2(REGISTRY, archived)
     registry = {
-        "schema_version": "2.0",
+        "schema_version": "2.1",
+        "freshness_evaluated_at_utc": evaluated_at.isoformat().replace("+00:00", "Z"),
         "snapshot_id": snapshot_id,
         "generated_at_utc": _iso_now(),
         "checked_at_utc": products["daily"].get("checked_at_utc"),
@@ -416,6 +424,15 @@ def build() -> dict[str, Any]:
         for feature in payload.get("features", []):
             feature.setdefault("properties", {})["snapshot_id"] = snapshot_id
         cells.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    for relative in ("indicators/daily_readings.json", "metadata/daily_readings.json"):
+        path=PROJECT/relative
+        if path.exists():
+            data=json.loads(path.read_text(encoding="utf-8"))
+            for key,item in data.get("readings",{}).items():
+                item["freshness"]=registry["readings"][key]["freshness"]
+                item["status"]=item["freshness"]["status"]
+            path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    write_audit(PROJECT, registry)
     return registry
 
 
