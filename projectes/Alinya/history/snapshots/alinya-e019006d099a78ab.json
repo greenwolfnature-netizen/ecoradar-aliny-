@@ -1,7 +1,7 @@
 {
   "schema_version": "2.0",
-  "snapshot_id": "alinya-e695a0994b1cf57f",
-  "generated_at_utc": "2026-09-10T05:13:11.817851Z",
+  "snapshot_id": "alinya-e019006d099a78ab",
+  "generated_at_utc": "2026-09-10T05:13:09.193338Z",
   "checked_at_utc": "2026-09-10T05:10:53Z",
   "scope": "Muntanya d'Alinyà",
   "contract": "Single metadata state consumed by readings, RADAR, completeness, viewer and report generator.",
@@ -901,7 +901,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab",
+      "snapshot_input": "alinya-3f7897d9ffb4f43c",
       "completeness": {
         "indicator": "CORE_01",
         "required_sources": [
@@ -1017,7 +1017,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab",
+      "snapshot_input": "alinya-3f7897d9ffb4f43c",
       "completeness": {
         "indicator": "CORE_02",
         "required_sources": [
@@ -1125,7 +1125,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia.",
-      "snapshot_input": "alinya-e019006d099a78ab",
+      "snapshot_input": "alinya-3f7897d9ffb4f43c",
       "completeness": {
         "indicator": "CORE_03",
         "required_sources": [
@@ -1259,7 +1259,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia, validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab",
+      "snapshot_input": "alinya-3f7897d9ffb4f43c",
       "completeness": {
         "indicator": "CORE_04",
         "required_sources": [
@@ -1435,7 +1435,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab",
+      "snapshot_input": "alinya-3f7897d9ffb4f43c",
       "completeness": {
         "indicator": "CORE_05",
         "required_sources": [
@@ -1571,7 +1571,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab",
+      "snapshot_input": "alinya-3f7897d9ffb4f43c",
       "completeness": {
         "indicator": "CORE_06",
         "required_sources": [
@@ -1680,7 +1680,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab",
+      "snapshot_input": "alinya-3f7897d9ffb4f43c",
       "completeness": {
         "indicator": "CORE_07",
         "required_sources": [
@@ -1794,7 +1794,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab",
+      "snapshot_input": "alinya-3f7897d9ffb4f43c",
       "completeness": {
         "indicator": "CORE_08",
         "required_sources": [
@@ -1945,7 +1945,7 @@
         },
         "qa": {
           "rating": "limitada",
-          "reason": "Qualitat/actualització efectiva del producte 48.8 %; no s’anomena confiança ecològica."
+          "reason": "Qualitat/actualització efectiva del producte 48.9 %; no s’anomena confiança ecològica."
         },
         "representativitat": {
           "rating": "limitada",
@@ -1961,7 +1961,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab",
+      "snapshot_input": "alinya-3f7897d9ffb4f43c",
       "completeness": {
         "indicator": "CORE_09",
         "required_sources": [
@@ -2093,7 +2093,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab",
+      "snapshot_input": "alinya-3f7897d9ffb4f43c",
       "completeness": {
         "indicator": "CORE_10",
         "required_sources": [
@@ -2210,7 +2210,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, vigencia, cobertura, resolucio, qa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab",
+      "snapshot_input": "alinya-3f7897d9ffb4f43c",
       "completeness": {
         "indicator": "CORE_11",
         "required_sources": [
@@ -2472,7 +2472,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab",
+      "snapshot_input": "alinya-3f7897d9ffb4f43c",
       "completeness": {
         "indicator": "CORE_12",
         "required_sources": [

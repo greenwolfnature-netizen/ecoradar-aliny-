@@ -1,8 +1,8 @@
 {
   "schema_version": "2.0",
-  "snapshot_id": "alinya-50f3600ec62190b3",
-  "generated_at_utc": "2026-09-10T05:04:32.444752Z",
-  "checked_at_utc": "2026-09-10T05:02:26Z",
+  "snapshot_id": "alinya-e695a0994b1cf57f",
+  "generated_at_utc": "2026-09-10T05:13:11.817851Z",
+  "checked_at_utc": "2026-09-10T05:10:53Z",
   "scope": "Muntanya d'Alinyà",
   "contract": "Single metadata state consumed by readings, RADAR, completeness, viewer and report generator.",
   "readings": {
@@ -19,7 +19,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_point",
@@ -47,7 +47,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_point_context",
@@ -75,7 +75,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_point",
@@ -103,7 +103,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_point_context",
@@ -131,7 +131,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_point",
@@ -159,7 +159,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_time_series",
@@ -187,7 +187,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_time_series",
@@ -215,7 +215,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_time_series",
@@ -243,7 +243,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "municipality",
@@ -271,7 +271,7 @@
       "temporal_kind": "multitemporal_composite",
       "period_start_utc": "2025-06-03T10:36:04.004415Z",
       "period_end_utc": "2026-08-25T10:36:29.966485Z",
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": 30,
       "coverage": {
         "valid_pct": 100.0,
@@ -302,7 +302,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": 10,
       "coverage": {
         "valid_area_ha": 5461.4,
@@ -334,7 +334,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": 10,
       "coverage": {
         "valid_area_ha": 5461.4,
@@ -366,7 +366,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": 10,
       "coverage": {
         "valid_area_ha": 5461.4,
@@ -398,7 +398,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": 10000,
       "coverage": null,
       "spatial_support": "model_grid_context",
@@ -426,7 +426,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_point_derived",
@@ -454,7 +454,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": 5,
       "coverage": null,
       "spatial_support": "study_area_raster",
@@ -482,7 +482,7 @@
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:02:26Z",
+      "checked_at_utc": "2026-09-10T05:10:53Z",
       "resolution_m": 100,
       "coverage": {
         "valid_area_ha": 5353.66,
@@ -494,7 +494,7 @@
       "support_id": "Alinyà study polygon",
       "grid_id": "current_fire_danger:EPSG25831:100m",
       "mask_id": "study_area_and_available_components",
-      "qa": "confiança del producte baixa · 48.9 %",
+      "qa": "confiança del producte baixa · 48.8 %",
       "quality_verified": true,
       "coverage_verified": true,
       "validity": "actualitzada avui",
@@ -901,7 +901,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c",
+      "snapshot_input": "alinya-e019006d099a78ab",
       "completeness": {
         "indicator": "CORE_01",
         "required_sources": [
@@ -1017,7 +1017,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c",
+      "snapshot_input": "alinya-e019006d099a78ab",
       "completeness": {
         "indicator": "CORE_02",
         "required_sources": [
@@ -1125,7 +1125,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c",
+      "snapshot_input": "alinya-e019006d099a78ab",
       "completeness": {
         "indicator": "CORE_03",
         "required_sources": [
@@ -1259,7 +1259,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia, validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c",
+      "snapshot_input": "alinya-e019006d099a78ab",
       "completeness": {
         "indicator": "CORE_04",
         "required_sources": [
@@ -1435,7 +1435,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c",
+      "snapshot_input": "alinya-e019006d099a78ab",
       "completeness": {
         "indicator": "CORE_05",
         "required_sources": [
@@ -1571,7 +1571,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c",
+      "snapshot_input": "alinya-e019006d099a78ab",
       "completeness": {
         "indicator": "CORE_06",
         "required_sources": [
@@ -1680,7 +1680,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c",
+      "snapshot_input": "alinya-e019006d099a78ab",
       "completeness": {
         "indicator": "CORE_07",
         "required_sources": [
@@ -1794,7 +1794,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c",
+      "snapshot_input": "alinya-e019006d099a78ab",
       "completeness": {
         "indicator": "CORE_08",
         "required_sources": [
@@ -1945,7 +1945,7 @@
         },
         "qa": {
           "rating": "limitada",
-          "reason": "Qualitat/actualització efectiva del producte 48.9 %; no s’anomena confiança ecològica."
+          "reason": "Qualitat/actualització efectiva del producte 48.8 %; no s’anomena confiança ecològica."
         },
         "representativitat": {
           "rating": "limitada",
@@ -1961,7 +1961,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c",
+      "snapshot_input": "alinya-e019006d099a78ab",
       "completeness": {
         "indicator": "CORE_09",
         "required_sources": [
@@ -2093,7 +2093,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c",
+      "snapshot_input": "alinya-e019006d099a78ab",
       "completeness": {
         "indicator": "CORE_10",
         "required_sources": [
@@ -2210,7 +2210,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, vigencia, cobertura, resolucio, qa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c",
+      "snapshot_input": "alinya-e019006d099a78ab",
       "completeness": {
         "indicator": "CORE_11",
         "required_sources": [
@@ -2472,7 +2472,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c",
+      "snapshot_input": "alinya-e019006d099a78ab",
       "completeness": {
         "indicator": "CORE_12",
         "required_sources": [
@@ -3304,7 +3304,7 @@
     },
     "sentinel2_catalog_check": {
       "schema_version": "1.0",
-      "checked_at_utc": "2026-09-10T05:04:08.045069+00:00",
+      "checked_at_utc": "2026-09-10T05:12:47.187063+00:00",
       "source": "Copernicus Data Space Ecosystem Sentinel-2 L2A STAC",
       "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&datetime=2026-07-27T00%3A00%3A00Z%2F2026-09-10T23%3A59%3A59Z&limit=100",
       "search_period": {

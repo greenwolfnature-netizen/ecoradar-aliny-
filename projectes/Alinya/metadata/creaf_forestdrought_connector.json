@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-09-10T05:02:26Z",
-  "latest_catalog_check_utc": "2026-09-10T05:02:26Z",
+  "generated_at_utc": "2026-09-10T05:10:53Z",
+  "latest_catalog_check_utc": "2026-09-10T05:10:53Z",
   "connector": "creaf_forestdrought_daily_modelled_forests",
   "responsibility": "discover_download_subset_and_normalize_only",
   "scope": "Muntanya d'Alinyà",
@@ -31,5 +31,5 @@
   "usage_license": "Public download and reuse stated by CREAF; formal license identifier pending verification.",
   "connector_status": "verified",
   "status_note": "Latest published model file found by descending date search. The model date is preserved separately from the daily check.",
-  "updated": true
+  "updated": false
 }

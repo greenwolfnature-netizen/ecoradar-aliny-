@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-10T05:04:31+00:00",
+  "generated_at": "2026-09-10T05:13:11+00:00",
   "project": "Alinya",
   "methodology_version": "alinya_core_v2_2026-09-09",
-  "snapshot_id": "alinya-50f3600ec62190b3",
+  "snapshot_id": "alinya-e695a0994b1cf57f",
   "preflight_reports": {
     "data_availability_report": "metadata/data_availability_report.json",
     "connectors_status_report": "metadata/connectors_status_report.json",
@@ -109,7 +109,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c"
+      "snapshot_input": "alinya-e019006d099a78ab"
     },
     {
       "code": "CORE_02",
@@ -191,7 +191,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c"
+      "snapshot_input": "alinya-e019006d099a78ab"
     },
     {
       "code": "CORE_03",
@@ -271,7 +271,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c"
+      "snapshot_input": "alinya-e019006d099a78ab"
     },
     {
       "code": "CORE_04",
@@ -370,7 +370,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia, validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c"
+      "snapshot_input": "alinya-e019006d099a78ab"
     },
     {
       "code": "CORE_05",
@@ -503,7 +503,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c"
+      "snapshot_input": "alinya-e019006d099a78ab"
     },
     {
       "code": "CORE_06",
@@ -599,7 +599,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c"
+      "snapshot_input": "alinya-e019006d099a78ab"
     },
     {
       "code": "CORE_07",
@@ -678,7 +678,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c"
+      "snapshot_input": "alinya-e019006d099a78ab"
     },
     {
       "code": "CORE_08",
@@ -768,7 +768,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c"
+      "snapshot_input": "alinya-e019006d099a78ab"
     },
     {
       "code": "CORE_09",
@@ -871,7 +871,7 @@
         },
         "qa": {
           "rating": "limitada",
-          "reason": "Qualitat/actualització efectiva del producte 48.9 %; no s’anomena confiança ecològica."
+          "reason": "Qualitat/actualització efectiva del producte 48.8 %; no s’anomena confiança ecològica."
         },
         "representativitat": {
           "rating": "limitada",
@@ -887,7 +887,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c"
+      "snapshot_input": "alinya-e019006d099a78ab"
     },
     {
       "code": "CORE_10",
@@ -969,7 +969,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c"
+      "snapshot_input": "alinya-e019006d099a78ab"
     },
     {
       "code": "CORE_11",
@@ -1050,7 +1050,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, vigencia, cobertura, resolucio, qa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c"
+      "snapshot_input": "alinya-e019006d099a78ab"
     },
     {
       "code": "CORE_12",
@@ -1234,7 +1234,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3f7897d9ffb4f43c"
+      "snapshot_input": "alinya-e019006d099a78ab"
     }
   ]
 }

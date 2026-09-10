@@ -1,7 +1,7 @@
 # Indicator Engine Report
 
 Projecte: `Alinya`
-Generat: `2026-09-10T04:50:18+00:00`
+Generat: `2026-09-10T05:13:11+00:00`
 
 ## Preflight obligatori
 
@@ -105,7 +105,7 @@ Generat: `2026-09-10T04:50:18+00:00`
 ### CORE_09 · Perfil de susceptibilitat i recuperació davant del foc
 - Càlcul: Quatre eixos no agregats: propagació potencial actual, sensibilitat ecològica, recuperació postincendi i context operatiu. Pla Alfa és context oficial independent.
 - Resultat: Propagació actual moderat · recuperació NO AVALUABLE
-- Vector de confiança: {"completesa": {"rating": "limitada", "reason": "La propagació actual té entrades parcials; sensibilitat i recuperació no són avaluables."}, "vigencia": {"rating": "adequada", "reason": "Meteorologia, precipitació i Pla Alfa conserven data actual; NDMI/LST antics queden exclosos del perill actual."}, "cobertura": {"rating": "adequada", "reason": "El perill actual declara 98.0 % vàlid i la superfície sense dada."}, "resolucio": {"rating": "limitada", "reason": "Malla de 100 m amb meteorologia puntual de Y4/CJ i capes estructurals més fines."}, "qa": {"rating": "limitada", "reason": "Qualitat/actualització efectiva del producte 47.8 %; no s’anomena confiança ecològica."}, "representativitat": {"rating": "limitada", "reason": "El perfil separa propagació, sensibilitat, recuperació i operativa; només la primera té lectura actual."}, "biaix": {"rating": "limitada", "reason": "Falten combustible mesurat, humitat actual i vent territorial per valls i carenes."}, "validacio": {"rating": "insuficient", "reason": "No hi ha validació del comportament o recuperació amb incendis observats locals."}}
+- Vector de confiança: {"completesa": {"rating": "limitada", "reason": "La propagació actual té entrades parcials; sensibilitat i recuperació no són avaluables."}, "vigencia": {"rating": "adequada", "reason": "Meteorologia, precipitació i Pla Alfa conserven data actual; NDMI/LST antics queden exclosos del perill actual."}, "cobertura": {"rating": "adequada", "reason": "El perill actual declara 98.0 % vàlid i la superfície sense dada."}, "resolucio": {"rating": "limitada", "reason": "Malla de 100 m amb meteorologia puntual de Y4/CJ i capes estructurals més fines."}, "qa": {"rating": "limitada", "reason": "Qualitat/actualització efectiva del producte 48.8 %; no s’anomena confiança ecològica."}, "representativitat": {"rating": "limitada", "reason": "El perfil separa propagació, sensibilitat, recuperació i operativa; només la primera té lectura actual."}, "biaix": {"rating": "limitada", "reason": "Falten combustible mesurat, humitat actual i vent territorial per valls i carenes."}, "validacio": {"rating": "insuficient", "reason": "No hi ha validació del comportament o recuperació amb incendis observats locals."}}
 - Raó de confiança: Confiança mitjana: dimensions insuficients — validacio.
 - Limitacions: El perill actual no és probabilitat d’ignició ni predicció d’incendi.; Camins, aigua i superfície cremada no sumen ni resten resiliència de manera lineal.
 - Impacte: Permet vigilar propagació actual sense confondre-la amb sensibilitat, capacitat d’extinció o recuperació ecològica.
