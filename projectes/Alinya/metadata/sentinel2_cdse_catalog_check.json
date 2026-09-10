@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "checked_at_utc": "2026-09-10T16:14:10.034351+00:00",
+  "checked_at_utc": "2026-09-10T19:23:41.972532+00:00",
   "source": "Copernicus Data Space Ecosystem Sentinel-2 L2A STAC",
   "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&datetime=2026-07-27T00%3A00%3A00Z%2F2026-09-10T23%3A59%3A59Z&limit=100",
   "search_period": {
@@ -139,10 +139,7 @@
       "qa_status": "requires_authenticated_process_api"
     }
   ],
-  "connector_status": "requires_credentials",
-  "missing_requirements": [
-    "COPERNICUS_CLIENT_ID",
-    "COPERNICUS_CLIENT_SECRET"
-  ],
+  "connector_status": "ready_for_authenticated_qa",
+  "missing_requirements": [],
   "limitation": "The public catalogue exposes footprint and tile cloud metadata only. Actual valid coverage inside Alinyà must be evaluated from SCL/dataMask through the authenticated Process API before selection."
 }

@@ -1,7 +1,7 @@
 # Data Availability Report
 
 Projecte: `projectes/Alinya`
-Generat: `2026-09-10T16:14:32+00:00`
+Generat: `2026-09-10T19:24:15+00:00`
 
 ## Resum
 
@@ -10,7 +10,8 @@ Generat: `2026-09-10T16:14:32+00:00`
 | consultada_correctament | 18 |
 | legalment_condicionada | 1 |
 | manual_pendent | 8 |
-| requereix_credencials | 3 |
+| parcial | 2 |
+| requereix_credencials | 1 |
 
 ## Fonts per bloc
 
@@ -21,7 +22,7 @@ Generat: `2026-09-10T16:14:32+00:00`
 | Cobertes del sòl ICGC / MCSC | 2 | consultada_correctament: 1, manual_pendent: 1 |
 | Hàbitats Generalitat / HIC | 2 | consultada_correctament: 2 |
 | SIGPAC i mapa de cultius | 2 | manual_pendent: 2 |
-| Copernicus / Sentinel | 5 | consultada_correctament: 3, requereix_credencials: 2 |
+| Copernicus / Sentinel | 5 | consultada_correctament: 3, parcial: 2 |
 | DEM / MDT | 1 | consultada_correctament: 1 |
 | Hidrologia | 1 | consultada_correctament: 1 |
 | Connectivitat ecològica | 1 | consultada_correctament: 1 |
@@ -57,8 +58,8 @@ Generat: `2026-09-10T16:14:32+00:00`
 - **Cobertes del sòl ICGC / MCSC / MCSC - Mapa de Cobertes del Sòl de Catalunya**: `manual_pendent`; connector `pending_mcsc_connector`; indicadors CORE_01, CORE_08, CORE_09.
 - **SIGPAC i mapa de cultius / SIGPAC Catalunya**: `manual_pendent`; connector `pending_sigpac_connector`; indicadors CORE_01, CORE_08, CORE_09, CORE_11, CORE_12.
 - **SIGPAC i mapa de cultius / Mapa de cultius / DUN**: `manual_pendent`; connector `pending_dun_cultius_connector`; indicadors CORE_01, CORE_08, CORE_09, CORE_11, CORE_12.
-- **Copernicus / Sentinel / Copernicus Data Space Sentinel-2 NDWI**: `requereix_credencials`; connector `connector_copernicus_teledeteccio`; indicadors CORE_03, CORE_10, CORE_11, CORE_12.
-- **Copernicus / Sentinel / Copernicus Data Space Sentinel-2 NBR**: `requereix_credencials`; connector `connector_copernicus_teledeteccio`; indicadors CORE_03, CORE_09, CORE_11, CORE_12.
+- **Copernicus / Sentinel / Copernicus Data Space Sentinel-2 NDWI**: `parcial`; connector `connector_copernicus_teledeteccio`; indicadors CORE_03, CORE_10, CORE_11, CORE_12.
+- **Copernicus / Sentinel / Copernicus Data Space Sentinel-2 NBR**: `parcial`; connector `connector_copernicus_teledeteccio`; indicadors CORE_03, CORE_09, CORE_11, CORE_12.
 - **Biodiversitat / Banc de Dades de Biodiversitat de Catalunya**: `manual_pendent`; connector `pending_bdbc_connector`; indicadors CORE_06, CORE_12.
 - **Biodiversitat / Dades pròpies de camp**: `manual_pendent`; connector `pending_fieldwork_importer`; indicadors CORE_02, CORE_06, CORE_07, CORE_10, CORE_11, CORE_12.
 - **Pressió humana / Strava Global Heatmap**: `legalment_condicionada`; connector `blocked_strava_heatmap_connector`; indicadors CORE_07, CORE_08, CORE_12.
@@ -123,16 +124,16 @@ Generat: `2026-09-10T16:14:32+00:00`
 | --- | ---: | --- | --- | --- |
 | CORE_01 | 100.0% | DISPONIBLE | alta | land_cover_mcsc, sigpac_catalunya, dun_cultius |
 | CORE_02 | 100.0% | DISPONIBLE | alta | field_biodiversity, field_validation |
-| CORE_03 | 66.7% | PARCIAL | mitjana | copernicus_sentinel_ndwi, copernicus_sentinel_nbr, aemet |
+| CORE_03 | 83.3% | PARCIAL | alta | aemet |
 | CORE_04 | 100.0% | DISPONIBLE | alta | aemet, spei |
 | CORE_05 | 100.0% | DISPONIBLE | alta | aemet, spei |
 | CORE_06 | 100.0% | DISPONIBLE | alta | bdbc, field_biodiversity, field_validation |
 | CORE_07 | 100.0% | DISPONIBLE | alta | field_biodiversity, strava_heatmap, field_validation |
 | CORE_08 | 100.0% | DISPONIBLE | alta | land_cover_mcsc, sigpac_catalunya, dun_cultius, strava_heatmap |
-| CORE_09 | 77.8% | PARCIAL | mitjana | land_cover_mcsc, sigpac_catalunya, dun_cultius, copernicus_sentinel_nbr, fuel_continuity |
-| CORE_10 | 80.0% | PARCIAL | alta | copernicus_sentinel_ndwi, field_biodiversity, spei, field_validation |
-| CORE_11 | 82.4% | PARCIAL | alta | sigpac_catalunya, dun_cultius, copernicus_sentinel_ndwi, copernicus_sentinel_nbr, field_biodiversity, fuel_continuity, aemet, spei, field_validation |
-| CORE_12 | 83.3% | PARCIAL | alta | sigpac_catalunya, dun_cultius, copernicus_sentinel_ndwi, copernicus_sentinel_nbr, bdbc, field_biodiversity, strava_heatmap, fuel_continuity, aemet, spei, field_validation |
+| CORE_09 | 83.3% | PARCIAL | alta | land_cover_mcsc, sigpac_catalunya, dun_cultius, fuel_continuity |
+| CORE_10 | 90.0% | DISPONIBLE | alta | field_biodiversity, spei, field_validation |
+| CORE_11 | 88.2% | PARCIAL | alta | sigpac_catalunya, dun_cultius, field_biodiversity, fuel_continuity, aemet, spei, field_validation |
+| CORE_12 | 88.9% | PARCIAL | alta | sigpac_catalunya, dun_cultius, bdbc, field_biodiversity, strava_heatmap, fuel_continuity, aemet, spei, field_validation |
 
 ## Estat de connectors
 
@@ -142,7 +143,7 @@ Generat: `2026-09-10T16:14:32+00:00`
 | connector_aca_hidrologia | implementat | aca_hydrology |
 | connector_biodiversitat | implementat | gbif_occurrences, inaturalist_observations |
 | connector_connectivitat_ecologica | implementat | connectivity_infraestructura_verda |
-| connector_copernicus_teledeteccio | requereix intervenció manual | copernicus_sentinel_ndvi, copernicus_sentinel_ndmi, copernicus_sentinel_ndwi, copernicus_sentinel_nbr |
+| connector_copernicus_teledeteccio | parcial | copernicus_sentinel_ndvi, copernicus_sentinel_ndmi, copernicus_sentinel_ndwi, copernicus_sentinel_nbr |
 | connector_detailed_surface_temperature | parcial | detailed_surface_temperature |
 | connector_habitats | implementat | habitats_terrestres_v3, hic_v2 |
 | connector_icgc_cobertes_sol | implementat | land_cover_icgc_cobertes_sol |

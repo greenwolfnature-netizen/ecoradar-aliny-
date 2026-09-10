@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T16:14:32+00:00",
+  "generated_at": "2026-09-10T19:24:15+00:00",
   "project_root": "projectes/Alinya",
   "config": "config/data_sources.yaml",
   "policy": {
@@ -16,14 +16,15 @@
     "status_counts": {
       "consultada_correctament": 18,
       "manual_pendent": 8,
-      "requereix_credencials": 3,
-      "legalment_condicionada": 1
+      "parcial": 2,
+      "legalment_condicionada": 1,
+      "requereix_credencials": 1
     },
     "sources_ok": 18,
-    "sources_partial": 0,
+    "sources_partial": 2,
     "sources_failed": 0,
     "sources_not_implemented": 0,
-    "sources_require_credentials": 3,
+    "sources_require_credentials": 1,
     "sources_manual_pending": 8,
     "sources_legal_conditioned": 1
   },
@@ -75,7 +76,7 @@
       "source_count": 5,
       "status_counts": {
         "consultada_correctament": 3,
-        "requereix_credencials": 2
+        "parcial": 2
       }
     },
     {
@@ -483,10 +484,7 @@
       ],
       "required": true,
       "status": "consultada_correctament",
-      "missing_credentials": [
-        "COPERNICUS_CLIENT_ID",
-        "COPERNICUS_CLIENT_SECRET"
-      ],
+      "missing_credentials": [],
       "downloaded_data": [
         "processed/teledeteccio/ndvi.tif",
         "maps/teledeteccio/ndvi.webp",
@@ -527,10 +525,7 @@
       ],
       "required": true,
       "status": "consultada_correctament",
-      "missing_credentials": [
-        "COPERNICUS_CLIENT_ID",
-        "COPERNICUS_CLIENT_SECRET"
-      ],
+      "missing_credentials": [],
       "downloaded_data": [
         "processed/teledeteccio/ndmi.tif",
         "maps/teledeteccio/ndmi.webp",
@@ -550,7 +545,7 @@
       "access_type": "STAC/API",
       "expected_format": "GeoTIFF, CSV, JSON",
       "responsible_connector": "connector_copernicus_teledeteccio",
-      "connector_status": "requereix intervenció manual",
+      "connector_status": "parcial",
       "minimum_fields": [
         "ndwi_mean",
         "ndwi_min",
@@ -568,11 +563,8 @@
         "CORE_12"
       ],
       "required": true,
-      "status": "requereix_credencials",
-      "missing_credentials": [
-        "COPERNICUS_CLIENT_ID",
-        "COPERNICUS_CLIENT_SECRET"
-      ],
+      "status": "parcial",
+      "missing_credentials": [],
       "downloaded_data": [
         "metadata/teledeteccio_metadata.json"
       ],
@@ -598,7 +590,7 @@
       "access_type": "STAC/API",
       "expected_format": "GeoTIFF, PNG, CSV, JSON",
       "responsible_connector": "connector_copernicus_teledeteccio",
-      "connector_status": "requereix intervenció manual",
+      "connector_status": "parcial",
       "minimum_fields": [
         "nbr_mean",
         "nbr_min",
@@ -616,11 +608,8 @@
         "CORE_12"
       ],
       "required": true,
-      "status": "requereix_credencials",
-      "missing_credentials": [
-        "COPERNICUS_CLIENT_ID",
-        "COPERNICUS_CLIENT_SECRET"
-      ],
+      "status": "parcial",
+      "missing_credentials": [],
       "downloaded_data": [
         "metadata/teledeteccio_metadata.json"
       ],
@@ -1340,7 +1329,7 @@
     {
       "source_id": "copernicus_sentinel_ndwi",
       "source_name": "Copernicus Data Space Sentinel-2 NDWI",
-      "status": "requereix_credencials",
+      "status": "parcial",
       "required": true,
       "affected_indicators": [
         "CORE_03",
@@ -1353,7 +1342,7 @@
     {
       "source_id": "copernicus_sentinel_nbr",
       "source_name": "Copernicus Data Space Sentinel-2 NBR",
-      "status": "requereix_credencials",
+      "status": "parcial",
       "required": true,
       "affected_indicators": [
         "CORE_03",
@@ -1534,5 +1523,5 @@
       "spei"
     ]
   },
-  "snapshot_id": "alinya-ece6261f5ac73a6c"
+  "snapshot_id": "alinya-0f62df26fcdc061b"
 }
