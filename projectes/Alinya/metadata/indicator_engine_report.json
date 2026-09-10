@@ -1,6 +1,6 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-10T05:38:11+00:00",
+  "generated_at": "2026-09-10T16:14:34+00:00",
   "scope": "EcoRadar Core Indicator Engine; lectures directes, perfils i síntesi no compensatòria",
   "preflight_checked": {
     "data_availability_report.json": true,
@@ -30,5 +30,5 @@
     "No s'ha aplicat una escala 0-100 comuna a dimensions no commensurables.",
     "No s'ha generat diagnosi, recomanacions, fitxa ni PDF."
   ],
-  "snapshot_id": "alinya-abc6f15ce75e86fe"
+  "snapshot_id": "alinya-ece6261f5ac73a6c"
 }
