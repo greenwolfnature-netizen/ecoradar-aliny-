@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-09T20:12:36.514107+00:00",
+  "generated_at_utc": "2026-09-10T05:04:02.684286+00:00",
   "scope": "Muntanya d'Alinya",
   "status": "verified_analysis",
   "name": "Potencial relatiu de refugi climatic",
@@ -79,5 +79,5 @@
     "product_map": "maps/producte/mapa_refugis_climatics_alinya.png"
   },
   "limitations": "Relative screening layer based on a two-summer daytime LST composite and one Sentinel-2 date. Hydrology is drawn as cartographic context and does not enter the numeric formula. It is not air temperature, a climatic normal, microclimate monitoring or a field-validated refuge inventory. Weights and thresholds are explicit EcoRadar analysis assumptions.",
-  "snapshot_id": "alinya-804a204e984fd089"
+  "snapshot_id": "alinya-50f3600ec62190b3"
 }
