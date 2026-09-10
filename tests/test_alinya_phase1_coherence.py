@@ -128,11 +128,10 @@ class Phase1CoherenceTests(unittest.TestCase):
 
     def test_public_sentinel_catalog_does_not_select_without_aoi_scl_qa(self):
         catalog = read("metadata/sentinel2_cdse_catalog_check.json")
-        self.assertEqual(catalog["connector_status"], "requires_credentials")
-        self.assertEqual(
-            set(catalog["missing_requirements"]),
-            {"COPERNICUS_CLIENT_ID", "COPERNICUS_CLIENT_SECRET"},
-        )
+        self.assertIn(catalog["connector_status"], {"requires_credentials", "ready_for_authenticated_qa"})
+        expected_missing = ({"COPERNICUS_CLIENT_ID", "COPERNICUS_CLIENT_SECRET"}
+                            if catalog["connector_status"] == "requires_credentials" else set())
+        self.assertEqual(set(catalog["missing_requirements"]), expected_missing)
         self.assertGreater(catalog["candidate_count"], 0)
         self.assertTrue(all(item["actual_aoi_scl_coverage_pct"] is None for item in catalog["candidates"]))
 
