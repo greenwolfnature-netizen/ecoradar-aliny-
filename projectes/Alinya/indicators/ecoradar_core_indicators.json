@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-10T05:13:11+00:00",
+  "generated_at": "2026-09-10T05:38:11+00:00",
   "project": "Alinya",
   "methodology_version": "alinya_core_v2_2026-09-09",
-  "snapshot_id": "alinya-e695a0994b1cf57f",
+  "snapshot_id": "alinya-abc6f15ce75e86fe",
   "preflight_reports": {
     "data_availability_report": "metadata/data_availability_report.json",
     "connectors_status_report": "metadata/connectors_status_report.json",
@@ -109,7 +109,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab"
+      "snapshot_input": "alinya-3cf5d53aecd25c4a"
     },
     {
       "code": "CORE_02",
@@ -191,7 +191,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab"
+      "snapshot_input": "alinya-3cf5d53aecd25c4a"
     },
     {
       "code": "CORE_03",
@@ -271,7 +271,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia.",
-      "snapshot_input": "alinya-e019006d099a78ab"
+      "snapshot_input": "alinya-3cf5d53aecd25c4a"
     },
     {
       "code": "CORE_04",
@@ -370,7 +370,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia, validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab"
+      "snapshot_input": "alinya-3cf5d53aecd25c4a"
     },
     {
       "code": "CORE_05",
@@ -406,8 +406,8 @@
           "status": "context actual/parcial",
           "readings": {
             "air_temperature": {
-              "value": "9,9 °C",
-              "data_at_utc": "2026-09-10T04:00:00Z",
+              "value": "10,1 °C",
+              "data_at_utc": "2026-09-10T04:30:00Z",
               "period_start_utc": null,
               "period_end_utc": null,
               "temporal_kind": "observation",
@@ -416,7 +416,7 @@
             },
             "precipitation_30d": {
               "value": "45,0 mm",
-              "data_at_utc": "2026-09-10T04:00:00Z",
+              "data_at_utc": "2026-09-10T04:30:00Z",
               "period_start_utc": null,
               "period_end_utc": null,
               "temporal_kind": "observation",
@@ -425,7 +425,7 @@
             },
             "days_without_significant_rain": {
               "value": "0 dies",
-              "data_at_utc": "2026-09-10T04:00:00Z",
+              "data_at_utc": "2026-09-10T04:30:00Z",
               "period_start_utc": null,
               "period_end_utc": null,
               "temporal_kind": "observation",
@@ -503,7 +503,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab"
+      "snapshot_input": "alinya-3cf5d53aecd25c4a"
     },
     {
       "code": "CORE_06",
@@ -599,7 +599,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab"
+      "snapshot_input": "alinya-3cf5d53aecd25c4a"
     },
     {
       "code": "CORE_07",
@@ -678,7 +678,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab"
+      "snapshot_input": "alinya-3cf5d53aecd25c4a"
     },
     {
       "code": "CORE_08",
@@ -768,7 +768,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab"
+      "snapshot_input": "alinya-3cf5d53aecd25c4a"
     },
     {
       "code": "CORE_09",
@@ -800,21 +800,21 @@
       "measurement_kind": "four_axis_profile",
       "direct_value": null,
       "direct_unit": null,
-      "source_date_utc": "2026-09-10T04:00:00Z",
-      "primary_result": "Propagació actual moderat · recuperació NO AVALUABLE",
+      "source_date_utc": "2026-09-10T04:30:00Z",
+      "primary_result": "Propagació actual alt · recuperació NO AVALUABLE",
       "interpretation_short": "La propagació actual és avaluable parcialment; sensibilitat i recuperació necessiten dades pròpies.",
       "methodology_version": "alinya_core_v2_2026-09-09",
       "profile": {
         "propagation_current": {
-          "ecoradar_index_0_100": 59.8,
-          "category": "moderat",
+          "ecoradar_index_0_100": 60.4,
+          "category": "alt",
           "valid_coverage_pct": 98.0,
           "dominant_variables": [
             "Vent fort",
             "Potencial de foc ForestDrought elevat",
             "Humitat relativa baixa"
           ],
-          "data_at_utc": "2026-09-10T04:00:00Z",
+          "data_at_utc": "2026-09-10T04:30:00Z",
           "pla_alfa_context": {
             "level": 1,
             "label": "moderat",
@@ -887,7 +887,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab"
+      "snapshot_input": "alinya-3cf5d53aecd25c4a"
     },
     {
       "code": "CORE_10",
@@ -969,7 +969,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab"
+      "snapshot_input": "alinya-3cf5d53aecd25c4a"
     },
     {
       "code": "CORE_11",
@@ -1050,7 +1050,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, vigencia, cobertura, resolucio, qa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab"
+      "snapshot_input": "alinya-3cf5d53aecd25c4a"
     },
     {
       "code": "CORE_12",
@@ -1161,7 +1161,7 @@
             "alternative": "Vigilar canvis i preparar resposta segons Pla Alfa vigent",
             "result": "P2",
             "decisive_factors": [
-              "Propagació actual moderat · recuperació NO AVALUABLE",
+              "Propagació actual alt · recuperació NO AVALUABLE",
               "vent i estructura entre factors dominants",
               "cobertura vàlida explícita"
             ],
@@ -1234,7 +1234,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-e019006d099a78ab"
+      "snapshot_input": "alinya-3cf5d53aecd25c4a"
     }
   ]
 }
