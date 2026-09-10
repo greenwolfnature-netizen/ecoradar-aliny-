@@ -1,7 +1,7 @@
 {
   "schema_version": "2.0",
   "snapshot_id": "alinya-e695a0994b1cf57f",
-  "generated_at_utc": "2026-09-10T05:13:11.817851Z",
+  "generated_at_utc": "2026-09-10T05:25:00.969751Z",
   "checked_at_utc": "2026-09-10T05:10:53Z",
   "scope": "Muntanya d'Alinyà",
   "contract": "Single metadata state consumed by readings, RADAR, completeness, viewer and report generator.",

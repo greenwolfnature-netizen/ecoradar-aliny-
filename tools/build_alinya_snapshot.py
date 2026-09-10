@@ -8,6 +8,7 @@ and stamps that id into every public product consumed by the viewer or reports.
 
 from __future__ import annotations
 
+import csv
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -334,6 +335,24 @@ def _stamp(path: Path, snapshot_id: str) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _stamp_csv(path: Path, snapshot_id: str, field: str = "snapshot_input") -> None:
+    """Keep tabular RADAR exports on the same snapshot as their JSON source."""
+    if not path.exists():
+        return
+    with path.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        fieldnames = list(reader.fieldnames or [])
+        rows = list(reader)
+    if field not in fieldnames:
+        return
+    for row in rows:
+        row[field] = snapshot_id
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def build() -> dict[str, Any]:
     products, sources = _build_records()
     seed = _snapshot_seed(products, sources)
@@ -384,6 +403,12 @@ def build() -> dict[str, Any]:
     ]
     for relative in stamp_paths:
         _stamp(PROJECT / relative, snapshot_id)
+    for relative in (
+        "indicators/ecoradar_core_indicators.csv",
+        "indicators/ecoradar_core.csv",
+        "indicators/ecoradar_indicators_summary.csv",
+    ):
+        _stamp_csv(PROJECT / relative, snapshot_id)
     cells = PROJECT / "maps" / "incendis" / "current_fire_danger_cells.geojson"
     if cells.exists():
         payload = json.loads(cells.read_text(encoding="utf-8"))

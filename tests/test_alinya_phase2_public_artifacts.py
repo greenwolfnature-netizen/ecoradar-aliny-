@@ -63,6 +63,9 @@ class AlinyaPhase2PublicArtifactTests(unittest.TestCase):
             self.assertEqual(read_json(PROJECT / relative), self.canonical, relative)
         for relative in ("indicators/ecoradar_core.csv", "indicators/ecoradar_indicators_summary.csv"):
             self.assertEqual((PROJECT / relative).read_bytes(), canonical_csv.read_bytes(), relative)
+        with canonical_csv.open(encoding="utf-8", newline="") as handle:
+            csv_snapshots = {row["snapshot_input"] for row in csv.DictReader(handle)}
+        self.assertEqual(csv_snapshots, {self.canonical["snapshot_id"]})
         self.assertTrue(all(item["value_0_100"] is None for item in self.canonical["indicators"]))
         self.assertEqual(canonical_json.read_text(encoding="utf-8"), (PROJECT / "indicators/ecoradar_core.json").read_text(encoding="utf-8"))
 
