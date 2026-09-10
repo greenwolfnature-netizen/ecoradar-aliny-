@@ -107,7 +107,9 @@ def _copy_tree(source: Path, target: Path) -> None:
     shutil.copytree(
         source,
         target,
-        ignore=shutil.ignore_patterns(".DS_Store", "__pycache__", "*.pyc", "*.pyo", "*.zip"),
+        ignore=shutil.ignore_patterns(
+            ".DS_Store", "__pycache__", "*.pyc", "*.pyo", "*.zip", "* 2.*"
+        ),
     )
 
 
