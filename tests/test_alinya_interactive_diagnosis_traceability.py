@@ -87,7 +87,11 @@ class InteractiveDiagnosisTraceabilityTests(unittest.TestCase):
         vegetation = self.core["CORE_03"]
         self.assertEqual(vegetation["measurement_kind"], "direct_reading")
         self.assertIsNone(vegetation["value_0_100"])
-        self.assertIn("NDVI 0,616", vegetation["primary_result"])
+        sentinel = json.loads((ROOT / "projectes/Alinya/indicators/teledeteccio_sentinel2.json").read_text(encoding="utf-8"))
+        expected_ndvi = format(sentinel["metrics"]["ndvi"]["median"], ".3f").replace(".", ",")
+        self.assertIn(f"NDVI {expected_ndvi}", vegetation["primary_result"])
+        year, month, day = sentinel["acquired_at_utc"][:10].split("-")
+        self.assertIn(f"{day}/{month}/{year}", vegetation["primary_result"])
         self.assertIn("no equival a `61,6/100`", self.methodology)
 
     def test_radar_12_documents_the_non_compensatory_decision_matrix(self):
