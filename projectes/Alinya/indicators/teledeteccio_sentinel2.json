@@ -1,8 +1,8 @@
 {
-  "generated_at_utc": "2026-09-10T19:23:51.599289+00:00",
+  "generated_at_utc": "2026-09-11T17:54:18.791332+00:00",
   "scope": "Muntanya d'Alinyà",
-  "source_scene": "S2C_T31TCG_20260906T104903_L2A",
-  "acquired_at_utc": "2026-09-06T10:59:24.874000Z",
+  "source_scene": "S2B_T31TCG_20260911T105235_L2A",
+  "acquired_at_utc": "2026-09-11T10:59:24.314000Z",
   "source": "Copernicus Sentinel-2 MSI Level-2A (Earth Search / AWS)",
   "official_urls": {
     "stac": "https://earth-search.aws.element84.com/v1/search",
@@ -26,29 +26,29 @@
     "SCL": 20
   },
   "scope_pixels": 546357,
-  "valid_pixels": 522406,
-  "invalid_or_masked_pixels": 23951,
-  "valid_coverage_pct": 95.62,
-  "valid_area_ha": 5224.1,
+  "valid_pixels": 524193,
+  "invalid_or_masked_pixels": 22164,
+  "valid_coverage_pct": 95.94,
+  "valid_area_ha": 5241.9,
   "rasterized_scope_area_ha": 5463.6,
   "metrics": {
     "ndvi": {
-      "mean": 0.618,
-      "median": 0.663,
-      "p10": 0.356,
-      "p90": 0.805
+      "mean": 0.647,
+      "median": 0.691,
+      "p10": 0.377,
+      "p90": 0.845
     },
     "ndmi": {
-      "mean": 0.122,
-      "median": 0.122,
-      "p10": -0.077,
-      "p90": 0.319
+      "mean": 0.181,
+      "median": 0.176,
+      "p10": -0.061,
+      "p90": 0.428
     },
     "albedo": {
-      "mean": 0.13,
-      "median": 0.122,
-      "p10": 0.087,
-      "p90": 0.179
+      "mean": 0.125,
+      "median": 0.118,
+      "p10": 0.081,
+      "p90": 0.176
     }
   },
   "methods": {
@@ -68,5 +68,5 @@
     "ndmi": "maps/teledeteccio/ndmi.webp",
     "albedo": "maps/teledeteccio/albedo.webp"
   },
-  "snapshot_id": "alinya-0f62df26fcdc061b"
+  "snapshot_id": "alinya-bcfd5c07be3312a0"
 }

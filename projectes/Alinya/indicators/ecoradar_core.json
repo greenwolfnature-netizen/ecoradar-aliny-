@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-10T19:24:16+00:00",
+  "generated_at": "2026-09-11T17:54:44+00:00",
   "project": "Alinya",
   "methodology_version": "alinya_core_v2_2026-09-09",
-  "snapshot_id": "alinya-0f62df26fcdc061b",
+  "snapshot_id": "alinya-bcfd5c07be3312a0",
   "preflight_reports": {
     "data_availability_report": "metadata/data_availability_report.json",
     "connectors_status_report": "metadata/connectors_status_report.json",
@@ -109,7 +109,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-75effd6eefe9af42"
+      "snapshot_input": "alinya-b8d28a9b4996699f"
     },
     {
       "code": "CORE_02",
@@ -191,7 +191,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-75effd6eefe9af42"
+      "snapshot_input": "alinya-b8d28a9b4996699f"
     },
     {
       "code": "CORE_03",
@@ -214,19 +214,19 @@
       ],
       "diagnosis_impact": "Aporta evidència datada sobre activitat verda i conserva separat el context fenològic no disponible.",
       "measurement_kind": "direct_reading",
-      "direct_value": 0.663,
+      "direct_value": 0.691,
       "direct_unit": "NDVI",
-      "source_date_utc": "2026-09-06T10:59:24.874000Z",
-      "primary_result": "NDVI 0,663 · 06/09/2026",
+      "source_date_utc": "2026-09-11T10:59:24.314000Z",
+      "primary_result": "NDVI 0,691 · 11/09/2026",
       "interpretation_short": "Lectura espectral d’una escena concreta; sense sèrie fenològica no es classifica com a bona o dolenta.",
       "methodology_version": "alinya_core_v2_2026-09-09",
       "profile": {
-        "median": 0.663,
-        "p10": 0.356,
-        "p90": 0.805,
-        "valid_area_ha": 5224.1,
-        "valid_coverage_pct": 95.62,
-        "acquired_at_utc": "2026-09-06T10:59:24.874000Z",
+        "median": 0.691,
+        "p10": 0.377,
+        "p90": 0.845,
+        "valid_area_ha": 5241.9,
+        "valid_coverage_pct": 95.94,
+        "acquired_at_utc": "2026-09-11T10:59:24.314000Z",
         "phenological_anomaly": "NO AVALUABLE · no hi ha línia base comparable per coberta i època"
       },
       "guide": {
@@ -247,7 +247,7 @@
         },
         "cobertura": {
           "rating": "adequada",
-          "reason": "Cobertura vàlida 95.62 % de l’àmbit rasteritzat."
+          "reason": "Cobertura vàlida 95.94 % de l’àmbit rasteritzat."
         },
         "resolucio": {
           "rating": "adequada",
@@ -271,7 +271,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia.",
-      "snapshot_input": "alinya-75effd6eefe9af42"
+      "snapshot_input": "alinya-b8d28a9b4996699f"
     },
     {
       "code": "CORE_04",
@@ -301,7 +301,7 @@
       "direct_value": null,
       "direct_unit": null,
       "source_date_utc": null,
-      "primary_result": "Estructural parcial · senyal satel·lital 42,8 %",
+      "primary_result": "Estructural parcial · senyal satel·lital 41,8 %",
       "interpretation_short": "Separa atributs estructurals i senyal tèrmic/hídric; cap dels dos confirma un refugi ecològic.",
       "methodology_version": "alinya_core_v2_2026-09-09",
       "profile": {
@@ -312,16 +312,16 @@
           "mapped_water_role": "context cartogràfic; no entra a la fórmula del senyal observat"
         },
         "observed_satellite_signal": {
-          "high_or_very_high_share_pct": 42.8,
+          "high_or_very_high_share_pct": 41.8,
           "denominator": {
             "name": "vegetated pixels with valid LST, NDMI and NDVI",
             "rule": "inside the study polygon; all three formula inputs valid; NDVI >= 0.30",
-            "valid_pixels": 490709,
-            "valid_area_ha": 4907.5,
+            "valid_pixels": 498041,
+            "valid_area_ha": 4980.8,
             "study_polygon_rasterized_pixels": 546357,
             "study_polygon_area_ha": 5464.0,
             "area_method": "Study-area area apportioned by the share of rasterized study pixels.",
-            "share_of_study_raster_pct": 89.8
+            "share_of_study_raster_pct": 91.2
           },
           "formula": "0.50*frescor_LST + 0.30*humitat_NDMI + 0.20*vigor_NDVI",
           "temporal_semantics": "compost LST 2025–2026 + escena Sentinel-2 07/07/2026"
@@ -346,7 +346,7 @@
         },
         "cobertura": {
           "rating": "adequada",
-          "reason": "El denominador vàlid cobreix 89.8 % del raster de l’àmbit."
+          "reason": "El denominador vàlid cobreix 91.2 % del raster de l’àmbit."
         },
         "resolucio": {
           "rating": "limitada",
@@ -370,7 +370,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia, validacio.",
-      "snapshot_input": "alinya-75effd6eefe9af42"
+      "snapshot_input": "alinya-b8d28a9b4996699f"
     },
     {
       "code": "CORE_05",
@@ -406,8 +406,8 @@
           "status": "context actual/parcial",
           "readings": {
             "air_temperature": {
-              "value": "16,3 °C",
-              "data_at_utc": "2026-09-10T18:30:00Z",
+              "value": "21,1 °C",
+              "data_at_utc": "2026-09-11T17:00:00Z",
               "period_start_utc": null,
               "period_end_utc": null,
               "temporal_kind": "observation",
@@ -415,8 +415,8 @@
               "validity": "actualitzada avui"
             },
             "precipitation_30d": {
-              "value": "44,0 mm",
-              "data_at_utc": "2026-09-10T18:30:00Z",
+              "value": "35,4 mm",
+              "data_at_utc": "2026-09-11T17:00:00Z",
               "period_start_utc": null,
               "period_end_utc": null,
               "temporal_kind": "observation",
@@ -425,7 +425,7 @@
             },
             "days_without_significant_rain": {
               "value": "1 dies",
-              "data_at_utc": "2026-09-10T18:30:00Z",
+              "data_at_utc": "2026-09-11T17:00:00Z",
               "period_start_utc": null,
               "period_end_utc": null,
               "temporal_kind": "observation",
@@ -503,7 +503,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-75effd6eefe9af42"
+      "snapshot_input": "alinya-b8d28a9b4996699f"
     },
     {
       "code": "CORE_06",
@@ -599,7 +599,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-75effd6eefe9af42"
+      "snapshot_input": "alinya-b8d28a9b4996699f"
     },
     {
       "code": "CORE_07",
@@ -678,7 +678,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-75effd6eefe9af42"
+      "snapshot_input": "alinya-b8d28a9b4996699f"
     },
     {
       "code": "CORE_08",
@@ -768,7 +768,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-75effd6eefe9af42"
+      "snapshot_input": "alinya-b8d28a9b4996699f"
     },
     {
       "code": "CORE_09",
@@ -800,25 +800,25 @@
       "measurement_kind": "four_axis_profile",
       "direct_value": null,
       "direct_unit": null,
-      "source_date_utc": "2026-09-10T18:30:00Z",
+      "source_date_utc": "2026-09-11T17:00:00Z",
       "primary_result": "Propagació actual moderat · recuperació NO AVALUABLE",
       "interpretation_short": "La propagació actual és avaluable parcialment; sensibilitat i recuperació necessiten dades pròpies.",
       "methodology_version": "alinya_core_v2_2026-09-09",
       "profile": {
         "propagation_current": {
-          "ecoradar_index_0_100": 42.0,
+          "ecoradar_index_0_100": 51.8,
           "category": "moderat",
           "valid_coverage_pct": 98.0,
           "dominant_variables": [
+            "Humitat relativa baixa",
             "Potencial de foc ForestDrought elevat",
-            "Vegetació seca",
-            "Perill estructural elevat"
+            "Vegetació seca"
           ],
-          "data_at_utc": "2026-09-10T18:30:00Z",
+          "data_at_utc": "2026-09-11T17:00:00Z",
           "pla_alfa_context": {
             "level": 1,
             "label": "moderat",
-            "data_at_utc": "2026-09-10T08:41:14.160000Z"
+            "data_at_utc": "2026-09-11T07:22:30.027000Z"
           }
         },
         "ecological_sensitivity": {
@@ -871,7 +871,7 @@
         },
         "qa": {
           "rating": "limitada",
-          "reason": "Qualitat/actualització efectiva del producte 61.3 %; no s’anomena confiança ecològica."
+          "reason": "Qualitat/actualització efectiva del producte 61.4 %; no s’anomena confiança ecològica."
         },
         "representativitat": {
           "rating": "limitada",
@@ -887,7 +887,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-75effd6eefe9af42"
+      "snapshot_input": "alinya-b8d28a9b4996699f"
     },
     {
       "code": "CORE_10",
@@ -969,7 +969,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-75effd6eefe9af42"
+      "snapshot_input": "alinya-b8d28a9b4996699f"
     },
     {
       "code": "CORE_11",
@@ -1050,7 +1050,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, vigencia, cobertura, resolucio, qa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-75effd6eefe9af42"
+      "snapshot_input": "alinya-b8d28a9b4996699f"
     },
     {
       "code": "CORE_12",
@@ -1234,7 +1234,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-75effd6eefe9af42"
+      "snapshot_input": "alinya-b8d28a9b4996699f"
     }
   ]
 }

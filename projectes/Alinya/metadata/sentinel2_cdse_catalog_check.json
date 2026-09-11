@@ -1,15 +1,23 @@
 {
   "schema_version": "1.0",
-  "checked_at_utc": "2026-09-10T19:23:41.972532+00:00",
+  "checked_at_utc": "2026-09-11T17:54:09.002032+00:00",
   "source": "Copernicus Data Space Ecosystem Sentinel-2 L2A STAC",
-  "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&datetime=2026-07-27T00%3A00%3A00Z%2F2026-09-10T23%3A59%3A59Z&limit=100",
+  "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&datetime=2026-07-28T00%3A00%3A00Z%2F2026-09-11T23%3A59%3A59Z&limit=100",
   "search_period": {
-    "start": "2026-07-27",
-    "end": "2026-09-10"
+    "start": "2026-07-28",
+    "end": "2026-09-11"
   },
   "maximum_tile_cloud_pct": 10.0,
   "candidate_count": 16,
   "candidates": [
+    {
+      "scene_id": "S2B_MSIL2A_20260911T105019_N0512_R051_T31TCG_20260911T132207",
+      "acquired_at_utc": "2026-09-11T10:50:19.025000Z",
+      "scene_cloud_cover_pct": 0.7,
+      "footprint_coverage_pct": 100.0,
+      "actual_aoi_scl_coverage_pct": null,
+      "qa_status": "requires_authenticated_process_api"
+    },
     {
       "scene_id": "S2C_MSIL2A_20260906T104621_N0512_R051_T31TCG_20260906T184616",
       "acquired_at_utc": "2026-09-06T10:46:21.025000Z",
@@ -126,14 +134,6 @@
       "scene_id": "S2C_MSIL2A_20260728T104621_N0512_R051_T31TCG_20260728T144218",
       "acquired_at_utc": "2026-07-28T10:46:21.025000Z",
       "scene_cloud_cover_pct": 0.01,
-      "footprint_coverage_pct": 100.0,
-      "actual_aoi_scl_coverage_pct": null,
-      "qa_status": "requires_authenticated_process_api"
-    },
-    {
-      "scene_id": "S2A_MSIL2A_20260727T104041_N0512_R008_T31TCG_20260727T184256",
-      "acquired_at_utc": "2026-07-27T10:40:41.024000Z",
-      "scene_cloud_cover_pct": 0.15,
       "footprint_coverage_pct": 100.0,
       "actual_aoi_scl_coverage_pct": null,
       "qa_status": "requires_authenticated_process_api"

@@ -2,7 +2,7 @@
 
 Metodologia: `alinya_core_v2_2026-09-09`
 
-Resultat: `NDVI 0,663 · 06/09/2026`
+Resultat: `NDVI 0,691 · 11/09/2026`
 
 Estat: `COMPLET` · Confiança: `mitjana`
 
