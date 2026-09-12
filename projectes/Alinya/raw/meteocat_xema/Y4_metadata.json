@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-11T17:52:39.056228+00:00",
+  "generated_at_utc": "2026-09-12T17:25:44.630627+00:00",
   "connector": "meteocat_xema_socrata",
   "responsibility": "download_and_normalize_only",
   "source": "Dades meteorològiques de la XEMA",
@@ -8,8 +8,8 @@
   "station_code": "Y4",
   "station_name": "Alinyà",
   "records": 5037,
-  "first_observation_utc": "2026-08-07T18:00:00Z",
-  "last_observation_utc": "2026-09-11T17:00:00Z",
+  "first_observation_utc": "2026-08-08T17:30:00Z",
+  "last_observation_utc": "2026-09-12T16:30:00Z",
   "variables": {
     "air_temperature_c": "32",
     "wind_speed_ms": "30",
