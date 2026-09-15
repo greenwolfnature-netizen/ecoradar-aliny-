@@ -1,12 +1,12 @@
 {
-  "generated_at_utc": "2026-09-12T17:27:38.860903+00:00",
+  "generated_at_utc": "2026-09-15T18:29:03.777432+00:00",
   "scope": "Muntanya d'Alinya",
   "status": "verified_analysis",
   "name": "Potencial relatiu de refugi climatic",
   "sources": {
     "temperature": "USGS Landsat 8/9 Collection 2 Level-2 Surface Temperature",
     "temperature_period": "2025-06-01T00:00:00Z/2026-09-15T23:59:59Z",
-    "ndmi_ndvi": "Copernicus Sentinel-2 L2A S2B_T31TCG_20260911T105235_L2A",
+    "ndmi_ndvi": "Copernicus Sentinel-2 L2A S2C_T31TCG_20260913T104809_L2A",
     "hydrology_context": "ACA and project-normalized official hydrology layers"
   },
   "method": {
@@ -34,13 +34,13 @@
         "reading": "Sentinel-2 NDMI",
         "role": "numeric input",
         "weight": 0.3,
-        "date_utc": "2026-09-11T10:59:24.314000Z"
+        "date_utc": "2026-09-13T10:49:28.739000Z"
       },
       {
         "reading": "Sentinel-2 NDVI",
         "role": "numeric input and NDVI >= 0.30 denominator filter",
         "weight": 0.2,
-        "date_utc": "2026-09-11T10:59:24.314000Z"
+        "date_utc": "2026-09-13T10:49:28.739000Z"
       }
     ],
     "cartographic_context_only": [
@@ -50,34 +50,34 @@
   },
   "distribution": {
     "suport": {
-      "pixels": 78006,
-      "share_of_vegetated_valid_pct": 15.7
+      "pixels": 78833,
+      "share_of_vegetated_valid_pct": 16.0
     },
     "alt": {
-      "pixels": 88111,
-      "share_of_vegetated_valid_pct": 17.7
+      "pixels": 89145,
+      "share_of_vegetated_valid_pct": 18.0
     },
     "molt_alt": {
-      "pixels": 119781,
-      "share_of_vegetated_valid_pct": 24.1
+      "pixels": 120881,
+      "share_of_vegetated_valid_pct": 24.5
     }
   },
   "denominator": {
     "name": "vegetated pixels with valid LST, NDMI and NDVI",
     "rule": "inside the study polygon; all three formula inputs valid; NDVI >= 0.30",
-    "valid_pixels": 498041,
-    "valid_area_ha": 4980.8,
+    "valid_pixels": 493954,
+    "valid_area_ha": 4940.0,
     "study_polygon_rasterized_pixels": 546357,
     "study_polygon_area_ha": 5464.0,
     "area_method": "Study-area area apportioned by the share of rasterized study pixels.",
-    "share_of_study_raster_pct": 91.2
+    "share_of_study_raster_pct": 90.4
   },
-  "high_or_very_high_share_of_vegetated_valid_pct": 41.8,
+  "high_or_very_high_share_of_vegetated_valid_pct": 42.5,
   "outputs": {
     "geotiff": "processed/teledeteccio/refugis_climatics_potencials.tif",
     "webp": "maps/teledeteccio/refugis_climatics_potencials.webp",
     "product_map": "maps/producte/mapa_refugis_climatics_alinya.png"
   },
   "limitations": "Relative screening layer based on a two-summer daytime LST composite and one Sentinel-2 date. Hydrology is drawn as cartographic context and does not enter the numeric formula. It is not air temperature, a climatic normal, microclimate monitoring or a field-validated refuge inventory. Weights and thresholds are explicit EcoRadar analysis assumptions.",
-  "snapshot_id": "alinya-5f4e8d29fdf098f3"
+  "snapshot_id": "alinya-fc9f7175d1f4fc22"
 }

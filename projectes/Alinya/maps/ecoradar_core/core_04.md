@@ -2,7 +2,7 @@
 
 Metodologia: `alinya_core_v2_2026-09-09`
 
-Resultat: `Estructural parcial · senyal satel·lital 41,8 %`
+Resultat: `Estructural parcial · senyal satel·lital 42,5 %`
 
 Estat: `PARCIAL` · Confiança: `mitjana`
 

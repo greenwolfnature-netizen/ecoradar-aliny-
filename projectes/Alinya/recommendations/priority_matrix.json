@@ -1,6 +1,6 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-12T17:28:01+00:00",
+  "generated_at": "2026-09-15T18:29:27+00:00",
   "decision_method": {
     "type": "non_compensatory_categories",
     "allowed_results": [
@@ -327,5 +327,5 @@
     }
   ],
   "methodology_version": "alinya_core_v2_2026-09-09",
-  "snapshot_id": "alinya-5f4e8d29fdf098f3"
+  "snapshot_id": "alinya-fc9f7175d1f4fc22"
 }
