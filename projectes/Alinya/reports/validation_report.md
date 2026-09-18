@@ -1,7 +1,7 @@
 # Informe de validació EcoRadar
 
 Projecte: `Alinya`
-Generat: `2026-09-15T18:30:09+00:00`
+Generat: `2026-09-18T06:17:20+00:00`
 Estat per generar fitxa/informe final: `APTE`
 
 ## Resum
