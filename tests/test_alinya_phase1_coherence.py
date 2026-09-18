@@ -58,7 +58,17 @@ class Phase1CoherenceTests(unittest.TestCase):
         selection = read("metadata/current_surface_temperature.json")["selected"]
         self.assertEqual(selection["temporal_kind"], "multitemporal_composite")
         self.assertIsNone(selection["acquired_at_utc"])
-        self.assertEqual(selection["component_scene_count"], 26)
+        metadata = read("metadata/landsat_connector.json")
+        scenes = [scene for scene in metadata["scenes"] if scene.get("acquired_at_utc")]
+        self.assertGreater(len(scenes), 1)
+        self.assertEqual(metadata["scene_count"], len(scenes))
+        self.assertEqual(selection["component_scene_count"], len(scenes))
+        contributing = [scene for scene in scenes if scene.get("valid_study_pixels", 0)]
+        self.assertGreater(len(contributing), 0)
+        self.assertEqual(selection["contributing_scene_count"], len(contributing))
+        acquired = sorted(scene["acquired_at_utc"] for scene in scenes)
+        self.assertEqual(selection["period_start_utc"], acquired[0])
+        self.assertEqual(selection["period_end_utc"], acquired[-1])
         self.assertLess(selection["period_start_utc"], selection["period_end_utc"])
         daily = read("indicators/daily_readings.json")["readings"]["surface_temperature"]
         self.assertEqual(daily["status_code"], "period_context")
