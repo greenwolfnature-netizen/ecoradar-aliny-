@@ -2,7 +2,7 @@
 
 Metodologia: `alinya_core_v2_2026-09-09`
 
-Resultat: `Propagació actual baix · recuperació NO AVALUABLE`
+Resultat: `Propagació actual moderat · recuperació NO AVALUABLE`
 
 Estat: `PARCIAL` · Confiança: `mitjana`
 

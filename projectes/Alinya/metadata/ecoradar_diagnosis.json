@@ -1,8 +1,8 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-18T06:16:36+00:00",
+  "generated_at": "2026-09-18T17:53:35+00:00",
   "methodology_version": "alinya_core_v2_2026-09-09",
-  "snapshot_input": "alinya-f255a8ee5aa1a12c",
+  "snapshot_input": "alinya-122475f6eb119ec5",
   "scope": "diagnosi ecològica basada en indicadors; sense recomanacions, fitxa ni informe final",
   "inputs": {
     "indicators": "indicators/ecoradar_core_indicators.json",
@@ -90,7 +90,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació",
-      "snapshot_id": "alinya-f255a8ee5aa1a12c"
+      "snapshot_id": "alinya-122475f6eb119ec5"
     },
     {
       "section": "distribucio_territorial",
@@ -110,7 +110,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació + interpretació plausible",
-      "snapshot_id": "alinya-f255a8ee5aa1a12c"
+      "snapshot_id": "alinya-122475f6eb119ec5"
     },
     {
       "section": "valors_ecologics_principals",
@@ -131,7 +131,7 @@
       ],
       "robustness": "robusta per responsabilitat; provisional per estat",
       "evidence_type": "observació",
-      "snapshot_id": "alinya-f255a8ee5aa1a12c"
+      "snapshot_id": "alinya-122475f6eb119ec5"
     },
     {
       "section": "factors_explicatius",
@@ -151,7 +151,7 @@
       ],
       "robustness": "robusta per l’escena; no vigent per avui",
       "evidence_type": "observació datada",
-      "snapshot_id": "alinya-f255a8ee5aa1a12c"
+      "snapshot_id": "alinya-122475f6eb119ec5"
     },
     {
       "section": "vulnerabilitats",
@@ -179,7 +179,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "interpretació plausible",
-      "snapshot_id": "alinya-f255a8ee5aa1a12c"
+      "snapshot_id": "alinya-122475f6eb119ec5"
     },
     {
       "section": "biodiversitat",
@@ -200,7 +200,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació",
-      "snapshot_id": "alinya-f255a8ee5aa1a12c"
+      "snapshot_id": "alinya-122475f6eb119ec5"
     },
     {
       "section": "connectivitat_i_us",
@@ -225,7 +225,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació + hipòtesi",
-      "snapshot_id": "alinya-f255a8ee5aa1a12c"
+      "snapshot_id": "alinya-122475f6eb119ec5"
     },
     {
       "section": "aigua",
@@ -251,12 +251,12 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació",
-      "snapshot_id": "alinya-f255a8ee5aa1a12c"
+      "snapshot_id": "alinya-122475f6eb119ec5"
     },
     {
       "section": "foc",
       "title": "El foc es presenta com un perfil de propagació, sensibilitat, recuperació i operativa",
-      "interpretation": "Propagació actual baix · recuperació NO AVALUABLE. El perill EcoRadar actual conserva la seva escala 0–100 perquè és un producte diari específic, i el Pla Alfa continua com a context oficial independent. La sensibilitat ecològica i la recuperació postincendi no són avaluables amb perímetres, camins i aigua cartografiada.",
+      "interpretation": "Propagació actual moderat · recuperació NO AVALUABLE. El perill EcoRadar actual conserva la seva escala 0–100 perquè és un producte diari específic, i el Pla Alfa continua com a context oficial independent. La sensibilitat ecològica i la recuperació postincendi no són avaluables amb perímetres, camins i aigua cartografiada.",
       "management_implication": "Vigilar vent, humitat, pluja i potencial ForestDrought; abans de tractaments, verificar combustible, hàbitats i sòl als sectors candidats.",
       "supporting_indicators": [
         "CORE_09"
@@ -277,7 +277,7 @@
       ],
       "robustness": "caduca amb la següent instantània diària",
       "evidence_type": "escenari potencial",
-      "snapshot_id": "alinya-f255a8ee5aa1a12c"
+      "snapshot_id": "alinya-122475f6eb119ec5"
     },
     {
       "section": "implicacions_gestio",
@@ -314,8 +314,8 @@
       ],
       "robustness": "robusta en els vetos; provisional en l’ordenació",
       "evidence_type": "síntesi de decisió",
-      "snapshot_id": "alinya-f255a8ee5aa1a12c"
+      "snapshot_id": "alinya-122475f6eb119ec5"
     }
   ],
-  "snapshot_id": "alinya-87e5afcc8f16c615"
+  "snapshot_id": "alinya-852ecba8ee70305c"
 }

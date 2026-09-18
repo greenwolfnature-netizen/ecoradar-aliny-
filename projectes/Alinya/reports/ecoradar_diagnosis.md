@@ -1,7 +1,7 @@
 # EcoRadar Diagnosis
 
 Projecte: `Alinya`
-Generat: `2026-09-18T06:16:36+00:00`
+Generat: `2026-09-18T17:53:35+00:00`
 
 ## Resum
 
@@ -111,7 +111,7 @@ Generat: `2026-09-18T06:16:36+00:00`
 ### El foc es presenta com un perfil de propagació, sensibilitat, recuperació i operativa
 
 - Secció: `foc`
-- Interpretació: Propagació actual baix · recuperació NO AVALUABLE. El perill EcoRadar actual conserva la seva escala 0–100 perquè és un producte diari específic, i el Pla Alfa continua com a context oficial independent. La sensibilitat ecològica i la recuperació postincendi no són avaluables amb perímetres, camins i aigua cartografiada.
+- Interpretació: Propagació actual moderat · recuperació NO AVALUABLE. El perill EcoRadar actual conserva la seva escala 0–100 perquè és un producte diari específic, i el Pla Alfa continua com a context oficial independent. La sensibilitat ecològica i la recuperació postincendi no són avaluables amb perímetres, camins i aigua cartografiada.
 - Implicació per a la gestió: Vigilar vent, humitat, pluja i potencial ForestDrought; abans de tractaments, verificar combustible, hàbitats i sòl als sectors candidats.
 - Indicadors: CORE_09
 - Fonts: aca_hydrology, fires_burned_areas, icgc_dem_mdt, land_cover_icgc_cobertes_sol, meteocat, osm_public_use, pla_alfa

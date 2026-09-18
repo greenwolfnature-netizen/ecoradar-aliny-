@@ -1,7 +1,7 @@
 # Indicator Engine Report
 
 Projecte: `Alinya`
-Generat: `2026-09-18T06:16:36+00:00`
+Generat: `2026-09-18T17:53:35+00:00`
 
 ## Preflight obligatori
 
@@ -31,7 +31,7 @@ Generat: `2026-09-18T06:16:36+00:00`
 | CORE_06 | Cobertura del coneixement de biodiversitat | 3.680 registres · 66/84 cel·les amb dades | knowledge_profile | PARCIAL | baixa | gbif_occurrences, inaturalist_observations | standardized_field_inventory, BDBC |
 | CORE_07 | Accessibilitat cartografiada i ús potencial | 124,8 km · 2,28 km/km² · 18 punts | direct_inventory | COMPLET | mitjana | osm_public_use | visitor_counts, field_impact_observations |
 | CORE_08 | Continuïtat estructural i connectivitat potencial | 1.198,6 ha en connectors · funcionalitat NO AVALUABLE | two_level_profile | PARCIAL | mitjana | connectivity_infraestructura_verda, land_cover_icgc_cobertes_sol | species_specific_resistance, movement_validation |
-| CORE_09 | Perfil de susceptibilitat i recuperació davant del foc | Propagació actual baix · recuperació NO AVALUABLE | four_axis_profile | PARCIAL | mitjana | meteocat, pla_alfa, land_cover_icgc_cobertes_sol, icgc_dem_mdt, fires_burned_areas, osm_public_use, aca_hydrology | fuel_structure_field_data, postfire_severity_timeseries, recovery_field_validation |
+| CORE_09 | Perfil de susceptibilitat i recuperació davant del foc | Propagació actual moderat · recuperació NO AVALUABLE | four_axis_profile | PARCIAL | mitjana | meteocat, pla_alfa, land_cover_icgc_cobertes_sol, icgc_dem_mdt, fires_burned_areas, osm_public_use, aca_hydrology | fuel_structure_field_data, postfire_severity_timeseries, recovery_field_validation |
 | CORE_10 | Presència hídrica cartografiada | 11,8 km de xarxa · 12 fonts cartografiades | direct_inventory | COMPLET | mitjana | aca_hydrology | flow_and_permanence, water_quality, riparian_condition, field_validation |
 | CORE_11 | Cribratge de necessitat i oportunitat de restauració | NO AVALUABLE · falta diagnosi de degradació | decision_gate | NO AVALUABLE | baixa | - | degradation_evidence, reference_ecosystem, restoration_objective, benefit_feasibility_risk |
 | CORE_12 | Síntesi multicriteri per a la gestió | SENSE PRIORITAT ÚNICA · 1 P1, 4 P2 i 1 NO AVALUABLE | multicriteria_decision | PARCIAL | mitjana | aca_hydrology, connectivity_infraestructura_verda, copernicus_sentinel_ndmi, copernicus_sentinel_ndvi, detailed_surface_temperature, fires_burned_areas, gbif_occurrences, habitats_terrestres_v3, hic_v2, icgc_dem_mdt, inaturalist_observations, land_cover_icgc_cobertes_sol, meteocat, osm_public_use, pla_alfa | approved_management_units, approved_objectives_and_preferences, field_validation |
@@ -104,8 +104,8 @@ Generat: `2026-09-18T06:16:36+00:00`
 
 ### CORE_09 · Perfil de susceptibilitat i recuperació davant del foc
 - Càlcul: Quatre eixos no agregats: propagació potencial actual, sensibilitat ecològica, recuperació postincendi i context operatiu. Pla Alfa és context oficial independent.
-- Resultat: Propagació actual baix · recuperació NO AVALUABLE
-- Vector de confiança: {"completesa": {"rating": "limitada", "reason": "La propagació actual té entrades parcials; sensibilitat i recuperació no són avaluables."}, "vigencia": {"rating": "adequada", "reason": "Meteorologia, precipitació i Pla Alfa conserven data actual; NDMI/LST antics queden exclosos del perill actual."}, "cobertura": {"rating": "adequada", "reason": "El perill actual declara 98.0 % vàlid i la superfície sense dada."}, "resolucio": {"rating": "limitada", "reason": "Malla de 100 m amb meteorologia puntual de Y4/CJ i capes estructurals més fines."}, "qa": {"rating": "limitada", "reason": "Qualitat/actualització efectiva del producte 62.2 %; no s’anomena confiança ecològica."}, "representativitat": {"rating": "limitada", "reason": "El perfil separa propagació, sensibilitat, recuperació i operativa; només la primera té lectura actual."}, "biaix": {"rating": "limitada", "reason": "Falten combustible mesurat, humitat actual i vent territorial per valls i carenes."}, "validacio": {"rating": "insuficient", "reason": "No hi ha validació del comportament o recuperació amb incendis observats locals."}}
+- Resultat: Propagació actual moderat · recuperació NO AVALUABLE
+- Vector de confiança: {"completesa": {"rating": "limitada", "reason": "La propagació actual té entrades parcials; sensibilitat i recuperació no són avaluables."}, "vigencia": {"rating": "adequada", "reason": "Meteorologia, precipitació i Pla Alfa conserven data actual; NDMI/LST antics queden exclosos del perill actual."}, "cobertura": {"rating": "adequada", "reason": "El perill actual declara 98.0 % vàlid i la superfície sense dada."}, "resolucio": {"rating": "limitada", "reason": "Malla de 100 m amb meteorologia puntual de Y4/CJ i capes estructurals més fines."}, "qa": {"rating": "limitada", "reason": "Qualitat/actualització efectiva del producte 61.4 %; no s’anomena confiança ecològica."}, "representativitat": {"rating": "limitada", "reason": "El perfil separa propagació, sensibilitat, recuperació i operativa; només la primera té lectura actual."}, "biaix": {"rating": "limitada", "reason": "Falten combustible mesurat, humitat actual i vent territorial per valls i carenes."}, "validacio": {"rating": "insuficient", "reason": "No hi ha validació del comportament o recuperació amb incendis observats locals."}}
 - Raó de confiança: Confiança mitjana: dimensions insuficients — validacio.
 - Limitacions: El perill actual no és probabilitat d’ignició ni predicció d’incendi.; Camins, aigua i superfície cremada no sumen ni resten resiliència de manera lineal.
 - Impacte: Permet vigilar propagació actual sense confondre-la amb sensibilitat, capacitat d’extinció o recuperació ecològica.

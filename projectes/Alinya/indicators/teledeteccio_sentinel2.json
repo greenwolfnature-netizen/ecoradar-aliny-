@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-18T06:16:12.484425+00:00",
+  "generated_at_utc": "2026-09-18T17:53:11.715086+00:00",
   "scope": "Muntanya d'Alinyà",
   "source_scene": "S2A_T31TCG_20260915T103959_L2A",
   "acquired_at_utc": "2026-09-15T10:49:43.429000Z",
@@ -68,5 +68,5 @@
     "ndmi": "maps/teledeteccio/ndmi.webp",
     "albedo": "maps/teledeteccio/albedo.webp"
   },
-  "snapshot_id": "alinya-87e5afcc8f16c615"
+  "snapshot_id": "alinya-852ecba8ee70305c"
 }

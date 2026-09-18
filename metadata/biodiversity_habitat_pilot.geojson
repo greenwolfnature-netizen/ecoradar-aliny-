@@ -20,7 +20,7 @@
         "ndvi": 0.551,
         "ndmi": 0.054,
         "lst_c": 31.054,
-        "fire_today": 31.514,
+        "fire_today": 44.154,
         "value_reasons": [
           "5.8 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -169,7 +169,7 @@
         "ndvi": 0.433,
         "ndmi": -0.133,
         "lst_c": 33.747,
-        "fire_today": 36.617,
+        "fire_today": 54.314,
         "value_reasons": [
           "0.1 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -324,7 +324,7 @@
         "ndvi": 0.527,
         "ndmi": 0.029,
         "lst_c": 31.1,
-        "fire_today": 29.645,
+        "fire_today": 42.285,
         "value_reasons": [
           "36.4 ha d’HIC cartografiat",
           "42 registres públics agregats; indiquen coneixement, no abundància",
@@ -1238,7 +1238,7 @@
         "ndvi": 0.49,
         "ndmi": -0.008,
         "lst_c": 31.216,
-        "fire_today": 30.67,
+        "fire_today": 43.197,
         "value_reasons": [
           "40.4 ha d’HIC cartografiat",
           "9 registres públics agregats; indiquen coneixement, no abundància",
@@ -3259,7 +3259,7 @@
         "ndvi": 0.496,
         "ndmi": 0.008,
         "lst_c": 30.098,
-        "fire_today": 29.69,
+        "fire_today": 42.33,
         "value_reasons": [
           "4.1 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -3544,7 +3544,7 @@
         "ndvi": 0.438,
         "ndmi": -0.02,
         "lst_c": 31.86,
-        "fire_today": 27.464,
+        "fire_today": 40.104,
         "value_reasons": [
           "4.7 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -3981,7 +3981,7 @@
         "ndvi": 0.663,
         "ndmi": 0.123,
         "lst_c": 27.494,
-        "fire_today": 22.473,
+        "fire_today": 35.113,
         "value_reasons": [
           "2.6 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -4248,7 +4248,7 @@
         "ndvi": 0.492,
         "ndmi": 0.008,
         "lst_c": 31.753,
-        "fire_today": 22.182,
+        "fire_today": 34.822,
         "value_reasons": [
           "2.7 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -4501,7 +4501,7 @@
         "ndvi": 0.45,
         "ndmi": -0.006,
         "lst_c": 31.585,
-        "fire_today": 28.477,
+        "fire_today": 41.118,
         "value_reasons": [
           "3.2 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -4798,7 +4798,7 @@
         "ndvi": 0.629,
         "ndmi": 0.119,
         "lst_c": 29.979,
-        "fire_today": 28.759,
+        "fire_today": 42.007,
         "value_reasons": [
           "3.5 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -5076,7 +5076,7 @@
         "ndvi": 0.677,
         "ndmi": 0.131,
         "lst_c": 27.73,
-        "fire_today": 35.813,
+        "fire_today": 46.735,
         "value_reasons": [
           "1030.1 ha d’HIC prioritari cartografiat",
           "2697.7 ha d’HIC cartografiat",
@@ -19551,7 +19551,7 @@
         "ndvi": 0.389,
         "ndmi": -0.024,
         "lst_c": 35.607,
-        "fire_today": 41.771,
+        "fire_today": 51.561,
         "value_reasons": [
           "0.3 ha d’HIC cartografiat",
           "0.7 ha dins connectors terrestres oficials",
@@ -19735,7 +19735,7 @@
         "ndvi": 0.526,
         "ndmi": -0.054,
         "lst_c": 37.876,
-        "fire_today": 48.151,
+        "fire_today": 58.048,
         "value_reasons": [
           "0.5 ha d’HIC prioritari cartografiat",
           "0.5 ha d’HIC cartografiat",
@@ -20034,7 +20034,7 @@
         "ndvi": 0.581,
         "ndmi": 0.03,
         "lst_c": 29.032,
-        "fire_today": 33.861,
+        "fire_today": 43.887,
         "value_reasons": [],
         "pressure_reasons": [],
         "knowledge_class": "Pràcticament sense dades",
@@ -20140,7 +20140,7 @@
         "ndvi": 0.617,
         "ndmi": 0.06,
         "lst_c": 37.216,
-        "fire_today": 45.236,
+        "fire_today": 55.279,
         "value_reasons": [
           "0.8 ha dins connectors terrestres oficials",
           "98 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -20373,7 +20373,7 @@
         "ndvi": 0.574,
         "ndmi": 0.185,
         "lst_c": 23.772,
-        "fire_today": 28.173,
+        "fire_today": 40.813,
         "value_reasons": [
           "0.5 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -20451,7 +20451,7 @@
         "ndvi": 0.451,
         "ndmi": -0.072,
         "lst_c": 37.599,
-        "fire_today": 48.012,
+        "fire_today": 57.906,
         "value_reasons": [
           "8.1 ha dins connectors terrestres oficials",
           "96 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -20897,7 +20897,7 @@
         "ndvi": 0.61,
         "ndmi": 0.063,
         "lst_c": 29.297,
-        "fire_today": 32.474,
+        "fire_today": 42.779,
         "value_reasons": [
           "0.3 ha d’HIC prioritari cartografiat",
           "0.5 ha d’HIC cartografiat",
@@ -21087,7 +21087,7 @@
         "ndvi": 0.758,
         "ndmi": 0.182,
         "lst_c": 29.311,
-        "fire_today": 34.511,
+        "fire_today": 44.962,
         "value_reasons": [
           "4.1 ha d’HIC prioritari cartografiat",
           "4.2 ha d’HIC cartografiat",
@@ -21573,7 +21573,7 @@
         "ndvi": 0.801,
         "ndmi": 0.244,
         "lst_c": 30.09,
-        "fire_today": 31.472,
+        "fire_today": 42.884,
         "value_reasons": [
           "3.5 ha d’HIC prioritari cartografiat",
           "4.0 ha d’HIC cartografiat",
@@ -21853,7 +21853,7 @@
         "ndvi": 0.637,
         "ndmi": 0.084,
         "lst_c": 29.499,
-        "fire_today": 32.977,
+        "fire_today": 44.465,
         "value_reasons": [
           "0.9 ha d’HIC prioritari cartografiat",
           "2.8 ha d’HIC cartografiat",
@@ -22192,7 +22192,7 @@
         "ndvi": 0.631,
         "ndmi": 0.038,
         "lst_c": 30.89,
-        "fire_today": 40.066,
+        "fire_today": 52.706,
         "value_reasons": [
           "0.9 ha d’HIC prioritari cartografiat",
           "0.9 ha d’HIC cartografiat",
@@ -22320,7 +22320,7 @@
         "ndvi": 0.78,
         "ndmi": 0.248,
         "lst_c": 30.396,
-        "fire_today": 25.135,
+        "fire_today": 37.775,
         "value_reasons": [
           "1.0 ha d’HIC prioritari cartografiat",
           "1.0 ha d’HIC cartografiat",
@@ -22527,7 +22527,7 @@
         "ndvi": 0.489,
         "ndmi": -0.05,
         "lst_c": 33.974,
-        "fire_today": 47.939,
+        "fire_today": 65.635,
         "value_reasons": [
           "0.1 ha d’HIC prioritari cartografiat",
           "0.1 ha d’HIC cartografiat",
@@ -22537,7 +22537,8 @@
         "pressure_reasons": [
           "NDMI relativament baix (-0.05; observació 07/07/2026)",
           "NDVI relativament baix (0.49; observació 07/07/2026)",
-          "temperatura superficial estival relativament elevada (34.0 °C)"
+          "temperatura superficial estival relativament elevada (34.0 °C)",
+          "perill EcoRadar actual alt al sector (66/100)"
         ],
         "knowledge_class": "Ben prospectat en fonts públiques",
         "followup": "Prioritat de comprovació",
@@ -22554,7 +22555,8 @@
         "reading_coincidences": [
           "NDMI relativament baix (-0.05; observació 07/07/2026)",
           "NDVI relativament baix (0.49; observació 07/07/2026)",
-          "temperatura superficial estival relativament elevada (34.0 °C)"
+          "temperatura superficial estival relativament elevada (34.0 °C)",
+          "perill EcoRadar actual alt al sector (66/100)"
         ],
         "detected": [
           "valor ecològic cartografiat amb les fonts disponibles",
@@ -22563,7 +22565,8 @@
         "possible_implications": [
           "La humitat espectral relativament baixa pot ser compatible amb menys disponibilitat hídrica de la vegetació, però no demostra estrès fisiològic sense camp.",
           "El vigor espectral relativament baix pot respondre a coberta, fenologia, sòl o estat vegetal; cal contrastar la causa abans d’interpretar degradació.",
-          "Una superfície relativament càlida pot reduir la funció de refugi tèrmic i reforçar l’assecament, si coincideix amb baixa humitat i la situació es confirma al camp."
+          "Una superfície relativament càlida pot reduir la funció de refugi tèrmic i reforçar l’assecament, si coincideix amb baixa humitat i la situació es confirma al camp.",
+          "El perill d’incendi actual elevat augmenta la necessitat de vigilància conjuntural; no converteix el sector en candidat automàtic a tractament."
         ]
       },
       "geometry": {
@@ -22787,7 +22790,7 @@
         "ndvi": 0.674,
         "ndmi": 0.101,
         "lst_c": 29.562,
-        "fire_today": 29.822,
+        "fire_today": 41.759,
         "value_reasons": [
           "1.1 ha d’HIC prioritari cartografiat",
           "4.4 ha d’HIC cartografiat",
@@ -23341,7 +23344,7 @@
         "ndvi": 0.682,
         "ndmi": 0.102,
         "lst_c": 30.362,
-        "fire_today": 31.706,
+        "fire_today": 43.419,
         "value_reasons": [
           "4.7 ha d’HIC prioritari cartografiat",
           "10.7 ha d’HIC cartografiat",
@@ -24926,7 +24929,7 @@
         "ndvi": 0.619,
         "ndmi": 0.051,
         "lst_c": 30.941,
-        "fire_today": 40.476,
+        "fire_today": 50.415,
         "value_reasons": [
           "28.1 ha d’HIC prioritari cartografiat",
           "99.3 ha d’HIC cartografiat",
@@ -30535,7 +30538,7 @@
         "ndvi": 0.709,
         "ndmi": 0.141,
         "lst_c": 30.471,
-        "fire_today": 29.765,
+        "fire_today": 42.405,
         "value_reasons": [],
         "pressure_reasons": [
           "accessibilitat potencial relativa elevada (13.9 km de xarxa/km²); no és freqüentació real"
@@ -30700,7 +30703,7 @@
         "ndvi": 0.625,
         "ndmi": 0.074,
         "lst_c": 30.559,
-        "fire_today": 34.513,
+        "fire_today": 46.045,
         "value_reasons": [
           "8.4 ha d’HIC prioritari cartografiat",
           "22.9 ha d’HIC cartografiat",
@@ -32877,7 +32880,7 @@
         "ndvi": 0.629,
         "ndmi": 0.038,
         "lst_c": 31.722,
-        "fire_today": 35.71,
+        "fire_today": 52.99,
         "value_reasons": [
           "1.3 ha d’HIC prioritari cartografiat",
           "1.3 ha d’HIC cartografiat",
@@ -33144,7 +33147,7 @@
         "ndvi": 0.535,
         "ndmi": 0.046,
         "lst_c": 29.657,
-        "fire_today": 25.829,
+        "fire_today": 38.469,
         "value_reasons": [
           "0.2 ha d’HIC prioritari cartografiat",
           "1.3 ha d’HIC cartografiat",
@@ -33275,7 +33278,7 @@
         "ndvi": 0.417,
         "ndmi": -0.046,
         "lst_c": 32.402,
-        "fire_today": 38.364,
+        "fire_today": 51.005,
         "value_reasons": [
           "1.6 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -33518,7 +33521,7 @@
         "ndvi": 0.783,
         "ndmi": 0.256,
         "lst_c": 29.884,
-        "fire_today": 41.747,
+        "fire_today": 51.787,
         "value_reasons": [
           "138.3 ha d’HIC prioritari cartografiat",
           "167.3 ha d’HIC cartografiat",
@@ -35665,7 +35668,7 @@
         "ndvi": 0.772,
         "ndmi": 0.261,
         "lst_c": 33.475,
-        "fire_today": 35.175,
+        "fire_today": 47.815,
         "value_reasons": [
           "0.1 ha dins connectors terrestres oficials",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -35858,7 +35861,7 @@
         "ndvi": 0.602,
         "ndmi": 0.162,
         "lst_c": 31.132,
-        "fire_today": 23.761,
+        "fire_today": 36.401,
         "value_reasons": [
           "0.2 ha dins connectors terrestres oficials",
           "87 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -35944,7 +35947,7 @@
         "ndvi": 0.8,
         "ndmi": 0.322,
         "lst_c": 32.778,
-        "fire_today": 28.75,
+        "fire_today": 41.391,
         "value_reasons": [],
         "pressure_reasons": [
           "temperatura superficial estival relativament elevada (32.8 °C)",
@@ -36322,7 +36325,7 @@
         "ndvi": 0.396,
         "ndmi": 0.016,
         "lst_c": 33.359,
-        "fire_today": 26.932,
+        "fire_today": 39.572,
         "value_reasons": [
           "0.2 ha d’HIC cartografiat",
           "0.2 ha dins connectors terrestres oficials",
@@ -36413,7 +36416,7 @@
         "ndvi": 0.603,
         "ndmi": 0.069,
         "lst_c": 29.88,
-        "fire_today": 37.133,
+        "fire_today": 47.877,
         "value_reasons": [
           "5.8 ha d’HIC prioritari cartografiat",
           "44.1 ha d’HIC cartografiat",
@@ -39482,7 +39485,7 @@
         "ndvi": 0.671,
         "ndmi": 0.142,
         "lst_c": 30.65,
-        "fire_today": 39.002,
+        "fire_today": 48.746,
         "value_reasons": [
           "0.9 ha d’HIC cartografiat",
           "5.4 ha dins connectors terrestres oficials",
@@ -39931,7 +39934,7 @@
         "ndvi": 0.751,
         "ndmi": 0.224,
         "lst_c": 30.526,
-        "fire_today": 30.025,
+        "fire_today": 42.665,
         "value_reasons": [
           "0.1 ha d’HIC cartografiat",
           "5.1 ha dins connectors terrestres oficials",
@@ -40225,7 +40228,7 @@
         "ndvi": 0.749,
         "ndmi": 0.209,
         "lst_c": 30.386,
-        "fire_today": 38.035,
+        "fire_today": 47.762,
         "value_reasons": [
           "2.1 ha dins connectors terrestres oficials",
           "97 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -40345,7 +40348,7 @@
         "ndvi": 0.497,
         "ndmi": -0.036,
         "lst_c": 34.663,
-        "fire_today": 49.646,
+        "fire_today": 59.568,
         "value_reasons": [
           "0.4 ha d’HIC cartografiat",
           "0.6 ha dins connectors terrestres oficials",
@@ -40464,5 +40467,5 @@
       }
     }
   ],
-  "snapshot_id": "alinya-87e5afcc8f16c615"
+  "snapshot_id": "alinya-852ecba8ee70305c"
 }
