@@ -1,7 +1,7 @@
 # EcoRadar Recommendations
 
 Projecte: `Alinya`
-Generat: `2026-09-18T17:53:35+00:00`
+Generat: `2026-09-19T17:26:52+00:00`
 
 Aquest fitxer conté recomanacions derivades exclusivament de la diagnosi ecològica. No és una fitxa ni un informe final.
 

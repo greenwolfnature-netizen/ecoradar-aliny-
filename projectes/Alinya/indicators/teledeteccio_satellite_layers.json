@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-18T17:52:53.925069+00:00",
+  "generated_at_utc": "2026-09-19T17:26:11.770539+00:00",
   "scope": "Muntanya d'Alinyà",
   "study_bbox_epsg4326": [
     1.3639979999999998,
@@ -46,5 +46,5 @@
     "vegetation": "coverage presence, not biodiversity, habitat quality or fuel load",
     "temperature": "detailed satellite surface temperature; a multitemporal median is period context and never a single-date observation; it is not air temperature, personal exposure or a climatic normal"
   },
-  "snapshot_id": "alinya-852ecba8ee70305c"
+  "snapshot_id": "alinya-7587f68f47526b8d"
 }
