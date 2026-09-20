@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T17:26:50+00:00",
+  "generated_at": "2026-09-20T17:40:28+00:00",
   "project_root": "projectes/Alinya",
   "config": "config/data_sources.yaml",
   "policy": {
@@ -1523,5 +1523,5 @@
       "spei"
     ]
   },
-  "snapshot_id": "alinya-7587f68f47526b8d"
+  "snapshot_id": "alinya-0a5e40ae980cf22c"
 }

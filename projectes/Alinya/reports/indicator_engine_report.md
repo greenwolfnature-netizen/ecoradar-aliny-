@@ -1,7 +1,7 @@
 # Indicator Engine Report
 
 Projecte: `Alinya`
-Generat: `2026-09-19T17:26:52+00:00`
+Generat: `2026-09-20T17:40:29+00:00`
 
 ## Preflight obligatori
 

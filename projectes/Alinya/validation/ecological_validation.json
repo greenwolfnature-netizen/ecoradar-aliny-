@@ -1,6 +1,6 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-19T17:27:35+00:00",
+  "generated_at": "2026-09-20T17:41:07+00:00",
   "level": "ecological",
   "summary": {
     "checks": 8,
@@ -119,7 +119,7 @@
             }
           },
           "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-          "snapshot_input": "alinya-0ccafbfc289b97ff"
+          "snapshot_input": "alinya-1696bce574ed92bf"
         }
       }
     },
@@ -209,7 +209,7 @@
             }
           },
           "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia.",
-          "snapshot_input": "alinya-0ccafbfc289b97ff"
+          "snapshot_input": "alinya-1696bce574ed92bf"
         }
       }
     },
@@ -255,8 +255,8 @@
               "status": "context actual/parcial",
               "readings": {
                 "air_temperature": {
-                  "value": "21,5 °C",
-                  "data_at_utc": "2026-09-19T16:30:00Z",
+                  "value": "24,6 °C",
+                  "data_at_utc": "2026-09-20T16:30:00Z",
                   "period_start_utc": null,
                   "period_end_utc": null,
                   "temporal_kind": "observation",
@@ -264,8 +264,8 @@
                   "validity": "actualitzada avui"
                 },
                 "precipitation_30d": {
-                  "value": "24,6 mm",
-                  "data_at_utc": "2026-09-19T16:30:00Z",
+                  "value": "22,3 mm",
+                  "data_at_utc": "2026-09-20T16:30:00Z",
                   "period_start_utc": null,
                   "period_end_utc": null,
                   "temporal_kind": "observation",
@@ -273,8 +273,8 @@
                   "validity": "actualitzada avui"
                 },
                 "days_without_significant_rain": {
-                  "value": "9 dies",
-                  "data_at_utc": "2026-09-19T16:30:00Z",
+                  "value": "10 dies",
+                  "data_at_utc": "2026-09-20T16:30:00Z",
                   "period_start_utc": null,
                   "period_end_utc": null,
                   "temporal_kind": "observation",
@@ -352,7 +352,7 @@
             }
           },
           "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, representativitat, biaix, validacio.",
-          "snapshot_input": "alinya-0ccafbfc289b97ff"
+          "snapshot_input": "alinya-1696bce574ed92bf"
         },
         "CORE_11": {
           "code": "CORE_11",
@@ -433,7 +433,7 @@
             }
           },
           "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, vigencia, cobertura, resolucio, qa, representativitat, biaix, validacio.",
-          "snapshot_input": "alinya-0ccafbfc289b97ff"
+          "snapshot_input": "alinya-1696bce574ed92bf"
         }
       }
     },
@@ -627,7 +627,7 @@
             }
           },
           "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-          "snapshot_input": "alinya-0ccafbfc289b97ff"
+          "snapshot_input": "alinya-1696bce574ed92bf"
         }
       }
     },
