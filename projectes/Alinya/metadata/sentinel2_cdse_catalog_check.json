@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "checked_at_utc": "2026-09-20T17:40:01.986806+00:00",
+  "checked_at_utc": "2026-09-21T19:44:06.874670+00:00",
   "source": "Copernicus Data Space Ecosystem Sentinel-2 L2A STAC",
-  "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&datetime=2026-08-06T00%3A00%3A00Z%2F2026-09-20T23%3A59%3A59Z&limit=100",
+  "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&datetime=2026-08-07T00%3A00%3A00Z%2F2026-09-21T23%3A59%3A59Z&limit=100",
   "search_period": {
-    "start": "2026-08-06",
-    "end": "2026-09-20"
+    "start": "2026-08-07",
+    "end": "2026-09-21"
   },
   "maximum_tile_cloud_pct": 10.0,
   "candidate_count": 14,

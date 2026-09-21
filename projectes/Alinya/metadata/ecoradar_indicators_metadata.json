@@ -1,8 +1,8 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-20T17:40:29+00:00",
+  "generated_at": "2026-09-21T19:44:41+00:00",
   "methodology_version": "alinya_core_v2_2026-09-09",
-  "snapshot_id": "alinya-0a5e40ae980cf22c",
+  "snapshot_id": "alinya-d266d756d1951e81",
   "status": "compatibility_alias",
   "canonical_json": "indicators/ecoradar_core_indicators.json",
   "canonical_csv": "indicators/ecoradar_core_indicators.csv",
