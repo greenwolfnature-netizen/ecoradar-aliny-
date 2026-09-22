@@ -1,7 +1,7 @@
 # Data Availability Report
 
 Projecte: `projectes/Alinya`
-Generat: `2026-09-21T19:44:39+00:00`
+Generat: `2026-09-22T18:16:50+00:00`
 
 ## Resum
 

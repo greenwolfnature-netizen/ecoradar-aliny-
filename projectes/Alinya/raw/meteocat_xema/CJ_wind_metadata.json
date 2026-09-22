@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-09-21T19:43:15Z",
-  "latest_catalog_check_utc": "2026-09-21T19:43:15Z",
+  "generated_at_utc": "2026-09-22T18:15:31Z",
+  "latest_catalog_check_utc": "2026-09-22T18:15:31Z",
   "connector": "meteocat_xema_socrata_nearest_wind",
   "responsibility": "download_and_normalize_only",
   "source": "Dades meteorològiques de la XEMA",
@@ -24,8 +24,8 @@
     "wind_gust_direction_deg": "51"
   },
   "records": 6712,
-  "first_observation_utc": "2026-08-17T20:00:00Z",
-  "last_observation_utc": "2026-09-21T18:30:00Z",
+  "first_observation_utc": "2026-08-18T18:30:00Z",
+  "last_observation_utc": "2026-09-22T17:00:00Z",
   "connector_status": "verified",
   "limitation": "Observació puntual a Organyà, 9,2 km de Y4; no és vent mesurat dins la Muntanya d'Alinyà ni una superfície de vent.",
   "output_csv": "projectes/Alinya/raw/meteocat_xema/CJ_wind_observations.csv"
