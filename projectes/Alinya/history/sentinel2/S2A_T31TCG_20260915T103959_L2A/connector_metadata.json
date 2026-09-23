@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-21T19:44:14.758597+00:00",
+  "generated_at_utc": "2026-09-22T18:16:29.622194+00:00",
   "mission": "Sentinel-2",
   "data_level": "L2A",
   "provider": "Earth Search / AWS",
@@ -67,7 +67,7 @@
     "query": {
       "collections": "sentinel-2-l2a,sentinel-2-c1-l2a",
       "bbox": "1.3639979999999998,42.14442699999999,1.5199389999999997,42.22512200000001",
-      "datetime": "2026-07-08T00:00:00Z/2026-09-21T23:59:59Z",
+      "datetime": "2026-07-08T00:00:00Z/2026-09-22T23:59:59Z",
       "limit": 100
     },
     "total_scenes": 90,

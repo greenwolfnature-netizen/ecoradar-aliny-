@@ -17,10 +17,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.551,
-        "ndmi": 0.054,
+        "ndvi": 0.54,
+        "ndmi": 0.049,
         "lst_c": 31.054,
-        "fire_today": 48.887,
+        "fire_today": 48.677,
         "value_reasons": [
           "5.8 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -166,17 +166,17 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.433,
-        "ndmi": -0.133,
+        "ndvi": 0.419,
+        "ndmi": -0.121,
         "lst_c": 33.747,
-        "fire_today": 60.939,
+        "fire_today": 59.656,
         "value_reasons": [
           "0.1 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
         ],
         "pressure_reasons": [
-          "NDMI relativament baix (-0.13; observació 07/07/2026)",
-          "NDVI relativament baix (0.43; observació 07/07/2026)",
+          "NDMI relativament baix (-0.12; observació 07/07/2026)",
+          "NDVI relativament baix (0.42; observació 07/07/2026)",
           "temperatura superficial estival relativament elevada (33.7 °C)"
         ],
         "knowledge_class": "Pràcticament sense dades",
@@ -195,8 +195,8 @@
         "connected": true,
         "change_detected": false,
         "reading_coincidences": [
-          "NDMI relativament baix (-0.13; observació 07/07/2026)",
-          "NDVI relativament baix (0.43; observació 07/07/2026)",
+          "NDMI relativament baix (-0.12; observació 07/07/2026)",
+          "NDVI relativament baix (0.42; observació 07/07/2026)",
           "temperatura superficial estival relativament elevada (33.7 °C)"
         ],
         "detected": [
@@ -321,10 +321,10 @@
         "public_points": 1,
         "historic_fire_ha": 1.6,
         "historic_fire_events": 1,
-        "ndvi": 0.527,
-        "ndmi": 0.029,
+        "ndvi": 0.517,
+        "ndmi": 0.028,
         "lst_c": 31.1,
-        "fire_today": 47.018,
+        "fire_today": 46.436,
         "value_reasons": [
           "36.4 ha d’HIC cartografiat",
           "42 registres públics agregats; indiquen coneixement, no abundància",
@@ -1235,10 +1235,10 @@
         "public_points": 1,
         "historic_fire_ha": 5.9,
         "historic_fire_events": 1,
-        "ndvi": 0.49,
+        "ndvi": 0.477,
         "ndmi": -0.008,
         "lst_c": 31.216,
-        "fire_today": 47.929,
+        "fire_today": 47.411,
         "value_reasons": [
           "40.4 ha d’HIC cartografiat",
           "9 registres públics agregats; indiquen coneixement, no abundància",
@@ -1246,7 +1246,7 @@
         ],
         "pressure_reasons": [
           "NDMI relativament baix (-0.01; observació 07/07/2026)",
-          "NDVI relativament baix (0.49; observació 07/07/2026)",
+          "NDVI relativament baix (0.48; observació 07/07/2026)",
           "coincidència amb un perímetre històric (5.9 ha solapades)"
         ],
         "knowledge_class": "Ben prospectat en fonts públiques",
@@ -1263,7 +1263,7 @@
         "change_detected": false,
         "reading_coincidences": [
           "NDMI relativament baix (-0.01; observació 07/07/2026)",
-          "NDVI relativament baix (0.49; observació 07/07/2026)",
+          "NDVI relativament baix (0.48; observació 07/07/2026)",
           "coincidència amb un perímetre històric (5.9 ha solapades)"
         ],
         "detected": [
@@ -3256,17 +3256,17 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.496,
-        "ndmi": 0.008,
+        "ndvi": 0.491,
+        "ndmi": 0.01,
         "lst_c": 30.098,
-        "fire_today": 47.062,
+        "fire_today": 46.623,
         "value_reasons": [
           "4.1 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
         ],
         "pressure_reasons": [
           "NDMI relativament baix (0.01; observació 07/07/2026)",
-          "NDVI relativament baix (0.50; observació 07/07/2026)"
+          "NDVI relativament baix (0.49; observació 07/07/2026)"
         ],
         "knowledge_class": "Pràcticament sense dades",
         "followup": "Prioritat de comprovació",
@@ -3283,7 +3283,7 @@
         "change_detected": false,
         "reading_coincidences": [
           "NDMI relativament baix (0.01; observació 07/07/2026)",
-          "NDVI relativament baix (0.50; observació 07/07/2026)"
+          "NDVI relativament baix (0.49; observació 07/07/2026)"
         ],
         "detected": [
           "valor ecològic cartografiat amb les fonts disponibles",
@@ -3541,17 +3541,17 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.438,
+        "ndvi": 0.428,
         "ndmi": -0.02,
         "lst_c": 31.86,
-        "fire_today": 44.836,
+        "fire_today": 43.783,
         "value_reasons": [
           "4.7 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
         ],
         "pressure_reasons": [
           "NDMI relativament baix (-0.02; observació 07/07/2026)",
-          "NDVI relativament baix (0.44; observació 07/07/2026)"
+          "NDVI relativament baix (0.43; observació 07/07/2026)"
         ],
         "knowledge_class": "Poca informació",
         "followup": "Prioritat de comprovació",
@@ -3568,7 +3568,7 @@
         "change_detected": false,
         "reading_coincidences": [
           "NDMI relativament baix (-0.02; observació 07/07/2026)",
-          "NDVI relativament baix (0.44; observació 07/07/2026)"
+          "NDVI relativament baix (0.43; observació 07/07/2026)"
         ],
         "detected": [
           "valor ecològic cartografiat amb les fonts disponibles",
@@ -3978,10 +3978,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.663,
-        "ndmi": 0.123,
+        "ndvi": 0.673,
+        "ndmi": 0.134,
         "lst_c": 27.494,
-        "fire_today": 39.846,
+        "fire_today": 38.903,
         "value_reasons": [
           "2.6 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -4245,10 +4245,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.492,
-        "ndmi": 0.008,
+        "ndvi": 0.488,
+        "ndmi": 0.01,
         "lst_c": 31.753,
-        "fire_today": 39.554,
+        "fire_today": 38.349,
         "value_reasons": [
           "2.7 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -4498,17 +4498,17 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.45,
-        "ndmi": -0.006,
+        "ndvi": 0.441,
+        "ndmi": -0.007,
         "lst_c": 31.585,
-        "fire_today": 45.85,
+        "fire_today": 45.006,
         "value_reasons": [
           "3.2 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
         ],
         "pressure_reasons": [
           "NDMI relativament baix (-0.01; observació 07/07/2026)",
-          "NDVI relativament baix (0.45; observació 07/07/2026)"
+          "NDVI relativament baix (0.44; observació 07/07/2026)"
         ],
         "knowledge_class": "Pràcticament sense dades",
         "followup": "Prioritat de comprovació",
@@ -4525,7 +4525,7 @@
         "change_detected": false,
         "reading_coincidences": [
           "NDMI relativament baix (-0.01; observació 07/07/2026)",
-          "NDVI relativament baix (0.45; observació 07/07/2026)"
+          "NDVI relativament baix (0.44; observació 07/07/2026)"
         ],
         "detected": [
           "valor ecològic cartografiat amb les fonts disponibles",
@@ -4795,10 +4795,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.629,
-        "ndmi": 0.119,
+        "ndvi": 0.624,
+        "ndmi": 0.124,
         "lst_c": 29.979,
-        "fire_today": 46.74,
+        "fire_today": 46.295,
         "value_reasons": [
           "3.5 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -5073,10 +5073,10 @@
         "public_points": 16,
         "historic_fire_ha": 9.94,
         "historic_fire_events": 2,
-        "ndvi": 0.677,
-        "ndmi": 0.131,
+        "ndvi": 0.676,
+        "ndmi": 0.141,
         "lst_c": 27.73,
-        "fire_today": 49.534,
+        "fire_today": 49.597,
         "value_reasons": [
           "1030.1 ha d’HIC prioritari cartografiat",
           "2697.7 ha d’HIC cartografiat",
@@ -19548,18 +19548,18 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.389,
-        "ndmi": -0.024,
+        "ndvi": 0.441,
+        "ndmi": -0.0,
         "lst_c": 35.607,
-        "fire_today": 55.567,
+        "fire_today": 54.797,
         "value_reasons": [
           "0.3 ha d’HIC cartografiat",
           "0.7 ha dins connectors terrestres oficials",
           "92 % de cobertes naturals o seminaturals com a context de continuïtat"
         ],
         "pressure_reasons": [
-          "NDMI relativament baix (-0.02; observació 07/07/2026)",
-          "NDVI relativament baix (0.39; observació 07/07/2026)",
+          "NDMI relativament baix (-0.00; observació 07/07/2026)",
+          "NDVI relativament baix (0.44; observació 07/07/2026)",
           "temperatura superficial estival relativament elevada (35.6 °C)",
           "accessibilitat potencial relativa elevada (11.3 km de xarxa/km²); no és freqüentació real"
         ],
@@ -19579,8 +19579,8 @@
         "connected": true,
         "change_detected": false,
         "reading_coincidences": [
-          "NDMI relativament baix (-0.02; observació 07/07/2026)",
-          "NDVI relativament baix (0.39; observació 07/07/2026)",
+          "NDMI relativament baix (-0.00; observació 07/07/2026)",
+          "NDVI relativament baix (0.44; observació 07/07/2026)",
           "temperatura superficial estival relativament elevada (35.6 °C)",
           "accessibilitat potencial relativa elevada (11.3 km de xarxa/km²); no és freqüentació real"
         ],
@@ -19732,10 +19732,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.526,
-        "ndmi": -0.054,
+        "ndvi": 0.53,
+        "ndmi": -0.035,
         "lst_c": 37.876,
-        "fire_today": 62.058,
+        "fire_today": 61.29,
         "value_reasons": [
           "0.5 ha d’HIC prioritari cartografiat",
           "0.5 ha d’HIC cartografiat",
@@ -19743,9 +19743,9 @@
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
         ],
         "pressure_reasons": [
-          "NDMI relativament baix (-0.05; observació 07/07/2026)",
+          "NDMI relativament baix (-0.04; observació 07/07/2026)",
           "temperatura superficial estival relativament elevada (37.9 °C)",
-          "perill EcoRadar actual alt al sector (62/100)"
+          "perill EcoRadar actual alt al sector (61/100)"
         ],
         "knowledge_class": "Pràcticament sense dades",
         "followup": "Prioritat de comprovació",
@@ -19763,9 +19763,9 @@
         "connected": true,
         "change_detected": false,
         "reading_coincidences": [
-          "NDMI relativament baix (-0.05; observació 07/07/2026)",
+          "NDMI relativament baix (-0.04; observació 07/07/2026)",
           "temperatura superficial estival relativament elevada (37.9 °C)",
-          "perill EcoRadar actual alt al sector (62/100)"
+          "perill EcoRadar actual alt al sector (61/100)"
         ],
         "detected": [
           "valor ecològic cartografiat amb les fonts disponibles",
@@ -20034,10 +20034,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.581,
-        "ndmi": 0.03,
+        "ndvi": 0.56,
+        "ndmi": 0.04,
         "lst_c": 29.032,
-        "fire_today": 48.333,
+        "fire_today": 47.402,
         "value_reasons": [],
         "pressure_reasons": [],
         "knowledge_class": "Pràcticament sense dades",
@@ -20140,10 +20140,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.617,
-        "ndmi": 0.06,
+        "ndvi": 0.591,
+        "ndmi": 0.07,
         "lst_c": 37.216,
-        "fire_today": 60.239,
+        "fire_today": 59.107,
         "value_reasons": [
           "0.8 ha dins connectors terrestres oficials",
           "98 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -20373,10 +20373,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.574,
-        "ndmi": 0.185,
+        "ndvi": 0.531,
+        "ndmi": 0.222,
         "lst_c": 23.772,
-        "fire_today": 45.545,
+        "fire_today": 40.223,
         "value_reasons": [
           "0.5 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -20451,19 +20451,18 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.451,
-        "ndmi": -0.072,
+        "ndvi": 0.452,
+        "ndmi": -0.059,
         "lst_c": 37.599,
-        "fire_today": 61.916,
+        "fire_today": 60.849,
         "value_reasons": [
           "8.1 ha dins connectors terrestres oficials",
           "96 % de cobertes naturals o seminaturals com a context de continuïtat"
         ],
         "pressure_reasons": [
-          "NDMI relativament baix (-0.07; observació 07/07/2026)",
+          "NDMI relativament baix (-0.06; observació 07/07/2026)",
           "NDVI relativament baix (0.45; observació 07/07/2026)",
-          "temperatura superficial estival relativament elevada (37.6 °C)",
-          "perill EcoRadar actual alt al sector (62/100)"
+          "temperatura superficial estival relativament elevada (37.6 °C)"
         ],
         "knowledge_class": "Pràcticament sense dades",
         "followup": "Prioritat de comprovació",
@@ -20481,10 +20480,9 @@
         "connected": true,
         "change_detected": false,
         "reading_coincidences": [
-          "NDMI relativament baix (-0.07; observació 07/07/2026)",
+          "NDMI relativament baix (-0.06; observació 07/07/2026)",
           "NDVI relativament baix (0.45; observació 07/07/2026)",
-          "temperatura superficial estival relativament elevada (37.6 °C)",
-          "perill EcoRadar actual alt al sector (62/100)"
+          "temperatura superficial estival relativament elevada (37.6 °C)"
         ],
         "detected": [
           "valor ecològic cartografiat amb les fonts disponibles",
@@ -20496,8 +20494,7 @@
           "Una alteració dins un connector cartografiat podria reduir permeabilitat ecològica; la funcionalitat real s’ha de validar per grups de fauna.",
           "La humitat espectral relativament baixa pot ser compatible amb menys disponibilitat hídrica de la vegetació, però no demostra estrès fisiològic sense camp.",
           "El vigor espectral relativament baix pot respondre a coberta, fenologia, sòl o estat vegetal; cal contrastar la causa abans d’interpretar degradació.",
-          "Una superfície relativament càlida pot reduir la funció de refugi tèrmic i reforçar l’assecament, si coincideix amb baixa humitat i la situació es confirma al camp.",
-          "El perill d’incendi actual elevat augmenta la necessitat de vigilància conjuntural; no converteix el sector en candidat automàtic a tractament."
+          "Una superfície relativament càlida pot reduir la funció de refugi tèrmic i reforçar l’assecament, si coincideix amb baixa humitat i la situació es confirma al camp."
         ]
       },
       "geometry": {
@@ -20900,10 +20897,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.61,
-        "ndmi": 0.063,
+        "ndvi": 0.604,
+        "ndmi": 0.071,
         "lst_c": 29.297,
-        "fire_today": 46.804,
+        "fire_today": 45.77,
         "value_reasons": [
           "0.3 ha d’HIC prioritari cartografiat",
           "0.5 ha d’HIC cartografiat",
@@ -21090,10 +21087,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.758,
-        "ndmi": 0.182,
+        "ndvi": 0.751,
+        "ndmi": 0.193,
         "lst_c": 29.311,
-        "fire_today": 44.739,
+        "fire_today": 44.169,
         "value_reasons": [
           "4.1 ha d’HIC prioritari cartografiat",
           "4.2 ha d’HIC cartografiat",
@@ -21576,10 +21573,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.801,
-        "ndmi": 0.244,
+        "ndvi": 0.789,
+        "ndmi": 0.287,
         "lst_c": 30.09,
-        "fire_today": 46.666,
+        "fire_today": 45.255,
         "value_reasons": [
           "3.5 ha d’HIC prioritari cartografiat",
           "4.0 ha d’HIC cartografiat",
@@ -21856,10 +21853,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.637,
-        "ndmi": 0.084,
+        "ndvi": 0.641,
+        "ndmi": 0.105,
         "lst_c": 29.499,
-        "fire_today": 45.656,
+        "fire_today": 45.188,
         "value_reasons": [
           "0.9 ha d’HIC prioritari cartografiat",
           "2.8 ha d’HIC cartografiat",
@@ -22195,10 +22192,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.631,
-        "ndmi": 0.038,
+        "ndvi": 0.603,
+        "ndmi": 0.051,
         "lst_c": 30.89,
-        "fire_today": 57.439,
+        "fire_today": 56.346,
         "value_reasons": [
           "0.9 ha d’HIC prioritari cartografiat",
           "0.9 ha d’HIC cartografiat",
@@ -22323,10 +22320,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.78,
-        "ndmi": 0.248,
+        "ndvi": 0.77,
+        "ndmi": 0.257,
         "lst_c": 30.396,
-        "fire_today": 42.508,
+        "fire_today": 41.986,
         "value_reasons": [
           "1.0 ha d’HIC prioritari cartografiat",
           "1.0 ha d’HIC cartografiat",
@@ -22456,8 +22453,8 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.742,
-        "ndmi": 0.169,
+        "ndvi": 0.737,
+        "ndmi": 0.177,
         "lst_c": 30.621,
         "fire_today": null,
         "value_reasons": [],
@@ -22530,10 +22527,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.489,
-        "ndmi": -0.05,
+        "ndvi": 0.483,
+        "ndmi": -0.042,
         "lst_c": 33.974,
-        "fire_today": 72.261,
+        "fire_today": 70.808,
         "value_reasons": [
           "0.1 ha d’HIC prioritari cartografiat",
           "0.1 ha d’HIC cartografiat",
@@ -22541,10 +22538,10 @@
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
         ],
         "pressure_reasons": [
-          "NDMI relativament baix (-0.05; observació 07/07/2026)",
-          "NDVI relativament baix (0.49; observació 07/07/2026)",
+          "NDMI relativament baix (-0.04; observació 07/07/2026)",
+          "NDVI relativament baix (0.48; observació 07/07/2026)",
           "temperatura superficial estival relativament elevada (34.0 °C)",
-          "perill EcoRadar actual alt al sector (72/100)"
+          "perill EcoRadar actual alt al sector (71/100)"
         ],
         "knowledge_class": "Ben prospectat en fonts públiques",
         "followup": "Prioritat de comprovació",
@@ -22559,10 +22556,10 @@
         "connected": false,
         "change_detected": false,
         "reading_coincidences": [
-          "NDMI relativament baix (-0.05; observació 07/07/2026)",
-          "NDVI relativament baix (0.49; observació 07/07/2026)",
+          "NDMI relativament baix (-0.04; observació 07/07/2026)",
+          "NDVI relativament baix (0.48; observació 07/07/2026)",
           "temperatura superficial estival relativament elevada (34.0 °C)",
-          "perill EcoRadar actual alt al sector (72/100)"
+          "perill EcoRadar actual alt al sector (71/100)"
         ],
         "detected": [
           "valor ecològic cartografiat amb les fonts disponibles",
@@ -22793,10 +22790,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.674,
-        "ndmi": 0.101,
+        "ndvi": 0.672,
+        "ndmi": 0.12,
         "lst_c": 29.562,
-        "fire_today": 46.491,
+        "fire_today": 45.216,
         "value_reasons": [
           "1.1 ha d’HIC prioritari cartografiat",
           "4.4 ha d’HIC cartografiat",
@@ -23347,10 +23344,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.682,
-        "ndmi": 0.102,
+        "ndvi": 0.683,
+        "ndmi": 0.121,
         "lst_c": 30.362,
-        "fire_today": 48.152,
+        "fire_today": 46.483,
         "value_reasons": [
           "4.7 ha d’HIC prioritari cartografiat",
           "10.7 ha d’HIC cartografiat",
@@ -24932,10 +24929,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.619,
-        "ndmi": 0.051,
+        "ndvi": 0.626,
+        "ndmi": 0.071,
         "lst_c": 30.941,
-        "fire_today": 53.793,
+        "fire_today": 52.583,
         "value_reasons": [
           "28.1 ha d’HIC prioritari cartografiat",
           "99.3 ha d’HIC cartografiat",
@@ -30541,10 +30538,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.709,
-        "ndmi": 0.141,
+        "ndvi": 0.702,
+        "ndmi": 0.142,
         "lst_c": 30.471,
-        "fire_today": 47.138,
+        "fire_today": 46.143,
         "value_reasons": [],
         "pressure_reasons": [
           "accessibilitat potencial relativa elevada (13.9 km de xarxa/km²); no és freqüentació real"
@@ -30623,8 +30620,8 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.706,
-        "ndmi": 0.143,
+        "ndvi": 0.693,
+        "ndmi": 0.166,
         "lst_c": 28.871,
         "fire_today": null,
         "value_reasons": [
@@ -30706,10 +30703,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.625,
-        "ndmi": 0.074,
+        "ndvi": 0.624,
+        "ndmi": 0.09,
         "lst_c": 30.559,
-        "fire_today": 48.496,
+        "fire_today": 47.322,
         "value_reasons": [
           "8.4 ha d’HIC prioritari cartografiat",
           "22.9 ha d’HIC cartografiat",
@@ -32883,10 +32880,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.629,
-        "ndmi": 0.038,
+        "ndvi": 0.622,
+        "ndmi": 0.06,
         "lst_c": 31.722,
-        "fire_today": 57.722,
+        "fire_today": 56.288,
         "value_reasons": [
           "1.3 ha d’HIC prioritari cartografiat",
           "1.3 ha d’HIC cartografiat",
@@ -33150,10 +33147,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.535,
-        "ndmi": 0.046,
+        "ndvi": 0.531,
+        "ndmi": 0.057,
         "lst_c": 29.657,
-        "fire_today": 43.202,
+        "fire_today": 42.594,
         "value_reasons": [
           "0.2 ha d’HIC prioritari cartografiat",
           "1.3 ha d’HIC cartografiat",
@@ -33281,17 +33278,17 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.417,
-        "ndmi": -0.046,
+        "ndvi": 0.405,
+        "ndmi": -0.034,
         "lst_c": 32.402,
-        "fire_today": 55.737,
+        "fire_today": 54.957,
         "value_reasons": [
           "1.6 ha d’HIC cartografiat",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
         ],
         "pressure_reasons": [
-          "NDMI relativament baix (-0.05; observació 07/07/2026)",
-          "NDVI relativament baix (0.42; observació 07/07/2026)",
+          "NDMI relativament baix (-0.03; observació 07/07/2026)",
+          "NDVI relativament baix (0.41; observació 07/07/2026)",
           "temperatura superficial estival relativament elevada (32.4 °C)"
         ],
         "knowledge_class": "Pràcticament sense dades",
@@ -33310,8 +33307,8 @@
         "connected": true,
         "change_detected": false,
         "reading_coincidences": [
-          "NDMI relativament baix (-0.05; observació 07/07/2026)",
-          "NDVI relativament baix (0.42; observació 07/07/2026)",
+          "NDMI relativament baix (-0.03; observació 07/07/2026)",
+          "NDVI relativament baix (0.41; observació 07/07/2026)",
           "temperatura superficial estival relativament elevada (32.4 °C)"
         ],
         "detected": [
@@ -33440,8 +33437,8 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.683,
-        "ndmi": 0.273,
+        "ndvi": 0.633,
+        "ndmi": 0.277,
         "lst_c": 30.732,
         "fire_today": null,
         "value_reasons": [
@@ -33524,10 +33521,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.783,
-        "ndmi": 0.256,
+        "ndvi": 0.785,
+        "ndmi": 0.279,
         "lst_c": 29.884,
-        "fire_today": 54.733,
+        "fire_today": 53.821,
         "value_reasons": [
           "138.3 ha d’HIC prioritari cartografiat",
           "167.3 ha d’HIC cartografiat",
@@ -35671,10 +35668,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.772,
-        "ndmi": 0.261,
+        "ndvi": 0.768,
+        "ndmi": 0.282,
         "lst_c": 33.475,
-        "fire_today": 52.548,
+        "fire_today": 51.037,
         "value_reasons": [
           "0.1 ha dins connectors terrestres oficials",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -35774,8 +35771,8 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.716,
-        "ndmi": 0.146,
+        "ndvi": 0.727,
+        "ndmi": 0.141,
         "lst_c": 30.409,
         "fire_today": null,
         "value_reasons": [
@@ -35864,10 +35861,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.602,
-        "ndmi": 0.162,
+        "ndvi": 0.612,
+        "ndmi": 0.17,
         "lst_c": 31.132,
-        "fire_today": 41.133,
+        "fire_today": 40.237,
         "value_reasons": [
           "0.2 ha dins connectors terrestres oficials",
           "87 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -35950,10 +35947,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.8,
-        "ndmi": 0.322,
+        "ndvi": 0.788,
+        "ndmi": 0.335,
         "lst_c": 32.778,
-        "fire_today": 46.123,
+        "fire_today": 44.991,
         "value_reasons": [],
         "pressure_reasons": [
           "temperatura superficial estival relativament elevada (32.8 °C)",
@@ -36035,8 +36032,8 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.686,
-        "ndmi": 0.148,
+        "ndvi": 0.711,
+        "ndmi": 0.175,
         "lst_c": 31.201,
         "fire_today": null,
         "value_reasons": [
@@ -36148,8 +36145,8 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.663,
-        "ndmi": 0.161,
+        "ndvi": 0.656,
+        "ndmi": 0.18,
         "lst_c": 33.504,
         "fire_today": null,
         "value_reasons": [],
@@ -36233,7 +36230,7 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.367,
+        "ndvi": 0.385,
         "ndmi": 0.002,
         "lst_c": null,
         "fire_today": null,
@@ -36244,7 +36241,7 @@
         ],
         "pressure_reasons": [
           "NDMI relativament baix (0.00; observació 07/07/2026)",
-          "NDVI relativament baix (0.37; observació 07/07/2026)"
+          "NDVI relativament baix (0.39; observació 07/07/2026)"
         ],
         "knowledge_class": "Pràcticament sense dades",
         "followup": "Prioritat de comprovació",
@@ -36264,7 +36261,7 @@
         "change_detected": false,
         "reading_coincidences": [
           "NDMI relativament baix (0.00; observació 07/07/2026)",
-          "NDVI relativament baix (0.37; observació 07/07/2026)"
+          "NDVI relativament baix (0.39; observació 07/07/2026)"
         ],
         "detected": [
           "valor ecològic cartografiat amb les fonts disponibles",
@@ -36328,17 +36325,17 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.396,
-        "ndmi": 0.016,
+        "ndvi": 0.453,
+        "ndmi": 0.032,
         "lst_c": 33.359,
-        "fire_today": 44.305,
+        "fire_today": 42.761,
         "value_reasons": [
           "0.2 ha d’HIC cartografiat",
           "0.2 ha dins connectors terrestres oficials",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
         ],
         "pressure_reasons": [
-          "NDVI relativament baix (0.40; observació 07/07/2026)",
+          "NDVI relativament baix (0.45; observació 07/07/2026)",
           "temperatura superficial estival relativament elevada (33.4 °C)"
         ],
         "knowledge_class": "Pràcticament sense dades",
@@ -36358,7 +36355,7 @@
         "connected": true,
         "change_detected": false,
         "reading_coincidences": [
-          "NDVI relativament baix (0.40; observació 07/07/2026)",
+          "NDVI relativament baix (0.45; observació 07/07/2026)",
           "temperatura superficial estival relativament elevada (33.4 °C)"
         ],
         "detected": [
@@ -36419,10 +36416,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.603,
-        "ndmi": 0.069,
+        "ndvi": 0.614,
+        "ndmi": 0.091,
         "lst_c": 29.88,
-        "fire_today": 51.067,
+        "fire_today": 49.958,
         "value_reasons": [
           "5.8 ha d’HIC prioritari cartografiat",
           "44.1 ha d’HIC cartografiat",
@@ -39488,10 +39485,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.671,
-        "ndmi": 0.142,
+        "ndvi": 0.697,
+        "ndmi": 0.161,
         "lst_c": 30.65,
-        "fire_today": 49.561,
+        "fire_today": 48.229,
         "value_reasons": [
           "0.9 ha d’HIC cartografiat",
           "5.4 ha dins connectors terrestres oficials",
@@ -39938,9 +39935,9 @@
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
         "ndvi": 0.751,
-        "ndmi": 0.224,
+        "ndmi": 0.246,
         "lst_c": 30.526,
-        "fire_today": 46.323,
+        "fire_today": 45.073,
         "value_reasons": [
           "0.1 ha d’HIC cartografiat",
           "5.1 ha dins connectors terrestres oficials",
@@ -40231,10 +40228,10 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.749,
-        "ndmi": 0.209,
+        "ndvi": 0.762,
+        "ndmi": 0.235,
         "lst_c": 30.386,
-        "fire_today": 48.576,
+        "fire_today": 46.34,
         "value_reasons": [
           "2.1 ha dins connectors terrestres oficials",
           "97 % de cobertes naturals o seminaturals com a context de continuïtat"
@@ -40351,20 +40348,19 @@
         "public_points": 0,
         "historic_fire_ha": 0.0,
         "historic_fire_events": 0,
-        "ndvi": 0.497,
-        "ndmi": -0.036,
+        "ndvi": 0.49,
+        "ndmi": -0.02,
         "lst_c": 34.663,
-        "fire_today": 61.336,
+        "fire_today": 60.351,
         "value_reasons": [
           "0.4 ha d’HIC cartografiat",
           "0.6 ha dins connectors terrestres oficials",
           "100 % de cobertes naturals o seminaturals com a context de continuïtat"
         ],
         "pressure_reasons": [
-          "NDMI relativament baix (-0.04; observació 07/07/2026)",
-          "NDVI relativament baix (0.50; observació 07/07/2026)",
-          "temperatura superficial estival relativament elevada (34.7 °C)",
-          "perill EcoRadar actual alt al sector (61/100)"
+          "NDMI relativament baix (-0.02; observació 07/07/2026)",
+          "NDVI relativament baix (0.49; observació 07/07/2026)",
+          "temperatura superficial estival relativament elevada (34.7 °C)"
         ],
         "knowledge_class": "Poca informació",
         "followup": "Prioritat de comprovació",
@@ -40382,10 +40378,9 @@
         "connected": true,
         "change_detected": false,
         "reading_coincidences": [
-          "NDMI relativament baix (-0.04; observació 07/07/2026)",
-          "NDVI relativament baix (0.50; observació 07/07/2026)",
-          "temperatura superficial estival relativament elevada (34.7 °C)",
-          "perill EcoRadar actual alt al sector (61/100)"
+          "NDMI relativament baix (-0.02; observació 07/07/2026)",
+          "NDVI relativament baix (0.49; observació 07/07/2026)",
+          "temperatura superficial estival relativament elevada (34.7 °C)"
         ],
         "detected": [
           "valor ecològic cartografiat amb les fonts disponibles",
@@ -40397,8 +40392,7 @@
           "Una alteració dins un connector cartografiat podria reduir permeabilitat ecològica; la funcionalitat real s’ha de validar per grups de fauna.",
           "La humitat espectral relativament baixa pot ser compatible amb menys disponibilitat hídrica de la vegetació, però no demostra estrès fisiològic sense camp.",
           "El vigor espectral relativament baix pot respondre a coberta, fenologia, sòl o estat vegetal; cal contrastar la causa abans d’interpretar degradació.",
-          "Una superfície relativament càlida pot reduir la funció de refugi tèrmic i reforçar l’assecament, si coincideix amb baixa humitat i la situació es confirma al camp.",
-          "El perill d’incendi actual elevat augmenta la necessitat de vigilància conjuntural; no converteix el sector en candidat automàtic a tractament."
+          "Una superfície relativament càlida pot reduir la funció de refugi tèrmic i reforçar l’assecament, si coincideix amb baixa humitat i la situació es confirma al camp."
         ]
       },
       "geometry": {
@@ -40476,5 +40470,5 @@
       }
     }
   ],
-  "snapshot_id": "alinya-d4a97cade3d12fe1"
+  "snapshot_id": "alinya-dedfc04cfc033fa8"
 }

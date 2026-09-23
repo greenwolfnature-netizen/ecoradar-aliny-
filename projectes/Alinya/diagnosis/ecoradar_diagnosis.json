@@ -1,8 +1,8 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-22T18:16:52+00:00",
+  "generated_at": "2026-09-23T18:37:04+00:00",
   "methodology_version": "alinya_core_v2_2026-09-09",
-  "snapshot_input": "alinya-5e7c8246a8b0df0a",
+  "snapshot_input": "alinya-5eef29f2a9fb66ec",
   "scope": "diagnosi ecològica basada en indicadors; sense recomanacions, fitxa ni informe final",
   "inputs": {
     "indicators": "indicators/ecoradar_core_indicators.json",
@@ -90,7 +90,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació",
-      "snapshot_id": "alinya-5e7c8246a8b0df0a"
+      "snapshot_id": "alinya-5eef29f2a9fb66ec"
     },
     {
       "section": "distribucio_territorial",
@@ -110,7 +110,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació + interpretació plausible",
-      "snapshot_id": "alinya-5e7c8246a8b0df0a"
+      "snapshot_id": "alinya-5eef29f2a9fb66ec"
     },
     {
       "section": "valors_ecologics_principals",
@@ -131,12 +131,12 @@
       ],
       "robustness": "robusta per responsabilitat; provisional per estat",
       "evidence_type": "observació",
-      "snapshot_id": "alinya-5e7c8246a8b0df0a"
+      "snapshot_id": "alinya-5eef29f2a9fb66ec"
     },
     {
       "section": "factors_explicatius",
       "title": "L’NDVI descriu el 7 de juliol i no l’estat actual de setembre",
-      "interpretation": "NDVI 0,676 · 15/09/2026. L’escena tenia 96.18 % de cobertura vàlida, amb P10 0.348 i P90 0.831. El valor és coherent amb una activitat verda desigual dins l’àmbit, però sense línia base per coberta i època no permet classificar vigor actual, anomalia fenològica o estat de conservació.",
+      "interpretation": "NDVI 0,674 · 23/09/2026. L’escena tenia 94.27 % de cobertura vàlida, amb P10 0.346 i P90 0.83. El valor és coherent amb una activitat verda desigual dins l’àmbit, però sense línia base per coberta i època no permet classificar vigor actual, anomalia fenològica o estat de conservació.",
       "management_implication": "Esperar una nova escena QA-vàlida i comparar-la amb la mateixa època i coberta abans d’interpretar canvi o estrès.",
       "supporting_indicators": [
         "CORE_03"
@@ -151,12 +151,12 @@
       ],
       "robustness": "robusta per l’escena; no vigent per avui",
       "evidence_type": "observació datada",
-      "snapshot_id": "alinya-5e7c8246a8b0df0a"
+      "snapshot_id": "alinya-5eef29f2a9fb66ec"
     },
     {
       "section": "vulnerabilitats",
       "title": "Refugis i vulnerabilitat climàtica requereixen dues lectures diferents",
-      "interpretation": "Estructural parcial · senyal satel·lital 42,4 %. El 42,3 % és la proporció alta o molt alta dins el denominador vegetat amb LST, NDMI i NDVI vàlids; combina un compost tèrmic 2025–2026 amb una escena del 07/07/2026. CORE_05 retorna NO AVALUABLE perquè només hi ha context parcial d’exposició i falten sensibilitat i capacitat adaptativa definides per receptor.",
+      "interpretation": "Estructural parcial · senyal satel·lital 42,7 %. El 42,3 % és la proporció alta o molt alta dins el denominador vegetat amb LST, NDMI i NDVI vàlids; combina un compost tèrmic 2025–2026 amb una escena del 07/07/2026. CORE_05 retorna NO AVALUABLE perquè només hi ha context parcial d’exposició i falten sensibilitat i capacitat adaptativa definides per receptor.",
       "management_implication": "Usar el mapa de refugi per seleccionar candidats a sensors o camp, i no per declarar refugis permanents o vulnerabilitat territorial.",
       "supporting_indicators": [
         "CORE_04",
@@ -179,7 +179,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "interpretació plausible",
-      "snapshot_id": "alinya-5e7c8246a8b0df0a"
+      "snapshot_id": "alinya-5eef29f2a9fb66ec"
     },
     {
       "section": "biodiversitat",
@@ -200,7 +200,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació",
-      "snapshot_id": "alinya-5e7c8246a8b0df0a"
+      "snapshot_id": "alinya-5eef29f2a9fb66ec"
     },
     {
       "section": "connectivitat_i_us",
@@ -225,7 +225,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació + hipòtesi",
-      "snapshot_id": "alinya-5e7c8246a8b0df0a"
+      "snapshot_id": "alinya-5eef29f2a9fb66ec"
     },
     {
       "section": "aigua",
@@ -251,7 +251,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació",
-      "snapshot_id": "alinya-5e7c8246a8b0df0a"
+      "snapshot_id": "alinya-5eef29f2a9fb66ec"
     },
     {
       "section": "foc",
@@ -277,7 +277,7 @@
       ],
       "robustness": "caduca amb la següent instantània diària",
       "evidence_type": "escenari potencial",
-      "snapshot_id": "alinya-5e7c8246a8b0df0a"
+      "snapshot_id": "alinya-5eef29f2a9fb66ec"
     },
     {
       "section": "implicacions_gestio",
@@ -314,8 +314,8 @@
       ],
       "robustness": "robusta en els vetos; provisional en l’ordenació",
       "evidence_type": "síntesi de decisió",
-      "snapshot_id": "alinya-5e7c8246a8b0df0a"
+      "snapshot_id": "alinya-5eef29f2a9fb66ec"
     }
   ],
-  "snapshot_id": "alinya-d4a97cade3d12fe1"
+  "snapshot_id": "alinya-dedfc04cfc033fa8"
 }

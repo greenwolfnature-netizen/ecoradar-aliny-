@@ -1,7 +1,7 @@
 # EcoRadar Diagnosis
 
 Projecte: `Alinya`
-Generat: `2026-09-22T18:16:52+00:00`
+Generat: `2026-09-23T18:37:04+00:00`
 
 ## Resum
 
@@ -51,7 +51,7 @@ Generat: `2026-09-22T18:16:52+00:00`
 ### L’NDVI descriu el 7 de juliol i no l’estat actual de setembre
 
 - Secció: `factors_explicatius`
-- Interpretació: NDVI 0,676 · 15/09/2026. L’escena tenia 96.18 % de cobertura vàlida, amb P10 0.348 i P90 0.831. El valor és coherent amb una activitat verda desigual dins l’àmbit, però sense línia base per coberta i època no permet classificar vigor actual, anomalia fenològica o estat de conservació.
+- Interpretació: NDVI 0,674 · 23/09/2026. L’escena tenia 94.27 % de cobertura vàlida, amb P10 0.346 i P90 0.83. El valor és coherent amb una activitat verda desigual dins l’àmbit, però sense línia base per coberta i època no permet classificar vigor actual, anomalia fenològica o estat de conservació.
 - Implicació per a la gestió: Esperar una nova escena QA-vàlida i comparar-la amb la mateixa època i coberta abans d’interpretar canvi o estrès.
 - Indicadors: CORE_03
 - Fonts: copernicus_sentinel_ndvi
@@ -63,7 +63,7 @@ Generat: `2026-09-22T18:16:52+00:00`
 ### Refugis i vulnerabilitat climàtica requereixen dues lectures diferents
 
 - Secció: `vulnerabilitats`
-- Interpretació: Estructural parcial · senyal satel·lital 42,4 %. El 42,3 % és la proporció alta o molt alta dins el denominador vegetat amb LST, NDMI i NDVI vàlids; combina un compost tèrmic 2025–2026 amb una escena del 07/07/2026. CORE_05 retorna NO AVALUABLE perquè només hi ha context parcial d’exposició i falten sensibilitat i capacitat adaptativa definides per receptor.
+- Interpretació: Estructural parcial · senyal satel·lital 42,7 %. El 42,3 % és la proporció alta o molt alta dins el denominador vegetat amb LST, NDMI i NDVI vàlids; combina un compost tèrmic 2025–2026 amb una escena del 07/07/2026. CORE_05 retorna NO AVALUABLE perquè només hi ha context parcial d’exposició i falten sensibilitat i capacitat adaptativa definides per receptor.
 - Implicació per a la gestió: Usar el mapa de refugi per seleccionar candidats a sensors o camp, i no per declarar refugis permanents o vulnerabilitat territorial.
 - Indicadors: CORE_04, CORE_05
 - Fonts: copernicus_sentinel_ndmi, copernicus_sentinel_ndvi, detailed_surface_temperature, icgc_dem_mdt, land_cover_icgc_cobertes_sol, meteocat
