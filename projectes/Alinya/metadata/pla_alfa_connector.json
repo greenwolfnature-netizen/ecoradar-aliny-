@@ -6,10 +6,10 @@
   "municipality_code": "259084",
   "municipality": "Fígols i Alinyà",
   "county": "Alt Urgell",
-  "level": 1,
-  "label": "moderat",
-  "data_at_utc": "2026-09-23T07:06:17.287000Z",
-  "checked_at_utc": "2026-09-23T18:35:36Z",
+  "level": 2,
+  "label": "alt",
+  "data_at_utc": "2026-09-24T07:47:30.074000Z",
+  "checked_at_utc": "2026-09-24T18:38:47Z",
   "status": "verified",
   "source_url": "https://services7.arcgis.com/ZCqVt1fRXwwK6GF4/arcgis/rest/services/Pla_Alfa_Municipal_Avui_FL_alternatiu_VW/FeatureServer/0",
   "official_page": "https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/index.html",
@@ -17,6 +17,6 @@
   "note": "Nivell operatiu oficial municipal; no és un càlcul EcoRadar ni s'incorpora numèricament a l'índex 0-100.",
   "connector": "pla_alfa_official_arcgis",
   "responsibility": "download_and_normalize_only",
-  "service_last_edit_epoch_ms": 1790147177287,
+  "service_last_edit_epoch_ms": 1790236050074,
   "output": "projectes/Alinya/raw/pla_alfa/figols_alinya_current.json"
 }
