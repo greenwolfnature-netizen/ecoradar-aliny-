@@ -1,6 +1,6 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-24T18:40:24+00:00",
+  "generated_at": "2026-09-25T18:53:01+00:00",
   "preflight_checked": {
     "indicators/ecoradar_core_indicators.json": true,
     "metadata/indicator_engine_report.json": true,
@@ -29,5 +29,5 @@
     "Cada conclusió inclou indicadors, fonts, confiança, limitacions i robustesa.",
     "Les conclusions dependents d'indicadors parcials s'han marcat com a provisionals."
   ],
-  "snapshot_id": "alinya-0b7832853459001d"
+  "snapshot_id": "alinya-60bd305388e21a85"
 }
