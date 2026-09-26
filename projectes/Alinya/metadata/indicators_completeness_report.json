@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T18:52:59+00:00",
+  "generated_at": "2026-09-26T18:00:35+00:00",
   "indicators": [
     {
       "indicator": "CORE_01",
@@ -549,5 +549,5 @@
     "partial": 4,
     "not_available": 0
   },
-  "snapshot_id": "alinya-60bd305388e21a85"
+  "snapshot_id": "alinya-079796bc2396639f"
 }
