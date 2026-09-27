@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
-  "checked_at_utc": "2026-09-26T18:00:04.367681+00:00",
+  "checked_at_utc": "2026-09-27T18:39:41.253816+00:00",
   "source": "Copernicus Data Space Ecosystem Sentinel-2 L2A STAC",
-  "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&datetime=2026-08-12T00%3A00%3A00Z%2F2026-09-26T23%3A59%3A59Z&limit=100",
+  "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&datetime=2026-08-13T00%3A00%3A00Z%2F2026-09-27T23%3A59%3A59Z&limit=100",
   "search_period": {
-    "start": "2026-08-12",
-    "end": "2026-09-26"
+    "start": "2026-08-13",
+    "end": "2026-09-27"
   },
   "maximum_tile_cloud_pct": 10.0,
-  "candidate_count": 14,
+  "candidate_count": 13,
   "candidates": [
     {
       "scene_id": "S2C_MSIL2A_20260923T103741_N0513_R008_T31TCG_20260923T135551",
@@ -110,14 +110,6 @@
       "scene_id": "S2C_MSIL2A_20260814T104021_N0512_R008_T31TCG_20260814T153403",
       "acquired_at_utc": "2026-08-14T10:40:21.025000Z",
       "scene_cloud_cover_pct": 6.78,
-      "footprint_coverage_pct": 100.0,
-      "actual_aoi_scl_coverage_pct": null,
-      "qa_status": "requires_authenticated_process_api"
-    },
-    {
-      "scene_id": "S2B_MSIL2A_20260812T104619_N0512_R051_T31TCG_20260812T132436",
-      "acquired_at_utc": "2026-08-12T10:46:19.024000Z",
-      "scene_cloud_cover_pct": 0.27,
       "footprint_coverage_pct": 100.0,
       "actual_aoi_scl_coverage_pct": null,
       "qa_status": "requires_authenticated_process_api"

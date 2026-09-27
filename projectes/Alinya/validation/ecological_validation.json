@@ -1,6 +1,6 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-26T18:01:21+00:00",
+  "generated_at": "2026-09-27T18:40:46+00:00",
   "level": "ecological",
   "summary": {
     "checks": 8,
@@ -119,7 +119,7 @@
             }
           },
           "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-          "snapshot_input": "alinya-aca28ecf30a460f2"
+          "snapshot_input": "alinya-400e3e6412c7f75b"
         }
       }
     },
@@ -209,7 +209,7 @@
             }
           },
           "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia.",
-          "snapshot_input": "alinya-aca28ecf30a460f2"
+          "snapshot_input": "alinya-400e3e6412c7f75b"
         }
       }
     },
@@ -255,8 +255,8 @@
               "status": "context actual/parcial",
               "readings": {
                 "air_temperature": {
-                  "value": "22,5 °C",
-                  "data_at_utc": "2026-09-26T17:00:00Z",
+                  "value": "18,9 °C",
+                  "data_at_utc": "2026-09-27T17:30:00Z",
                   "period_start_utc": null,
                   "period_end_utc": null,
                   "temporal_kind": "observation",
@@ -265,7 +265,7 @@
                 },
                 "precipitation_30d": {
                   "value": "4,1 mm",
-                  "data_at_utc": "2026-09-26T17:00:00Z",
+                  "data_at_utc": "2026-09-27T17:30:00Z",
                   "period_start_utc": null,
                   "period_end_utc": null,
                   "temporal_kind": "observation",
@@ -273,8 +273,8 @@
                   "validity": "actualitzada avui"
                 },
                 "days_without_significant_rain": {
-                  "value": "16 dies",
-                  "data_at_utc": "2026-09-26T17:00:00Z",
+                  "value": "18 dies",
+                  "data_at_utc": "2026-09-27T17:30:00Z",
                   "period_start_utc": null,
                   "period_end_utc": null,
                   "temporal_kind": "observation",
@@ -352,7 +352,7 @@
             }
           },
           "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, representativitat, biaix, validacio.",
-          "snapshot_input": "alinya-aca28ecf30a460f2"
+          "snapshot_input": "alinya-400e3e6412c7f75b"
         },
         "CORE_11": {
           "code": "CORE_11",
@@ -433,7 +433,7 @@
             }
           },
           "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, vigencia, cobertura, resolucio, qa, representativitat, biaix, validacio.",
-          "snapshot_input": "alinya-aca28ecf30a460f2"
+          "snapshot_input": "alinya-400e3e6412c7f75b"
         }
       }
     },
@@ -627,7 +627,7 @@
             }
           },
           "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-          "snapshot_input": "alinya-aca28ecf30a460f2"
+          "snapshot_input": "alinya-400e3e6412c7f75b"
         }
       }
     },

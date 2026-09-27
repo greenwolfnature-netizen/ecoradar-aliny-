@@ -1,12 +1,12 @@
 {
-  "latest_catalog_check_utc": "2026-09-26T17:58:18Z",
-  "official_catalog_search_url": "https://cmr.earthdata.nasa.gov/search/granules.json?short_name=ECO_L2T_LSTE&version=003&bounding_box=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&temporal=2026-05-29T17%3A58%3A18Z%2C2026-09-26T17%3A58%3A18Z&page_size=100&sort_key=-start_date",
+  "latest_catalog_check_utc": "2026-09-27T18:38:39Z",
+  "official_catalog_search_url": "https://cmr.earthdata.nasa.gov/search/granules.json?short_name=ECO_L2T_LSTE&version=003&bounding_box=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&temporal=2026-05-30T18%3A38%3A39Z%2C2026-09-27T18%3A38%3A39Z&page_size=100&sort_key=-start_date",
   "latest_catalog_candidate": {
-    "granule_id": "ECOv003_L2T_LSTE_46600_011_31TCG_20260923T201038_01",
-    "concept_id": "G4322152120-LPCLOUD",
-    "acquired_at_utc": "2026-09-23T20:10:38.647Z",
-    "day_night_flag": "NIGHT",
-    "updated_at_utc": "2026-09-24T10:57:03.193Z",
+    "granule_id": "ECOv003_L2T_LSTE_46642_001_31TCG_20260926T125536_02",
+    "concept_id": "G4325771121-LPCLOUD",
+    "acquired_at_utc": "2026-09-26T12:55:36.604Z",
+    "day_night_flag": "DAY",
+    "updated_at_utc": "2026-09-27T11:28:55.760Z",
     "bounds_epsg4326": [
       "41.4391963 0.5688037 42.4474384 1.919488"
     ]

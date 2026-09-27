@@ -1,8 +1,8 @@
 {
   "project": "Alinya",
-  "generated_at": "2026-09-26T18:00:37+00:00",
+  "generated_at": "2026-09-27T18:40:09+00:00",
   "methodology_version": "alinya_core_v2_2026-09-09",
-  "snapshot_input": "alinya-aca28ecf30a460f2",
+  "snapshot_input": "alinya-400e3e6412c7f75b",
   "scope": "diagnosi ecològica basada en indicadors; sense recomanacions, fitxa ni informe final",
   "inputs": {
     "indicators": "indicators/ecoradar_core_indicators.json",
@@ -90,7 +90,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació",
-      "snapshot_id": "alinya-aca28ecf30a460f2"
+      "snapshot_id": "alinya-400e3e6412c7f75b"
     },
     {
       "section": "distribucio_territorial",
@@ -110,7 +110,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació + interpretació plausible",
-      "snapshot_id": "alinya-aca28ecf30a460f2"
+      "snapshot_id": "alinya-400e3e6412c7f75b"
     },
     {
       "section": "valors_ecologics_principals",
@@ -131,7 +131,7 @@
       ],
       "robustness": "robusta per responsabilitat; provisional per estat",
       "evidence_type": "observació",
-      "snapshot_id": "alinya-aca28ecf30a460f2"
+      "snapshot_id": "alinya-400e3e6412c7f75b"
     },
     {
       "section": "factors_explicatius",
@@ -151,7 +151,7 @@
       ],
       "robustness": "robusta per l’escena; no vigent per avui",
       "evidence_type": "observació datada",
-      "snapshot_id": "alinya-aca28ecf30a460f2"
+      "snapshot_id": "alinya-400e3e6412c7f75b"
     },
     {
       "section": "vulnerabilitats",
@@ -179,7 +179,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "interpretació plausible",
-      "snapshot_id": "alinya-aca28ecf30a460f2"
+      "snapshot_id": "alinya-400e3e6412c7f75b"
     },
     {
       "section": "biodiversitat",
@@ -200,7 +200,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació",
-      "snapshot_id": "alinya-aca28ecf30a460f2"
+      "snapshot_id": "alinya-400e3e6412c7f75b"
     },
     {
       "section": "connectivitat_i_us",
@@ -225,7 +225,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació + hipòtesi",
-      "snapshot_id": "alinya-aca28ecf30a460f2"
+      "snapshot_id": "alinya-400e3e6412c7f75b"
     },
     {
       "section": "aigua",
@@ -251,7 +251,7 @@
       ],
       "robustness": "provisional",
       "evidence_type": "observació",
-      "snapshot_id": "alinya-aca28ecf30a460f2"
+      "snapshot_id": "alinya-400e3e6412c7f75b"
     },
     {
       "section": "foc",
@@ -277,7 +277,7 @@
       ],
       "robustness": "caduca amb la següent instantània diària",
       "evidence_type": "escenari potencial",
-      "snapshot_id": "alinya-aca28ecf30a460f2"
+      "snapshot_id": "alinya-400e3e6412c7f75b"
     },
     {
       "section": "implicacions_gestio",
@@ -314,8 +314,8 @@
       ],
       "robustness": "robusta en els vetos; provisional en l’ordenació",
       "evidence_type": "síntesi de decisió",
-      "snapshot_id": "alinya-aca28ecf30a460f2"
+      "snapshot_id": "alinya-400e3e6412c7f75b"
     }
   ],
-  "snapshot_id": "alinya-079796bc2396639f"
+  "snapshot_id": "alinya-3d7721cf2bbe916b"
 }
