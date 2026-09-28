@@ -9,7 +9,7 @@
         "ecological_element": "Boixedes xerotermòfiles permanents, dels vessants rocosos",
         "hic_code": "5110",
         "is_priority": false,
-        "area_ha": 0.1572,
+        "area_ha": 0.0784,
         "what_happens": "Una part concreta de l’HIC coincideix amb cel·les on el producte diari EcoRadar classifica el perill actual com a alt.",
         "why_flagged": [
           "HIC cartografiat",
@@ -41,7 +41,7 @@
           "NDMI i NDVI quan hi hagi una observació nova i vàlida",
           "temperatura superficial amb data i frescor"
         ],
-        "max_fire_index": 64.1
+        "max_fire_index": 62.8
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -89,6 +89,10 @@
           [
             [
               [
+                1.383869390312552,
+                42.15514716780515
+              ],
+              [
                 1.3838669352266304,
                 42.15524363946688
               ],
@@ -119,66 +123,6 @@
               [
                 1.383869390312552,
                 42.15514716780515
-              ],
-              [
-                1.3838669352266304,
-                42.15524363946688
-              ]
-            ]
-          ],
-          [
-            [
-              [
-                1.3873286159470537,
-                42.16180740671055
-              ],
-              [
-                1.3873267825282325,
-                42.16187963559874
-              ],
-              [
-                1.3873535225923612,
-                42.16197394289048
-              ],
-              [
-                1.3873509553585048,
-                42.16207506278498
-              ],
-              [
-                1.3873495060467662,
-                42.16214546614029
-              ],
-              [
-                1.3874536148721506,
-                42.162164737493306
-              ],
-              [
-                1.3874924268036493,
-                42.16221293956279
-              ],
-              [
-                1.3875648754581031,
-                42.16227323331383
-              ],
-              [
-                1.3875756838426676,
-                42.16184764916862
-              ],
-              [
-                1.3874910028095235,
-                42.16181250411369
-              ],
-              [
-                1.3874911630249962,
-                42.16180619582436
-              ],
-              [
-                1.387329748549067,
-                42.16180392648476
-              ],
-              [
-                1.3873286159470537,
-                42.16180740671055
               ]
             ]
           ]
@@ -225,7 +169,7 @@
           "NDMI i NDVI quan hi hagi una observació nova i vàlida",
           "temperatura superficial amb data i frescor"
         ],
-        "max_fire_index": 68.0
+        "max_fire_index": 66.8
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1386,5 +1330,5 @@
       }
     }
   ],
-  "snapshot_id": "alinya-3d7721cf2bbe916b"
+  "snapshot_id": "alinya-61d0a8a1a5a2fd2d"
 }

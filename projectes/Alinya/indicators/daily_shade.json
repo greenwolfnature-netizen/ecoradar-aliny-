@@ -1,11 +1,11 @@
 {
-  "checked_at_utc": "2026-09-27T18:38:39Z",
-  "data_at_utc": "2026-09-27T13:00:00Z",
-  "data_at_local": "2026-09-27T15:00:00+02:00",
+  "checked_at_utc": "2026-09-28T20:44:05Z",
+  "data_at_utc": "2026-09-28T13:00:00Z",
+  "data_at_local": "2026-09-28T15:00:00+02:00",
   "value": {
     "shade_pct": 1.4,
-    "solar_elevation_deg": 43.3,
-    "solar_azimuth_deg": 206.2
+    "solar_elevation_deg": 42.9,
+    "solar_azimuth_deg": 206.1
   },
   "source": "ICGC Model d'elevacions del terreny 5 m + posició solar calculada",
   "method": "Ombra topogràfica local a les 15.00 h segons la incidència solar sobre pendent i orientació del DEM.",
