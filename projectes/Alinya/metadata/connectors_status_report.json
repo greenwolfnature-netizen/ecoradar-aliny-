@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T05:38:09+00:00",
+  "generated_at": "2026-09-28T20:45:49+00:00",
   "connectors": [
     {
       "connector": "blocked_strava_heatmap_connector",
@@ -61,7 +61,7 @@
     },
     {
       "connector": "connector_copernicus_teledeteccio",
-      "status": "requereix intervenció manual",
+      "status": "parcial",
       "sources": [
         "copernicus_sentinel_ndvi",
         "copernicus_sentinel_ndmi",
@@ -94,7 +94,7 @@
         "metadata/teledeteccio_classification.json",
         "metadata/teledeteccio_ecological_summary.json"
       ],
-      "requires_manual_intervention": true
+      "requires_manual_intervention": false
     },
     {
       "connector": "connector_detailed_surface_temperature",
@@ -321,10 +321,10 @@
     }
   ],
   "summary": {
-    "requereix intervenció manual": 10,
+    "requereix intervenció manual": 9,
     "implementat": 9,
-    "parcial": 2,
+    "parcial": 3,
     "pendent": 1
   },
-  "snapshot_id": "alinya-abc6f15ce75e86fe"
+  "snapshot_id": "alinya-61d0a8a1a5a2fd2d"
 }

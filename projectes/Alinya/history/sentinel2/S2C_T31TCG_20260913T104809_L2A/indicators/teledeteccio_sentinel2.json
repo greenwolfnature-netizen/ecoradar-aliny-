@@ -1,0 +1,72 @@
+{
+  "generated_at_utc": "2026-09-15T18:29:02.405895+00:00",
+  "scope": "Muntanya d'Alinyà",
+  "source_scene": "S2C_T31TCG_20260913T104809_L2A",
+  "acquired_at_utc": "2026-09-13T10:49:28.739000Z",
+  "source": "Copernicus Sentinel-2 MSI Level-2A (Earth Search / AWS)",
+  "official_urls": {
+    "stac": "https://earth-search.aws.element84.com/v1/search",
+    "provider": "https://registry.opendata.aws/sentinel-2-l2a-cogs/"
+  },
+  "license": "Copernicus free, full and open data policy",
+  "study_bbox_epsg4326": [
+    1.3639979999999998,
+    42.14442699999999,
+    1.5199389999999997,
+    42.22512200000001
+  ],
+  "crs": "EPSG:32631",
+  "output_resolution_m": 10,
+  "native_band_resolution_m": {
+    "B02": 10,
+    "B04": 10,
+    "B08": 10,
+    "B11": 20,
+    "B12": 20,
+    "SCL": 20
+  },
+  "scope_pixels": 546357,
+  "valid_pixels": 526662,
+  "invalid_or_masked_pixels": 19695,
+  "valid_coverage_pct": 96.4,
+  "valid_area_ha": 5266.6,
+  "rasterized_scope_area_ha": 5463.6,
+  "metrics": {
+    "ndvi": {
+      "mean": 0.633,
+      "median": 0.68,
+      "p10": 0.356,
+      "p90": 0.832
+    },
+    "ndmi": {
+      "mean": 0.147,
+      "median": 0.144,
+      "p10": -0.074,
+      "p90": 0.371
+    },
+    "albedo": {
+      "mean": 0.146,
+      "median": 0.137,
+      "p10": 0.097,
+      "p90": 0.203
+    }
+  },
+  "methods": {
+    "ndvi": "(B08 - B04) / (B08 + B04), Sentinel-2 L2A bottom-of-atmosphere reflectance.",
+    "ndmi": "(B08 - B11) / (B08 + B11), with B11 resampled from 20 m to the 10 m output grid.",
+    "albedo": "0.356*B02 + 0.130*B04 + 0.373*B08 + 0.085*B11 + 0.072*B12 - 0.0018; published Sentinel-2 narrow-to-broadband adaptation documented by Naegeli et al. (2017), DOI 10.3390/rs9020110.",
+    "quality_mask": "dataMask=1 and SCL classes 4, 5 or 6; cloud, cirrus, shadow, snow and invalid classes excluded."
+  },
+  "limitations": {
+    "scene": "Single clear-sky acquisition; not a seasonal climatology.",
+    "ndvi": "Vegetation-vigour proxy, not biodiversity or individual plant health.",
+    "ndmi": "Relative vegetation-moisture proxy, not field fuel moisture or volumetric soil moisture.",
+    "albedo": "Broadband spectral estimate, not in-situ radiometry; effective detail is limited by mixed 10/20 m input bands."
+  },
+  "outputs": {
+    "ndvi": "maps/teledeteccio/ndvi.webp",
+    "ndmi": "maps/teledeteccio/ndmi.webp",
+    "albedo": "maps/teledeteccio/albedo.webp"
+  },
+  "snapshot_id": "alinya-fc9f7175d1f4fc22"
+}

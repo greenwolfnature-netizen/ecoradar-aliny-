@@ -110,7 +110,11 @@ jobs:
       - name: Recalculate Sentinel-2 readings only when the source changed
         if: steps.sentinel.outcome == 'success'
         run: |
+<<<<<<< HEAD
           if ! git diff --quiet -- projectes/Alinya/processed/sentinel2_cdse; then
+=======
+          if [ -n "$(git status --porcelain --untracked-files=all -- projectes/Alinya/processed/sentinel2_cdse projectes/Alinya/metadata/sentinel2_cdse_automated_connector.json)" ]; then
+>>>>>>> 4cc92f30c21de3d9d4ad57258af4e804146e5e16
             python tools/calculate_alinya_sentinel2_indicators.py
             python tools/calculate_alinya_climatic_refuges.py
             python tools/calculate_alinya_integrated_fire_danger.py

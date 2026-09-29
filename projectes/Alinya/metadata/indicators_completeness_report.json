@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T05:38:09+00:00",
+  "generated_at": "2026-09-28T20:45:49+00:00",
   "indicators": [
     {
       "indicator": "CORE_01",
@@ -88,15 +88,16 @@
         "detailed_surface_temperature",
         "meteocat"
       ],
-      "partial_sources": [],
-      "missing_sources": [
+      "partial_sources": [
         "copernicus_sentinel_ndwi",
-        "copernicus_sentinel_nbr",
+        "copernicus_sentinel_nbr"
+      ],
+      "missing_sources": [
         "aemet"
       ],
-      "data_available_percent": 66.7,
+      "data_available_percent": 83.3,
       "status": "PARCIAL",
-      "confidence": "mitjana"
+      "confidence": "alta"
     },
     {
       "indicator": "CORE_04",
@@ -321,17 +322,18 @@
         "fires_burned_areas",
         "effis"
       ],
-      "partial_sources": [],
+      "partial_sources": [
+        "copernicus_sentinel_nbr"
+      ],
       "missing_sources": [
         "land_cover_mcsc",
         "sigpac_catalunya",
         "dun_cultius",
-        "copernicus_sentinel_nbr",
         "fuel_continuity"
       ],
-      "data_available_percent": 77.8,
+      "data_available_percent": 83.3,
       "status": "PARCIAL",
-      "confidence": "mitjana"
+      "confidence": "alta"
     },
     {
       "indicator": "CORE_10",
@@ -358,15 +360,16 @@
         "aca_hydrology",
         "connectivity_infraestructura_verda"
       ],
-      "partial_sources": [],
+      "partial_sources": [
+        "copernicus_sentinel_ndwi"
+      ],
       "missing_sources": [
-        "copernicus_sentinel_ndwi",
         "field_biodiversity",
         "spei",
         "field_validation"
       ],
-      "data_available_percent": 80.0,
-      "status": "PARCIAL",
+      "data_available_percent": 90.0,
+      "status": "DISPONIBLE",
       "confidence": "alta"
     },
     {
@@ -431,19 +434,20 @@
         "fires_burned_areas",
         "meteocat"
       ],
-      "partial_sources": [],
+      "partial_sources": [
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr"
+      ],
       "missing_sources": [
         "sigpac_catalunya",
         "dun_cultius",
-        "copernicus_sentinel_ndwi",
-        "copernicus_sentinel_nbr",
         "field_biodiversity",
         "fuel_continuity",
         "aemet",
         "spei",
         "field_validation"
       ],
-      "data_available_percent": 82.4,
+      "data_available_percent": 88.2,
       "status": "PARCIAL",
       "confidence": "alta"
     },
@@ -520,12 +524,13 @@
         "effis",
         "meteocat"
       ],
-      "partial_sources": [],
+      "partial_sources": [
+        "copernicus_sentinel_ndwi",
+        "copernicus_sentinel_nbr"
+      ],
       "missing_sources": [
         "sigpac_catalunya",
         "dun_cultius",
-        "copernicus_sentinel_ndwi",
-        "copernicus_sentinel_nbr",
         "bdbc",
         "field_biodiversity",
         "strava_heatmap",
@@ -534,15 +539,15 @@
         "spei",
         "field_validation"
       ],
-      "data_available_percent": 83.3,
+      "data_available_percent": 88.9,
       "status": "PARCIAL",
       "confidence": "alta"
     }
   ],
   "summary": {
-    "complete": 7,
-    "partial": 5,
+    "complete": 8,
+    "partial": 4,
     "not_available": 0
   },
-  "snapshot_id": "alinya-abc6f15ce75e86fe"
+  "snapshot_id": "alinya-61d0a8a1a5a2fd2d"
 }

@@ -1,8 +1,8 @@
 {
   "schema_version": "2.0",
-  "snapshot_id": "alinya-abc6f15ce75e86fe",
-  "generated_at_utc": "2026-09-10T05:38:12.512773Z",
-  "checked_at_utc": "2026-09-10T05:36:42Z",
+  "snapshot_id": "alinya-61d0a8a1a5a2fd2d",
+  "generated_at_utc": "2026-09-28T20:45:52.075903Z",
+  "checked_at_utc": "2026-09-28T20:44:05Z",
   "scope": "Muntanya d'Alinyà",
   "contract": "Single metadata state consumed by readings, RADAR, completeness, viewer and report generator.",
   "readings": {
@@ -10,16 +10,16 @@
       "reading_id": "air_temperature",
       "label": "Temperatura de l'aire",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "10,1 °C",
-      "value_numeric": 10.1,
+      "value": "16,7 °C",
+      "value_numeric": 16.7,
       "unit": "°C",
       "source": "Meteocat XEMA · estació Y4 Alinyà",
       "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
-      "data_at_utc": "2026-09-10T04:30:00Z",
+      "data_at_utc": "2026-09-28T19:30:00Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_point",
@@ -38,16 +38,16 @@
       "reading_id": "wind_gust",
       "label": "Ratxa de vent",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "47,2 km/h",
-      "value_numeric": 47.2,
+      "value": "20,2 km/h",
+      "value_numeric": 20.2,
       "unit": "km/h",
       "source": "Meteocat XEMA · estació CJ Organyà · 9,2 km de Y4",
       "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
-      "data_at_utc": "2026-09-10T04:30:00Z",
+      "data_at_utc": "2026-09-28T19:30:00Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_point_context",
@@ -66,16 +66,16 @@
       "reading_id": "relative_humidity",
       "label": "Humitat relativa",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "35 %",
-      "value_numeric": 35.0,
+      "value": "73 %",
+      "value_numeric": 73.0,
       "unit": "%",
       "source": "Meteocat XEMA · estació Y4 Alinyà",
       "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
-      "data_at_utc": "2026-09-10T04:30:00Z",
+      "data_at_utc": "2026-09-28T19:30:00Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_point",
@@ -94,16 +94,16 @@
       "reading_id": "wind",
       "label": "Vent",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "28,8 km/h",
-      "value_numeric": 28.8,
+      "value": "10,8 km/h",
+      "value_numeric": 10.8,
       "unit": "km/h",
       "source": "Meteocat XEMA · estació CJ Organyà · 9,2 km de Y4",
       "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
-      "data_at_utc": "2026-09-10T04:30:00Z",
+      "data_at_utc": "2026-09-28T19:30:00Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_point_context",
@@ -127,11 +127,11 @@
       "unit": "mm",
       "source": "Meteocat XEMA · estació Y4 Alinyà",
       "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
-      "data_at_utc": "2026-09-10T04:30:00Z",
+      "data_at_utc": "2026-09-28T19:30:00Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_point",
@@ -144,22 +144,22 @@
       "validity": "actualitzada avui",
       "update_frequency": "daily check; source subdaily",
       "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
-      "note": "Acumulació dels períodes XEMA disponibles del 2026-09-10."
+      "note": "Acumulació dels períodes XEMA disponibles del 2026-09-28."
     },
     "precipitation_7d": {
       "reading_id": "precipitation_7d",
       "label": "Precipitació últims 7 dies",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "4,5 mm",
-      "value_numeric": 4.5,
+      "value": "0,0 mm",
+      "value_numeric": 0.0,
       "unit": "mm",
       "source": "Meteocat XEMA · estació Y4 Alinyà",
       "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
-      "data_at_utc": "2026-09-10T04:30:00Z",
+      "data_at_utc": "2026-09-28T19:30:00Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_time_series",
@@ -178,16 +178,16 @@
       "reading_id": "precipitation_30d",
       "label": "Precipitació últims 30 dies",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "45,0 mm",
-      "value_numeric": 45.0,
+      "value": "4,1 mm",
+      "value_numeric": 4.1,
       "unit": "mm",
       "source": "Meteocat XEMA · estació Y4 Alinyà",
       "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
-      "data_at_utc": "2026-09-10T04:30:00Z",
+      "data_at_utc": "2026-09-28T19:30:00Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_time_series",
@@ -206,16 +206,16 @@
       "reading_id": "days_without_significant_rain",
       "label": "Dies sense pluja significativa",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "0 dies",
-      "value_numeric": 0.0,
+      "value": "19 dies",
+      "value_numeric": 19.0,
       "unit": "dies",
       "source": "Meteocat XEMA · estació Y4 Alinyà",
       "source_url": "https://analisi.transparenciacatalunya.cat/resource/nzvn-apee.json",
-      "data_at_utc": "2026-09-10T04:30:00Z",
+      "data_at_utc": "2026-09-28T19:30:00Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_time_series",
@@ -239,11 +239,11 @@
       "unit": "nivell oficial 0–4",
       "source": "Cos d'Agents Rurals / Generalitat de Catalunya",
       "source_url": "https://interior.gencat.cat/ca/arees_dactuacio/agents-rurals/pla-alfa/",
-      "data_at_utc": "2026-09-10T00:06:12.528000Z",
+      "data_at_utc": "2026-09-28T07:40:44.976000Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "municipality",
@@ -271,7 +271,7 @@
       "temporal_kind": "multitemporal_composite",
       "period_start_utc": "2025-06-03T10:36:04.004415Z",
       "period_end_utc": "2026-08-25T10:36:29.966485Z",
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": 30,
       "coverage": {
         "valid_pct": 100.0,
@@ -293,27 +293,27 @@
       "reading_id": "ndmi",
       "label": "NDMI",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "0,106",
-      "value_numeric": 0.106,
+      "value": "0,137",
+      "value_numeric": 0.137,
       "unit": "índex",
       "source": "Copernicus Sentinel-2 MSI L2A",
-      "source_url": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a",
-      "data_at_utc": "2026-07-07T10:37:01.024000Z",
+      "source_url": "https://earth-search.aws.element84.com/v1/search",
+      "data_at_utc": "2026-09-23T10:49:30.882000Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": 10,
       "coverage": {
-        "valid_area_ha": 5461.4,
-        "valid_pct": 99.95,
+        "valid_area_ha": 5150.6,
+        "valid_pct": 94.27,
         "denominator": "rasterized study polygon"
       },
       "spatial_support": "study_area_raster",
       "support_id": "Alinyà study polygon",
-      "grid_id": "sentinel2:S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508:EPSG:4326:10m",
-      "mask_id": "SCL_4_5_6:S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508",
-      "qa": "dataMask=1 and SCL classes 4, 5 or 6; cloud, cirrus, shadow, snow and invalid classes excluded",
+      "grid_id": "sentinel2:S2C_T31TCG_20260923T104756_L2A:EPSG:32631:10m",
+      "mask_id": "SCL_4_5_6:S2C_T31TCG_20260923T104756_L2A",
+      "qa": "dataMask=1 and SCL classes 4, 5 or 6; cloud, cirrus, shadow, snow and invalid classes excluded.",
       "quality_verified": true,
       "coverage_verified": true,
       "validity": "última dada disponible",
@@ -325,27 +325,27 @@
       "reading_id": "ndvi",
       "label": "NDVI",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "0,616",
-      "value_numeric": 0.616,
+      "value": "0,674",
+      "value_numeric": 0.674,
       "unit": "índex",
       "source": "Copernicus Sentinel-2 MSI L2A",
-      "source_url": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a",
-      "data_at_utc": "2026-07-07T10:37:01.024000Z",
+      "source_url": "https://earth-search.aws.element84.com/v1/search",
+      "data_at_utc": "2026-09-23T10:49:30.882000Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": 10,
       "coverage": {
-        "valid_area_ha": 5461.4,
-        "valid_pct": 99.95,
+        "valid_area_ha": 5150.6,
+        "valid_pct": 94.27,
         "denominator": "rasterized study polygon"
       },
       "spatial_support": "study_area_raster",
       "support_id": "Alinyà study polygon",
-      "grid_id": "sentinel2:S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508:EPSG:4326:10m",
-      "mask_id": "SCL_4_5_6:S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508",
-      "qa": "dataMask=1 and SCL classes 4, 5 or 6; cloud, cirrus, shadow, snow and invalid classes excluded",
+      "grid_id": "sentinel2:S2C_T31TCG_20260923T104756_L2A:EPSG:32631:10m",
+      "mask_id": "SCL_4_5_6:S2C_T31TCG_20260923T104756_L2A",
+      "qa": "dataMask=1 and SCL classes 4, 5 or 6; cloud, cirrus, shadow, snow and invalid classes excluded.",
       "quality_verified": true,
       "coverage_verified": true,
       "validity": "última dada disponible",
@@ -357,27 +357,27 @@
       "reading_id": "albedo",
       "label": "Albedo",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "0,173",
-      "value_numeric": 0.173,
+      "value": "0,133",
+      "value_numeric": 0.133,
       "unit": "índex",
       "source": "Copernicus Sentinel-2 MSI L2A",
-      "source_url": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a",
-      "data_at_utc": "2026-07-07T10:37:01.024000Z",
+      "source_url": "https://earth-search.aws.element84.com/v1/search",
+      "data_at_utc": "2026-09-23T10:49:30.882000Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": 10,
       "coverage": {
-        "valid_area_ha": 5461.4,
-        "valid_pct": 99.95,
+        "valid_area_ha": 5150.6,
+        "valid_pct": 94.27,
         "denominator": "rasterized study polygon"
       },
       "spatial_support": "study_area_raster",
       "support_id": "Alinyà study polygon",
-      "grid_id": "sentinel2:S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508:EPSG:4326:10m",
-      "mask_id": "SCL_4_5_6:S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508",
-      "qa": "dataMask=1 and SCL classes 4, 5 or 6; cloud, cirrus, shadow, snow and invalid classes excluded",
+      "grid_id": "sentinel2:S2C_T31TCG_20260923T104756_L2A:EPSG:32631:10m",
+      "mask_id": "SCL_4_5_6:S2C_T31TCG_20260923T104756_L2A",
+      "qa": "dataMask=1 and SCL classes 4, 5 or 6; cloud, cirrus, shadow, snow and invalid classes excluded.",
       "quality_verified": true,
       "coverage_verified": true,
       "validity": "última dada disponible",
@@ -389,16 +389,16 @@
       "reading_id": "air_quality",
       "label": "Qualitat de l'aire",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "PM2,5 · 8,78 µg/m³",
-      "value_numeric": 8.78,
+      "value": "PM2,5 · 8,73 µg/m³",
+      "value_numeric": 8.73,
       "unit": "µg/m³ PM2,5",
       "source": "Copernicus CAMS European air-quality forecast",
       "source_url": "https://ads.atmosphere.copernicus.eu/",
-      "data_at_utc": "2026-09-09T00:00:00Z",
+      "data_at_utc": "2026-09-28T00:00:00Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": 10000,
       "coverage": null,
       "spatial_support": "model_grid_context",
@@ -408,7 +408,7 @@
       "qa": "model 0,1° (~10 km)",
       "quality_verified": true,
       "coverage_verified": false,
-      "validity": "última dada disponible",
+      "validity": "actualitzada avui",
       "update_frequency": "daily",
       "compatibility": "Use only when period, support, grid and mask are compatible with the paired reading.",
       "note": "Context modelitzat supramunicipal; no és una estació local ni una concentració de sender o nucli."
@@ -417,16 +417,16 @@
       "reading_id": "thermal_comfort",
       "label": "Confort tèrmic contextual",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "1,9 °C aparents",
-      "value_numeric": 1.9,
+      "value": "15,2 °C aparents",
+      "value_numeric": 15.2,
       "unit": "°C aparents",
       "source": "Derivat EcoRadar · temperatura aparent de Steadman amb XEMA",
       "source_url": "docs/data_sources/alinya_daily_readings.md",
-      "data_at_utc": "2026-09-10T04:30:00Z",
+      "data_at_utc": "2026-09-28T19:30:00Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": null,
       "coverage": null,
       "spatial_support": "station_point_derived",
@@ -445,16 +445,16 @@
       "reading_id": "terrain_shade",
       "label": "Ombra topogràfica diària · 15 h",
       "measurement_kind": "direct_or_derived_reading",
-      "value": "0,6 %",
-      "value_numeric": 0.6,
+      "value": "1,4 %",
+      "value_numeric": 1.4,
       "unit": "%",
       "source": "ICGC MDT 5 m + posició solar calculada",
       "source_url": "https://www.icgc.cat/ca/Geoinformacio-i-mapes/Dades-i-productes/Geoinformacio-cartografica/Altimetria",
-      "data_at_utc": "2026-09-10T13:00:00Z",
+      "data_at_utc": "2026-09-28T13:00:00Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": 5,
       "coverage": null,
       "spatial_support": "study_area_raster",
@@ -473,16 +473,16 @@
       "reading_id": "current_fire_danger",
       "label": "Perill actual d'incendi",
       "measurement_kind": "synthetic_score",
-      "value": "60,4/100 · alt",
-      "value_numeric": 60.4,
+      "value": "42,1/100 · moderat",
+      "value_numeric": 42.1,
       "unit": "índex 0–100",
       "source": "Índex EcoRadar derivat · fonts detallades a la lectura",
       "source_url": "docs/data_sources/fire/current-wildfire-danger-alinya.md",
-      "data_at_utc": "2026-09-10T04:30:00Z",
+      "data_at_utc": "2026-09-28T19:30:00Z",
       "temporal_kind": "observation",
       "period_start_utc": null,
       "period_end_utc": null,
-      "checked_at_utc": "2026-09-10T05:36:42Z",
+      "checked_at_utc": "2026-09-28T20:44:05Z",
       "resolution_m": 100,
       "coverage": {
         "valid_area_ha": 5353.66,
@@ -494,7 +494,7 @@
       "support_id": "Alinyà study polygon",
       "grid_id": "current_fire_danger:EPSG25831:100m",
       "mask_id": "study_area_and_available_components",
-      "qa": "confiança del producte baixa · 48.8 %",
+      "qa": "confiança del producte mitjana · 61.1 %",
       "quality_verified": true,
       "coverage_verified": true,
       "validity": "actualitzada avui",
@@ -506,25 +506,25 @@
       "reading_id": "climate_refuges",
       "label": "Potencial relatiu de refugi climatic",
       "measurement_kind": "derived_screening",
-      "value": 42.3,
-      "value_numeric": 42.3,
+      "value": 42.7,
+      "value_numeric": 42.7,
       "unit": "% of vegetated valid denominator",
       "source": "EcoRadar derivation from LST, NDMI and NDVI",
       "source_url": null,
       "data_at_utc": null,
       "temporal_kind": "mixed_period_derived",
       "period_start_utc": "2025-06-03T10:36:04.004415Z",
-      "period_end_utc": "2026-08-25T10:36:29.966485Z",
+      "period_end_utc": "2026-09-23T10:49:30.882000Z",
       "resolution_m": 10,
       "coverage": {
         "name": "vegetated pixels with valid LST, NDMI and NDVI",
         "rule": "inside the study polygon; all three formula inputs valid; NDVI >= 0.30",
-        "valid_pixels": 351637,
-        "valid_area_ha": 5085.1,
-        "study_polygon_rasterized_pixels": 377841,
+        "valid_pixels": 479995,
+        "valid_area_ha": 4800.4,
+        "study_polygon_rasterized_pixels": 546357,
         "study_polygon_area_ha": 5464.0,
         "area_method": "Study-area area apportioned by the share of rasterized study pixels.",
-        "share_of_study_raster_pct": 93.1
+        "share_of_study_raster_pct": 87.9
       },
       "spatial_support": "vegetated_valid_pixels",
       "support_id": "Alinyà study polygon",
@@ -901,7 +901,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3cf5d53aecd25c4a",
+      "snapshot_input": "alinya-c50bfb2a171d27f9",
       "completeness": {
         "indicator": "CORE_01",
         "required_sources": [
@@ -1017,7 +1017,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3cf5d53aecd25c4a",
+      "snapshot_input": "alinya-c50bfb2a171d27f9",
       "completeness": {
         "indicator": "CORE_02",
         "required_sources": [
@@ -1068,19 +1068,19 @@
       ],
       "diagnosis_impact": "Aporta evidència datada sobre activitat verda i conserva separat el context fenològic no disponible.",
       "measurement_kind": "direct_reading",
-      "direct_value": 0.616,
+      "direct_value": 0.674,
       "direct_unit": "NDVI",
-      "source_date_utc": "2026-07-07T10:37:01.024000Z",
-      "primary_result": "NDVI 0,616 · 07/07/2026",
+      "source_date_utc": "2026-09-23T10:49:30.882000Z",
+      "primary_result": "NDVI 0,674 · 23/09/2026",
       "interpretation_short": "Lectura espectral d’una escena concreta; sense sèrie fenològica no es classifica com a bona o dolenta.",
       "methodology_version": "alinya_core_v2_2026-09-09",
       "profile": {
-        "median": 0.616,
-        "p10": 0.341,
-        "p90": 0.757,
-        "valid_area_ha": 5461.4,
-        "valid_coverage_pct": 99.95,
-        "acquired_at_utc": "2026-07-07T10:37:01.024000Z",
+        "median": 0.674,
+        "p10": 0.346,
+        "p90": 0.83,
+        "valid_area_ha": 5150.6,
+        "valid_coverage_pct": 94.27,
+        "acquired_at_utc": "2026-09-23T10:49:30.882000Z",
         "phenological_anomaly": "NO AVALUABLE · no hi ha línia base comparable per coberta i època"
       },
       "guide": {
@@ -1101,7 +1101,7 @@
         },
         "cobertura": {
           "rating": "adequada",
-          "reason": "Cobertura vàlida 99.95 % de l’àmbit rasteritzat."
+          "reason": "Cobertura vàlida 94.27 % de l’àmbit rasteritzat."
         },
         "resolucio": {
           "rating": "adequada",
@@ -1125,7 +1125,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia.",
-      "snapshot_input": "alinya-3cf5d53aecd25c4a",
+      "snapshot_input": "alinya-c50bfb2a171d27f9",
       "completeness": {
         "indicator": "CORE_03",
         "required_sources": [
@@ -1151,15 +1151,16 @@
           "detailed_surface_temperature",
           "meteocat"
         ],
-        "partial_sources": [],
-        "missing_sources": [
+        "partial_sources": [
           "copernicus_sentinel_ndwi",
-          "copernicus_sentinel_nbr",
+          "copernicus_sentinel_nbr"
+        ],
+        "missing_sources": [
           "aemet"
         ],
-        "data_available_percent": 66.7,
+        "data_available_percent": 83.3,
         "status": "PARCIAL",
-        "confidence": "mitjana"
+        "confidence": "alta"
       }
     },
     "CORE_04": {
@@ -1190,7 +1191,7 @@
       "direct_value": null,
       "direct_unit": null,
       "source_date_utc": null,
-      "primary_result": "Estructural parcial · senyal satel·lital 42,3 %",
+      "primary_result": "Estructural parcial · senyal satel·lital 42,7 %",
       "interpretation_short": "Separa atributs estructurals i senyal tèrmic/hídric; cap dels dos confirma un refugi ecològic.",
       "methodology_version": "alinya_core_v2_2026-09-09",
       "profile": {
@@ -1201,16 +1202,16 @@
           "mapped_water_role": "context cartogràfic; no entra a la fórmula del senyal observat"
         },
         "observed_satellite_signal": {
-          "high_or_very_high_share_pct": 42.3,
+          "high_or_very_high_share_pct": 42.7,
           "denominator": {
             "name": "vegetated pixels with valid LST, NDMI and NDVI",
             "rule": "inside the study polygon; all three formula inputs valid; NDVI >= 0.30",
-            "valid_pixels": 351637,
-            "valid_area_ha": 5085.1,
-            "study_polygon_rasterized_pixels": 377841,
+            "valid_pixels": 479995,
+            "valid_area_ha": 4800.4,
+            "study_polygon_rasterized_pixels": 546357,
             "study_polygon_area_ha": 5464.0,
             "area_method": "Study-area area apportioned by the share of rasterized study pixels.",
-            "share_of_study_raster_pct": 93.1
+            "share_of_study_raster_pct": 87.9
           },
           "formula": "0.50*frescor_LST + 0.30*humitat_NDMI + 0.20*vigor_NDVI",
           "temporal_semantics": "compost LST 2025–2026 + escena Sentinel-2 07/07/2026"
@@ -1235,7 +1236,7 @@
         },
         "cobertura": {
           "rating": "adequada",
-          "reason": "El denominador vàlid cobreix 93.1 % del raster de l’àmbit."
+          "reason": "El denominador vàlid cobreix 87.9 % del raster de l’àmbit."
         },
         "resolucio": {
           "rating": "limitada",
@@ -1259,7 +1260,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — vigencia, validacio.",
-      "snapshot_input": "alinya-3cf5d53aecd25c4a",
+      "snapshot_input": "alinya-c50bfb2a171d27f9",
       "completeness": {
         "indicator": "CORE_04",
         "required_sources": [
@@ -1338,8 +1339,8 @@
           "status": "context actual/parcial",
           "readings": {
             "air_temperature": {
-              "value": "10,1 °C",
-              "data_at_utc": "2026-09-10T04:30:00Z",
+              "value": "16,7 °C",
+              "data_at_utc": "2026-09-28T19:30:00Z",
               "period_start_utc": null,
               "period_end_utc": null,
               "temporal_kind": "observation",
@@ -1347,8 +1348,8 @@
               "validity": "actualitzada avui"
             },
             "precipitation_30d": {
-              "value": "45,0 mm",
-              "data_at_utc": "2026-09-10T04:30:00Z",
+              "value": "4,1 mm",
+              "data_at_utc": "2026-09-28T19:30:00Z",
               "period_start_utc": null,
               "period_end_utc": null,
               "temporal_kind": "observation",
@@ -1356,8 +1357,8 @@
               "validity": "actualitzada avui"
             },
             "days_without_significant_rain": {
-              "value": "0 dies",
-              "data_at_utc": "2026-09-10T04:30:00Z",
+              "value": "19 dies",
+              "data_at_utc": "2026-09-28T19:30:00Z",
               "period_start_utc": null,
               "period_end_utc": null,
               "temporal_kind": "observation",
@@ -1435,7 +1436,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-3cf5d53aecd25c4a",
+      "snapshot_input": "alinya-c50bfb2a171d27f9",
       "completeness": {
         "indicator": "CORE_05",
         "required_sources": [
@@ -1571,7 +1572,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-3cf5d53aecd25c4a",
+      "snapshot_input": "alinya-c50bfb2a171d27f9",
       "completeness": {
         "indicator": "CORE_06",
         "required_sources": [
@@ -1680,7 +1681,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3cf5d53aecd25c4a",
+      "snapshot_input": "alinya-c50bfb2a171d27f9",
       "completeness": {
         "indicator": "CORE_07",
         "required_sources": [
@@ -1794,7 +1795,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3cf5d53aecd25c4a",
+      "snapshot_input": "alinya-c50bfb2a171d27f9",
       "completeness": {
         "indicator": "CORE_08",
         "required_sources": [
@@ -1874,25 +1875,25 @@
       "measurement_kind": "four_axis_profile",
       "direct_value": null,
       "direct_unit": null,
-      "source_date_utc": "2026-09-10T04:30:00Z",
-      "primary_result": "Propagació actual alt · recuperació NO AVALUABLE",
+      "source_date_utc": "2026-09-28T19:30:00Z",
+      "primary_result": "Propagació actual moderat · recuperació NO AVALUABLE",
       "interpretation_short": "La propagació actual és avaluable parcialment; sensibilitat i recuperació necessiten dades pròpies.",
       "methodology_version": "alinya_core_v2_2026-09-09",
       "profile": {
         "propagation_current": {
-          "ecoradar_index_0_100": 60.4,
-          "category": "alt",
+          "ecoradar_index_0_100": 42.1,
+          "category": "moderat",
           "valid_coverage_pct": 98.0,
           "dominant_variables": [
-            "Vent fort",
             "Potencial de foc ForestDrought elevat",
-            "Humitat relativa baixa"
+            "Vegetació seca",
+            "Perill estructural elevat"
           ],
-          "data_at_utc": "2026-09-10T04:30:00Z",
+          "data_at_utc": "2026-09-28T19:30:00Z",
           "pla_alfa_context": {
             "level": 1,
             "label": "moderat",
-            "data_at_utc": "2026-09-10T00:06:12.528000Z"
+            "data_at_utc": "2026-09-28T07:40:44.976000Z"
           }
         },
         "ecological_sensitivity": {
@@ -1945,7 +1946,7 @@
         },
         "qa": {
           "rating": "limitada",
-          "reason": "Qualitat/actualització efectiva del producte 48.8 %; no s’anomena confiança ecològica."
+          "reason": "Qualitat/actualització efectiva del producte 61.1 %; no s’anomena confiança ecològica."
         },
         "representativitat": {
           "rating": "limitada",
@@ -1961,7 +1962,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3cf5d53aecd25c4a",
+      "snapshot_input": "alinya-c50bfb2a171d27f9",
       "completeness": {
         "indicator": "CORE_09",
         "required_sources": [
@@ -2000,17 +2001,18 @@
           "fires_burned_areas",
           "effis"
         ],
-        "partial_sources": [],
+        "partial_sources": [
+          "copernicus_sentinel_nbr"
+        ],
         "missing_sources": [
           "land_cover_mcsc",
           "sigpac_catalunya",
           "dun_cultius",
-          "copernicus_sentinel_nbr",
           "fuel_continuity"
         ],
-        "data_available_percent": 77.8,
+        "data_available_percent": 83.3,
         "status": "PARCIAL",
-        "confidence": "mitjana"
+        "confidence": "alta"
       }
     },
     "CORE_10": {
@@ -2093,7 +2095,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3cf5d53aecd25c4a",
+      "snapshot_input": "alinya-c50bfb2a171d27f9",
       "completeness": {
         "indicator": "CORE_10",
         "required_sources": [
@@ -2119,15 +2121,16 @@
           "aca_hydrology",
           "connectivity_infraestructura_verda"
         ],
-        "partial_sources": [],
+        "partial_sources": [
+          "copernicus_sentinel_ndwi"
+        ],
         "missing_sources": [
-          "copernicus_sentinel_ndwi",
           "field_biodiversity",
           "spei",
           "field_validation"
         ],
-        "data_available_percent": 80.0,
-        "status": "PARCIAL",
+        "data_available_percent": 90.0,
+        "status": "DISPONIBLE",
         "confidence": "alta"
       }
     },
@@ -2210,7 +2213,7 @@
         }
       },
       "confidence_reason": "Confiança baixa: dimensions insuficients — completesa, vigencia, cobertura, resolucio, qa, representativitat, biaix, validacio.",
-      "snapshot_input": "alinya-3cf5d53aecd25c4a",
+      "snapshot_input": "alinya-c50bfb2a171d27f9",
       "completeness": {
         "indicator": "CORE_11",
         "required_sources": [
@@ -2273,19 +2276,20 @@
           "fires_burned_areas",
           "meteocat"
         ],
-        "partial_sources": [],
+        "partial_sources": [
+          "copernicus_sentinel_ndwi",
+          "copernicus_sentinel_nbr"
+        ],
         "missing_sources": [
           "sigpac_catalunya",
           "dun_cultius",
-          "copernicus_sentinel_ndwi",
-          "copernicus_sentinel_nbr",
           "field_biodiversity",
           "fuel_continuity",
           "aemet",
           "spei",
           "field_validation"
         ],
-        "data_available_percent": 82.4,
+        "data_available_percent": 88.2,
         "status": "PARCIAL",
         "confidence": "alta"
       }
@@ -2399,7 +2403,7 @@
             "alternative": "Vigilar canvis i preparar resposta segons Pla Alfa vigent",
             "result": "P2",
             "decisive_factors": [
-              "Propagació actual alt · recuperació NO AVALUABLE",
+              "Propagació actual moderat · recuperació NO AVALUABLE",
               "vent i estructura entre factors dominants",
               "cobertura vàlida explícita"
             ],
@@ -2472,7 +2476,7 @@
         }
       },
       "confidence_reason": "Confiança mitjana: dimensions insuficients — validacio.",
-      "snapshot_input": "alinya-3cf5d53aecd25c4a",
+      "snapshot_input": "alinya-c50bfb2a171d27f9",
       "completeness": {
         "indicator": "CORE_12",
         "required_sources": [
@@ -2546,12 +2550,13 @@
           "effis",
           "meteocat"
         ],
-        "partial_sources": [],
+        "partial_sources": [
+          "copernicus_sentinel_ndwi",
+          "copernicus_sentinel_nbr"
+        ],
         "missing_sources": [
           "sigpac_catalunya",
           "dun_cultius",
-          "copernicus_sentinel_ndwi",
-          "copernicus_sentinel_nbr",
           "bdbc",
           "field_biodiversity",
           "strava_heatmap",
@@ -2560,7 +2565,7 @@
           "spei",
           "field_validation"
         ],
-        "data_available_percent": 83.3,
+        "data_available_percent": 88.9,
         "status": "PARCIAL",
         "confidence": "alta"
       }
@@ -3032,60 +3037,327 @@
       ]
     },
     "sentinel2": {
-      "generated_at_utc": "2026-07-20T17:49:53.447098+00:00",
-      "source": "Copernicus Sentinel-2 MSI Level-2A",
-      "organization": "European Union Copernicus programme / ESA",
-      "scene_id": "S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508",
-      "acquired_at_utc": "2026-07-07T10:37:01.024000Z",
-      "source_file": "projectes/Alinya/raw/sentinel2_cdse/S2A_MSIL2A_20260707T103701_N0512_R008_T31TCG_20260707T190508_analytical_uint8.tif",
-      "source_sha256": "a2ba776617842c161ab73e0c7ed8647d92bc9a906955f7566433288cdac008c8",
+      "generated_at_utc": "2026-09-28T20:45:25.239651+00:00",
+      "mission": "Sentinel-2",
+      "data_level": "L2A",
+      "provider": "Earth Search / AWS",
+      "source_scene_id": "S2C_T31TCG_20260923T104756_L2A",
+      "stac_collection": "sentinel-2-c1-l2a",
+      "esa_product_uri": "S2C_MSIL2A_20260923T103741_N0513_R008_T31TCG_20260923T135551.SAFE",
+      "acquisition_date": "2026-09-23T10:49:30.882000Z",
+      "qa_method": "SCL nearest-neighbour; classes 4,5,6; all-band nodata mask inside exact AOI",
+      "fallback_reason": "CDSE OAuth unavailable",
+      "scene_id": "S2C_T31TCG_20260923T104756_L2A",
+      "acquired_at_utc": "2026-09-23T10:49:30.882000Z",
+      "scene_cloud_cover_pct": 0.006992,
+      "source": "Copernicus Sentinel-2 MSI Level-2A (Earth Search / AWS)",
+      "organization": "ESA / European Commission; access via Element 84 / AWS",
       "official_urls": {
-        "stac": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a",
-        "browser": "https://browser.dataspace.copernicus.eu/",
-        "process_api": "https://sh.dataspace.copernicus.eu/api/v1/process"
+        "stac": "https://earth-search.aws.element84.com/v1/search",
+        "provider": "https://registry.opendata.aws/sentinel-2-l2a-cogs/"
       },
-      "service_type": "authenticated CDSE Browser analytical GeoTIFF export",
-      "credentials": "free CDSE user session required; no credential stored",
-      "license": "Copernicus Sentinel data policy",
+      "license": "Copernicus free, full and open data policy",
+      "connector": "alinya_sentinel2_earth_search_fallback",
       "connector_status": "verified",
-      "quality_selection": {
-        "scope_pixels": 377841,
-        "valid_aoi_pixels": 377656,
-        "invalid_or_masked_aoi_pixels": 185,
-        "valid_aoi_coverage_pct": 99.95,
+      "responsibility": "select_download_and_normalize_only",
+      "updated": true,
+      "crs": "EPSG:32631",
+      "resolution_m": 10,
+      "bands": [
+        "B02",
+        "B04",
+        "B08",
+        "B11",
+        "B12",
+        "SCL",
+        "dataMask"
+      ],
+      "native_resolution_m": {
+        "B02": 10,
+        "B04": 10,
+        "B08": 10,
+        "B11": 20,
+        "B12": 20,
+        "SCL": 20
+      },
+      "normalization": "STAC asset scale/offset to BOA reflectance; clamp negatives as CDSE harmonizeValues=true; spectral bilinear, SCL nearest",
+      "actual_aoi_qa": {
+        "scope_pixels": 546357,
+        "valid_aoi_pixels": 515058,
+        "valid_aoi_coverage_pct": 94.27,
         "accepted_scl_classes": [
           4,
           5,
           6
-        ],
-        "note": "Coverage reconstructed from the preserved QA-masked analytical export; scene replacement requires authenticated SCL/dataMask evaluation."
+        ]
       },
-      "study_bbox_epsg4326": [
-        1.363998,
-        42.144427,
-        1.5199389999999993,
-        42.22512200000001
+      "candidate_evaluations": [
+        {
+          "scene_id": "S2C_T31TCG_20260923T104756_L2A",
+          "acquired_at_utc": "2026-09-23T10:49:30.882000Z",
+          "scene_cloud_cover_pct": 0.006992,
+          "scl_valid_aoi_coverage_pct": 94.28,
+          "valid_aoi_coverage_pct": 94.27,
+          "qa_status": "validated"
+        }
       ],
-      "crs": "EPSG:4326",
-      "export_bounds": [
-        1.2390518188476565,
-        42.108411365705855,
-        1.603660583496094,
-        42.291532494305976
-      ],
-      "export_grid_resolution": [
-        0.000145843505859375,
-        0.00010809983978755645
-      ],
-      "transport_encoding": {
-        "band_1": "NDVI encoded as round(255*((NDVI+1)/2))",
-        "band_2": "NDMI encoded as round(255*((NDMI+1)/2))",
-        "band_3": "albedo encoded as round(255*albedo)",
-        "validity": "evalscript returns RGB 0/0/0 outside dataMask=1 and SCL {4,5,6}; Browser export used Clip extra bands"
-      }
+      "catalogue": {
+        "query": {
+          "collections": "sentinel-2-l2a,sentinel-2-c1-l2a",
+          "bbox": "1.3639979999999998,42.14442699999999,1.5199389999999997,42.22512200000001",
+          "datetime": "2026-07-08T00:00:00Z/2026-09-28T23:59:59Z",
+          "limit": 100
+        },
+        "total_scenes": 98,
+        "eligible_scenes": 49,
+        "pages": 2,
+        "complete": true
+      },
+      "selection_rule": "Newest footprint-covering scene passing unchanged tile-cloud and actual AOI SCL/nodata thresholds; full paginated search since 2026-07-08",
+      "maximum_tile_cloud_pct": 10.0,
+      "minimum_aoi_coverage_pct": 85.0,
+      "normalized_path": "projectes/Alinya/processed/sentinel2_cdse/sentinel2_l2a_reflectance_quality.tif",
+      "source_assets": {
+        "blue": {
+          "href": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/31/T/CG/2026/9/S2C_T31TCG_20260923T104756_L2A/B02.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "Blue - 10m",
+          "eo:bands": [
+            {
+              "name": "B02",
+              "common_name": "blue",
+              "center_wavelength": 0.49,
+              "full_width_half_max": 0.098
+            }
+          ],
+          "gsd": 10,
+          "proj:shape": [
+            10980,
+            10980
+          ],
+          "proj:transform": [
+            10,
+            0,
+            300000,
+            0,
+            -10,
+            4700040
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "file:checksum": "12203d34d5c6971c841b24a1f0e48ff757f1563a38814e07905e21a938a42f6a1331",
+          "file:size": 148491359,
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "red": {
+          "href": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/31/T/CG/2026/9/S2C_T31TCG_20260923T104756_L2A/B04.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "Red - 10m",
+          "eo:bands": [
+            {
+              "name": "B04",
+              "common_name": "red",
+              "center_wavelength": 0.665,
+              "full_width_half_max": 0.038
+            }
+          ],
+          "gsd": 10,
+          "proj:shape": [
+            10980,
+            10980
+          ],
+          "proj:transform": [
+            10,
+            0,
+            300000,
+            0,
+            -10,
+            4700040
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "file:checksum": "12203fc9880805c86838f44b2d5040e3d15f47c81739a38c54271c124c6dc7565839",
+          "file:size": 155022333,
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "nir": {
+          "href": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/31/T/CG/2026/9/S2C_T31TCG_20260923T104756_L2A/B08.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "NIR 1 - 10m",
+          "eo:bands": [
+            {
+              "name": "B08",
+              "common_name": "nir",
+              "center_wavelength": 0.842,
+              "full_width_half_max": 0.145
+            }
+          ],
+          "gsd": 10,
+          "proj:shape": [
+            10980,
+            10980
+          ],
+          "proj:transform": [
+            10,
+            0,
+            300000,
+            0,
+            -10,
+            4700040
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 10,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "file:checksum": "1220467de875995a62d80997bb8496c273b4f495d9c782efd16226bf714541c29a54",
+          "file:size": 156969781,
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "swir16": {
+          "href": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/31/T/CG/2026/9/S2C_T31TCG_20260923T104756_L2A/B11.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "SWIR 1.6μm - 20m",
+          "eo:bands": [
+            {
+              "name": "B11",
+              "common_name": "swir16",
+              "center_wavelength": 1.61,
+              "full_width_half_max": 0.143
+            }
+          ],
+          "gsd": 20,
+          "proj:shape": [
+            5490,
+            5490
+          ],
+          "proj:transform": [
+            20,
+            0,
+            300000,
+            0,
+            -20,
+            4700040
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 20,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "file:checksum": "12206b2192997c962da522b89ae7180c27ba2da1d646f01ca0f0183056ad2cc78c95",
+          "file:size": 40361164,
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "swir22": {
+          "href": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/31/T/CG/2026/9/S2C_T31TCG_20260923T104756_L2A/B12.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "SWIR 2.2μm - 20m",
+          "eo:bands": [
+            {
+              "name": "B12",
+              "common_name": "swir22",
+              "center_wavelength": 2.19,
+              "full_width_half_max": 0.242
+            }
+          ],
+          "gsd": 20,
+          "proj:shape": [
+            5490,
+            5490
+          ],
+          "proj:transform": [
+            20,
+            0,
+            300000,
+            0,
+            -20,
+            4700040
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint16",
+              "spatial_resolution": 20,
+              "scale": 0.0001,
+              "offset": -0.1
+            }
+          ],
+          "file:checksum": "12205e087c658aed01b6157f2ab4963eceeed67d3037033a9d4cb08579b92fcca035",
+          "file:size": 39787716,
+          "roles": [
+            "data",
+            "reflectance"
+          ]
+        },
+        "scl": {
+          "href": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/31/T/CG/2026/9/S2C_T31TCG_20260923T104756_L2A/SCL.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+          "title": "Scene classification map (SCL)",
+          "gsd": 20,
+          "proj:shape": [
+            5490,
+            5490
+          ],
+          "proj:transform": [
+            20,
+            0,
+            300000,
+            0,
+            -20,
+            4700040
+          ],
+          "raster:bands": [
+            {
+              "nodata": 0,
+              "data_type": "uint8",
+              "spatial_resolution": 20
+            }
+          ],
+          "file:checksum": "122015f5f6f1a1155b9eb293170bda0aa05a620e546ffc5811f82147586e159dc432",
+          "file:size": 2174166,
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "normalized_sha256": "832e9654440326c196b5c8b85a03be03203b3c656b57b4710e2cac007cc5d505"
     },
     "landsat": {
-      "generated_at_utc": "2026-09-10T05:03:58.405171+00:00",
+      "generated_at_utc": "2026-09-11T17:53:58.534073+00:00",
       "connector": "landsat_usgs_c2_l2_summer_composite",
       "responsibility": "download_and_normalize_only",
       "scope": "Muntanya d'Alinyà",
@@ -3304,16 +3576,48 @@
     },
     "sentinel2_catalog_check": {
       "schema_version": "1.0",
-      "checked_at_utc": "2026-09-10T05:37:47.668937+00:00",
+      "checked_at_utc": "2026-09-28T20:45:18.608208+00:00",
       "source": "Copernicus Data Space Ecosystem Sentinel-2 L2A STAC",
-      "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&datetime=2026-07-27T00%3A00%3A00Z%2F2026-09-10T23%3A59%3A59Z&limit=100",
+      "official_url": "https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=1.3639979999999998%2C42.14442699999999%2C1.5199389999999997%2C42.22512200000001&datetime=2026-08-14T00%3A00%3A00Z%2F2026-09-28T23%3A59%3A59Z&limit=100",
       "search_period": {
-        "start": "2026-07-27",
-        "end": "2026-09-10"
+        "start": "2026-08-14",
+        "end": "2026-09-28"
       },
       "maximum_tile_cloud_pct": 10.0,
-      "candidate_count": 16,
+      "candidate_count": 13,
       "candidates": [
+        {
+          "scene_id": "S2C_MSIL2A_20260923T103741_N0513_R008_T31TCG_20260923T135551",
+          "acquired_at_utc": "2026-09-23T10:37:41.025000Z",
+          "scene_cloud_cover_pct": 0.01,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2A_MSIL2A_20260915T103701_N0512_R008_T31TCG_20260915T172409",
+          "acquired_at_utc": "2026-09-15T10:37:01.024000Z",
+          "scene_cloud_cover_pct": 0.0,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2C_MSIL2A_20260913T103631_N0512_R008_T31TCG_20260913T155815",
+          "acquired_at_utc": "2026-09-13T10:36:31.025000Z",
+          "scene_cloud_cover_pct": 1.02,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
+        {
+          "scene_id": "S2B_MSIL2A_20260911T105019_N0512_R051_T31TCG_20260911T132207",
+          "acquired_at_utc": "2026-09-11T10:50:19.025000Z",
+          "scene_cloud_cover_pct": 0.7,
+          "footprint_coverage_pct": 100.0,
+          "actual_aoi_scl_coverage_pct": null,
+          "qa_status": "requires_authenticated_process_api"
+        },
         {
           "scene_id": "S2C_MSIL2A_20260906T104621_N0512_R051_T31TCG_20260906T184616",
           "acquired_at_utc": "2026-09-06T10:46:21.025000Z",
@@ -3385,69 +3689,10 @@
           "footprint_coverage_pct": 100.0,
           "actual_aoi_scl_coverage_pct": null,
           "qa_status": "requires_authenticated_process_api"
-        },
-        {
-          "scene_id": "S2B_MSIL2A_20260812T104619_N0512_R051_T31TCG_20260812T132436",
-          "acquired_at_utc": "2026-08-12T10:46:19.024000Z",
-          "scene_cloud_cover_pct": 0.27,
-          "footprint_coverage_pct": 100.0,
-          "actual_aoi_scl_coverage_pct": null,
-          "qa_status": "requires_authenticated_process_api"
-        },
-        {
-          "scene_id": "S2C_MSIL2A_20260807T104621_N0512_R051_T31TCG_20260807T143318",
-          "acquired_at_utc": "2026-08-07T10:46:21.025000Z",
-          "scene_cloud_cover_pct": 0.6,
-          "footprint_coverage_pct": 100.0,
-          "actual_aoi_scl_coverage_pct": null,
-          "qa_status": "requires_authenticated_process_api"
-        },
-        {
-          "scene_id": "S2B_MSIL2A_20260802T104619_N0512_R051_T31TCG_20260802T144452",
-          "acquired_at_utc": "2026-08-02T10:46:19.024000Z",
-          "scene_cloud_cover_pct": 0.3,
-          "footprint_coverage_pct": 100.0,
-          "actual_aoi_scl_coverage_pct": null,
-          "qa_status": "requires_authenticated_process_api"
-        },
-        {
-          "scene_id": "S2A_MSIL2A_20260730T104701_N0512_R051_T31TCG_20260730T191810",
-          "acquired_at_utc": "2026-07-30T10:47:01.024000Z",
-          "scene_cloud_cover_pct": 0.64,
-          "footprint_coverage_pct": 100.0,
-          "actual_aoi_scl_coverage_pct": null,
-          "qa_status": "requires_authenticated_process_api"
-        },
-        {
-          "scene_id": "S2B_MSIL2A_20260730T103629_N0512_R008_T31TCG_20260730T143638",
-          "acquired_at_utc": "2026-07-30T10:36:29.024000Z",
-          "scene_cloud_cover_pct": 0.0,
-          "footprint_coverage_pct": 100.0,
-          "actual_aoi_scl_coverage_pct": null,
-          "qa_status": "requires_authenticated_process_api"
-        },
-        {
-          "scene_id": "S2C_MSIL2A_20260728T104621_N0512_R051_T31TCG_20260728T144218",
-          "acquired_at_utc": "2026-07-28T10:46:21.025000Z",
-          "scene_cloud_cover_pct": 0.01,
-          "footprint_coverage_pct": 100.0,
-          "actual_aoi_scl_coverage_pct": null,
-          "qa_status": "requires_authenticated_process_api"
-        },
-        {
-          "scene_id": "S2A_MSIL2A_20260727T104041_N0512_R008_T31TCG_20260727T184256",
-          "acquired_at_utc": "2026-07-27T10:40:41.024000Z",
-          "scene_cloud_cover_pct": 0.15,
-          "footprint_coverage_pct": 100.0,
-          "actual_aoi_scl_coverage_pct": null,
-          "qa_status": "requires_authenticated_process_api"
         }
       ],
-      "connector_status": "requires_credentials",
-      "missing_requirements": [
-        "COPERNICUS_CLIENT_ID",
-        "COPERNICUS_CLIENT_SECRET"
-      ],
+      "connector_status": "ready_for_authenticated_qa",
+      "missing_requirements": [],
       "limitation": "The public catalogue exposes footprint and tile cloud metadata only. Actual valid coverage inside Alinyà must be evaluated from SCL/dataMask through the authenticated Process API before selection."
     }
   }

@@ -58,7 +58,17 @@ class Phase1CoherenceTests(unittest.TestCase):
         selection = read("metadata/current_surface_temperature.json")["selected"]
         self.assertEqual(selection["temporal_kind"], "multitemporal_composite")
         self.assertIsNone(selection["acquired_at_utc"])
-        self.assertEqual(selection["component_scene_count"], 26)
+        metadata = read("metadata/landsat_connector.json")
+        scenes = [scene for scene in metadata["scenes"] if scene.get("acquired_at_utc")]
+        self.assertGreater(len(scenes), 1)
+        self.assertEqual(metadata["scene_count"], len(scenes))
+        self.assertEqual(selection["component_scene_count"], len(scenes))
+        contributing = [scene for scene in scenes if scene.get("valid_study_pixels", 0)]
+        self.assertGreater(len(contributing), 0)
+        self.assertEqual(selection["contributing_scene_count"], len(contributing))
+        acquired = sorted(scene["acquired_at_utc"] for scene in scenes)
+        self.assertEqual(selection["period_start_utc"], acquired[0])
+        self.assertEqual(selection["period_end_utc"], acquired[-1])
         self.assertLess(selection["period_start_utc"], selection["period_end_utc"])
         daily = read("indicators/daily_readings.json")["readings"]["surface_temperature"]
         self.assertEqual(daily["status_code"], "period_context")
@@ -128,11 +138,10 @@ class Phase1CoherenceTests(unittest.TestCase):
 
     def test_public_sentinel_catalog_does_not_select_without_aoi_scl_qa(self):
         catalog = read("metadata/sentinel2_cdse_catalog_check.json")
-        self.assertEqual(catalog["connector_status"], "requires_credentials")
-        self.assertEqual(
-            set(catalog["missing_requirements"]),
-            {"COPERNICUS_CLIENT_ID", "COPERNICUS_CLIENT_SECRET"},
-        )
+        self.assertIn(catalog["connector_status"], {"requires_credentials", "ready_for_authenticated_qa"})
+        expected_missing = ({"COPERNICUS_CLIENT_ID", "COPERNICUS_CLIENT_SECRET"}
+                            if catalog["connector_status"] == "requires_credentials" else set())
+        self.assertEqual(set(catalog["missing_requirements"]), expected_missing)
         self.assertGreater(catalog["candidate_count"], 0)
         self.assertTrue(all(item["actual_aoi_scl_coverage_pct"] is None for item in catalog["candidates"]))
 
